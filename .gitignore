@@ -1,0 +1,6 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore the development log.
+/log/development.log
+/tmp
