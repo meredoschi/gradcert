@@ -1,0 +1,600 @@
+@import "foundation";
+
+/* This controls padding around the buttons. Use a variable or em value */
+$padding: $button-sml;
+
+/* This controls button radius. Set to a variable, true/false, or custom px value */
+/* $radius: false; */
+/* Marcelo, set to true */
+$radius: true;
+$not_radius: false;
+
+/* This whether button is full-width. Set to true or false */
+$full-width: false;
+
+/* This controls whether disabled styles are used. Set to true or false */
+$disabled: false;
+
+/* This controls padding for inputs, they are a little different */
+$is-input: false;
+
+/* This controls button color. Set to one of our variables or a custom hex value */
+
+/* */
+$button-font-color: black;
+$button-font-color-alt: white;
+/* */
+
+$bg_buscar: #bcb991;
+
+$bg_anular: #ae1f36;
+
+$bg_criar: #b0e9a2;
+
+$bg_create-nested: #c4f9d2;
+
+$bg_remove-nested: #5c3422;
+
+$bg_editar: #f1c632 ;
+
+$bg_criar: #24742d ;
+
+$bg_gerar: #cda70f ;
+
+$bg_relatorio: #5ca3fd ;
+
+$bg_relatorio2: #d6e4bd ;
+
+$bg_relatorio3: #a7b1e1 ;
+
+$bg_relatorio4: #006268 ;
+
+$bg_relatorio5: #ddd717 ;
+
+$bg_relatorio6: #c8cca2 ;
+
+$bg_transparent: false;
+
+$sonia_blu: #87c6f6;
+
+$bg_id_label: #dff6f4;
+
+$bg_beige: #ecc5a5;
+
+$bg_orange: #ff9a55;
+
+$bg_dada_gray: #dadada;
+
+$bg_pdf: $bg_dada_gray;
+
+$bg_turquoise: #a0d5d5;
+
+$gradient: linear-gradient(45deg, $bg_relatorio2 , $bg_relatorio3);
+
+$gradient2: linear-gradient(45deg, $bg_relatorio4, $bg_relatorio5);
+
+
+.custom-hr {
+
+	border-width: 3px;
+	border-top: 1px solid #ccc;
+
+}
+
+.gradiented {
+
+  color: black;
+
+  font-size: 2rem;
+
+  letter-spacing: 5px;
+
+  border: 4px solid transparent;
+
+  border-image: $gradient;
+
+  border-image-slice: 1;
+
+  background: $gradient;
+
+  -webkit-background-clip: text;
+
+  text-fill-color: transparent;
+
+  transition: all 0.2s ease;
+
+
+
+  &:hover {
+
+    border-image: $gradient2;
+
+    background: $gradient2;
+
+  }
+
+}
+
+
+.reportstable {
+
+	$table-head-font-size: rem-calc(16);
+	$table-head-font-color: $gradient;
+
+}
+
+.relatorio {
+  @include button($padding, $bg_relatorio, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.relatorio2 {
+  @include button($padding, $bg_relatorio2, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.relatorio3 {
+  @include button($padding, $bg_relatorio3, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.relatorio4 {
+  @include button($padding, $bg_relatorio4, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.relatorio5 {
+  @include button($padding, $bg_relatorio5, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.relatorio6 {
+  @include button($padding, $bg_relatorio6, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.transparente {
+  @include button($padding, $bg_transparent, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.gerar {
+  @include button($padding, $bg_gerar, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.exportpdf {
+  @include button($padding, $bg_pdf, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.buscar {
+  @include button($padding, $bg_buscar, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.anular {
+  @include button($padding, $bg_anular, $radius, $full-width, $disabled, $is-input);
+}
+
+.editar {
+  @include button($padding, $bg_editar, $radius, $full-width, $disabled, $is-input);
+}
+
+.mostrar {
+
+	@include button($button-sml, $sonia_blu, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.remove-nested {
+
+	@include button($button-sml, $bg_remove-nested, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.remover {
+
+	@include button($button-sml, $alert-color, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.header-create-new {
+
+	@include button($button-tny, $bg_transparent, $not_radius, $full-width, $disabled, $is-input);
+
+}
+
+.criar {
+
+	@include button($button-sml, $bg_criar, $not_radius, $full-width, $disabled, $is-input);
+
+}
+
+.create-nested {
+
+	@include button($button-sml, $bg_create-nested, $not_radius, $full-width, $disabled, $is-input);
+
+}
+
+.voltar {
+
+	@include button($button-sml, $secondary-color, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.confirmar {
+
+	@include button($button-sml, $success-color, $radius, $full-width, $disabled, $is-input);
+
+}
+
+input.inline, label.inline {
+  vertical-align:bottom;
+
+}
+
+$include-html-table-classes: $include-html-classes !default;
+
+$table-border-style: solid;
+$table-border-size: 2px;
+$table-border-color: blue;
+
+.custom-panel {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg:#e9e864,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel2 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg: cyan,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel3 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg:#c5f632,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel4 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg:#25ff42,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel5 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg:#12df42,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel6 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg:#8aafa9,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel7 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg: $bg_beige,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel8 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg: $bg_dada_gray,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel9 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg: $bg_turquoise,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.custom-panel10 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg: $bg_orange,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+.diversity-panel {
+ @include panel(
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg:pink,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+
+.custom-table {
+
+	$table-head-bg: yellow;
+	$table-head-font-size: rem-calc(14);
+	$table-head-font-color: blue;
+	$table-head-font-weight: $font-weight-bold;
+
+}
+.custom-panel4 {
+ @include panel(
+	// http://foundation.zurb.com/docs/components/panels.html
+
+    // Sets the panel background color. Default: $panel-pg
+    $bg:#4f8fb9,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+// http://stackoverflow.com/questions/18178816/creating-inline-date-select-dropdowns-using-simple-form-and-zurb-foundation
+
+form.custom .dropdown.date{
+  width: 30%;
+  margin-right: 10px;
+  float: left;
+}
+
+.birthdate {
+  width: 40%;
+  margin-right: 15px;
+  float: left;
+}
+
+select.select-date {
+  width: 30%;
+  margin-right: 10px;
+  float: left;
+}
+
+.select-birthdate{
+  select:first-of-type{
+    width: 25%;
+  }
+  select:nth-of-type(2){
+    width: 25%;
+  }
+  select:nth-of-type(3){
+    width: 25%;
+  }
+
+}
+
+.select-date-wrapper{
+  select:first-of-type{
+    width: 45%;
+  }
+  select:nth-of-type(2){
+    width: 20%;
+  }
+  select:last-of-type{
+    margin-right: 0;
+  }
+}
+
+
+.id-label {
+  @include label(
+    // This options sets label padding
+    $padding:7px 16px 9px,
+    // This option sets label text-size
+    $text-size:13px,
+    // This option sets label background-color
+    $bg: $bg_id_label,
+    // This option sets the radius of the label
+    $radius:4px
+  );
+}
+
+
+.select-date { display: inline; }
+
+//http://stackoverflow.com/questions/5267998/rails-3-field-with-errors-wrapper-changes-the-page-appearance-how-to-avoid-t
+.parent_class .field_with_errors {
+    display: inline;
+  }
+
+error small,
+small.error {
+  display: block;
+  padding: 0.375em 0.25em;
+  margin-top: -1.3125em;
+  margin-bottom: 1em;
+  font-size: 0.75em;
+  font-weight: bold;
+  background: #910001;
+  color: white; }
+
+/* http://stackoverflow.com/questions/23280971/foundation-5-top-bar-change-the-background-and-hover-style-for-the-mobile-men */
+
+.top-bar {
+    background: #d9e9e6;
+}
+
+.top-bar-section li a:not(.button) {
+    background: #57b1ac !important;
+}
+
+.top-bar-section li a:not(.button):hover {
+    background: green !important;
+}
+
+.top-bar-section ul li.active > a {
+    background: #0fb1d9 !important;
+}
+
+.top-bar-section ul li.active > a:hover {
+    background: gray !important;
+}
+
+select.select-date {
+  width: 30%;
+  margin-right: 10px;
+  float: left;
+}
+.select-date-wrapper{
+  select:first-of-type{
+    width: 45%;
+  }
+  select:nth-of-type(2){
+    width: 20%;
+  }
+  select:last-of-type{
+    margin-right: 0;
+  }
+}
+
+.medium-6.columns select {
+    display: inline-block;
+    width:20%;
+  }
+
+
+select.select-dmy {
+
+    display: inline-block;
+    width:20%;
+}
+
+.medium-9.columns select {
+    display: inline-block;
+    width:20%;
+  }
+
+ // http://stackoverflow.com/questions/21657445/foundation-5-and-page-printing
+@media print {
+
+
+	.row {
+  	margin-right: 2em;
+  	margin-left: 2em;
+		$base-font-size: 12px;
+
+	}
+
+
+  .large-1 {
+    width: 8.33333%;
+  }
+
+  .large-2 {
+    width: 16.66667%;
+  }
+
+  .large-3 {
+    width: 25%;
+  }
+
+  .large-4 {
+    width: 33.33333%;
+  }
+
+  .large-5 {
+    width: 41.66667%;
+  }
+
+  .large-6 {
+    width: 50%;
+  }
+
+  .large-7 {
+    width: 58.33333%;
+  }
+
+  .large-8 {
+    width: 66.66667%;
+  }
+
+  .large-9 {
+    width: 75%;
+  }
+
+  .large-10 {
+    width: 83.33333%;
+  }
+
+  .large-11 {
+    width: 91.66667%;
+  }
+
+  .large-12 {
+    width: 100%;
+  }
+}
