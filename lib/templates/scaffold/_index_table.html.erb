@@ -1,0 +1,52 @@
+<table>
+ 
+<%%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <tr>
+				<div class="row">
+				
+	
+	<% attributes.reject(&:password_digest?).each do |attribute| -%>
+
+		   <div class="large-2 columns">
+	
+        <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+
+			</div>
+				
+	<% end -%>
+
+		   <div class="large-3 columns">
+
+	        <%% if can? :read, <%= singular_table_name %> %>
+		        <td><%%= link_to t('actions.show'), <%= singular_table_name %>, class: t('show') %></td>
+					<%% end %>
+
+        <%% if can? :update, <%= singular_table_name %> %>
+			      <td><%%= link_to t('actions.edit'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: t('edit') %></td>   
+					<%% end %>
+
+	        <%% if can? :destroy, <%= singular_table_name %> %>
+		     		<td><%%= link_to t('actions.delete'),<%= singular_table_name %>, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<%% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <%% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%%= paginate @<%= plural_table_name %> %>
+
+</div>
+
+<br>

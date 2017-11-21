@@ -1,0 +1,49 @@
+<div class="row">
+
+	<h2><%%= tm('<%= singular_table_name %>').capitalize %></h2>
+
+</div>
+
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%%= ta('<%= singular_table_name %>.<%= attribute.name %>')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%%= @<%= singular_table_name %>.<%= attribute.name %> %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+<% end -%>
+
+<div class="row">
+	
+	<%% if can? :edit, @<%= singular_table_name %> %>
+
+		<%%= link_to t('actions.edit'), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: t('edit')  %> |
+
+	<%% end %>
+	
+	<%%= link_to t('actions.back'), <%= plural_table_name %>_path,  class: t('back')  %>
+
+</div>

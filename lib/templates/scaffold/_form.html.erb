@@ -1,0 +1,46 @@
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <%% if @<%= singular_table_name %>.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%%= t('validation.messagetext.system_detected') %> <%%= pluralize(@<%= singular_table_name %>.errors.count, t('validation.messagetext.error')) %> <%%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+        <li><%%= message %></li>
+      <%% end %>
+      </ul>
+    </div>
+  <%% end %>
+
+<div class="row">
+
+	<% attributes.each do |attribute| -%>
+	  <div class="field">
+	<% if attribute.password_digest? -%>
+	    <%%= f.label :password %><br>
+	    <%%= f.password_field :password %>
+	  </div>
+	  <div class="field">
+	    <%%= f.label :password_confirmation %><br>
+	    <%%= f.password_field :password_confirmation %>
+	<% else -%>
+	    <%%= f.label :<%= attribute.column_name %> %><br>
+	    <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+	<% end -%>
+	  </div>
+	<% end -%>
+
+</div>
+
+	<%% if can? :update, <%= class_name %> %>
+	
+	   <div class="row actions">
+	  	<%%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<%% end %>
+
+  	 <%%= link_to t('actions.cancel'), <%= plural_table_name %>_path, class: t('cancel') %>
+	
+	</div>
+
+<%% end %>

@@ -1,0 +1,13 @@
+<%%= render 'index_header.html.erb' %>
+
+<%% if @<%= plural_table_name %>.total_count>0 %>
+
+	<div class="row">
+
+		<%%= render 'index_table.html.erb' %>
+
+	</div>
+	
+	<%%= render 'index_search.html.erb' %>
+	
+<%% end %>
