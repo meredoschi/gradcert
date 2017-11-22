@@ -22,6 +22,7 @@ group :test do
 end
 
 group :test, :development do
+  gem 'factory_bot_rails'
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
   gem 'rubocop' # August 2017
@@ -39,7 +40,6 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'execjs' # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'factory_girl_rails', '~> 4.0'
 gem 'faker'
 gem 'ffaker'
 gem 'file_validators'
@@ -54,7 +54,7 @@ gem 'money-rails'
 gem 'morrisjs-rails'
 gem 'paper_trail', '~> 3.0.6'
 gem 'passenger'
-gem 'pg' # Use postgresql as the database for Active Record
+gem 'pg', '0.20' # Use postgresql as the database for Active Record
 gem 'prawn' # June 2016
 gem 'prawn-table', '~> 0.2.0'
 gem 'priceable'
