@@ -196,6 +196,8 @@ $ grep ENV config/database.yml
 export GRADCERT_DATABASE_PASSWORD='sample-db-password'
 ```
 
+Be sure to add this to your **$HOME/.bashrc** (or similar file).
+
 ```
 echo $GRADCERT_DATABASE_PASSWORD
 ```
