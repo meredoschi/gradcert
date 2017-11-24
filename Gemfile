@@ -40,7 +40,6 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'execjs' # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'factory_bot_rails', '~> 4.0'
 gem 'faker'
 gem 'ffaker'
 gem 'file_validators'
