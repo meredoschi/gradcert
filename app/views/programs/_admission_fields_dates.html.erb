@@ -1,0 +1,36 @@
+<div class="row">
+
+	<div class="medium-3 columns", class: "left inline">
+
+		<%= f.label ta('admission.start')  %><br>
+
+	</div>
+
+	<div class="medium-9 columns">
+
+
+		<%= f.date_select(:start, prompt: true, start_year: Date.today.year, end_year: Date.today.year-1, :include_blank => true) %>
+
+
+	</div>
+
+</div>
+
+<div class="row">
+
+
+	<div class="medium-3 columns", class: "left inline">
+
+		<%= f.label ta('admission.finish')  %><br>
+
+	</div>
+
+	<div class="medium-9 columns">
+
+
+		<%= f.date_select(:finish, prompt: true, start_year: Date.today.year, end_year: Date.today.year-1, :include_blank => true) %>
+
+
+	</div>
+
+</div>

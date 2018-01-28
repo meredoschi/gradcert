@@ -1,0 +1,112 @@
+<table>
+
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @placesavailables.each do |placesavailable| %>
+      <tr>
+				<div class="row">
+
+
+
+		   <div class="large-2 columns">
+
+        <td><%= link_to placesavailable.institution.name, placesavailable.institution %></td>
+
+			</div>
+
+
+		   <div class="large-1 column">
+
+        <td><%= link_to placesavailable.schoolterm.name, placesavailable.schoolterm %></td>
+
+			</div>
+
+		   <div class="large-1 column">
+
+        <td><%= placesavailable.authorized %></td>
+
+			</div>
+
+    <div class="large-1 column">
+
+     <td>
+       <%#= Registration.from_institution(placesavailable.institution).on_schoolterm(placesavailable.schoolterm).count %>
+       <%= placesavailable.num_active_registrations %>
+     </td>
+
+   </div>
+
+   <div class="large-1 column">
+
+    <td>
+      <%#= Registration.from_institution(placesavailable.institution).on_schoolterm(placesavailable.schoolterm).count %>
+      <%= placesavailable.num_still_available %>
+    </td>
+
+  </div>
+
+   <div class="large-1 column">
+
+    <td>
+      <%#= Registration.from_institution(placesavailable.institution).on_schoolterm(placesavailable.schoolterm).count %>
+      <%= placesavailable.num_registered_veterans %>
+    </td>
+
+  </div>
+
+  <div class="large-1 column">
+
+   <td>
+     <%#= Registration.from_institution(placesavailable.institution).on_schoolterm(placesavailable.schoolterm).count %>
+     <%= placesavailable.num_total_active %>
+   </td>
+
+ </div>
+
+ <div class="large-1 column">
+
+  <td><%= placesavailable.num_inactive_registrations %></td>
+
+</div>
+
+<div class="large-1 column">
+
+ <td><%= placesavailable.num_registrations_deactivation_pending %></td>
+
+</div>
+
+
+
+		   <div class="large-3 columns">
+
+	        <% if can? :read, placesavailable %>
+		        <td><%= link_to t('actions.show'), placesavailable, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, placesavailable %>
+			      <td><%= link_to t('actions.edit'), edit_placesavailable_path(placesavailable), class: t('edit') %></td>
+					<% end %>
+
+	        <% if can? :destroy, placesavailable %>
+		     		<td><%= link_to t('actions.delete'),placesavailable, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+					<% end %>
+
+    	</div>
+
+    		</div>
+
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @placesavailables %>
+
+</div>
+
+<br>

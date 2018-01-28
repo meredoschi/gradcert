@@ -1,0 +1,74 @@
+<div class="row panel custom-panel4">
+
+	<div class="row">
+	
+		<div class="large-4 columns">
+	
+			<% if @contact.image.blank? %>
+			
+				<%= t('actions.insert')+' '+t('photo') %>
+	
+			<% else %>
+									
+				<%= t('actions.update')+' '+t('photo') %>
+	
+			<% end %>
+			
+		</div>
+	
+		<div class="large-8 columns">
+	
+	    <%= form.file_field :image %>
+	    <%= form.hidden_field :image_cache %>
+	
+		</div>
+			
+	</div>
+
+	<div class="row">
+	
+		<div class="large-4 columns">
+	
+			<% if @contact.image.blank? %>
+			
+				<%= t('actions.insert')+' '+t('by_means_of')+' URL' %>
+	
+			<% else %>
+									
+				<%= t('actions.update')+' '+t('by_means_of')+' URL' %>
+	
+			<% end %>
+			
+		</div>
+	
+		<div class="large-8 columns">
+
+  	  <%= form.text_field :remote_image_url %>
+    
+	    <%= form.hidden_field :image_cache %>
+	
+		</div>
+			
+	</div>	
+	
+	<% if @contact.image.present? %>
+	
+		<div class="row">
+	
+			<div class="large-4 columns">
+			
+		    <%= t('actions.delete')+' '+t('photo') %>
+	
+			</div>
+	
+			<div class="large-8 columns">
+				
+	     <%= form.check_box :remove_image %>
+	
+			</div>
+					
+		</div>
+		  
+	<% end %>
+
+</div>

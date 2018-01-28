@@ -1,0 +1,54 @@
+<div class="row">
+		<table>
+			<tr>
+	
+				<% if @council.phone.main.present? %>
+
+						<div class="large-6 columns">
+						
+								<th><strong><%= ta('contact.phone')%></strong></th>
+						
+						</div>
+	
+				<% end %>
+			
+				<% if @council.phone.fax.present? %>
+
+					<div class="large-6 columns">
+						
+								<th><strong><%= ta('contact.fax')%></strong></th>
+						
+					</div>
+	
+					<% end %>
+									
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+				
+					<% if @council.phone.main.present? %>
+
+						<div class="large-6 columns">
+						
+							<td> <%= @council.phone.main %> </td>
+						
+						</div>
+					
+					<% end %>
+					
+					<% if @council.phone.fax.present? %>
+
+						<div class="large-6 columns">
+						
+							<td> <%= @council.phone.fax %> </td>
+						
+						</div>
+		
+					<% end %>				
+								
+			</tr>
+		</div>
+	</table>
+</div>

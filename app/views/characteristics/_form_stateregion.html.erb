@@ -1,0 +1,16 @@
+<div class="row">
+		
+	 		<div class="large-5 columns", class: "left inline">
+	
+	    <%= f.label ta('characteristic.stateregion_id') %><br>
+	
+			</div>
+	 		
+	 		<div class="large-7 columns">
+  
+			  <%= f.collection_select :stateregion_id, Stateregion.paulista.order(:name), :id, :name,  {prompt: true} %>
+		
+			
+			</div>
+
+</div>

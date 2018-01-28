@@ -1,0 +1,132 @@
+<div class="row">
+
+	<h2><%= tm('professionalspecialty').capitalize %></h2>
+
+</div>
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('professionalspecialty.name')%></strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('professionalspecialty.professionalarea_id')%></strong></th>
+					
+							</div>
+
+							<% if is_legacy?(@professionalspecialty) %>
+							
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('professionalspecialty.previousname')%></strong></th>
+					
+							</div>
+
+							<% end %>
+					
+									
+							<% if is_admin(current_user) %>
+
+								<div class="large-1 column">											
+						
+									<th><strong><%= ta('professionalspecialty.previouscode')%></strong></th>
+						
+								</div>
+							
+								<div class="large-3 columns">
+						
+									<th><strong><%= ta('professionalspecialty.comment')%></strong></th>
+						
+								</div>
+
+							<% end %>	
+
+							<% if is_legacy?(@professionalspecialty) %>
+	
+								<div class="large-2 columns">
+						
+									<th><strong><%= ta('professionalspecialty.legacy')%></strong></th>
+						
+								</div>
+
+							<% end %>
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-2 columns">
+					
+						<td><%= @professionalspecialty.name %></td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td><%= @professionalspecialty.professionalarea_name %></td>
+					
+					</div>
+
+
+					<% if is_legacy?(@professionalspecialty) %>
+
+					<div class="large-2 columns">
+			
+						<td><%= @professionalspecialty.previousname %></td>
+					
+					</div>
+	
+					<% end %>
+					
+					<% if is_admin(current_user) %>
+
+					<div class="large-1 column">
+					
+						<td><%= @professionalspecialty.previouscode %></td>
+					
+					</div>
+
+	
+							<div class="large-3 columns">
+							
+								<td><%= @professionalspecialty.comment %></td>
+							
+							</div>
+	
+					<% end %>
+				
+					
+					<% if is_legacy?(@professionalspecialty) %>
+
+					<div class="large-2 columns">
+					
+						<td><%= tickmark(@professionalspecialty.legacy) %></td>
+					
+					</div>
+					
+					<% end %>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	
+	<% if can? :edit, @professionalspecialty %>
+
+		<%= link_to t('actions.edit'), edit_professionalspecialty_path(@professionalspecialty), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), professionalspecialties_path,  class: t('back')  %>
+
+</div>

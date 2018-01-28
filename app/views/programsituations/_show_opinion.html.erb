@@ -1,0 +1,25 @@
+<h3>
+
+	<div class="row">
+	
+			<% if favorable_opinion? %>
+	
+				<div data-alert class="alert-box success round">
+				
+					<strong><%= link_to t('favorable_assessment').capitalize, @programsituation.assessment  %></strong>
+	
+				</div>
+							
+			<% else %>
+	
+				<div data-alert class="alert-box warning round">
+	
+					<strong><%= link_to t('unfavorable_assessment').capitalize, @programsituation.assessment  %></strong>
+						
+				</div>
+				
+			<% end %>
+																																			
+	</div>
+
+</h3>

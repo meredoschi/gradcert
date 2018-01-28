@@ -1,0 +1,112 @@
+	<div class="nested-fields">
+  
+
+		<div class="row">
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+					  <%= f.label ta('address.header')%><br>
+		
+					</div>
+			 		
+		 		
+			 		<div class="large-6 columns">
+		  
+				   <%= f.text_field :header %>        	
+		 
+					</div>
+		
+				<div class="large-4 columns">
+
+					  <%= link_to_remove_association t('actions.delete')+' '+t('external_venue'), f, class: "remove-nested" %>
+
+					</div>
+
+		
+		</div>
+
+
+		<div class="row">
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+					  <%= f.label ta('address.addr')%><br>
+		
+					</div>
+			 		
+			 		<div class="large-2 columns", class: "left inline">
+		   
+				  	<%= f.collection_select :streetname_id, Streetname.order(:designation), :id, :designation,  {prompt: true} %>
+		  
+					</div>
+			 		
+			 		<div class="large-3 columns">
+		  
+				   <%= f.text_field :addr %>        	
+		 
+					</div>
+
+			 		<div class="large-1 column">
+		  
+				   <%= f.number_field :streetnum %>        	
+		 
+					</div>
+
+			 		<div class="large-2 columns", class: "left inline">
+			
+						  <%= f.label ta('address.complement')%><br>
+		
+					</div>
+			 		
+			 		<div class="large-2 columns">
+		  
+				   <%= f.text_field :complement %>        	
+		 
+					</div>
+		
+		</div>
+
+<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+				  <%= f.label ta('address.neighborhood')%><br>
+
+			</div>
+	 			 		
+	 		<div class="large-2 columns">
+  
+	   <%= f.text_field :neighborhood %>        	
+ 
+			</div>
+
+	 		<div class="large-1 columns", class: "left inline">
+	
+			  <%= f.label ta('address.municipality')%><br>
+
+			</div>
+	 		
+	 		<div class="large-3 columns">
+   
+		  	<%= f.collection_select :municipality_id, Municipality.paulista, :id, :name,  {prompt: true} %>
+  
+			</div>
+	 		
+	 		<div class="large-2 columns">
+  
+			  <%= f.label ta('address.postalcode')%><br>
+ 
+			</div>
+
+	 		<div class="large-2 columns">
+  
+		   <%= f.text_field :postalcode %>        	
+ 
+			</div>
+
+	</div>
+</div>
+
+<div class="row">
+
+</div>

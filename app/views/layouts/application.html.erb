@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+<title> <%= title %></title>
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
-
-    <%= stylesheet_link_tag    "application" %>
+		<%# http://foundation.zurb.com/forum/posts/17900-print-with-foundation-rails %>		
+    <%= stylesheet_link_tag "application", media: 'all' %>
+    
     <%= javascript_include_tag "vendor/modernizr" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    
   </head>
 
   <body>
 
-    <%= yield %>
+		<%= display_header(current_user) %>
+									
+		<%= render 'layouts/navigationbar' %>
+  
+		<%= render 'layouts/messages' %>
 
+    <%= javascript_include_tag "application" %>
+
+    <%= yield %>
   </body>
 </html>
+

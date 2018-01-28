@@ -1,0 +1,132 @@
+<%= form_for(@feedback) do |f| %>
+  <% if @feedback.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@feedback.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @feedback.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= f.label tm('registration') %>
+
+					</div>
+
+			 		<div class="large-9 columns">
+
+
+					<%#= f.collection_select :registration_id, Registration.current.ordered_by_contact_name, :id, :namecpfinstitution %>
+
+					<%#= f.collection_select :registration_id, Registration.contextual_today.ordered_by_contact_name, :id, :student_name_id_schoolyear_term %>
+          <%= f.collection_select :registration_id, @registrations_with_program_names_schoolterms, :id, :student_name_id_schoolyear_term %>
+
+
+
+					</div>
+
+		</div>
+
+	<% render 'form_registration.html.erb', f: f %>
+
+	<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+					    <%= f.label :bankpayment_id %>
+
+					</div>
+
+			 		<div class="large-9 columns">
+
+
+					  <%= f.collection_select :bankpayment_id, Bankpayment.not_done.resend.ordered_by_most_recent_payroll, :id, :name %>
+
+
+					</div>
+
+		</div>
+
+
+
+		<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= f.label :processingdate  %>
+
+					</div>
+
+			 		<div class="medium-9 columns">
+
+
+							<%= f.date_select(:processingdate, prompt: true, start_year: Date.today.year-1, end_year: Date.today.year, :include_blank => true) %>
+
+
+					</div>
+
+		</div>
+
+	<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+					    <%= f.label :processed %>
+
+					</div>
+
+			 		<div class="large-9 columns">
+
+
+					  <%= f.check_box :processed %>
+
+
+					</div>
+
+	</div>
+
+  <div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+					    <%= f.label :approved %>
+
+					</div>
+
+			 		<div class="large-9 columns">
+
+
+					  <%= f.check_box :approved %>
+
+
+					</div>
+
+		</div>
+
+
+	<div class="row">
+
+	<% if can? :update, Feedback %>
+
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), feedbacks_path, class: t('cancel') %>
+
+	</div>
+
+<% end %>

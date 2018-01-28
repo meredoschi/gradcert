@@ -1,0 +1,9 @@
+<div id="professionalfamily">
+  <%= f.fields_for :professionalfamily do |professionalfamily| %>
+    <%= render 'professionalfamily_fields', :f => professionalfamily %>
+  <% end %>
+
+ <div class="row links">
+    <%= link_to_add_association t('actions.new.f')+' '+tm('professionalfamily').downcase, f, :professionalfamily, class: t('create') %>
+ </div>
+</div>

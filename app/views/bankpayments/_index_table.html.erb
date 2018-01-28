@@ -1,0 +1,80 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @bankpayments.each do |bankpayment| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= bankpayment.payroll.name %></td>
+
+			</div>
+
+			<% if is_admin_or_manager(current_user) %>
+			
+			   <div class="large-2 columns">
+		
+	        <td><%= bankpayment.sequential %></td>
+	
+				</div>
+					
+		
+			   <div class="large-3 columns">
+		
+	        <td><%= bankpayment.comment %></td>
+	
+				</div>
+					
+		
+			   <div class="large-1 column">
+		
+	        <td><%= yes_no(bankpayment.prepared) %></td>
+	
+				</div>
+	
+			   <div class="large-1 column">
+		
+	        <td><%= yes_no(bankpayment.done) %></td>
+	
+				</div>
+				
+				
+			<% end %>
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, bankpayment %>
+		        <td><%= link_to t('actions.show'), bankpayment, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, bankpayment %>
+			      <td><%= link_to t('actions.edit'), edit_bankpayment_path(bankpayment), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, bankpayment %>
+		     		<td><%= link_to t('actions.delete'),bankpayment, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @bankpayments %>
+
+</div>
+
+<br>

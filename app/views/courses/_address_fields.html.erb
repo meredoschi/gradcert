@@ -1,0 +1,116 @@
+	<div class="nested-fields">
+  
+
+		<div class="row">
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+					  <%= f.label ta('address.header')%><br>
+		
+					</div>
+			 		
+		 		
+			 		<div class="large-6 columns">
+		  
+				   <%= f.text_field :header %>        	
+		 
+					</div>
+
+				<div class="large-3 columns", class: "left inline">
+
+	  	  	<%= f.label ta('address.internal') %>
+	  	  	<a href="#" data-reveal-id="myModal"><em><%= t('help') %></em></a> 
+	  	  	<div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog"> <h2 id="modalTitle"></h2> <p class="lead"><%= t('internal_address_help') %></p> <a class="close-reveal-modal" aria-label="Close">&#215;</a> 
+	  	  	</div>
+
+ 		
+				</div>
+
+
+ 		
+		 		<div class="large-1 column">
+	   
+					<%= f.check_box :internal %>
+ 
+			 </div>
+		
+		</div>
+
+		<div class="row">
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+					  <%= f.label ta('address.addr')%><br>
+		
+					</div>
+			 		
+			 		<div class="large-2 columns", class: "left inline">
+		   
+				  	<%= f.collection_select :streetname_id, Streetname.order(:designation), :id, :designation,  {prompt: true} %>
+		  
+					</div>
+			 		
+			 		<div class="large-4 columns">
+		  
+				   <%= f.text_field :addr %>        	
+		 
+					</div>
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+						  <%= f.label ta('address.complement')%><br>
+		
+					</div>
+			 		
+			 		<div class="large-2 columns">
+		  
+				   <%= f.text_field :complement %>        	
+		 
+					</div>
+		
+		</div>
+
+<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+				  <%= f.label ta('address.neighborhood')%><br>
+
+			</div>
+	 			 		
+	 		<div class="large-2 columns">
+  
+	   <%= f.text_field :neighborhood %>        	
+ 
+			</div>
+
+	 		<div class="large-1 columns", class: "left inline">
+	
+			  <%= f.label ta('address.municipality')%><br>
+
+			</div>
+	 		
+	 		<div class="large-3 columns">
+   
+		  	<%= f.collection_select :municipality_id, Municipality.paulista, :id, :name,  {prompt: true} %>
+  
+			</div>
+	 		
+	 		<div class="large-2 columns">
+  
+			  <%= f.label ta('address.postalcode')%><br>
+ 
+			</div>
+
+	 		<div class="large-2 columns">
+  
+		   <%= f.text_field :postalcode %>        	
+ 
+			</div>
+
+	</div>
+</div>
+
+<div class="row">
+
+</div>

@@ -1,0 +1,42 @@
+	<table>
+	  <thead>
+	    <tr>
+				<div class="row">
+		      <th><%= ta('permission.kind')%></th>
+		      <th><%= ta('permission.description')%></th>
+		      <th colspan="3"></th> 
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @permissions.each do |permission| %>
+	      <tr>
+	        <td><%= permission.kind %></td>
+	        <td><%= permission.description %></td>
+	       	        
+	        <% if can? :read, permission %>
+		        <td><%= link_to t('actions.show'), permission, class: "mostrar" %></td>
+					<% end %>
+	
+	        <% if can? :update, permission %>
+			      <td><%= link_to t('actions.edit'), edit_permission_path(permission), class: "editar" %></td>   
+					<% end %>
+	
+	        <% if can? :destroy, permission %>
+		     		<td><%= link_to t('actions.delete'),permission, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+					  
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	<br>
+</div>
+
+<div class="row">
+
+  <%= paginate @permissions %>
+
+  <br>
+		 
+</div>

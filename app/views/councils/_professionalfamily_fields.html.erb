@@ -1,0 +1,26 @@
+<div class="nested-fields">
+ 
+	<div class="row">
+	
+		 		<div class="medium-2 columns", class: "left inline">
+	
+	 				<%= f.label tm('professionalfamily') %>
+		
+				</div>
+		 			 		
+		 		<div class="medium-8 column">
+
+					<%= f.collection_select :id, Professionalfamily.all, :id, :name,  {prompt: true} %>
+	
+				
+				</div>
+
+  		<div class="medium-2 columns">
+
+					  <%= link_to_remove_association t('actions.delete'), f, class: "remover" %>
+
+			</div>
+		 	
+	</div>
+
+</div>

@@ -1,0 +1,82 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @programsituations.each do |programsituation| %>
+
+		<% if is_staff(current_user) %>
+		     
+      <tr>
+
+		   <div class="large-2 columns">
+	
+        <td><%= link_to programsituation.assessment.contact.name, programsituation.assessment.contact %></td>
+
+			</div>
+
+		<% end %>
+			
+		   <div class="large-2 columns">
+	
+        <td><%= link_to programsituation.assessment_short_name, programsituation.assessment %></td>
+
+			</div>
+
+		   <div class="large-1 column">
+	
+			<td><%= tickmark(programsituation.favorable) %></td>
+			
+			</div>
+
+								
+		   <div class="large-2 columns">
+	
+        <td>
+        
+        <%# "is it true that both are not equal", if so, display a tickmark %>
+        <%= tickmark(programsituation.assessment.program.duration!=programsituation.recommended_duration) %>
+
+				</td>
+				
+			</div>
+				
+		   <div class="large-2 columns">
+	
+			<td><%= tickmark(programsituation.assessment.program.workload!=programsituation.workload) %>
+			
+			</div>
+								
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, programsituation %>
+		        <td><%= link_to t('actions.show'), programsituation, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, programsituation %>
+			      <td><%= link_to t('actions.edit'), edit_programsituation_path(programsituation), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, programsituation %>
+		     		<td><%= link_to t('actions.delete'),programsituation, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @programsituations %>
+
+</div>
+
+<br>

@@ -1,0 +1,6 @@
+---
+pt_BR:
+  contact_removal_lock:
+    student: A remoção do contato não é permitida se houverem dados de bolsista cadastrados.
+  student_removal_lock:
+    registration: A remoção do bolsista não é permitida se já tiver sido matriculado.

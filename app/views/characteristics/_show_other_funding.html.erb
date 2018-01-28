@@ -1,0 +1,32 @@
+<div class="row">
+		
+	<tr>
+	
+			<div class="large-6 columns">
+		
+					<td><%= ta('funding.other').capitalize %></td>
+		
+				</div>
+	
+				<div class="large-3 columns">
+		
+					<td><%= @characteristic.funding.other %></td>
+		
+				</div>
+	
+					<% if @characteristic.funding.absolute? %>
+							
+					<div class="large-3 columns">
+			
+						<th><%= percent(@characteristic.funding.other, @characteristic.funding.total) %></th>
+		
+					</div>
+
+				<% end %>
+
+	
+		</div>
+	 			 		
+	</tr>
+
+</div>	

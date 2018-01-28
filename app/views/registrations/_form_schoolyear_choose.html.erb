@@ -1,0 +1,23 @@
+<div class="large-3 columns", class: "left inline">
+
+  <h5><%= ta('registration.schoolyear_id')%></h5>
+
+</div>
+
+<div class="large-9 columns">
+
+    <%# if @registration.schoolyear_id.nil? %>
+
+      <%#= f.collection_select :schoolyear_id, retrieve_schoolyears_for(current_user), :id, display_student_program_for(current_user), prompt: true  %>
+
+      <%#= f.collection_select :schoolyear_id, retrieve_schoolyears_for(current_user), :name  %>
+
+      <%= f.collection_select :schoolyear_id, retrieve_schoolyears_for(current_user), :id, display_student_program_for(current_user),  {prompt: true} %>
+
+    <%# else %>
+
+      <%#= f.select :schoolyear_id, options_from_collection_for_select(retrieve_schoolyears_for(current_user), :id, display_student_program_for(current_user), @registration.schoolyear_id) %>
+
+    <%# end %>
+
+</div>

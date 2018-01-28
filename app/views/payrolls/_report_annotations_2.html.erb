@@ -1,0 +1,39 @@
+<% @all_events.for_registration_from_payroll(annotation.registration,@payroll).each_with_index do |event, i|	%>
+
+ <% if event.pending? %>
+   <div class="row">
+     <h4> ****** <%= tm('event').capitalize %> <%= t('pending').downcase %> ******</h4>
+   </div>
+ <% end %>
+ <div class="row">
+
+   <div class="large-8 columns">
+
+     <%= render 'annotationsreport_event.html.erb', event: event %>
+
+   </div>
+
+
+   <div class="large-4 columns">
+
+     <% if event.residual? %>
+
+       <h6><u><%= tm('event').capitalize %> <%= ta('event.residual').downcase %></u></h6>
+
+     <% end %>
+
+   </div>
+
+   <%= render 'annotationsreport_registration_status.html.erb', event: event %>
+ </div>
+
+ <% if event.pending? %>
+
+   <div class="row"><h4>*****************************************</h4></div>
+
+ <% end %>
+
+
+
+</div>
+<% end %>

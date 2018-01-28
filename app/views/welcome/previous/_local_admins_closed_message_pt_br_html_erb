@@ -1,0 +1,26 @@
+<div class="panel callout">
+	
+<div class="row">
+	
+<h6>	Prezados membros das comissões locais, </h6> 
+	
+<h6>
+	Está encerrado o período de lançamento de movimentos referente à folha do mês.  Sendo assim, algumas telas terão somente a opção "mostrar". </h6>
+
+
+<h6>
+
+  Referente aos demonstrativos, os mesmos podem ser acessados por meio da tela:
+
+  <span class="label info"><%= link_to "Financeiro -> Pagamentos Bancários", bankpayments_path %></span> 
+
+  Queiram por gentileza escolherem uma folha que não estiver marcada como *pendente* (isto é, ainda em elaboração).
+
+  Mostrar.
+
+  Caso estejam disponíveis, "Relatório PDF" aparecerá.
+
+  Cliquem no botão "Demonstrativos" e aguardem o processamento, que poderá levar vários segundos em instituições com várias dezenas de bolsistas. Isto é normal.  
+
+</h6>
+

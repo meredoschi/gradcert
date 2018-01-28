@@ -1,0 +1,59 @@
+<div class="row">
+
+	<table>
+		
+		<h4><%= tm('schoolterm').capitalize %></h4>
+	
+		<tr>
+	
+			<div class="row">
+															
+				<div class="large-4 columns">
+			
+					<th><strong><%= ta('schoolterm.start')%></strong></th>
+			
+				</div>
+			
+				<div class="large-4 columns">
+			
+					<th><strong><%#= ta('schoolterm.finish')%></strong></th>
+			
+				</div>
+	
+			</div>
+		
+		</tr>
+	
+		<div class="row">
+	
+		<tr>
+		
+			<div class="large-4 columns">
+				 			
+				<td>
+				
+						<% if @program.schoolterm.present? %>
+				
+							<%=	 I18n.l(@program.schoolterm.start , :format => :dmy) %>
+
+						<% end %> 
+				
+				</td>
+				
+			</div>
+		
+			<div class="large-4 columns">
+				<td>
+				
+						<% if @program.schoolterm.present? %>
+				
+							<%#=	 I18n.l(@program.schoolterm.finish , :format => :dmy) %>
+
+						<% end %> 
+				
+				</td>
+			</div>
+																											
+		</div>
+	</table>
+</div>

@@ -1,0 +1,19 @@
+<% if can? :read, User %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(users_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to t('my.m').capitalize+' '+tm('user'), users_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

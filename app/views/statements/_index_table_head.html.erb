@@ -1,0 +1,61 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+    
+	  		
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :registration_id, ta('statement.registration_id')) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :bankpayment_id, ta('statement.bankpayment_id')) %></th>
+      
+    			</div>
+    			        
+							
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :incometax, ta('statement.incometax')) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :socialsecurity, ta('statement.socialsecurity')) %></th>
+      
+    			</div>
+    			        
+				<% if is_admin_or_manager(current_user) %>
+				
+		    		<div class="large-2 columns">
+
+	  					<th><%= sort_link(@search, :childsupport, ta('statement.childsupport')) %></th>
+      
+    				</div>
+    			 
+				<% end %>    
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :netamount, ta('statement.netamount')) %></th>
+      
+    			</div>
+    			        
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

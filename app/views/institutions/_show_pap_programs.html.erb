@@ -1,0 +1,37 @@
+
+<div class="row">
+
+	<table>
+		<tr>
+			<th><strong><%= ta('programname.pap') %></strong></th>		
+		</tr>						
+
+</div>
+
+<td><%= @institution.program.pap.count %></td>	
+
+</div>
+
+</tr>
+
+</div>
+
+</table>
+
+<div class="large-12 columns">
+		
+<% @papprograms.each do |program| %>
+
+	<% if is_not_regular_user(current_user) %>
+						
+		<p><%= link_to program.programname.name, program_path(program.id) %></p>
+	
+	<% else %>
+
+		<p><%= program.programname.name %></p>
+	
+	<% end %>
+					
+<% end %>
+
+</div>

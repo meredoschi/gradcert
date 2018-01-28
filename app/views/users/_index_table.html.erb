@@ -1,0 +1,71 @@
+<table>
+
+	<%= render 'index_table_head.html.erb' %>
+	
+<tbody>
+	<% @users.each do |user| %>
+	 	<tr>
+	   	<div class="large-3 columns">					  
+					<td><%= user.email %></td> 
+			</div>
+
+			<% if is_admin_or_readonly(current_user) || is_manager(current_user) %>		  
+						
+				      <div class="large-3 columns">
+
+					        <td><%= link_to user.institution.name, user.institution  %></td>
+			
+							</div>
+
+			<% end %>
+			
+	    <div class="large-3 columns">					  
+	    
+		  	<th> 	
+		  	<%= show_permission_for(user) %></h6>
+			</div>
+
+      	<% if can? :read, user %>
+	
+		    	<div class="large-1 column">					  
+	
+		        <td><%= link_to t('actions.show'), user, class: "mostrar" %></td>
+	
+					</div>
+
+				<% end %>
+				
+	    	<div class="large-1 column">					  
+	        
+	        <% if can? :edit, user %>
+	
+		      <td><%= link_to t('actions.edit'), edit_user_path(user), class: "editar" %></td>   
+		
+	        <% end %>
+	        
+				</div>
+
+	    	<div class="large-1 column">					  
+	                
+	 	      <% if can? :destroy, user %>
+		     		<td><%= link_to t('actions.delete'),user, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     	
+					<% end %> 
+
+				</div>
+
+	      </tr>
+	      
+	      </div>
+	      
+	    <% end %>
+	  </tbody>
+	</table>
+
+</div>
+	
+<div class="row">
+
+  <%= paginate @users %>
+  <br>
+		 
+</div>

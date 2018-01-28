@@ -1,0 +1,80 @@
+	<% if uses_internet_social_media?(@institution) %>
+	
+		<div class="row">
+	
+			<table>
+				<tr>
+				
+						<% if @institution.webinfo.facebook.present? %>
+	
+								<div class="large-4 columns">
+						
+									<th><strong><%= ta('webinfo.facebook')%></strong></th>
+						
+								</div>
+						
+						<% end %>
+						
+						<% if @institution.webinfo.twitter.present? %>
+		
+								<div class="large-4 columns">
+						
+									<th><strong><%= ta('webinfo.twitter')%></strong></th>
+						
+								</div>
+								
+						<% end %>
+	
+						<% if @institution.webinfo.other.present? %>
+		
+								<div class="large-4 columns">
+						
+									<th><strong><%= ta('webinfo.other')%></strong></th>
+						
+								</div>
+								
+						<% end %>
+								
+				</tr>						
+			
+					<div class="row">
+				
+						<tr>
+		
+							<% if @institution.webinfo.facebook.present? %>
+		
+								<div class="large-4 columns">
+								
+									<td> <%= @institution.webinfo.facebook %>						</td>
+								
+								</div>
+		
+							<% end %>
+		
+							<% if @institution.webinfo.twitter.present? %>
+		
+								<div class="large-4 columns">
+								
+									<td> <%= @institution.webinfo.twitter %> </td>
+								
+								</div>
+		
+							<% end %>
+		
+							<% if @institution.webinfo.other.present? %>
+		
+								<div class="large-4 columns">
+								
+									<td> <%= @institution.webinfo.other %> </td>
+								
+								</div>
+		
+							<% end %>
+							
+						</tr>
+				</div>
+			</table>
+	
+		</div>
+
+	<% end %>

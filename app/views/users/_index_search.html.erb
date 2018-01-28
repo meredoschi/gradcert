@@ -1,0 +1,20 @@
+<%= search_form_for @search do |f| %>
+
+	<% if institution_with_users_exists_for(current_user) %>
+
+		<%= render 'index_search_institution', f: f %>
+	
+ <% end %>
+
+	<%= render 'index_search_permission', f: f %>
+
+	<%= render 'index_search_email', f: f %>
+
+	<div class="row">
+		    
+		<div class="large-6 columns">	  
+		  <%= f.submit  t('actions.search'), class: "buscar" %>
+		</div>
+	</div>
+
+<% end %>

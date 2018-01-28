@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+		
+		<h2><%= tm('permission').capitalize.pluralize %> (<%= @permissions.total_count  %> /  <%= @numpermissions %>)  	</h2>
+	
+  </div>
+
+	<% if can? :create, Permission %>
+
+		<div class="large-4 columns">
+			 	
+	    	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('permission')), new_permission_path %>	 
+
+	  </div>
+
+	<% end %>
+		  
+</div>

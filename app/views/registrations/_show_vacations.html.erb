@@ -1,0 +1,41 @@
+<div class="row">
+
+	<hr class="custom-hr ">
+	<h3>
+
+		<%= pluralize(@num_vacations, tm('event')) %> <%= t('of.n') %> <%= ta('leavetype.vacation').downcase %>
+
+	</h3>
+
+</div>
+
+<div class="row">
+	<h4>
+		 <%= pluralize(@total_days_vacationed, t('day')) %> <%= t('total') %> 
+	</h4>
+</div>
+
+
+<div class="row">
+
+	<h4>
+		<table>
+
+		<% @vacations.each_with_index do |vacation, i| %>
+
+			<% if i==0 %>
+
+				<%= render 'show_vacations_heading', vacation: vacation, i: i %>
+
+			<% end %>
+
+			<%= render 'show_vacation_details', vacation: vacation, i: i %>
+
+		<% end %>
+
+		</table>
+	</div>
+
+	</h4>
+
+</div>

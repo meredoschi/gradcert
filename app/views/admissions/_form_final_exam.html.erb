@@ -1,0 +1,30 @@
+<div class="row">
+
+      <div class="large-4 columns", class: "left inline">
+
+      <%= f.label ta('admission.absentfinalexam') %>
+
+    </div>
+
+
+    <div class="large-2 columns">
+
+       <%= f.number_field :absentfinalexam, min:0 %>
+
+    </div>
+
+    <div class="large-4 columns", class: "left inline">
+
+      <%= f.label ta('admission.insufficientfinalexamgrade') %>
+
+      <span data-tooltip aria-haspopup="true" class="has-tip" title="Candidatos que realizaram a prova porém não foram aprovados."><%= t('help') %></span>
+
+    </div>
+
+    <div class="large-2 columns">
+
+      <%= f.number_field :insufficientfinalexamgrade, min:0 %>
+
+    </div>
+
+</div>

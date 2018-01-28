@@ -1,0 +1,100 @@
+<div class="row">
+		<table>
+			<tr>
+			
+				<div class="large-4 columns">
+		
+					<th><strong><%= ta('recommendation.grants').capitalize %></strong></th>
+			
+				</div>
+	
+				<div class="large-4 columns">
+		
+					<th><strong><%= t('current_situation') %></strong></th>
+			
+				</div>
+
+				<div class="large-2 columns">
+		
+					<th><strong>&#916;</strong></th>
+			
+				</div>
+	
+				<div class="large-2 columns">
+		
+					<th><strong>&#916; %</strong></th>
+			
+				</div>
+					
+							
+			</tr>						
+	
+		</div>
+			
+			<div class="row">
+		
+				<tr>
+
+				<div class="large-4 columns">
+					
+						<td><%= recommendation.grants %></td>
+										
+					</div>
+
+			<% if @schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).exists? %>
+
+
+				<div class="large-2 columns">
+		
+
+					<td>
+				
+								<%= @schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).first.grants %> </td>
+									
+				</div>
+
+				<div class="large-2 columns">
+		
+					<td>
+	
+							<%= recommendation.grants-@schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).first.grants %> </td>
+					
+				</div>
+
+				<div class="large-2 columns">
+
+		
+					<td><%= delta(@schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).first.grants,recommendation.grants)   %></td>
+			
+				</div>
+
+			<% else %>
+
+				<div class="large-2 columns">
+		
+					<td>---</td>
+													
+				</div>
+
+				<div class="large-2 columns">
+		
+					<td>---</td>
+													
+				</div>
+
+				<div class="large-2 columns">
+		
+					<td>---</td>
+													
+				</div>
+
+				<% end %>
+													
+				</tr>
+				
+			</div>
+						
+		</div>
+
+	</table>
+</div>

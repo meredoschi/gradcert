@@ -1,0 +1,19 @@
+<% if can? :read, Contact %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(contacts_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('contact').capitalize.pluralize, contacts_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

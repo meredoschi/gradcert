@@ -1,0 +1,32 @@
+<div class="row">
+		
+	<tr>
+	
+			<div class="large-6 columns">
+		
+					<td><%= ta('funding.ppp').capitalize %></td>
+		
+				</div>
+	
+				<div class="large-3 columns">
+		
+					<td><%= @characteristic.funding.ppp %></td>
+		
+				</div>
+	
+					<% if @characteristic.funding.absolute? %>
+							
+					<div class="large-3 columns">
+			
+						<th><%= percent(@characteristic.funding.ppp, @characteristic.funding.total) %></th>
+		
+					</div>
+
+				<% end %>
+
+	
+		</div>
+	 			 		
+	</tr>
+
+</div>	

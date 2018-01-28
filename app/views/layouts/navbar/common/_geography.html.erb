@@ -1,0 +1,26 @@
+<% if ( is_active_link?(municipalities_path, :inclusive) || is_active_link?(countries_path, :inclusive) || is_active_link?(brstates_path, :inclusive) || is_active_link?(stateregions_path, :inclusive) ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+  <a href="#"><%= t('geography').pluralize.mb_chars.upcase %></a>
+    <ul class="dropdown">
+
+		<%= render 'layouts/navbar/submenu/countries.html.erb' %>
+		
+		<%= render 'layouts/navbar/submenu/brstates.html.erb' %>
+
+		<%= render 'layouts/navbar/submenu/stateregions.html.erb' %>
+
+		<%= render 'layouts/navbar/submenu/municipalities.html.erb' %>
+
+	    </ul>
+      </ul>
+    </li>
+ </ul>
+ </ul>

@@ -1,0 +1,115 @@
+<div class="row">
+
+	<table>
+		<tr>
+		
+						<div class="large-6 columns">
+				
+							<th><strong><%= ta('webinfo.email')%></strong></th>
+				
+						</div>
+				
+						<div class="large-6 columns">
+				
+							<th><strong><%= ta('webinfo.site')%></strong></th>
+				
+						</div>
+	
+		</tr>						
+	
+		<div class="row">
+	
+			<tr>
+				<div class="large-6 columns">
+				
+					<td> <% if @regionaloffice.webinfo.present? %>
+					
+									<%= @regionaloffice.webinfo.email %>
+					
+							<% end %>
+							
+					</td>
+				
+						</div>
+				
+							<div class="large-6 columns">
+				
+								<td>
+
+									<% if @regionaloffice.webinfo.present? %>
+													
+										<%= @regionaloffice.webinfo.site  %></td>
+	
+									<% end %>
+												
+						</div>
+				
+			</tr>
+	</div>
+</table>
+
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('webinfo.facebook')%></strong></th>
+					
+							</div>
+					
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('webinfo.twitter')%></strong></th>
+					
+							</div>
+					
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('webinfo.other')%></strong></th>
+					
+							</div>
+		
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-4 columns">
+					
+						<td> <% if @regionaloffice.webinfo.present? %>
+						
+										<%= @regionaloffice.webinfo.facebook %>
+						
+								<% end %>
+								
+						</td>
+					
+							</div>
+					
+								<div class="large-4 columns">
+					
+									<td>
+
+										<% if @regionaloffice.webinfo.present? %>
+														
+											<%= @regionaloffice.webinfo.twitter  %></td>
+		
+										<% end %>
+													
+							</div>
+					
+							<div class="large-4 columns">
+					
+								<td>
+								
+									<% if @regionaloffice.webinfo.present? %>
+														
+										<%= @regionaloffice.webinfo.other  %></td>
+					
+									<% end %>
+									
+							</div>
+				</tr>
+		</div>
+	</table>
+</div>

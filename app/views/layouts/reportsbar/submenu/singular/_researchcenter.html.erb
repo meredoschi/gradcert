@@ -1,0 +1,19 @@
+<% if can? :read, Researchcenter %>        
+
+	<ul class="left">
+	
+		<% if is_active_link?(researchcenters_path, :inclusive) %>
+	
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+	
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('researchcenter').capitalize, researchcenters_path  %></li>	
+		    
+	</ul>    
+
+<% end %>

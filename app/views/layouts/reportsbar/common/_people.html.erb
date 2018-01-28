@@ -1,0 +1,21 @@
+<% if ( is_active_link?(users_path, :inclusive) || is_active_link?(contacts_path, :inclusive) || is_active_link?(supervisors_path, :inclusive)  ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+<a href="#"><%= t('people_management').mb_chars.upcase %></a>
+
+	<ul class="dropdown">
+	
+		<div class="row"> <%= render 'layouts/navbar/submenu/users.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/contacts.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/students.html.erb' %> </div>	
+		<div class="row"> <%= render 'layouts/navbar/submenu/supervisors.html.erb' %> </div>
+	
+	 </ul>
+	 

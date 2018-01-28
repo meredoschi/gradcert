@@ -1,0 +1,46 @@
+<div class="row">
+
+	<table>
+		<tr>
+			
+		<div class="large-6 columns">
+			<th><strong><%= tm('supervisor').capitalize %></strong></th>
+		</div>
+
+		<div class="large-3 columns">			
+			<th><strong><%= tm('profession').capitalize %></strong></th>		
+		</div>
+
+		<div class="large-3 columns">			
+			<th><strong><%= ta('supervisor.career_start_date') %></strong></th>		
+		</div>
+				
+		</tr>
+</div>
+
+<div class="row">
+
+		<tr>
+		
+		<div class="large-6 columns">
+		
+			<td><%= link_to @supervisor.contact.name, @supervisor.contact  %></td>	
+
+		</div>
+
+		<div class="large-3 columns">
+			
+			<td><%= link_to @supervisor.profession.name, @supervisor.profession %>			</td>	
+
+		</div>
+	
+		<div class="large-3 columns">
+			
+			<td><%= I18n.localize(@supervisor.career_start_date) %></td>	
+
+		</div>
+			
+	  </tr>
+	</table>
+
+</div>

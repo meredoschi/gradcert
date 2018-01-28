@@ -1,0 +1,16 @@
+
+<div class="row">
+
+	<hr>
+	
+	<h6>
+	
+			<%= t('institution_total') %>: <%= pluralize(confirmed_registrations_from_institution.count, tm('student')) %>, 
+	
+			<%= t('net').downcase %> <%= humanized_money_with_symbol(@institution_payments) %>
+			
+	</h6>
+			 	
+	<hr>
+	
+</div>							

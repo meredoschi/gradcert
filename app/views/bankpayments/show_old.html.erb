@@ -1,0 +1,80 @@
+<div class="row">
+
+	<h2>
+	
+		<div class="large-5 columns">
+		
+			<%= tm('bankpayment').capitalize %>
+	
+		</div>
+	
+		<div class="large-7 columns">
+	
+			<%= render 'show_payroll_details.html.erb' %>
+
+		</div>
+	
+	</h2>
+	
+</div>
+
+<% if @bankpayment.prepared? %>
+
+	<div data-alert class="row alert-box info">
+	
+		<div class="row">
+	
+			<h3 class="subheader"><%= t('file_was_prepared') %></h3>
+	
+		</div>
+	
+	</div>
+
+<% else %>
+
+	<div data-alert class="alert-box warning">
+	
+		<div class="row">
+	
+			<h3 class="subheader"><%= t('file_not_generated_yet') %></h3>
+	
+		</div>
+	
+	</div>
+
+<% end %>
+
+<%= render 'show_calculations.html.erb' %>
+
+<%= render 'show_skipped_annotations.html.erb' %>
+
+<div class="row panel callout">
+
+	<%#= render 'show_financial_summary.html.erb' %>
+
+</div>
+
+<%= render 'show_monetary_annotations.html.erb' %>
+
+<div class="row">
+	
+	<% if can? :edit, @bankpayment %>
+
+		<%= link_to 'Editar', edit_bankpayment_path(@bankpayment), class: "editar"  %> |
+
+
+		<% if @bankpayment.not_prepared? %>
+		
+			<%= link_to t('actions.generate')+' '+t('bankfile'), generatefile_bankpayment_path(@bankpayment), class: t('generate')  %> | 
+
+		<% else %>
+
+		<%= link_to t('report')+' '+t('bankpayment_explanation'), report_bankpayment_path(@bankpayment), class: "relatorio"  %> | 
+
+		<% end %>
+
+  	<% end %>
+	
+	<%= link_to 'Voltar', bankpayments_path,  class: "voltar"  %>
+
+</div>

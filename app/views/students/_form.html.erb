@@ -1,0 +1,156 @@
+<%= form_for(@student) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@student.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<% if is_not_regular_user(current_user) && action_name!='edit' %>
+
+	<div class="row">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+			    <%= f.label ta('contact.name')  %>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+						<% if is_admin_or_manager(current_user) %>
+
+			  			<%= f.collection_select :contact_id, retrieve_possible_students_for(current_user), :id, :name_and_institution,  {prompt: true} %>
+
+						<% else %>
+
+			  			<%= f.collection_select :contact_id, retrieve_possible_students_for(current_user), :id, :name,  {prompt: true} %>
+
+						<% end %>
+
+				</div>
+
+	</div>
+
+<% else %>
+
+
+		<div class="row">
+
+		 		<h3><div class="large-6 columns", class: "left inline"><h3>
+
+			<%= @student.contact_name %>
+
+			</div>
+
+		</div>
+
+<% end %>
+
+
+
+	<div class="row">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+			    <%= f.label tm('profession')  %><br>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+              <%# quick patch.  To do: verify helper method is working for pap local admin as expected. %>
+              <% if is_pap_staff(current_user) %>
+
+                <%= f.collection_select :profession_id, Profession.paplocal, :id, :name,  {prompt: true} %>
+
+              <% else %>
+
+				 			  <%= f.collection_select :profession_id, retrieve_professions_for(current_user), :id, :name,  {prompt: true} %>
+
+              <% end %>
+
+				</div>
+
+</div>
+
+<div class="row panel callout">
+
+      <div class="large-5 columns", class: "left inline">
+
+        <%= f.label ta('student.previousparticipant')  %><br>
+
+      </div>
+
+      <div class="large-1 columns">
+
+            <%= f.check_box :previousparticipant %>
+
+      </div>
+
+      <div class="large-5 columns", class: "left inline">
+
+        <%= f.label ta('student.nationalhealthcareworker')  %><br>
+
+      </div>
+
+      <div class="large-1 columns">
+
+            <%= f.check_box :nationalhealthcareworker %>
+
+      </div>
+
+</div>
+
+<div class="row">
+
+	<h4 class="subheader"><em><%= tm('bankaccount').capitalize %></em></h4>
+
+</div>
+
+
+	<%= render 'form_bankaccount.html.erb', form: f %>
+
+	<div class="row">
+
+		<h4 class="subheader"><em><%= t('diploma').capitalize.pluralize %></em></h4>
+
+  <div class="custom panel secondary">
+
+  <div id="diploma">
+    <%= f.fields_for :diploma do |diploma| %>
+      <%= render 'diploma_fields', :f => diploma %>
+    <% end %>
+
+	</div>
+
+   <div class="row links">
+      <%#= link_to_add_association t('actions.new.m')+' '+tm('diploma'), f, :diploma, class: "criar" %>
+   </div>
+  </div>
+
+
+	</div>
+
+</div>
+
+
+	<% if can? :update, Student %>
+
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), students_path, class: "anular" %>
+
+	</div>
+
+<% end %>

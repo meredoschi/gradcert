@@ -1,0 +1,35 @@
+<div class="row custom-panel">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+			<%= form.label ta('contact.name') %>
+		  
+			</div>
+
+	 		<div class="large-5 columns">
+	
+				<%= form.text_field :name %>
+		
+			</div>
+
+			<div class="large-2 columns", class: "left inline">
+	
+				<%= form.label ta('contact.role') %>
+	  
+			</div>
+			
+			<div class="large-3 columns">
+			
+				<% if is_not_collaborator(@contact.user) %>			 
+		
+					 <%= form.collection_select :role_id, retrieve_internal_roles_for(current_user), :id, :name,  {prompt: true} %>
+		
+				<% else %>
+		
+					 <%= form.collection_select :role_id, retrieve_collaborator_roles_for(current_user), :id, :name,  {prompt: true} %>
+		
+				<% end %>			
+	
+			</div>
+			
+</div>

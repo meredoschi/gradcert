@@ -1,0 +1,49 @@
+<div class="row">
+
+
+			<% if in_season? && action_name=='new' %>
+
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= f.label ta('registration.student_id')%>
+					<p></p>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+
+			  			<%= f.collection_select :student_id, incoming_students_not_registered_yet(current_user), :id, :namecpf %>
+
+
+				</div>
+
+			<% else %>
+
+
+			<div class="large-3 columns", class: "left inline">
+
+
+				<h5>
+
+					<%= ta('registration.student_id')%> <p></p>
+
+				</h5>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+				<h5 class="subheader">
+
+			  			<%= @registration.namecpf %>
+
+
+				</h5>
+
+				</div>
+
+			<% end %>
+
+</div>

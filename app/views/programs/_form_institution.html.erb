@@ -1,0 +1,19 @@
+<% if is_admin_or_manager(current_user) %>
+			
+	<div class="row">
+
+			<div class="large-2 columns", class: "left inline">
+		
+				<%= f.label tm('institution') %>
+		
+			</div>
+		 		
+		 	<div class="large-10 columns">
+		 
+				<%= f.collection_select :institution_id, Institution.order(:name), :id, :name,  {prompt: true} %>
+		
+			</div>
+	
+	</div>
+	
+<% end %>

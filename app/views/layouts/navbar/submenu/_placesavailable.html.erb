@@ -1,0 +1,19 @@
+<% if can? :read, Placesavailable %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(placesavailables_path, :inclusive) %>
+
+			<li class="active">
+
+		<% else %>
+
+			<li>
+
+		<% end %>
+
+		  <%= link_to tm('placesavailable').capitalize.pluralize, placesavailables_path  %></li>
+
+  </ul>
+
+<% end %>

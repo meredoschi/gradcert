@@ -1,0 +1,64 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @schoolnames.each do |schoolname| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= schoolname.name %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= schoolname.previousname %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= schoolname.active %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, schoolname %>
+		        <td><%= link_to t('actions.show'), schoolname, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, schoolname %>
+			      <td><%= link_to t('actions.edit'), edit_schoolname_path(schoolname), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, schoolname %>
+		     		<td><%= link_to t('actions.delete'),schoolname, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @schoolnames %>
+
+</div>
+
+<br>

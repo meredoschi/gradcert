@@ -1,0 +1,10 @@
+				Prawn::Document.generate(@fullname, :page_size => 'A4') do |pdf|					
+												
+					pdf.stroke_horizontal_rule					
+
+					pdf.pad(20) { pdf.text "Demonstrativos de pagamento (Holerith)", :align => :center, :size => 16  }			
+
+					pdf.stroke_horizontal_rule					
+
+			end
+			

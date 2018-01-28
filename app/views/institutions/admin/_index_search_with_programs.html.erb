@@ -1,0 +1,19 @@
+<% if Institution.with_programs.count > 0 %>
+
+	<div class="row">
+			
+		<div class="large-4 columns">
+		
+			<th><%= f.label t('activerecord.attributes.institution.withprograms.any')%></th>
+	
+		</div>
+		
+		<div class="large-8 columns">
+							
+			<%= f.select :id_eq, options_from_collection_for_select(Institution.with_programs, :id, :name), 		include_blank: true %>
+				
+		</div>
+		
+	</div>
+
+<% end %>

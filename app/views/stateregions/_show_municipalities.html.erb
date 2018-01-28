@@ -1,0 +1,17 @@
+<% @stateregionmunicipalities.each do |municipality| %>
+
+	<div class="row">
+				
+		<p><%= link_to municipality.name, municipality_path(municipality.id) %> 
+		
+		</p>
+		
+	</div>		 
+				 
+<% end %>
+
+<div class="row">
+
+  <%= paginate @stateregionmunicipalities %>
+		 
+</div>

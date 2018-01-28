@@ -1,0 +1,83 @@
+<div class="row">
+		<table>
+			<tr>
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= tm('payroll').capitalize %></strong></th>
+					
+							</div>
+
+							<% if is_admin_or_manager(current_user) %>
+					
+								<div class="large-3 columns">
+						
+									<th><strong><%= ta('bankpayment.sequential')%></strong></th>
+						
+								</div>
+	
+								<% if @bankpayment.prepared? %>
+	
+									<div class="large-3 columns">
+						
+										<th><strong><%= ta('bankpayment.total')%></strong></th>
+							
+									</div>
+				
+								<% end %>
+							
+								<div class="large-3 columns">
+						
+									<th><strong><%= ta('bankpayment.comment')%></strong></th>
+						
+								</div>
+
+						<% end %>
+						
+				</tr>
+		</div>
+	
+	
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-3 columns">
+					
+						<td><%= link_to @bankpayment.payroll.name, @bankpayment.payroll %></td>	
+					
+					</div>
+
+					<% if is_admin_or_manager(current_user) %>
+		
+							<div class="large-3 columns">
+							
+								<td><%= @bankpayment.sequential %></td>
+							
+							</div>
+		
+						<% if @bankpayment.prepared? %>
+		
+						<div class="large-3 columns">
+							
+										
+								<td>
+											<%= display_non_zero_amount(@bankpayment.totalamount) %>
+								
+													
+								</td>
+									
+							</div>
+		
+						<% end %>
+						
+							<div class="large-3 columns">
+							
+								<td><%= @bankpayment.comment %></td>
+							
+						</div>
+						
+					<% end %>																
+
+	</table>
+</div>

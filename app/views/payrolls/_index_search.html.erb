@@ -1,0 +1,38 @@
+<%= search_form_for @search do |f| %>
+
+	<div class="row">
+
+			<div class="large-3 columns">
+
+			<div class="field">
+		
+				<%= f.label :monthworked %>
+			
+			</div>
+
+		</div>
+			
+		<div class="large-9 columns">
+
+			<div class="field">
+					
+				<%= f.select :id_eq, options_from_collection_for_select(Payroll.ordered_from_oldest_to_newest, :id, :shortname), 		include_blank: true %>
+					
+			</div>
+
+		</div>
+				    
+	</div>
+
+
+	<div class="row">
+		    
+		<div class="large-6 columns">
+	
+		  <%= f.submit t('actions.search'), class: t('seek') %>
+	
+		</div>
+	
+	</div>
+	 
+<% end %>

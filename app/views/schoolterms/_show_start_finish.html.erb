@@ -1,0 +1,39 @@
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-6 columns">
+					
+								<th><strong><%= ta('schoolterm.start')%></strong></th>
+					
+							</div>
+
+							<div class="large-6 columns">
+					
+								<th><strong><%= ta('schoolterm.finish')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-6 columns">
+					
+						<td><%= I18n.l(@schoolterm.start, format: :dmy) %></td>
+					
+					</div>
+
+					<div class="large-6 columns">
+					
+						<td><%= I18n.l(@schoolterm.finish, format: :dmy) %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>

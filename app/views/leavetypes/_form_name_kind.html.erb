@@ -1,0 +1,41 @@
+<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+				<%= f.label :name %>
+
+			</div>
+	 		
+	 		<div class="large-4 columns">
+  
+	   <%= f.text_field :name %>        	
+ 
+			</div>
+
+  		<div class="large-2 columns", class: "left inline">
+	
+				<%= f.label :paid %>
+
+			</div>
+	 		
+	 		<div class="large-1 column">
+  
+	   <%= f.check_box :paid %>        	
+ 
+			</div>
+
+ 		<div class="large-2 columns", class: "left inline">
+	
+				<%= f.label :vacation %>
+
+    		<span data-tooltip aria-haspopup="true" class="has-tip" title="Marcar somente se for do tipo férias"><%= t('restricted') %></span>
+	
+			</div>
+	 		
+	 		<div class="large-1 column">
+  
+	   <%= f.check_box :vacation %>        	
+ 
+			</div>
+
+</div>

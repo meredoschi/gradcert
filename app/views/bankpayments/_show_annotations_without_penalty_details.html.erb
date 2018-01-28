@@ -1,0 +1,38 @@
+
+	<div class="row custom-panel5">
+
+			<% @present_annotations.each_with_index do |annotation, i|  %>
+
+			<% vacations=@vacations_on_this_payroll.for_registration(annotation.registration) %>
+
+		  <% num_vacations=vacations.count %>
+
+				<h5>
+
+					<% if num_vacations>0 %>
+
+						<span class="label info"><%= ta('leavetype.vacation') %></span>
+
+					<% end %>
+
+
+					<%= (i+1).to_s%>
+
+
+							<% if is_admin_or_manager(current_user) %>
+
+									<%=  link_to annotation.full_details, annotation %>
+
+								<% else %>
+
+									<%=  link_to annotation.details, annotation %>
+
+								<% end %>
+
+
+					 </h5>
+
+
+			<% end %>
+
+	</div>

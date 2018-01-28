@@ -1,0 +1,46 @@
+<%= render 'show_alerts.html.erb' %>
+
+<%= render 'show_header.html.erb' %>
+
+<%# comment do %>
+
+<% if !@program.internal %>
+
+	<%= render 'show_address.html.erb' %>
+
+<% end %>
+
+<%= render 'show_schoolterm' %>
+
+<%= render 'show_admission' %>
+
+<%= render 'show_schoolyears.html.erb' %>
+
+<% if @program.accreditation.details_on_file? && is_not_regular_user(current_user) %>
+
+	<%= render 'show_accreditation.html.erb' %>
+
+<% end %>
+
+<% if is_admin_or_manager(current_user)  %>
+	<%#= render 'show_temp' %>
+
+<% end %>
+
+<% if @program.versions.length>0 %>
+	<%= render 'show_last_updated' %>
+<% end %>
+
+<%# end %>
+
+<div class="row">
+
+<% if can? :edit, @program %>
+
+	<%= link_to t('actions.edit'), edit_program_path(@program), class: "editar"  %> |
+
+<% end %>
+
+	<%= link_to t('actions.back'), programs_path,  class: "voltar"  %>
+
+</div>

@@ -1,0 +1,50 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @methodologies.each do |methodology| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= methodology.kind %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, methodology %>
+		        <td><%= link_to t('actions.show'), methodology, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, methodology %>
+			      <td><%= link_to t('actions.edit'), edit_methodology_path(methodology), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, methodology %>
+		     		<td><%= link_to t('actions.delete'),methodology, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @methodologies %>
+
+</div>
+
+<br>

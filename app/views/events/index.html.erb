@@ -1,0 +1,18 @@
+
+<%= render 'index_header.html.erb' %>
+
+<% if events_exist_for?(current_user) %>
+
+	<div class="row">
+
+		<%= render 'index_table.html.erb' %>
+
+	</div>
+
+	<%= render 'index_search.html.erb' %>
+
+<% else %>
+
+	<%= render 'index_warning_none_found.html.erb' %>
+
+<% end %>

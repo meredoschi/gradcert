@@ -1,0 +1,69 @@
+		<div class="row">
+
+			<div class="large-3 columns">
+
+				<%= f.label ta('registration.accreditation.original')%>
+
+			</div>
+
+			<div class="large-9 columns">
+
+				<%= f.check_box :accreditation_original_true %>
+
+			</div>
+
+		</div>
+
+<%# if is_admin_or_manager(current_user) %>
+
+<% if is_admin(current_user) %>
+
+		<div class="row">
+
+			<div class="large-3 columns">
+
+				<%= f.label ta('registration.accreditation.suspended')%>
+
+			</div>
+
+			<div class="large-9 columns">
+
+				<%= f.check_box :accreditation_suspended_true %>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="large-3 columns">
+
+				<%= f.label ta('registration.accreditation.renewed')%>
+
+			</div>
+
+			<div class="large-9 columns">
+
+				<%= f.check_box :accreditation_renewed_true %>
+
+			</div>
+
+		</div>
+
+<% end %>
+
+		<div class="row">
+
+			<div class="large-3 columns">
+
+				<%= f.label ta('registration.accreditation.revoked')%>
+
+			</div>
+
+			<div class="large-9 columns">
+
+				<%= f.check_box :accreditation_revoked_true %>
+
+			</div>
+
+		</div>

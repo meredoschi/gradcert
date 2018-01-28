@@ -1,0 +1,85 @@
+<div class="row custom-panel6">
+
+
+<h3>
+
+<%= Settings.system_abbreviation %> <%#= I18n.l(Time.now()) %>
+
+</h3>
+
+		<table>
+			<tr>
+
+							<div class="large-2 columns">
+
+								<th><strong><%= ta('user.current_sign_in_at')%></strong></th>
+
+							</div>
+
+
+							<div class="large-3 columns">
+
+								<th><strong><%= ta('user.current_sign_in_ip')%></strong></th>
+
+							</div>
+
+							<div class="large-2 columns">
+
+								<th><strong><%= ta('user.last_sign_in_at')%></strong></th>
+
+							</div>
+
+							<div class="large-3 columns">
+
+								<th><strong><%= ta('user.last_sign_in_ip')%></strong></th>
+
+							</div>
+
+							<div class="large-2 columns">
+
+								<th><strong><%= ta('user.sign_in_count')%></strong></th>
+
+							</div>
+
+
+			</tr>
+
+			<div class="row">
+
+				<tr>
+
+					<div class="large-2 columns">
+
+						<td><%= I18n.l(current_user.current_sign_in_at) %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+						<td><%= current_user.current_sign_in_ip %></td>
+
+					</div>
+
+					<div class="large-2 columns">
+
+						<td><%= I18n.l(current_user.last_sign_in_at) %></td>
+
+					</div>
+
+					<div class="large-2 columns">
+
+						<td><%= current_user.last_sign_in_ip %></td>
+
+					</div>
+
+					<div class="large-2 columns">
+
+						<td><%= current_user.sign_in_count %></td>
+
+					</div>
+				</tr>
+		</div>
+
+	</table>
+</div>
+</div>

@@ -1,0 +1,68 @@
+<table>
+
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @degreetypes.each do |degreetype| %>
+      <tr>
+				<div class="row">
+
+
+
+		   <div class="large-2 columns">
+
+        <td><%= degreetype.name %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+
+        <td><%= degreetype.level %></td>
+
+			</div>
+
+      <div class="large-2 columns">
+
+       <td><%= tickmark(degreetype.pap) %></td>
+
+     </div>
+
+     <div class="large-2 columns">
+
+      <td><%= tickmark(degreetype.medres) %></td>
+
+    </div>
+
+
+		   <div class="large-3 columns">
+
+	        <% if can? :read, degreetype %>
+		        <td><%= link_to t('actions.show'), degreetype, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, degreetype %>
+			      <td><%= link_to t('actions.edit'), edit_degreetype_path(degreetype), class: "editar" %></td>
+					<% end %>
+
+	        <% if can? :destroy, degreetype %>
+		     		<td><%= link_to t('actions.delete'),degreetype, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>
+					<% end %>
+
+    	</div>
+
+    		</div>
+
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @degreetypes %>
+
+</div>
+
+<br>

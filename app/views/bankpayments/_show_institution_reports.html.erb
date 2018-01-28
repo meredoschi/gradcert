@@ -1,0 +1,26 @@
+<% if @bankpayment.done? %>
+
+	<div class="row">
+
+		<h4 class="subheader"> Aviso referente aos demonstrativos </h4>
+
+			<h5>
+			Eles agora podem ser consultados diretamente em sua própria tela.
+
+		</h5>
+
+			<h5>
+			Dica: lá é possível filtrar pelo pagamento bancário desejado, antes de gerar o PDF.
+
+			Clique em "Procurar" após selecionar o mês.
+
+			</h5>
+
+
+			<%= link_to "Financeiro -> Demonstrativos", statements_path, class: "small button warning"  %>
+
+		<hr>
+
+  </div>
+
+<% end %>

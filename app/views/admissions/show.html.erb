@@ -1,0 +1,36 @@
+
+	<%= render 'show_dates.html.erb' %>
+
+	<div class="row panel callout">
+
+	<%= render 'show_grants.html.erb'  %>
+	<%= render 'show_first_exam.html.erb'  %>
+	<%= render 'show_final_exam.html.erb'  %>
+</div>
+
+<div class="row panel secondary">
+	<%= render 'show_appeals.html.erb' %>
+</div>
+
+approved
+<div class="row custom-panel2">
+	<%= render 'show_approved.html.erb' %>
+</div>
+
+reg_stats
+<div class='row custom-panel9' %>
+	<%= render 'show_registration_stats.html.erb' %>
+</div>
+
+
+<div class="row">
+
+<% if can? :edit, @admission %>
+
+  <%= link_to t('actions.edit'), edit_admission_path(@admission), class: t('edit') %>
+
+<% end %>
+
+  <%= link_to t('actions.back'), admissions_path,  class: t('back')  %>
+
+</div>

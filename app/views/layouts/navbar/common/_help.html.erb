@@ -1,0 +1,25 @@
+<!-- Right Nav Section -->
+<ul class="right">
+<% if is_logged_in(current_user) %>
+
+  <li class="has-dropdown">
+    <a href="#"><%= t('help').upcase %></a>
+    <ul class="dropdown">
+
+			<% if is_logged_in(current_user) %>
+
+        <% if is_admin_or_manager(current_user) %>
+
+    		  <div class="row"><li><%= link_to( t('actions.edit').capitalize+' '+t('my.m')+' '+tm('contact'), edit_contact_path(current_user.contact))  %></li></div>
+
+    		    <div class="row"><li><%= link_to( t('actions.edit').capitalize+' '+t('my.m')+' '+tm('user'), edit_user_path(current_user))  %></li></div>
+
+        <% end %>
+
+    		<div class="row"><li><%= link_to( t('actions.quit'), destroy_user_session_path, :method => :delete)%></li></div>
+
+			<% end %>
+    </ul>
+  </li>
+</ul>
+<% end %>

@@ -1,0 +1,36 @@
+
+<div class="row">
+
+	<h2><%= tm('coursename').capitalize %></h2>
+
+
+<% if !@coursename.active %>
+
+	<div data-alert class="alert-box warning">
+
+			<h3><%= @coursename.name %></h3>
+	
+			<h3 class="subheader"><%= t('inactive') %></h3>
+	
+	</div>
+
+<% else %>		
+
+			<h3><%= @coursename.name %></h3>
+
+<% end %>
+
+	
+</div>
+				
+<div class="row">
+	
+	<% if can? :edit, @coursename %>
+
+		<%= link_to t('actions.edit'), edit_coursename_path(@coursename), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), coursenames_path,  class: "voltar"  %>
+
+</div>

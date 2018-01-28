@@ -1,0 +1,45 @@
+<div class="row panel callout">
+
+	<div class="row text-justify">
+
+		<div class="large-1 column">
+
+		</div>
+
+		<div class="large-11 columns">
+
+		<h5> O sistema está aberto para os lançamentos da folha de <u><%= link_to @latest_payroll.name.capitalize, @latest_payroll %></u> </h5>
+
+		<h5>
+
+			O procedimento é o mesmo, relembrando:
+
+		</h5>
+	<h5> 1)  Relação de matrículas: <span class="label info"><%= link_to "Eventos de Cálculo -> Matrículas", registrations_path %></span>
+
+		<h5>
+		 <em>Dica: cliquem na situação correspondente de modo a filtrarem corretamente o que desejam buscar e então botão "Editar", caso tenham havido cancelamentos.</em>
+
+		 <em>Procure por período letivo 2017, ou eventualmente 2016 se for informar cancelamento de PA2 (segundo-anista) nesta folha.</em>
+
+		</h5>
+	</h5>
+
+	<h5>
+
+		2) Lançamento de faltas e/ou licenças: <span class="label info"><%= link_to "Eventos de Cálculo -> Movimentos", events_path %></span>, sinal de mais (criar).
+</h5>
+
+	<h5>
+		3) Os dados por vocês inseridos ficarão pendentes até que sejam autorizados/confirmados pela equipe do Pap.
+	</h5>
+	<h5>
+	4) Finalmente, se não houver nenhuma ocorrência neste ciclo da folha (exemplo: faltas, licenças, cancelamentos) em sua instituição, nenhuma ação será necessária este mês, referente a freqüências.
+
+	</h5>
+
+	  </div>
+
+	</div>
+
+</div>

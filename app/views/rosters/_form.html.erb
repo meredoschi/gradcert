@@ -1,0 +1,51 @@
+<%= form_for(@roster) do |f| %>
+  <% if @roster.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@roster.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @roster.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+		  <div class="field">
+		    <%= f.label :institution_id %><br>
+	    <%= f.number_field :institution_id %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :schoolterm_id %><br>
+	    <%= f.number_field :schoolterm_id %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :authorizedsupervisors %><br>
+	    <%= f.number_field :authorizedsupervisors %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :dataentrystart %><br>
+	    <%= f.datetime_select :dataentrystart %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :dataentryfinish %><br>
+	    <%= f.datetime_select :dataentryfinish %>
+		  </div>
+	
+</div>
+
+	<% if can? :update, Roster %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), rosters_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

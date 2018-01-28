@@ -1,0 +1,69 @@
+<table>
+
+	<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @characteristics.each do |characteristic| %>
+      <tr>
+				<div class="row">
+				
+		   <div class="large-3 columns">
+	
+        <td><%= link_to characteristic.institution.name, characteristic.institution %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 column">
+	
+        <td><%= trim_text(characteristic.relationwithpublichealthcare) %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 column">
+	
+        <td><%= characteristic.funding.government %> <%= currency_or_percent(characteristic) %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 column">
+	
+        <td><%= trim_text(characteristic.highlightareas) %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, characteristic %>
+		        <td><%= link_to t('actions.show'), characteristic, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, characteristic %>
+			      <td><%= link_to t('actions.edit'), edit_characteristic_path(characteristic), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, characteristic %>
+		     		<td><%= link_to t('actions.delete'),characteristic, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @characteristics %>
+
+</div>
+
+<br>

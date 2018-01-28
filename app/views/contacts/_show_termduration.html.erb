@@ -1,0 +1,37 @@
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-6 columns">
+					
+								<th><strong><%= t('activerecord.attributes.contact.termstart')%></strong></th>
+					
+							</div>
+					
+							<div class="large-6 columns">
+					
+								<th><strong><%= t('activerecord.attributes.contact.termfinish')%></strong></th>
+					
+							</div>
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-6 columns">
+					
+						<td><%= @contact.termstart %></td>
+					
+							</div>
+					
+								<div class="large-6 columns">
+					
+									<td><%= @contact.termfinish  %></td>
+					
+							</div>
+					
+				</tr>
+		</div>
+	</table>
+</div>

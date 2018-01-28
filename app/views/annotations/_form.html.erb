@@ -1,0 +1,178 @@
+<%= form_for(@annotation) do |f| %>
+  <% if @annotation.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@annotation.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @annotation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= f.label tm('registration') %>
+
+					</div>
+
+			 		<div class="large-9 columns">
+
+					<%#= f.collection_select :registration_id, Registration.current.ordered_by_contact_name, :id, :namecpfinstitution %>
+
+    		<% if !is_admin_or_manager(current_user) && (action_name!='new')  %>
+
+						<%= @annotation.registration.namecpfinstitutionstatus %>
+
+					<% else %>
+
+						<%= f.collection_select :registration_id, @registrations, :id, :detailed %>
+
+
+					<% end %>
+
+					</div>
+
+		</div>
+
+<%#= render 'form_registrations.html.erb', f: f %>
+
+
+<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+
+			  	<%= f.label tm('payroll')  %>
+
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="Mês e ano de referência, com respectiva data crédito">
+<%= '*' %></span>
+
+
+			</div>
+
+	 		<div class="large-9 columns">
+
+		  	<%= f.collection_select :payroll_id, Payroll.ordered_by_most_recent, :id, :name %>
+
+
+
+			</div>
+
+</div>
+
+<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+
+				<%= f.label :discount %>
+
+			</div>
+
+	 		<div class="large-2 columns">
+
+				  <%= f.text_field :discount, min: 0, value: 0 %>
+
+			</div>
+
+	 		<div class="large-7 columns">
+
+			</div>
+
+</div>
+
+<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+
+				<%= f.label :supplement %>
+
+			</div>
+
+	 		<div class="large-2 columns">
+
+				  <%= f.text_field :supplement, min:0, value: 0 %>
+
+			</div>
+
+	 		<div class="large-7 columns">
+
+			</div>
+
+
+</div>
+
+<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+
+				<%= f.label :comment %> <br>
+
+			</div>
+
+	 		<div class="large-9 columns">
+
+		  	<%= f.text_field :comment %>
+
+			</div>
+
+
+</div>
+
+<% if is_admin_or_manager(current_user) %>
+
+	<div class="row">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :skip %> <br>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+			  	<%= f.check_box :skip %>
+
+				</div>
+
+
+	</div>
+
+
+	<div class="row">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :confirmed %> <br>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+			  	<%= f.check_box :confirmed %>
+
+				</div>
+
+
+	</div>
+
+<% end %>
+
+	<div class="row actions">
+
+		<% if can? :update, Annotation %>
+
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+		<% end %>
+
+  	<%= link_to t('actions.cancel'), annotations_path, class: t('cancel') %>
+
+
+	</div>
+
+<% end %>

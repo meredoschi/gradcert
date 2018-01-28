@@ -1,0 +1,98 @@
+
+<div class="row">
+		<h4 class="subheader"><%= t('education') %></h3>
+		<table>
+			<tr>
+			
+							<div class="large-3 colums">
+					
+								<th><strong><%#= tm('degreetype').titleize %></strong></th>
+					
+							</div>
+					
+							<div class="large-3 column">
+					
+								<th><strong><%= t('professional_field').titleize %></strong></th>
+					
+							</div>
+
+							<div class="large-3 column">
+					
+								<th><strong><%= tm('institution').titleize %></strong></th>
+					
+							</div>
+
+							<div class="large-3 column">
+					
+								<th><strong><%= ta('diploma.awarded') %></strong></th>
+					
+							</div>
+		
+			</tr>						
+			
+			<% if @supervisor.diploma.present? %>
+			
+				<% @supervisor.diploma.each do |diploma| %>
+			
+					<div class="row">
+				
+						<tr>
+							<div class="large-3 column">
+							
+								<td> 
+						
+								<%= diploma.degreetype.name %>
+														
+								</td>
+							
+									</div>
+							
+										<div class="large-3 columns">
+							
+											<td>
+			
+											<%=	diploma.profession.name %>
+									
+											</td>
+								
+									</div>
+					
+									<div class="large-3 columns">
+							
+										<td>
+										
+												<% if diploma.institution %>
+										
+													<%= link_to diploma.institution.name, diploma.institution  %>
+											
+												<% else %>
+	
+													<em><%= diploma.externalinstitution %></em>
+																	
+												<% end %>			 											 			
+																
+										</td>
+	
+									
+									<div class="large-3 columns">
+							
+										<td>
+	
+										
+												<%= I18n.l(diploma.awarded) %>
+												
+									 			<% if diploma.ongoing %>
+									 			
+										 			<em><%= ta('diploma.ongoing') %></em>
+									 			
+									 			<% end %>
+																
+										</td>
+	
+	
+						</tr>
+				</div>
+			<% end %>
+		<% end %>	
+	</table>
+</div>

@@ -1,0 +1,36 @@
+<%= render 'show_header.html.erb' %>
+
+	<div class="row">
+
+			<% if @programname.comment.present? %>
+
+			<span class="label secondary"><h3><%= ta('programname.comment') %>: <%= @programname.comment %></span></h3>
+
+		<% end %>
+
+	</div>
+
+
+<div class="row">
+
+		<% if @ancestor.present? %>
+
+		<%= render 'show_ancestor.html.erb' %>
+
+	<% end %>
+
+ </div>
+
+ <%= render 'show_area_pap_medres.html.erb' %>
+
+<div class="row">
+
+<% if can? :edit, @programname %>
+
+	<%= link_to t('actions.edit'), edit_programname_path(@programname), class: "editar"  %> |
+
+<% end %>
+
+	<%= link_to t('actions.back'), programnames_path,  class: "voltar"  %>
+
+</div>

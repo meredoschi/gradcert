@@ -1,0 +1,58 @@
+<% if ( is_active_link?(assignments_path, :inclusive) || is_active_link?(programs_path, :inclusive)  ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+  <a href="#"><%= t('course').pluralize.mb_chars.upcase %></a>
+    <ul class="dropdown">
+
+			<% if can? :read, Assignment %>        
+
+		  	<ul class="left">
+		
+					<% if is_active_link?(assignments_path, :inclusive) %>
+			
+						<li class="active">
+						
+					<% else %>
+						
+						<li>
+			
+					<% end %>
+				 			 			   											
+					  <%= link_to tm('assignment').capitalize.pluralize, assignments_path  %></li>	
+					    
+		    </ul>    
+
+			<% end %>
+
+			<% if can? :read, Program %>        
+
+		  	<ul class="left">
+		
+					<% if is_active_link?(programs_path, :inclusive) %>
+			
+						<li class="active">
+						
+					<% else %>
+						
+						<li>
+			
+					<% end %>
+				 			 			   											
+					  <%= link_to tm('program').capitalize.pluralize, programs_path  %></li>	
+					    
+		    </ul>    
+
+			<% end %>
+
+
+	    </ul>
+	   </ul>
+	  </ul>
+	 </ul>

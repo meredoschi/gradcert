@@ -1,0 +1,56 @@
+<%= form_for(@council) do |f| %>
+  <% if @council.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@council.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @council.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<%= render 'form_name.html.erb', f: f %>
+
+	<%= render 'form_address.html.erb', form: f %>
+
+	<%= render 'form_phones.html.erb', form: f %>
+
+	<%= render 'form_webinfo.html.erb', form: f %>
+
+	<div class="row">
+			
+			<h3><%= tm('professionalfamily').capitalize.pluralize %></h3>
+
+	</div>
+
+	<div class="row">
+
+			<div id="professionalfamily">
+			  <%= f.fields_for :professionalfamily do |professionalfamily| %>
+			    <%= render 'professionalfamily_fields', :f => professionalfamily %>
+			  <% end %>
+
+			 <div class="row links">
+			    <%= link_to_add_association t('actions.new.f')+' '+tm('professionalfamily').downcase, f, :professionalfamily, class: t('create') %>
+			 </div>
+			</div>
+		
+		<hr>
+		
+	</div>	
+
+	<% if can? :update, Council %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), councils_path, class: "anular" %>
+	
+	</div>
+
+<% end %>

@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= tm('schooltype').pluralize.mb_chars.upcase  %> (<%= @schooltypes.total_count  %> /  <%= @numschooltypes %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Schooltype %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "criar", alt: t('actions.new.m')+' '+tm('schooltype')), new_schooltype_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

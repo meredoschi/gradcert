@@ -1,0 +1,52 @@
+<%= form_for(@leavetype) do |f| %>
+  <% if @leavetype.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@leavetype.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @leavetype.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= render 'form_name_kind', f: f %>
+
+<%= render 'form_days_limit', f: f %>
+
+<% if is_admin(current_user) %>
+
+	<%= render 'form_pap_medres', f: f %>
+
+<% end %>
+
+<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+				<%= f.label :comment %><br>
+
+			</div>
+	 		
+	 		<div class="large-10 columns">
+  
+	   <%= f.text_field :comment %>        	
+ 
+			</div>
+
+</div>
+
+	<% if can? :update, Leavetype %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), leavetypes_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

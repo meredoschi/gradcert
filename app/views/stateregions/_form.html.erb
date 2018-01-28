@@ -1,0 +1,53 @@
+<%= form_for(@stateregion) do |f| %>
+  <% if @stateregion.errors.any? %>
+    <div id="error_explanation">
+      <h2>A região do estado não pode ser gravada devido a <%= pluralize(@stateregion.errors.count, "erro") %>:</h2>
+
+      <ul>
+      <% @stateregion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+	
+		  <%= f.label "Nome" %><br>
+
+			</div>
+	 		
+	 		<div class="large-8 columns">
+  
+	   <%= f.text_field :name %>        	
+ 
+			</div>
+
+</div>
+
+
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+	
+		  <%= f.label "Estado" %><br>
+
+			</div>
+	 		
+	 		<div class="large-8 columns">
+  
+  		  	<%= f.collection_select :state_id, State.all, :id, :name %>
+ 
+			</div>
+
+</div>
+
+
+  <div class="row actions">
+  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+  	<%= link_to 'Anular', municipalities_path, class: "anular" %>
+ </div>
+  
+<% end %>

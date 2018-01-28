@@ -1,0 +1,41 @@
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-6 columns">
+					
+								<th><strong><%= tm('funding').capitalize %></strong></th>
+					
+							</div>
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= currency_or_percent(@characteristic) %> </strong></th>
+					
+							</div>
+
+
+							<% if @characteristic.funding.absolute? %>
+							
+								<div class="large-3 columns">
+						
+									<th><strong><%= t('proportion').capitalize %> </strong></th>
+					
+								</div>
+
+							<% end %>
+					
+			</tr>						
+		
+			<%= render 'show_government_funding.html.erb' %>
+			<%= render 'show_private_funding.html.erb' %>
+			<%= render 'show_agreements_funding.html.erb' %>
+  		<%= render 'show_ppp_funding.html.erb' %>
+			<%= render 'show_other_funding.html.erb' %>
+	   	<%= render 'show_total_funding.html.erb' %>
+
+	</table>
+
+</div>
+
+<%= display_comment_if_exists %>

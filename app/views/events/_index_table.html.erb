@@ -1,0 +1,84 @@
+<table>
+
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @events.each do |event| %>
+      <tr>
+				<div class="row">
+
+		   <div class="large-2 columns">
+
+        <td><%= link_to event.registration_full_details, event.registration %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+
+        <td><%= I18n.l(event.start) %></td>
+
+
+				</div>
+
+		   <div class="large-2 columns">
+
+
+        <td> <%= I18n.l(event.finish) %></td>
+
+
+			</div>
+
+
+		   <div class="large-1 column">
+
+        <td><%= index_kind(event) %></td>
+
+			</div>
+
+		   <div class="large-1 column">
+
+        <td> <%= tickmark(event.confirmed) %></td>
+
+
+			</div>
+
+
+		   <div class="large-1 column">
+
+        <td><%= tickmark(event.residual) %></td>
+
+			</div>
+
+
+		   <div class="large-3 columns">
+
+	        <% if can? :read, event %>
+		        <td><%= link_to t('actions.show'), event, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, event %>
+			      <td><%= link_to t('actions.edit'), edit_event_path(event), class: t('edit') %></td>
+					<% end %>
+
+	        <% if can? :destroy, event %>
+		     		<td><%= link_to t('actions.delete'),event, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+					<% end %>
+
+    	</div>
+
+    		</div>
+
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @events %>
+
+</div>
+
+<br>

@@ -1,0 +1,95 @@
+<%= search_form_for @q do |f| %>
+
+	<div class="row">
+
+		<div class="large-3 columns">
+		
+			<div class="field">
+			
+			  <th><%= f.label :name %></th>
+		
+			</div>
+
+		</div>
+			
+		<div class="large-9 columns">
+		
+				<%= f.text_field :name_cont %>  
+		
+		</div>
+	    
+	</div>
+
+
+	<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+
+      <%= f.label :familycode %>
+ 	
+			</div>
+	 		
+	 		<div class="large-2 columns">
+  
+		   <%= f.number_field :familycode_eq  %>        	
+ 
+			</div>    
+
+	 		<div class="large-7 columns">
+   
+			</div>    
+
+	</div>    
+
+<div class="row">
+
+		<div class="large-5 columns">
+				
+					<%= f.label t('sector') %>
+
+  	</div>
+
+		<div class="large-2 columns">
+				
+					<%= f.label :pap %>
+
+  	</div>
+
+		<div class="large-1 column">
+						
+			<div class="field">
+				
+				<%= f.check_box :pap_true %>
+						
+			</div>
+
+ 		 </div>
+		
+		<div class="large-3 columns">
+				
+					<%= f.label :medres %>
+
+  	</div>
+
+		<div class="large-1 column">
+						
+			<div class="field">
+				
+				<%= f.check_box :medres_true %>
+						
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	    
+	<div class="large-6 columns">
+
+	  <%= f.submit t('actions.search'), class: "buscar" %>
+
+	</div>
+
+</div>
+  
+<% end %>

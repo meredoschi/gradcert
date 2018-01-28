@@ -1,0 +1,34 @@
+	<div class="row">
+				<tr>
+					<div class="large-3 columns">
+
+						<td><%= link_to annotation.payroll.name, annotation %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+
+						<td><%= @actual_absence_events.for_payroll(annotation.payroll).absences_total %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+
+						<td><%= annotation.absences %></td>
+
+					</div>
+
+					<% if annotation.skip %>
+
+						<div class="large-3 columns">
+
+							<td><u><%= t('skip_payment') %></u></td>
+
+						</div>
+
+					<% end %>
+
+				</tr>
+		</div>

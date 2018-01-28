@@ -65,7 +65,11 @@ $bg_orange: #ff9a55;
 
 $bg_dada_gray: #dadada;
 
+$bg_brownish: #797100;
+
 $bg_pdf: $bg_dada_gray;
+
+$bg_csv: $bg_brownish;
 
 $bg_turquoise: #a0d5d5;
 
@@ -165,6 +169,11 @@ $gradient2: linear-gradient(45deg, $bg_relatorio4, $bg_relatorio5);
 
 .exportpdf {
   @include button($padding, $bg_pdf, $radius, $full-width, $disabled, $is-input);
+
+}
+
+.exportcsv {
+  @include button($padding, $bg_csv, $radius, $full-width, $disabled, $is-input);
 
 }
 

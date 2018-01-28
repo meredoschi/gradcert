@@ -1,0 +1,174 @@
+<div class="row">
+
+			<h2> <%= tm('event').capitalize %> </h2>
+
+</div>
+
+<div class="row">
+
+	<span class="id-label"><h3><%= @event.id %> </h3></span>
+
+
+</div>
+
+<br>
+
+<div class="row">
+
+	<%= render 'show_confirmation_status.html.erb' %>
+
+</div>
+
+<% if @event.residual? %>
+
+	<div class="row">
+
+		<% if @event.registration.accreditation.revoked? %>
+
+			<div data-alert class="alert-box warning radius">
+
+				<h3> <%#= display_residual_warning?(@event) %> </h3>
+
+				<h4> <%= ta('registration.accreditation.revoked') %></h4>
+
+			</div>
+
+  	<% end %>
+
+	</div>
+
+<% end %>
+
+<div class="row">
+
+	<h3 class="subheader"><%= link_to @event.registration.full_details, @event.registration %></h3>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= t('kind')%></strong></th>
+
+				</div>
+
+				<div class="large-3 columns">
+
+					<th><strong><%= ta('event.start')%></strong></th>
+
+				</div>
+
+					<div class="large-2 columns">
+
+						<th><strong><%= ta('event.finish')%></strong></th>
+
+					</div>
+
+				<%# to fix %>
+
+
+				<%# if @event.actualdays!=@event.numdays %>
+
+					<div class="large-2 columns">
+
+						<th><strong><%#= ta('event.virtual.numdays')%></strong></th>
+
+					</div>
+
+				<%# end %>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('event.virtual.actualdays')%></strong></th>
+
+				</div>
+
+		</tr>
+
+			<div class="row">
+
+				<tr>
+
+				<div class="large-2 columns">
+
+					<td><%= show_kind(@event) %></td>
+
+				</div>
+
+
+				<div class="large-3 columns">
+
+					<td><%= I18n.l(@event.start, format: :dmy) %></td>
+
+				</div>
+
+				<div class="large-3 columns">
+
+					<td><%= I18n.l(@event.finish, format: :dmy) %></td>
+
+				</div>
+
+			<%# to fix %>
+
+			<%# if @event.actualdays!=@event.numdays %>
+
+
+				<div class="large-2 columns">
+
+					<td><%#= @event.actualdays %></td>
+
+				</div>
+
+			<%# end %>
+
+				<div class="large-2 columns">
+
+					<td><%= @event.numdays %></td>
+
+				</div>
+
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+<% if @event.supportingdocumentation.present? %>
+
+	<%= render 'show_supportingdocumentation.html.erb' %>
+
+<% end %>
+
+<div class="row">
+
+	<% if @event.limited_leave? %>
+
+	<h5> <%= ta('leavetype.dayswithpaylimit') %> :	<%= @event.leavetype.dayswithpaylimit %> </h5>
+
+	<% end %>
+
+</div>
+
+<% if @event.versions.length>0 %>
+	<%= render 'show_last_updated' %>
+<% end %>
+
+<div class="row">
+
+	<% if can? :edit, @event %>
+
+			<% if !@event.residual? %>
+
+				<%= link_to t('actions.edit'), edit_event_path(@event), class: t('edit')  %> |
+
+		<% end %>
+
+	<% end %>
+
+	<%= link_to t('actions.back'), events_path,  class: t('back')  %>
+
+</div>

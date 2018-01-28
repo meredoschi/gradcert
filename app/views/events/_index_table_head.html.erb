@@ -1,0 +1,63 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+
+		    	<div class="large-2 columns">
+
+						<th><%= sort_link(@search, :registration_student_contact_name, ta('event.registration_id')) %></th>
+            
+    			</div>
+    
+	  		
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :start, ta('event.start')) %></th>
+
+	  		      
+    			</div>
+    			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :finish, ta('event.finish')) %></th>
+
+	  			
+
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('kind') %></th>
+      
+    			</div>
+
+					<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :residual, ta('event.confirmed')) %></th>
+
+	  		      
+    			</div>
+  
+					<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :residual, ta('event.residual')) %></th>
+
+	  		      
+    			</div>
+    		
+    			        
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

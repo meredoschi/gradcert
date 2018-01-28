@@ -1,0 +1,31 @@
+<% if is_not_regular_user(current_user) && @num_institution_team_members>0 %>
+
+	<table>
+		<tr>
+
+		<th>
+						<%= pluralize(@num_institution_team_members, t('member')).titleize %> <%= t('of_the_team') %>
+		</th>
+
+		<td>
+
+		<% @institution_team_members.ordered_by_contact_name.each do |user|  %>
+
+
+			<% if user.contact.present? && user.contact.role.present? %>
+
+				<%= user.contact.role.name %>
+
+				<u><%= link_to user.contact.name, user.contact %></u>
+
+			<% end %>
+
+
+
+		<br>
+		<br>
+		<% end %>
+
+		</td>
+
+<% end %>

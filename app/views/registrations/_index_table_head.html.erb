@@ -1,0 +1,73 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+
+        <% if @num_special_registrations>0 %>
+
+        <div class="large-1 column">
+
+          <th><%= tm('registrationkind').capitalize %></th>
+
+        </div>
+
+        <% end %>
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :student_contact_name, tm('student').capitalize, default_order: :desc) %></th>
+
+    			</div>
+
+    			<% if is_admin_or_manager(current_user) %>
+
+						<div class="large-1 column">
+
+							<th><%= sort_link(@search, :student_contact_user_institution_name, tm('institution').capitalize) %></th>
+
+						</div>
+
+					<% end %>
+
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :schoolyear_programyear, t('year').capitalize, default_order: :desc) %></th>
+
+    			</div>
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :schoolyear_program_programname_name, tm('program').capitalize) %></th>
+
+    			</div>
+
+		    	<div class="large-1 column">
+
+	  				<th>
+	  						<%#= tm('schoolterm').capitalize %>
+
+			  				<%#= sort_link(@search, :schoolyear_program_schoolterm_name, tm('schoolterm').capitalize , default_order: :desc) %>
+
+			  				<%= tm('schoolterm').capitalize %>
+
+	  				</th>
+
+    			</div>
+
+		    	<div class="large-1 column">
+
+	  				<th><%= ta('registration.virtual.actualabsences') %></th>
+
+    			</div>
+
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+
+			</div>
+
+    </tr>
+
+  </thead>

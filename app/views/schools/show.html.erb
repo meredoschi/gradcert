@@ -1,0 +1,118 @@
+<div class="row">
+
+	<h2><%= tm('school').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-9 columns">
+					
+								<th><strong><%= ta('school.name')%></strong></th>
+					
+							</div>
+					
+								
+							<div class="large-3 columns">
+					
+								<th><strong><%= ta('school.academiccategory_id')%></strong></th>
+					
+							</div>
+
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-9 columns">
+					
+						<td><%= @school.name %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= @school.academiccategory.name %></td>
+					
+					</div>
+										
+				</tr>
+
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+											
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('school.abbreviation')%></strong></th>
+					
+							</div>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('school.ministrycode')%></strong></th>
+					
+							</div>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('school.public')%></strong></th>
+					
+							</div>
+
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+			
+					<div class="large-4 columns">
+					
+						<td><%= @school.abbreviation %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= @school.ministrycode %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= yes_no(@school.public) %></td>
+					
+					</div>
+											
+				</tr>
+
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	
+	<% if can? :edit, @school %>
+
+		<%= link_to t('actions.edit'), edit_school_path(@school), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), schools_path,  class: t('back')  %>
+
+</div>

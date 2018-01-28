@@ -1,0 +1,117 @@
+<div class="row">
+
+
+	<h2>
+
+
+			<%= tm('bankpayment').capitalize %>
+
+		</div>
+
+
+	</h2>
+
+
+<% if @bankpayment.resend? %>
+
+		<div data-alert class="row alert-box warning">
+
+		<h3><%= t('resend') %></h3>
+
+
+	</div>
+
+<% end %>
+
+<% if is_admin_or_manager(current_user) %>
+
+
+		<% if @bankpayment.without_statements? %>
+
+				<%= render 'show_calculate_statements.html.erb' %>
+
+		<% end %>
+
+
+<% end %>
+
+<div class="row">
+
+		<span class="id-label"><h3><%= @bankpayment.id %> </h3></span>
+
+</div>
+
+<%= render 'show_payroll_header.html.erb' %>
+
+<%= render 'show_registration_totals.html.erb' %>
+
+<%= render 'show_annotation_totals.html.erb' %>
+
+<% if @num_skip_payment>0 %>
+
+	<%= render 'show_annotations_payment_skipped.html.erb' %>
+
+<% end %>
+
+
+<%= render 'show_annotation_adjustments.html.erb' %>
+
+<%= render 'show_annotations_without_penalty.html.erb' %>
+
+<%= render 'show_annotations_with_financial_impact.html.erb' %>
+
+<% if @bankpayment.resend? %>
+
+	<%= render 'show_registrations_resent.html.erb' %>
+
+<% end %>
+
+
+<div class="row">
+
+	<% if can? :read, @bankpayment %>
+
+		<% if @bankpayment.unprepared? %>
+
+		<% if is_admin_or_manager(current_user) %>
+
+			<%= link_to t('actions.generate')+' '+t('bankfile'), generatefile_bankpayment_path(@bankpayment), class: t('generate')  %> |
+
+			<%= link_to t('totals'), totalreport_bankpayment_path(@bankpayment), class: "relatorio3", :onclick => "alert('#{t('please_wait_for_processing')}')"    %>
+
+		<% end %>
+
+		<% else %>
+
+			<% if is_admin_or_manager(current_user) %>
+
+					<%= render 'show_available_reports' %>
+
+			<% else %>
+
+				<%= render 'show_institution_reports' %>
+
+			<% end %>
+
+		<% end %>
+
+	</div>
+
+		<div class="row">
+
+		<% if can? :edit, @bankpayment %>
+
+
+				<%= link_to 'Editar', edit_bankpayment_path(@bankpayment), class: "editar"  %> |
+
+
+  	<% end %>
+
+
+  <% end %>
+
+			<%= link_to t('actions.back'), bankpayments_path,  class: t('back')  %>
+
+		</div>
+
+</div>

@@ -1,0 +1,40 @@
+<div class="row">
+
+	<h2><%= tm('healthcareinfo').capitalize%></h2>
+
+</div>
+
+
+<%= render 'show_institution.html.erb'%>
+
+<div class="row">
+
+	<div class="large-6 columns">			
+
+		<%= render 'show_beds.html.erb'%>
+
+		<%= render 'show_labs.html.erb'%>
+
+		<%= render 'show_equipment.html.erb'%>
+
+	</div>
+
+	<div class="large-6 columns panel callout">			
+
+		<%= render 'show_statistics.html.erb'%>
+
+	</div>
+	
+</div>
+
+<div class="row">
+
+	<% if can? :edit, @healthcareinfo %>
+	
+		<%= link_to t('actions.edit'), edit_healthcareinfo_path(@healthcareinfo), class: "editar" %> |
+	
+	<% end %>
+			
+	<%= link_to t('actions.back'), healthcareinfos_path, class: "voltar" %>
+
+</div>

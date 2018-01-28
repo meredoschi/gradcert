@@ -1,0 +1,64 @@
+<div class="row">
+		<table>
+			<tr>
+
+				<div class="large-3 columns">
+		
+					<th><strong><%= ta('annotation.supplement')%></strong></th>
+		
+				</div>
+			
+				<div class="large-3 columns">
+		
+					<th><strong><%= ta('annotation.discount')%></strong></th>
+		
+				</div>
+				
+	
+ 			<div class="large-3 columns">
+		
+					<th><strong><%= ta('annotation.net')%></strong></th>
+		
+				</div>
+
+ 			<div class="large-3 columns">
+		
+					<th><strong><%= ta('annotation.comment')%></strong></th>
+		
+				</div>
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-3 columns">
+					
+						<td><%= humanized_money_with_symbol(annotation.supplement) %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= humanized_money_with_symbol(annotation.discount) %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= humanized_money_with_symbol(annotation.net) %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= annotation.comment %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>

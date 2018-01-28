@@ -1,0 +1,19 @@
+<% if can? :read, @state %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(states_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+
+	<%= link_to tm('state').pluralize.capitalize, states_path %></li>
+
+	</ul>
+	
+<% end %>

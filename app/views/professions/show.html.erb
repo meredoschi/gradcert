@@ -1,0 +1,74 @@
+<div class="row">
+
+	<h2><%= tm('profession').capitalize %></h2>
+
+</div>
+
+<div class="row">
+
+	<table>
+		<tr>
+		
+		<div class="large-3 columns">
+				<th><strong><%= ta('profession.name')%></strong></th>
+	
+		</div>
+		
+		<div class="large-3 columns">
+			<th><strong><%= ta('profession.occupationcode')%></strong></th>
+		</div>
+
+		<div class="large-3 columns">
+			<th><strong><%= ta('profession.pap')%></strong></th>
+
+		<div class="large-3 columns">
+			<th><strong><%= ta('profession.medres')%></strong></th>
+				
+		</tr>
+</div>
+
+<div class="row">
+
+		<tr>
+		
+		<div class="large-3 columns">
+
+			<td><%= @profession.name %></td>
+
+		</div>
+
+		<div class="large-3 columns">
+		
+			<td><%= @profession.occupationcode  %></td>	
+
+		</div>
+
+		<div class="large-3 columns">
+
+			<td><%= tickmark(@profession.pap) %></td>
+
+		</div>
+
+		<div class="large-3 columns">
+
+			<td><%= tickmark(@profession.medres) %></td>
+
+		</div>
+
+			
+	  </tr>
+	</table>
+
+</div>
+
+<div class="row">
+
+	<% if can? :edit, @profession %>
+	
+		<%= link_to t('actions.edit'), edit_profession_path(@profession), class: "editar" %> |
+	
+	<% end %>
+			
+	<%= link_to t('actions.back'), professions_path, class: "voltar" %>
+
+</div>

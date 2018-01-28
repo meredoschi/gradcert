@@ -1,0 +1,90 @@
+<table>
+
+	<%= render 'index_table_head.html.erb' %>
+
+  <tbody>
+    <% @institutions.each do |institution| %>
+			<div class="row">
+
+      	<tr>
+
+      		<div class="large-2 column">
+
+		        <td><%= www_globe(institution) %></td>
+
+					</div>
+
+      		<div class="large-3 columns">
+
+	  		    <td><%= link_to institution.name, institution %></td>
+
+					</div>
+
+	   			<div class="large-2 columns">
+
+					<% if is_admin_or_manager(current_user) %>
+
+	      	  	<td>
+								<% if institution.address.municipality.regionaloffice.present? %>
+
+								 <%= link_to institution.address.municipality.regionaloffice.name, institution.address.municipality.regionaloffice %></td>
+
+								<% end %>
+
+					<% end %>
+				</div>
+
+    			<div class="large-2 columns">
+
+	      	  <td> <% if institution.address.present? %>
+		      				  <%= institution.address.municipality.name %>
+									<% end %>
+	      	  </td>
+
+					</div>
+
+      		<div class="large-1 column">
+
+		 				<% if can? :read, institution %>
+			        <td><%= link_to 'Mostrar', institution, class: "mostrar" %></td>
+						<% end %>
+
+  				</div>
+
+      		<div class="large-1 column">
+
+		 				<% if can? :update, institution %>
+
+	        <td><%= link_to 'Editar', edit_institution_path(institution), class: "editar" %></td>
+
+						<% end %>
+
+					</div>
+
+					<div class="large-1 column">
+
+ 						<% if can? :destroy, institution %>
+
+	      	  <td><%= link_to 'Remover', institution, method: :delete, data: { confirm: 'Você tem certeza?' }, class: "remover" %></td>
+
+						<% end %>
+
+          </div>
+
+		      </tr>
+
+		     </div>
+
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="row">
+
+  <%= paginate @institutions %>
+
+  <br>
+
+</div>

@@ -1,0 +1,73 @@
+<%= form_for(@professionalarea) do |f| %>
+  <% if @professionalarea.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@professionalarea.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @professionalarea.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+	
+		  <%= f.label :name %><br>
+
+			</div>
+	 		
+	 		<div class="large-9 columns">
+
+			   <%= f.text_field :name %>        	   
+		  </div>
+	</div>
+
+
+	<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+	
+		  <%= f.label :previousname %><br>
+
+			</div>
+	 		
+	 		<div class="large-9 columns">
+
+			   <%= f.text_field :previousname %>        	   
+		  </div>
+	</div>
+
+
+	<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+	
+		  <%= f.label :comment %><br>
+
+			</div>
+	 		
+	 		<div class="large-9 columns">
+
+			   <%= f.text_field :comment %>        	   
+		  </div>
+	</div>
+
+ <%# :previouscode not editable.  Seeded only!  Kept for legacy, historical purposes. %>
+
+
+	<% if can? :update, Professionalarea %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), professionalareas_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

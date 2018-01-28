@@ -1,0 +1,20 @@
+<div class="custom-panel2">
+
+  	<div class="row">
+
+		 		<div class="medium-2 columns", class: "left inline">
+
+	 				<%= f.label :profession_id %>
+
+				</div>
+
+
+		 		<div class="medium-10 columns", class: "left inline">
+
+					<%= f.collection_select :profession_id, Profession.all, :id, :name,  :include_blank => true %>
+
+				</div>
+
+		</div>
+
+</div>

@@ -1,0 +1,102 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+		<h2><%= t('activerecord.models.municipality').capitalize.pluralize %> (<%= @municipalities.total_count  %> /  <%= @nummunicipalities %>)  	</h2>
+
+  </div>
+
+	<% if can? :create, Municipality %>
+	
+		<div class="large-4 columns">
+		 	
+	    <%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('municipality')), new_municipality_path %>	 
+
+  	</div>
+	 
+	<% end %>
+	 
+</div>
+
+<table>
+  <thead>
+    <tr>
+
+			<div class="large-4 column">
+	      <th><%= sort_link(@search, :name, t('activerecord.attributes.municipality.name')) %></th>
+			</div>
+			
+			<div class="large-2 column">
+	      <th><%= sort_link(@search, :municipality_state_name, t('activerecord.attributes.state.name')) %></th>
+			</div>
+			
+			<div class="large-1 column">
+				<th><%= sort_link(@search, :municipality_capital, t('activerecord.attributes.municipality.capital')) %></th>
+			</div>			  
+			<div class="large-1 column">
+		    <th><%= t('activerecord.models.institution').capitalize.pluralize %></th>
+			</div>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @municipalities.each do |municipality| %>
+      <tr>
+      <div class="row">
+				<div class="large-4 column">
+	        <td><%= link_to municipality.name, municipality %></td>
+				</div>
+				<div class="large-2 column">
+        	<td><%= link_to municipality.stateregion.state.name, municipality.stateregion.state %></td>        
+				</div>
+				<div class="large-1 column">
+				  <td><%= tickmark(municipality.capital) %></td>        
+				</div>			  
+				<div class="large-1 column">
+				  <td><%= municipality.institution_count %></td>        
+				</div>
+				<div class="large-1 column">
+
+		        <% if can? :read, municipality %>
+	 				
+			        <td><%= link_to t('actions.show'), municipality, class: "mostrar" %>
+
+						<% end %>
+						
+					</div>
+	
+					<div class="large-1 column">
+					
+		        <% if can? :edit, municipality %>
+	
+	    		  <td><%= link_to t('actions.edit'), edit_municipality_path(municipality), class: "editar" %></td>   
+			
+	  				<% end %>
+	
+					</div>
+				
+					<div class="large-1 column">
+		
+		        <% if can? :destroy, municipality %>
+	  			      
+ 		     		  <td><%= link_to t('actions.delete'),municipality, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+	              
+	    	    <% end %>
+	
+	        </div>
+				</div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="row">
+
+  <%= paginate @municipalities %>
+  
+</div>
+
+<%= render 'index_search.html.erb' %>

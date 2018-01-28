@@ -1,0 +1,39 @@
+
+	<div class="row">
+
+		<div class="large-2 columns">
+
+			<% if event.pending? %>
+
+				<strong><%= I18n.t('pending')%> !</strong>
+
+			<% else %>
+
+				<%= ta('event.confirmed')%>
+
+			<% end %>
+
+		</div>
+
+		<div class="large-6 columns">
+
+			<%= link_to event.name, event %>
+
+		</div>
+
+		<div class="large-2 columns">
+
+			<%# to do: implement actual days %>
+			<%= pluralize(event.numdays, t('day').downcase) %>
+
+		</div>
+
+		<div class="large-2 columns">
+
+			<%= @annotation.comment %>
+
+		</div>
+
+	</div>
+
+</h5>

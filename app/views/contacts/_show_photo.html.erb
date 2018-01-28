@@ -1,0 +1,9 @@
+<div class="row photo">
+
+	<% if @contact.image.present? %>
+	
+		<%= image_tag @contact.image_url.to_s %>
+ 
+ 	<% end %>
+ 	
+</div>

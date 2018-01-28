@@ -1,0 +1,26 @@
+<% if ( is_active_link?(payrolls_path, :inclusive) || is_active_link?(events_path, :inclusive) || is_active_link?(bankpayments_path, :inclusive) || is_active_link?(leavetypes_path, :inclusive) || is_active_link?(scholarships_path, :inclusive) || is_active_link?(feedbacks_path, :inclusive) ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+<a href="#"><%= t('navbar.financial').upcase %></a>
+
+	<ul class="dropdown">
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/statements.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/payrolls.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/bankpayments.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/feedbacks.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/leavetypes.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/scholarships.html.erb' %> </div>
+	
+
+	  </ul>
+	 </ul>
+	</ul>
+ </ul>

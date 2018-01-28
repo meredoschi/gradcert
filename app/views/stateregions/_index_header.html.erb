@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+		
+		<h2><%= t('activerecord.models.stateregion').capitalize.pluralize %> (<%= @stateregions.total_count  %> /  <%= @numstateregions %>)  	</h2>
+	
+  </div>
+
+	<% if can? :create, Stateregion %>
+
+		<div class="large-4 columns">
+			 	
+	  	  <%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('stateregion')), new_stateregion_path %>	 
+
+	  </div>
+
+	<% end %>
+		  
+</div>

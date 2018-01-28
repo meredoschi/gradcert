@@ -1,0 +1,17 @@
+<div class="row">
+
+	<h2>
+			
+				<% if is_admin_or_manager(current_user) %>
+
+					<%= link_to @healthcareinfo.institution.name, @healthcareinfo.institution %>
+				
+				<% else %>
+				
+					<%= @healthcareinfo.institution_name %>
+
+				<% end %>
+	
+	</h2>
+
+</div>

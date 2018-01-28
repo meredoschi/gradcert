@@ -1,0 +1,137 @@
+<table>
+
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @registrations.each do |registration| %>
+      <tr>
+				<div class="row">
+
+          <% if @num_special_registrations>0 %>
+
+            <div class="large-1 column">
+
+              <td> <%= display_kind(registration) %> </td>
+
+  				      </div>
+
+          <% end %>
+          
+
+		   <div class="large-2 columns">
+
+        <td>
+
+          <% if registration.inactive? && registration.accreditation.confirmed? %>
+
+           <strike>
+
+            <%= link_to registration.student_name, registration.student  %>
+
+          </strike>
+
+         <% else %>
+
+          <%= link_to registration.student_name, registration.student  %>
+
+
+         <% end %>
+
+        </td>
+
+			</div>
+
+			<% if is_admin_or_manager(current_user) %>
+
+				<div class="large-1 column">
+
+	  	      <td><%= link_to registration.institution, registration.schoolyear.program.institution %></td>
+
+				</div>
+
+			<% end %>
+
+
+
+		   <div class="large-1 column">
+
+        <td><%= registration.programyear %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+
+        <td><%= link_to registration.program_name, registration.schoolyear.program  %></td>
+
+			</div>
+
+		 <div class="large-1 column">
+
+		        <td><%= registration.school_term_name  %></td>
+
+		</div>
+
+		   <div class="large-1 column">
+
+        <td>
+
+					<% if registration.annotated? %>
+
+						<%#= Annotation.for_registration(registration).pluck(:absences).sum %>
+
+						<%#= display_annotation_absences(registration) %>
+
+						<%= display_actual_absences(registration) %>
+
+					<% end %>
+
+        </td>
+
+			</div>
+
+
+</div>
+
+		   <div class="large-3 columns">
+
+	        <% if can? :read, registration %>
+		        <td><%= link_to t('actions.show'), registration, class: "mostrar" %></td>
+					<% end %>
+
+
+
+      	  <% if can? :update, registration %>
+
+				      <td> 				<% if !already_cancelled?(registration) %>
+
+
+								      <%= link_to t('actions.edit'), edit_registration_path(registration), class: "editar" %>
+
+								<% end %>
+
+							</td>
+
+				<% end %>
+
+	        <% if can? :destroy, registration %>
+		     		<td><%= link_to t('actions.delete'),registration, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>
+					<% end %>
+
+    	</div>
+
+    		</div>
+
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @registrations %>
+
+</div>
+
+<br>

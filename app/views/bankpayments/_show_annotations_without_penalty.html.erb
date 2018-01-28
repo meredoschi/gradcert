@@ -1,0 +1,11 @@
+<% if assiduos_annotations_exist? %>
+
+	<div class="row">
+
+		<h4 class=subheader> <%= t('paid_leaves') %> </h4>
+
+	</div>
+
+		<%= render 'show_annotations_without_penalty_details' %>
+
+<% end %>

@@ -1,0 +1,78 @@
+<% if @institution.phone.present? %>
+
+		<div class="row">
+				<table>
+					<tr>
+
+						<% if @institution.phone.main.present? %>
+
+								<div class="large-4 columns">
+
+										<th><strong><%= ta('phone.main')%></strong></th>
+
+								</div>
+
+						<% end %>
+
+						<% if @institution.phone.other.present? %>
+
+							<div class="large-4 columns">
+
+										<th><strong><%= ta('phone.other')%></strong></th>
+
+							</div>
+
+							<% end %>
+
+						<% if @institution.phone.fax.present? %>
+
+							<div class="large-4 columns">
+
+										<th><strong><%= ta('phone.fax')%></strong></th>
+
+							</div>
+
+							<% end %>
+
+					</tr>
+
+					<div class="row">
+
+						<tr>
+
+							<% if @institution.phone.main.present? %>
+
+								<div class="large-4 columns">
+
+									<td> <%= @institution.phone.main %> </td>
+
+								</div>
+
+							<% end %>
+
+							<% if @institution.phone.other.present? %>
+
+								<div class="large-4 columns">
+
+									<td> <%= @institution.phone.other %> </td>
+
+								</div>
+
+							<% end %>
+
+							<% if @institution.phone.fax.present? %>
+
+								<div class="large-4 columns">
+
+									<td> <%= @institution.phone.fax %> </td>
+
+								</div>
+
+							<% end %>
+
+					</tr>
+				</div>
+			</table>
+		</div>
+
+<% end %>

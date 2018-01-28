@@ -1,0 +1,13 @@
+<div class="row">
+
+	<% Statement.for_registration(registration).each do |statement| %>
+
+		<div class="row">
+
+			<%= link_to statement.bankpayment.name, statement %>
+			
+		</div>
+							
+	<% end %>
+	
+</div>

@@ -1,0 +1,36 @@
+<div class="row">
+			<tr>
+			
+				<div class="large-3 columns">
+					
+			
+					<th><strong><%= tm('payroll').capitalize %></strong></th>
+
+				</div>
+		
+
+				<div class="large-3 columns">
+
+					<th><strong><%= ta('registration.virtual.actualabsences') %>*</strong></th>
+				
+				</div>
+
+				<div class="large-3 columns">
+		
+							<th><strong><%= ta('registration.virtual.accountingabsences') %></strong></th>
+
+		
+				</div>
+
+				<% if annotation.skip %>
+	
+					<div class="large-3 columns">
+					
+						<th><strong></strong></th>
+
+					</div>
+					
+				<% end %>
+						
+			</tr>						
+	</div>

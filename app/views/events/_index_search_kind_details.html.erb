@@ -1,0 +1,44 @@
+	<div class="row">
+
+			<div class="large-3 columns">
+
+			<div class="field">
+
+				<%= f.label ta('event.absence') %>
+
+			</div>
+
+		</div>
+
+		<div class="large-3 columns">
+
+			<div class="field">
+
+				<%= f.check_box :absence_true %>
+
+			</div>
+
+		</div>
+
+		<div class="large-3 columns">
+
+		<div class="field">
+
+			<%= f.label tm('leavetype') %>
+
+		</div>
+
+	</div>
+
+	<div class="large-3 columns">
+
+		<div class="field">
+
+		<%= f.select :leavetype_id_eq, options_from_collection_for_select(Leavetype.pap, :id, :name), 		include_blank: true %>
+
+		</div>
+
+	</div>
+
+
+	</div>

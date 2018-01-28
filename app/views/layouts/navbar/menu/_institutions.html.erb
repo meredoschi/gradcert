@@ -1,0 +1,23 @@
+<ul class="left">
+
+	<% if can? :read, @institution %>        
+	
+		<ul class="left">
+	
+			<% if is_active_link?(institutions_path, :inclusive) %>
+	
+				<li class="active">
+				
+			<% else %>
+				
+				<li>
+	
+			<% end %>
+		 			 			   											
+			  <%= link_to tm('institution').pluralize.mb_chars.upcase, institutions_path  %></li>	
+			    
+	  </ul>    
+	
+	<% end %>
+	 
+</ul>

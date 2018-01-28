@@ -1,0 +1,72 @@
+	<table>
+				<tr>
+
+					<div class="row">
+						<div class="large-3 columns">
+						
+							<th><strong><%= ta('role.name') %></th>
+	
+						</div>
+
+						<div class="large-1 columns">
+						
+							<th><strong><%= ta('role.pap') %></th>
+	
+						</div>
+	
+						<div class="large-2 columns">
+						
+							<th><strong><%= ta('role.management') %></th>
+	
+						</div>
+	
+						<div class="large-2 columns">
+	
+							<th><strong><%= ta('role.teaching') %></th>
+	
+						</div>
+	
+						<div class="large-2 columns">
+	
+							<th><strong><%= ta('role.clerical') %></th>
+	
+						</div>
+
+						<div class="large-2 columns">
+	
+							<th><strong><%= ta('role.collaborator') %></th>
+	
+						</div>
+	
+					</div>
+					
+				</tr>
+			
+				<tr>
+				
+					<div class="row">
+						<div class="large-3 columns">		
+							<td><%= f.text_field :name %></td>
+						</div>
+
+						<div class="large-1 columns">								
+							<td><%= f.check_box :pap %></td>	
+						</div>				
+
+						<div class="large-2 columns">								
+							<td><%= f.check_box :management %></td>	
+						</div>				
+
+						<div class="large-2 columns">								
+							<td><%= f.check_box :teaching %></td>	
+						</div>				
+
+						<div class="large-2 columns">								
+							<td><%= f.check_box :clerical %></td>	
+						</div>			
+						<div class="large-2 columns">								
+							<td><%= f.check_box :collaborator %></td>	
+						</div>					
+					</div>				
+			  </tr>
+	</table>

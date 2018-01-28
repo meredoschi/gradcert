@@ -1,0 +1,82 @@
+
+	<% if @contact.personalinfo.country_id.present? %>
+
+		<div class="row">
+
+			<table>
+					<tr>
+					
+						<div class="large-6 columns">
+
+							<th><strong><%=  ta('personalinfo.country_id') %></strong></th>
+
+						</div>
+						
+					</tr>
+							
+					<div class="large-6 columns">
+		  
+			  		<td><%= @contact.personalinfo.country.brname %></td>
+		 
+					</div>
+
+			
+						</tr>
+					</div>
+				</table>
+	
+	</div>
+
+			<% end %>
+	
+		<div class="row">
+
+			<table>
+					<tr>
+					
+						<div class="large-6 columns">
+				
+						<th><strong><%= ta('personalinfo.tin')%></strong></th>
+					
+						</div>
+		
+						<% if @contact.personalinfo.socialsecuritynumber.present? %>
+				
+		
+							<div class="large-6 columns">
+					
+								<th><strong><%= ta('personalinfo.socialsecuritynumber')%></strong></th>
+					
+							</div>
+
+						<% end %>
+							
+						
+					</tr>						
+				
+					<div class="row">
+				
+						<tr>
+							<div class="large-6 columns">
+							
+								<td><%= @contact.personalinfo.tin %></td>
+							
+							</div>
+
+
+						<% if @contact.personalinfo.socialsecuritynumber.present? %>
+				
+							<div class="large-6 columns">
+				
+								<td><%= @contact.personalinfo.socialsecuritynumber  %></td>
+										
+							</div>
+				
+						<% end %>
+						
+						</tr>
+					</div>
+				</table>
+	
+		</div>
+		

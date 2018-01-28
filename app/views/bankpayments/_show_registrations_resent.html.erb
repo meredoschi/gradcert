@@ -1,0 +1,12 @@
+	<div class="row">
+
+		<h4 class=subheader> <%= pluralize(@num_returned_payments, tm('registration').capitalize) %> </h4>
+
+
+			<% @registrations.ordered_by_contact_name.each_with_index do |registration, i|  %>
+
+				<h5><%= (i+1).to_s%>)	<%=  link_to registration.full_details, registration %> </h5>
+
+			<% end %>
+
+	</div>

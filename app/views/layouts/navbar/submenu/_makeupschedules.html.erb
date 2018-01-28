@@ -1,0 +1,19 @@
+<% if can? :read, Makeupschedule %>
+
+	<ul class="left">
+
+		<% if is_active_link?(makeupschedules_path, :inclusive) %>
+
+			<li class="active">
+
+		<% else %>
+
+			<li>
+
+		<% end %>
+
+		  <%= link_to tm('makeupschedule').capitalize.pluralize, makeupschedules_path  %></li>
+
+  </ul>
+
+<% end %>

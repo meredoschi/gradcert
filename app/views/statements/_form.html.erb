@@ -1,0 +1,139 @@
+<%= form_for(@statement) do |f| %>
+  <% if @statement.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@statement.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @statement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="row">
+	
+		 		<div class="large-3 columns", class: "left inline">
+		
+					<%= f.label tm('registration').capitalize %> <br>
+	
+				</div>
+		 		
+		 		<div class="large-9 columns">
+	   
+			  	<%= f.collection_select :registration_id, Registration.current, :id, :name %>
+	  
+				</div>
+
+</div>
+
+<div class="row">
+	
+		 		<div class="large-3 columns", class: "left inline">
+		
+					<%= f.label tm('bankpayment').capitalize %> <br>
+	
+				</div>
+		 		
+		 		<div class="large-9 columns">
+	   
+			  	<%= f.collection_select :bankpayment_id, Bankpayment.all, :id, :name %>
+	  
+				</div>
+
+</div>
+
+<div class="row">
+	
+		<div class="large-3 columns">
+	
+	    <%= f.label :grossamount %>
+	
+		</div>
+	
+			<div class="large-9 columns">
+	
+		  <%= f.text_field :grossamount %>
+	
+		 </div>
+	
+	</div>
+		  
+<div class="row">
+	
+		<div class="large-3 columns">
+	
+	    <%= f.label :incometax %>
+	
+		</div>
+	
+			<div class="large-9 columns">
+	
+		  <%= f.text_field :incometax %>
+	
+		 </div>
+	
+	</div>
+
+<div class="row">
+	
+		<div class="large-3 columns">
+	
+	    <%= f.label :socialsecurity %>
+	
+		</div>
+	
+			<div class="large-9 columns">
+	
+		  <%= f.text_field :socialsecurity %>
+	
+		 </div>
+	
+	</div>
+
+<div class="row">
+	
+		<div class="large-3 columns">
+	
+	    <%= f.label :childsupport %>
+	
+		</div>
+	
+			<div class="large-9 columns">
+	
+		  <%= f.text_field :childsupport %>
+	
+		 </div>
+	
+	</div>
+
+<div class="row">
+	
+		<div class="large-3 columns">
+	
+	    <%= f.label :netamount %>
+	
+		</div>
+	
+			<div class="large-9 columns">
+	
+		  <%= f.text_field :netamount %>
+	
+		 </div>
+	
+	</div>
+
+	<% if can? :update, Statement %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), statements_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

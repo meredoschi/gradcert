@@ -1,0 +1,37 @@
+
+  <% if is_local_admin(current_user) %>
+
+  <% if Student.accessible_by(current_ability).not_barred.not_registered.count > 0 %>
+
+        <% if current_user.institution.remaining_vacancies_on_schoolterm(Schoolterm.latest)>0 %>
+
+          <h2> <%= t('perform').capitalize+' '+t('a.f')+' '+t('new.f')+' '+tm('registration') %> </h2>
+
+          <%= render 'form' %>
+
+          <% else %>
+
+          Vagas preenchidas.
+
+          <% end %>
+
+       <% else %>
+
+        <%= render 'form' %>
+
+      <% end %>
+
+   <% else %>
+
+   Não há mais bolsistas disponíveis para serem cadastrados.
+
+   <% end %>
+  <%# if @num_students_yet_to_be_registered>=1 %>
+
+  	<%#= render 'form' %>
+
+  <%# else %>
+
+  	<%#= render 'warning_no_available_students_found' %>
+
+  <%# end %>

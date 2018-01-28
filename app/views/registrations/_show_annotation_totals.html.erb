@@ -1,0 +1,57 @@
+</div>
+
+<div class="row">
+
+	<h4><%= I18n.t('total').capitalize %></h4>
+
+</div>
+
+	<div class="row">
+	
+			<table>
+	<div class="row">
+				<tr>
+				
+					<div class="large-6 columns">
+
+						<th><strong><%= ta('registration.virtual.actualabsences') %></strong></th>			
+			
+					</div>
+	
+					<div class="large-6 columns">
+	
+						<th><strong><%= ta('registration.virtual.accountingabsences') %></strong></th>
+			
+					</div>
+							
+				</tr>						
+		</div>
+		
+			<div class="row">
+					<tr>
+	
+						<div class="large-6 columns">
+			
+							<td><%= @actual_absences_total %> </td>
+												
+						</div>
+						
+	
+						<div class="large-6 columns">
+							
+							<td> <%= @accounting_absences_total %> </td>
+	
+						</div>
+																	
+					</tr>
+			</div>
+	
+	</table>
+
+</div>
+
+<div class="row">
+
+	*<%= t('actual_absences_explanation') %>
+
+</div>

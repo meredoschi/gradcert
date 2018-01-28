@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+	<tr>
+  <th><strong><%= t('activerecord.attributes.institutiontype.name')%></strong></th>
+	</tr>
+
+	<tr>
+	<td><%= @institutiontype.name %></td>
+  </tr>
+</table>
+
+<% if can? :edit, @institutiontype %>
+
+	<%= link_to t('actions.edit'), edit_institutiontype_path(@institutiontype), class: "editar" %> |
+
+<% end %>
+		
+<%= link_to t('actions.back'), institutiontypes_path, class: "voltar" %>

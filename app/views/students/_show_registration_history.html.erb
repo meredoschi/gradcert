@@ -1,0 +1,17 @@
+
+<div class="row">
+
+	<h4> <%= pluralize(@num_registrations, tm('registration').capitalize) %>  </h4> 
+
+	<hr>
+</div>
+
+<% @registrations.each do |registration| %>
+
+	<div class="row">
+
+	<h5>	<%= link_to registration.schoolyear_and_cohort, registration %>	</h5>
+
+	</div>
+		
+<% end %>

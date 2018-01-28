@@ -1,0 +1,14 @@
+<%=	index_header(current_user) %>			
+
+
+<div class="row">
+
+	<%= render 'index_table.html.erb' %>
+
+	<% if is_staff(current_user) && @supervisors.total_count>1 %>
+
+		<%= render 'index_search.html.erb' %>
+	
+	<% end %>
+	
+</div>

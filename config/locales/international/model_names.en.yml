@@ -1,0 +1,77 @@
+---
+en:
+  activerecord:
+    models:
+      academiccategory: Academic category
+      accreditation: Accreditation
+      address: Address
+      admission: Admission
+      annotation: Annotation
+      assesment: Assessment
+      assessment: Assessment
+      assignment: Assignment
+      bankaccount: Bank account
+      bankbranch: Bank branch
+      bankfile: Bankfile
+      bankpayment: Bank payment
+      box: Box
+      bracket: Bracket
+      characteristic: Characteristic
+      college: College
+      completion: Completion
+      contact: Contact
+      council: professional association
+      country: Country
+      course: Course
+      coursename: Coursename
+      degreetype: Degreetype
+      diploma: Diploma
+      enrollment: Enrollment
+      event: Event
+      feedback: Initially declined transaction
+      healthcareinfo: Healthcare information
+      institution: Institution
+      institutiontype: Institution type
+      leave: Leave
+      leavetype: Leavetype
+      makeupschedule: Makeup schedule
+      methodology: Methodology
+      municipality: Municipality
+      password: Password
+      payroll: Payroll
+      permission: Permission
+      personalinfo: Personal information
+      phone: Phone
+      placesavailable: Places available
+      profession: Profession
+      professionalarea: Professional area
+      professionalfamily: Professional family
+      professionalspecialty: Professional Specialty
+      program: Program
+      programname: Program name
+      programsituation: Program situation
+      recommendation: Recommendation
+      regionaloffice: Regional office
+      registration: Registration
+      registrationkind: “Registration kind"
+      researchcenter: Research center
+      role: Role
+      roster: Roster
+      scholarship: Scholarship
+      school: school
+      schoolname: Schoolname
+      schoolterm: Schoolterm
+      schooltype: School type
+      schoolyear: Schoolyear
+      schoolyears: Schoolyears
+      state: State
+      statement: Statement
+      stateregion: State region
+      streetname: Street name
+      student: Student
+      supervisor: Supervisor
+      taxation: Taxation
+      user: User
+      vacancyallocation: Vacancy allocation
+      versions: Versions
+      webinfo: Web information

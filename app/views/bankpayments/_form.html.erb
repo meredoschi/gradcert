@@ -1,0 +1,133 @@
+<%= form_for(@bankpayment) do |f| %>
+  <% if @bankpayment.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@bankpayment.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @bankpayment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= f.label tm('payroll').capitalize %> <br>
+
+				</div>
+
+
+		 		<div class="large-9 columns">
+
+			  	<%#= f.collection_select :payroll_id, Payroll.not_scheduled, :id, :name %>
+
+          <% if action_name=='new' %>
+
+			  	    <%= f.collection_select :payroll_id, @possible_payrolls, :id, :name %>
+
+          <% else %>
+
+            <h6><%= @bankpayment.payroll.name %>
+
+          <% end %>
+
+				</div>
+
+</div>
+
+<div class="row">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :sequential %>
+
+				</div>
+
+		 		<div class="large-1 column">
+
+			  	<%= f.number_field :sequential, min: 1%>
+
+				</div>
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :prepared %>
+
+				</div>
+
+		 		<div class="large-1 column">
+
+			  	<%= f.check_box :prepared %>
+
+				</div>
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :done %>
+
+				</div>
+
+		 		<div class="large-1 column">
+
+			  	<%= f.check_box :done %>
+
+				</div>
+
+</div>
+
+
+<div class="row custom-panel2">
+
+	<div class="row">
+
+				<div class="large-3 columns", class: "left inline">
+
+					<%= f.label tm('feedback')+' '+t('or')+' '+t('supplemental_remittance') %> <br>
+
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+			  	<%= f.check_box :resend %>
+
+				</div>
+
+
+	 </div>
+
+</div>
+<div class="row">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :comment %> <br>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+			  	<%= f.text_field :comment %>
+
+				</div>
+
+
+</div>
+
+
+	<% if can? :update, Bankpayment %>
+
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), bankpayments_path, class: t('cancel') %>
+
+	</div>
+
+<% end %>

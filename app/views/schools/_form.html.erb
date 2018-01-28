@@ -1,0 +1,51 @@
+<%= form_for(@school) do |f| %>
+  <% if @school.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@school.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @school.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+		  <div class="field">
+		    <%= f.label :name %><br>
+	    <%= f.text_field :name %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :abbreviation %><br>
+	    <%= f.text_field :abbreviation %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :ministrycode %><br>
+	    <%= f.number_field :ministrycode %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :academiccategory_id %><br>
+	    <%= f.number_field :academiccategory_id %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :public %><br>
+	    <%= f.check_box :public %>
+		  </div>
+	
+</div>
+
+	<% if can? :update, School %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), schools_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

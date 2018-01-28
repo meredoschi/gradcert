@@ -1,0 +1,12 @@
+<div class="row panel callout">
+				
+		<h4><u><%= pluralize(@num_monetary_annotations, tm('event').capitalize) %></u></h4>
+		
+		<% @monetary_annotations.each_with_index do |annotation, i|  %>
+	
+			<h5>	<%=  link_to annotation.details, annotation %> </h5> 
+								
+		<% end %>
+			
+
+</div>

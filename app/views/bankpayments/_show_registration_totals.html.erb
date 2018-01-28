@@ -1,0 +1,76 @@
+<div class="row">
+		<table>
+			<tr>
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= t('situation') %> <%= t('normal') %></strong></th>
+					
+							</div>
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= t('cancelled_registrations_during_this_payroll') %></strong></th>
+					
+							</div>
+
+							<% if is_admin_or_manager(current_user) %>
+
+								<div class="large-3 columns">
+						
+									<th><strong><%= ta('registration.accreditation.suspended').pluralize %></strong></th>
+						
+								</div>
+				
+	
+								<div class="large-3 columns">
+						
+									<th><strong><%= ta('registration.accreditation.renewed')%></strong></th>
+						
+								</div>
+
+							<% end %>
+							
+				</tr>
+		</div>
+	
+	
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-3 columns">
+					
+						<td><%= @num_normal %></td>	
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= @num_cancelled %></td>
+					
+					</div>
+
+					<% if is_admin_or_manager(current_user) %>
+
+						<div class="large-3 columns">
+						
+							<td><%= @num_suspended %></td>
+						
+						</div>
+	
+						<div class="large-3 columns">
+						
+							<td><%= @num_renewed %></td>
+						
+						</div>
+																				
+					<% end %>
+					
+	</table>
+</div>
+
+<div class="row">
+
+
+</div>

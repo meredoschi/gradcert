@@ -1,0 +1,74 @@
+<% if with_website_or_email?(@institution) %>
+
+	<div class="row">
+			
+		<table>
+			<tr>
+						
+				<% if @institution.webinfo.site.present? %>
+		
+						<div class="large-6 columns">
+			
+							<th><strong><%= ta('webinfo.site')%></strong></th>
+			
+						</div>
+		
+					<% end %>
+		
+					<% if @institution.webinfo.email.present? %>
+		
+						<div class="large-6 columns">
+			
+							<th><strong><%= ta('webinfo.email')%></strong></th>
+			
+						</div>
+		
+					<% end %>
+							
+			</tr>						
+
+			</div>
+		
+			<div class="row">
+		
+				<tr>
+		
+	
+							<% if @institution.webinfo.site.present? %>
+					
+								<div class="large-6 columns">
+	
+								<!-- 
+								
+								http://stackoverflow.com/questions/2543936/rails-i18n-translating-text-with-links-inside
+								
+								-->
+					
+								<td> <%= link_to @institution.webinfo.site, "http://"+@institution.webinfo.site, data: { confirm: I18n.t("confirm.visit_external_site")}, :target => '_blank'   %> </td>
+																															
+								</div>
+							
+							<% end %>
+							
+		
+							<% if @institution.webinfo.email.present? %>
+							
+								<div class="large-6 columns">
+						
+									<td> <%#= @institution.webinfo.email %>	
+					
+										<%= mail_to @institution.webinfo.email %> 
+										
+										
+									</td>
+									
+								</div>
+								
+							<% end %>
+								
+						</tr>
+				</div>
+			</table>
+	
+	</div>
+<% end %>

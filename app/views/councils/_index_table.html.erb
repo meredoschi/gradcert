@@ -1,0 +1,65 @@
+<table>
+
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @councils.each do |council| %>
+      <tr>
+				<div class="row">
+
+			<div class="large-2 columns">
+
+    		<td><%#= weblink(council) %></td> 
+
+			</div>
+
+		   <div class="large-3 columns">
+
+        <td><%= council.name %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+
+        <td><%= council.phone.main %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+
+        <td><%= council.state.name %></td>
+
+			</div>
+
+		   <div class="large-3 columns">
+
+	        <% if can? :read, council %>
+		        <td><%= link_to t('actions.show'), council, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, council %>
+			      <td><%= link_to t('actions.edit'), edit_council_path(council), class: "editar" %></td>
+					<% end %>
+
+	        <% if can? :destroy, council %>
+		     		<td><%= link_to t('actions.delete'), council, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+					<% end %>
+
+    	</div>
+
+    		</div>
+
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @councils %>
+
+</div>
+
+<br>

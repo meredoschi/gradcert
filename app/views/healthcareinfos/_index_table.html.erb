@@ -1,0 +1,42 @@
+<table>
+
+	<%= render 'index_table_head.html.erb' %>
+
+  <tbody>
+    <% @healthcareinfos.each do |healthcareinfo| %>
+      <tr>
+        <td><%= link_to healthcareinfo.institution_name, healthcareinfo.institution %></td>
+					
+        <td><%= healthcareinfo.totalbeds %></td>
+        <td><%= healthcareinfo.icubeds %></td>
+        <td><%= healthcareinfo.consultations %></td>
+        <td><%= healthcareinfo.surgeries %></td>
+        <td><%= healthcareinfo.ambulatoryrooms %></td>
+        <td><%= healthcareinfo.admissions %></td>
+        
+	    	<div class="large-1 column">					  
+						<td>
+			      	<% if can? :read, Supervisor %> 
+								<%= link_to t('actions.show'), healthcareinfo, class: "mostrar" %>
+							<% end %>			      
+			      </td> 
+					</div>
+
+		    	<div class="large-1 column">					  	
+		        <% if can? :edit, Healthcareinfo %>
+	  		      <td><%= link_to t('actions.edit'), edit_healthcareinfo_path(healthcareinfo), class: "editar" %></td>   
+		  			<% end %>
+					</div>
+
+		    	<div class="large-1 column">					  	
+  		    	<% if can? :destroy, Healthcareinfo %>  
+  		    		<td><%= link_to t('actions.delete'),healthcareinfo, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     	
+        		<% end %>
+        	</div>
+        </div>
+        
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>

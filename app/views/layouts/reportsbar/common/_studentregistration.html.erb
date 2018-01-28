@@ -1,0 +1,22 @@
+<% if ( is_active_link?(registrations_path, :inclusive) || is_active_link?(annotations_path, :inclusive)  || is_active_link?(events_path, :inclusive)  ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+<a href="#"><%= t('navbar.studentregistration').pluralize.mb_chars.upcase %></a>
+
+	<ul class="dropdown">
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/annotations.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/registrations.html.erb' %> </div>	
+		<div class="row"> <%= render 'layouts/navbar/submenu/events.html.erb' %> </div>
+			
+	  </ul>
+	 </ul>
+	</ul>
+ </ul>

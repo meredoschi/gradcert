@@ -1,0 +1,46 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+    
+	  		
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :name, t('activerecord.attributes.professionalarea.name'), default_order: :desc) %></th>
+      
+    			</div>
+    			            			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :previousname, t('activerecord.attributes.professionalarea.previousname'), default_order: :desc) %></th>
+      
+    			</div>
+
+					<% if is_admin(current_user) %>
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :previouscode, t('activerecord.attributes.professionalarea.previouscode')) %></th>
+      
+    			</div>
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :comment, t('activerecord.attributes.professionalarea.comment'), default_order: :desc) %></th>
+      
+    			</div>
+
+				<% end %>    			        
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

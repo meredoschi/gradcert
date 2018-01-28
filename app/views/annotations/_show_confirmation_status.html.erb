@@ -1,0 +1,25 @@
+<% if @annotation.confirmed? %>
+
+	<div data-alert class="alert-box success">
+	
+		<div class="row">
+
+			<h3 class="subheader"> <%= t('confirmed.f').capitalize %></h3>	
+	
+		</div>
+	
+	</div>
+
+<% else %>
+
+	<div data-alert class="alert-box warning">
+	
+		<div class="row">
+
+			<h3 class="subheader"><%= t('not').capitalize+' '+t('confirmed.f') %></h3>
+	
+		</div>
+	
+	</div>
+
+<% end %>

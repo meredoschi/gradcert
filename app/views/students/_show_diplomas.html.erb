@@ -1,0 +1,119 @@
+
+<div class="row">
+		<h4 class="subheader"><%= t('education') %></h3>
+		<table>
+			<tr>
+
+							<div class="large-3 colums">
+
+								<th><strong><%= tm('diploma').titleize %></strong></th>
+
+							</div>
+
+							<div class="large-3 column">
+
+
+								<th><strong><%= ta('diploma.school_id').capitalize %></strong></th>
+
+							</div>
+
+							<div class="large-3 column">
+
+
+								<th><strong><%= ta('diploma.coursename_id').titleize %></strong></th>
+
+							</div>
+
+							<div class="large-3 column">
+
+								<th><strong><%= ta('diploma.awarded') %></strong></th>
+
+							</div>
+
+			</tr>
+
+			<% if @student.diploma.present? %>
+
+				<% @student.diploma.each do |diploma| %>
+
+					<div class="row">
+
+						<tr>
+							<div class="large-3 column">
+
+								<td>
+
+								<% if diploma.degreetype.present? %>
+
+									<%= diploma.degreetype.name %>
+
+								<% end %>
+								</td>
+
+									</div>
+
+									<div class="large-3 columns">
+
+										<td>
+
+												<% if diploma.school %>
+
+													<%= link_to diploma.school.name, diploma.school  %>
+
+												<% else %>
+
+													<em><%= diploma.externalinstitution %></em>
+
+												<% end %>
+
+										</td>
+
+										<div class="large-3 columns">
+
+											<td>
+
+												<% if diploma.coursename %>
+
+												<%= link_to diploma.coursename.name, diploma.coursename  %>
+
+												<% end %>
+											</td>
+
+									</div>
+
+
+									<div class="large-3 columns">
+
+										<td>
+
+
+											<% if diploma.awarded.present? %>
+
+												<%= I18n.l(diploma.awarded) %>
+
+											<% end %>
+											
+									 			<% if diploma.ongoing %>
+
+										 			<em><%= ta('diploma.ongoing') %></em>
+
+									 			<% end %>
+
+										</td>
+
+
+						</tr>
+				</div>
+
+				<% if !diploma.council_information_all_blank? %>
+
+				<%# if diploma.council_id.present?  %>
+
+						<%= render 'show_credentials.html.erb', diploma: diploma %>
+
+				<% end %>
+
+			<% end %>
+		<% end %>
+	</table>
+</div>

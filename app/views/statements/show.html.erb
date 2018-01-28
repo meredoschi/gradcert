@@ -1,0 +1,177 @@
+<div class="row">
+
+	<h2><%= tm('statement').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-8 columns">
+					
+								<th><strong><%= ta('statement.registration_id')%></strong></th>
+					
+							</div>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('statement.bankpayment_id')%></strong></th>
+										
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-8 columns">
+					
+						<td><%= link_to @statement.registration.report_details, @statement.registration %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= link_to @statement.bankpayment.payroll.name, @statement.bankpayment.payroll %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('statement.grossamount')%></strong></th>
+					
+							</div>
+
+							<% if @registration.annotated? %>
+							
+								<div class="large-2 columns">
+					
+									<th><strong><%= ta('statement.virtual.absencesdiscount')%></strong></th>
+					
+								</div>
+	
+							<% end %>
+							
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('statement.socialsecurity')%></strong></th>
+					
+							</div>
+
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('statement.incometax')%></strong></th>
+					
+							</div>
+							
+							<% if @statement.childsupport>0 %>
+
+								<div class="large-2 columns">
+					
+									<th><strong><%= ta('statement.childsupport')%></strong></th>
+					
+								</div>
+		
+							<% end %>
+							
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('statement.netamount')%></strong></th>
+					
+							</div>
+					
+					
+							
+			</tr>						
+		
+			<div class="row">
+				
+				<tr>
+
+				<% if !@registration.annotated? %>
+				
+					<div class="large-2 columns">
+					
+						<td><%= @statement.grossamount %></td>
+					
+					</div>
+
+				<% else %>
+				
+					<div class="large-2 columns">
+					
+						<td><%= @scholarship_gross_amount %></td>
+					
+					</div>
+
+				
+					<div class="large-2 columns">
+					
+						<td><%= @absences_discount %></td>
+					
+					</div>
+				
+				
+				<% end %>
+					
+	
+					<div class="large-2 columns">
+					
+						<td><%= @statement.socialsecurity %></td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td><%= @statement.incometax %></td>
+					
+					</div>
+
+					<% if @statement.childsupport>0 %>
+					
+					<div class="large-2 columns">
+					
+						<td><%= @statement.childsupport %></td>
+					
+					</div>
+
+					<% end %>
+					
+					<div class="large-2 columns">
+					
+						<td><%= @statement.netamount %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	
+	<% if can? :edit, @statement %>
+
+		<%= link_to t('actions.edit'), edit_statement_path(@statement), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), statements_path,  class: t('back')  %>
+
+</div>

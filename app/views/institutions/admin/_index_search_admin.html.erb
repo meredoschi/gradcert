@@ -1,0 +1,13 @@
+<%= search_form_for @search do |f| %>
+
+<%= render 'index_search_name.html.erb', f: f %>
+
+<%= render '/institutions/admin/index_search_with_programs.html.erb', f: f %>
+
+<div class="row">	    
+	<div class="large-6 columns">
+		<%= f.submit  t('actions.search'), class: "buscar" %>
+	</div>
+</div>
+  
+<% end %>

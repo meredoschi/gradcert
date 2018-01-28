@@ -1,0 +1,80 @@
+<thead>
+  <tr>
+
+	<% if is_admin_or_manager(current_user) && (@characteristics.total_count>1) %>
+	
+  	<div class="row">
+  
+  		
+	    	<div class="large-3 columns">
+
+  				<th><%= sort_link(@search, :institution_id, t('activerecord.attributes.institution.name')) %></th>
+    
+  			</div>
+  			        
+			  			       
+	    	<div class="large-2 column">
+
+  				<th><%= sort_link(@search, :relationwithpublichealthcare, t('activerecord.attributes.characteristic.relationwithpublichealthcare')) %></th>
+    
+  			</div>
+  			        
+			
+	    	<div class="large-2 column">
+
+  				<th><%#= ta('funding.government') %></th>
+    
+  			</div>
+  			        
+	    	<div class="large-2 column">
+
+  				<th><%= sort_link(@search, :highlightareas, t('activerecord.attributes.characteristic.highlightareas')) %></th>
+    
+  			</div>
+
+		<% else %>
+
+  	<div class="row">
+  
+  		
+	    	<div class="large-3 columns">
+
+  				<th><%= t('activerecord.attributes.institution.name') %></th>
+    
+  			</div>
+  			        			
+	    	<div class="large-2 column">
+
+  				<th><%= t('activerecord.attributes.characteristic.relationwithpublichealthcare') %></th>
+    
+  			</div>
+  			        
+			
+	    	<div class="large-2 column">
+
+  				<th><%= tm('funding').capitalize %> <%= ta('funding.government').downcase %> </th>
+    
+  			</div>
+  			        
+			
+	    	<div class="large-2 column">
+
+  				<th><%= t('activerecord.attributes.characteristic.highlightareas') %></th>
+    
+  			</div>
+		
+		<% end %>
+  			        
+	    <div class="large-3 columns">
+
+    		<th colspan="3"></th>
+
+			</div>
+			
+		</div>
+	
+		
+  </tr>
+
+	  
+</thead>

@@ -1,0 +1,48 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :name, ta('taxation.name')) %></th>
+      
+    			</div>
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :start, ta('taxation.start')) %></th>
+      
+    			</div>
+  
+  	    	<div class="large-2 columns">
+
+  					<th><%= sort_link(@search, :finish, ta('taxation.finish')) %></th>
+  	
+    			</div>
+    			            
+	  		
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :socialsecurity, ta('taxation.socialsecurity')) %></th>
+      
+    			</div>
+    			        
+    			<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :bracket_id, tm('bracket').capitalize.pluralize) %></th>
+      
+    			</div>
+            			        
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

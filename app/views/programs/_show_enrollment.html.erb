@@ -1,0 +1,89 @@
+</div>
+
+<div class="row">
+
+		<table>
+				<div class="row">
+
+				<tr>
+
+								<div class="large-4 columns">
+
+									<th><strong><%= t('were_registered')%></strong></th>
+
+								</div>
+
+								<div class="large-4 column">
+
+									<th><strong><%= t('cancellations').capitalize %></strong></th>
+
+								</div>
+
+								<div class="large-4 column">
+
+									<th><strong><%= t('proportion') %></strong></th>
+
+								</div>
+
+
+				</tr>
+
+					<div class="row">
+
+						<tr>
+							<div class="large-4 columns">
+
+											<td><%=	schoolyear.enrollment %></td>
+
+							</div>
+
+							<div class="large-4 columns">
+
+								<td><%= schoolyear.registrations.cancelled.count %></td>
+
+							</div>
+
+							<div class="large-4 columns">
+
+								<td><%= percent(schoolyear.registrations.cancelled.count, schoolyear.enrollment) %></td>
+
+							</div>
+
+						</div>
+
+						</tr>
+				</div>
+
+			</div>
+
+		</table>
+</div>
+
+
+	<% schoolyear.registrations.ordered_by_contact_name.each do |registration| %>
+
+		<div class='row'>
+
+		<h5>
+
+			<% if registration.cancelled? %>
+
+				<strike>
+
+			<% end %>
+
+					<%#= link_to registration.namecpf, registration %>
+
+					<%= link_to registration.id_name_tin, registration %>
+
+			<% if registration.cancelled? %>
+
+				</strike>
+
+			<% end %>
+
+		</h5>
+
+		</div>
+
+	<% end %>

@@ -1,0 +1,31 @@
+<%= search_form_for @search do |f| %>
+
+
+<%= render 'index_search_name', f: f %>
+
+<%= render 'index_search_tin_legacy', f: f %>
+
+<% if is_admin_or_manager(current_user) %>
+
+	<%= render 'index_search_institution', f: f %>
+
+
+<% end %>
+
+<% if is_staff(current_user) %>
+
+	<%= render 'index_search_bank_info', f: f %>
+
+<% end %>
+
+	<div class="row">
+
+		<div class="large-6 columns">
+
+		  <%= f.submit t('actions.search'), class: "buscar" %>
+
+		</div>
+
+	</div>
+
+<% end %>

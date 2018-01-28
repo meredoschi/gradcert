@@ -1,0 +1,55 @@
+<%= form_for(@registration) do |f| %>
+  <% if @registration.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@registration.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @registration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if is_local_admin(current_user) %>
+
+    <%= render 'form_display_available_institution_vacancies' %>
+
+  <% end %>
+
+  <%= render 'form_student', f: f%>
+
+  <%= render 'form_schoolyear', f: f%>
+
+	</div>
+
+	</div>
+
+	<% if is_staff(current_user) %>
+
+			<%= render 'form_accreditation.html.erb', form: f %>
+
+	<% end %>
+
+	<% if is_admin_or_manager(current_user) %>
+
+				<%= render 'form_accreditation_authorization.html.erb', form: f %>
+
+	<% end %>
+
+
+   <div class="row actions">
+
+			<% if can? :update, Registration %>
+
+	  		<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+			<% end %>
+
+  		 <%= link_to t('actions.cancel'), registrations_path, class: "anular" %>
+
+			</div>
+
+
+<% end %>

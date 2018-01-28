@@ -1,0 +1,19 @@
+<% if can? :read, @degreetype %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(degreetypes_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('degreetype').capitalize.pluralize, degreetypes_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

@@ -1,0 +1,88 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @statements.each do |statement| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= link_to statement.registration.student_name, statement.registration %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+
+        <td><%= link_to statement.bankpayment.name, statement.bankpayment %></td>
+	
+
+			</div>
+					
+		   <div class="large-2 columns">
+	
+  	    <td><%= display_non_zero_amount(statement.incometax) %></td>
+	
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+	
+        <td><%= display_non_zero_amount(statement.socialsecurity) %></td>
+
+			</div>
+				
+		<% if is_admin_or_manager(current_user) %>
+
+		   <div class="large-2 columns">
+	
+        <td><%= display_non_zero_amount(statement.childsupport) %></td>
+
+			</div>
+				
+		<% end %>
+		
+		   <div class="large-2 columns">
+
+        <td><%= display_non_zero_amount(statement.netamount) %></td>
+	
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, statement %>
+		        <td><%= link_to t('actions.show'), statement, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, statement %>
+			      <td><%= link_to t('actions.edit'), edit_statement_path(statement), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, statement %>
+		     		<td><%= link_to t('actions.delete'),statement, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @statements %>
+
+</div>
+
+<br>

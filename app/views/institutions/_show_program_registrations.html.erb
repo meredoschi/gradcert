@@ -1,0 +1,23 @@
+<table>
+
+ 	<% Registration.on_program(program).ordered_by_contact_name.each do |registration| %>
+
+    <tr><td><h6> 
+
+				<% if registration.cancelled? %>
+					
+					<strike><%= link_to registration.student_name, registration %> </strike><em> <%= I18n.l(registration.accreditation.revocation, format: :compact) %></em>
+					
+				
+				<% else %>
+
+
+					<%= link_to registration.student_name, registration %> 
+				
+				<% end %>
+				
+	</h6> </td></tr>
+
+ 	<% end %>
+
+</table>							

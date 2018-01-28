@@ -1,0 +1,19 @@
+<h2><%= t('actions.new.f')+" "+tm('assignment') %></h2>
+
+<% if supervisors_exist_for(current_user) %>
+
+<% else %>
+
+<%= render 'error_no_supervisors' %>
+	
+<% end %>
+
+<% if programs_exist_for(current_user) %>
+
+	<%= render 'form' %>
+
+<% else %>
+
+<%= render 'error_no_programs' %>
+	
+<% end %>

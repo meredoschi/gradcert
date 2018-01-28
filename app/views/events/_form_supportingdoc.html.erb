@@ -1,0 +1,73 @@
+<div class="row panel custom-panel4">
+
+	<div class="row">
+	
+		<div class="large-4 columns">
+	
+			<% if @event.supportingdocumentation.blank? %>
+			
+				Documentação comprobatória (imagem, PDF)
+			<% else %>
+									
+				<%= t('actions.update')%>
+	
+			<% end %>
+			
+		</div>
+	
+		<div class="large-8 columns">
+	
+	    <%= f.file_field :supportingdocumentation %>
+	    <%= f.hidden_field :supportingdocumentation_cache %>
+	
+		</div>
+			
+	</div>
+
+	<div class="row">
+	
+		<div class="large-4 columns">
+	
+			<% if @event.supportingdocumentation.blank? %>
+			
+				<%= t('actions.insert')+' '+t('by_means_of')+' URL' %>
+	
+			<% else %>
+									
+				<%= t('actions.update')+' '+t('by_means_of')+' URL' %>
+	
+			<% end %>
+			
+		</div>
+	
+		<div class="large-8 columns">
+
+  	  <%= f.text_field :remote_supportingdocumentation_url %>
+    
+	    <%= f.hidden_field :supportingdocumentation_cache %>
+	
+		</div>
+			
+	</div>	
+	
+	<% if @event.supportingdocumentation.present? %>
+	
+		<div class="row">
+	
+			<div class="large-4 columns">
+			
+		    <%= t('actions.delete')+' '+t('photo') %>
+	
+			</div>
+	
+			<div class="large-8 columns">
+				
+		     <%= f.check_box :remove_supportingdocumentation %>
+	
+			</div>
+					
+		</div>
+		  
+	<% end %>
+
+</div>

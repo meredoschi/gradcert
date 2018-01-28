@@ -1,0 +1,105 @@
+<div class="row">
+
+	<h2><%= tm('schoolname').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('schoolname.name')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @schoolname.name %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('schoolname.previousname')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @schoolname.previousname %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('schoolname.active')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @schoolname.active %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	
+	<% if can? :edit, @schoolname %>
+
+		<%= link_to t('actions.edit'), edit_schoolname_path(@schoolname), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), schoolnames_path,  class: t('back')  %>
+
+</div>

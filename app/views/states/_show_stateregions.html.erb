@@ -1,0 +1,28 @@
+<% if @stateregions.count>0 %>
+
+	<div class="row">
+
+		<h3><%= pluralize(@stateregions.count, tm('stateregion').capitalize) %></h3>
+
+	</div>
+	<br>
+	
+ 
+	<% @stateregions.each do |stateregion| %>
+	
+		<div class="row">
+			
+			<p><%= link_to stateregion.name, stateregion %></p>
+	
+		</div>		 
+					 
+	<% end %>
+	
+		
+	<div class="row">
+	
+	  <%= paginate @stateregions %>
+			 
+	</div>
+
+<% end %>

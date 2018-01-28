@@ -1,0 +1,42 @@
+<%= render 'annotation_header.html.erb' %>
+
+<% @eager_loaded_payroll_annotations_ordered_by_name.each_with_index do |annotation, i| %>
+
+<div class="row">
+	<hr>
+
+	<%= render 'annotation_details.html.erb', annotation: annotation, i: i %>
+
+</div>
+
+<% end %>
+
+<% if is_admin_or_manager(current_user) && @payroll.annotated? %>
+
+<%= render 'institutions_without_annotations.html.erb' %>
+
+<% end %>
+
+<div class="row">
+
+	<hr>
+
+	<h5><%= current_user.contact_name %></h5>
+
+	<h5 class="subheader"><%= I18n.l(@current_time).capitalize %></h5>
+
+</div>
+
+<% if can? :read, @payroll %>
+
+<div class="row">
+
+	<td><%= link_to t('actions.print'), reports_annotations_path(@report), :onclick => 'window.print();return false;', class: 'small button info'%>|
+
+		<%= link_to t('actions.back'), @payroll, class: t('back') %>
+
+	</td>
+
+</div>
+
+<% end %>

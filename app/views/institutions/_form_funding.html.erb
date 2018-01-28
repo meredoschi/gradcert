@@ -1,0 +1,105 @@
+<%# :government, :agreements, :privatesector, :other, :ppp, :percentvalues, :comment   %>  
+ 
+<%= form.fields_for :funding do |funding| %>
+
+	<div class="row">
+	
+		 		<div class="large-2 columns", class: "left inline">
+	
+	 				<%= funding.label ta('funding.government') %>
+		
+				</div>
+		 			 		
+		 		<div class="large-4 columns">
+	
+	 
+				  <%= funding.number_field :government, min: 0 %>        	
+	    
+				</div>
+	
+		 		<div class="large-2 columns", class: "left inline">
+		
+					<%= funding.label ta('funding.agreements') %>
+	 
+				</div>
+		 			 		
+		 		
+		 		<div class="large-4 columns">
+	  
+				  <%= funding.number_field :agreements, min: 0 %>        	
+	 
+				</div>
+		
+	</div>
+
+<div class="row">
+	
+		 		<div class="large-2 columns", class: "left inline">
+	
+	 				<%= funding.label ta('funding.privatesector') %>
+		
+				</div>
+		 			 		
+		 		<div class="large-2 columns">
+	
+				  <%= funding.number_field :privatesector, min: 0 %>        	 
+	    
+				</div>
+
+		 		<div class="large-2 columns", class: "left inline">
+		
+					<%= funding.label ta('funding.ppp') %>
+	 
+				</div>
+	
+		 		<div class="large-2 columns", class: "left inline">
+
+				  <%= funding.number_field :ppp, min: 0 %>        	 		
+	 
+				</div>
+	
+
+		 		<div class="large-2 columns", class: "left inline">
+		
+					<%= funding.label ta('funding.other') %>
+	 
+				</div>
+			 			 		
+		 		
+		 		<div class="large-2 columns">
+	  
+				  <%= funding.number_field :other, min: 0 %>        	 
+	 
+				</div>
+		
+	</div>
+	
+<% end %>
+
+<div class="row">
+	
+		 		<div class="large-2 columns", class: "left inline">
+	
+	 				<%= funding.label ta('funding.comment') %>
+		
+				</div>
+		 			 		
+		 		<div class="large-7 columns">
+	
+				  <%= funding.text_field :comment, min: 0 %>        	 
+	    
+				</div>
+
+		 		<div class="large-2 columns", class: "left inline">
+		
+					<%= funding.label ta('funding.percentvalues') %>
+	 
+				</div>
+	
+		 		<div class="large-1 columns", class: "left inline">
+
+				  <%= funding.checkbox :percentvalues %>        	 		
+	 
+				</div>
+
+</div>

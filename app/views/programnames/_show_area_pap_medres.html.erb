@@ -1,0 +1,27 @@
+<% if !is_pap_staff(current_user) %>
+
+	<div class="row">
+
+		<% if @programname.pap==true %>
+
+		<h3>	<%= t('belongs.pap') %></h3>
+
+		<% end %>
+
+	</div>
+
+<% end %>
+
+<% if !is_medres_staff(current_user) %>
+
+	<div class="row">
+
+		<% if @programname.medres==true %>
+
+		<h3><%= t('belongs.medres') %></h3>
+
+		<% end %>
+
+	</div>
+
+<% end %>

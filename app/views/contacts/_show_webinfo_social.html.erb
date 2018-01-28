@@ -1,0 +1,66 @@
+
+		<table>
+				<tr>
+				
+								<div class="large-4 columns">
+						
+									<th><strong><%= ta('webinfo.facebook')%></strong></th>
+						
+								</div>
+						
+								<div class="large-4 columns">
+						
+									<th><strong><%= ta('webinfo.twitter')%></strong></th>
+						
+								</div>
+						
+								<div class="large-4 columns">
+						
+									<th><strong><%= ta('webinfo.other')%></strong></th>
+						
+								</div>
+			
+				</tr>						
+			
+				<div class="row">
+			
+					<tr>
+						<div class="large-4 columns">
+						
+							<td> <% if @contact.webinfo.present? %>
+							
+											<%= @contact.webinfo.facebook %>
+							
+									<% end %>
+									
+							</td>
+						
+								</div>
+						
+									<div class="large-4 columns">
+						
+										<td>
+		
+											<% if @contact.webinfo.present? %>
+															
+												<%= @contact.webinfo.twitter  %></td>
+			
+											<% end %>
+														
+								</div>
+						
+								<div class="large-4 columns">
+						
+									<td>
+									
+										<% if @contact.webinfo.present? %>
+															
+											<%= @contact.webinfo.other  %></td>
+						
+										<% end %>
+										
+								</div>
+					</tr>
+			</div>
+		</table>
+	

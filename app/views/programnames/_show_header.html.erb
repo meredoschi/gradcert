@@ -1,0 +1,38 @@
+<div class="row">
+
+	<% if !@programname.active %>
+
+		<div data-alert class="alert-box warning">
+
+			<h1> <%= ta('programname.inactive').capitalize %> </h1>
+
+ 		  <h2><%= tm('programname').capitalize %>: <%= @programname.name.capitalize %></h2>
+
+		</div>
+
+	<% else %>
+
+		<h2><%= @programname.name.capitalize %></h2>
+
+	<% end %>
+
+</div>
+
+<div class="row">
+
+	<% if @programname.legacy? %>
+
+	<span class="label info"><h3><%= t('legacy') %> </span></h3>
+
+	<% else %>
+
+		<% if @previous_programname.present? %>
+
+					<span class="label info"><h3><%= ta('programname.previousname') %>: <%= @previous_programname.name %></span></h3>
+
+		<% end %>
+
+
+	<% end %>
+
+</div>

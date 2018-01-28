@@ -1,0 +1,55 @@
+<div class="row">
+	
+	<h4><%= t('accreditation_status') %></h4>
+
+	</div>
+
+<div class="row">
+	
+	<%= show_accreditation_status(@institution.accreditation) %>
+		
+</div>
+
+<% if @institution.accreditation.initial.present? %>
+
+	<div class="row">
+
+		
+			<div class="large-3 columns">
+			
+				<strong><%= ta('accreditation.initial') %>: </strong>
+													
+					
+			</div>
+				
+			<div class="large-9 columns">
+	
+				<%= I18n.l(@institution.accreditation.initial) %>
+										
+			</div>
+						
+	</div>
+
+<% end %>	
+
+<% if @institution.accreditation.renewal.present? %>
+
+	<div class="row">
+
+		
+			<div class="large-3 columns">
+			
+				<strong><%= ta('accreditation.renewal') %>: </strong>
+													
+					
+			</div>
+				
+			<div class="large-9 columns">
+	
+				<%= I18n.l(@institution.accreditation.renewal) %>
+										
+			</div>
+						
+	</div>
+
+<% end %>	

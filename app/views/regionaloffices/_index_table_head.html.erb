@@ -1,0 +1,36 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+    
+	  		
+	  			<div class="large-1 columns">
+
+	  				<th><%= sort_link(@search, :num, t('activerecord.attributes.regionaloffice.num'), default_order: :desc) %></th>
+      
+    			</div>
+    		
+		    	<div class="large-5 columns">
+
+	  				<th><%= sort_link(@search, :name, t('activerecord.attributes.regionaloffice.name'), default_order: :desc) %></th>
+      
+    			</div>
+
+				
+		    	<div class="large-3 columns">
+
+	  				<th><%= sort_link(@search, :directorsname, t('activerecord.attributes.regionaloffice.directorsname'), default_order: :desc) %></th>
+      
+    			</div>
+    			       
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

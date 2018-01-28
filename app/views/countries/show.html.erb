@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+	<tr>
+		
+			<th><strong>País (Brazilian name)</strong></th>
+			<th><strong>International name</strong></th>
+			<th><strong>Abbreviation (2 letters)</strong></th>
+			<th><strong>Abbreviation (3 letters)</strong></th>
+			<th><strong>Number code</strong></th>
+	
+	</tr>
+
+	<tr>
+		
+			<td><%= @country.brname %></td>
+			<td><%= @country.name %></td>
+			<td><%= @country.a2 %></td>
+			<td><%= @country.a3 %></td>
+  		<td><%= @country.number %></td>
+  </tr>
+</table>
+	
+<% if can? :edit, @country %>
+
+	<%= link_to t('actions.edit'), edit_country_path(@country), class: "editar" %> |
+
+<% end %>
+		
+<%= link_to t('actions.back'), countries_path, class: "voltar" %>
+

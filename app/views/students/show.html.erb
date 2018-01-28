@@ -1,0 +1,92 @@
+
+<div class="row">
+
+	<h2><%= tm('student').capitalize %></h2>
+
+</div>
+
+<div class="row">
+
+		<span class="id-label"><h3><%= @student.id %> </h3></span>
+
+</div>
+
+<div class="row">
+
+	<h3>  <td><%= link_to @student.contact_name, @student.contact %></h3>
+
+</div>
+
+<div class="row">
+
+	<h4>  <td><%= link_to @student.institution_name, @student.contact.user.institution %></h4>
+
+</div>
+
+<% if @student.previousparticipant %>
+
+	<%= render 'show_previous_participant_warning.html.erb' %>
+
+<% end %>
+
+<% if @student.nationalhealthcareworker %>
+
+	<%= render 'show_nationalhealthcareworker_warning.html.erb' %>
+
+<% end %>
+
+	<% if @student.previouscode.present? %>
+
+		<%= render 'show_previouscode.html.erb' %>
+
+	<% end %>
+
+		<%= render 'show_banking_details.html.erb' %>
+
+
+	<% if @num_diplomas>0 %>
+
+			<%= render 'show_diplomas.html.erb' %>
+
+	 <% end %>
+
+	<% if @num_registrations>0 %>
+
+		<%#= render 'show_registration_history.html.erb' %>
+
+	<% else  %>
+
+
+	<% if can? :create, Registration && !@student.registered? %>
+
+
+				<div class="row">
+
+					<hr class="custom-hr">
+
+					<h5><em> Se os dados do bolsista estiverem corretos, pode tentar matriculá-lo.</em></h5>
+
+					<h5>Lembrete: <em>EVENTOS DE CÁLCULO -> Matrículas -> Criar (+)</em></h5>
+
+					<h5><em>Para sua comodidade, criei um atalho.</em></h5>
+
+					<h4><%= link_to "Nova matrícula (atalho)", new_registration_path, class: "medium button info" %></h4>
+
+				</div>
+
+		<% end %>
+
+ <% end %>
+
+
+<div class="row">
+
+	<% if can? :edit, @student %>
+
+		<%= link_to t('actions.edit'), edit_student_path(@student), class: "editar"  %> |
+
+	<% end %>
+
+	<%= link_to t('actions.back'), students_path,  class: "voltar"  %>
+
+</div>

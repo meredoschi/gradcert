@@ -1,0 +1,70 @@
+<div class="row">
+
+	<div class="large-9 columns">
+	
+		<h2><%= tm('annotation').capitalize %></h2>
+
+	</div>
+	
+	<div class="large-3 columns">
+
+		<%#= render 'show_confirmation_status.html.erb' %>
+	
+	</div>
+	
+</div>
+
+<div class="row">
+	
+		<span class="id-label"><h3><%= @annotation.id %> </h3></span>
+	
+</div>
+
+<% if @annotation.manual? %>
+
+	<div class="row custom-panel4">
+
+		<%= render 'show_financial_adjustments.html.erb' %>
+
+	</div>
+	
+<% end %>
+
+
+<div class="row custom-panel2">
+
+	<%= render 'show_registration.html.erb' %>
+
+	<%= render 'show_absences.html.erb' %>
+
+	<% if @annotation.comment.present? %>
+
+	<h5> <%= @annotation.comment %> </h5>
+	
+	<% end %>
+
+</div>
+
+
+	<% if @num_events > 0 %>
+	
+		<%= render 'show_events.html.erb' %>
+
+	<% else %>
+
+		<h3><div class="row">	<%= t('none.m').capitalize+' '+tm('event')+' '+t('found.m')+'.' %> </div> </h3>
+				
+	<% end %>
+		
+
+<div class="row">
+	
+	<% if can? :edit, @annotation %>
+
+		<%= link_to t('actions.edit'), edit_annotation_path(@annotation), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), annotations_path,  class: t('back')  %>
+
+</div>

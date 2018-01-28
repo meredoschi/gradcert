@@ -1,0 +1,76 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @courses.each do |course| %>
+      <tr>
+				<div class="row">
+				
+
+		   <div class="large-2 columns">
+	
+        <td><%= course.program.institution.name %></td>
+
+			</div>
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= course.coursename.name %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= course.professionalfamily.name %></td>
+
+			</div>
+					
+		   <div class="large-2 columns">
+	
+        <td><%= link_to course.supervisor.contact.name, course.supervisor %></td>
+
+			</div>
+								
+	
+		   <div class="large-1 column">
+	
+        <td><%= course.workload %></td>
+
+			</div>
+								
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, course %>
+		        <td><%= link_to t('actions.show'), course, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, course %>
+			      <td><%= link_to t('actions.edit'), edit_course_path(course), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, course %>
+		     		<td><%= link_to t('actions.delete'),course, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @courses %>
+
+</div>
+
+<br>

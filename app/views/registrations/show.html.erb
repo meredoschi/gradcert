@@ -1,0 +1,104 @@
+<div class="row">
+
+		<h2>	<%= tm('registration').capitalize %></h2>
+
+</div>
+
+<% if @registration.special? %>
+
+	<div class="row">
+
+		<h3>
+
+					<em><%= link_to ta('registrationkind.virtual.special').capitalize+': '+display_kind(@registration).downcase, @previous_registration %></em>
+
+
+		</h3>
+
+	</div>
+
+	<%= render 'show_previous.html.erb' %>
+
+<% end %>
+
+<div class="row">
+
+		<span class="id-label"><h3><%= @registration.id %> </h3></span>
+
+</div>
+
+<div class="row">
+
+		<table>
+
+			<%= render 'show_table_head.html.erb' %>
+
+			<div class="row">
+
+				<%= render 'show_table.html.erb' %>
+
+			</div>
+
+		</table>
+	</div>
+
+	<div class="row">
+
+		<%= render 'show_confirmation_status.html.erb' %>
+
+	</div>
+
+		<%= render 'show_accreditation.html.erb' %>
+
+		<% if @registration.annotated? %>
+
+			<%= render 'show_annotations.html.erb' %>
+
+		<% end %>
+
+		<% if @registration.vacationed? %>
+
+			<%= render 'show_vacations.html.erb' %>
+
+		<% end %>
+
+
+		<% if @registration.comment.present? %>
+
+		<div class="row custom-panel3">
+
+		<h5>	<%= @registration.comment %></h5>
+
+		</div>
+
+		<% end %>
+
+		<%= render 'show_created_at' %>
+
+
+<%# if @registration.versions.length>0 %>
+	<%= render 'show_last_updated' %>
+<%# end %>
+
+<% if @registration.supportingdocumentation.present? %>
+
+		<%= render 'show_supportingdocumentation.html.erb' %>
+
+<% end %>
+
+
+<div class="row">
+
+	<% if can? :edit, @registration %>
+
+		<% if !already_cancelled?(@registration) %>
+
+			<%= link_to t('actions.edit'), edit_registration_path(@registration), class: t('edit')  %> |
+
+	<% end %>
+
+	<% end %>
+
+	<%= link_to t('actions.back'), registrations_path,  class: t('back')  %>
+
+</div>

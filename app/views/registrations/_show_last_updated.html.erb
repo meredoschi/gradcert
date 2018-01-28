@@ -1,0 +1,35 @@
+<div class="row custom-panel4">
+	
+		<% if @registration.versions.last.present? && @user.present? %>
+
+				<div class="row">
+			
+				<strong><%= t('modified_by')%>: </strong>
+		
+					<%= @user.contact.name %> < <%= @user.email %> > <%= @user.institution.name %>
+	
+				</div>
+					
+		<% end %>
+
+		<div class="row">
+				
+			<strong><%= t('latest_update')%></strong>
+	
+			<%=		@registration.versions.length %>
+						
+	
+			
+	
+		</div>
+		
+		<div class="row">
+				
+			<strong><%= t('when')%>: </strong>
+	
+			<%= I18n.l(@registration.updated_at) %>
+			
+	
+		</div>	
+			
+</div>

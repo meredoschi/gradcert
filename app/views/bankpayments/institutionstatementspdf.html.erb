@@ -1,0 +1,8 @@
+
+<% @bankpayment_statements.each do |statement| %>
+
+<%= statement.registration.student_name %> <%= statement.netamount %> <%= I18n.l(@bankpayment.payroll.paymentdate, format: :compact) %><br>
+
+<% end %>
+	
+	

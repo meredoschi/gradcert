@@ -1,0 +1,23 @@
+<div class="row">
+
+		<%# if @registration.present? && @registration.school_term.open? %>
+
+	 		<div class="large-3 columns", class: "left inline">
+
+				<%= f.label ta('registration.schoolyear_id')%> <br>
+
+			</div>
+
+	 		<div class="large-9 columns">
+
+		  	<%= f.collection_select :schoolyear_id, retrieve_schoolyears_for(current_user), :id, display_student_program_for(current_user) %>
+
+		  	<%#= f.collection_select :schoolyear_id,   @schoolyears, :id, display_student_program_for(current_user) %>
+
+			</div>
+
+
+		</div>
+
+
+</div>

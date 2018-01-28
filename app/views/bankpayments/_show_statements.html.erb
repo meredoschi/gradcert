@@ -1,0 +1,45 @@
+<div class="row">
+
+	<h2><%= t('report').capitalize %> <%= t('bankpayment_explanation').capitalize %></h2>
+
+</div>
+
+<div class="row">
+
+	<h3 class="subheader">
+		<div class="large-9 columns">
+	
+			<%= tm('bankpayment').capitalize %> - <%= tm('payroll').capitalize %>: <%= @bankpayment.payroll.name %>
+	
+		</div>
+	
+			<div class="large-3 columns">
+			
+				<%= humanized_money_with_symbol(@bankpayment.totalamount) %>
+			
+			</div>
+		
+	</h3>
+	
+</div>
+
+<hr>
+<hr>
+
+<div class="row">
+
+<h5><%= current_user.contact_name %></h5>
+
+</div>
+
+<div class="row">
+
+	<h5><%= I18n.l(Time.now) %></h5>
+	
+</div>
+
+<div class="row">
+	
+	<%= link_to t('back'), bankpayments_path,  class: t('back')  %>
+
+</div>

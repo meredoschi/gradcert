@@ -1,0 +1,95 @@
+---
+pt_BR:
+  definitions:
+    leavetype:
+      paid:
+        bereavement: Nojo
+        blood_donation: Doação de sangue
+        election: Eleição
+        honeymoon: Gala
+        maternity: Maternidade
+        paternity: Paternidade
+        sick: Saúde
+        vacation: Férias
+      unpaid:
+        breast_feeding: Amamentação
+        personal: Particular
+        social_security: INSS
+    role:
+      names:
+        itstaff: Sistema
+        medres:
+          clerical: Apoio administrativo
+          collaborator: Colaborador da RM
+          localmanager: Coordenador da comissão de residência médica
+          localmanagersubstitute: Coordenador suplente da comissão de residência médica
+          student: Residente
+          supervisor: Preceptor
+        pap:
+          clerical: Apoio administrativo
+          collaborator: Colaborador do PAP
+          localmanager: Coordenador da comissão local
+          localmanagersubstitute: Coordenador suplente da comissão local
+          student: Aprimorando
+          supervisor: Docente supervisor
+    streetname:
+      designations:
+      - Aeroporto
+      - Alameda
+      - Área
+      - Avenida
+      - Boulevard
+      - Campo
+      - Campus
+      - Chácara
+      - Colônia
+      - Condomínio
+      - Conjunto
+      - Distrito
+      - Esplanada
+      - Estação
+      - Estrada
+      - Favela
+      - Fazenda
+      - Feira
+      - Jardim
+      - Ladeira
+      - Lago
+      - Lagoa
+      - Largo
+      - Loteamento
+      - Morro
+      - Núcleo
+      - Parque
+      - Passarela
+      - Praça
+      - Pátio
+      - Quadra
+      - Recanto
+      - Residencial
+      - Rodovia
+      - Rua
+      - Setor
+      - Superquadra
+      - Sítio
+      - Travessa
+      - Trecho
+      - Trevo
+      - Vale
+      - Vereda
+      - Via
+      - Viaduto
+      - Viela
+      - Vila
+    user_permission:
+      description:
+        admin: Administrador do sistema (acesso total)
+        adminreadonly: Somente leitura - Read-only
+        medres: Residente
+        medrescollaborator: Colaborador Residência Médica
+        medreslocaladm: COREME
+        medresmgr: Gerente da Residência Médica
+        pap: Bolsista (PAP)
+        papcollaborator: Colaborador externo (PAP)
+        paplocaladm: Comissão Local (PAP)
+        papmgr: Gerente do PAP

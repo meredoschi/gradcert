@@ -1,0 +1,93 @@
+	<%#	confirmed_registrations_from_institution=@confirmedregistrations_report2.from_institution(institution) %>
+	<%	confirmed_registrations_from_institution=@confirmedregistrations_report2.includes(schoolyear: :program).from_institution(institution) %> 
+: 
+			<% if is_admin_or_manager(current_user) %>
+
+				<div class="row">
+
+					<h5> <%= institution.name %> </h5>
+
+				</div>				
+ 	
+ 			<% end %>
+ 			
+			<% @institution_payments=0 %>
+ 	
+ 			<% @program_years_offered.each do |programyear| %>
+				
+				<% programyear_registrations=confirmed_registrations_from_institution.on_program_year(programyear) %>
+				
+				<% if registrations_exist_for_institution_on_programyear?(programyear_registrations, programyear) %>
+					
+					<div class="row">
+	
+						<h5> <%= t('year').capitalize %>: 
+
+				
+						<% if belongs_to_pap(current_user) %>
+					
+								PA
+							
+						<% end %>					
+					
+						<%= programyear %> (<%= pluralize(programyear_registrations.count, tm('student')) %>) </h5>
+
+					</div>				
+ 			
+	 				<%# programyear_registrations.each do |registration| %>
+
+	 				<% programyear_registrations.each do |registration| %>
+
+						<% @institution_payments+=calculate_net_amount(@bankpayment, registration) %>
+
+						<div class="row">
+			
+					<h6>
+					
+						<% if registration.annotated_on_payroll?(@bankpayment.payroll) %>
+
+						<u>
+
+						<% end %>
+
+						
+						<div class="row">
+														
+							<div class="large-11 large-offset-1 column">
+																
+								<%= render 'report_registration_details2', registration: registration, institution: institution %>
+						
+							</div>
+							
+						</div>
+						
+								<% if registration.annotated_on_payroll?(@bankpayment.payroll) %>
+							
+									</u>
+
+						<% end %>
+
+						<% if registration.annotated_on_payroll?(@bankpayment.payroll) %>
+
+										<% if registration.annotation.first.absent? %>
+																										
+											<%= render 'report2_details.html.erb', registration: registration %>
+								
+										<% end %>
+										
+						
+						<% end %>
+						 
+						 
+						 </h6>
+
+					</div>				
+
+					<% end %>
+
+				<% end %>
+		
+			<% end %>
+
+				
+				<%= render 'report2_totals.html.erb', confirmed_registrations_from_institution: confirmed_registrations_from_institution %>

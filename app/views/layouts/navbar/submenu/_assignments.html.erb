@@ -1,0 +1,19 @@
+<% if can? :read, Assignment %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(assignments_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('assignment').capitalize.pluralize, assignments_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

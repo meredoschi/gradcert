@@ -1,0 +1,22 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= t('activerecord.models.annotation').pluralize.mb_chars.upcase  %> (<%= @annotations.total_count  %> /  <%= @num_annotations %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Annotation %>
+
+			<div class="large-4 columns">
+			 	
+			 	<%#= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('annotation')), new_annotation_path %>	 
+
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('annotation')), new_annotation_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

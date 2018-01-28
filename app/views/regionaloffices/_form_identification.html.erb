@@ -1,0 +1,43 @@
+<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+		 	 <%= form.label ta('regionaloffice.name')%> <br>
+
+			</div>
+	 		
+	 		<div class="large-6 columns">
+  
+		 	  <%= form.text_field :name %>     
+	     	
+			</div>
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+		 	 <%= form.label ta('regionaloffice.num')%> <br>
+
+			</div>
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+		 	  <%= form.number_field :num, min: 0, max:Settings.max_number_regional_offices %>     
+
+			</div>
+			
+</div>
+
+<div class="row">
+
+			<div class="large-2 columns", class: "left inline">
+	
+		 	 <%= form.label ta('regionaloffice.directorsname')%> 
+
+			</div>
+	 		
+	 		<div class="large-10 columns">
+  
+		 	  <%= form.text_field :directorsname %>     
+	     	
+			</div>
+
+</div>

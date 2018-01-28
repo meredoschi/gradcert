@@ -1,0 +1,83 @@
+<%= form_for(@taxation) do |f| %>
+  <% if @taxation.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@taxation.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @taxation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="row custom-panel4">
+
+	<div class="row">
+	
+		<h3> <%= t('income_tax')%> </h3>
+
+	</div>
+		
+	<%= render 'form_name_and_dates', f: f %>
+			
+	<div class="row">
+	
+	  <div id="brackets">
+	    <%= f.fields_for :brackets do |bracket| %>
+	      <%= render 'bracket_fields', :f => bracket  %>
+	    <% end %>
+  
+		<div class="row links">
+	      <%= link_to_add_association t('create').capitalize+' '+tm('bracket'), f, :brackets, class: "create-nested" %>
+	 	</div>
+  	  </div>	
+
+	</div>
+
+</div>
+
+<div class="row custom-panel2">
+	
+	<div class="row">
+	
+		<h3> <%= ta('taxation.socialsecurity')%> </h3>
+
+	</div>
+
+	<div class="row">
+		
+		<div class="large-3 columns", class: "left inline">
+
+			<%= f.label t('percent') %><br>
+
+		</div>
+
+		<div class="large-2 columns">
+	 
+			<%= f.number_field :socialsecurity, min: 0, max: 100, :step => 0.01 %>
+	
+		</div>	
+
+		<div class="large-7 columns">
+	 
+		</div>	
+
+	</div>
+
+</div>
+
+	<% if can? :update, Taxation %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), taxations_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

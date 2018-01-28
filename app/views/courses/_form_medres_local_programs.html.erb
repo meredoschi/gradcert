@@ -1,0 +1,15 @@
+<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+		  <%= f.label tm('program') %><br>
+
+			</div>
+	 		
+	 		<div class="large-10 columns">
+   
+		  	<%= f.collection_select :program_id, Program.from_own_institution(current_user).active.medres, :id, :program_name %>
+  
+			</div>
+
+</div>

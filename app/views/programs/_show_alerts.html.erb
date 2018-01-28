@@ -1,0 +1,10 @@
+
+<% if !@program.accreditation.details_on_file? && is_not_regular_user(current_user) %>
+
+	<div class="row alert-box warning">
+	
+		<strong><%=  t('accreditation_not_on_file') %></strong>
+
+	</div>
+	
+<% end %>

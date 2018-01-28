@@ -1,0 +1,33 @@
+		<div class="row">
+
+			<% comment do %>
+
+			<div class="large-3 columns">
+
+				<%= f.label t('confirmed.f')%>
+
+			</div>
+
+			<div class="large-3 columns">
+
+				<%= f.check_box :accreditation_confirmed_true %>
+
+			</div>
+
+			<% end %>
+
+			<div class="large-3 columns">
+
+				<%= f.label t('pending')%>
+				<span data-tooltip aria-haspopup="true" class="has-tip" title="Esta opção foi simplificada.  Marque apenas se quiser mostrar as matrículas com alguma pendência (se houverem).  As autorizadas agora aparecem por padrão."><%= t('help') %></span>
+
+
+			</div>
+
+			<div class="large-3 columns">
+
+				<%= f.check_box :accreditation_confirmed_false %>
+
+			</div>
+
+		</div>

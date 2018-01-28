@@ -1,0 +1,30 @@
+<tr>
+  <div class="large-3 columns">
+
+    <td><%= link_to @registration.namecpf, @registration.student %></td>
+
+  </div>
+
+  <div class="large-3 columns">
+
+    <td><%= link_to @registration.schoolyear_name, @registration.schoolyear.program %></td>
+
+  </div>
+
+  <div class="large-3 columns">
+
+    <td><%= link_to @registration.schoolyear.program.schoolterm.name, @registration.schoolyear.program.schoolterm %></td>
+
+  </div>
+
+  <% if is_admin_or_manager(current_user) %>
+
+    <div class="large-3 columns">
+
+        <td><%= link_to @registration.institution, @registration.schoolyear.program.institution %></td>
+
+    </div>
+
+  <% end %>
+
+  </tr>

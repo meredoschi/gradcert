@@ -1,0 +1,13 @@
+<h2><%= t('noun.edit') %> <%= t('activerecord.models.healthcareinfo') %></h2>
+
+<% if is_local_admin(current_user) %>
+
+	<div class="row">
+
+		<h2 class="subheader"><%= @healthcareinfo.institution.name %> </h2>
+
+	</div>
+
+<% end %>
+
+<%= render 'form' %>

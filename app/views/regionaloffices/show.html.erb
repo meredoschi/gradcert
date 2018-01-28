@@ -1,0 +1,27 @@
+<div class="row">
+
+	<h2><%= tm('regionaloffice').capitalize %></h2>
+
+</div>
+
+<%= render 'show_identification.html.erb' %>
+
+<%= render 'show_address.html.erb' %>
+
+<%= render 'show_phones.html.erb' %>
+
+<%= render 'show_webinfo.html.erb' %>
+
+<%= render 'show_municipalities.html.erb' %>
+
+<div class="row">
+	
+	<% if can? :edit, @regionaloffice %>
+
+		<%= link_to t('actions.edit'), edit_regionaloffice_path(@regionaloffice), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), regionaloffices_path,  class: "voltar"  %>
+
+</div>

@@ -1,0 +1,73 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @professionalareas.each do |professionalarea| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= professionalarea.name %></td>
+
+			</div>
+
+  	   <div class="large-2 columns">
+	
+        <td><%= professionalarea.previousname %></td>
+
+			</div>
+					
+			<% if is_admin(current_user) %>
+		
+		   <div class="large-2 columns">
+	
+        <td><%= professionalarea.previouscode %></td>
+
+			</div>
+
+						
+		   <div class="large-2 columns">
+	
+        <td><%= professionalarea.comment %></td>
+
+			</div>
+			
+			<% end %>
+	
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, professionalarea %>
+		        <td><%= link_to t('actions.show'), professionalarea, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, professionalarea %>
+			      <td><%= link_to t('actions.edit'), edit_professionalarea_path(professionalarea), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, professionalarea %>
+		     		<td><%= link_to t('actions.delete'),professionalarea, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @professionalareas %>
+
+</div>
+
+<br>

@@ -1,0 +1,137 @@
+<% if gender_diversity?(@contact) %>
+ 		
+	<div class="row diversity-panel">
+
+		<h3 class="subheader"><%= t('diversity').capitalize %></h3>
+
+			<table>
+					<tr>
+		
+						<div class="large-3 columns">
+								
+							<th><strong><%= ta('personalinfo.dob')%></strong></th>
+
+						</div>
+						
+						<div class="large-3 columns">
+				
+							<th><strong><%= ta('personalinfo.sex')%></strong></th>
+				
+						</div>
+				
+						<div class="large-3 columns">
+				
+							<th><strong><%= ta('personalinfo.gender') %></strong></th>
+				
+						</div>
+				
+						<div class="large-3 columns">
+				
+							<th><strong><%= ta('personalinfo.othername')%></strong></th>
+				
+						</div>
+				
+					</tr>						
+				
+					<div class="row">
+				
+						<tr>
+
+							<div class="large-3 columns">
+							
+								<td><%= I18n.l(@contact.personalinfo.dob , :format => :dmy) %></td>
+							
+							</div>
+
+							<div class="large-3 columns">
+
+								<td><%= fulldescription(@contact.personalinfo.sex) %></td>
+							
+							
+							</div>
+							
+							<div class="large-3 columns">
+				
+								<td><%= fulldescription(@contact.personalinfo.gender)  %></td>
+				
+							</div>
+				
+							<div class="large-3 columns">
+					
+								<td><%= @contact.personalinfo.othername  %></td>
+				
+							</div>
+						</tr>
+				</div>
+			</table>
+
+
+	</div>
+
+<% else %>
+
+<div class="row">
+
+	<table>
+			<tr>
+			
+				<div class="large-4 columns">
+		
+				<th><strong><%= ta('personalinfo.dob')%></strong></th>
+			
+				</div>
+		
+	
+				<div class="large-4 columns">
+		
+					<th><strong><%= ta('personalinfo.sex')%></strong></th>
+		
+				</div>
+		
+
+				<% if @contact.personalinfo.mothersname.present? %>
+				
+					<div class="large-4 columns">
+			
+						<th><strong><%= ta('personalinfo.mothersname')%></strong></th>
+			
+					</div>
+
+				<% end %>
+					
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-4 columns">
+					
+						<td><%= I18n.l(@contact.personalinfo.dob) %></td>
+					
+							</div>
+
+								<div class="large-4 columns">
+					
+									<td><%= fulldescription(@contact.personalinfo.sex)  %></td>
+					
+								</div>
+
+								<% if @contact.personalinfo.mothersname.present? %>
+	
+									<div class="large-4 columns">					
+	
+										<td><%= @contact.personalinfo.mothersname  %></td>
+												
+									</div>
+					
+								<% end %>								
+					
+				</tr>
+			</div>
+		</table>
+
+
+	</div>
+
+
+<% end %>

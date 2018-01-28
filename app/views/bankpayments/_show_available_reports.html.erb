@@ -1,0 +1,13 @@
+<div class="row">
+
+<h4 class="subheader"> <%= t('report').pluralize %></h4>
+
+		<div class="panel">
+
+		<%= link_to t('bankpayment_explanation'), report_bankpayment_path(@bankpayment), class: "relatorio",  :onclick => "alert('#{t('please_wait_for_processing')}')"    %> |
+
+		<%= link_to t('totals'), totalreport_bankpayment_path(@bankpayment), class: "relatorio5", :onclick => "alert('#{t('please_wait_for_processing')}')"    %>
+
+</div>
+
+<hr>

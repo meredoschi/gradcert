@@ -1,0 +1,72 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+
+
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :institution_id, ta('placesavailable.institution_id')) %></th>
+
+    			</div>
+
+
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :schoolterm_id, ta('placesavailable.schoolterm_id')) %></th>
+
+    			</div>
+
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :authorized, ta('placesavailable.authorized')) %></th>
+
+    			</div>
+
+          <div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :authorized, ta('placesavailable.virtual.activeregistrations')) %></th>
+
+    			</div>
+
+          <div class="large-1 column">
+
+	  				<th><%= ta('placesavailable.virtual.total.available') %></th>
+
+    			</div>
+
+          <div class="large-1 column">
+
+	  				<th><%= ta('placesavailable.virtual.veterans.active') %></th>
+
+    			</div>
+
+          <div class="large-1 column">
+
+	  				<th><%= ta('placesavailable.virtual.total.active') %></th>
+
+    			</div>
+
+		    	<div class="large-1 column">
+
+	  				<th><%= ta('placesavailable.virtual.cancellations.authorized') %></th>
+
+    			</div>
+
+          <div class="large-1 column">
+
+	  				<th><%= ta('placesavailable.virtual.cancellations.pending') %></th>
+
+    			</div>
+
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+
+			</div>
+
+    </tr>
+
+  </thead>

@@ -1,0 +1,41 @@
+<div class="row">
+
+		<h4 class="subheader"><%= tm('bankaccount').capitalize %></h4>
+		<table>
+			<tr>
+			
+				<div class="large-3 colums">
+		
+					<th><strong><%= ta('bankaccount.num') %></strong></th>
+		
+				</div>
+
+				<div class="large-3 colums">
+		
+					<th><strong><%= ta('bankaccount.verificationdigit') %></strong></th>
+		
+				</div>
+			
+			<tr>
+
+				<div class="row">
+				
+						<div class="large-3 columns">
+						
+							<td><%= @student.bankaccount.num %></td>
+								
+						</div>
+
+						<div class="large-3 columns">
+						
+							<td><%= @student.bankaccount.verificationdigit %></td>
+								
+						</div>
+																	
+				</div>
+								
+			</tr>						
+
+		</div>
+	</table>
+</div>

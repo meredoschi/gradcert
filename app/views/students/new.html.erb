@@ -1,0 +1,15 @@
+
+	<h2> <%= t('actions.new.m')+" "+tm('student') %> </h2>
+
+<% if possible_students_exist_for(current_user) %>
+
+	<%= render 'form' %>
+
+<% else %>
+
+<%= render 'error_no_possible_students_found' %>
+	
+<% end %>
+
+
+

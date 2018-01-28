@@ -1,0 +1,158 @@
+<div class="row">
+
+	<h2>
+
+		<% if @feedback.regular_bankpayment? %>
+
+		<%= tm('feedback').capitalize %>
+
+		<% else %>
+
+		<%= t('supplemental_remittance').capitalize %>
+
+		<% end %>
+
+	</h2>
+
+</div>
+
+<div class="row">
+	<table>
+		<tr>
+
+			<div class="large-4 columns">
+
+				<th><strong><%= tm('student').capitalize %></strong></th>
+
+			</div>
+
+
+		</tr>
+
+		<div class="row">
+
+			<tr>
+				<div class="large-12 columns">
+
+					<td><%= link_to @feedback.registration.namecpfinstitution, @feedback.registration %></td>
+
+				</div>
+
+			</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	<table>
+		<tr>
+
+			<div class="large-4 columns">
+
+				<th><strong><%= tm('payroll').capitalize %></strong></th>
+
+			</div>
+
+
+		</tr>
+
+		<div class="row">
+
+			<tr>
+				<div class="large-12 columns">
+
+					<td><%= link_to @feedback.bankpayment.name, @feedback.bankpayment %></td>
+
+				</div>
+
+			</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	<table>
+		<tr>
+
+			<% if @feedback.processingdate %>
+
+			<div class="large-4 columns">
+
+				<th><strong>
+
+
+					<%= ta('feedback.processingdate')%>
+
+				</strong></th>
+
+			</div>
+
+			<% end %>
+
+			<%# if @feedback.bankpayment.regular? %>
+
+			<div class="large-4 columns">
+
+				<th><strong><%= ta('feedback.approved')%></strong></th>
+
+			</div>
+
+			<%# end %>
+
+			<div class="large-4 columns">
+
+				<th><strong><%= ta('feedback.processed')%></strong></th>
+
+			</div>
+
+		</tr>
+
+		<div class="row">
+
+			<tr>
+
+				<% if @feedback.processingdate %>
+
+				<div class="large-4 columns">
+
+					<td>
+						<%= I18n.l(@feedback.processingdate, format: :dmy) %>
+					</td>
+
+				</div>
+
+				<% end %>
+
+				<div class="large-4 columns">
+
+					<td><%= yes_not_yet(@feedback.approved) %></td>
+
+				</div>
+
+				<div class="large-4 columns">
+
+					<td><%= tickmark(@feedback.processed) %></td>
+
+				</div>
+
+			</tr>
+		</div>
+
+	</table>
+</div>
+
+<div class="row">
+
+	<% if can? :edit, @feedback %>
+
+	<%= link_to t('actions.edit'), edit_feedback_path(@feedback), class: t('edit')  %> |
+
+	<% end %>
+
+	<%= link_to t('actions.back'), feedbacks_path,  class: t('back')  %>
+
+</div>

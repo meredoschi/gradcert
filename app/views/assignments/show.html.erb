@@ -1,0 +1,22 @@
+<div class="row">
+
+	<h2><%= tm('assignment').capitalize%></h2>
+
+</div>
+
+<%= render 'show_program_info.html.erb' %>
+
+<%= render 'show_supervisor_info.html.erb' %>
+
+
+<div class="row">
+
+	<% if can? :edit, @assignment %>
+	
+		<%= link_to t('actions.edit'), edit_assignment_path(@assignment), class: "editar" %> |
+	
+	<% end %>
+			
+	<%= link_to t('actions.back'), assignments_path, class: "voltar" %>
+
+</div>

@@ -1,0 +1,67 @@
+ <thead>
+    <tr>
+			
+    	<div class="row">
+    
+	  		
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :programname_name, t('name')) %></th>
+      
+    			</div>
+    			        
+				
+					<% if is_admin_or_manager(current_user)  %>
+
+			    	<div class="large-2 columns">
+	
+		  				<th><%= sort_link(@search, :institution_name, tm('institution').capitalize) %></th>
+	      
+	    			</div>
+	    			
+    			<% end %>        
+				
+					<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :schoolterm_name, tm('schoolterm').capitalize) %></th>
+      
+    			</div>
+    		
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :duration, ta('program.duration')) %></th>
+      
+    			</div>
+
+		    	<div class="large-1 column">
+
+	  				<th><%= t('were_registered') %></th>
+
+      
+    			</div>
+    			        
+    			<div class="large-1 column">
+
+	  				<th><%#= ta('schoolyears.grants') %></th>
+      
+    			</div>				
+    		
+    			<div class="large-1 column">
+	
+	
+		     	 <th><%= sort_link(@search, :updated_at, default_order: :desc) %></th>
+	
+      
+    			</div>
+    			          			        	
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

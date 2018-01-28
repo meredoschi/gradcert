@@ -1,0 +1,19 @@
+<% if can? :read, Institution %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(institutions_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   	
+	  	<%= link_to t('summary'), institutions_path %></li>
+ 			 			   													    
+  </ul>    
+
+<% end %>

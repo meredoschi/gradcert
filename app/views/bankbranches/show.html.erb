@@ -1,0 +1,86 @@
+<div class="row">
+
+	<h2><%= tm('bankbranch').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= t('activerecord.attributes.bankbranch.name')%></strong></th>
+					
+							</div>
+			
+							<div class="large-3 columns">
+					
+								<th><strong><%= t('activerecord.attributes.bankbranch.code')%></strong></th>
+					
+							</div>
+
+							<div class="large-1 column">
+					
+								<th><strong><%= t('activerecord.attributes.bankbranch.verificationdigit')%></strong></th>
+					
+							</div>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= t('activerecord.attributes.bankbranch.opened')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-4 columns">
+					
+						<td><%= @bankbranch.name %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= @bankbranch.code %></td>
+					
+					</div>
+
+					<div class="large-1 column">
+					
+						<td><%= @bankbranch.verificationdigit %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					  
+						<td><%= I18n.l @bankbranch.opened %></td>
+					
+					</div>
+															
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+<%= render 'show_address.html.erb' %>
+
+<%= render 'show_phones.html.erb' %>
+
+<div class="row">
+	
+	<% if can? :edit, @bankbranch %>
+
+		<%= link_to t('actions.edit'), edit_bankbranch_path(@bankbranch), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), bankbranches_path,  class: t('back')  %>
+
+</div>

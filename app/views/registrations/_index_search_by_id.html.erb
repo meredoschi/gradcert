@@ -1,0 +1,54 @@
+<div class="row">
+
+	<div class="large-2 columns">
+
+		<div class="field">
+
+			<th><%= f.label ta('registration.id')%></th>
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="Um bolsista que curse programa com duração maior que um ano, quando for veterano, terá mais do que uma matrícula registrada.  Neste caso, recomenda-se procurar pelo identificador do bolsista, que mostrará todas suas matrículas."><%= t('help') %></span>
+
+		</div>
+
+	</div>
+
+	<div class="large-2 columns">
+
+			<%= f.number_field :id_eq %>
+
+	</div>
+
+		<div class="large-2 columns">
+
+			<div class="field">
+
+			  <th><%= f.label ta('student.id')%></th>
+				<span data-tooltip aria-haspopup="true" class="has-tip" title="Número único que identifica cada bolsista dentro do SISPAP."><%= t('help') %></span>
+
+			</div>
+
+		</div>
+
+		<div class="large-2 columns">
+
+				<%= f.number_field :student_id_eq %>
+
+		</div>
+
+		<div class="large-2 columns">
+
+			<div class="field">
+
+			  <th><%= f.label ta('student.previouscode')%></th>
+
+				<span data-tooltip aria-haspopup="true" class="has-tip" title="Campo legado que não se aplica a matriculados a partir de 2017."><%= t('help') %></span>
+			</div>
+
+		</div>
+
+		<div class="large-2 columns">
+
+				<%= f.number_field :student_previouscode_eq %>
+
+		</div>
+
+	</div>

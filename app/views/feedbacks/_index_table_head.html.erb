@@ -1,0 +1,49 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+
+
+		    	<div class="large-3 columns">
+
+	  				<th><%= sort_link(@search, :registration_id, tm('registration').capitalize) %></th>
+
+    			</div>
+
+          <div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :bankpayment_id, ta('feedback.bankpayment_id')) %></th>
+
+    			</div>
+
+          <div class="large-1 column">
+
+            <th><%= sort_link(@search, :missed, ta('feedback.processed')) %></th>
+
+          </div>
+
+
+					<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :approved, ta('feedback.approved')) %></th>
+
+    			</div>
+
+	        <div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :returndate, ta('feedback.processingdate')) %></th>
+
+    			</div>
+
+
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+
+			</div>
+
+    </tr>
+
+  </thead>

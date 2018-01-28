@@ -1,0 +1,52 @@
+<div class="row">
+
+	<h2><%= tm('schoolterm').capitalize %></h2>
+
+</div>
+
+<div class="row">
+
+	<span class="id-label"><h3><%= @schoolterm.id %> </h3></span>
+
+</div>
+
+<div class="row">
+
+	<div class="large-6 columns">
+
+		<%= render 'show_start_finish' %>
+
+	</div>
+
+	<div class="large-6 columns">
+
+		<%= render 'show_status' %>
+
+
+	</div>
+
+</div>
+
+<div class="row">
+
+	<%= render 'show_season_dates' %>
+
+</div>
+
+<div class="row">
+
+	<%= render 'show_admission_data_entry_dates' %>
+
+</div>
+
+		<div class="row">
+
+			<% if can? :edit, @schoolterm %>
+
+			<%= link_to t('actions.edit'), edit_schoolterm_path(@schoolterm), class: t('edit')  %> |
+
+			<% end %>
+
+			<%= link_to t('actions.back'), schoolterms_path,  class: t('back')  %>
+
+		</div>

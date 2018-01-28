@@ -1,0 +1,88 @@
+<%= render 'show_photo.html.erb' %>
+
+<%= render 'show_name_and_role.html.erb' %>
+
+<div class="row">
+
+		<span class="id-label"><h3><%= @contact.id %> </h3></span>
+
+</div>
+
+<div class="row">
+
+	<div class="large-7 columns panel callout">
+
+
+		<% if @contact.personalinfo.present?  %>
+
+			<%= render 'show_tax_id.html.erb' %>
+			<%= render 'show_identification.html.erb' %>
+			<%= render 'show_dob.html.erb' %>
+
+		<% end %>
+
+		<% if @contact.webinfo.present?  %>
+
+			<%= render 'show_webinfo.html.erb' %>
+
+			<% if uses_social_networks?(@contact)  %>
+
+				<%= render 'show_webinfo_social.html.erb' %>
+
+			<% end %>
+
+		<% end %>
+
+
+	</div>
+
+	<div class="large-5 columns">
+
+		<% if @contact.address.present?  %>
+
+			<%= render 'show_address.html.erb' %>
+
+		<% end %>
+
+		<% if @contact.phone.present?  %>
+
+			<%= render 'show_phones.html.erb' %>
+
+		<% end %>
+
+		<% if has_management_role(@contact) %>
+
+			<% if !@contact.termstart.nil? %>
+
+				<%= render 'show_termduration.html.erb' %>
+
+			<% end %>
+
+		<% end %>
+
+
+	</div>
+
+</div>
+
+	<% if can? :create, Student %>
+
+		<% if @contact.student_role? %>
+
+			<% if !@contact.student? %>
+
+				<div class="row">
+
+					<h4><%= link_to I18n.t('actions.new'), new_student_path, class: "medium button info" %></h4>
+
+				</div>
+
+			<% end %>
+
+		<% end %>
+
+		<% end %>
+
+
+
+</div>

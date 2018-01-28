@@ -1,0 +1,53 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+
+		    	<div class="large-3 columns">
+
+	  				<th><%= sort_link(@search, :name, ta('scholarship.name')) %></th>
+      
+    			</div>
+    
+	  		
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :amount, ta('scholarship.amount')) %></th>
+      
+    			</div>
+    	
+    		<% if is_admin(current_user) || is_medres_manager(current_user) %>
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :partialamount, ta('scholarship.partialamount')) %></th>
+      
+    			</div>
+			       
+			   <% end %> 
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :start, ta('scholarship.start')) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :finish, ta('scholarship.finish')) %></th>
+      
+    			</div>
+    			        
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

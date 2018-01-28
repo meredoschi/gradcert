@@ -1,0 +1,37 @@
+ <% if !@program.programnum.nil? %>
+
+	<div class="row">
+	
+		<table>
+			<tr>
+		
+		  <th><strong><%= t('activerecord.attributes.program.programnum') %></strong></th>		
+			</tr>
+		
+			<tr>
+		  <td><%= @program.programnum %></td>
+			 </tr>
+		</table>
+	
+	</div>
+
+<% end %>
+
+<% if !@program.instprogramnum.nil? %>
+
+	<div class="row">
+	
+		<table>
+			<tr>
+		
+		  <th><strong><%= t('activerecord.attributes.program.instprogramnum') %></strong></th>		
+			</tr>
+		
+			<tr>
+		  <td><%= @program.instprogramnum %></td>
+			 </tr>
+		</table>
+	
+	</div>
+
+<% end %>

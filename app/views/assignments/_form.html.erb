@@ -1,0 +1,25 @@
+<%= form_for(@assignment) do |f| %>
+  <% if @assignment.errors.any? %>
+    <div id="error_explanation">
+
+			<h2><%= t('validation.messagetext.system_detected') %> <%= pluralize(@assignment.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %></h2>
+
+      <ul>
+      <% @assignment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%#= program_supervisor_list(current_user, f) %>
+
+<div class="row custom-panel">
+
+	<%= render 'form_program.html.erb', f: f %>
+	
+	<%= render 'form_supervisor.html.erb', f: f %>
+
+	<% end %>
+
+</div>

@@ -1,0 +1,65 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+    
+	  		
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :registration_student_contact_name, ta('annotation.registration_id'), order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :payroll_id, ta('annotation.payroll_id')) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%=  ta('annotation.absences') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= ta('annotation.discount') %></th>
+      
+    			</div>
+
+		    	<div class="large-2 column">
+
+	  				<th><%= ta('annotation.supplement') %></th>
+      
+    			</div>
+    			          
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :skip, ta('annotation.skip')) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= ta('annotation.comment') %></th>
+      
+    			</div>
+    			        
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

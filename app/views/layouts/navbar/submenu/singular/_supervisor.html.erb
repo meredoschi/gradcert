@@ -1,0 +1,19 @@
+<% if can? :read, Supervisor %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(supervisors_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to t('my_teaching').capitalize, supervisors_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

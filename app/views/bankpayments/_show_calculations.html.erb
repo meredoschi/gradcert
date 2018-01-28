@@ -1,0 +1,92 @@
+Cancelados nesta folha
+<%= @lingering_registrations.count %>
+
+<div class="row">
+		<table>
+			<tr>
+
+						<div class="large-3 columns">
+					
+								<th><strong><%= tm('student').pluralize.capitalize+' '+t('calculated.pl') %></strong></th>
+					
+							</div>
+
+						<div class="large-3 columns">
+					
+								<th><strong><%= tm('student').pluralize.capitalize %> <%= t('excluded.pl') %></strong></th>
+					
+							</div>
+								
+							<div class="large-3 columns">
+					
+								<th><strong><%= tm('student').pluralize.capitalize %> <%= t('to_be_paid') %></strong></th>
+					
+							</div>
+					
+						 <div class="large-3 columns">
+					
+								<th><strong>
+								
+									<% if @bankpayment.payroll.special? %>
+
+													<%= ta('payroll.amount')%>
+					
+									<% else %>
+						
+									<%= ta('payroll.scholarship_id')%>
+
+								<% end %>												
+					
+											</strong></th>
+					
+							</div>
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					
+					<div class="large-3 columns">
+					
+						<td><%= @num_confirmed_registrations %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+
+						<td><%= @num_skipped_annotations %></td>
+					
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%#= @numrecipients %></td>
+					
+					</div>
+
+					<div class="large-3 columns">						
+					
+						<td>
+						
+							<% if @bankpayment.payroll.special? %>
+								
+									<%= humanized_money(@payroll.amount) %>
+									
+							<% else %>
+								
+										<%= link_to @bankpayment.payroll.scholarship.details, @bankpayment.payroll.scholarship %>
+	
+							<% end %>
+
+						</td>
+					
+					</div>
+
+
+				</tr>
+		</div>
+	</table>
+</div>

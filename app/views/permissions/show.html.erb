@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+
+	<p>
+	  <strong><%= ta('permission.kind') %>: </strong>
+	  <%= @permission.kind %>
+	</p>
+
+</div>
+
+<div class="row">
+
+	<p>
+	  <strong><%= ta('permission.description') %>: </strong>
+	  <%= @permission.description %>
+	</p>
+
+</div>
+
+<div class="row">
+
+	<% if can? :update, Permission %>
+		
+	<%= link_to t('actions.edit'), edit_permission_path(@permission), class: "editar"  %> |
+		
+	<% end %>
+		
+	<%= link_to t('actions.back'), permissions_path,  class: "voltar"  %>
+		
+</div>

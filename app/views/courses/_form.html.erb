@@ -1,0 +1,138 @@
+<%= form_for(@course) do |f| %>
+  <% if @course.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@course.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @course.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="row custom-panel">
+
+	<%= active_programs_for(current_user, f) %>
+
+	<%=	supervisors_for(current_user, f) %>
+
+	<div class="row">
+	
+	 		<div class="large-2 columns", class: "left inline">
+	
+				<%= f.label ta('coursename.name') %>
+	
+			</div>
+	
+	 		<div class="large-4 columns">
+	
+				<%= f.collection_select :coursename_id, Coursename.all, :id, :name,  {prompt: true} %>
+	
+			</div>
+	
+	 		<div class="large-2 columns", class: "left inline">
+	
+				<%= f.label ta('course.workload') %>
+	
+			</div>
+	
+	 		<div class="large-1 columns">
+	
+				<%= f.number_field :workload, min:0, max: 3000 %>
+	
+			</div>
+
+			<div class="large-2 columns", class: "left inline">
+	
+		    <%= f.label ta('course.core') %>
+	 	
+			</div>
+	 		
+	 		<div class="large-1 column">
+		   
+				<%= f.check_box :core %>
+	 
+			</div>
+
+
+	</div>
+
+		
+		<div class="row">
+	
+	 		<div class="large-2 columns">
+	
+				<%= f.label tm('professionalfamily') %>
+	
+			</div>
+	
+	 		<div class="large-6 columns">
+	
+				<%= f.collection_select :professionalfamily_id, professional_family_list_for(current_user), :id, :name,  {prompt: true} %>
+	
+			</div>
+	
+			<div class="large-3 columns", class: "left inline">
+	
+		    <%= f.label ta('course.professionalrequirement') %><br>
+	 	
+			</div>
+	 		
+		   
+	 		<div class="large-1 column">
+				<%= f.check_box :professionalrequirement %>
+	 
+			</div>
+	
+	
+		</div>
+	
+	<%= render 'form_kind.html.erb', f: f %>
+
+	
+</div>
+
+<div class="row panel">
+	
+  <div id="addresses">
+    <%= f.fields_for :address do |address| %>
+      <%= render 'address_fields', :f => address	 %>
+    <% end %>
+
+	</div>
+
+</div>
+
+<div class="row panel callout">
+
+ 		<div class="large-2 columns", class: "left inline">
+
+			<%= f.label ta('course.syllabus') %>
+
+		</div>
+
+ 		<div class="large-10 columns" >
+
+	    <%= f.text_area :syllabus %>
+
+		</div>
+
+</div>
+	
+	
+	
+	<% if can? :update, Course %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), courses_path, class: "anular" %>
+	
+	</div>
+
+<% end %>

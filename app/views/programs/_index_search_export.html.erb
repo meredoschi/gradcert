@@ -1,0 +1,1 @@
+    <%= link_to t('generate_csv'), statements_path(params.merge(:format => "pdf")), class: "exportcsv",  :onclick => "alert(' #{t('please_wait_for_processing')} ')" %>

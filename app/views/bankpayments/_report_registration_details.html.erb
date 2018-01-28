@@ -1,0 +1,28 @@
+
+<div class="row">	
+
+	<h5> <%= registration.namecpf %></h5> 
+
+	<% statement=statement_for_registration(registration) %> 
+	
+</div>
+
+<div class="row">
+						
+	<div class="large-11 large-offset-1 column">
+
+	<h5>
+
+		<% if is_admin_or_manager(current_user) %>
+			
+			<%= registration.name %> 
+	
+		<% end %>
+		
+		<%= registration.schoolyear_and_cohort %>  
+
+	</h5>
+
+	</div>
+
+</div>

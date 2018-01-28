@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= t('activerecord.models.degreetype').pluralize.mb_chars.upcase  %> (<%= @degreetypes.total_count  %> /  <%= @numdegreetypes %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Degreetype %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('degreetype')), new_degreetype_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

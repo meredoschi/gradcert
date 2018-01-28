@@ -1,0 +1,10 @@
+<%= render 'index_header.html.erb' %>
+
+<% if @courses.total_count>0 %>
+
+	<%= render 'index_table.html.erb' %>
+
+
+	<%= render 'index_search.html.erb' %>
+	
+<% end %>

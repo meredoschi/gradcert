@@ -1,0 +1,13 @@
+<%= render 'index_header.html.erb' %>
+
+<% if @professionalspecialties.total_count>0 %>
+
+<div class="row">
+
+	<%= render 'index_table.html.erb' %>
+
+</div>
+
+	<%= render 'index_search.html.erb' %>
+	
+<% end %>

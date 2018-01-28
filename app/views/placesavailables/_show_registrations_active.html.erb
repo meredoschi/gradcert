@@ -1,0 +1,20 @@
+
+<div class="row custom-panel3">
+
+ <h4>  <%= pluralize(@num_active_registrations, tm('registration')).capitalize %> <%= t('active.f').pluralize(@num_active_registrations).downcase  %> </h4>
+
+</div>
+
+  <%# @placesavailable.registrations.each do |registration| %>
+
+  <% @active_registrations.ordered_by_programyear_and_contact_name.each do |registration| %>
+
+  <div class="row">
+
+    <h5><%= link_to registration.details, registration %></h5>
+
+  </div>
+
+  <% end %>
+
+</div>

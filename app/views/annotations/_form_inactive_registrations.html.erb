@@ -1,0 +1,41 @@
+<% if is_not_regular_user(current_user) %>
+
+	<h5>
+
+	<div class="row">
+
+		<% if	action_name!='edit' %>
+
+			<div class="large-3 columns", class: "left inline">
+
+		  	<%= f.label tm('student').pluralize+' '+t('inactive').pluralize  %><br>
+
+			</div>
+
+		 	<div class="large-9 columns">
+
+		 		<%= f.collection_select :registration_id, Registration.current.inactive.ordered_by_contact_name, :id, registration_details(current_user),  {prompt: true} %>
+
+			</div>
+
+		<% else %>
+
+			<div class="large-3 columns", class: "left inline">
+
+		  	<%= f.label tm('student')  %><br>
+
+			</div>
+
+		 	<div class="large-9 columns">
+
+		 		<%= @annotation.registration.full_details %>
+
+			</div>
+
+			<% end %>
+
+	</div>
+
+	</h5>
+
+<% end %>

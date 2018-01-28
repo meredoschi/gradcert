@@ -1,0 +1,44 @@
+<% if @institution.program.medres.count > 0 %>
+
+	<table>
+		<tr>
+			<div class="row">
+				<div class="large-12 columns">
+					<th><strong><%= ta('program.medres') %></strong></th>
+				 </div>
+			</div>
+		</tr>						
+	
+	
+		<tr>
+			<div class="row">
+				<div class="large-12 columns">
+					<td><%= @institution.program.medres.count %></td>	
+				</div>
+			</div>	
+		</tr>
+	</table>
+	
+	<div class="large-12 columns">
+			
+	<% @medresprograms.each do |program| %>
+
+		<% if is_not_regular_user(current_user) %>
+						
+			<p><%= link_to program.programname.name, program_path(program.id) %></p>
+	
+		<% else %>
+
+			<p><%= program.programname.name %></p>
+	
+		<% end %>
+
+	<% end %>
+										
+	</div>
+	
+	<div class="row">
+	  <%= paginate @medresprograms %>		 
+	</div>
+
+<% end %>

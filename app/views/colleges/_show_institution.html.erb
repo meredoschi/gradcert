@@ -1,0 +1,17 @@
+<div class="row">
+
+	<h2>
+			
+				<% if is_admin_or_manager(current_user) %>
+
+					<%= link_to @college.institution.name, @college.institution %>
+				
+				<% else %>
+				
+					<%= @college.institution_name %>
+
+				<% end %>
+	
+	</h2>
+
+</div>

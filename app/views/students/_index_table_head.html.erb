@@ -1,0 +1,48 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+    
+	  		
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :contact_name, ta('contact.name'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :profession_name, ta('student.profession_id')) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :council_abbreviation, ta('student.council_id').capitalize) %></th>
+      
+    			</div>
+
+					<% if is_admin_or_manager(current_user) %>
+
+			    	<div class="large-2 columns">
+	
+		  				<th><%= sort_link(@search, :institution, tm('institution').capitalize) %></th>
+	      
+	    			</div>
+	    
+    			<% end %>			        
+    			        
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

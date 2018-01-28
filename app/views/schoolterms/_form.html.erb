@@ -1,0 +1,64 @@
+<%= form_for(@schoolterm) do |f| %>
+  <% if @schoolterm.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@schoolterm.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @schoolterm.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= render 'form_start_finish.html.erb', f: f %>
+
+<%= render 'form_scholarships_offered.html.erb', f: f %>
+
+<%= render 'form_season_active.html.erb', f: f %>
+
+<% if is_admin(current_user) %>
+
+  <div class="row custom-panel">
+
+    <%= render 'form_season_debut_closure.html.erb', f: f %>
+
+  </div>
+
+<% end %>
+
+<% if is_admin_or_manager(current_user) %>
+
+  <div class="row custom-panel9">
+
+    <%= render 'form_admissions_debut_closure.html.erb', f: f %>
+
+  </div>
+
+<% end %>
+
+<% if is_admin(current_user) %>
+
+	<div class="row">
+
+		<hr>
+
+	</div>
+
+	<%= render 'form_pap_medres.html.erb', f: f %>
+
+<% end %>
+
+	<% if can? :update, Schoolterm %>
+
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), schoolterms_path, class: t('cancel') %>
+
+	</div>
+
+<% end %>

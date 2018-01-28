@@ -1,0 +1,55 @@
+<div class="row">
+		<table>
+			<tr>
+
+							<% if @leavetype.setnumdays.present? %>
+
+							<div class="large-6 columns">
+
+								<th><strong><%= ta('leavetype.setnumdays')%></strong></th>
+
+							</div>
+
+							<% end %>
+
+							<% if @leavetype.dayspaidcap.present? %>
+
+								<div class="large-6 columns">
+
+									<th><strong><%= ta('leavetype.dayspaidcap')%></strong></th>
+
+								</div>
+
+							<% end %>
+
+			</tr>
+
+			<div class="row">
+
+				<tr>
+
+					<% if @leavetype.setnumdays.present? %>
+
+						<div class="large-6 columns">
+
+							<td><%= @leavetype.setnumdays %></td>
+
+						</div>
+
+					<% end %>
+
+					<% if @leavetype.dayspaidcap.present? %>
+
+						<div class="large-6 columns">
+
+							<td><%= @leavetype.dayspaidcap %></td>
+
+						</div>
+
+					<% end %>
+
+				</tr>
+		</div>
+
+	</table>
+</div>

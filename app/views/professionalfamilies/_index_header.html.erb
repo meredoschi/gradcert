@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= t('activerecord.models.professionalfamily').pluralize.mb_chars.upcase  %> (<%= @professionalfamilies.total_count  %> /  <%= @numprofessionalfamilies %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Professionalfamily %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('professionalfamily')), new_professionalfamily_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

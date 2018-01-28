@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= t('activerecord.models.payroll').pluralize.mb_chars.upcase  %> (<%= @payrolls.total_count  %> /  <%= @numpayrolls %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Payroll %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('payroll')), new_payroll_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

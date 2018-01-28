@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="large-3 columns", class: "left inline">
+
+		<%#= I18n.t('area').mb_chars.capitalize %>
+		 <%= I18n.t('area').capitalize %>
+
+	</div>
+
+	<div class="large-3 columns">
+
+		<%= f.label ta('program.gradcert') %>
+
+	</div>
+
+		<div class="large-1 column">
+
+			<div class="field">
+
+				<%= f.check_box :gradcert_true %>
+
+			</div>
+
+		</div>
+
+		<div class="large-4 columns">
+
+		</div>
+
+  <%# to do: filter for active programs and show unique values %>
+
+</div>

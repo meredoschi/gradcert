@@ -1,0 +1,68 @@
+<table>
+
+	<%= render 'index_table_head.html.erb' %>
+
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>
+	    	<div class="row">
+
+					<div class="large-2 columns">
+ 						<td>
+							<% if contact.image.present? %>
+
+						 		<%= image_tag contact.image.thumb.url %>
+
+ 							<% end %>
+
+ 						</td>
+		      </div>
+
+					<div class="large-3 columns">
+		        <td><%= link_to contact.name, contact.user %></td>
+					</div>
+
+					<% if is_admin_or_readonly(current_user) || is_manager(current_user) %>
+
+				      <div class="large-2 columns">
+
+								<% if  contact.institution.present? %>
+
+
+					        <td><%= link_to contact.institution.name, contact.institution  %></td>
+
+							<% else %>
+
+					    <td>Valor falta: contact.institution.name </td>
+
+
+							<% end %>
+							</div>
+
+
+
+
+					<% end %>
+
+		      <div class="large-2 columns">
+	       	  <td>
+	       	  	<% if !contact.role.nil? %>
+       	  			<%= contact.role.name %>
+							<% end %>
+						</td>
+					</div>
+
+					<%= render 'index_table_buttons.html.erb', contact: contact %>
+
+        </div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+
+  <%= paginate @contacts %>
+<br>
+
+</div>

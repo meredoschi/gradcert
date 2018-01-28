@@ -1,0 +1,53 @@
+<%= search_form_for @search do |f| %>
+
+	<div class="row">
+
+		<div class="large-3 columns">
+
+			<div class="field">
+					
+				<%= f.label tm('stateregion') %>
+		
+			</div>
+	
+		</div>
+			
+		<div class="large-4 columns">
+		
+			<%= f.text_field :name_cont %>  
+		
+		</div>
+	    
+		<div class="large-2 columns">
+
+			<div class="field">
+		
+				<%= f.label ta('state.name') %>
+			
+			</div>
+
+		</div>
+			
+		<div class="large-3 columns">
+
+			<div class="field">
+					
+				<%= f.select :state_id_eq, options_from_collection_for_select(State.all, :id, :name), 		include_blank: true %>
+					
+			</div>
+
+		</div>
+				    
+	</div>
+
+	<div class="row">
+	    
+		<div class="large-6 columns">
+
+	  	<%= f.submit "Busca", class: "buscar" %>
+
+		</div>
+
+	</div>
+  
+<% end %>

@@ -1,0 +1,2 @@
+module AcademiccategoriesHelper
+end

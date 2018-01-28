@@ -1,0 +1,23 @@
+<div class="row">
+
+	<hr>
+
+	<h4><%= @num_institution_ids_sans_annotations %> <%= t('institutions_without_annotations').downcase %></h4>
+
+	<div class="custom-panel">
+
+	<% @institution_ids_sans_annotations.each do |id| %>
+
+		<% institution=@all_institutions.find(id) %>
+
+		<div class="row">
+
+		<h5>	<%= link_to institution.name, institution %> </h5>
+
+		</div>
+
+	<% end %>
+
+	</div>
+
+</div>

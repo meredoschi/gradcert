@@ -1,0 +1,42 @@
+<%= search_form_for @search do |f| %>
+
+	<div class="row">
+			
+			<div class="large-2 columns">
+					
+			<h3>	<%= t('area').mb_chars.capitalize %> </h3>
+	
+			</div>
+	
+			<div class="large-2 columns">
+							
+				<div class="field">
+
+					<%= f.label ta('role.pap')%>
+					
+					<%= f.check_box :pap_true %>
+					
+			
+				</div>
+			</div>
+	
+		<div class="large-3 columns">
+							
+				<div class="field">
+										
+					<%= f.label ta('role.medres')%>
+			
+					<%= f.check_box :medres_true %>
+
+				</div>
+			</div>
+							
+			<div class="large-5 columns">
+		
+				<%= f.submit  t('actions.filter'), class: "buscar" %>
+			
+			</div>
+	
+	</div>
+  
+<% end %>

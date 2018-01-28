@@ -1,0 +1,53 @@
+<div class="row">
+
+	<table>
+		<tr>
+
+					<% if @contact.webinfo.email.present? %>
+		
+						<div class="large-6 columns">
+				
+							<th><strong><%= ta('webinfo.personal.email')%></strong></th>
+				
+						</div>
+	
+					<% end %>					
+	
+					<% if @contact.webinfo.site.present? %>
+				
+						<div class="large-6 columns">
+				
+							<th><strong><%= ta('webinfo.personal.site')%></strong></th>
+				
+						</div>
+
+					<% end %>					
+						
+		</tr>						
+	
+		<div class="row">
+	
+			<tr>
+				<div class="large-6 columns">
+	
+					<% if @contact.webinfo.email.present? %>
+				
+						<td><%= @contact.webinfo.email %></td>
+		
+					<% end %>			
+				
+				</div>
+
+				<div class="large-6 columns">
+
+					<% if @contact.webinfo.site.present? %>
+				
+						<td><%= @contact.webinfo.site %></td>
+		
+					<% end %>			
+				
+				</div>
+				
+			</tr>
+	</table>
+</div>

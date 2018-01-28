@@ -1,0 +1,19 @@
+<% if can? :read, Regionaloffice %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(regionaloffices_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('regionaloffice').capitalize.pluralize, regionaloffices_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

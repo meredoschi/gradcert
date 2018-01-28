@@ -1,0 +1,90 @@
+<div class="row">
+
+	<h2><%= tm('makeupschedule').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+
+				<tbody>
+					<tr>
+
+					   <div class="large-3 columns">
+
+					  	<th><strong><%= t('current_registration').capitalize %></strong></th>
+
+						 </div>
+
+						 <div class="large-3 columns">
+
+							 <th><strong><%= tm('institution').capitalize %></strong></th>
+
+						 </div>
+
+							<div class="large-3 columns">
+
+								<th><strong><%= ta('makeupschedule.start')%></strong></th>
+
+							</div>
+
+							<div class="large-3 columns">
+
+								<th><strong><%= ta('makeupschedule.finish')%></strong></th>
+
+							</div>
+
+
+			</tr>
+
+			<div class="row">
+
+				<tr>
+					<div class="large-3 columns">
+
+						<td><%= link_to @makeupschedule.registration.details, @makeupschedule.registration %></td>
+
+					</div>
+
+						<% if is_admin_or_manager(current_user) %>
+
+		        <div class="large-3 columns">
+
+		         <td><%= link_to @makeupschedule.registration.institution.capitalize, @makeupschedule.registration.student.contact.institution %></td>
+
+		 			   </div>
+
+		        <% end %>
+
+					<div class="large-3 columns">
+
+						<td><%= I18n.l(@makeupschedule.start) %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+						<td><%= I18n.l(@makeupschedule.finish) %></td>
+
+					</div>
+
+				</tr>
+		</div>
+	</tbody>
+	</table>
+</div>
+
+<%= render 'show_previous_registration.html.erb' %>
+
+<div class="row">
+
+	<% if can? :edit, @makeupschedule %>
+
+		<%= link_to t('actions.edit'), edit_makeupschedule_path(@makeupschedule), class: t('edit')  %> |
+
+	<% end %>
+
+	<%= link_to t('actions.back'), makeupschedules_path,  class: t('back')  %>
+
+</div>

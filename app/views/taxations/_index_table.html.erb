@@ -1,0 +1,75 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @taxations.each do |taxation| %>
+      <tr>
+				<div class="row">
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= taxation.name %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+	
+        <td><%= I18n.l(taxation.start) %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+	
+        <td><%= display_date_finished(taxation) %></td>
+
+			</div>
+								
+
+		   <div class="large-2 columns">
+	
+        <td><%= taxation.socialsecurity %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= taxation.brackets.count %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, taxation %>
+		        <td><%= link_to t('actions.show'), taxation, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, taxation %>
+			      <td><%= link_to t('actions.edit'), edit_taxation_path(taxation), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, taxation %>
+		     		<td><%= link_to t('actions.delete'),taxation, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @taxations %>
+
+</div>
+
+<br>

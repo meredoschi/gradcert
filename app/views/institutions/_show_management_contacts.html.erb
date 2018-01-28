@@ -1,0 +1,87 @@
+
+			
+			<table>
+
+		<div class="row">
+
+				<tr>
+	
+							<div class="large-4 columns">
+						
+									<th><strong><%= pluralize(@num_institution_managers, t('manager')).titleize  %></strong></th>
+						
+								</div>
+						
+	
+								<div class="large-4 columns">
+						
+									<th><strong><%= t('activerecord.attributes.contact.termstart')%></strong></th>
+						
+								</div>
+						
+								<div class="large-4 columns">
+						
+									<th><strong><%= t('activerecord.attributes.contact.termfinish')%></strong></th>
+						
+								</div>
+								
+				</tr>						
+			
+			<% @institution_managers.ordered_by_contact_name.each do |user|  %>
+
+				<div class="row">
+			
+					<tr>
+	
+							<div class="large-4 columns">
+	
+								<td><u><%= link_to user.contact.role.name+': '+user.contact.name, user.contact %></u></td> 
+						
+						
+								</div>
+						
+	
+							<div class="large-4 columns">
+						
+							
+							<td>
+
+								<% if !user.contact.termstart.nil? %>
+								
+									<%= I18n.l(user.contact.termstart, format: :dmy) %>
+								
+								<% else %>
+								
+								 _
+									
+								<% end %>
+						
+							</td>
+						
+								</div>
+						
+									<div class="large-4 columns">
+						
+										<td>
+											<% if !user.contact.termstart.nil? %>
+										
+												<%= I18n.l(user.contact.termfinish, format: :dmy)  %></td>
+
+											<% else %>
+
+												_
+											
+											<% end %>
+									
+								</div>
+						
+					</tr>
+			</div>
+
+		</div>
+
+		</table>					
+		
+					
+		<% end %>
+		

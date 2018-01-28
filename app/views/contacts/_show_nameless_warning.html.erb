@@ -1,0 +1,30 @@
+<div class="row custom-panel2">
+
+  <h5> <em>Lembrete</em> </h5>
+
+  <h6> E-mail do usuário: <em><%= link_to @contact.user.email, @contact.user  %></em> </h5>
+
+  <h6> Permissão: <u><%= @contact.user.permission.description %></u>.  </h5>
+
+  <p> Verifique se foi digitado corretamente o e-mail e o corrija, caso necessário.</p>
+
+</div>
+
+<div class="row custom-panel7">
+
+  <h4> O nome do contato precisa constar! </h4>
+
+  <h4> Clique em editar abaixo, informe todos os dados obrigatórios que faltarem e confirme.</h4>
+
+</div>
+
+  <% if @contact.user.permission.regular? %>
+
+  <div class="row">
+
+  <h6> De modo a poder imprimir a carta de abertura de conta bancária, os dados de contato devem
+  ter sido cadastrados com sucesso.</h6>
+
+  </div>
+
+  <% end %>

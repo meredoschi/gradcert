@@ -1,0 +1,122 @@
+
+<div class="row">
+
+
+	<h3>	<%= @role.name %> </h3>
+
+</div>
+
+<div class="row">
+
+
+	<h3 class="subheader">	<%= t('category').upcase  %> </h3>
+
+
+</div>
+
+
+<div class="row">
+
+	<table>
+		<tr>
+
+			<div class="row">
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('role.clerical') %></strong></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('role.collaborator') %></strong></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('role.teaching') %></strong></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('role.student') %></strong></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('role.management') %></strong></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('role.itstaff') %></strong></th>
+
+				</div>
+
+			</div>
+
+		</tr>
+
+		<tr>
+			<div class="row">
+
+				<div class="large-2 columns">
+
+					<td><%= tickmark(@role.clerical) %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<td><%= tickmark(@role.collaborator) %></td>
+
+				<div class="large-2 columns">
+
+					<td><%= tickmark(@role.teaching) %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<td><%= tickmark(@role.student) %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<td><%= tickmark(@role.management) %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<td><%= tickmark(@role.itstaff) %></td>
+
+				</div>
+
+			</div>
+
+	  </tr>
+	</table>
+
+</div>
+
+
+<%= render 'show_belongs_to' %>
+
+<div class="row">
+
+	<% if can? :edit, @role %>
+
+		<%= link_to t('actions.edit'), edit_role_path(@role), class: "editar" %> |
+
+	<% end %>
+
+	<%= link_to t('actions.back'), roles_path, class: "voltar" %>
+
+</div>

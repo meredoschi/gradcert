@@ -1,0 +1,106 @@
+<table>
+ 
+	<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @colleges.each do |college| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-1 column">
+	
+        <td><%= link_to college.institution_name, college.institution %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= college.area %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= college.classrooms %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= college.otherrooms %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= college.sportscourts %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= college.foodplaces %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= college.libraries %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= college.gradcertificatecourses %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= college.previousyeargradcertcompletions %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, college %>
+		        <td><%= link_to t('actions.show'), college, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, college %>
+			      <td><%= link_to t('actions.edit'), edit_college_path(college), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, college %>
+		     		<td><%= link_to t('actions.delete'),college, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @colleges %>
+
+</div>
+
+<br>

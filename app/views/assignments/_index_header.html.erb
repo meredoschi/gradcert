@@ -1,0 +1,40 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+	<% if @assignments.total_count>0 %>
+			
+			<% if is_regular_user(current_user) %>
+						
+				<h2><%= t('my_assignment_info').mb_chars.upcase  %></h2>	
+
+			<% else %>
+
+				<h2> <%= t('course').pluralize.upcase %></h2>
+	
+		 	  <h2 class="subheader"> <%= tm('assignment').pluralize.capitalize %> (<%= @assignments.total_count  %> /  <%= @numassignments %>) </h2>
+			
+			<% end %>
+						
+	<% else %>
+
+	<div data-alert class="alert-box warning">
+		 <h3><%= t('none.f')+" "+tm('assignment')+" "+t('found.f') %></h3>
+	</div>					
+
+	<% end %>
+	
+	 </div>
+
+
+	<% if can? :create, Assignment %>
+
+		<div class="large-4 columns">
+		 	
+	  	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('assignment')), new_assignment_path %>	 
+  
+  	</div>
+	 
+	<% end %>
+
+</div>

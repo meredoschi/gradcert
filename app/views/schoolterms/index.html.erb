@@ -1,0 +1,15 @@
+<%= render 'index_header.html.erb' %>
+
+<% if @schoolterms.total_count>0 %>
+
+	<%= render 'index_table.html.erb' %>
+
+<div class="row custom-panel3">
+
+	<%= t('schoolterm_finish_explanation') %>
+
+</div>
+
+	<%#= render 'index_search.html.erb' %>
+	
+<% end %>

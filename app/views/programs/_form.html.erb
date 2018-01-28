@@ -1,0 +1,78 @@
+<%= form_for(@program) do |f| %>
+<% if @program.errors.any? %>
+<div id="error_explanation">
+  <h2><%= t('validation.messagetext.system_detected') %> <%= pluralize(@program.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %></h2>
+  <ul>
+    <% @program.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="row">
+
+  <%= render 'form_programname.html.erb', f: f %>
+
+  <%= render 'form_professionalspecialty.html.erb', f: f %>
+
+  <%= render 'form_institution.html.erb', f: f %>
+
+  <%= render 'form_schoolterm.html.erb', f: f %>
+
+  <%= render 'form_duration.html.erb', f: f %>
+
+  <div id="addresses">
+    <%= f.fields_for :address do |address| %>
+    <%= render 'address_fields', :f => address	 %>
+    <% end %>
+
+    <div class="row links">
+      <%= link_to_add_association t('create').capitalize+' '+t('external_venue'), f, :address, class: "create-nested" %>
+    </div>
+  </div>
+
+  <div id="admission">
+    <%= f.fields_for :admission do |admission| %>
+    <%= render 'admission_fields', :f => admission	 %>
+    <% end %>
+  </div>
+
+
+  <div class="row">
+
+    <hr>
+
+    <div class="row">
+
+      <h4>		<%= t('year').capitalize.pluralize %> </h4>
+
+    </div>
+
+    <div id="schoolyears">
+      <%= f.fields_for :schoolyears do |schoolyear| %>
+      <%= render 'schoolyear_fields', :f => schoolyear  %>
+      <% end %>
+
+
+      <div class="row links">
+        <%= link_to_add_association t('actions.new.m')+' '+tm('schoolyears'), f, :schoolyears, class: "criar" %>
+      </div>
+    </div>
+
+    <%= render 'form_accreditation.html.erb', form: f %>
+
+  </div>
+
+  <% if is_admin(current_user) %>
+
+  <% render 'form_teaching_area', f: f%>
+
+  <% end %>
+
+  <div class="row actions">
+    <%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+    <%= link_to 'Anular', programs_path, class: "anular" %>
+  </div>
+
+  <% end %>

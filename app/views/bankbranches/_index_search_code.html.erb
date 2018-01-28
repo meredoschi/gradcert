@@ -1,0 +1,21 @@
+<div class="row">
+
+  <div class="large-2 columns">
+
+    <div class="field">
+
+      <th><%= f.label t('activerecord.attributes.bankbranch.code')%></th>
+
+      <span data-tooltip aria-haspopup="true" title='Ao procurar, informe apenas os digitos significantes (sem zeros a esquerda)' class="has-tip" > <%= t('help') %></span>
+
+    </div>
+
+  </div>
+
+  <div class="large-10 columns">
+
+      <%= f.text_field :code_eq %>
+
+  </div>
+
+</div>

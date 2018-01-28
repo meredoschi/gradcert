@@ -1,0 +1,30 @@
+<div class="row panel callout">
+
+	<h4>
+		
+		<div class="row">
+	
+			<%= pluralize(@num_events,tm('event').capitalize) %>
+		
+		</div> 
+		
+	</h4>
+	
+	<% @events.ordered_for_payroll_display.each do |event| %>
+	
+		<% if event.pending? %>
+		
+			<div data-alert class="alert-box warning">
+	
+			<%= render 'show_each_event.html.erb', event: event %>
+			
+			</div>
+			
+		<% else %>
+
+			<%= render 'show_each_event.html.erb', event: event %>
+		
+		<% end %>
+	<% end %>
+	
+</div>

@@ -1,0 +1,90 @@
+<div class="row">
+
+	<h2><%= t('bankfile').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-3 columns">
+					
+								<th><strong><%= t('activerecord.attributes.bankpayment.payroll_id')%></strong></th>
+					
+							</div>
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= t('net')%></strong></th>
+					
+							</div>
+
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= t('activerecord.attributes.bankpayment.comment')%></strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= t('activerecord.attributes.bankpayment.sequential')%></strong></th>
+					
+							</div>
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-3 columns">
+					
+						<td><%= @bankpayment.payroll.name %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= Pretty.to_BRL(@net) %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= @bankpayment.comment %></td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td><%= @bankpayment.sequential %></td>
+					
+					</div>
+																				
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+	
+	<pre>
+
+		<%= @bankfile %>
+
+	</pre>
+
+<br>
+
+<div class="row">
+	
+	<% if can? :edit, @bankpayment %>
+
+		<%= link_to t('actions.back'), bankpayment_path(@bankpayment), class: t('back')  %> 
+
+	<% end %>
+	
+</div>

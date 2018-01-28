@@ -1,0 +1,71 @@
+<div class="row">
+	<div class="large-8 columns">
+		<h2><%= t('activerecord.models.institutiontype').capitalize.pluralize %> (<%= @institutiontypes.total_count  %> /  <%= @numinstitutiontypes %>)  	</h2>
+	
+	</div>
+	
+		<div class="large-4 columns">
+	
+	
+			<% if can? :create, Institutiontype %>
+		 	
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('institutiontype')), new_institutiontype_path %>	 
+
+			<% end %>
+	  
+	  </div>
+	</div>
+
+<table>
+  <thead>
+    <tr>
+    	<th><%= t('activerecord.attributes.institutiontype.name')%></th>
+			<th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @institutiontypes.each do |institutiontype| %>
+      <tr>
+
+  	<div class="row">					  
+
+  		<div class="large-9 columns">					  
+			
+			 <td><%= institutiontype.name %></td>
+      
+		    	<div class="large-1 column">					  
+						<td>
+			      	<% if can? :read, institutiontype %> 
+								<%= link_to t('actions.show'), institutiontype, class: "mostrar" %>
+							<% end %>			      
+			      </td> 
+					</div>
+
+		    	<div class="large-1 column">					  	
+		        <% if can? :edit, institutiontype %>
+	  		      <td><%= link_to t('actions.edit'), edit_institutiontype_path(institutiontype), class: "editar" %></td>   
+		  			<% end %>
+					</div>
+
+		    	<div class="large-1 column">					  	
+  		    	<% if can? :destroy, institutiontype %>  
+  		    		<td><%= link_to t('actions.delete'),institutiontype, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     	
+        		<% end %>
+        	</div>    
+	  	</div>					  
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="row">
+
+  <%= paginate @institutiontypes %>
+
+  <br>
+		 
+</div>

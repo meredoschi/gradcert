@@ -1,0 +1,45 @@
+<%= search_form_for @search do |f| %>
+
+	<div class="row">
+
+		<div class="large-3 columns">
+		
+			<div class="field">
+			
+			  <th><%= f.label ta('professionalspecialty.name')%></th>
+		
+			</div>
+
+		</div>
+			
+		<div class="large-9 columns">
+		
+				<%= f.text_field :name_cont %>  
+		
+		</div>
+	    
+	</div>
+
+<div class="row">	    		
+	<div class="large-3 columns", class: "left inline">
+			<%= f.label tm('professionalarea').mb_chars.capitalize %>
+	</div>
+			
+	<div class="large-9 columns">								
+		<%= f.select :professionalarea_id_eq, options_from_collection_for_select(Professionalarea.all, :id, :name), 		include_blank: true %>				
+	</div>
+				
+</div>
+
+
+	<div class="row">
+		    
+		<div class="large-6 columns">
+	
+		  <%= f.submit t('actions.search'), class: t('seek') %>
+	
+		</div>
+	
+	</div>
+
+<% end %>

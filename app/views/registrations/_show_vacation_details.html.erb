@@ -1,0 +1,32 @@
+	<div class="row">
+				<tr>
+
+					<div class="large-3 columns">
+
+
+						<td><%= link_to "ID: "+vacation.id.to_s, vacation %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+
+						<td><%= I18n.l(vacation.start, format: :compact) %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+
+						<td><%= I18n.l(vacation.finish, format: :compact) %></td>
+
+					</div>
+
+						<div class="large-3 columns">
+
+							<td><%= vacation.numdays %></td>
+
+						</div>
+
+				</tr>
+		</div>

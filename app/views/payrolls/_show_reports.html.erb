@@ -1,0 +1,50 @@
+<% if @payroll.annotated? %>
+
+	<table>
+	  <thead>
+
+
+		    <tr>
+		      <th>
+
+				  	<% if is_admin_or_manager(current_user) %>
+
+		      		<%= t('report_available').pluralize.capitalize %>
+
+		      <% else %>
+
+		      		<%= t('report_available').capitalize %>
+
+		      <% end %>
+
+		      </th>
+				</tr>
+
+		</thead>
+
+
+		<tbody>
+		    <tr>
+		      <td>
+						<%= link_to tm('annotation').capitalize.pluralize, report_payroll_path(@payroll), class: "relatorio6"  %>
+					</td>
+
+		    </tr>
+
+		  	<% if is_admin_or_manager(current_user) %>
+
+
+			    <tr>
+			    	<td>
+							<%= link_to t('absences_total').capitalize, absences_payroll_path(@payroll), class: "relatorio3"  %>
+
+						</td>
+					</tr>
+
+				<% end %>
+
+			</tbody>
+
+	</table>
+
+<% end %>

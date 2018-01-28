@@ -1,0 +1,58 @@
+<%= form_for(@profession) do |f| %>
+  <% if @profession.errors.any? %>
+    <div id="error_explanation"> 
+		 <h2><%= t('validation.messagetext.system_detected') %> <%= pluralize(@profession.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %></h2>
+      <ul>
+      <% @profession.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+	
+				<%= f.label ta('profession.name')%><br>
+
+			</div>
+	 		
+	 		<div class="large-8 columns">
+  
+	   <%= f.text_field :name %>        	
+ 
+			</div>
+
+</div>
+
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+
+				<%= f.label ta('profession.occupationcode')%><br>
+	
+			</div>
+	 		
+	 		<div class="large-8 columns">
+  
+	   <%= f.number_field :occupationcode %>        	
+ 
+			</div>
+
+</div>
+
+<%= render 'form_belongs_to.html.erb', f: f %>  
+  
+<% if can? :update, Profession %>
+
+   <div class="row actions">
+  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+ 
+<% end %>
+
+  	 <%= link_to t('actions.cancel'), states_path, class: "anular" %>
+  </div>
+
+<% end %>

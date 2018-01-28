@@ -1,0 +1,113 @@
+<div class="row">
+
+	<table>
+		<tr>
+						
+						<div class="large-6 columns">
+				
+							<th><strong><%= ta('webinfo.site')%></strong></th>
+				
+						</div>
+	
+						<% if @council.webinfo.email.present? %>
+
+							<div class="large-6 columns">
+				
+								<th><strong><%= ta('webinfo.email')%></strong></th>
+				
+							</div>
+
+						<% end %>
+						
+		</tr>						
+	
+		<div class="row">
+	
+			<tr>
+	
+						</div>
+
+						<% if @council.webinfo.site.present? %>
+				
+							<div class="large-6 columns">
+
+							<!-- 
+							
+							http://stackoverflow.com/questions/2543936/rails-i18n-translating-text-with-links-inside
+							
+							-->
+				
+							<td> <%= link_to @council.webinfo.site, "http://"+@council.webinfo.site, data: { confirm: I18n.t("confirm.visit_external_site")}, :target => '_blank'   %> </td>
+																														
+							</div>
+						
+						<% end %>
+						
+
+					<% if @council.webinfo.present? %>
+					
+						<div class="large-6 columns">
+				
+							<td> <%= @council.webinfo.email %>	</td>
+							
+						</div>
+						
+					<% end %>
+						
+			</tr>
+	</div>
+</table>
+
+		<table>
+			<tr>
+			
+					<% if @council.webinfo.facebook.present? %>
+
+							<div class="large-6 columns">
+					
+								<th><strong><%= ta('webinfo.facebook')%></strong></th>
+					
+							</div>
+					
+					<% end %>
+					
+					<% if @council.webinfo.twitter.present? %>
+	
+							<div class="large-6 columns">
+					
+								<th><strong><%= ta('webinfo.twitter')%></strong></th>
+					
+							</div>
+							
+					<% end %>
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					<% if @council.webinfo.facebook.present? %>
+
+						<div class="large-6 columns">
+						
+							<td> <%= @council.webinfo.facebook %>						</td>
+						
+						</div>
+
+					<% end %>
+
+					<% if @council.webinfo.twitter.present? %>
+
+						<div class="large-6 columns">
+						
+							<td> <%= @council.webinfo.twitter %> </td>
+						
+						</div>
+
+					<% end %>
+					
+				</tr>
+		</div>
+	</table>
+</div>

@@ -1,0 +1,55 @@
+<%= search_form_for @search do |f| %>
+
+<%= render 'index_search_student_name.html.erb', f: f %>
+
+<%= render 'index_search_by_id.html.erb', f: f %>
+
+<%= render 'index_search_schoolterm.html.erb', f: f %>
+
+<% if is_admin_or_manager(current_user) %>
+
+<%= render 'index_search_institution.html.erb', f: f %>
+
+<%#= render 'index_search_institution_name.html.erb', f: f %>
+
+<% end %>
+
+<%= render 'index_search_status.html.erb', f: f %>
+
+<hr>
+
+<%= render 'index_search_confirmation.html.erb', f: f %>
+
+<hr>
+
+<%# if is_admin(current_user) %>
+
+<%#= render 'index_search_kind.html.erb', f: f %>
+
+<%# end %>
+
+<div class="row">
+
+</div>
+
+<div class="row">
+
+	<div class="large-6 columns">
+
+		<%= f.submit t('actions.search'), class: t('seek') %>
+
+	</div>
+
+	<% if is_admin(current_user) %>
+
+		<div class="large-6 columns">
+
+			<%= render 'index_search_reports.html.erb', f: f %>
+
+	</div>
+
+  <% end %>
+
+</div>
+
+<% end %>

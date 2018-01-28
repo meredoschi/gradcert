@@ -1,0 +1,76 @@
+	<div class="nested-fields">
+
+
+	<div class="row">
+	
+
+		 		<div class="large-2 columns", class: "left inline">
+	
+	 				<%= f.label t('year_number').capitalize %>
+		
+				</div>
+		 			 		
+		 		<div class="large-1 column">
+	
+	 
+				  <%= f.number_field	 :programyear, in: 1..@maxduration %>        	
+	    
+				</div>
+
+				 		<div class="large-9 columns">
+
+					  <%= link_to_remove_association t('actions.delete'), f, class: "remove-nested" %>
+
+					</div>
+			</div>		      
+      
+      
+      
+	<div class="custom-panel">
+	
+		<div class="row">
+		
+					<div class="large-3 columns", class: "left inline">
+			
+						<%= f.label ta('recommendation.grants') %>
+		 
+					</div>
+			 			 		
+			 		<div class="large-1 columns">
+		  
+					   <%= f.number_field :grants, min:0 %>        	
+		 
+					</div>
+					
+			 		<div class="large-3 columns", class: "left inline">
+			
+						<%= f.label ta('recommendation.theory') %>
+		 	
+					</div>
+			 			 		
+			 		<div class="large-1 columns">
+		  
+			   <%= f.number_field :theory, min:0 %>        	
+		 
+					</div>
+			
+					
+				 		<div class="large-3 columns", class: "left inline">
+			
+						<%= f.label ta('recommendation.practice') %>
+		 
+					</div>
+			 			 		
+			 		
+			 		<div class="large-1 columns">
+		  
+					   <%= f.number_field :practice, min:0 %>        	
+		 
+					</div>
+	
+		</div>
+	  
+	  
+	</div>
+
+</div>

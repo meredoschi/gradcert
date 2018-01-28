@@ -1,0 +1,14 @@
+<% if is_admin_or_readonly(current_user) || is_manager(current_user) %>
+
+  <li class="has-dropdown">
+    <a href="#">Admin</a>
+    <ul class="dropdown">
+    
+     <li><%= link_to "Todos os contatos", contacts_path %></li>
+                  
+		 <li><%= link_to "Todos os usuários", users_path %></li>
+
+    </ul>
+  </li>
+
+<% end %>

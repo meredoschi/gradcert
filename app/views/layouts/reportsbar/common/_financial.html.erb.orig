@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+<% if ( is_active_link?(payrolls_path, :inclusive) || is_active_link?(events_path, :inclusive) || is_active_link?(bankpayments_path, :inclusive) || is_active_link?(leavetypes_path, :inclusive) || is_active_link?(scholarships_path, :inclusive) ) %>
+=======
+<% if ( is_active_link?(payrolls_path, :inclusive) || is_active_link?(leavetypes_path, :inclusive) || is_active_link?(scholarships_path, :inclusive) ) %>
+>>>>>>> pap-a/movement
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+<a href="#"><%= t('navbar.financial').upcase %></a>
+
+	<ul class="dropdown">
+
+		<%= render 'layouts/navbar/submenu/payrolls.html.erb' %>
+		<%= render 'layouts/navbar/submenu/bankpayments.html.erb' %>
+<<<<<<< HEAD
+		<%= render 'layouts/navbar/submenu/leavetypes.html.erb' %>		
+		<%= render 'layouts/navbar/submenu/events.html.erb' %>	
+=======
+		<%= render 'layouts/navbar/submenu/leavetypes.html.erb' %>
+>>>>>>> pap-a/movement
+		<%= render 'layouts/navbar/submenu/scholarships.html.erb' %>
+
+
+	  </ul>
+	 </ul>
+	</ul>
+ </ul>

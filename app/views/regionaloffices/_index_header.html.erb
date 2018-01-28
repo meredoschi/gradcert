@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+			<h2><%= t('definition').pluralize.mb_chars.upcase %> </h2>
+			<h2 class="subheader"><%= tm('regionaloffice').pluralize(@regionaloffices.total_count).pluralize.mb_chars.capitalize %> (<%= @regionaloffices.total_count  %> /  <%= @numregionaloffices %>)  	</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Regionaloffice %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('regionaloffice')), new_regionaloffice_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

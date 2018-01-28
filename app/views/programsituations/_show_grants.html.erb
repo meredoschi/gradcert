@@ -1,0 +1,52 @@
+<table>
+	
+	<tr>
+
+		<div class="row">
+					
+			<div class="large-4 columns">
+		
+				<th><strong><%= ta('schoolyears.grants')%></strong></th>
+		
+			</div>
+		
+			<div class="large-4 columns">
+		
+				<th><strong><%= ta('schoolyears.grantsrequested')%></strong></th>
+		
+			</div>
+
+			<div class="large-4 columns">
+	
+				<th><strong><%= t('proportion')%></strong></th>
+	
+			</div>
+
+		</div>
+	
+	</tr>
+
+	<div class="row">
+
+	<tr>
+	
+		<div class="large-4 columns">
+
+	 	<td><%= @schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).first.grants %></td>
+		
+		</div>
+	
+		<div class="large-4 columns">
+	
+			<td><%= @schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).first.grantsrequested %></td>
+		
+		</div>
+							
+		<div class="large-4 columns">
+			<td><%= percent(@schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).first.grantsrequested, @schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).first.grants ) %></td>
+		</div>
+		
+		</tr>
+															
+	</div>
+</table>

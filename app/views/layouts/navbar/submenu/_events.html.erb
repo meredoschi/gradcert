@@ -1,0 +1,19 @@
+<% if can? :read, Event %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(events_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('event').capitalize.pluralize, events_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

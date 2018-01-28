@@ -1,0 +1,391 @@
+---
+pt_BR:
+  10th: Décimo
+  1st: Primeiro
+  2nd: Segundo
+  3rd: Terceiro
+  4th: Quarto
+  5th: Quinto
+  6th: Sexto
+  7th: Sétimo
+  8th: Oitavo
+  9th: Nono
+  Currently: Atualmente
+  Total: Total
+  abbreviations:
+    payment: pag
+  about: sobre
+  about_the_registration_steps: Procedimentos de matrícula
+  absence: falta
+  absences: faltas
+  absences_adjustment: Ajuste das faltas
+  absences_or_personal_leaves: Faltas, licenças particulares ou cancelamentos
+  absences_total: total de faltas
+  account: conta
+  accreditation_not_on_file: Situação do credenciamento não informada
+  accreditation_status: Situação do credenciamento
+  active_registrations: Matrículas ativas
+  actual_absences_explanation: Faltas menos a quantidade de dias lançados contabilmente referentes a matrícula tardia, cancelamentos e outras situações semelhantes (se houverem).
+  adjustments: Ajustes
+  after: Após
+  all_current_registrations: Todas as matrículas atuais (inclui inativas)
+  all_registrations: Todas as matrículas (lista completa)
+  already_exists: já existe
+  annotate_payroll: Calcular movimentos
+  application_title: "Pós-graduação (gradcert)"
+  approval_rate: Taxa de aprovação
+  approximate_value: Valor aproximado
+  assessed_institution: instituição avaliada
+  assessed_program: programa avaliado
+  assessor_recommendations: Recomendações do parecerista
+  associations: Associações
+  attribute_summary: Resumo dos atributos
+  attribution: atribuição
+  authorization: Autorização
+  authorized_vancancies_total: Total de vagas autorizadas
+  available: disponível
+  available_tutorials: Tutoriais disponíveis
+  awarded_by: Outorgante
+  awardee: Outorgado
+  back_to_start_page: Voltar à página inicial
+  back_to_tutorials_home: Voltar à página principal dos tutoriais
+  bankfile: arquivo bancário
+  bankfile_amount: Valor do arquivo bancário
+  bankpayment_explanation: Explicativo
+  bankpayments_by_institution: Pagamentos por instituição
+  bed: leito
+  belongs_to: Pertence a
+  by_means_of: por meio de
+  calculate: calcular
+  calculate_payroll: Calcular folha
+  cancellation_already_processed_on_a_previous_payroll: Cancelamento já processado em uma folha anterior.
+  cancellation_date: data de cancelamento
+  cancellations: cancelamentos
+  cancelled_registrations_during_this_payroll: Matrículas canceladas durante esta folha
+  category: categoria
+  change_my_password: Mudar minha senha
+  characteristics_not_on_file: Perfil institucional ainda não cadastrado
+  clear: limpar
+  clear_payroll: Limpar cálculos
+  clear_payroll_annotations: Limpar as anotações e movimentos (automáticos) da folha
+  click_the_above_message_to_jump_directly_to_the_contacts_page_and_learn_more: clique na mensagem acima para ir diretamente à página de contatos e saber mais.
+  cohort: Turma
+  contact_info: informações de contato
+  content: conteúdo
+  contract_enforcement_period: Vigência
+  convocation_rate: Taxa de convocação
+  country_of_citizenship: Nacionalidade (país)
+  course: programa e curso
+  create: criar
+  created_at: 'Data de criação do registro: '
+  current_registration: matrícula atual
+  current_situation: Número atual
+  data: dados de
+  data_not_checked_recently: Dados não conferidos recentemente.  Podem estar desatualizados ou incompletos.
+  database_schema_version: Versão do esquema de dados
+  date_created: Data de criação
+  date_issued: Data de emissão
+  date_updated: Data de atualização
+  day: dia
+  deactivated:
+    f: desativada
+    m: desativado
+  deactivation: desativação
+  deannotate: Limpar anotações (lançamentos)
+  declaration_that_person_is_not_employed_by_a_public_healthcare_institution:
+    filename_prefix: Inexistencia_de_vinculo_bolsista_
+    letterhead_title: DECLARAÇÃO DE INEXISTÊNCIA DE VÍNCULO EMPREGATÍCIO COM INSTITUIÇÕES VINCULADAS AO SUS
+    screen_title: Declaração de inexistência de vínculo empregatício com instituições vinculadas ao SUS
+  definition: definição
+  description: Descrição
+  detailed_info: Informação detalhada
+  diploma: Diploma
+  discounts: Descontos
+  discounts_and_supplements: Estornos ou Complementos
+  diversity: diversidade
+  early_cancellation: cancelamento temporão
+  education: Formação
+  end_of_report: Fim do relatório
+  entered_on: ingressou em
+  entity: instituição
+  event_creation_reminder_no_active_registrations_found: 'Lembrete: é preciso haver ao menos um bolsista ativo de modo que possam ser criados os respectivos movimentos.'
+  external_venue: local externo de curso
+  facilities: instalações
+  'false': não
+  favorable_assessment: avaliação favorável
+  file: Ficha
+  file_not_generated_yet: 'Aviso: ainda não foi gerado (ou regerado) o arquivo.'
+  file_was_prepared: 'Lembrete: arquivo foi processado.'
+  fill_in_if_applicable: Favor preencher, se cabível
+  filter_by_profile: Filtrar por perfil (escolha somente um)
+  for_passport_only: Somente para passaporte
+  foreigner: estrangeiro(a)
+  foreigners: estrangeiros
+  from: de
+  function: função
+  general_characteristics: Características gerais
+  general_information: Informações gerais
+  generate: gerar
+  generate_csv: Gerar arquivo CSV
+  generate_makeup_registrations: Gerar matrículas de reposição
+  generate_pdf: Gerar arquivo PDF
+  geography: geografia
+  given_the_search_parameters_provided: dados os parâmetros de busca informados
+  go_to_contacts_index: Ir à relação de contatos
+  grants_to_available_seats_percentage: "% Bolsas / Número de Vagas"
+  greetings: Boas vindas!
+  gross: Valor bruto
+  gross_daily_scholarship_amount: Valor bruto diário da bolsa
+  has_many: Tem vários
+  has_one: Possui um
+  health_leaves: Licenças saúde
+  help: ajuda
+  hour: hora
+  hours: horas
+  identification: identificação
+  if_present_in_the_system: "(caso já conste do sistema)"
+  if_student: Se for aluno
+  in_case_of_doubt_please_contact_the_team: Em caso de dúvidas, por gentileza entre em contato com a equipe.
+  income_tax: Imposto de Renda
+  incoming_cohort: ingressante em
+  inconsistent: inconsistente!
+  infrastructure: Infraestrutura
+  institution_file: Ficha da instituição
+  institution_summary: ficha da instituição
+  institution_total: Total da instituição
+  institution_vacancies: Vagas disponíveis para matrícula na instituição
+  institutions_with_confirmed_inactive: Instituições com cancelamentos confirmados
+  institutions_with_pending_inactive: Instituições com cancelamentos pendentes
+  institutions_with_students_set_to_makeup: instituições com alunos que irão repor
+  institutions_with_students_that_advance: instituições com alunos que avançam para o ano de programa seguinte
+  institutions_without_annotations: Instituições sem anotações nesta folha
+  institutions_without_confirmed_active: Instituições sem nenhuma matrícula ativa e confirmada
+  insurance: Seguro
+  insurance_file: arquivo do seguro
+  insurance_report: Relatório do Seguro
+  interaction: interação
+  internal_address_help: 'Marcar este campo caso se tratar de endereço interno, ou seja, curso ou programa realizado nas instalações da própria instituição.  Informe apenas o Local (ex: Sala 5, Centro de Treinamento, etc)'
+  international: internacional
+  issue_legal_form_pdf: Termo de Outorga (PDF)
+  issue_no_employment_ties_with_the_public_health_sector_pdf: Inexistência de vínculo (PDF)'
+  issue_registration_receipt_pdf: Emitir comprovante (PDF)
+  issued_in: Emitido em
+  iteration: Número da interação
+  kind: Tipo
+  kind_regards: Saudações cordiais,
+  labs: laboratórios
+  latest_update: 'Atualização mais recente: '
+  legacy: Legado
+  legend: legenda
+  list: Relação de
+  listed_to_be_paid: Relacionados para pagamento
+  loading: carregando
+  main: principal
+  main_attributes: Atributos em destaque
+  manager: gestor
+  mandatory: favor informar
+  matriculate: matricular
+  may_not_contain_digits: não pode conter digitos!
+  member: membro
+  modified_by: Modificado por
+  monetary_annotations: Anotações com impacto financeiro
+  my_assignment_info: Minhas alocações
+  my_contact_info: minhas informações de contato
+  my_gifts: meus presentes
+  my_supervision_info: Minhas informações de coordenação
+  my_teaching: minha docência
+  name: Nome
+  nameless_contacts_exist: Existem contatos com informações incompletas (sem nome) !
+  national: nacional
+  nature: natureza
+  navbar_menu_name: modelo
+  negative: negativo
+  negative_amount: valor negativo
+  net: Valor líquido
+  no_absences: nenhuma falta
+  no_annotations_found: Nenhuma anotação encontrada
+  no_events_found: Nenhum movimento encontrado
+  no_incoming_students_found: nenhum bolsista ingressante encontrado
+  no_infrastructure_reported: Nenhuma infraestrutura informada
+  no_payrolls_found: Nenhuma folha disponível encontrada.  Para se cadastrar um pagamento bancário, primeiro é necessário criar a respectiva folha.
+  no_photo: Sem foto
+  no_programs_or_supervisors: É preciso haver pelo menos um programa e um coordenador de curso cadastrados dentro de sua hierarquia de modo que a alocação possa ser efetuada.
+  no_programs_registered: Nenhum programa cadastrado até o momento
+  no_supervisors_found: Nenhum coordenador de curso encontrado dentro de sua hierarquia.  É necessário que exista de modo que possa ser alocado a um programa.
+  no_teachers_found: Os supervisores são criados a partir dos contatos com papel de docente de sua instituição, porém não encontrei nenhum. Você pode tentar novamente, após criar o respectivo usuário e inserir os dados de contato.
+  no_unregistered_students_found: Não foi encontrado nenhum bolsista cadastrado ainda por matricular.
+  not: não
+  nothing_due: Nada a receber
+  num_authorized_scholarships_for_incoming_students: Bolsas autorizadas para os ingressantes
+  num_days_worked_before_cancelling: Número de dias trabalhados antes do cancelamento
+  number_abbreviation: nº
+  of_the_team: da equipe
+  of_which_inactive: dos quais inativos
+  of_which_still_active: dos quais ainda ativos
+  ongoing: em andamento
+  only: somente
+  only_letters_allowed: somente caracteres (A até Z ou a até z) permitidos!
+  optional: opcional
+  or: ou
+  organization: organização
+  our_programs: Nossos cursos
+  page: página
+  paid_leaves: Licenças remuneradas (inclusive férias)
+  pay_slip: Demonstrativo de pagamento (Holerith)
+  pay_slips: Demonstrativos de pagamento (Holerith)
+  payroll_absences_report: Relatório de faltas da folha
+  payroll_annotations: anotações da folha
+  payroll_annotations_report: Relatório de anotações da folha
+  pending: Pendente
+  penultimate_day_in_month: Penúltimo dia do mês
+  people: pessoas
+  people_management: gestão de pessoas
+  percent: Percentual
+  percent_from_total: "% do total"
+  perform: efetuar
+  performed_on:
+    f: efetuada em
+    m: efetuado em
+  person: pessoa
+  personal_info: Informação pessoal
+  personal_leaves_amount: Valor de licenças particulares
+  phone: fone
+  photo: foto
+  place_a_program_under_review: Colocar um programa sob análise
+  please_provide_if_student: Dado obrigatório para bolsista
+  please_tick_one: Tique uma opção por favor
+  please_wait_for_processing: Por favor, aguarde o processamento.  Comecarei assim que você clicar em 'Ok'.
+  possible_students_to_be_paid: Possíveis bolsistas a receber
+  possible_values_for_the_attribute: Valores possíveis para o atributo
+  practical: Prático
+  press_ok: Pressione ok para iniciar o preparo.  Por favor aguarde
+  previous: anterior
+  previous_registration: matrícula anterior
+  previous_work_week_day: Dia de semana anterior (segunda à sexta)
+  processed_in_a_previous_payroll: Processado em uma folha anterior.
+  produce_statements: Gerar os demonstrativos deste mês (após confirmação do pagamento bancário)
+  professional_experience: Experiência Profissional
+  professional_field: Área profissional
+  program_duration: duração do programa
+  proportion: Proporção
+  public_sector_financed: de financiamento público
+  quality: qualidade
+  recalc: Recálculo
+  recalculate_payroll: recalcular folha
+  record_found: registro encontrado
+  record_not_found: registro não encontrado
+  registration_season_ended: Foi encerrada a temporada de matrículas.
+  registration_summary: Resumo da matrícula
+  registration_tutorial: 'Tutorial: realização da matrícula dos calouros - 2017'
+  registrations_confirmed_active: Matrículas confirmadas e ativas
+  registrations_confirmed_active_today: Matriculas confirmadas e ativas de hoje
+  registrations_confirmed_inactive: Cancelamentos confirmados
+  registrations_created_today: Matrículas realizadas hoje
+  registrations_pending_inactive: Cancelamentos pendentes
+  registrations_report:
+    filename_prefix: relatorio_situacao_matriculas
+    pdf_title: Relatório de situação das matrículas
+    screen_title: Relatório de matrículas
+  registrations_set_for_makeup: Matrículas marcadas como 'reposição obrigatória' (andamento)
+  regular_absences: Faltas comuns
+  related_to_cancellations: Relativas a cancelamentos
+  related_to_late_registrations: Relativas a matrículas tardias
+  remaining_scholarships: Bolsas ainda não alocadas
+  remark: observação
+  report: Relatório
+  report_available: relatório disponível
+  report_requested_by: Relatório solicitado por
+  reprt: relatorio
+  required: favor preencher
+  research: pesquisa
+  resend: Reenvio
+  responsible_department: Departamento responsável
+  restricted: preenchimento restrito
+  restricted_access: acesso restrito
+  result: resultado
+  retroactive_cancellation_after_payroll_was_processed: cancelamento retroativo após processamento da folha
+  rooms: salas
+  rounding: Arredondamento
+  scholarship_amount: Valor da bolsa
+  scholarship_recipient: bolsista
+  scholarship_registration_confirmation_receipt: Comprovante de matrícula
+  schoolterm_finish_explanation: O campo final do período letivo se refere ao término dos programas de maior duração que começaram (ou vão começar) na data especificada de início.  Por isto, pode ultrapassar 1 ano.
+  scientific_production: produção científica
+  screens: Telas
+  second_schoolyear_removal_instructions: Verifique se o segundo (ou maior) ano escolar realmente deve constar, de acordo com a duração do programa.  Caso necessário, o mesmo pode ser excluído ao se clicar em 'Remover' do lado direito da tela, na linha correspondente ao Número do ano (escolar) 2 ou maior.
+  sector: Setor
+  seek: buscar
+  settings: Configurações
+  shortcut: atalho
+  since: Desde
+  skip_payment: Nada a receber nesta folha
+  some_attributes: Alguns atributos
+  spreadsheet: planilha
+  start: Início
+  start_date: Desde
+  stats: Estatísticas
+  status: Situação
+  step:
+    f: etapa
+    m: passo
+  still_valid: Ainda vigente
+  student_history: Histórico do bolsista
+  student_situation: situação do bolsista
+  students_paid: Bolsistas que irão receber algo
+  students_skipped: Bolsistas com valor zerado
+  subtotal: subtotal
+  summary: Resumo
+  supervisor_professional_data: dados do docente
+  supplemental_info: Informações complementares
+  supplemental_remittance: envio complementar
+  supplements: Suplementos
+  suspended_registrations_during_this_payroll: Matrículas suspensas durante esta folha
+  system: sistema
+  system_developer: Desenvolvedor do sistema
+  target_public: Público almejado
+  teacher: Docente responsável
+  teaching: Ensino
+  teaching_info: informação de docência
+  term_of_office: Período de gestão
+  theoretical: Teórico
+  this_warning_will_automatically_disappear: Este aviso desaparecerá automaticamente quando a situação que o originou não ocorrer mais.  Isto é normal.
+  tie_freshman_student_to_their_schoolyear: Atrelar bolsista primeiro-anista a seu programa
+  to: a
+  to_be_done_in_this_order: A serem realizados nesta ordem
+  to_be_paid: a receber
+  total: total
+  total_absences_amount: Valor total de faltas
+  total_report: Relatório de totalização
+  totals: Totalização
+  'true': sim
+  tutorial: Tutorial
+  tutorials: Tutoriais
+  unable_to_create_user: Não foi possível criar o usuário.  Verifique os dados digitados e tente novamente.
+  undefined_value: "<<valor indefinido!>>"
+  undergraduate_institution: Instituição onde se formou (graduação)
+  unfavorable_assessment: avaliação desfavorável
+  until: até
+  updated_at: Atualização mais recente (ou criação)
+  updated_by: Atualizado por
+  url_entered_incorrectly: digitada incorretamente.  Não é necessário iniciar com http://
+  user:
+    f: usuária
+    m: usuário
+  user_email: E-mail do usuário
+  users_with_incomplete_contact_information_detected: Foram detectados usuários com informações de contato incompletas (sem nome) !
+  various_paid_leave_types: Vários tipos de licenças remuneradas
+  weekday: Dia da semana
+  were_registered: Foram matriculados
+  when: Quando
+  with_annotations: Com anotações
+  with_financial_impact: Com impacto financeiro
+  without_annotations: Sem anotações
+  without_financial_impact: Sem impacto na folha
+  workday: Dia útil
+  workload: Carga de trabalho
+  year: ano
+  year_number: Número do ano
+  year_s: ano(s)
+  yearly_statistics: Estatísticas anuais de funcionamento
+  you_must_edit_or_remove_them: Você deverá editá-los e completar as informações (em certas situações você poderá remover o contato, por exemplo, se já tiver sido informado um e-mail alternativo e um outro contato criado com sucesso em nome da pessoa - senão terá que recomeçar o cadastro a partir da criação do usuário).
+  your_search_result_follows: Segue o resultado de sua busca

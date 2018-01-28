@@ -1,0 +1,51 @@
+<div class="row">
+
+	<h2><%= t('insurance_report') %></h2>
+
+</div>
+
+<div class="row">
+
+	<h2 class="subheader"><%= tm('bankpayment').capitalize+': ' %> <%= @bankpayment.name %></h2>
+
+</div>
+
+<div class="row">
+
+	<h3><%= @insured_registrations.count.to_s+' '+I18n.t('activerecord.models.student').capitalize.pluralize %></h3>
+
+	<hr>
+	
+</div>
+
+<% @insured_registrations.ordered_by_contact_name.each_with_index do |registration, n| %>
+	
+	<div class="row">
+		
+			<%= insurance_report_for_student(registration) %>
+					  
+	</div>
+	
+<% end %>
+
+<div class="row">
+
+<h5><%= current_user.contact_name %></h5>
+
+</div>
+
+<div class="row">
+
+	<h5><%= I18n.l(Time.now) %></h5>
+	
+</div>
+
+<div class="row">
+	
+	<%= link_to t('actions.print'), report2_bankpayment_path(@bankpayment), :onclick => 'window.print();return false;', class: 'small button info'%> | 
+
+	<%= link_to t('actions.generate').capitalize+' '+t('spreadsheet'), insurancecsv_bankpayment_path(@bankpayment), class: "relatorio3"  %> | 
+
+	<%= link_to t('back').capitalize, bankpayments_path,  class: t('back')  %>
+
+</div>

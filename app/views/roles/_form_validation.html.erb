@@ -1,0 +1,10 @@
+<% if @role.errors.any? %>
+    <div id="error_explanation">
+      <h2>O perfil não pode ser gravado devido a <%= pluralize(@role.errors.count, "erro") %>:</h2>
+      <ul>
+      <% @role.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>

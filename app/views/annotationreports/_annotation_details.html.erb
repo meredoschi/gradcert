@@ -1,0 +1,101 @@
+<% if is_admin_or_manager(current_user) %>
+
+<div class="row">
+  <h4>
+        <%= link_to annotation.institution.name, annotation.institution %> </h5>
+
+</div>
+
+<% end %>
+
+  <% if annotation.skip? %>
+
+    <div class="row">
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    <h4> <%= ta('annotation.skip') %></h4>
+
+    </div>
+
+    <div class="row">
+
+      <h5>
+        <%= link_to annotation.registration.student_name_id_with_label_schoolyear_term, annotation  %>
+        </h5>
+
+
+    </div>
+
+    <div class="row">
+
+      <h6>	<%= annotation.comment %> </h6>
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    </div>
+
+  <% else %>
+
+    <div class="row">
+
+      <h5> <%= link_to tm('annotation').capitalize+' '+annotation.id.to_s, annotation  %><h5>
+           <%#= link_to annotation.registration.report_details, annotation.registration %>
+
+      <h5> <%= link_to annotation.registration.student_name_id_with_label_schoolyear_term, annotation.registration %> </h5>
+
+    </div>
+
+    <div class="row">
+
+      <h6> <%= pluralize(annotation.absences, t('absence')) %></h6>
+
+    </div>
+
+
+  <% end %>
+
+</div>
+
+
+<% @all_events.for_registration_from_payroll(annotation.registration,@payroll).each_with_index do |event, i|	%>
+
+  <% if event.pending? %>
+    <div class="row">
+      <h4> ****** <%= tm('event').capitalize %> <%= t('pending').downcase %> ******</h4>
+    </div>
+  <% end %>
+
+  <div class="row">
+
+    <div class="large-8 columns">
+
+      <%= render 'annotation_event.html.erb', event: event %>
+
+    </div>
+
+
+    <div class="large-4 columns">
+
+      <% if event.residual? %>
+
+        <h6><u><%= tm('event').capitalize %> <%= ta('event.residual').downcase %></u></h6>
+
+      <% end %>
+
+    </div>
+
+    <%= render 'annotation_registration.html.erb', event: event %>
+
+  </div>
+
+  <% if event.pending? %>
+
+    <div class="row"><h4>*****************************************</h4></div>
+
+  <% end %>
+
+<% end %>
+
+
+</div>

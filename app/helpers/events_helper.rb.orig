@@ -1,0 +1,91 @@
+module EventsHelper
+<<<<<<< HEAD
+
+  # Fetch students 
+	def registrations_for(user)
+	
+				records = case
+				
+	        when permission_for(user)=='admin' then Registration.all
+	        when permission_for(user)=='papmgr' then Registration.pap
+	        when permission_for(user)=='paplocaladm' then Registration.pap.from_own_institution(user)
+				  end	 				
+			  
+			  return records
+	end
+
+	def registration_details(user)
+
+			profile = case
+
+			when permission_for(user)=='admin' then :full_details		
+			when permission_for(user)=='papmgr' then :full_details		
+			when permission_for(user)=='paplocaladm' then :details		
+			else "indefinido"
+		  end		 
+		  
+			return profile
+				 		 
+	end
+
+	def display_kind(event)
+
+			txt=''
+				
+			if event.leave? 
+				
+				txt=tm('leave').capitalize+' '+event.leavetype.name
+				
+			else
+			
+				txt=ta('event.absence')
+				
+			end
+
+			return txt.html_safe
+									
+	end
+
+=begin
+
+	def display_if_is_leave(event)
+
+			txt=''
+				
+			if event.leave? 
+				
+				txt=event.leavetype.name
+				
+			else
+			
+				txt='---'
+				
+			end
+
+			return txt.html_safe
+									
+	end
+
+	def display_if_is_absence(event)
+
+			txt=''
+				
+			if event.absence? 
+				
+				txt=tickmark(event.absence)
+				
+			else
+			
+				txt='---'
+				
+			end
+
+			return txt.html_safe
+									
+	end
+
+=end
+
+=======
+>>>>>>> pap-a/movement
+end

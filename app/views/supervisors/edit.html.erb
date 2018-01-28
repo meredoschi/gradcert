@@ -1,0 +1,18 @@
+<% if is_regular_user(current_user) || is_own_supervisor(current_user)  %>
+
+	<h2> <%= t('actions.edit').capitalize+' '+t('my.f')+' '+t('teaching_info') %> </h2>
+
+	
+<% else %>
+
+	<h2><%= t('noun.edit') %> <%= tm('supervisor') %></h2>
+
+	<div class="row">
+	
+		<h2 class="subheader"><%= @supervisor.contact.name %></h2>
+
+	</div>
+
+<% end %>
+
+<%= render 'form' %>

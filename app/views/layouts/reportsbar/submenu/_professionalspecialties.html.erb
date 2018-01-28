@@ -1,0 +1,19 @@
+<% if can? :read, @professionalspecialty %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(professionalspecialties_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('professionalspecialty').capitalize.pluralize, professionalspecialties_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

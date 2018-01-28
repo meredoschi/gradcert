@@ -1,0 +1,88 @@
+<%= form.fields_for :address do |address_fields| %>
+
+	<div class="row custom-panel3">
+
+		<div class="row">
+
+			 		<div class="large-2 columns", class: "left inline">
+
+					  <%= address_fields.label ta('address.addr')%><br>
+
+					</div>
+
+			 		<div class="large-2 columns", class: "left inline">
+
+				  	<%= address_fields.collection_select :streetname_id, Streetname.order(:designation), :id, :designation,  {prompt: true} %>
+
+					</div>
+
+						 		<div class="large-3 columns">
+
+					   <%= address_fields.text_field :addr %>
+
+						</div>
+
+				 		<div class="large-1 column">
+
+					   <%= address_fields.number_field :streetnum %>
+
+						</div>
+
+			 		<div class="large-2 columns", class: "left inline">
+
+						  <%= address_fields.label ta('address.complement')%><br>
+
+					</div>
+
+			 		<div class="large-2 columns">
+
+				   <%= address_fields.text_field :complement %>
+
+					</div>
+
+		</div>
+
+		<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+
+				  <%= form.label ta('address.neighborhood')%><br>
+
+			</div>
+
+	 		<div class="large-2 columns">
+
+	   <%= address_fields.text_field :neighborhood %>
+
+			</div>
+
+	 		<div class="large-1 columns", class: "left inline">
+
+			  <%= address_fields.label ta('address.municipality')%><br>
+
+			</div>
+
+	 		<div class="large-3 columns">
+
+				<%= address_fields.collection_select :municipality_id, Municipality.ordered_by_asciiname_and_state.paulista, :id, :name_with_state, selected: Municipality.hometown.id.to_s  %>
+				<%#= address_fields.collection_select :municipality_id, @state_towns, :id, :name_with_state, prompt: true, selected: @hometown_id  %>
+
+			</div>
+
+	 		<div class="large-2 columns">
+
+			  <%= address_fields.label ta('address.postalcode')%><br>
+
+			</div>
+
+	 		<div class="large-2 columns">
+
+		   <%= address_fields.text_field :postalcode %>
+
+			</div>
+
+		</div>
+
+	</div>
+
+<% end %>

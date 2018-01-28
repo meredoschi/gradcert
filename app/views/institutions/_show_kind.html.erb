@@ -1,0 +1,85 @@
+<div class="row">
+		<table>
+
+			<div class="row">
+
+				<tr>
+
+				  <div class="large-4 columns">
+			
+					
+								<th><strong><%= ta('institution.type')%></strong></th>
+
+ 	 			  </div>
+
+					<% if @institution.higherlearning? %>					
+										
+					  <div class="large-4 columns">
+	
+									<th><strong><%= t('teaching') %></strong></th>
+	
+	 	 			  </div>
+	
+					<% end %>
+
+					<% if @institution.with_infrastructure? %>					
+					
+					  <div class="large-4 columns">
+	
+									<th><strong><%= t('infrastructure') %></strong></th>
+	
+	 	 			  </div>
+	
+					<% end %>
+					
+				</tr>						
+					
+			</div>
+												
+		
+				</div>										
+
+			<div class="row">
+		
+				<tr>
+
+				  <div class="large-4 columns">
+					
+						<td><%= @institution.institutiontype.name %></td>
+
+					</div>
+
+					<% if @institution.higherlearning? %>					
+
+					  <div class="large-4 columns">
+	
+							<td>
+						
+							<%=	teaching_offerings(@institution) %>
+						
+								</td>						
+							
+					  </div>
+					  
+					 <% end %>
+
+					<% if @institution.with_infrastructure? %>					
+				
+					  <div class="large-4 columns">
+	
+							<td>
+
+								<%=	available_infrastructure(@institution) %>
+															
+							</td>
+		
+					  </div>
+	 
+	 				<% end %>
+ 	 		
+	 	 		</tr>
+	  					
+ 	 			</div>
+				 		
+</table>
+</div>		

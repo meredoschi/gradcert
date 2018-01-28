@@ -1,0 +1,107 @@
+<div class="row">
+
+	<h2><%= tm('assessment').capitalize %></h2>
+
+</div>
+
+<% if is_staff(current_user) %>
+
+	<div class="row">
+			<table>
+				<tr>
+	
+	
+								<div class="large-4 columns">
+						
+									<th><strong><%= t('activerecord.attributes.assessment.contact')%></strong></th>
+						
+								</div>		
+								
+				</tr>						
+			
+				<div class="row">
+			
+					<tr>
+						<div class="large-12 columns">
+						
+						  <td><%= link_to @assessment.contact.name, @assessment.contact %></td>
+						
+						</div>
+											
+					</tr>
+			</div>
+	
+		</table>
+	</div>
+
+<% end %>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= t('name')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= link_to @assessment.program.programname.name, @assessment.program %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= t('activerecord.attributes.assessment.profession')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= link_to @assessment.profession.name, @assessment.profession %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+<div class="row">
+	
+	<% if can? :edit, @assessment %>
+
+		<%= link_to t('actions.edit'), edit_assessment_path(@assessment), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), assessments_path,  class: "voltar"  %>
+
+</div>

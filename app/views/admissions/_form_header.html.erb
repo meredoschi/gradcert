@@ -1,0 +1,17 @@
+<div class="row custom-panel 5 text-center">
+
+  <% if is_admin_or_manager(current_user) %>
+
+  <div class="custom-panel9">
+    <h3> <%= @program.institution.name %> </h3>
+
+  </div>
+
+  <% end %>
+
+
+  <h3><%= @program.name.capitalize %></h3>
+
+  <h4> <%= tm('schoolterm').capitalize %>: <%= @program.schoolterm.name.downcase %></h4>
+
+</div>

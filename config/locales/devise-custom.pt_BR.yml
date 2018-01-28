@@ -1,0 +1,11 @@
+---
+pt_BR:
+  devise-custom:
+    access: Acessar
+    access_control: Controle de acesso
+    change_your_password: Alterar sua senha
+    forgot_your_password: Esqueceu sua senha?
+    new_password: Nova senha
+    provide_your_registered_email: Informe seu endereço de correio eletrônico cadastrado (e-mail)
+    repeat_new_password: Repita a senha nova
+    send_me_instructions_to_generate_a_new_password: Me envie instruções para regerar senha

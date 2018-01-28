@@ -1,0 +1,35 @@
+<%= form_for(@makeupschedule) do |f| %>
+  <% if @makeupschedule.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@makeupschedule.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @makeupschedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+  <%= render 'form_start', f: f %>
+  <%= render 'form_finish', f: f %>
+  <%# stopped here  %>
+  <%#= render 'form_registration', f: f %>
+
+</div>
+
+	<% if can? :update, Makeupschedule %>
+
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), makeupschedules_path, class: t('cancel') %>
+
+	</div>
+
+<% end %>

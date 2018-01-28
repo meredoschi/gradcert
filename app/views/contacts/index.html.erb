@@ -1,0 +1,27 @@
+<%= render 'index_header.html.erb' %>
+
+<% if @num_nameless_contacts > 0 %>
+
+	<%= render 'index_nameless_warning.html.erb' %>
+
+	<%= render 'index_nameless_records.html.erb' %>
+
+<div class="row">
+
+	<hr class="custom-hr">
+
+</div>
+
+<% end %>
+
+<div class="row">
+
+	<%= render 'index_table.html.erb' %>
+
+	<% if is_staff(current_user)  %>
+
+		<%= render 'index_search.html.erb' %>
+
+	<% end %>
+
+</div>

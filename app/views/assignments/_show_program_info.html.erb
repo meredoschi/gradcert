@@ -1,0 +1,39 @@
+<div class="row">
+
+	<table>
+		<tr>
+		
+		<div class="large-6 columns">
+				<th><strong><%= tm('program').capitalize%></strong></th>
+	
+		</div>
+		
+		<div class="large-6 columns">
+			<th><strong><%= tm('institution').capitalize%></strong></th>
+		</div>
+				
+		</tr>
+</div>
+
+<div class="row">
+
+		<tr>
+		
+		<div class="large-6 columns">
+
+			<td><%= link_to @assignment.program.programname.name, @assignment.program %></td>
+
+		</div>
+
+		<div class="large-6 columns">
+		
+			<td><%= link_to @assignment.program.institution.name, @assignment.program.institution %></td>	
+
+		</div>
+
+		</div>
+				
+	  </tr>
+	</table>
+
+</div>

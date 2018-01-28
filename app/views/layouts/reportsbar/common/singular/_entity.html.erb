@@ -1,0 +1,23 @@
+<% if ( is_active_link?(institutions_path, :inclusive) || is_active_link?(characteristics_path, :inclusive) || is_active_link?(researchcenters_path, :inclusive) || is_active_link?(colleges_path, :inclusive) || is_active_link?(healthcareinfos_path, :inclusive) ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+  <a href="#"><%= t('my.f').upcase+' '+t('entity').mb_chars.upcase %></a>
+  
+    <ul class="dropdown">
+
+			<%= render 'layouts/navbar/submenu/singular/institution.html.erb' %>
+			<%= render 'layouts/navbar/submenu/singular/characteristic.html.erb' %>
+
+			<%= render 'layouts/navbar/submenu/singular/researchcenter.html.erb' %>
+			<%= render 'layouts/navbar/submenu/singular/healthcareinfo.html.erb' %>
+			<%= render 'layouts/navbar/submenu/singular/college.html.erb' %>
+	
+	</ul>
+</ul>

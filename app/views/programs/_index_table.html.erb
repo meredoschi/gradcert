@@ -1,0 +1,109 @@
+<table>
+
+	<%= render 'index_table_head' %>
+
+  <tbody>
+    <% @programs.each do |program| %>
+
+		<div class="row">
+      <tr>
+
+			<div class="large-3 columns">
+      
+      	<% if is_inactive?(program) %>
+
+				<td><strike><%= link_to program.programname.name, program %></strike></td>
+      	
+      	<% else %>
+      	
+        <td><%= link_to program.programname.name, program %></td>
+       
+       	<% end %>
+       	
+      </div>
+
+				<div class="large-2 columns">
+      
+				<% if is_admin_or_manager(current_user) %>
+
+							
+      		<td><% if program.institution.present? %>
+      		
+      					<%= link_to program.institution.name, program.institution %>
+				
+							 <% else %>
+
+      					<%= program.institution %>
+							 
+							 <% end %>
+					     </td>		 
+								
+				<% end %>
+
+				</div>
+
+				<div class="large-1 column">
+	        <td><%= program.schoolterm.name %></td>
+				</div>
+
+				<div class="large-1 column">
+	        <td><%= program.duration %></td>
+				</div>
+
+				<div class="large-1 column">
+	  				<td> <%=	display_if_not_zero(program.schoolyears.enrollment) %></td>
+				</div>
+
+				<div class="large-1 column">
+	  			<td>
+	  					<%#= display_if_not_zero(program.schoolyears.grants(program)) %>
+							
+	  				</td>
+				</div>
+				
+				<div class="large-1 column">
+	        <td>
+	        		<%= I18n.l program.updated_at, :format => :short %></td>
+				</div>
+				
+				<div class="large-1 column">
+
+	        <% if can? :read, program %>
+ 				
+		        <td><%= link_to t('actions.show'), program, class: "mostrar" %>
+
+					<% end %>
+					
+				</div>
+
+				<div class="large-1 column">
+				
+	        <% if can? :edit, program %>
+
+    		  <td><%= link_to t('actions.edit'), edit_program_path(program), class: "editar" %></td>   
+		
+  				<% end %>
+
+				</div>
+			
+				<div class="large-1 column">
+	
+	        <% if can? :destroy, program %>
+  			      
+ 		     		  <td><%= link_to t('actions.delete'),program, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+              
+    	    <% end %>
+
+        </div>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<div class="row">
+
+<%= paginate @programs %>
+	 
+</div>

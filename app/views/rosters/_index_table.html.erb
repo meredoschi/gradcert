@@ -1,0 +1,78 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @rosters.each do |roster| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= roster.institution_id %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= roster.schoolterm_id %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= roster.authorizedsupervisors %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= roster.dataentrystart %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= roster.dataentryfinish %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, roster %>
+		        <td><%= link_to t('actions.show'), roster, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, roster %>
+			      <td><%= link_to t('actions.edit'), edit_roster_path(roster), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, roster %>
+		     		<td><%= link_to t('actions.delete'),roster, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @rosters %>
+
+</div>
+
+<br>

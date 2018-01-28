@@ -1,0 +1,72 @@
+<div class="row">
+		<table>
+			<tr>
+			
+				<div class="large-6 columns">
+					
+			
+					<th><strong><%= ta('annotation.payroll_id')%></strong></th>
+
+				</div>
+		
+
+				<div class="large-2 columns">
+		
+					<th><strong><%= ta('annotation.absences')%></strong></th>
+		
+				</div>
+
+				<% if @annotation.skip %>
+	
+					<div class="large-2 columns">
+					
+						<th><strong><%= ta('annotation.skip')%></strong></th>
+
+					</div>
+					
+				<% end %>
+
+					<div class="large-2 columns">
+					
+						<th><strong><%= ta('annotation.virtual.attendance')%></strong></th>
+
+					</div>
+						
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-6 columns">
+					
+						<td><%= link_to @annotation.payroll.name, @annotation.payroll %></td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td><%= @annotation.absences %></td>
+					
+					</div>
+					
+					<% if @annotation.skip %>
+
+						<div class="large-2 columns">
+						
+							<td><%= yes_no(@annotation.skip) %></td>
+						
+						</div>
+						
+					<% end %>
+
+						<div class="large-2 columns">
+						
+							<td><%= display_attendance(@annotation) %></td>
+						
+						</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>

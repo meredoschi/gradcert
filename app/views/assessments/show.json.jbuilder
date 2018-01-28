@@ -1,0 +1,1 @@
+json.extract! @assessment, :id, :contact_id, :program_id, :profession_id, :duration_change_requested, :expected_duration, :expected_first_year_grants, :expected_second_year_grants, :summary_of_program_goals, :program_nature_vocation, :first_year_theory_hours, :first_year_practice_hours, :second_year_theory_hours, :second_year_practice_hours, :created_at, :updated_at

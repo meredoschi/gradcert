@@ -1,0 +1,38 @@
+<div class="row">
+	<h3>
+
+			<%= pluralize(@registration.numannotations, tm('annotation').capitalize) %>
+		
+	</h3>
+	
+</div>
+
+<div class="row">
+
+	<h4>
+		<table>
+
+		<% @annotations.each_with_index do |annotation, i| %>
+
+			<% if i==0 %>
+			
+				<%= render 'show_annotations_heading', annotation: annotation, i: i %>
+
+			<% end %>
+			
+			<%= render 'show_annotation_details', annotation: annotation, i: i %>
+
+		<% end %>
+
+		</table>
+	</div>		
+
+	</h4>
+	
+</div>
+
+	<% if @accounting_absences_total.present? %>
+
+		<%= render 'show_annotation_totals' %>
+			
+	<% end %>

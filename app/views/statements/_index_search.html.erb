@@ -1,0 +1,34 @@
+<%= search_form_for @search do |f| %>
+
+	<% if is_admin_or_manager_or_readonly(current_user) %>
+
+		<%= render 'index_search_institution.html.erb', f: f %>
+
+	<% end %>
+
+	<%= render 'index_search_bankpayment.html.erb', f: f %>
+
+	<%= render 'index_search_registration.html.erb', f: f %>
+
+	<div class="row">
+
+		<div class="large-3 columns">
+
+		  <%= f.submit t('actions.search'), class: t('seek') %>
+
+	 </div>
+
+
+		<div class="large-3 columns">
+
+  	  	<%#= link_to t('generate_pdf'), statements_path(params.merge(:format => "pdf")), class: "exportpdf",  :onclick => "alert(' #{t('please_wait_for_processing')} ')" %>
+
+	 </div>
+
+		<div class="large-6 columns">
+
+		</div>
+	</div>
+
+
+<% end %>

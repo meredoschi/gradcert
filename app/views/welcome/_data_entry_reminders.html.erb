@@ -1,0 +1,13 @@
+<% if is_local_admin(current_user) %>
+
+  <% if data_entry_permitted_on_latest_payroll? %>
+
+    <%= render 'permitted_message.html.erb'%>
+
+  <% else %>
+
+    <%= render 'read_only_events.html.erb'%>
+
+  <% end %>
+
+<% end %>

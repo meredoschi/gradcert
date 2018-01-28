@@ -1,0 +1,24 @@
+
+<div class="row">
+
+  <div class="large-9 columns">
+
+
+    <h5> <%= t('of_which_still_active') %> </h5>
+
+
+  </div>
+
+
+  <div class="large-3 columns">
+
+    <h5>
+      <%# To do: verify why this isn't displaying properly %>
+      <%#= @scholarships_offered %>
+      <%= @previous_term_registrations_on_multiyear_programs.active.count.to_s	%>
+
+    </h5>
+
+  </div>
+
+</div>

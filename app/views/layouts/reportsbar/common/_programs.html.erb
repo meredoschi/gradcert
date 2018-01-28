@@ -1,0 +1,21 @@
+<% if ( is_active_link?(assignments_path, :inclusive) || is_active_link?(programs_path, :inclusive) || is_active_link?(professionalareas_path, :inclusive) || is_active_link?(professionalspecialties_path, :inclusive)  ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+  <a href="#"><%= t('navbar.programming').pluralize.mb_chars.upcase %></a>
+
+	<ul class="dropdown">
+	
+		<div class="row"> <%= render 'layouts/navbar/submenu/assignments.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/professionalareas.html.erb' %> </div>	
+		<div class="row"> <%= render 'layouts/navbar/submenu/professionalspecialties.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/programs.html.erb' %> </div>
+	
+	 </ul>
+	 

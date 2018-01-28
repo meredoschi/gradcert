@@ -1,0 +1,46 @@
+# CBO ("Brazilian Labor Ministry Official Classification")
+class Professionalfamily < ActiveRecord::Base
+  # ------------------- References ------------------------
+
+  belongs_to :council
+
+  has_many :course, foreign_key: 'professionalfamily_id'
+
+  has_many  :profession, foreign_key: 'professionalfamily_id'
+
+  # -------------------------------------------------------
+
+<<<<<<< HEAD
+  # --- Tested code start
+  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 150 }
+  # --- Tested code finish
+
+=======
+  # ********* It is assumed an attribute called 'name' exists for most models.  Adjust or comment accordingly ************************
+
+  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 150 }
+
+>>>>>>> devel
+  def self.default_scope
+    # this notation prevents ambiguity
+    order(name: :asc)
+    # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
+  end
+<<<<<<< HEAD
+=======
+
+  # ***********************************************************************************************************************************
+>>>>>>> devel
+
+  def self.pap
+    where(pap: true)
+  end
+
+  def self.medres
+    where(medres: true)
+<<<<<<< HEAD
+  end
+=======
+ end
+>>>>>>> devel
+end

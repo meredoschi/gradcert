@@ -1,0 +1,2 @@
+module SchoolnamesHelper
+end

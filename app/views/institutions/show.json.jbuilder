@@ -1,0 +1,1 @@
+json.extract! @institution, :id, :name, :streetname_id, :address, :addresscomplement, :neighborhood, :municipality_id, :postalcode, :mainphone, :url, :email, :institutiontype_id, :pap, :medicalresidency, :provisional, :created_at, :updated_at

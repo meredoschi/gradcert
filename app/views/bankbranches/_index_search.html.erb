@@ -1,0 +1,19 @@
+<%= search_form_for @search do |f| %>
+
+	<%= render 'index_search_name', f: f %>
+
+	<%= render 'index_search_code', f: f %>
+
+	<%= render 'index_search_municipality_and_neighborhood', f: f %>
+
+	<div class="row">
+
+		<div class="large-6 columns">
+
+		  <%= f.submit t('actions.search'), class: t('seek') %>
+
+		</div>
+
+	</div>
+
+<% end %>

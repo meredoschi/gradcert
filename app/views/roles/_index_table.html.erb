@@ -1,0 +1,111 @@
+<table>
+	<thead>
+		<tr>
+			<div class="row">
+
+				<div class="large-2 columns">
+							
+				  <th><%= ta('role.name') %></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+		      <th><%= ta('role.management') %></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+		      <th><%= ta('role.teaching') %></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+	  	    <th><%= ta('role.clerical') %></th>       
+
+				</div>
+
+				<div class="large-2 columns">
+
+				  <th><%= ta('role.collaborator') %></th>       
+
+				</div>
+
+				<div class="large-2 columns">
+
+				  <th><%= ta('role.student') %></th>
+
+				</div>
+								  					
+		      <th colspan="3"></th> 
+	   </tr>
+	 </thead>
+	
+	  <tbody>
+	    <% @roles.each do |role| %>
+	      <tr>
+
+				<div class="large-2 columns">
+
+	      	<td><%= role.name %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+        	<td><%= tickmark(role.management) %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+        	<td><%= tickmark(role.teaching) %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+        	<td><%= tickmark(role.clerical) %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+        	<td><%= tickmark(role.collaborator) %></td>
+
+				</div>
+
+				<div class="large-2 columns">
+
+        	<td><%= tickmark(role.student) %></td>
+
+				</div>
+	      
+	        <% if can? :read, role %>
+		        <td><%= link_to t('actions.show'), role, class: "mostrar" %></td>
+					<% end %>
+	
+	        <% if can? :update, role %>
+			      <td><%= link_to t('actions.edit'), edit_role_path(role), class: "editar" %></td>   
+					<% end %>
+	
+	        <% if can? :destroy, role %>
+		     		<td><%= link_to t('actions.delete'),role, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+					  
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	<br>
+</div>
+
+<div class="row">
+
+  <%= paginate @roles %>
+
+  <br>
+		 
+</div>

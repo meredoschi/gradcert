@@ -1,0 +1,90 @@
+<%= form_for(@bankbranch) do |f| %>
+  <% if @bankbranch.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@bankbranch.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @bankbranch.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+	<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+
+		    <%= f.label :name %><br>
+
+			</div>
+
+	 		<div class="large-4 columns">
+
+			  <%= f.text_field :name %>
+
+			</div>
+
+	 		<div class="large-2 columns">
+
+		    <%= f.label :code %><br>
+
+			</div>
+
+	 		<div class="large-2 columns">
+
+			  <%= f.text_field :code %>
+
+			</div>
+
+	 		<div class="large-1 column">
+
+		    <%= f.label :verificationdigit %><br>
+
+			</div>
+
+	 		<div class="large-1 column">
+
+			  <%= f.text_field :verificationdigit %>
+
+			</div>
+
+ 	</div>
+
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label :opened %><br>
+
+	</div>
+
+		 		<div class="medium-9 columns ">
+
+						<%#=  f.date_select(:opened, prompt: true, start_year: Date.today.year, end_year: Date.today.year) %>
+
+						<%= f.date_select(:opened, prompt: true,  start_year: Date.today.year - 2, end_year: Date.today.year) %>
+
+
+				</div>
+
+</div>
+
+	<%= render 'form_address.html.erb', form: f %>
+
+	<%= render 'form_phones.html.erb', form: f %>
+
+	<% if can? :update, Bankbranch %>
+
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), bankbranches_path, class: t('cancel') %>
+
+	</div>
+
+<% end %>

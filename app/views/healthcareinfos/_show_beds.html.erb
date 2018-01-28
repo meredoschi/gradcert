@@ -1,0 +1,87 @@
+<div class="row">
+
+	<table>
+		<tr>
+
+		<div class="large-4 columns">			
+			<th><strong><%= ta('healthcareinfo.emergencyroombeds') %></strong></th>		
+		</div>
+
+		<div class="large-4 columns">			
+			<th><strong><%= ta('healthcareinfo.icubeds') %></strong></th>		
+		</div>
+			
+		<div class="large-4 columns">
+			<th><strong>Total</strong></th>
+		</div>
+
+				
+		</tr>
+
+</div>
+
+<div class="row">
+
+		<tr>
+
+		<div class="large-4 columns">
+			
+			<td><%= @healthcareinfo.emergencyroombeds %></td>	
+
+		</div>
+
+			
+		<div class="large-4 columns">
+			
+			<td><%= @healthcareinfo.icubeds %></td>	
+
+		</div>
+		
+				<div class="large-4 columns">
+		
+			<td><%= @healthcareinfo.totalbeds  %></td>	
+
+		</div>
+	
+	  </tr>
+	</table>
+</div>
+
+<div class="row">
+
+	<table>
+		<tr>
+
+		<div class="large-4 columns">			
+			<th><strong><%= ta('healthcareinfo.regularbeds') %></strong></th>		
+		</div>
+			
+		<div class="large-4 columns">
+			<th><strong>% total</strong></th>
+		</div>
+
+				
+		</tr>
+
+</div>
+
+<div class="row">
+
+		<tr>
+
+		<div class="large-4 columns">
+			
+			<td><%= @healthcareinfo.regularbeds %></td>	
+
+		</div>
+		
+				<div class="large-4 columns">
+		
+				
+			<td><%= number_to_percentage(@healthcareinfo.regularbeds*100/@healthcareinfo.totalbeds, format: "%n", precision: 1) %></td>	
+
+		</div>
+	
+	  </tr>
+	</table>
+</div>

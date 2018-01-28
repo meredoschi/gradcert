@@ -1,0 +1,210 @@
+<div class="row">
+
+ <h3><%= tm('personalinfo').capitalize %></h3>
+
+</div>
+
+<div class="row">
+
+	<%= form.fields_for :personalinfo do |personalinfo_fields| %>
+
+			<div class="row">
+
+		    <div class="large-2 columns">
+
+					<%= personalinfo_fields.label ta('personalinfo.dob') %>
+
+				</div>
+
+		    <div class="large-7 columns select-birthdate">
+
+			   <%= personalinfo_fields.date_select :dob, start_day: 1, start_year: Date.today.year - 16, end_year: Date.today.year-80, :prompt => true %>
+
+				</div>
+
+		 		<div class="large-2 columns", class: "left inline">
+
+				  <%= personalinfo_fields.label ta('personalinfo.sex')%>
+				  		<span data-tooltip aria-haspopup="true" class="has-tip" title="Sexo biológico da pessoa ao nascer (aspecto físico, cromossômico, gonoidal).  Geralmente aqui se marca: F=Feminino ou M=Masculino.  É possível informar X se for indefinido, entresexos ou não especificado."><%= t('required') %></span>
+
+
+				</div>
+
+		 		<div class="large-1 column" >
+
+			 	 <%= personalinfo_fields.select :sex, Personalinfo::SEXES, prompt: "--->" %>
+
+				</div>
+
+
+		</div>
+
+		<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+
+			<%= personalinfo_fields.label ta('personalinfo.mothersname') %>
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="Favor preencher este campo sempre que for bolsista (aprimorando).  É opcional para os outros papéis."><%= t('please_provide_if_student') %></span>
+
+
+			</div>
+
+		 	<div class="large-10 columns">
+
+				<%= personalinfo_fields.text_field :mothersname %>
+
+			</div>
+
+
+		</div>
+
+			<div class="row">
+
+				<h5><%= t('diversity').capitalize %></h5>
+
+			</div>
+
+
+		<div class="row panel">
+
+	 			<div class="large-3 columns", class: "left inline">
+
+				<%= personalinfo_fields.label ta('personalinfo.othername') %>
+			  			    		<span data-tooltip aria-haspopup="true" class="has-tip" title="Nome como a pessoa prefere ser chamada em sociedade, que reflete um gênero diferente do sexo biológico ao nascer.  Informar esta linha diversidade somente quando o sexo biológico e gênero forem distintos ou indefinidos (X).  Recomenda-se que a instituição mantenha cópia da devida documentação comprobatória (ex: laudo médico, psicólogo, endocrinológico)."><%= t('restricted') %></span>
+
+				</div>
+
+		 		<div class="large-4 columns">
+
+					<%= personalinfo_fields.text_field :othername %>
+
+				</div>
+
+		 		<div class="large-3 columns", class: "left inline">
+
+			  <%= personalinfo_fields.label ta('personalinfo.gender')%>
+			    		<span data-tooltip aria-haspopup="true" class="has-tip" title="É possível preencher um valor diferente de suas características biológicas aqui caso a pessoa se considere assim (mesmo que não tenha realizado cirurgia de mudança de sexo ou tratamento hormonal)."><%= t('restricted') %></span>
+
+			</div>
+
+	 		<div class="large-2 column">
+
+		 	 <%= personalinfo_fields.select :gender, Personalinfo::GENDERS, include_blank: true  %>
+
+			</div>
+
+
+
+			 	 <%#= personalinfo_fields.label ta('personalinfo.municipality_id') %>
+	  		 <%#= personalinfo_fields.collection_select :municipality_id, Municipality.all, :id, :name_with_state, prompt: true, include_blank: true %>
+
+
+	</div>
+
+</div>
+
+
+	<div class="row">
+
+	 <h3><%= t('identification').capitalize %></h3>
+
+	</div>
+
+		<div class="row">
+
+
+		 		<div class="large-2 columns", class: "left inline">
+
+				  <%#= personalinfo_fields.label ta('personalinfo.idtype')%>
+
+				  		<span data-tooltip aria-haspopup="true" class="has-tip" title="Selecione o tipo de documento e informe o número ao lado.  Em caso de estrangeiro: selecione RNE/CIE (de preferência) ou então passaporte e informe a nacionalidade."><%= ta('personalinfo.idtype') %></span>
+
+				</div>
+
+		 		<div class="large-2 columns", class: "left inline" >
+
+			 	 <%= personalinfo_fields.select :idtype, Personalinfo::IDTYPES %>
+
+				</div>
+
+
+		 		<div class="large-2 columns">
+
+				  <%= personalinfo_fields.text_field :idnumber %>
+
+				</div>
+
+		 		<div class="large-2 columns", class: "left inline" >
+
+			 	 <%= personalinfo_fields.label ta('personalinfo.state_id') %>
+
+				</div>
+
+			 	<div class="large-4 column">
+
+	  		 <%= personalinfo_fields.collection_select :state_id, State.all, :id, :name, prompt: true, include_blank: true %>
+
+				</div>
+
+		</div>
+
+	<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+
+			<%= personalinfo_fields.label ta('personalinfo.tin') %>
+
+			</div>
+
+	 		<div class="large-4 columns">
+
+				<%= personalinfo_fields.text_field :tin %>
+
+			</div>
+
+			<div class="large-2 columns", class: "left inline">
+
+				<%= personalinfo_fields.label ta('personalinfo.socialsecuritynumber') %>
+
+        <span data-tooltip aria-haspopup="true" class="has-tip" title="Favor preencher este campo sempre que for bolsista (aprimorando).  É opcional para os outros papéis."><%= t('please_provide_if_student') %></span>
+
+				</div>
+
+		 		<div class="large-4 columns">
+
+					<%= personalinfo_fields.text_field :socialsecuritynumber %>
+
+				</div>
+	</div>
+
+
+
+
+		<div class="row">
+
+		 	<div class="large-2 columns">
+
+	  	 <%= t('foreigner').capitalize %>
+
+			</div>
+
+			<div class="large-4 columns", class: "left inline" >
+
+			 	 <%#= personalinfo_fields.label ta('personalinfo.country_id') %>
+	  		    		<span data-tooltip aria-haspopup="true" class="has-tip" title="Informe somente quando não for brasileiro (i.e. documento apresentado for carteira de identidade de estrangeiro ou passaporte de outro país).  Neste caso não informe estado emissor (como se faz com RG)."><%= ta('personalinfo.country_id') %></span>
+
+				</div>
+
+			 	<div class="large-6 columns">
+
+	  		 <%= personalinfo_fields.collection_select :country_id, Country.foreign, :id, :brname, include_blank: true %>
+
+				</div>
+
+		</div>
+
+	</div>
+
+	<% end %>
+
+</div>

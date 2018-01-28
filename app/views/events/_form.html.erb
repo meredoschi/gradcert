@@ -1,0 +1,62 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@event.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%#= @num_active_registrations %>
+
+<% if !@event.archived? %>
+		
+	<%= render 'form_registration', f: f %>
+
+	<%= render 'form_kind', f: f %>
+
+	<%= render 'form_start', f: f %>
+
+	<%= render 'form_finish', f: f %>
+
+<% else %>
+
+	<div class="row custom-panel6">
+	
+		<%= render 'form_display_archived_info' %>
+	
+	</div>
+	
+	<%= render 'form_finish', f: f %>
+
+<% end %>
+
+<% if is_admin_or_manager(current_user) %>
+
+	<%= render 'form_confirmed', f: f %>
+	
+<% end %>	
+
+<% if is_staff(current_user) %>
+
+		<%= render 'form_supportingdoc', f: f %>
+	
+<% end %>
+
+	<% if can? :update, Event %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+		<% end %>
+
+  	 <%= link_to t('actions.cancel'), events_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

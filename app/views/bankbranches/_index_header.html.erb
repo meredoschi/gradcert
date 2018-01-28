@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-9 columns">
+
+
+	    	<h2> <%= t('activerecord.models.bankbranch').pluralize.mb_chars.upcase  %> (<%= @bankbranches.total_count  %> /  <%= @numbankbranches %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Bankbranch %>
+
+			<div class="large-3 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('bankbranch')), new_bankbranch_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

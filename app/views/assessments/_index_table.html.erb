@@ -1,0 +1,70 @@
+<table>
+
+	<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @assessments.each do |assessment| %>
+      <tr>
+				<div class="row">
+				
+		   <% if is_staff(current_user) %>
+
+		   		<div class="large-2 columns">
+	
+        		<td><%= link_to assessment.contact_name, assessment.contact %></td>
+
+					</div>
+					
+				<% end %>
+	
+		   <div class="large-3 columns">
+	
+        <td><%= link_to assessment.program_name, assessment.program  %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+	
+        <td><%= link_to assessment.institution_name, assessment.program.institution  %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= link_to assessment.profession_name, assessment.profession %></td>
+
+			</div>
+					
+		   <div class="large-3 columns">
+
+	        <% if can? :read, assessment %>
+		        <td><%= link_to t('actions.show'), assessment, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, assessment %>
+			      <td><%= link_to t('actions.edit'), edit_assessment_path(assessment), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, assessment %>
+		     		<td><%= link_to t('actions.delete'),assessment, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @assessments %>
+
+</div>
+
+<br>

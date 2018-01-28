@@ -1,0 +1,42 @@
+<% if ( is_active_link?(bankbranches_path, :inclusive) || is_active_link?(programnames_path, :inclusive)  || is_active_link?(professionalfamilies_path, :inclusive) || is_active_link?(professions_path, :inclusive) || is_active_link?(regionaloffices_path, :inclusive) || is_active_link?(methodologies_path, :inclusive) || is_active_link?(degreetypes_path, :inclusive) || is_active_link?(coursenames_path, :inclusive) || is_active_link?(schoolterms_path, :inclusive) || is_active_link?(taxations_path, :inclusive) || ( is_active_link?(streetnames_path, :inclusive) || is_active_link?(stateregions_path, :inclusive) || is_active_link?(states_path, :inclusive) || is_active_link?(countries_path, :inclusive) || is_active_link?(municipalities_path, :inclusive)  )   ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+  <a href="#"><%= t('definition').pluralize.mb_chars.upcase %></a>
+    <ul class="dropdown">
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/bankbranches.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/councils.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/regionaloffices.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/professionalfamilies.html.erb' %> </div>	
+		<div class="row"> <%= render 'layouts/navbar/submenu/methodologies.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/coursenames.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/programnames.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/schoolterms.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/professions.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/degreetypes.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/taxations.html.erb' %> </div>
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/streetnames.html.erb' %> </div>		
+		
+		<div class="row"> <%= render 'layouts/navbar/submenu/municipalities.html.erb' %> </div>
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/countries.html.erb' %> </div>
+
+		
+		<div class="row"> <%= render 'layouts/navbar/submenu/stateregions.html.erb' %> </div>
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/states.html.erb' %> </div>		
+		
+		
+		
+		
+		
+		  </ul>
+	 </ul>

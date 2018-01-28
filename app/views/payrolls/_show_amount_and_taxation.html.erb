@@ -1,0 +1,63 @@
+<div class="row">
+		<table>
+			<tr>
+
+						<div class="large-6 columns">
+
+							<th><strong><%= ta('payroll.taxation_id')%></strong></th>
+
+						</div>
+
+						<% if @payroll.special? %>
+
+							<div class="large-6 columns">
+					
+								<th><strong><%= t('gross_daily_scholarship_amount')%></strong></th>
+					
+							</div>
+
+						<% else %>
+						
+						<div class="large-6 columns">
+
+							<th><strong><%= ta('payroll.scholarship_id')%></strong></th>
+
+						</div>
+
+						<% end %>
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-6 columns">
+					
+						<td><%= link_to @payroll.taxation.name, @payroll.taxation %></td>
+					
+					</div>
+
+						<% if @payroll.special? %>
+
+							<div class="large-6 columns">													
+							
+								<td><%= @scholarship_for_payroll.first.amount/@payroll.numdays %></td>
+							
+							</div>
+
+						<% else %>
+						
+							<div class="large-6 columns">
+							
+								<td><%= link_to @scholarship_for_payroll.first.amount, @scholarship %></td>
+							
+							</div>
+
+						<% end %>																																																				
+										
+				</tr>
+		</div>
+
+	</table>
+</div>

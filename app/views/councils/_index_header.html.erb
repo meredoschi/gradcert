@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= t('activerecord.models.council').pluralize.mb_chars.upcase  %> (<%= @councils.total_count  %> /  <%= @numcouncils %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Council %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('council')), new_council_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

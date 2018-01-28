@@ -1,0 +1,56 @@
+<%= form_for(@permission) do |f| %>
+  <% if @permission.errors.any? %>
+    <div id="error_explanation">
+			<h2><%= t('validation.messagetext.system_detected') %> <%= pluralize(@permission.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %></h2>
+      <ul>
+      <% @permission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+	
+			<%= f.label ta('permission.kind') %>
+		  
+			</div>
+
+	 		<div class="large-9 columns">
+	
+				<%= f.text_field :kind %>
+		
+			</div>
+
+</div>
+
+<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+	
+			<%= f.label ta('permission.description') %>
+		  
+			</div>
+
+	 		<div class="large-9 columns">
+	
+				<%= f.text_field :description %>
+		
+			</div>
+
+</div>
+
+
+<% if can? :update, Permission %>
+
+   <div class="row actions">
+  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+ 
+<% end %>
+
+  	 <%= link_to t('actions.cancel'), permissions_path, class: "anular" %>
+  </div>
+
+<% end %>	

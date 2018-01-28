@@ -1,0 +1,64 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @leavetypes.each do |leavetype| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= leavetype.name %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= tickmark(leavetype.paid) %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= leavetype.comment %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, leavetype %>
+		        <td><%= link_to t('actions.show'), leavetype, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, leavetype %>
+			      <td><%= link_to t('actions.edit'), edit_leavetype_path(leavetype), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, leavetype %>
+		     		<td><%= link_to t('actions.delete'),leavetype, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @leavetypes %>
+
+</div>
+
+<br>

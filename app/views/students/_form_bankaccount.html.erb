@@ -1,0 +1,50 @@
+<%= form.fields_for :bankaccount do |bankaccount| %>
+
+	<div class="row panel custom-panel3">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+	 				<%= bankaccount.label ta('bankaccount.num') %>
+
+				</div>
+
+		 		<div class="large-3 columns">
+
+
+				  <%= bankaccount.text_field :num %>
+
+				</div>
+
+		 		<div class="large-3 columns", class: "left inline">
+
+	 				<%= bankaccount.label ta('bankaccount.verificationdigit') %>
+
+				</div>
+
+		 		<div class="large-3 columns">
+
+
+				  <%= bankaccount.text_field :verificationdigit %>
+
+				</div>
+
+	</div>
+
+	<div class="row custom-panel">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+					<%= bankaccount.label tm('bankbranch')%><br>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+		   		<%= bankaccount.collection_select :bankbranch_id, Bankbranch.all, :id, :details, :prompt => true %>        	
+
+				</div>
+
+	</div>
+
+
+<% end %>

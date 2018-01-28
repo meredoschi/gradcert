@@ -1,0 +1,30 @@
+
+
+
+	<div class="row">
+			
+		<div class="large-2 columns", class: "left inline">
+
+			<%= f.label tm('methodology') %>
+
+		</div>
+
+ 		<div class="large-6 columns">
+
+			<%= f.collection_select :methodology_id, Methodology.all, :id, :kind,  {prompt: true} %>
+	
+		</div>
+
+ 		<div class="large-3 columns", class: "left inline">
+
+	    <%= f.label ta('course.practical') %>
+ 	
+		</div>
+ 		
+ 		<div class="large-1 column">
+	   
+			<%= f.check_box :practical %>
+ 
+		</div>
+	
+</div>		

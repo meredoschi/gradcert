@@ -1,0 +1,19 @@
+<% if can? :read, @municipality %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(municipalities_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('municipality').capitalize.pluralize, municipalities_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

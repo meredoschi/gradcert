@@ -1,0 +1,125 @@
+
+<% if is_admin_or_manager(current_user) %>
+
+	<%= render 'show_alerts.html.erb' %>
+
+<% end %>
+
+<div class="row">
+
+	<span class="id-label"><h3><%= @institution.id %> </h3></span>
+
+</div>
+
+<div class="row">
+
+
+
+	<div class="large-8 columns">
+
+		<h2><%= @institution.name %></h2>
+
+			<% if @institution.abbreviation.present? %>
+
+			<%= render 'show_abbreviation.html.erb' %>
+
+		<% end %>
+
+
+			<% if @num_institution_managers > 0 %>
+
+				<div class="row">
+
+					<%= render 'show_managers.html.erb' %>
+
+				</div>
+
+				<%#= render 'show_management_contacts.html.erb' %>
+
+			<% end %>
+
+		<% if @institution.accreditation.details_on_file? && is_not_regular_user(current_user) %>
+			<%= render 'show_accreditation.html.erb' %>
+
+		<% end %>
+
+
+	</div>
+
+	<div class="large-4 columns">
+
+		<% if is_admin_or_manager(current_user) %>
+
+			<% if @institution.address.municipality.regionaloffice.present? %>
+
+				<%= render 'show_regional_office.html.erb' %>
+
+			<% end %>
+
+		<% end %>
+
+		<%= render 'show_kind.html.erb' %>
+
+		<%= render 'show_address.html.erb' %>
+
+		<%= render 'show_phones.html.erb' %>
+
+	</div>
+
+</div>
+
+<% if is_staff(current_user) %>
+
+	<div class="row">
+
+			<% if @num_institution_team_members>0 %>
+
+				<%= render 'show_team_members.html.erb' %>
+
+			<% end %>
+
+	</div>
+
+<% end %>
+
+
+<div class="row">
+
+	<div class="large-6 columns">
+
+		<%= render 'show_site_email.html.erb' %>
+
+	</div>
+
+
+		<div class="large-6 columns">
+
+		<%= render 'show_internet_social_media.html.erb' %>
+
+
+		</div>
+
+
+</div>
+
+
+<%= render 'show_programs.html.erb' %>
+
+
+<div class="row">
+
+	<% if can? :update, @institution %>
+
+	<%= link_to t('actions.edit'), edit_institution_path(@institution), class: "editar"  %> |
+
+	<% end %>
+
+	<%= link_to t('actions.back'), institutions_path,  class: "voltar"  %>
+
+</div>
+
+<% if is_staff(current_user) %>
+
+	<%= render 'show_last_updated.html.erb' %>
+
+<% end %>

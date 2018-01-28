@@ -1,0 +1,76 @@
+<div class="row">
+		<table>
+			<tr>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('schoolterm.scholarshipsoffered')%></strong></th>
+
+				</div>
+
+				<div class="large-3 columns">
+
+					<th><strong><%= ta('schoolterm.registrationseason')%></strong></th>
+
+				</div>
+
+				<div class="large-3 columns">
+
+					<th><strong><%= ta('schoolterm.active')%></strong></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('schoolterm.pap')%></strong></th>
+
+				</div>
+
+				<div class="large-2 columns">
+
+					<th><strong><%= ta('schoolterm.medres')%></strong></th>
+
+				</div>
+
+
+			</tr>
+
+			<div class="row">
+
+				<tr>
+
+					<div class="large-2 columns">
+
+						<td><%= @schoolterm.scholarshipsoffered %></td>
+
+					</div>
+
+					<div class="large-2 columns">
+
+						<td><%= tickmark(@schoolterm.registrationseason) %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+						<td><%= tickmark(@schoolterm.active_today?) %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+						<td><%= tickmark(@schoolterm.pap) %></td>
+
+					</div>
+
+					<div class="large-3 columns">
+
+						<td><%= tickmark(@schoolterm.medres) %></td>
+
+					</div>
+
+				</tr>
+		</div>
+
+	</table>
+</div>

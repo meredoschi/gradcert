@@ -1,0 +1,40 @@
+<div class="row">
+
+  <div class="large-2 columns">
+
+    <div class="field">
+
+      <th><%= f.label tm('municipality')%></th>
+
+      <span data-tooltip aria-haspopup="true" title='Informe o nome ou parte dele' class="has-tip" > <%= t('optional') %></span>
+
+    </div>
+
+  </div>
+
+  <div class="large-4 columns">
+
+      <%= f.text_field :address_municipality_name_cont %>
+
+  </div>
+
+
+    <div class="large-2 columns">
+
+      <div class="field">
+
+        <th><%= f.label ta('address.neighborhood')%></th>
+
+        <span data-tooltip aria-haspopup="true" title='Informe o nome ou parte dele' class="has-tip" > <%= t('optional') %></span>
+
+      </div>
+
+    </div>
+
+    <div class="large-4 columns">
+
+        <%= f.text_field :address_neighborhood_cont %>
+
+    </div>
+
+</div>

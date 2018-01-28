@@ -1,0 +1,14 @@
+
+<% if payrolls_exist_for(current_user) && (@num_possible_payrolls>0) %>
+
+<h2> <%= t('actions.new.m')+" "+tm('bankpayment') %> </h2>
+
+	<%= render 'form' %>
+
+<% else %>
+
+<div class="row text-center"> <h2> <%= tm('bankpayment').capitalize %> </h2> </div>
+
+<%= render 'warning_no_payrolls_found.html.erb' %>
+
+<% end %>

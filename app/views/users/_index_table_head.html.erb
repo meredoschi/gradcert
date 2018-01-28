@@ -1,0 +1,75 @@
+ <thead>
+    <tr>
+
+		<% if is_staff(current_user) && (@users.total_count>1) %>
+
+			
+    	<div class="row">
+    
+	  		
+		    	<div class="large-3 columns">
+
+	  				<th><%= sort_link(@search, :email, ta('user.email'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+
+    			<% if (is_admin_or_readonly(current_user) || is_manager(current_user)) %>		  
+	        
+			    	<div class="large-3 columns">
+	
+		  				<th><%= sort_link(@search, :institution_name, tm('institution').capitalize, default_order: :desc) %></th>
+	      
+	    			</div>
+    			     
+    			<% end %>      
+				
+				
+		    	<div class="large-3 columns">
+
+	  				<th><%= sort_link(@search, :permission_description, tm('permission').capitalize, default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+	  
+  	<% else %>
+
+    	<div class="row">
+    
+		    	<div class="large-3 columns">
+
+	  				<th><%= ta('user.email') %></th>
+      
+    			</div>
+
+    			<% if (is_admin_or_readonly(current_user) || is_manager(current_user)) %>		  
+	        
+			    	<div class="large-3 columns">
+	
+		  				<th><%= sort_link(@search, :user_institution_name, tm('institution').capitalize, default_order: :desc) %></th>
+	      
+	    			</div>
+    			     
+    			<% end %>      
+    			        
+				
+		    	<div class="large-3 columns">
+
+	  				<th><%= ta('user.profile') %></th>
+      
+    			</div>
+    			          	
+  	<% end %>
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

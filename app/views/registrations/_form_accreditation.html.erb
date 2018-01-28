@@ -1,0 +1,46 @@
+<%= form.fields_for :accreditation do |accreditation_fields| %>
+
+		<% if !already_cancelled?(@registration) %>
+
+			<%= render 'form_accreditation_status.html.erb', accreditation_fields: accreditation_fields %>
+
+		<% else %>
+
+			<%= render 'form_display_processed_accreditation_status.html.erb' %>
+
+		<% end %>
+
+		<%# uncomment, comment below to allow, if needed %>
+		<%#= render 'form_accreditation_start.html.erb', accreditation_fields: accreditation_fields %>
+
+		<%# comment do %>
+		<% if action_name=='new' || is_admin_or_manager(current_user) %>
+
+			<%= render 'form_accreditation_start.html.erb', accreditation_fields: accreditation_fields %>
+
+		<% else %>
+
+			<h6><%= render 'show_accreditation_start_date.html.erb' %></h6>
+
+		<% end %>
+
+		<%# end %>
+
+		<%# if is_admin_or_manager(current_user) %>
+		<% if is_admin(current_user) %>
+
+			<%= render 'form_accreditation_suspension.html.erb', accreditation_fields: accreditation_fields %>
+
+			<%= render 'form_accreditation_renewal.html.erb', accreditation_fields: accreditation_fields %>
+
+		<% end %>
+
+		<%# if action_name!='new' %>
+
+			<%= render 'form_accreditation_revocation.html.erb', accreditation_fields: accreditation_fields %>
+
+		<%# end %>
+
+			<%= render 'form_accreditation_comment.html.erb', accreditation_fields: accreditation_fields %>
+
+<% end %>

@@ -1,0 +1,14 @@
+
+<div class='row panel' %>
+	<%= render 'show_admission_period.html.erb' %>
+
+</div>
+
+<div class='row custom-panel2' %>
+	<%= render 'show_admission_grants.html.erb', admission: @program.admission  %>
+	<%= render 'show_admission_candidate_stats.html.erb', admission: @program.admission %>
+</div>
+
+<div class='row custom-panel9' %>
+	<%= render 'show_admission_registration_stats.html.erb', admission: @program.admission %>
+</div>

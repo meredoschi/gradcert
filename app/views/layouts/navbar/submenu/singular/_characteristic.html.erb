@@ -1,0 +1,19 @@
+<% if can? :read, Characteristic %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(characteristics_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('characteristic').capitalize, characteristics_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

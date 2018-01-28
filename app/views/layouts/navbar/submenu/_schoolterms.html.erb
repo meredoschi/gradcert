@@ -1,0 +1,19 @@
+<% if can? :read, @schoolterm %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(schoolterms_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('schoolterm').capitalize.pluralize, schoolterms_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

@@ -1,0 +1,105 @@
+<div class="row">
+
+					<h4><%= tm('accreditation').capitalize %></h4>
+
+</div>
+
+<%= form.fields_for :accreditation do |accreditation_fields| %>
+
+		<%= render 'form_accreditation_status.html.erb', accreditation_fields: accreditation_fields %>
+
+			<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= accreditation_fields.label ta('accreditation.start')  %><br>
+
+					</div>
+
+			 		<div class="medium-9 columns">
+
+
+							<%= accreditation_fields.date_select(:start, prompt: true, start_year: Date.today.year+1, end_year: Date.today.year-10, :include_blank => true) %>
+
+
+					</div>
+
+			</div>
+
+			<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= accreditation_fields.label ta('accreditation.renewal')  %><br>
+
+					</div>
+
+			 		<div class="medium-9 columns">
+
+
+							<%= accreditation_fields.date_select(:renewal, prompt: true, start_year: Date.today.year+1, end_year: Date.today.year-10, :include_blank => true) %>
+
+
+					</div>
+
+			</div>
+
+			<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= accreditation_fields.label ta('accreditation.suspension')  %><br>
+
+					</div>
+
+			 		<div class="medium-9 columns">
+
+
+						<%= accreditation_fields.date_select(:suspension, prompt: true, start_year: Date.today.year+1, end_year: Date.today.year-10, :include_blank => true) %>
+
+
+					</div>
+
+			</div>
+
+			<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= accreditation_fields.label ta('accreditation.revocation')  %><br>
+
+					</div>
+
+			 		<div class="medium-9 columns">
+
+
+						<%= accreditation_fields.date_select(:revocation, prompt: true, start_year: Date.today.year+1, end_year: Date.today.year-10, :include_blank => true) %>
+
+					</div>
+
+			</div>
+
+			<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= accreditation_fields.label ta('accreditation.comment')  %><br>
+
+					</div>
+
+			 		<div class="large-9 columns">
+
+
+				  	<%= accreditation_fields.text_field :comment %>
+
+					</div>
+
+			</div>
+
+
+<% end %>

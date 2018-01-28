@@ -1,0 +1,43 @@
+<div class="row">
+
+  <div class="large-3 columns", class: "left inline">
+
+    <%= f.label ta('admission.candidates') %>
+
+  </div>
+  
+
+  <div class="large-1 column">
+
+    <%= f.number_field :candidates, min:0 %>
+
+  </div>
+
+
+  <div class="large-3 columns", class: "left inline">
+
+    <%= f.label ta('admission.absentfirstexam') %>
+
+  </div>
+
+
+  <div class="large-1 column">
+
+    <%= f.number_field :absentfirstexam, min:0 %>
+
+  </div>
+
+  <div class="large-3 columns", class: "left inline">
+
+    <%= f.label ta('admission.passedfirstexam') %>
+
+  </div>
+
+
+  <div class="large-1 column">
+
+    <%= f.number_field :passedfirstexam, min:0 %>
+
+  </div>
+
+</div>

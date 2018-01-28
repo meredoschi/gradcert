@@ -1,0 +1,65 @@
+
+<div class='row' %>
+
+	<h4><%= tm('admission').capitalize %></h4>
+
+</div>
+
+<div class="row">
+
+	<table>
+
+		<tr>
+
+			<div class="row">
+
+				<div class="large-6 columns">
+
+					<th><strong><%= ta('admission.start')%></strong></th>
+
+				</div>
+
+				<div class="large-6 columns">
+
+					<th><strong><%= ta('admission.finish')%></strong></th>
+
+				</div>
+
+			</div>
+
+		</tr>
+
+		<div class="row">
+
+		<tr>
+
+			<div class="large-6 columns">
+
+				<td>
+
+						<% if @program.admission.start.present? %>
+
+							<%=	 I18n.l(@program.admission.start , :format => :dmy) %>
+
+						<% end %>
+
+				</td>
+
+			</div>
+
+			<div class="large-6 columns">
+				<td>
+
+						<% if @program.admission.start.present? %>
+
+							<%=	 I18n.l(@program.admission.finish , :format => :dmy) %>
+
+						<% end %>
+
+				</td>
+			</div>
+
+		</div>
+	</table>
+
+</div>

@@ -1,0 +1,100 @@
+# config/application_settings.yml
+# https://github.com/settingslogic/settingslogic
+defaults: &defaults
+  MEDRES_Permissions:
+  - medres
+  - medrescollaborator
+  - medreslocaladmn
+  - medresmgr
+  PAP_Permissions:
+  - pap
+  - papcollaborator
+  - paplocaladmn
+  - papmgr
+  abbreviated_state_prefix: " / "
+  abbreviatedname:
+    medres: medres
+    pap: pap
+  abbreviations:
+    organization: Example
+    payment: pmt
+  application:
+    version: 0.1
+    year: 2018
+  logo_file_name: app/assets/images/logo.png
+  created_recently:
+    maximum_number_days_ago: 10
+  dayone: <%= "#{'1967-12-31'.to_date}" %>
+  default_municipality_ascii_name_with_state: Sao Paulo / SP
+  feedback:
+    registrations_contextual_from:
+      number_days_ago: 70
+  home_country_abbreviation: BRA
+  home_state: SÃO PAULO
+  home_state_abbreviation: SP
+  longest_program_duration:
+    all: 2
+    medres: 2
+    pap: 2
+  maintenance:
+    contact:
+      name: Example COM Maintenance
+    institution:
+      name: Example COM IT department
+    user:
+      email: it@example.com
+  managing_institution: Example COM
+  max_length_for_bankaccount_number: 8
+  max_length_for_bankbranch_code: 4
+  max_number_bankaccounts: 99999999
+  max_number_bankbranches: 9999
+  max_number_diplomas: 4
+  max_number_regional_offices: 100
+  max_tax_brackets: 5
+  maximum_comment_length:
+    payroll: 200
+    program: 200
+  min_number_days_worked:
+    pap: 7
+  num_scholarships_offered:
+    pap: 1170
+  operational_start: <%= "#{'2016-3-01'.to_date}" %>
+  personalcharacteristic:
+    female: F
+    male: M
+    unspecified: X
+  personaldocument:
+    passport: Passaporte
+    registered_foreigner: RNE/CIE
+    state_registration: RG
+  registration_season:
+    finish: <%= "#{'2018-4-1'.to_date}" %>
+    start: <%= "#{'2018-1-01'.to_date}" %>
+  restfull:
+  - create
+  - new
+  - index
+  - update
+  - show
+  - delete
+  - edit
+  restricted: preenchimento restrito
+  sample_state_abbreviation: TE
+  separator: ";"
+  separator_info: ","
+  separator_mkdown: "|"
+  shortname_len:
+    institution: 60
+    program: 55
+  system_abbreviation: GRADCERT
+  total_hours_in_a_year: 8784
+  vacation_days_allowed: 30
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

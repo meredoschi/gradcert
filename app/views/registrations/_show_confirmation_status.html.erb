@@ -1,0 +1,25 @@
+<% if @registration.accreditation && @registration.accreditation.confirmed? %>
+
+	<div data-alert class="alert-box success">
+	
+		<div class="row">
+
+			<h3 class="subheader text-center"> <%= ta('accreditation.confirmed').capitalize %></h3>	
+	
+		</div>
+	
+	</div>
+
+<% else %>
+
+	<div data-alert class="alert-box warning">
+	
+		<div class="row">
+
+			<h3 class="subheader text-center"><%= t('pending') %></h3>
+	
+		</div>
+	
+	</div>
+
+<% end %>

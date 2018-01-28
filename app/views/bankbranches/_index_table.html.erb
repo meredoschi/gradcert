@@ -1,0 +1,68 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @bankbranches.each do |bankbranch| %>
+      <tr>
+				<div class="row">
+				
+
+		   <div class="large-3 columns">
+	
+        <td><%= bankbranch.name %></td>
+
+			</div>
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= bankbranch.code %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+	
+        <td><%= bankbranch.verificationdigit %></td>
+
+			</div>
+				
+		   <div class="large-2 columns">
+	
+				<td><%= I18n.l bankbranch.opened %></td>
+        
+			</div>
+							
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, bankbranch %>
+		        <td><%= link_to t('actions.show'), bankbranch, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, bankbranch %>
+			      <td><%= link_to t('actions.edit'), edit_bankbranch_path(bankbranch), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, bankbranch %>
+		     		<td><%= link_to t('actions.delete'),bankbranch, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @bankbranches %>
+
+</div>
+
+<br>

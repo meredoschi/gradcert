@@ -1,0 +1,44 @@
+<div class="row">
+
+			<% if in_season? && (action_name=='new' ||  is_admin_or_manager(current_user) ) %>
+
+				<%= render 'form_schoolyear_choose.html.erb', f: f %>
+
+			<% else %>
+
+				<%= render 'form_schoolyear_display.html.erb', f: f %>
+
+			<% end %>
+
+</div>
+
+<% comment do %>
+
+<% if in_season? && is_admin_or_manager(current_user) && action_name!='new' && @registration.school_term==Schoolterm.latest %>
+
+<div class="row panel callout">
+
+	<div class="large-3 columns", class: "left inline">
+
+		<em>Uso exclusivo da equipe (selecione o program correto em caso de erro da instituição)</em>
+	</div>
+
+	<div class="large-9 columns">
+
+	<%# Emergency hotfix.  Code will be made cleaner %>
+
+	<%#	inst_id=@registration.student.institution_id %>
+
+	<%	inst_id=@registration.student.contact.user.institution_id %>
+
+	<%	i=Institution.where(id: inst_id).first %>
+
+ 	<%= f.collection_select :schoolyear_id, Schoolyear.for_schoolterm(Schoolterm.latest).from_institution(i).where(programyear: 1), :id, :program_name_schoolterm_institution, prompt: true %>
+
+ </div>
+
+</div>
+
+<% end %>
+
+<% end %>

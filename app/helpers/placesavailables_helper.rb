@@ -1,0 +1,2 @@
+module PlacesavailablesHelper
+end

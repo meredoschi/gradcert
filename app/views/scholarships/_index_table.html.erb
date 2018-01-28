@@ -1,0 +1,76 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @scholarships.each do |scholarship| %>
+      <tr>
+				<div class="row">
+
+		   <div class="large-3 columns">
+	
+        <td><%= scholarship.name %></td>
+
+			</div>
+						
+
+		   <div class="large-2 columns">
+	
+        <td><%= Pretty.to_BRL(scholarship.amount) %></td>
+
+			</div>
+	
+		<% if is_admin(current_user) || is_medres_manager(current_user) %>
+		
+		   <div class="large-2 columns">
+	
+        <td><%= Pretty.to_BRL(scholarship.partialamount) %></td>
+
+			</div>
+
+		<% end %>
+						
+		   <div class="large-1 column">
+	
+        <td><%= I18n.l(scholarship.start) %></td>
+
+			</div>
+
+		   <div class="large-1 column">
+	
+        <td><%= display_date_finished(scholarship) %></td>
+
+			</div>				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, scholarship %>
+		        <td><%= link_to t('actions.show'), scholarship, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, scholarship %>
+			      <td><%= link_to t('actions.edit'), edit_scholarship_path(scholarship), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, scholarship %>
+		     		<td><%= link_to t('actions.delete'),scholarship, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @scholarships %>
+
+</div>
+
+<br>

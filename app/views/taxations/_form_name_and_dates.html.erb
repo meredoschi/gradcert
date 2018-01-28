@@ -1,0 +1,47 @@
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label ta('taxation.name') %><br>
+
+	</div>
+
+		<div class="large-9 columns">
+
+	  <%= f.text_field :name %>
+
+	 </div>
+
+</div>
+
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label ta('taxation.start') %><br>
+
+	</div>
+
+		<div class="large-9 columns select-date-wrapper">
+
+	  <%= f.date_select :start,  options={prompt: true, start_year: Date.today.year - 5, end_year: Date.today.year}, html_options = { class: 'select-date'} %>
+
+	 </div>
+
+</div>
+
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label ta('taxation.finish') %><br>
+
+	</div>
+
+		<div class="large-9 columns select-date-wrapper">
+
+	  <%= f.date_select :finish,  options={prompt: true, start_year: Date.today.year - 5, end_year: Date.today.year}, html_options = { class: 'select-date'} %>
+
+	 </div>
+
+</div>

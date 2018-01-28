@@ -1,0 +1,21 @@
+<div class="row">
+
+  <div class="large-2 columns">
+
+    <div class="field">
+
+      <th><%= f.label t('activerecord.attributes.bankbranch.name')%></th>
+
+      <span data-tooltip aria-haspopup="true" title='Informe o nome, ou parte dele, sem acentuação ou cedilha.  É útil realizar a busca assim caso não se saiba o código da agência.' class="has-tip" > <%= t('optional') %></span>
+
+    </div>
+
+  </div>
+
+  <div class="large-10 columns">
+
+      <%= f.text_field :name_cont %>
+
+  </div>
+
+</div>

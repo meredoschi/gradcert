@@ -1,0 +1,36 @@
+<div class="row">
+
+	<h2><%= tm('professionalarea').mb_chars.capitalize %></h2>
+
+</div>
+
+<div class="row">
+					
+	<h3 class="subheader"><%= @professionalarea.name %></h3>
+				
+</div>
+
+<div class="row">
+
+	<%= render 'show_specialties.html.erb' %>
+
+</div>
+
+<div class="row">
+
+	<%= render 'show_details.html.erb' %>
+
+</div>
+
+
+<div class="row">
+	
+	<% if can? :edit, @professionalarea %>
+
+		<%= link_to t('actions.edit'), edit_professionalarea_path(@professionalarea), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), professionalareas_path,  class: t('back')  %>
+
+</div>

@@ -1,0 +1,12 @@
+<% if assessments_exist?(current_user) %>
+
+	<h2> <%= t('actions.new.m')+" "+tm('programsituation') %> </h2>
+
+	<%= render 'form' %>
+
+<% else %>
+
+	<%= render 'error_no_assessments' %>
+	
+<% end %>
+

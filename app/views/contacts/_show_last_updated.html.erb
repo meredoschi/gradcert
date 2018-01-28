@@ -1,0 +1,39 @@
+<div class="row">
+
+<hr>
+
+</div>
+
+<div class="row custom-panel4">
+	
+		<% if @contact.versions.last.present? && @userwho.present? %>
+
+				<div class="row">
+			
+				<strong><%= t('modified_by')%>: </strong>
+		
+					<%= @userwho.contact.name %> < <%= @userwho.email %> > <%= @userwho.institution.name %>
+	
+				</div>
+					
+		<% end %>
+
+		<div class="row">
+				
+			<strong><%= t('latest_update')%></strong>
+	
+			<%=	@contact.versions.length %>
+						
+	
+		</div>
+		
+		<div class="row">
+				
+			<strong><%= t('when')%>: </strong>
+	
+			<%= I18n.l(@contact.updated_at) %>
+			
+	
+		</div>	
+			
+</div>

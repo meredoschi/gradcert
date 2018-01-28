@@ -1,0 +1,86 @@
+<div class="row">
+
+	<h2><%= tm('professionalfamily').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-6 columns">
+					
+								<th><strong><%= ta('professionalfamily.name')%></strong></th>
+					
+							</div>
+					
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('professionalfamily.familycode')%></strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('professionalfamily.pap')%></strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= ta('professionalfamily.medres')%></strong></th>
+					
+							</div>
+
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-6 columns">
+					
+						<td><%= @professionalfamily.name %></td>
+					
+					</div>
+
+					<div class="large-2 columns">
+
+						<td><%= @professionalfamily.familycode %></td>
+																				
+					</div>
+
+					<div class="large-2 columns">
+
+						<td><%= tickmark(@professionalfamily.pap) %></td>
+																				
+					</div>
+
+					<div class="large-2 columns">
+
+						<td><%= tickmark(@professionalfamily.medres) %></td>
+																				
+					</div>
+					
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<%= render 'show_professions' %>
+
+
+<div class="row">
+	
+	<% if can? :edit, @professionalfamily %>
+
+		<%= link_to t('actions.edit'), edit_professionalfamily_path(@professionalfamily), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), professionalfamilies_path,  class: t('back')  %>
+
+</div>

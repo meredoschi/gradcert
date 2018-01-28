@@ -1,0 +1,23 @@
+<div class="row">
+
+	<h2><%= tm('degreetype').capitalize %></h2>
+
+	<h3><%= @degreetype.name %></h3>
+
+	<h3 class="subheader"><%= ta('degreetype.level').capitalize %> 	<%= @degreetype.level %> </h3>
+
+</div>
+
+<%= render 'show_area_pap_medres.html.erb' %>
+
+<div class="row">
+
+	<% if can? :edit, @degreetype %>
+
+		<%= link_to t('actions.edit'), edit_degreetype_path(@degreetype), class: "editar"  %> |
+
+	<% end %>
+
+	<%= link_to t('actions.back'), degreetypes_path,  class: "voltar"  %>
+
+</div>

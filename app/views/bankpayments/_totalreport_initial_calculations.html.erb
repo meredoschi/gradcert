@@ -1,0 +1,164 @@
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-2 columns">
+						
+								<th><strong><%= t('gross') %></strong></th>
+					
+							</div>
+			
+							<div class="large-1 column">
+					
+								<th><strong><%= t('total_absences_amount') %></strong></th>
+					
+							</div>
+
+							<div class="large-1 column">
+					
+								<th><strong><%= ta('annotation.discount').pluralize %></strong></th>
+					
+							</div>
+
+							<div class="large-1 column">
+					
+								<th><strong><%= ta('annotation.supplement').pluralize %></strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= t('subtotal').capitalize %></strong></th>
+					
+							</div>
+
+
+				</tr>
+		</div>
+	
+	
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-2 columns">
+					
+						<td><%= humanized_money_with_symbol(@total_gross_amount) %></td>
+					
+					</div>
+
+					<div class="large-1 column">
+					
+						<td> <%= humanized_money_with_symbol(@absences_total_amount) %> </td>
+					
+					</div>
+
+					<div class="large-1 column">
+					
+						<td> <%= humanized_money_with_symbol(@discounts) %> </td>
+					
+					</div>
+
+					<div class="large-1 column">
+					
+						<td> <%= humanized_money_with_symbol(@supplements) %> </td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@subtotal) %> </td>
+					
+					</div>
+																									
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+
+				<div class="large-2 columns">
+		
+					<th><strong><%= ta('taxation.socialsecurity') %></strong></th>
+		
+				</div>
+
+				<div class="large-2 columns">
+		
+					<th><strong><%= t('approximate_value') %></strong></th>
+		
+				</div>
+
+				<div class="large-2 columns">
+		
+					<th><strong><%= t('bankfile_amount') %></strong></th>
+		
+				</div>
+
+				<div class="large-2 columns">
+		
+					<th><strong><%= t('rounding') %></strong></th>
+		
+				</div>
+
+				<div class="large-2 columns">
+		
+					<th><strong><%= t('absences_adjustment') %></strong></th>
+		
+				</div>
+
+
+				</tr>
+
+		</div>
+		
+			<div class="row">
+		
+				<tr>
+
+	<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@social_security) %> </td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@net) %> </td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@bankpayment.totalamount) %> </td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@rounding) %> </td>
+					
+					</div>
+	
+					<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@absences_adjustment) %> </td>
+					
+					</div>
+																				
+
+	</table>
+</div>
+
+
+
+<div class="row">
+
+<hr>
+	
+	<h4> <%= t('recalc') %> </h4>
+
+</div>

@@ -1,0 +1,41 @@
+<div class="row panel callout">
+
+	<fieldset>
+  	<legend><%= t('teaching_area') %>
+  	</legend>
+
+		<div class="row">
+		
+			<div class="large-3 columns">
+					
+				<%= f.label :pap_true, ta('program.pap')%>
+			
+			</div>
+		
+			<div class="large-9 columns">
+												
+				<%= f.check_box :pap_true %>
+					
+			</div>
+		
+		</div>
+		
+		<div class="row">
+		
+			<div class="large-3 columns">
+					
+				<%= f.label :medres_true, ta('program.medres')%>
+			
+			</div>
+		
+			<div class="large-9 columns">
+												
+				<%= f.check_box :medres_true %>
+					
+			</div>
+		
+		</div>
+		
+	</fieldset>
+		
+</div>

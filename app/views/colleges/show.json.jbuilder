@@ -1,0 +1,1 @@
+json.extract! @college, :id, :institution_id, :area, :classrooms, :otherrooms, :sportscourts, :foodplaces, :libraries, :gradcertificatecourses, :previousyeargradcertcompletions, :created_at, :updated_at

@@ -1,0 +1,43 @@
+<%= form_for(@programname) do |f| %>
+  <% if @programname.errors.any? %>
+    <div id="error_explanation">
+      <h2>Este nome de programa não pode ser gravado ou atualizado devido a <%= pluralize(@programname.errors.count, "erro") %> de preenchimento.</h2>
+
+      <ul>
+      <% @programname.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row custom-panel9">
+
+<%= render 'form_name', f: f %>
+	
+<% if is_admin(current_user) %>
+
+	<%= render 'form_belongsto', f: f %>
+
+<% end %>
+
+	<%= render 'form_active', f: f %>
+
+	<%= render 'form_comment', f: f %>
+
+</div>
+
+<div class="row custom-panel8">
+	
+	<%= render 'form_ancestor', f: f %>
+
+</div>
+
+
+  
+   <div class="row actions">
+  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+  	 <%= link_to 'Anular', programnames_path, class: "anular" %>
+  </div>
+
+<% end %>

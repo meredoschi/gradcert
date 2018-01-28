@@ -1,0 +1,45 @@
+<%= form.fields_for :phone do |phone| %>
+
+	<div class="row">
+	
+		 		<div class="large-2 columns", class: "left inline">
+	
+	 				<%= phone.label ta('phone.main') %>
+		
+				</div>
+		 			 		
+		 		<div class="large-2 columns">
+	
+	 
+				  <%= phone.text_field :main %>        	
+	    
+				</div>
+	
+		 		<div class="large-2 columns", class: "left inline">
+		
+					<%= phone.label ta('phone.other') %>
+	 
+				</div>
+		 			 		
+		 		
+		 		<div class="large-2 columns">
+	  
+				   <%= phone.text_field :other %>        	
+	 
+				</div>
+	
+		 		<div class="large-2 columns", class: "left inline">
+		
+					<%= phone.label ta('phone.mobile') %>
+	 	
+				</div>
+		 			 		
+		 		<div class="large-2 columns">
+	  
+		   <%= phone.text_field :mobile %>        	
+	 
+				</div>
+	
+	</div>
+
+<% end %>

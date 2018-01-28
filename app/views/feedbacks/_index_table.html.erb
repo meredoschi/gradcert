@@ -1,0 +1,78 @@
+<table>
+
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <%# @feedbacks.includes(registration: [student: :contact]).includes(registration: [schoolyear: {program: :programname}]).each do |feedback| %>
+
+   <% @feedbacks.each do |feedback| %>
+
+      <tr>
+				<div class="row">
+
+		   <div class="large-3 columns">
+
+        <td>
+          <%#= link_to feedback.registration.namecpfinstitution, feedback.registration %>
+          <%= link_to feedback.registration_student_name_id_schoolyear_term, feedback.registration %>
+
+        </td>
+
+			</div>
+
+      <div class="large-2 columns">
+
+       <td><%= link_to feedback.bankpayment.name, feedback.bankpayment %></td>
+
+     </div>
+
+		   <div class="large-1 column">
+
+        <td><%= tickmark(feedback.processed) %></td>
+
+			</div>
+
+      <div class="large-1 column">
+
+       <td><%= yes_no(feedback.approved) %></td>
+
+     </div>
+
+     <div class="large-1 column">
+
+      <td> <%= display_date_processed(feedback) %> </td>
+
+    </div>
+
+		   <div class="large-3 columns">
+
+	        <% if can? :read, feedback %>
+		        <td><%= link_to t('actions.show'), feedback, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, feedback %>
+			      <td><%= link_to t('actions.edit'), edit_feedback_path(feedback), class: t('edit') %></td>
+					<% end %>
+
+	        <% if can? :destroy, feedback %>
+		     		<td><%= link_to t('actions.delete'),feedback, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+					<% end %>
+
+    	</div>
+
+    		</div>
+
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @feedbacks %>
+
+</div>
+
+<br>

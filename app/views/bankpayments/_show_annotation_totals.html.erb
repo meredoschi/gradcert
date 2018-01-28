@@ -1,0 +1,77 @@
+<div class="row">
+		<table>
+			<tr>
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= tm('annotation').pluralize.capitalize %> </strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= t('nothing_due')%></strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= t('without_financial_impact')%></strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= t('with_financial_impact') %></strong></th>
+					
+							</div>
+
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= t('listed_to_be_paid') %></strong></th>
+					
+							</div>
+			
+				</tr>
+		</div>
+	
+	
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-3 columns">
+					
+						<td><%= dash_when_none(@num_payroll_annotations) %></td>	
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td><%= dash_when_none(@num_skip_payment) %></td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td><%= dash_when_none(@num_present_annotations) %></td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td><%= dash_when_none(@num_absent_annotations) %></td>
+					
+					</div>
+
+			
+					<div class="large-3 columns">
+					
+						<td><%= dash_when_none(@num_confirmed_for_payment) %></td>
+					
+					</div>
+																				
+
+	</table>
+</div>

@@ -1,0 +1,41 @@
+<div class="row">
+
+	<h2> <%= @num_active_registrations %> <%= tm('registration').pluralize.capitalize %> <%= t('active.f').pluralize  %>  </h2>
+
+</div>
+
+
+	<% @active_registrations.each do |registration|  %>
+
+
+		<div class="row">
+
+			<%= registration.name %> <%= registration.tin %> <%= registration.id.to_s %> <%= registration.student.previouscode %>
+   
+
+		</div>
+
+	<% end %>
+
+
+<div class="row">
+
+<h5><%= current_user.contact_name %></h5>
+
+</div>
+
+<div class="row">
+
+	<h5><%= I18n.l(Time.now) %></h5>
+	
+</div>
+
+<div class="row">
+	
+	<%= link_to t('actions.print'), registrations_reportactive_path, :onclick => 'window.print();return false;', class: 'small button info'%> | 
+
+	<%= link_to t('actions.generate').capitalize+' '+t('spreadsheet'), registrations_activecsv_path, class: "relatorio3"  %> | 
+
+	<%= link_to t('back').capitalize, registrations_path,  class: t('back')  %>
+
+</div>

@@ -1,0 +1,30 @@
+<% unless @contact.nameless? %>
+
+	<%= render 'show_details.html.erb' %>
+
+<% else %>
+
+	<%= render 'show_nameless_warning.html.erb' %>
+
+<% end %>
+
+
+	<div class="row">
+
+		<% if can? :edit, @contact %>
+
+			<%= link_to t('actions.edit'), edit_contact_path(@contact), class: t('edit')  %> |
+
+			<% end %>
+
+			<%= link_to t('actions.back'), contacts_path, class: t('back')  %>
+
+
+		</div>
+
+
+<% if is_not_regular_user(current_user) %>
+
+	<%= render 'show_last_updated.html.erb' %>
+
+<% end %>

@@ -1,0 +1,65 @@
+<div class="row custom-panel3">
+
+		<div class="row">
+
+		 		<div class="large-1 columns", class: "left inline">
+
+
+			    <%= accreditation_fields.label ta('registration.accreditation.original')  %>
+
+				</div>
+
+		 		<div class="large-2 columns">
+
+
+			  	<%= accreditation_fields.check_box :original %>
+
+				</div>
+
+				<%# if is_admin_or_manager(current_user) %>
+				<% if is_admin(current_user) %>
+
+			 		<div class="large-1 columns", class: "left inline">
+
+
+				    <%= accreditation_fields.label ta('registration.accreditation.renewed')  %>
+
+					</div>
+
+			 		<div class="large-2 columns">
+
+
+				  	<%= accreditation_fields.check_box :renewed %>
+
+					</div>
+
+			 		<div class="large-2 columns", class: "left inline">
+
+				    <%= accreditation_fields.label ta('registration.accreditation.suspended')  %><br>
+
+					</div>
+
+			 		<div class="large-1 columns">
+
+
+				  	<%= accreditation_fields.check_box :suspended %>
+
+					</div>
+
+				<% end %>
+
+		 		<div class="large-2 columns", class: "left inline">
+
+			    <%= accreditation_fields.label ta('registration.accreditation.revoked')  %><br>
+
+				</div>
+
+		 		<div class="large-1 columns">
+
+
+			  	<%= accreditation_fields.check_box :revoked %>
+
+				</div>
+
+		</div>
+</div>

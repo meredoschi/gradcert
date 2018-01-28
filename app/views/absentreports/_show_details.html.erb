@@ -1,0 +1,51 @@
+<div class="row">
+
+  <% @absent_institution_ids.each do |institution_id| %>
+
+  <% @institution_absences=0 %>
+
+  <% institution=@all_institutions.find(institution_id) %>
+
+  <% @absent_registrations_from_institution=@absent_registrations.from_institution(institution) %>
+  <% @num_absent_registrations_from_institution=@absent_registrations_from_institution.count %>
+
+  <h4><%= link_to institution.name, institution %> </h4>
+
+
+  <% @absent_registrations_from_institution.each do |registration| %>
+
+  <div class="row">
+
+    <div class="large-2 columns">
+
+    </div>
+
+    <div class="large-10 columns">
+
+      <% registration_total_absences=@all_events.actual_absences_for(registration) %>
+
+      <h5><%= @all_events.actual_absences_for(registration) %> <%= link_to registration.namecpf, registration %></h5>
+      <h6>|---> <%= registration.schoolyear_and_cohort %></h6>
+
+      <% @institution_absences+=registration_total_absences %>
+
+    </div>
+
+  </div>
+
+  <% end %>
+  <div class="row">
+    <h6><%= t('institution_total') %>: <%= @institution_absences.to_s %></h6>
+    <hr>
+
+  </div>
+
+  <% @absences_grand_total+=@institution_absences %>
+
+  <% end %>
+
+  <h5>Total de alunos com faltas: <%= @num_absent_registrations %></h5>
+
+  <h5>Total de faltas: <%= @absences_grand_total %></h5>
+  <hr>
+</div>

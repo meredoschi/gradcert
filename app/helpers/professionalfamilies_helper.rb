@@ -1,0 +1,2 @@
+module ProfessionalfamiliesHelper
+end

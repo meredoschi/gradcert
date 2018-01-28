@@ -1,0 +1,62 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @regionaloffices.each do |regionaloffice| %>
+      <tr>
+				<div class="row">
+						
+	
+		   <div class="large-1 columns">
+	
+        <td><%= link_to regionaloffice.num, regionaloffice %></td>
+
+			</div>
+				
+			<div class="large-3 columns">
+	
+        <td><%= link_to regionaloffice.name, regionaloffice %></td>
+
+			</div>
+		
+	
+		   <div class="large-5 columns">
+	
+        <td><%= regionaloffice.directorsname %></td>
+
+			</div>
+								
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, regionaloffice %>
+		        <td><%= link_to t('actions.show'), regionaloffice, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, regionaloffice %>
+			      <td><%= link_to t('actions.edit'), edit_regionaloffice_path(regionaloffice), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, regionaloffice %>
+		     		<td><%= link_to t('actions.delete'),regionaloffice, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @regionaloffices %>
+
+</div>
+
+<br>

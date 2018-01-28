@@ -1,0 +1,89 @@
+<%= form_for(@role) do |f| %>
+
+<h3>
+
+	<div class="row">
+	
+	
+	 	<div class="large-2 columns", class: "left inline">
+	
+		 <%= ta('role.name') %> 
+	  
+		</div>
+	
+	 		<div class="large-6 columns">
+	
+			<%= f.text_field :name %>
+	
+		</div>
+	
+	 		<div class="large-4 columns">
+	
+	
+		</div>
+			
+	</div>
+
+</h3>	
+
+<%= render 'form_validation.html.erb', f: f %>
+ 
+<h3>
+
+	<div class="row">
+	
+	
+	 	<div class="large-2 columns", class: "left inline">
+	
+		 <%= t('category').capitalize %> 
+	  
+		</div>
+
+	 	<div class="large-10 columns">
+	
+			<%=	role_profiles(current_user, f) %>			
+	  
+		</div>
+
+	</div>
+
+</h3>
+
+<% if is_admin(current_user) %>
+	
+	<h3>
+	
+		<div class="row">
+		
+		
+		 	<div class="large-2 columns", class: "left inline">
+		
+			 <%= t('area').mb_chars.capitalize %> 
+		  
+			</div>
+	
+		 	<div class="large-10 columns">
+		
+				<%= render 'form_area.html.erb', f: f %>
+	
+		  
+			</div>
+	
+		</div>
+	
+	</h3>
+
+<% end %>
+	
+
+	<div class="row">
+	
+	  <div class="actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	  	<%= link_to 'Anular', roles_path, class: "anular" %>
+	 </div>
+	
+	
+	</div>
+
+<% end %>

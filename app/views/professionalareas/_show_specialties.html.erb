@@ -1,0 +1,23 @@
+
+	<table>
+		<tr>
+
+		<th>		
+				<em><%= pluralize(@num_area_specialties, tm('professionalspecialty')).titleize %></em> 
+		</th>
+							
+		<td>
+		
+		<% @area_specialties.each do |professionalspecialty|  %>
+																		
+			<div class="row">
+				<strong><u><%= link_to professionalspecialty.name, professionalspecialty %></u></strong>
+
+			</div>
+			
+		<% end %>
+	   	
+		</td>
+
+
+	</table>

@@ -1,0 +1,61 @@
+<%= form_for(@programsituation) do |f| %>
+  <% if @programsituation.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@programsituation.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @programsituation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  
+		<%= render 'form_assessment.html.erb', f: f %>
+	
+		<%= render 'form_nature_and_objectives.html.erb', f: f %>
+		
+		<%= render 'form_duration.html.erb', f: f %>
+
+</div>
+
+	<div class="row">
+	  
+  <div id="recommendations">
+    <%= f.fields_for :recommendations do |recommendation| %>
+
+			<h4><%= as_ordinal(recommendation.index+1) %> <%= t('year') %></h4>
+	
+			<% if action_name=='edit' && @schoolyears.for_progyear(@programsituation.assessment.program_id,recommendation.index+1).exists? %>
+			
+	      <%= render 'form_display_current.html.erb', recommendation: recommendation %>
+
+			<% end %>
+			
+      <%= render 'recommendation_fields', :f => recommendation  %>
+     
+
+
+    <% end %>
+
+ 	<div class="row links">
+      <%= link_to_add_association t('actions.new.m')+' '+tm('schoolyears'), f, :recommendations, class: "criar" %>
+   </div>
+  </div>
+
+
+	<% if can? :update, Programsituation %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), programsituations_path, class: "anular" %>
+	
+	</div>
+
+<% end %>

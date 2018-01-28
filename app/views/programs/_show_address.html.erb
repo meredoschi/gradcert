@@ -1,0 +1,42 @@
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('program.externalvenue').capitalize %></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					
+						<td><%= @program.address.street %> - <%= @program.address.neighborhood %></td>
+					
+										
+				</tr>
+				
+				<tr>
+					
+						<td><%= @program.address.municipality.name %></td>
+					
+										
+				</tr>
+
+				<tr>
+					
+						<td><%= ta('address.postalcode') %> <%= @program.address.postalcode %></td>
+					
+					
+					</div>
+										
+				</tr>
+				
+		</div>
+
+	</table>
+</div>

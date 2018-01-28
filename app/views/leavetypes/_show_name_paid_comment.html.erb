@@ -1,0 +1,59 @@
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('leavetype.name')%></strong></th>
+					
+							</div>
+					
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('leavetype.paid')%></strong></th>
+					
+							</div>
+
+							<% if @leavetype.comment.present? %>
+
+								<div class="large-4 columns">
+					
+									<th><strong><%= ta('leavetype.comment')%></strong></th>
+					
+								</div>
+				
+							<% end %>
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+										
+					<div class="large-4 columns">
+					
+						<td><%= @leavetype.name %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= yes_no(@leavetype.paid) %></td>
+					
+					</div>
+
+					<% if @leavetype.comment.present? %>
+					
+						<div class="large-4 columns">
+					
+							<td><%= @leavetype.comment %></td>
+						
+						</div>
+
+					<% end %>
+
+				</tr>
+		</div>
+
+	</table>
+</div>

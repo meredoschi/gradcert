@@ -1,0 +1,39 @@
+<%= search_form_for @search do |f| %>
+
+<% if is_admin_or_manager(current_user) %>
+
+	<%= render 'index_search_institution', f: f %>
+
+<% end %>
+
+<% if is_staff(current_user) %>
+
+	<%= render 'index_search_payroll', f: f %>
+
+	<%= render 'index_search_registration', f: f %>
+
+	<%= render 'index_search_kind', f: f %>
+
+	<%= render 'index_search_confirmation', f: f %>
+
+<% end %>
+
+	<%#= render 'index_search_schoolterm', f: f %>
+
+	<div class="row">
+
+		<div class="large-6 columns">
+
+		  <%= f.submit t('actions.search'), class: t('seek') %>
+
+		</div>
+
+		<div class="large-6 columns">
+
+				<%= link_to t('generate_pdf'), events_path(params.merge(:format => "pdf")), class: "exportpdf",  :onclick => "alert(' #{t('please_wait_for_processing')} ')" %>
+
+	 </div>
+
+	</div>
+
+<% end %>

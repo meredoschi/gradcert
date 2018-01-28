@@ -1,0 +1,66 @@
+
+<div class="row">
+		<table>
+			<tr>
+
+				<div class="large-3 columns">
+		
+					<th><strong><%= tm('student').pluralize.capitalize %></strong></th>
+		
+				</div>
+					
+					<div class="large-3 columns">
+		
+					<th><strong><%= ta('annotation.supplement')%></strong></th>
+		
+				</div>
+			
+				<div class="large-3 columns">
+		
+					<th><strong><%= ta('annotation.discount')%></strong></th>
+		
+				</div>
+				
+	
+ 			<div class="large-3 columns">
+		
+					<th><strong><%= ta('annotation.net')%></strong></th>
+		
+				</div>
+					
+
+			</tr>
+		
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-3 columns">
+					
+							<td><%= @annotatedregistrations.count %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= humanized_money_with_symbol(@supplement_amount) %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= humanized_money_with_symbol(@discount_amount) %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= humanized_money_with_symbol(@adjustment_amount) %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>

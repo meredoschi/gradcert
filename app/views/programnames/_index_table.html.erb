@@ -1,0 +1,85 @@
+<table>
+
+	<%= render 'index_table_head.html.erb' %>
+
+  <tbody>
+    <% @programnames.each do |programname| %>
+      <tr>
+
+			<div class="row">
+
+				<div class="large-4 columns">
+
+      	<% if !programname.active %>
+
+				<td><strike><%= link_to programname.name, programname %></strike></td>
+      	
+      	<% else %>
+      	
+        <td><%= link_to programname.name, programname %></td>
+       
+       	<% end %>
+
+				<% if is_admin(current_user) %>
+	
+					<div class="large-2 columns">
+      
+    	    <td><%= tickmark(programname.pap) %></td>
+
+					</div>
+				
+					<div class="large-2 columns">
+	      
+	        <td><%= tickmark(programname.medres) %></td>
+	
+					</div>
+
+				<% end %>		
+						
+				<div class="large-1 column">
+	        <td>
+	        		<%= I18n.l programname.updated_at, :format => :short %></td>
+				</div>
+
+					<div class="large-1 column">
+ 
+		        <% if can? :read, programname %>
+	 				
+			        <td><%= link_to t('actions.show'), programname, class: "mostrar" %>
+
+						<% end %>
+						
+					</div>
+	
+					<div class="large-1 column">
+					
+		        <% if can? :edit, programname %>
+	
+	    		  <td><%= link_to t('actions.edit'), edit_programname_path(programname), class: "editar" %></td>   
+			
+	  				<% end %>
+	
+					</div>
+				
+					<div class="large-1 column">
+				
+		        <% if can? :destroy, programname %>
+	  
+	  		     <%# http://stackoverflow.com/questions/4054112/how-do-i-prevent-deletion-of-parent-if-it-has-child-records %>						      
+
+ 		     		  <td><%= link_to t('actions.delete'),programname, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+	              
+	    	    <% end %>
+	
+	        </div>
+      	</div>       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+
+  <%= paginate @programnames %>
+		 
+</div>

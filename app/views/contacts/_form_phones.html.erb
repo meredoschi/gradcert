@@ -1,0 +1,56 @@
+<div class="row">
+
+ <h3><%= tm('phone').capitalize.pluralize %></h3>
+
+</div>
+
+<div class="row custom-panel5">
+
+	<%= form.fields_for :phone do |phone_fields| %>
+
+		<div class="row">
+
+			 		<div class="large-2 columns", class: "left inline">
+
+		 				<%= phone_fields.label t('main') %>
+   				<span data-tooltip aria-haspopup="true" class="has-tip" title="Comece pelo DD (dois digitos), dê um espaço e então informe o número (o traço é opcional).  Exemplo: 11 5555-1234" ><%= t('help') %></span>
+
+  				</div>
+
+			 		<div class="large-2 columns">
+
+
+					  <%= phone_fields.text_field :main %>
+
+					</div>
+
+			 		<div class="large-2 columns", class: "left inline">
+
+						<%= phone_fields.label t('other.m') %>
+
+					</div>
+
+
+			 		<div class="large-2 columns">
+
+					   <%= phone_fields.text_field :other %>
+
+					</div>
+
+			 		<div class="large-2 columns", class: "left inline">
+
+						<%= phone_fields.label ta('phone.mobile') %>
+
+					</div>
+
+			 		<div class="large-2 columns">
+
+			   <%= phone_fields.text_field :mobile %>
+
+					</div>
+
+		</div>
+
+	<% end %>
+
+</div>

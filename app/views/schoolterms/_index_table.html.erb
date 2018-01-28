@@ -1,0 +1,94 @@
+<div class="row">
+
+	<table>
+
+	<%= render 'index_table_head.html.erb' %>
+
+	<tbody>
+	   <% @schoolterms.each do |schoolterm| %>
+	      <tr>
+					<div class="row">
+
+
+
+			   <div class="large-2 columns">
+
+					<td><%= I18n.l(schoolterm.start, format: :dmy)  %></td>
+
+				</div>
+
+
+			   <div class="large-2 columns">
+
+					<td><%= I18n.l(schoolterm.finish, format: :dmy)  %></td>
+
+				</div>
+
+				<div class="large-1 column">
+
+				 <td><%= schoolterm.scholarshipsoffered %></td>
+
+			 </div>
+
+			   <div class="large-1 column">
+
+	        <td><%= tickmark(schoolterm.registrationseason) %></td>
+
+				</div>
+
+
+			   <div class="large-1 column">
+
+	        <td><%= tickmark(schoolterm.active_today?) %></td>
+
+				</div>
+
+
+			   <div class="large-1 column">
+
+	        <td><%= tickmark(schoolterm.pap) %></td>
+
+				</div>
+
+
+			   <div class="large-1 column">
+
+	        <td><%= tickmark(schoolterm.medres) %></td>
+
+				</div>
+
+
+			   <div class="large-3 columns">
+
+		        <% if can? :read, schoolterm %>
+			        <td><%= link_to t('actions.show'), schoolterm, class: t('show') %></td>
+						<% end %>
+
+	        <% if can? :update, schoolterm %>
+				      <td><%= link_to t('actions.edit'), edit_schoolterm_path(schoolterm), class: t('edit') %></td>
+						<% end %>
+
+		        <% if can? :destroy, schoolterm %>
+			     		<td><%= link_to t('actions.delete'),schoolterm, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+						<% end %>
+
+	    	</div>
+
+	    		</div>
+
+	      </tr>
+	  <% end %>
+	  </tbody>
+
+
+	</table>
+
+</div>
+
+<div class="row">
+
+  <%= paginate @schoolterms %>
+
+</div>
+
+<br>

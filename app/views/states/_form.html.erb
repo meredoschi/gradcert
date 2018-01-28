@@ -1,0 +1,73 @@
+<%= form_for(@state) do |f| %>
+  <% if @state.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@state.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @state.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+	
+				<%= f.label t('name')%><br>
+
+			</div>
+	 		
+	 		<div class="large-8 columns">
+  
+	   <%= f.text_field :name %>        	
+ 
+			</div>
+
+</div>
+
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+
+				<%= f.label t('activerecord.attributes.state.abbreviation')%><br>
+	
+			</div>
+	 		
+	 		<div class="large-8 columns">
+  
+	   <%= f.text_field :abbreviation %>        	
+ 
+			</div>
+
+</div>
+  
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+
+				<%= f.label ta('state.country')%><br>
+	
+			</div>
+	 		
+	 		<div class="large-8 columns">
+  
+	   <%= f.collection_select :id, Country.all, :id, :brname %>        	
+ 
+			</div>
+
+</div>  
+  
+<% if can? :update, State %>
+
+   <div class="row actions">
+  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+ 
+<% end %>
+
+  	 <%= link_to t('actions.cancel'), states_path, class: "anular" %>
+  </div>
+
+<% end %>

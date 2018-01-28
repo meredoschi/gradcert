@@ -1,0 +1,34 @@
+<% if ( is_active_link?(placesavailables_path, :inclusive) || is_active_link?(academiccategories_path, :inclusive)  || is_active_link?(bankbranches_path, :inclusive) || is_active_link?(programnames_path, :inclusive)  || is_active_link?(professionalfamilies_path, :inclusive) || is_active_link?(professions_path, :inclusive) || is_active_link?(regionaloffices_path, :inclusive) || is_active_link?(methodologies_path, :inclusive) || is_active_link?(degreetypes_path, :inclusive) || is_active_link?(coursenames_path, :inclusive) || is_active_link?(schoolterms_path, :inclusive) || is_active_link?(taxations_path, :inclusive) || ( is_active_link?(streetnames_path, :inclusive) || is_active_link?(stateregions_path, :inclusive) || is_active_link?(states_path, :inclusive) || is_active_link?(countries_path, :inclusive) || is_active_link?(municipalities_path, :inclusive)  )   ) %>
+
+	<li class="has-dropdown active">
+
+<% else %>
+
+	<li class="has-dropdown">
+
+<% end %>
+
+  <a href="#"><%= t('definition').pluralize.mb_chars.upcase %></a>
+    <ul class="dropdown">
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/bankbranches.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/placesavailable.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/schoolterms.html.erb' %> </div>
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/academiccategories.html.erb' %> </div>
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/councils.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/municipalities.html.erb' %> </div>
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/professions.html.erb' %> </div>
+		<div class="row"> <%= render 'layouts/navbar/submenu/degreetypes.html.erb' %> </div>
+
+		<div class="row"> <%= render 'layouts/navbar/submenu/schools.html.erb' %> </div>
+
+
+
+
+
+
+		  </ul>
+	 </ul>

@@ -1,0 +1,43 @@
+<%= form_for(@methodology) do |f| %>
+  <% if @methodology.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@methodology.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @methodology.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+		<div class="large-2 columns", class: "left inline">
+
+			<%= f.label :kind %>
+			
+		</div>
+		
+		<div class="large-10 columns">
+
+	    <%= f.text_field :kind %>
+		 
+		</div>
+	
+</div>
+
+
+	<% if can? :update, Methodology %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), methodologies_path, class: "anular" %>
+	
+	</div>
+
+<% end %>

@@ -1,0 +1,93 @@
+<div class="row">
+
+<h3><%= t('yearly_statistics') %></h3>
+
+</div>
+
+<div class="row">
+
+	<table>
+		<tr>
+		
+		<div class="large-4 columns">
+
+			<th><strong><%= ta('healthcareinfo.consultations')%></strong></th>
+	
+		</div>
+		
+		<div class="large-4 columns">
+			<th><strong><%= ta('healthcareinfo.admissions')%></strong></th>
+		</div>
+
+		<div class="large-4 columns">			
+			<th><strong><%= ta('healthcareinfo.surgeries') %></strong></th>		
+		</div>
+				
+		</tr>
+</div>
+
+<div class="row">
+
+		<tr>
+		
+		<div class="large-4 columns">
+
+			<td><%= @healthcareinfo.consultations %></td>
+				
+		</div>
+
+		<div class="large-4 columns">
+		
+			<td><%= @healthcareinfo.admissions  %></td>	
+
+		</div>
+
+		<div class="large-4 columns">
+			
+			<td><%= @healthcareinfo.surgeries %></td>	
+
+		</div>
+			
+	  </tr>
+	</table>
+
+</div>
+
+<div class="row">
+
+	<table>
+		<tr>
+		
+		<div class="large-6 columns">
+
+			<th><strong><%= ta('healthcareinfo.radiologyprocedures')%></strong></th>
+	
+		</div>
+		
+		<div class="large-6 columns">
+			<th><strong><%= ta('healthcareinfo.labexams')%></strong></th>
+		</div>
+				
+		</tr>
+</div>
+
+<div class="row">
+
+		<tr>
+		
+		<div class="large-6 columns">
+
+			<td><%= @healthcareinfo.radiologyprocedures %></td>
+				
+		</div>
+
+		<div class="large-6 columns">
+		
+			<td><%= @healthcareinfo.labexams  %></td>	
+
+		</div>
+			
+	  </tr>
+	</table>
+
+</div>

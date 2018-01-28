@@ -1,0 +1,21 @@
+		<div class="row">
+		
+			<div class="field">
+				
+				<div class="large-3 columns">
+					
+					<%= f.label retrieve_label_institutions_with_users_for(current_user) %>
+		
+				</div>
+		
+			
+				<div class="large-9 columns">
+
+					<%= f.select :institution_id_eq, options_from_collection_for_select(retrieve_institution_with_users_for(current_user), "id", "name", @search.institution_id_eq), include_blank: true %>
+			  				
+				</div>
+			    
+			</div>
+		
+		</div>
+

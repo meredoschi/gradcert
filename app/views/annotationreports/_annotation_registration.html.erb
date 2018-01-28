@@ -1,0 +1,31 @@
+<h6>
+
+          <div class="row">
+
+              <% if event.residual? %>
+
+                <% if event.registration.cancelled? %>
+
+                  <div class="row">
+
+                    <%= ta('registration.accreditation.revoked')	%>: <%= I18n.l(event.registration.accreditation.revocation, format: :dmy) %>
+
+                  </div>
+
+                <% end %>
+
+                <% if event.registration.suspended? %>
+
+                  <div class="row">
+
+                    <%= ta('registration.accreditation.suspended')	%>: <%= I18n.l(event.registration.accreditation.suspension, format: :dmy) %>
+
+                  </div>
+
+                <% end %>
+
+              <% end %>
+
+          </div>
+
+</h6>

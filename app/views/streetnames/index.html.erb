@@ -1,0 +1,76 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+		<h2><%= t('activerecord.models.streetname').capitalize.pluralize %> (<%= @streetnames.total_count  %> /  <%= @numstreetnames %>)  	</h2>
+
+  </div>
+
+	<% if can? :manage, @streetname %>
+
+		<div class="large-4 columns">
+		 	
+	  		<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('streetname')), new_streetname_path %>	 
+  
+	  </div>
+	  
+	 <% end %>
+	  
+</div>
+
+<table>
+  <thead>
+    <tr>
+    	<div class="row">
+    		<div class="large-9 columns">
+		      <th><%= t('activerecord.attributes.streetname.designation') %></th>
+				</div>
+				<div class="large-3 columns">		      
+		      <th colspan="3"></th> 
+		    </div>
+			</div>
+    </tr>
+ </thead>
+
+  <tbody>
+    <% @streetnames.each do |streetname| %>
+      <tr>
+		<div class="row">					  
+
+		  <div class="large-9 columns">					  
+
+				<td><%= streetname.designation %></td>     
+				
+		    	<div class="large-1 column">					  
+						<td>
+			      	<% if can? :read, streetname %> 
+								<%= link_to t('actions.show'), streetname, class: "mostrar" %>
+							<% end %>			      
+			      </td> 
+					</div>
+
+		    	<div class="large-1 column">					  	
+		        <% if can? :edit, streetname %>
+	  		      <td><%= link_to t('actions.edit'), edit_streetname_path(streetname), class: "editar" %></td>   
+		  			<% end %>
+					</div>
+
+		    	<div class="large-1 column">					  	
+  		    	<% if can? :destroy, streetname %>  
+  		    		<td><%= link_to t('actions.delete'),streetname, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     	
+        		<% end %>
+        	</div>
+       </div>
+  
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="row">
+
+  <%= paginate @streetnames %>
+  
+</div>

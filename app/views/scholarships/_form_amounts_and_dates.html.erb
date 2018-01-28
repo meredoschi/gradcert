@@ -1,0 +1,99 @@
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label :amount %>
+
+	</div>
+
+		<div class="large-9 columns">
+
+	  <%= f.text_field :amount %>
+
+	 </div>
+
+</div>
+
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label :writtenform %>
+
+	</div>
+
+		<div class="large-9 columns">
+
+	  <%= f.text_field :writtenform %>
+
+	 </div>
+
+</div>
+
+<% if is_admin(current_user) || is_medres_manager(current_user) %>
+
+	<div class="row">
+
+		<div class="large-3 columns">
+
+	    <%= f.label :partialamount %>
+
+		</div>
+
+			<div class="large-9 columns">
+
+		  <%= f.text_field :partialamount %>
+
+		 </div>
+
+	</div>
+
+
+	<div class="row">
+
+		<div class="large-3 columns">
+
+	    <%= f.label :writtenformpartial %>
+
+		</div>
+
+			<div class="large-9 columns">
+
+		  <%= f.text_field :writtenformpartial %>
+
+		 </div>
+
+	</div>
+<% end %>
+
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label :start %><br>
+
+	</div>
+
+		<div class="large-9 columns select-date-wrapper <em></em>er">
+
+	  <%= f.date_select :start,  options={prompt: true, start_year: Date.today.year - 5, end_year: Date.today.year}, html_options = { class: 'select-date'} %>
+
+	 </div>
+
+</div>
+
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label :finish %><br>
+
+	</div>
+
+		<div class="large-9 columns select-date-wrapper">
+
+	  <%= f.date_select :finish,  options={prompt: true, start_year: Date.today.year - 5, end_year: Date.today.year+10}, html_options = { class: 'select-date'} %>
+
+	 </div>
+
+</div>

@@ -1,0 +1,28 @@
+<div class="row">
+
+	<div class="large-3 columns", class: "left inline">
+
+		 <%= f.label ta('assessment.expected_duration') %>
+	
+	</div>
+	
+	<div class="large-1 columns", class: "left inline">
+
+	   <%= f.number_field :expected_duration, min: 0, max:5 %>
+
+	</div>
+
+	<div class="large-3 columns", class: "left inline">
+
+    <%= f.label ta('assessment.duration_change_requested') %>
+	
+	</div>
+	
+	<div class="large-5 column", class: "left inline">
+
+    <%= f.check_box :duration_change_requested %>
+
+	</div>
+	
+</div>
+

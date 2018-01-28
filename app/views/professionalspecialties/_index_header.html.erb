@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= t('activerecord.models.professionalspecialty').pluralize.mb_chars.upcase  %> (<%= @professionalspecialties.total_count  %> /  <%= @numprofessionalspecialties %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Professionalspecialty %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('professionalspecialty')), new_professionalspecialty_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

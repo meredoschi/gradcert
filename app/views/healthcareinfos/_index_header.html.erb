@@ -1,0 +1,50 @@
+<% if is_admin_or_manager(current_user) %>
+
+	<div class="row">
+	
+		<div class="large-8 columns">
+	
+			<h2><%= t('entity').mb_chars.pluralize.upcase %></h2>
+		
+			<h2 class="subheader"><%= tm('healthcareinfo').pluralize(@healthcareinfos.total_count).pluralize.mb_chars.capitalize %> (<%= @healthcareinfos.total_count  %> /  <%= @numhealthcareinfos %>)  	</h2>
+	 				
+		</div>
+			
+		  <% if can? :create, College %>
+	
+				<div class="large-4 columns">
+				 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('healthcareinfo')), new_healthcareinfo_path %>	 
+	
+		  </div>
+			  
+		<% end %>
+
+	</div>
+	
+<% else %>
+
+	<div class="row">
+	
+		<div class="large-8 columns">
+	
+					<h2> <%= t('my.f').upcase+' '+t('entity').mb_chars.upcase %> </h2>
+		    	<h2 class="subheader"> <%= t('activerecord.models.healthcareinfo').capitalize  %> </h2>
+	 				
+		</div>
+
+		  <% if (can? :create, Healthcareinfo)  && @healthcareinfos.total_count==0 %>
+	
+				<div class="large-4 columns">
+				 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('healthcareinfo')), new_healthcareinfo_path %>	 
+	
+		  </div>
+			  
+		<% end %>
+
+	</div>
+	
+		
+	</div>
+
+<% end %>
+

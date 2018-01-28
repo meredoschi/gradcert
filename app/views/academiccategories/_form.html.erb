@@ -1,0 +1,35 @@
+<%= form_for(@academiccategory) do |f| %>
+  <% if @academiccategory.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@academiccategory.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @academiccategory.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+		  <div class="field">
+		    <%= f.label :name %><br>
+	    <%= f.text_field :name %>
+		  </div>
+	
+</div>
+
+	<% if can? :update, Academiccategory %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), academiccategories_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

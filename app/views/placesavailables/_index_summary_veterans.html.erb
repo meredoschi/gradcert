@@ -1,0 +1,40 @@
+<div class="row">
+
+  <div class="large-9 columns">
+
+    <h5>
+
+
+       <%=  ta('placesavailable.virtual.veterans.active') %>
+
+     </h5>
+
+
+  </div>
+
+
+  <div class="large-3 columns">
+
+    <h5>
+      <%# To do: verify why this isn't displaying properly %>
+      <%#= @scholarships_offered %>
+      <%#= Registration.for_schoolterm(Schoolterm.latest.previous.first).veterans.active.count.to_s	%>
+      <%= @num_veterans_registered.to_s	%>
+
+
+    </h5>
+
+  </div>
+</div>
+
+<% comment do %>
+
+<div class="row panel callout">
+
+  <%= render 'index_veterans_inactive.html.erb' %>
+
+ <%= render 'index_veterans_active.html.erb' %>
+
+</div>
+
+<% end %>

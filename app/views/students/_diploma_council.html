@@ -1,0 +1,100 @@
+<div class="row">
+
+    <div class="medium-2 columns", class: "left inline">
+
+      <%= f.label ta('diploma.awarded')  %><br>
+
+    </div>
+
+    <div class="medium-6 columns select-dmy">
+
+
+        <%= f.date_select(:awarded, prompt: true,  start_year: Date.today.year, end_year: Date.today.year-50) %>
+
+
+    </div>
+
+    <div class="medium-1 column">
+
+      <%= f.check_box :ongoing %>
+    </div>
+
+    <div class="medium-3 columns">
+
+      <em><%= f.label ta('diploma.ongoing')  %></em>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+<hr class="custom-hr">
+
+</div>
+
+<div class="row">
+
+    <div class="large-3 columns", class: "left inline">
+
+      <span data-tooltip aria-haspopup="true" class="has-tip" title="A informação relativa à inscrição e situação junto ao conselho profissional deve ser informada se a profissão for regulamentada e assim o exigir.  Caso contrário, favor deixar em branco todos os campos desta seção."><%= t('help').capitalize %></span>
+
+      <%= f.label tm('council')  %><br>
+
+    </div>
+
+    <div class="large-9 columns">
+
+          <%= f.collection_select :council_id, Council.all, :id, :name, include_blank: true %>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="large-4 columns", class: "left inline">
+
+      <%= f.label :councilcredential  %><br>
+
+    </div>
+
+    <div class="large-2 columns">
+
+        <%= f.text_area :councilcredential %>
+
+    </div>
+
+    <div class="large-4 columns", class: "left inline">
+
+      <%= f.label ta('diploma.councilcredentialstatus')  %><br>
+
+    </div>
+
+    <div class="large-2 columns", class: "left inline">
+
+      <%= f.select :councilcredentialstatus, Diploma::COUNCILSTATUS, include_blank: true %>
+
+    </div>
+
+
+</div>
+
+
+<div class="row">
+
+<div class="medium-6 columns", class: "left inline">
+
+  <%= f.label ta('diploma.councilcredentialexpiration')  %><br>
+
+</div>
+
+<div class="medium-6 columns select-dmy">
+
+
+    <%= f.date_select(:councilcredentialexpiration, prompt: true,  start_year: Date.today.year+10, end_year: Date.today.year-1) %>
+
+
+</div>
+
+</div>

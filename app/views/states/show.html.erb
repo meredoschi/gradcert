@@ -1,0 +1,25 @@
+<div class="row">
+
+	<h2><%= tm('state').capitalize%></h2>
+
+	<h2 class="subheader"><%= @state.name %> (<%= @state.abbreviation %>)</h2>
+
+	<h3><%= display_if_foreign(@state.country) %>  </h3>
+				
+</div>
+
+<%#= t('activerecord.attributes.stateregion.name').pluralize(@state.stateregion.count)%></strong></th>		
+		
+	<%= render 'show_stateregions.html.erb' %>
+
+<div class="row">
+
+	<% if can? :edit, @state %>
+	
+		<%= link_to t('actions.edit'), edit_state_path(@state), class: "editar" %> |
+	
+	<% end %>
+			
+	<%= link_to t('actions.back'), states_path, class: "voltar" %>
+
+</div>

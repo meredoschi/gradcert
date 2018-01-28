@@ -1,0 +1,53 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+
+        <div class="large-2 columns">
+
+          <th><%= sort_link(@search, :registration_id, ta('makeupschedule.registration_id')) %></th>
+
+        </div>
+
+        <div class="large-1 column">
+
+          <th><%= ta('registration.schoolterm_id') %></th>
+
+        </div>
+
+        <% if is_admin_or_manager(current_user) %>
+
+        <div class="large-2 columns">
+
+         <th><%= tm('institution') %></th>
+
+         </div>
+
+        <% end %>
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :start, t('from').capitalize) %></th>
+
+    			</div>
+
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :finish, t('until').capitalize) %></th>
+
+    			</div>
+
+
+
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+
+			</div>
+
+    </tr>
+
+  </thead>

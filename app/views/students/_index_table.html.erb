@@ -1,0 +1,84 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @students.each do |student| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= link_to student.contact_name, student %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= student.profession_name %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%# if student.council.present? %>
+
+				<%#= link_to student.council_abbreviation, student.council %>
+				
+			<%# else %>
+			
+				---
+				
+			<%# end %>
+			
+				</td>
+
+			</div>
+
+			<% if is_admin_or_manager(current_user) %>
+			
+			   <div class="large-2 columns">
+		
+	        <td><%= link_to student.institution_name, student.contact %></td>
+	
+	
+				</div>
+			
+			<% end %>				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, student %>
+		        <td><%= link_to t('actions.show'), student, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, student %>
+			      <td><%= link_to t('actions.edit'), edit_student_path(student), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, student %>
+		     		<td><%= link_to t('actions.delete'),student, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @students %>
+
+</div>
+
+<br>

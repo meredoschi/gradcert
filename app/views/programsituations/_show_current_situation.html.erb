@@ -1,0 +1,17 @@
+	<div class="row">
+
+	<h4 class="subheader"><%= t('current_situation') %>  </h4>
+	
+	<% if i==0 %>
+	
+		<%= render 'show_approval_rate.html.erb', recommendation: recommendation %>
+
+	<% end %>
+			
+	<%= render 'show_grants.html.erb', recommendation: recommendation %>
+
+	<%= render 'show_invitations.html.erb', recommendation: recommendation %>
+
+	<h4 class="subheader"><%= tm('recommendation').capitalize.pluralize %> </h4>
+	
+	</div>

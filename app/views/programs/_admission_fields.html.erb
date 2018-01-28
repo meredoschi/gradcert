@@ -1,0 +1,19 @@
+<div class="nested-fields">
+
+	<div class="row">
+
+		<h4>		<%= tm('admission').capitalize %> </h4>
+
+	</div>
+
+	<%= render 'admission_fields_dates', :f => f  %>
+
+	<%= render 'admission_fields_grants', :f => f  %>
+	
+	<%= render 'admission_fields_candidates', :f => f  %>
+
+	<%= render 'admission_fields_absent_final_exam', :f => f  %>
+
+	<%= render 'admission_fields_admitted', :f => f  %>
+
+</div>

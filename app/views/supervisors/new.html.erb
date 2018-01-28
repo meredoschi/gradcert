@@ -1,0 +1,23 @@
+<% if teachers_exist_for(current_user) %>
+
+	<h2><%= t('actions.new.m')+" "+tm('supervisor') %></h2>
+
+	<%= render 'form' %>
+	
+	<%= link_to t('actions.back'), supervisors_path, class: t('back') %>
+<% else %>
+
+	<div class="row">
+
+		<div data-alert class="alert-box warning">
+
+				<h3><%= t('no_teachers_found') %></h3>
+
+    	</div>
+
+		<%= link_to t('go_to_contacts_index'), contacts_path, class: "small button info" %> | <%= link_to t('actions.back'), supervisors_path, class: t('back') %>
+		
+</div>
+ 		
+<% end %>
+

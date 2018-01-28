@@ -1,0 +1,15 @@
+---
+en:
+  definition: Definition
+  loading: Loading
+  people: People
+  sample:
+    area:
+      health_care: Healthcare
+      life_sciences: Life Sciences
+      management: Management
+    specialty:
+      biology: Biology
+      business_administration: Business Administration
+      nursing: Nursing
+  system: System

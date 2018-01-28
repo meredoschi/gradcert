@@ -1,0 +1,27 @@
+<div class="row">	
+			
+			<h2><%= link_to @contact.name, @contact.user %></h2>
+
+</div>
+
+<div class="row custom-panel5">	
+			
+			<h3 class="subheader"><%= mail_to @contact.user.email %></h3>
+
+</div>
+		
+<div class="row">
+				
+	<% if is_admin_or_manager(current_user) %>
+							
+		<h3><%= link_to @contact.user.institution.name, @contact.user.institution %></h3>
+	
+	<% end %>
+				
+</div>
+								
+<div class="row">
+							
+	<h4><%= @contact.role.name %></h4>
+		
+</div>

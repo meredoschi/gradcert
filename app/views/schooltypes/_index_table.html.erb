@@ -1,0 +1,50 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @schooltypes.each do |schooltype| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= schooltype.name %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, schooltype %>
+		        <td><%= link_to t('actions.show'), schooltype, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, schooltype %>
+			      <td><%= link_to t('actions.edit'), edit_schooltype_path(schooltype), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, schooltype %>
+		     		<td><%= link_to t('actions.delete'),schooltype, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @schooltypes %>
+
+</div>
+
+<br>

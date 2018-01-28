@@ -8,7 +8,7 @@ group :assets do
 end
 
 group :development do
-  gem 'bullet'
+#  gem 'bullet'
   gem 'byebug' #  Dec 2016
   gem 'railroady' # https://github.com/preston/railroady
   gem 'rspec-rails'
@@ -22,11 +22,12 @@ group :test do
 end
 
 group :test, :development do
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails',  :require => false
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
   gem 'rubocop' # August 2017
   gem 'shoulda-matchers', '~> 3.1' # July 2017
+  gem 'json_converter', '~> 0.0.0' # November 2017
 end
 
 # General
@@ -44,7 +45,9 @@ gem 'faker'
 gem 'ffaker'
 gem 'file_validators'
 gem 'foundation-rails', '~> 5.5.3' # Version 5
+gem 'holidays'
 gem 'i18n', '>= 0.6.9'
+gem 'i18n-tasks', '~> 0.9.20'
 gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'kaminari'
@@ -68,6 +71,7 @@ gem 'simple_xlsx_writer' # Excel export
 gem 'therubyracer', platforms: :ruby
 gem 'thin'
 gem 'timeliness' #  Date validation
+gem 'traceroute'
 gem 'turbolinks' # Read more: https://github.com/rails/turbolinks
 gem 'tzinfo', '~> 1.2.1'
 gem 'validates_overlap' # Abril 2016

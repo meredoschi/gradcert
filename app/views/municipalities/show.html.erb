@@ -1,0 +1,99 @@
+<div class="row">
+
+	<table>
+		<tr>
+		
+			<% if is_capital(@municipality) %>
+
+				<th><strong><%= ta('municipality.capital')%> </strong></th>
+				
+			<% else %>
+
+					<th><strong><%= ta('municipality.name')%> </strong></th>
+	
+			<% end %>					
+			
+		<th><strong><%= ta('state.name')%> </strong></th>
+				
+		<th><strong><%= ta('stateregion.name')%></strong></th>
+		</tr>
+	
+		<tr>
+		<td><%= @municipality.name %></td>
+		<td><%= link_to @municipality.stateregion.state.name, @municipality.stateregion.state %></td>
+		<td><%= link_to @municipality.stateregion.name, @municipality.stateregion %></td>	
+	  </tr>
+	</table>
+
+</div>
+
+<% if @municipality.institution_count >0 %>
+
+	<div class="row">
+	
+		<table>
+			<tr>
+			<th><strong><%= t('activerecord.models.institution').capitalize.pluralize(@municipality.institution_count)%></strong></th>
+		
+			</tr>
+		
+			<tr>
+			<td><%= @municipality.institution_count %></td>	
+		  </tr>
+		</table>
+	
+	</div>
+
+<% end %>
+
+<% if @municipality.regionaloffice.present? %>
+
+	<div class="row">
+	
+		<table>
+			<tr>
+			<th><strong><%= t('activerecord.models.regionaloffice').capitalize %></strong></th>
+		
+			</tr>
+		
+			<tr>
+			<td><%= link_to @municipality.regionaloffice.name, @municipality.regionaloffice %></td>	
+		  </tr>
+		</table>
+	
+	</div>
+
+<% end %>
+
+<% @cityinstitutions.each do |address| %>
+
+	<div class="row">
+	
+		<p><%#= link_to institution, institution_path(institution.id) %></p>
+	
+		<p><%#= address.institution.name %></p>
+		<p><%= link_to address.institution.name, institution_path(address.institution.id) %></p>
+	
+	</div>		 
+
+<% end %>
+
+
+<div class="row">
+
+  <%= paginate @cityinstitutions %>
+		 
+</div>
+
+
+<div class="row">
+
+	<% if can? :edit, @municipality %>
+
+		<%= link_to 'Editar', edit_municipality_path(@municipality), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to 'Voltar', municipalities_path,  class: "voltar"  %>
+	
+</div>

@@ -1,0 +1,13 @@
+<div class="row">	    		
+	<div class="large-3 columns", class: "left inline">
+			<%= f.label ta('schoolterm.start') %>
+	</div>
+			
+	<div class="large-9 columns">								
+		<%#= f.select :schoolterm_id_eq, options_from_collection_for_select(retrieve_schoolterms_for(current_user), :id, :startdate), 		include_blank: true %>				
+		
+		<%= f.select :schoolterm_id_eq, options_from_collection_for_select(Schoolterm.modern, :id, :name), 		include_blank: true %>
+	
+	</div>
+				
+</div>

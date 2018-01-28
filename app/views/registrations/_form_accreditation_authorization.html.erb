@@ -1,0 +1,20 @@
+<%= form.fields_for :accreditation do |accreditation_fields| %>
+
+	<div class="row custom-panel2">
+
+		 		<div class="large-3 columns", class: "left inline">
+
+	      		<%= accreditation_fields.label ta('event.confirmed') %>
+						<span data-tooltip aria-haspopup="true" class="has-tip" title="Marque esta opção se for para confirmar que o lançamento realizado pela comissão local procede ou, em casos excepcionais, se foi você mesmo o efetuou.  Desmarcado significa que continua pendente."><%= t('help') %></span>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+					<%= accreditation_fields.check_box :confirmed %>
+
+				</div>
+
+	</div>
+
+<% end %>

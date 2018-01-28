@@ -1,0 +1,19 @@
+<% if can? :read, @methodology %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(methodologies_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('methodology').capitalize.pluralize, methodologies_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

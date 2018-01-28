@@ -1,0 +1,31 @@
+<div class="row">
+
+		 		<div class="medium-2 columns", class: "left inline">
+
+	 				<%= f.label tm('diploma') %>
+
+				</div>
+
+		 		<div class="medium-6 column">
+
+					<% if is_local_admin(current_user) && Schoolterm.open_season? %>
+
+						<%= f.collection_select :degreetype_id, Degreetype.pap, :id, :name,  {prompt: true} %>
+
+					<% else %>
+
+						<%= f.collection_select :degreetype_id, Degreetype.all, :id, :name,  {prompt: true} %>
+
+					<% end %>
+
+					<%# To do: implement as helper method %>
+
+				</div>
+
+  		<div class="medium-4 columns">
+
+					  <%= link_to_remove_association t('actions.delete'), f, class: "remover" %>
+
+			</div>
+
+	</div>

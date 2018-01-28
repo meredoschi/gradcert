@@ -1,0 +1,27 @@
+<div class="row">
+
+	<h2><%= tm('leavetype').capitalize %></h2>
+
+</div>
+
+<div class="row">
+	
+		<span class="id-label"><h3><%= @leavetype.id %> </h3></span>
+	
+</div>
+
+<%= render 'show_name_paid_comment.html.erb' %>
+
+<%= render 'show_days_limit.html.erb' %>
+
+<div class="row">
+	
+	<% if can? :edit, @leavetype %>
+
+		<%= link_to t('actions.edit'), edit_leavetype_path(@leavetype), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), leavetypes_path,  class: t('back')  %>
+
+</div>

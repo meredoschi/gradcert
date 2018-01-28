@@ -1,0 +1,34 @@
+<%= search_form_for @search do |f| %>
+
+	<div class="row">
+
+	<div class="large-3 columns">
+
+			<div class="field">
+		
+				<%= f.label tm('payroll') %>
+			
+			</div>
+
+		</div>
+			
+		<div class="large-9 columns">
+
+			<div class="field">
+					
+				<%= f.select :payroll_id_eq, options_from_collection_for_select(@payrolls_with_bankpayment, :id, :name), 		include_blank: true %>
+					
+			</div>
+</div>
+
+	<div class="row">
+		    
+		<div class="large-6 columns">
+	
+		  <%= f.submit t('actions.search'), class: t('seek') %>
+	
+		</div>
+	
+	</div>
+	 
+<% end %>

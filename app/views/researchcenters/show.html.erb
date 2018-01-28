@@ -1,0 +1,180 @@
+<div class="row">
+
+	<h2><%= link_to @researchcenter.institution_name, @researchcenter.institution %><h2>
+
+	<h3><%= tm('researchcenter').capitalize %></h3>
+
+</div>
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= t('rooms').capitalize %></strong></th>
+					
+							</div>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= t('labs').capitalize %></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-4 columns">
+					
+						<td><%= @researchcenter.rooms %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= @researchcenter.labs %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+<div class="row">
+
+	<h4><%= t('scientific_production').capitalize+' ('+t('research').pluralize+')' %></h4>
+	
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+				<div class="large-3 columns">
+		
+					<th></th>
+		
+				</div>
+	
+				<div class="large-3 columns">
+		
+					<th><%= t('done.f').capitalize.pluralize %></th>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<th><%= t('ongoing').capitalize %></th>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<th><%= t('subtotal').capitalize %></th>
+		
+				</div>
+			</tr>
+	
+			<tr>
+			
+				<div class="large-3 columns">
+		
+					<td><strong><%= t('national').capitalize %></strong></td>
+		
+				</div>
+	
+				<div class="large-3 columns">
+		
+					<td><%= @researchcenter.domesticprojectsdone %></td>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<td><%= @researchcenter.ongoingdomesticprojects %></td>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<td> <%= @researchcenter.domestic %> </td>
+		
+				</div>
+			</tr>
+
+			<tr>
+			
+				<div class="large-3 columns">
+		
+					<td><strong><%= t('international').capitalize %></strong></td>
+		
+				</div>
+	
+				<div class="large-3 columns">
+		
+					<td><%= @researchcenter.intlprojectsdone %></td>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<td><%= @researchcenter.ongoingintlprojects %></td>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<td> <%= @researchcenter.international %> </td>
+		
+				</div>
+			</tr>
+
+			<tr>
+			
+				<div class="large-3 columns">
+		
+					<td><strong><%= t('total').capitalize %></strong></td>
+		
+				</div>
+	
+				<div class="large-3 columns">
+		
+					<td><%= @researchcenter.completed %></td>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<td><%= @researchcenter.ongoing %></td>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<td> <%= @researchcenter.production %> </td>
+		
+				</div>
+			</tr>
+
+		</table>
+</div>			
+
+
+<div class="row">
+	
+	<% if can? :edit, @researchcenter %>
+
+		<%= link_to 'Editar', edit_researchcenter_path(@researchcenter), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to 'Voltar', researchcenters_path,  class: "voltar"  %>
+
+</div>

@@ -1,0 +1,24 @@
+<div class="row">
+	
+	<% if can? :edit, @payroll %>
+
+		<%= link_to t('actions.edit'), edit_payroll_path(@payroll), class: t('edit')  %> |
+
+		<% if @payroll.annotated? %>
+
+			<%#= link_to t('calculate_payroll'), calculate_payroll_path(@payroll), class: t('generate')  %>  
+			<%= link_to t('clear_payroll'), clear_payroll_path(@payroll), class: "relatorio6" %>      
+
+			<%#= link_to t('recalculate_payroll').capitalize, calculate_payroll_path(@payroll), class: t('generate')  %> | 
+
+		<% else %>
+
+			<%= link_to t('calculate_payroll'), calculate_payroll_path(@payroll), class: "relatorio6" %> |     
+
+		<% end %>
+
+  <% end %>	
+
+	  <%= link_to t('actions.back'), payrolls_path,  class: t('back')  %>
+	
+</div>

@@ -1,0 +1,47 @@
+		<table>
+			<div class="row">
+			<tr>
+
+							<div class="large-6 columns">
+
+								<th><strong><%= ta('schoolterm.seasondebut')%></strong></th>
+
+							</div>
+
+
+							<div class="large-6 columns">
+
+								<th><strong><%= ta('schoolterm.seasonclosure')%></strong></th>
+
+							</div>
+
+
+			</tr>
+		</div>
+
+			<div class="row">
+
+				<tr>
+
+					<div class="large-6 columns">
+
+						<td>
+							<%= show_when(@schoolterm.seasondebut) %>
+						</td>
+
+					</div>
+
+					<div class="large-6 columns">
+
+						<td>
+							<%= show_when(@schoolterm.seasonclosure) %>
+						</td>
+
+					</div>
+
+
+				</tr>
+
+		</div>
+
+	</table>

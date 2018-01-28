@@ -1,0 +1,50 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @academiccategories.each do |academiccategory| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-2 columns">
+	
+        <td><%= academiccategory.name %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, academiccategory %>
+		        <td><%= link_to t('actions.show'), academiccategory, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, academiccategory %>
+			      <td><%= link_to t('actions.edit'), edit_academiccategory_path(academiccategory), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, academiccategory %>
+		     		<td><%= link_to t('actions.delete'),academiccategory, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @academiccategories %>
+
+</div>
+
+<br>

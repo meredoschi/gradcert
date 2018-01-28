@@ -1,0 +1,57 @@
+<% if absent_annotations_exist? %>
+
+	<div class="row">
+	
+		<h4 class=subheader> <%= t('absences_or_personal_leaves') %> </h4>
+	
+	</div>
+	
+	<div class="row panel callout">
+			
+			<% @absent_annotations.each_with_index do |annotation, i|  %>
+			
+				
+				<h5><%= (i+1).to_s%>	
+	
+				<% if annotation.registration.cancelled_on_this_payroll?(@bankpayment.payroll) %>
+	
+				
+						<strike>	
+						
+								<% if is_admin_or_manager(current_user) %>
+								
+									<%=  link_to annotation.full_details, annotation %> 
+						
+								<% else %>
+								
+									<%=  link_to annotation.details, annotation %> 
+								
+								<% end %>
+						
+						(<%= pluralize(annotation.absences, ta('event.absence')).downcase %>) </strike>
+		
+				</h5>
+				
+				<% else %>
+	
+									<% if is_admin_or_manager(current_user) %>
+								
+									<%=  link_to annotation.full_details, annotation %> 
+						
+								<% else %>
+								
+									<%=  link_to annotation.details, annotation %> 
+								
+								<% end %>
+					
+					 (<%= pluralize(annotation.absences, ta('event.absence')).downcase %>)
+				
+								
+				<% end %>
+	
+							
+			<% end %>
+				
+	</div>
+	
+<% end %>

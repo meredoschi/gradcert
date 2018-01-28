@@ -1,0 +1,47 @@
+<div class="row">
+
+	<div class="large-3 columns", class: "left inline">
+
+    <%= f.label ta('programsituation.recommended_first_year_grants') %>
+
+	</div>
+
+		<div class="large-1 columns", class: "left inline">
+	
+			
+		  <%= f.number_field :recommended_first_year_grants, min:0  %>
+					
+		</div>	
+		
+		<div class="large-2 columns", class: "left inline">
+	
+			
+		 <em> <%= f.label t('workload')  %></em>
+					
+		</div>	
+
+	<div class="large-2 columns", class: "left inline">
+
+    <%= f.label ta('programsituation.first_year_instructional_hours_theory') %>
+
+	</div>
+
+		<div class="large-1 column", class: "left inline">
+
+		  <%= f.number_field :first_year_instructional_hours_theory, min:0  %>
+					
+		</div>	
+	
+		<div class="large-2 columns", class: "left inline">
+
+    <%= f.label ta('programsituation.first_year_instructional_hours_practice') %>
+
+	</div>
+
+		<div class="large-1 column", class: "left inline">
+
+		  <%= f.number_field :first_year_instructional_hours_practice, min:0  %>
+					
+		</div>	
+
+</div>	

@@ -1,0 +1,15 @@
+<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+		  <%= f.label tm('supervisor') %><br>
+
+			</div>
+	 		
+	 		<div class="large-10 columns">
+   
+   			<%= f.collection_select :supervisor_id, Supervisor.from_own_institution(current_user).medres, :id, :contact_name,  {prompt: true} %>
+  
+			</div>
+
+</div>

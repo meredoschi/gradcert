@@ -1,0 +1,52 @@
+	<div class="nested-fields">
+
+	<div class="row">
+
+
+		 		<div class="large-2 columns", class: "left inline">
+
+	 				<%= f.label t('number_abbreviation') %>
+
+				</div>
+
+		 		<div class="large-1 column">
+
+
+				  <%= f.number_field	 :programyear, in: 1..@maxduration %>
+
+				</div>
+
+		 		<div class="large-2 columns", class: "left inline">
+
+	 				<%= f.label ta('schoolyears.theory'), in: 0..Settings.total_hours_in_a_year %>
+
+				</div>
+
+		 		<div class="large-1 column">
+
+
+				  <%= f.number_field	 :theory, in: 0..Settings.total_hours_in_a_year %>
+
+				</div>
+
+
+		 		<div class="large-2 columns", class: "left inline">
+
+	 				<%= f.label ta('schoolyears.practice') %>
+
+				</div>
+
+		 		<div class="large-1 column">
+
+
+				  <%= f.number_field	 :practice %>
+
+				</div>
+				 		<div class="large-3 columns">
+
+					  <%= link_to_remove_association t('actions.delete'), f, class: "remove-nested" %>
+
+					</div>
+			</div>
+
+</div>

@@ -1,0 +1,77 @@
+<table>
+
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @makeupschedules.each do |makeupschedule| %>
+      <tr>
+				<div class="row">
+
+          <div class="large-2 columns">
+
+           <td><%= link_to makeupschedule.registration.details, makeupschedule.registration  %></td>
+
+   			</div>
+
+        <div class="large-1 column">
+
+         <td><%= t('incoming_cohort').capitalize+' '+I18n.l(makeupschedule.registration.school_term.start, format: :dmy)  %></td>
+
+      </div>
+
+        <% if is_admin_or_manager(current_user) %>
+
+        <div class="large-2 columns">
+
+         <td><%= link_to makeupschedule.registration.institution, makeupschedule.registration.student.contact.institution %></td>
+
+ 			   </div>
+
+        <% end %>
+
+		   <div class="large-2 columns">
+
+        <td><%= I18n.l(makeupschedule.start, format: :compact) %></td>
+
+			</div>
+
+
+		   <div class="large-2 columns">
+
+         <td><%= I18n.l(makeupschedule.finish, format: :compact) %></td>
+
+			</div>
+
+
+		   <div class="large-3 columns">
+
+	        <% if can? :read, makeupschedule %>
+		        <td><%= link_to t('actions.show'), makeupschedule, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, makeupschedule %>
+			      <td><%= link_to t('actions.edit'), edit_makeupschedule_path(makeupschedule), class: t('edit') %></td>
+					<% end %>
+
+	        <% if can? :destroy, makeupschedule %>
+		     		<td><%= link_to t('actions.delete'),makeupschedule, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+					<% end %>
+
+    	</div>
+
+    		</div>
+
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @makeupschedules %>
+
+</div>
+
+<br>

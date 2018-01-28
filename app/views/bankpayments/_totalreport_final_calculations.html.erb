@@ -1,0 +1,102 @@
+<div class="row">
+		<table>
+			<tr>
+
+						
+							<div class="large-2 columns">
+						
+								<th><strong><%= t('gross') %></strong></th>
+					
+							</div>
+			
+							<div class="large-1 column">
+					
+								<th><strong><%= t('total_absences_amount') %></strong></th>
+					
+							</div>
+
+							<div class="large-1 column">
+					
+								<th><strong><%= ta('annotation.discount').pluralize %></strong></th>
+					
+							</div>
+
+							<div class="large-1 column">
+					
+								<th><strong><%= ta('annotation.supplement').pluralize %></strong></th>
+					
+							</div>
+
+							<div class="large-2 columns">
+					
+								<th><strong><%= t('subtotal').capitalize %></strong></th>
+					
+							</div>
+
+						<div class="large-2 columns">
+		
+							<th><strong><%= ta('taxation.socialsecurity') %></strong></th>
+		
+						</div>
+
+						<div class="large-2 columns">
+		
+							<th><strong><%= t('net') %></strong></th>
+		
+						</div>
+
+
+				</tr>
+		</div>
+	
+	
+			<div class="row">
+		
+				<tr>
+
+
+					<div class="large-2 columns">
+					
+						<td><%= humanized_money_with_symbol(@total_gross_amount) %></td>
+					
+					</div>
+
+					<div class="large-1 column">
+					
+						<td> <%= humanized_money_with_symbol(@absences_final_amount) %> </td>
+					
+					</div>
+
+					<div class="large-1 column">
+					
+						<td> <%= humanized_money_with_symbol(@discounts) %> </td>
+					
+					</div>
+
+					<div class="large-1 column">
+					
+						<td> <%= humanized_money_with_symbol(@supplements) %> </td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@subtotal_recalc) %> </td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@social_security_recalc) %> </td>
+					
+					</div>
+
+					<div class="large-2 columns">
+					
+						<td> <%= humanized_money_with_symbol(@net_recalc) %> </td>
+					
+					</div>
+																									
+
+	</table>
+</div>

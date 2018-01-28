@@ -1,0 +1,150 @@
+ <thead>
+    <tr>
+
+		<% if is_admin_or_manager(current_user) && (@colleges.total_count>1) %>
+
+			
+    	<div class="row">
+    
+	  		
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :institution_name, t('activerecord.attributes.institution.name'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :area, t('activerecord.attributes.college.area'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :classrooms, t('activerecord.attributes.college.classrooms'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :otherrooms, t('activerecord.attributes.college.otherrooms'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :sportscourts, t('activerecord.attributes.college.sportscourts'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :foodplaces, t('activerecord.attributes.college.foodplaces'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :libraries, t('activerecord.attributes.college.libraries'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :gradcertificatecourses, t('activerecord.attributes.college.gradcertificatecourses'), default_order: :desc) %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= sort_link(@search, :previousyeargradcertcompletions, t('activerecord.attributes.college.previousyeargradcertcompletions'), default_order: :desc) %></th>
+      
+    			</div>
+  
+  	<% else %>
+
+    	<div class="row">
+    
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.institution.name') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.college.area') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.college.classrooms') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.college.otherrooms') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.college.sportscourts') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.college.foodplaces') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.college.libraries') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.college.gradcertificatecourses') %></th>
+      
+    			</div>
+    			        
+				
+		    	<div class="large-1 column">
+
+	  				<th><%= t('activerecord.attributes.college.previousyeargradcertcompletions') %></th>
+      
+    			</div>
+  	
+  	<% end %>
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

@@ -1,0 +1,66 @@
+
+<% if is_not_regular_user(current_user) && @institution.programs.count>0 %>
+
+
+<div class="row">
+
+	<table>
+
+	
+		
+			<tr>
+	
+				<th><%= pluralize(@num_institutionprograms, tm('program')).titleize %> </th>
+
+
+
+				<th><%= pluralize(@num_institution_registrations, tm('registration')).capitalize.pluralize %></th>
+	
+			</tr>
+									
+		
+		<div class="row">
+			
+		
+				<% @institutionprograms.each do |program| %>
+			
+				<tr>
+
+					<div class="row">
+		
+						<div class="large-6 columns">
+									
+							<td><h5><u><%= link_to program.program_name_schoolterm, program %></u></h5></td> 
+
+						</div>
+
+						<div class="large-6 columns">
+	
+							<td>
+							
+ 								<%= render 'show_program_registrations.html.erb', program: program %>
+ 								
+							</td>
+				
+						</div>
+		
+						
+				</tr> 
+				
+					</div>
+			
+				<% end %>
+				
+			</div>
+	
+	</table>
+
+</div>
+
+<% end %>
+
+<div class="row">
+
+<%= paginate @institutionprograms %>
+	 
+</div>

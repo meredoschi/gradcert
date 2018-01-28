@@ -1,0 +1,62 @@
+<thead>
+    <tr>
+
+			<% if is_staff(current_user) && (@supervisors.total_count>1) %>
+			
+	    	<div class="row">
+	    
+
+					<% if is_admin_or_manager(current_user)  %>
+			  		
+				    	<div class="large-3 columns">
+		
+			  				<th><%= sort_link(@search, :contact_user_institution_name, tm('institution').capitalize) %></th>
+		      
+		    			</div>
+		    			        
+		    	<% end %>
+	    	
+					
+			    	<div class="large-3 column">
+	
+		  				<th><%= sort_link(@search, :contact_name, t('activerecord.attributes.contact.name')) %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-3 column">
+	
+		  				<th><%= sort_link(@search, :profession_name, tm('profession').capitalize) %></th>
+	      
+	    			</div>
+	    			        
+	    			        		
+				<% else %>
+				
+					<div class="row">
+		  			    			        
+			    	<div class="large-3 column">
+	
+		  				<th><%= ta('contact.name') %></th>
+	      
+	    			</div>
+	    			      
+			    	<div class="large-3 column">
+	
+		  				<th><%= ta('profession.name') %></th>
+	      
+	    			</div>
+
+				<% end %>
+					
+			    <div class="large-3 columns">
+	
+	      		<th colspan="3"></th>
+	
+					</div>
+					
+				</div>
+				
+    </tr>
+    
+</thead>

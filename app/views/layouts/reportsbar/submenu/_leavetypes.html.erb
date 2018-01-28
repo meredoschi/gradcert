@@ -1,0 +1,19 @@
+<% if can? :read, @leavetype %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(leavetypes_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('leavetype').capitalize.pluralize, leavetypes_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

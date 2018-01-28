@@ -1,0 +1,56 @@
+<div class="row"> 
+
+	<% if is_regular_user(current_user) %>
+
+			<h2> <%= t('personal_info').mb_chars.upcase %></h2>		
+			<h2 class="subheader"> <%= t('my_teaching').mb_chars.capitalize %></h2>
+			
+	<% else %>
+
+		<% if is_admin_or_manager(current_user)  %>
+	
+				<div class="large-8 columns">
+		
+		
+			  	<h2> <%= tm('supervisor').pluralize.mb_chars.capitalize  %> (<%= @supervisors.total_count  %> /  <%= @numsupervisors %>)</h2>
+		 				
+				</div>
+				
+			  <% if can? :create, Supervisor %>
+		
+					<div class="large-4 columns">
+					 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('supervisor')), new_supervisor_path %>	 
+		
+				  </div>
+				  
+				<% end %>
+	
+		<% else %>
+	
+			<% if is_local_admin(current_user) %>
+					
+				<div class="large-8 columns">
+				
+					<h2 class="text-center"> <%= t('people').mb_chars.upcase %> </h2>
+			
+					<h2 class="subheader"><%= tm('supervisor').pluralize(@supervisors.total_count).capitalize %> (<%= @supervisors.total_count  %> /  <%= @numsupervisors %>)  	</h2>
+			 				
+				</div>
+			
+				 <% if (can? :create, Supervisor)  %>
+				
+					<div class="large-4 columns">
+							 
+						<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('supervisor')), new_supervisor_path %>	 	
+					
+					</div>
+						
+				 <% end %>
+
+			  <% end %>
+				
+			<% end %>
+				
+	<% end %>
+
+</div>

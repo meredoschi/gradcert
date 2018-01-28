@@ -1,0 +1,51 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+    	  
+    	  	<% if is_staff(current_user) %>
+  
+			    	<div class="large-2 columns">
+	
+		  				<th><%= ta('assessment.contact') %></th>
+	        
+	    			</div>
+
+					<% end %>
+					
+		    	<div class="large-2 columns">
+
+	  				<th><%= tm('assessment').capitalize %></th>
+      
+    			</div>
+
+		    	<div class="large-1 column">
+
+	  				<th><%= t('favorable_assessment').capitalize %></th>
+      
+    			</div>
+    			        
+				    			        				
+		    	<div class="large-2 column">
+
+	  				<th><%= ta('programsituation.duration_change_requested') %></th>
+      
+    			</div>
+    			        
+					<div class="large-2 column">
+
+	  				<th><%= ta('programsituation.workload_change_requested') %></th>
+      
+    			</div>
+    			            			        
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

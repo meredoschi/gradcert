@@ -1,0 +1,21 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+			<h2><%= t('definition').pluralize.mb_chars.upcase %> </h2>
+
+			<h2 class="subheader"><%= tm('programname').pluralize.capitalize %> (<%= @programnames.total_count  %> /  <%= @numprogramnames %>)  	</h2>
+
+
+  </div>
+
+	  <% if can? :create, Programname %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('programname')), new_programname_path %>
+
+	  </div>
+
+	<% end %>
+
+</div>

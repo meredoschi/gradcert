@@ -1,0 +1,160 @@
+<%= form_for(@professionalspecialty) do |f| %>
+  <% if @professionalspecialty.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@professionalspecialty.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @professionalspecialty.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row custom-panel3">
+
+	<div class="row">
+	
+		 		<div class="large-3 columns", class: "left inline">
+		
+					<%= f.label :name %>
+	
+				</div>
+		 		
+		 		<div class="large-9 columns">
+	  
+		   <%= f.text_field :name %>        	
+	 
+				</div>
+	
+	</div>
+	
+	<div class="row">
+
+	
+		<% if action_name!='new' %>
+	
+		 		<div class="large-3 columns", class: "left inline">
+		
+					<%= f.label :previousname %>
+	
+				</div>
+	
+	
+		 		<div class="large-6 columns">
+	  
+		   <%= f.text_field :previousname %>        	
+	 
+				</div>
+
+		<% end %>
+		
+			<% if is_admin(current_user) %>
+						
+		 		<div class="large-2 columns", class: "left inline">
+		
+					<%= f.label :legacy %>
+		
+				</div>
+		
+		 		<div class="large-1 column">
+		
+					<%= f.check_box :legacy %>        	
+		 
+				</div>
+		
+			<% end %>
+		
+	</div>
+	
+	<div class="row">
+					
+			 		<div class="large-3 columns", class: "left inline">
+			
+						<%= f.label :professionalarea_id %>
+			
+					</div>
+			 		
+			 		<div class="large-9 columns">
+			
+			   		<%= f.collection_select :professionalarea_id, Professionalarea.all, :id, :name %>        	
+			 
+					</div>
+				
+	</div>  
+	
+	<div class="row">
+	
+		 		<div class="large-3 columns", class: "left inline">
+		
+					<%= f.label :comment %>
+	
+				</div>
+	
+		 		<div class="large-9 columns">
+	  
+		   <%= f.text_field :comment %>        	
+	 
+				</div>
+	
+	</div>
+	
+	<% if is_admin(current_user) %>
+	
+		<div class="row">
+	
+			 		<div class="large-3 columns", class: "left inline">
+			
+						<%= f.label t('sector') %>
+		
+					</div>
+		
+			 		<div class="large-3 columns", class: "left inline">
+			
+						<%= f.label :pap %>
+		
+					</div>
+		
+			 		<div class="large-1 column">
+		  
+			   <%= f.check_box :pap %>        	
+		 
+					</div>
+	
+			 		<div class="large-3 columns", class: "left inline">
+			
+						<%= f.label :medres %>
+		
+					</div>
+	
+			 		<div class="large-1 column">
+		  
+				   <%= f.check_box :medres %>        	
+		 
+					</div>
+	
+		</div>
+	
+	<% end %>
+
+</div>
+
+<div class="row">
+
+	<% if can? :update, Professionalspecialty %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), professionalspecialties_path, class: t('cancel') %>
+	
+	</div>
+
+</div>
+
+
+
+<% end %>

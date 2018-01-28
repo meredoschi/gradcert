@@ -1,0 +1,15 @@
+<%= search_form_for @search do |f| %>
+
+<%= render 'index_search_institution', f: f %>
+
+<div class="row">
+	    
+	<div class="large-6 columns">
+
+	  <%= f.submit t('actions.search'), class: "buscar" %>
+
+	</div>
+
+</div>
+	
+<% end %>

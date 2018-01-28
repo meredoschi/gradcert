@@ -1,0 +1,72 @@
+<div class="row">
+
+	<h2><%= t('total_report').capitalize %> </h2>
+
+</div>
+
+
+<% @confirmedregistrations.ordered_by_contact_name.each_with_index do |registration, n| %>
+	
+	<div class="row">
+				 
+		 <%#= render 'report_registration_details', registration: registration %>
+		 <%#= render 'totalreport_calculations', registration: registration %>
+		 		 
+		 <% @social_security_total_amount+=calculate_social_security_fee(registration) %>
+
+	</div>
+	
+<% end %>
+
+<div class="row">
+		<table>
+			<tr>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('payroll.monthworked') %></strong></th>
+					
+							</div>
+
+							<div class="large-4 column">
+					
+								<th><strong><%= tm('student').capitalize.pluralize %></strong></th>
+					
+							</div>
+
+							<div class="large-4 column">
+					
+								<th><strong><%= t('scholarship_amount') %></strong></th>
+					
+							</div>
+			
+
+				</tr>
+		</div>
+	
+	
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-4 columns">
+					
+						<td><%= I18n.l(@bankpayment.payroll.monthworked, format: :my) %></td>	
+					
+					</div>
+
+				
+					<div class="large-4 columns">
+					
+						<td><%= @num_confirmed_for_payment %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= humanized_money_with_symbol(@scholarship_amount) %></td>
+					
+					</div>
+
+	</table>
+</div>

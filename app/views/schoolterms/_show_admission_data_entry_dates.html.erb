@@ -1,0 +1,48 @@
+		<table>
+			<div class="row">
+			<tr>
+
+							<div class="large-6 columns">
+
+								<th><strong><%= ta('schoolterm.admissionsdebut')%></strong></th>
+
+							</div>
+
+
+							<div class="large-6 columns">
+
+								<th><strong><%= ta('schoolterm.admissionsclosure')%></strong></th>
+
+							</div>
+
+
+			</tr>
+		</div>
+
+
+			<div class="row">
+
+				<tr>
+
+					<div class="large-6 columns">
+
+						<td>
+							<%= show_when(@schoolterm.admissionsdebut) %>
+						</td>
+
+					</div>
+
+					<div class="large-6 columns">
+
+						<td>
+							<%= show_when(@schoolterm.admissionsclosure) %>
+						</td>
+
+					</div>
+
+
+				</tr>
+
+		</div>
+
+	</table>

@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= t('activerecord.models.leavetype').pluralize.mb_chars.upcase  %> (<%= @leavetypes.total_count  %> /  <%= @numleavetypes %>)</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Leavetype %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('leavetype')), new_leavetype_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

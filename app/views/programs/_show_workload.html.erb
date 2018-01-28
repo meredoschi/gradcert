@@ -1,0 +1,47 @@
+<table>
+	
+	<tr>
+
+		<div class="row">
+					
+			<div class="large-4 columns">
+		
+				<th><strong><%= ta('schoolyears.theory')%></strong></th>
+		
+			</div>
+		
+			<div class="large-4 columns">
+		
+				<th><strong><%= ta('schoolyears.practice')%></strong></th>
+		
+			</div>
+
+			<div class="large-4 columns">
+		
+				<th><strong><%= t('Total')%></strong></th>
+		
+			</div>
+			
+		</div>
+	
+	</tr>
+
+	<div class="row">
+
+	<tr>
+	
+		<div class="large-4 columns">
+			<td><%=	schoolyear.theory %></td>
+		</div>
+	
+		<div class="large-4 columns">
+			<td><%=	schoolyear.practice %></td>
+		</div>
+
+		<div class="large-4 columns">
+			<td><%=	pluralize(schoolyear.theory+schoolyear.practice,t('hour')) %></td>
+		</div>
+																						
+	</div>
+</table>
+</div>

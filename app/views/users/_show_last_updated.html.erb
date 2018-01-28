@@ -1,0 +1,42 @@
+<div class="row">
+
+<hr>
+	
+	<p><strong><%= t('latest_update')%></strong>
+					
+		<%= I18n.l(@user.updated_at) %></p>
+
+	<% if !@user.versions.last.nil? %>
+
+		<% if !@userwho.nil? && !@userwho.contact.nil?  %>
+
+			<p><strong><%= t('modified_by')%>: </strong>
+			
+			<% if can? :read, User %>
+			
+				 <%= link_to @userwho.contact_name, @userwho %> 
+
+			<% else %>
+
+				<%= @userwho.contact_name %> 
+
+			<% end %>
+
+			<% if current_user.institution_id!=@userwho.institution_id %>
+			
+				<%= @userwho.institution.name %> </p>
+
+			<% end %>
+			
+			
+				<p><strong><%= t('iteration')%>: </strong>
+						
+				<%= @user.versions.length %>
+
+				</p>
+				
+		<% end %>
+
+	<% end %>
+
+</div>

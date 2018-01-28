@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+	<tr>
+	<th><strong>Logradouro</strong></th>
+	</tr>
+
+	<tr>
+	<td><%= @streetname.designation %></td>
+  </tr>
+</table>
+
+<div class="row">
+
+	<% if can? :edit, @streetname %>
+
+		<%= link_to t('actions.edit'), edit_streetname_path(@streetname), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), streetnames_path,  class: "voltar"  %>
+	
+</div>

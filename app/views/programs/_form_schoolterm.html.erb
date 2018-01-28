@@ -1,0 +1,25 @@
+<div class="row">
+
+					<div class="large-2 columns", class: "left inline">
+
+						<%= f.label tm('schoolterm') %>
+
+					</div>
+
+
+				 	<div class="large-10 columns">
+
+						<% if @program.without_registered_students? %>
+
+
+							<%= f.collection_select :schoolterm_id, Schoolterm.all, :id, :name,  {prompt: true} %>
+
+						<% else %>
+
+							<%= @program.schoolterm.name %>
+
+						<% end %>
+
+					</div>
+
+</div>

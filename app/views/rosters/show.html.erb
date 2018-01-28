@@ -1,0 +1,163 @@
+<div class="row">
+
+	<h2><%= tm('roster').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('roster.institution_id')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @roster.institution_id %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('roster.schoolterm_id')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @roster.schoolterm_id %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('roster.authorizedsupervisors')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @roster.authorizedsupervisors %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('roster.dataentrystart')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @roster.dataentrystart %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('roster.dataentryfinish')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @roster.dataentryfinish %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	
+	<% if can? :edit, @roster %>
+
+		<%= link_to t('actions.edit'), edit_roster_path(@roster), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), rosters_path,  class: t('back')  %>
+
+</div>

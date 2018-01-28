@@ -1,0 +1,25 @@
+<div class="row">
+	
+			<% if is_own_contact(current_user) || is_regular_user(current_user) %>
+
+				<h2> <%= t('actions.edit').capitalize+' '+t('my.m')+' '+tm('contact') %> </h2>
+						
+			<% else %>
+			
+					<h2><%= t('noun.edit')+' '+tm('contact')%></h2>
+	
+    
+			    <% if @contact.image.present? %>
+			    
+			    	<%= image_tag(@contact.image_url)  %>
+
+					<% end %>
+					
+					<h2 class="subheader"><%= link_to @contact.user.email, @contact.user %></h2> 
+				
+			 <% end %>
+	
+		
+	</div>
+
+<%= render 'form' %>

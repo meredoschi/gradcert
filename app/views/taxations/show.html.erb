@@ -1,0 +1,33 @@
+<div class="row">
+
+	<h2><%= tm('taxation').capitalize %></h2>
+
+</div>
+
+<div class="row">
+	
+	<div class="large-8 columns">
+
+		<%= render 'show_name_and_dates' %>
+		
+	<div class="large-4 columns">
+
+		<%= render 'show_social_security' %>
+		
+	</div>
+
+</div>
+
+<%= render 'show_brackets' %>
+
+<div class="row">
+	
+	<% if can? :edit, @taxation %>
+
+		<%= link_to t('actions.edit'), edit_taxation_path(@taxation), class: t('edit')  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), taxations_path,  class: t('back')  %>
+
+</div>

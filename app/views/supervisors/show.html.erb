@@ -1,0 +1,27 @@
+<div class="row">
+		
+	<%= render 'show_contact_info.html.erb' %>
+
+	<%#= render 'show_education.html.erb' %>
+
+	<%= render 'show_diplomas.html.erb' %>
+
+	<% if is_staff(current_user) %>
+
+		<%= render 'show_contract_type.html.erb' %>
+
+	<% end %>
+		
+</div>
+
+<div class="row">
+
+	<% if can? :edit, @supervisor %>
+	
+		<%= link_to t('actions.edit'), edit_supervisor_path(@supervisor), class: "editar" %> |
+	
+	<% end %>
+			
+	<%= link_to t('actions.back'), supervisors_path, class: "voltar" %>
+
+</div>

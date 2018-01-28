@@ -1,0 +1,72 @@
+<div class="row">
+
+	<table>
+		<tr>
+
+				<div class="large-6 columns">
+		
+				
+							<th> <%= t('accreditation_status') %> </th>
+
+				</div>
+
+				<div class="large-6 columns">
+
+					<th><em><%= accreditation_status(@institution.accreditation) %></em></th>
+					
+				</div>
+				
+		</tr>						
+	
+	
+			<% if @institution.accreditation.is_original_or_was_renewed? %>
+			
+				<%= render 'show_accreditation_start_date.html.erb' %>
+			
+			<% end %>
+		
+			<% if @institution.accreditation.renewal.present? && @institution.accreditation.was_renewed? %>
+		
+				<%= render 'show_accreditation_renewal.html.erb' %>
+			
+			<% end %>
+		
+			<% if @institution.accreditation.was_suspended? %>
+			
+				<%= render 'show_accreditation_suspension.html.erb' %>
+				
+			<% end %>
+		
+			<% if @institution.accreditation.was_revoked? %>
+			
+				<%= render 'show_accreditation_revocation.html.erb' %>
+			
+				<% if @institution.accreditation.suspension.present?	%>
+			
+					<%= render 'show_accreditation_suspension.html.erb' %>
+			
+				<% end %>
+		
+				<% if @institution.accreditation.renewal.present?	%>
+			
+					<%= render 'show_accreditation_renewal.html.erb' %>
+			
+				<% end %>
+			
+				<% if @institution.accreditation.start_date.present?	%>
+			
+					<%= render 'show_accreditation_start_date.html.erb' %>
+			
+				<% end %>
+					
+			<% end %>
+			
+</table>
+
+<% if @institution.accreditation.comment.present? %> 
+
+	<h5> <%= ta('accreditation.comment').capitalize %>: <%= @institution.accreditation.comment %>  </h5>
+
+<% end %>
+
+</div>

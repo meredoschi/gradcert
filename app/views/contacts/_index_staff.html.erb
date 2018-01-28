@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-12 columns">
+
+	 		<%  if is_staff(current_user) %>  		
+
+				<h2><%= t('people').upcase %> </h2> 
+		
+	    	<h2 class="subheader"> <%= t('activerecord.models.contact').pluralize.mb_chars.capitalize  %> (<%= @contacts.total_count  %> /  <%= @numcontacts %>)</h2>
+  
+		<% end %>
+		 
+ 		</h2>
+ 				
+  </div>
+		  
+</div>
+
+<%= render 'index_table' %>

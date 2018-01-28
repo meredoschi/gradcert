@@ -1,0 +1,38 @@
+<div class="row">
+
+	<% if is_inactive?(@program) %>
+
+
+		<div data-alert class="alert-box warning">
+
+			<h1> <%= tm('program').capitalize+" "+ta('program.inactive') %> </h1>
+
+
+		<h2><%= @program.programname.name.capitalize %> (<%= @program.duration %> <%= t('datetime.prompts.year').pluralize(@program.duration) %>)</h2>
+
+		</div>
+
+	<% else %>
+
+		<span class="id-label"><h3><%= @program.id %> </h3></span>
+
+	<h2><%= @program.programname.name.capitalize %> (<%= @program.duration %> <%= t('datetime.prompts.year').pluralize(@program.duration) %>)</h2>
+
+	<% end %>
+
+		<% if @program.programname.previousname.present? %>
+
+	 		<%= render 'show_header_previous_name.html.erb' %>
+
+		<% end %>
+		
+		<% if @program.gradcert? %>
+
+			<%= render 'show_header_grad_cert.html.erb' %>
+
+		<% end %>
+
+		<h3><%= link_to @program.institution.name, @program.institution %> </h3>
+
+
+</div>

@@ -1,0 +1,24 @@
+<div class="row">
+
+	<div class="large-3 columns">
+
+			<div class="field">
+		
+				<%= f.label tm('schoolterm') %>
+			
+			</div>
+
+		</div>
+			
+		<div class="large-9 columns">
+
+			<div class="field">
+					
+				<%#= f.select :registration_schoolterm_id, options_from_collection_for_select(Schoolterm.all, :id, :name), 		include_blank: true %>
+
+				<%= f.select :registration_schoolyear_program_schoolterm_id, options_from_collection_for_select(Schoolterm.all, :id, :name), 		include_blank: true %>
+									
+			</div>
+	 </div>
+
+</div>

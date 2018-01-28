@@ -1,0 +1,136 @@
+<%= form.fields_for :accreditation do |accreditation_fields| %>
+	
+	
+		<%= render 'form_accreditation_status.html.erb', accreditation_fields: accreditation_fields %>
+
+		<div class="row">
+	
+			  <% if registration_season? %>
+
+				
+			 		<div class="large-3 columns", class: "left inline">
+			
+				    <%= accreditation_fields.label ta('registration.accreditation.start')  %><br>
+		
+					</div>
+			 		
+			 		<div class="medium-9 columns">
+		  		  						  		
+								<%= accreditation_fields.date_select(:start, prompt: true, start_year: Date.today.year-10, end_year: Date.today.year, :include_blank => true) %>
+		
+					</div>
+
+			<% else %>
+
+				<h6> 
+			 			<div class="large-3 columns", class: "left inline">
+
+				  	 <%= ta('registration.accreditation.start')  %>
+			
+		
+						</div>
+			 		
+			 			<div class="medium-9 columns">
+		  		  	
+		 						<% if @registration.accreditation.start.present? %>
+		 						
+		 						
+									 <%= I18n.l(@registration.accreditation.start, format: :dmy) %></h6>
+	
+								<% end %>				
+			
+					</div>
+			
+				<br>
+				
+				</h6>
+				
+			<% end %>				
+			
+			<% if is_admin_or_manager(current_user) %>
+		
+		
+			</div>	 		
+		
+				
+			<div class="row">
+	
+				
+			 		<div class="large-3 columns", class: "left inline">
+			
+				    <%= accreditation_fields.label ta('registration.accreditation.suspension')  %><br>
+		
+					</div>
+			 		
+			 		<div class="medium-9 columns">
+		  
+		  		
+							<%= accreditation_fields.date_select(:suspension, prompt: true,  start_year: Date.today.year - 2, end_year: Date.today.year, :include_blank => true) %>
+		
+		 
+					</div>
+		
+			</div>	 		
+
+			<div class="row">
+	
+				
+			 		<div class="large-3 columns", class: "left inline">
+			
+				    <%= accreditation_fields.label ta('registration.accreditation.renewal')  %><br>
+		
+					</div>
+			 		
+			 		<div class="medium-9 columns">
+		  
+		  		
+							<%= accreditation_fields.date_select(:renewal, prompt: true, start_year: Date.today.year - 2, end_year: Date.today.year, :include_blank => true) %>
+		
+		 
+					</div>
+
+					<% end %>
+		
+			</div>	 		
+
+
+			<div class="row">
+	
+				
+			 		<div class="large-3 columns", class: "left inline">
+			
+				    <%= accreditation_fields.label ta('registration.accreditation.revocation')  %><br>
+		
+					</div>
+			 		
+			 		<div class="medium-9 columns">
+		  
+		  		
+							<%= accreditation_fields.date_select(:revocation, prompt: true,  start_year: Date.today.year - 2, end_year: Date.today.year, :include_blank => true) %>
+		
+		 
+					</div>
+		
+			</div>	 		
+
+		
+			<div class="row">
+	
+				
+			 		<div class="large-3 columns", class: "left inline">
+			
+				    <%= accreditation_fields.label ta('accreditation.comment')  %><br>
+		
+					</div>
+			 		
+			 		<div class="large-9 columns">
+		  
+	
+				  	<%= accreditation_fields.text_field :comment %>        	
+		  	
+					</div>
+		
+			</div>	 		
+		
+		
+<% end %>

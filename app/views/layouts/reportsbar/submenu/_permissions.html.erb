@@ -1,0 +1,19 @@
+<% if can? :read, @permission %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(permissions_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('permission').capitalize.pluralize, permissions_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

@@ -1,0 +1,40 @@
+<%= search_form_for @search do |f| %>
+
+	<div class="row">
+
+		<div class="large-3 columns">
+
+			<div class="field">
+
+			  <th><%= f.label ta('programname.name').capitalize %></th>
+
+			</div>
+
+		</div>
+
+		<div class="large-9 columns">
+
+				<%= f.text_field :programname_name_cont %>
+
+		</div>
+
+	</div>
+
+	<%= render 'index_search_duration', f: f %>
+
+	<%#= render 'index_search_area', f: f %>
+
+	<%= render 'index_search_schoolterm', f: f %>
+
+<% if is_admin_or_manager(current_user) %>
+
+	<%= render 'index_search_institution', f: f %>
+
+
+	<%#= render 'index_search_teaching_area', f: f %>
+
+<% end %>
+
+<%= render 'index_search_submit', f: f %>
+
+<% end %>

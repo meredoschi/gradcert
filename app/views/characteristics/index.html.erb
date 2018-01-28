@@ -1,0 +1,13 @@
+<%= render 'index_header.html.erb' %>
+
+<% if @characteristics.total_count>0 %>
+
+	<%= render 'index_table.html.erb' %>
+
+	<% if is_admin_or_manager(current_user) && @characteristics.total_count>1 %>
+
+		<%= render 'index_search.html.erb' %>
+
+	<% end %>
+	
+<% end %>

@@ -1,0 +1,93 @@
+<%= form.fields_for :address do |address_fields| %>
+
+		<div class="row">
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+					  <%= address_fields.label ta('institution.address')%><br>
+		
+					</div>
+			 		
+			 		<div class="large-2 columns", class: "left inline">
+		   
+				  	<%= address_fields.collection_select :streetname_id, Streetname.order(:designation), :id, :designation,  {prompt: true} %>
+		  
+					</div>
+			 		
+			 		<div class="large-4 columns">
+		  
+				   <%= address_fields.text_field :addr %>        	
+		 
+					</div>
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+						  <%= address_fields.label ta('institution.addresscomplement')%><br>
+		
+					</div>
+			 		
+			 		<div class="large-2 columns">
+		  
+				   <%= address_fields.text_field :complement %>        	
+		 
+					</div>
+		
+		</div>
+
+<div class="row">
+
+	 		<div class="large-2 columns", class: "left inline">
+	
+				  <%= form.label ta('institution.neighborhood')%><br>
+
+			</div>
+	 			 		
+	 		<div class="large-2 columns">
+  
+	   <%= address_fields.text_field :neighborhood %>        	
+ 
+			</div>
+
+	 		<div class="large-1 columns", class: "left inline">
+	
+			  <%= address_fields.label ta('institution.municipality')%><br>
+
+			</div>
+	 		
+	 		<div class="large-3 columns">
+   
+		  	<%= address_fields.collection_select :municipality_id, Municipality.paulista, :id, :name,  {prompt: true} %>
+  
+			</div>
+	 		
+	 		<div class="large-2 columns">
+  
+			  <%= address_fields.label ta('institution.postalcode')%><br>
+ 
+			</div>
+
+	 		<div class="large-2 columns">
+  
+		   <%= address_fields.text_field :postalcode %>        	
+ 
+			</div>
+
+</div>
+
+<div class="row">
+
+	 		<div class="large-2 columns">
+  
+			  <%= address_fields.label ta('address.country')%><br>
+ 
+			</div>
+ 
+  		<div class="large-10 columns">
+   
+		  	<%= address_fields.collection_select :country_id, Country.domestic, :id, :brname,  {prompt: true} %>
+   
+			</div>
+
+</div>
+
+<% end %>

@@ -1,0 +1,8 @@
+---
+pt_BR:
+  errors:
+    registrations:
+      no_programs_found: A instituição ainda não possui nenhum programa cadastrado.
+      no_students_found: A instituição ainda não possui nenhum aluno cadastrado.
+    students:
+      none_available: De modo a cadastrar um novo aluno, primeiro é necessário criar o usuário e preencher os dados de contato correspondentes.

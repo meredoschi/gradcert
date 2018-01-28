@@ -1,0 +1,35 @@
+<% if is_regular_user(current_user)  || is_own_user(current_user) %>
+
+	<div class="row">
+	
+		<div class="large-10 columns">
+	
+			<h2 class="text-center"> <%= t('personal_info').mb_chars.upcase %>
+			
+			<h2 class="subheader"> <%= t('my.m').capitalize+' '+tm('contact') %> </h2>
+	 				
+	  </div>
+			  
+	</div>
+	
+<% else %>
+
+	<div class="row">
+	
+		<div class="large-12 columns">
+	
+		 		<%  if is_staff(current_user) %>  		
+	
+					<h2 class="text-center"><%= t('people').upcase %> </h2> 
+			
+		    	<h2 class="subheader"> <%= t('activerecord.models.contact').pluralize.mb_chars.capitalize  %> (<%= @contacts.total_count  %> /  <%= @numcontacts %>)</h2>
+	  
+	 		<% end %>
+			 
+	 		</h2>
+	 				
+	  </div>
+			  
+	</div>
+
+<% end %>

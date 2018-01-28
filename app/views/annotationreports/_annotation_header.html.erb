@@ -1,0 +1,21 @@
+<div class="row">
+
+	<h2> <%= t('payroll_annotations_report') %> </h2>
+
+</div>
+
+<div class="row">
+
+	<h3><%= ta('payroll.paymentdate') %>: <% if @payroll.present? %> <%= @payroll.name %> <% end %> </h3>
+
+</div>
+
+<% if @num_payroll_annotations>0 %>
+
+<div class="row">
+
+	<h3 class="subheader"> <%= I18n.t('total').capitalize %>: <%= @num_payroll_annotations %> </h3>
+
+</div>
+
+<% end %>

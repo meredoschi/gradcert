@@ -1,0 +1,167 @@
+<%= form_for(@payroll) do |f| %>
+  <% if @payroll.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@payroll.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @payroll.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<<<<<<< HEAD
+		<div class="row">
+
+				 		<div class="large-3 columns", class: "left inline">
+
+					  <%= f.label :taxation_id %>
+
+						</div>
+
+				 		<div class="large-9 columns">
+
+			  		  	<%= f.collection_select :taxation_id, Taxation.all, :id, :details %>
+
+						</div>
+
+			</div>
+
+
+	<div class="row">
+	
+		 		<div class="large-3 columns", class: "left inline">
+		
+			  <%= f.label :scholarship_id %>
+	
+				</div>
+		 		
+		 		<div class="large-9 columns">
+	  
+	  		  	<%= f.collection_select :scholarship_id, Scholarship.all, :id, :details, :include_blank => true %>
+	 
+				</div>
+	
+	</div>
+
+=======
+>>>>>>> pap-a/movement
+	<div class="row">
+
+		
+	 		<div class="large-3 columns", class: "left inline">
+	
+<<<<<<< HEAD
+		    <%= f.label :monthworked  %>
+
+			</div>
+	 		
+	 		<div class="medium-9 columns">
+=======
+		    <%= f.label :monthworked  %><br>
+
+			</div>
+	 		
+	 		<div class="medium-9 columns select-date-wrapper">
+>>>>>>> pap-a/movement
+
+		
+					<%= f.date_select(:monthworked, prompt: true, start_year: Date.today.year - 1, end_year: Date.today.year, :include_blank => true, discard_day: true) %>
+
+
+			</div>
+
+	</div>	 		
+
+
+
+	<div class="row">
+
+		
+	 		<div class="large-3 columns", class: "left inline">
+	
+		    <%= f.label :paymentdate  %>
+
+			</div>
+	 		
+	 		<div class="medium-9 columns">
+
+		
+					<%= f.date_select(:paymentdate, prompt: true, start_year: Date.today.year - 1, end_year: Date.today.year+1, :include_blank => true) %>
+
+
+			</div>
+
+	</div>	 		
+
+<div class="row custom-panel2"> 
+
+	<div class="row">
+		
+				<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :special %>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+			  	<%= f.check_box :special %>
+
+				</div>
+
+
+	 </div>	 		
+
+
+	<div class="row">
+		
+				<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :amount %>
+
+				</div>
+
+		 		<div class="large-9 columns">
+
+			  	<%= f.text_field :amount, min: 0 %>
+
+				</div>
+
+
+	 </div>	 		
+
+</div>
+
+			<div class="row">
+
+				<div class="large-3 columns", class: "left inline">
+
+					<%= f.label :comment %>
+
+				</div>
+
+	 			<div class="large-9 columns">
+
+		  			<%= f.text_area :comment %>
+
+				</div>
+			 	
+			 	
+	</div>
+
+
+	<% if can? :update, Payroll %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), payrolls_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

@@ -1,0 +1,18 @@
+
+<%= render 'show_registrations_active' %>
+
+
+	<% if @placesavailable.num_inactive_registrations_pending>0 %>
+
+		<%= render 'show_deactivations_pending' %>
+
+		<% end %>
+
+	</div>
+
+
+<% if @placesavailable.num_inactive_registrations>0 %>
+
+		<%= render 'show_deactivations' %>
+
+<% end %>

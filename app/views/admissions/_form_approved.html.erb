@@ -1,0 +1,29 @@
+<div class="row">
+
+  <div class="large-4 columns", class: "left inline">
+
+    <%= f.label ta('admission.admitted') %>
+    <span data-tooltip aria-haspopup="true" class="has-tip" title="Verifique se o número informado é igual ao resultado desta conta: Passaram a 1ᵃ fase - Ausentes na 2ᵃ fase - Reprovados na 2ᵃ fase "><%= t('help') %></span>
+
+  </div>
+
+  <div class="large-2 columns">
+
+    <%= f.number_field :admitted, min:0 %>
+
+  </div>
+
+  <div class="large-4 columns", class: "left inline">
+
+    <%= f.label ta('admission.convoked') %>
+    <span data-tooltip aria-haspopup="true" class="has-tip" title="Dentre os aprovados, aqueles efetivamente chamados para realizarem a matrícula."><%= t('help') %></span>
+
+  </div>
+
+  <div class="large-2 columns">
+
+    <%= f.number_field :convoked, min:0 %>
+
+  </div>
+
+</div>

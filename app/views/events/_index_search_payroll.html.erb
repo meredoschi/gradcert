@@ -1,0 +1,24 @@
+<div class="row">
+
+			<div class="large-3 columns">
+
+			<div class="field">
+		
+				<%= f.label tm('payroll') %>
+			
+			</div>
+
+		</div>
+			
+		<div class="large-9 columns">
+
+			<div class="field">
+					
+				<%= f.select :payroll_search, options_from_collection_for_select(Payroll.ordered_by_most_recent, :id, :shortname), 		include_blank: true %>
+					
+			</div>
+
+		</div>
+
+	    
+	</div>

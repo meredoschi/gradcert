@@ -1,0 +1,15 @@
+<div class="row custom-panel8">
+
+ <h4>  <%= pluralize(@placesavailable.num_inactive_registrations_pending, t('deactivation')).capitalize %> <%= t('pending').pluralize(@placesavailable.num_inactive_registrations_pending).downcase  %> </h4>
+
+</div>
+
+  <% @placesavailable.inactive_registrations_pending.each do |registration| %>
+
+  <div class="row">
+
+    <h5><%= link_to registration.details, registration %></h5>
+
+  </div>
+
+  <% end %>

@@ -1,0 +1,36 @@
+<%= form_for(@streetname) do |f| %>
+  <% if @streetname.errors.any? %>
+    <div id="error_explanation">
+      <h2>O logradouro não pode ser gravado devido a <%= pluralize(@streetname.errors.count, "erro") %>:</h2>
+
+      <ul>
+      <% @streetname.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+	
+			 <p> <%= f.label t('activerecord.attributes.streetname.designation') %></p>
+
+			</div>
+	 		
+	 		<div class="large-8 columns">
+  
+	   <%= f.text_field :designation %>        	
+ 
+			</div>
+
+</div>
+
+
+  <div class="row actions">
+  	<%= f.submit :value => "Confirmar", :class => 'button small success' %> |
+  	<%= link_to 'Anular', streetnames_path, class: "anular" %>
+ </div>
+  
+<% end %>

@@ -1,0 +1,80 @@
+<%= form_for(@placesavailable) do |f| %>
+  <% if @placesavailable.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@placesavailable.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @placesavailable.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+		  <div class="field">
+		    <%= f.label :institution_id %><br>
+        <%= f.collection_select :institution_id, Institution.all, :id, :name %>
+
+		  </div>
+		  <div class="field">
+		    <%= f.label :schoolterm_id %><br>
+        <%= f.collection_select :schoolterm_id, Schoolterm.most_recent, :id, :name %>
+		  </div>
+      <% comment do %>
+
+		  <div class="field">
+		    <%= f.label :requested %><br>
+	    <%= f.number_field :requested %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :accredited %><br>
+	    <%= f.number_field :accredited %>
+		  </div>
+
+      <% end %>
+
+      <div class="row">
+
+        <div class="large-4 columns">
+
+		        <%= f.label :authorized %><br>
+
+        </div>
+
+        <div class="large-2 columns">
+
+          <%= f.number_field :authorized, min: 0 %>
+
+        </div>
+
+        <div class="large-4 columns">
+
+          <%= f.label :allowregistrations %><br>
+
+        </div>
+
+        <div class="large-2 columns">
+
+          <%= f.check_box :allowregistrations %>
+
+        </div>
+
+      </div>
+
+</div>
+
+	<% if can? :update, Placesavailable %>
+
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), placesavailables_path, class: t('cancel') %>
+
+	</div>
+
+<% end %>

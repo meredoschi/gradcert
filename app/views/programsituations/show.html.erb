@@ -1,0 +1,58 @@
+
+<div class="row">
+
+	<h2> <%= ta('assessment.contact') %>: <%=  link_to @programsituation.contact_name, @programsituation.assessment.contact  %> </h2>
+
+</div>
+
+<div class="row panel callout">
+
+	<h3> <%=  link_to @programsituation.program_name, @programsituation.assessment.program  %>  </h3>
+
+</div>
+
+<div class="row panel">
+
+	<h3> <%= @programsituation.institution_name %> </h3>
+
+</div>
+
+<%= render 'show_opinion.html.erb' %>
+
+	<%= render 'show_nature_kind.html.erb' %>
+
+	<% if workload_change_recommended? %>
+
+		<%= render 'show_workload.html.erb' %>
+	
+	<% else %>
+
+		<%= render 'workload_unchanged.html.erb' %>
+			
+	<% end %>
+
+
+	<% if duration_change_recommended? %>
+	
+		<%= render 'show_duration.html.erb' %>
+
+	<% else %>
+
+		<%= render 'duration_unchanged.html.erb' %>
+			
+	<% end %>
+	
+	<%= render 'show_schoolyears.html.erb' %>
+
+
+<div class="row">
+	
+	<% if can? :edit, @programsituation %>
+
+		<%= link_to t('actions.edit'), edit_programsituation_path(@programsituation), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), programsituations_path,  class: "voltar"  %>
+
+</div>

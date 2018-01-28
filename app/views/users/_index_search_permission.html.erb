@@ -1,0 +1,19 @@
+	<div class="row">
+	
+ 		<div class="field">
+
+				<div class="large-3 columns">
+
+						<%= f.label tm('permission').capitalize %>
+
+				</div>
+				
+				<div class="large-9 columns">
+
+					<%= f.select :permission_id_eq, options_from_collection_for_select(retrieve_active_users_permissions_for(current_user), :id, :description), 		include_blank: true %>									
+			
+		  	</div>	
+
+		</div>
+
+	</div>

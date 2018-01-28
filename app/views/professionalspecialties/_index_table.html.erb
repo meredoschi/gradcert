@@ -1,0 +1,73 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @professionalspecialties.each do |professionalspecialty| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-3 columns">
+	
+        <td><%= professionalspecialty.name %></td>
+
+			</div>
+
+		   <div class="large-2 columns">
+	
+        <td><%= professionalspecialty.professionalarea_name %></td>
+
+			</div>
+	
+			<% if is_admin(current_user) %>
+								
+		   <div class="large-2 columns">
+	
+        <td><%= professionalspecialty.professionalarea_name %></td>
+
+			</div>
+				
+	
+		   <div class="large-2 columns">
+	
+        <td><%= professionalspecialty.previouscode %></td>
+
+			</div>
+				
+			<% end %>
+	
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, professionalspecialty %>
+		        <td><%= link_to t('actions.show'), professionalspecialty, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, professionalspecialty %>
+			      <td><%= link_to t('actions.edit'), edit_professionalspecialty_path(professionalspecialty), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, professionalspecialty %>
+		     		<td><%= link_to t('actions.delete'),professionalspecialty, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @professionalspecialties %>
+
+</div>
+
+<br>

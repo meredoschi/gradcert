@@ -1,0 +1,40 @@
+<%= form_for(@assessment) do |f| %>
+  <% if @assessment.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@assessment.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @assessment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row custom-panel">
+
+		  <%= render 'form_program.html.erb', f: f %>
+
+		  <%= render 'form_target_public.html.erb', f: f %>
+
+<% if !is_collaborator(current_user) %>
+ 
+			<%= render 'form_evaluator.html.erb', f: f %>
+
+<% end %>
+
+</div>
+
+	<% if can? :update, Assessment %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), assessments_path, class: "anular" %>
+	
+	</div>
+
+<% end %>

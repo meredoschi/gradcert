@@ -1,0 +1,62 @@
+<%= form_for(@payroll) do |f| %>
+<% if @payroll.errors.any? %>
+<div id="error_explanation">
+
+  <h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@payroll.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+  <ul>
+    <% @payroll.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= render 'form_taxation', f: f %>
+
+<% if is_admin(current_user) %>
+
+<%= render 'form_pap_medres', f: f %>
+
+<% end %>
+
+<div class="row custom-panel5">
+
+<%= render 'form_month_worked', f: f %>
+
+<%= render 'form_payment_date', f: f %>
+
+<% if is_admin_or_manager(current_user) %>
+
+  <%= render 'form_data_entry_start', f: f %>
+
+  <%= render 'form_data_entry_finish', f: f %>
+
+<% end %>
+
+</div>
+
+<div class="row custom-panel2">
+
+  <% if is_admin(current_user) %>
+
+  <%= render 'form_special', f: f %>
+
+  <% end %>
+
+  <%= render 'form_comment', f: f %>
+
+</div>
+
+<% if can? :update, Payroll %>
+
+<div class="row actions">
+  <%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+  <% end %>
+
+  <%= link_to t('actions.cancel'), payrolls_path, class: t('cancel') %>
+
+</div>
+
+<% end %>

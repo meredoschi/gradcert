@@ -1,0 +1,19 @@
+<% if can? :read, Annotation %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(annotations_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('annotation').capitalize.pluralize, annotations_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

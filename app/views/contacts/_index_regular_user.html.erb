@@ -1,0 +1,69 @@
+<table>
+  <thead>
+    <tr>
+    	<div class="row">    
+				<div class="large-3 columns">
+	  			<th><%= sort_link(@search, :name, ta('contact.name')) %></th>
+				</div>
+				<div class="large-3 columns">
+		      <th><%= ta('user.email') %></th>
+		    </div>
+			   <div class="large-3 columns">
+		      <th><%= ta('contact.role') %></th>
+		    </div>
+	     </div>
+				<div class="large-3 columns">
+					<th colspan="3"></th>
+				</div>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>        
+	    	<div class="row">    
+					<div class="large-3 columns">
+		        <td><%= link_to contact.name, contact.user %></td>
+					</div>	
+					<div class="large-3 columns">
+		        <td><%= link_to contact.user.email, contact.user %></td>
+		      </div>    		
+		      <div class="large-3 columns">				
+	       	  <td>
+	       	  	<% if !contact.role.nil? %>
+       	  			<%= contact.role.name %>
+							<% end %>
+						</td>
+					</div>
+	
+		    	<div class="large-1 column">					  
+						<td>
+			      	<% if can? :read, contact %> 
+								<%= link_to t('actions.show'), contact, class: "mostrar" %>
+							<% end %>			      
+			      </td> 
+					</div>
+
+		    	<div class="large-1 column">					  	
+		        <% if can? :edit, contact %>
+	  		      <td><%= link_to t('actions.edit'), edit_contact_path(contact), class: "editar" %></td>   
+		  			<% end %>
+					</div>
+
+		    	<div class="large-1 column">					  	
+  		    	<% if can? :destroy, contact %>  
+  		    		<td><%= link_to t('actions.delete'),contact, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     	
+        		<% end %>
+        	</div>
+        </div>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+
+  <%= paginate @contacts %>
+<br>
+		 
+</div>

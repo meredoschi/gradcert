@@ -1,0 +1,30 @@
+
+<% if programs_exist_for(current_user) && supervisors_exist_for(current_user) %>
+
+	<%= render 'index_header' %>
+
+  <%= render 'index_table' %>	
+  
+  <%= render 'index_search' %>
+
+<% else %>
+
+	<% if !supervisors_exist_for(current_user) %>
+
+		<%= render 'warning_no_supervisors_found.html.erb'%>
+ 	 	
+	<% end %>
+
+	<% if !programs_exist_for(current_user) %>
+
+		<%= render 'warning_no_programs_found.html.erb'%>
+	
+	<% end %>
+	
+	<div class="row">
+
+		<%= link_to t('actions.back'), supervisors_path, class: t('back') %>
+
+	</div>
+		
+<% end %>

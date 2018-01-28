@@ -1,0 +1,23 @@
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label tm('program') %>
+
+	</div>
+
+		<div class="large-9 columns">
+	
+			<% if is_admin_or_manager(current_user) %>
+			
+			  <%= f.collection_select :program_id, retrieve_programs_for(current_user), :id, :institution_program_name,  {prompt: true} %>
+				
+			<% else %>
+			
+			  <%= f.collection_select :program_id, retrieve_programs_for(current_user), :id, :program_name,  {prompt: true} %>
+			
+			<% end %>
+	
+		</div>	
+	
+</div>

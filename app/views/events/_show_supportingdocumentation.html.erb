@@ -1,0 +1,24 @@
+
+<div class="row">
+
+	<hr>
+	
+		<%= image_tag @event.supportingdocumentation.url.to_s %>
+
+	<hr>
+
+</div>
+
+<div class="row">
+
+<h5>
+Arquivo: 
+
+   <u>
+
+	<%= link_to @event.supportingdocumentation.to_s.split("/").last, asset_url(@event.supportingdocumentation.url)           %>
+        </u>
+
+
+</h5>    
+</div>

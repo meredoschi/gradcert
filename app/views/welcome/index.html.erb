@@ -1,0 +1,46 @@
+<div class="row">
+
+	<h1><%= display_department_name(current_user)%> </h1>
+
+	<h2><%#= display_brazilian_salutation(current_user)%> </strong> </h2>
+
+	<div class="row">
+
+		<%= render 'welcome_text_pt_br.html.erb'%>
+
+	</div>
+
+	<div class="row">
+
+		<%# if start_of_pap_payroll_cycle? %>
+
+		<%# if open_season? && places_available?(current_user) %>
+
+          <% if is_local_admin(current_user) %>
+
+		<% if registrations_permitted? && places_available?(current_user) %>
+
+		<%= render 'registrations_are_open_pt_br.html.erb'%>
+
+		<hr>
+
+		<% else %>
+
+		<%#= render 'registration_season_ended.html.erb'%>
+
+		<%#= render 'admissions_reminder.html.erb'%>
+
+
+		<% end %>
+
+	 <% if @num_payrolls > 0 %>
+
+		<%= render 'data_entry_reminders.html.erb'%>
+
+	<% end %>
+
+	<% end %>
+
+	</div>
+
+	<%= render 'user_stats.html.erb'%>

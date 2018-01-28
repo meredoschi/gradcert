@@ -1,0 +1,19 @@
+<% if can? :read, @feedback %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(feedbacks_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('feedback').capitalize.pluralize+' '+t('and')+' '+t('supplemental_remittance').pluralize, feedbacks_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

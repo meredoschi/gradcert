@@ -1,0 +1,31 @@
+<% if adjustments_exist? %>
+
+	<div class="row">
+	
+		<h4 class=subheader> <%= t('discounts_and_supplements') %> </h4>
+	
+	</div>
+	
+	<div class="row custom-panel6">
+			
+			<% @adjustments.includes(registration: :student).each_with_index do |annotation, i|  %>
+		
+				<h5><%= (i+1).to_s%>	
+
+				<% if is_admin_or_manager(current_user) %>
+								
+					<%=  link_to annotation.full_details, annotation %> 
+	
+				<% else %>
+
+					<%=  link_to annotation.details, annotation %> 
+				
+				<% end %>
+							
+				</h5> 
+									
+			<% end %>
+				
+	</div>
+
+<% end %>

@@ -1,0 +1,50 @@
+<div class="row">
+	
+	<h4 class=subheader> 		<%= t('skip_payment') %> </h4>
+	
+</div>		
+
+<div class="row panel">
+							
+		<% @skip_payment.each_with_index do |registration, i|  %>
+
+				
+			<h5> <%= (i+1).to_s%>	
+			
+			
+				<% if registration.cancelled? %>
+
+					<strike>
+
+						<% if is_admin_or_manager(current_user) %>
+							
+							 <%=  link_to registration.full_details, registration %>  
+			
+						<% else %>
+
+							 <%=  link_to registration.details, registration %>  						
+						
+						<% end %>		 
+					 
+					 </strike> 
+
+				<% else %>
+
+						<% if is_admin_or_manager(current_user) %>
+
+								<%=  link_to registration.full_details, registration %>  
+			
+						<% else %>
+
+							 <%=  link_to registration.details, registration %>  						
+						
+						<% end %>	
+
+				<% end %>
+				
+			</h5>
+			
+		<% end %>
+
+		
+</div>

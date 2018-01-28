@@ -1,0 +1,21 @@
+<ul class="left">
+
+<% if can? :read, @supervisor %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(supervisors_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('supervisor').pluralize.mb_chars.upcase, supervisors_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

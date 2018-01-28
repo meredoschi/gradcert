@@ -1,0 +1,43 @@
+<div class="row">
+
+	<table>
+
+	
+		
+			<tr>
+	
+			<th>		
+			
+			<%= pluralize(@professions.count, tm('profession')).titleize %> </th>
+		
+	
+			</tr>
+									
+		
+		<div class="row">
+			
+		
+				<% @professions.each do |profession| %>
+			
+				<tr>
+
+					<div class="row">
+		
+									
+							<td><u><%= link_to profession.name, profession %></u></td> 
+
+					</div>
+			
+				<% end %>
+				
+			</div>
+	
+	</table>
+
+</div>
+
+<div class="row">
+
+<%= paginate @professions %>
+	 
+</div>

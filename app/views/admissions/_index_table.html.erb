@@ -1,0 +1,93 @@
+<table>
+  <thead>
+    <tr>
+      <div class="row">
+
+        <div class="large-1 column">
+          <th><%= tm('schoolterm').capitalize%></th>
+        </div>
+        <div class="large-3 columns">
+          <th><%= ta('admission.program_id')%></th>
+        </div>
+
+        <% if is_admin_or_manager(current_user) %>
+
+        <div class="large-2 columns">
+          <th><%= tm('institution').capitalize %></th>
+        </div>
+
+        <% end %>
+
+        <div class="large-1 column">
+          <th><%= ta('admission.candidates')%></th>
+        </div>
+        <div class="large-1 column">
+          <th><%= ta('admission.convoked')%></th>
+        </div>
+        <div class="large-3 columns">
+          <th colspan="3"></th>
+        </div>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @admissions.each do |admission| %>
+      <tr>
+
+        <div class="large-1 column">
+          <td><%= link_to admission.program.schoolterm.name, admission.program.schoolterm %></td>
+        </div>
+        <div class="large-3 columns">
+          <td><%= link_to admission.program.name, admission.program %></td>
+        </div>
+        <% if is_admin_or_manager(current_user) %>
+        <div class="large-2 columns">
+          <td><%= link_to admission.program.institution.abbrv, admission.program.institution %></td>
+        </div>
+        <% end %>
+        <div class="large-1 column">
+          <td><%= admission.candidates %></td>
+        </div>
+        <div class="large-1 column">
+          <td><%= admission.convoked %></td>
+        </div>
+
+        <div class="large-1 column">
+
+          <% if can? :read, admission %>
+          <td><%= link_to t('actions.show'), admission, class: t('show') %></td>
+          <% end %>
+
+        </div>
+
+        <div class="large-1 column">
+
+          <% if can? :update, admission %>
+          <td><%= link_to t('actions.edit'), edit_admission_path(admission), class: t('edit') %></td>
+          <% end %>
+
+        </div>
+
+        <div class="large-1 column">
+
+          <% if can? :destroy, admission %>
+          <td><%= link_to t('actions.delete'),admission, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+          <% end %>
+
+        </div>
+
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+</div>
+
+<div class="row">
+
+  <%= paginate @admissions %>
+
+  <br>
+
+</div>

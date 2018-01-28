@@ -1,0 +1,20 @@
+<div class="row">
+
+
+	<h2><%= tm('methodology').capitalize %></h2>
+		
+	<h3 class="subheader"><%= @methodology.kind %></h>
+	
+</div>
+
+<div class="row">
+	
+	<% if can? :edit, @methodology %>
+
+		<%= link_to t('actions.edit'), edit_methodology_path(@methodology), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), methodologies_path,  class: "voltar"  %>
+
+</div>

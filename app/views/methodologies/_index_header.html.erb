@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+			<h2><%= t('definition').pluralize.mb_chars.upcase %> </h2>
+			<h2 class="subheader"><%= tm('methodology').pluralize(@methodologies.total_count).pluralize.mb_chars.capitalize %> (<%= @methodologies.total_count  %> /  <%= @nummethodologies %>)  	</h2>
+ 				
+	</div>
+
+	  <% if can? :create, Methodology %>
+
+			<div class="large-4 columns">
+			 	<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('methodology')), new_methodology_path %>	 
+
+	  </div>
+		  
+	<% end %>
+	
+</div>

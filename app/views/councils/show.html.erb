@@ -1,0 +1,78 @@
+<div class="row">
+
+	<h2><%= tm('council').capitalize %></h2>
+
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('council.name')%></strong></th>
+					
+							</div>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('council.state_id')%></strong></th>
+					
+							</div>
+
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('council.abbreviation')%></strong></th>
+					
+							</div>
+												
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-4 columns">
+					
+						<td><%= @council.name %></td>
+					
+					</div>										
+										
+					<div class="large-4 columns">
+					
+						<td><%= @council.state.abbreviation %></td>
+					
+					</div>
+								
+				 <div class="large-4 columns">
+					
+						<td><%= @council.abbreviation %></td>
+					
+					</div>
+		
+				</tr>
+
+		</div>
+
+	</table>
+</div>
+
+
+<%= render 'show_address.html.erb' %>
+
+<%= render 'show_phones.html.erb' %>
+
+<%= render 'show_webinfo.html.erb' %>
+
+<div class="row">
+	
+	<% if can? :edit, @council %>
+
+		<%= link_to t('actions.edit'), edit_council_path(@council), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), councils_path,  class: "voltar"  %>
+
+</div>

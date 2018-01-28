@@ -1,0 +1,29 @@
+<div class="row ">
+		
+	<div class="large-3 columns" , class: "left inline">
+  
+		<%= form.label tm('institutiontype') %>
+
+	</div>
+
+			
+	<div class="large-5 columns">
+					
+		<%= form.collection_select :institutiontype_id, Institutiontype.all, :id, :name,  {prompt: true} %>
+	   	
+	</div>
+
+	<div class="large-3 columns" , class: "left inline">
+  
+		<%= form.label ta('institution.undergraduate') %>
+
+	</div>
+
+			
+	<div class="large-1 column">
+					
+		<%= form.check_box :undergraduate %>        	
+ 	
+	</div>
+	
+</div>

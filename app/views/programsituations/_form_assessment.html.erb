@@ -1,0 +1,31 @@
+<div class="row">
+
+	<h2>			<%=  link_to @programsituation.program_name, @programsituation.assessment.program %>	</h2>
+
+</div>
+
+<div class="row">
+
+	<h3> 			<%=  link_to @programsituation.institution_name, @programsituation.assessment.program.institution  %>	</h3>
+
+</div>
+
+
+<div class="row panel callout">
+
+<h4>  
+	<div class="large-3 columns">
+
+<%= ta('programsituation.favorable').capitalize %> 
+
+	</div>
+
+	<div class="large-9 columns">
+	
+		<%= f.check_box :favorable %>        	
+
+	</div>	
+
+</h4>
+	
+</div>

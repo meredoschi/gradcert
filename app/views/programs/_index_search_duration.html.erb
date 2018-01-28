@@ -1,0 +1,33 @@
+<div class="row">
+				
+		<div class="large-3 columns">
+			
+			<%= f.label t('duration_between')%>
+		
+		</div>
+	
+				
+		<div class="large-1 columns">
+		
+			<%= f.number_field :duration_gteq,  :value => '1', min:1, max:Settings.longest_program_duration.all, in: 1..Settings.longest_program_duration.all %>  
+		
+		</div>
+
+		<div class="large-1 columns">
+			
+			<%= t('and') %>
+		
+		</div>
+	    
+		<div class="large-1 columns">
+	
+			<%= f.number_field :duration_lteq,  :value => Settings.longest_program_duration.all, min:1, max:Settings.longest_program_duration.all, in: 1..Settings.longest_program_duration.all %>  
+				
+		</div>	
+		
+		<div class="large-6 columns">
+		
+			<%= t('datetime.prompts.year').downcase.pluralize %>
+
+		</div>	
+</div>

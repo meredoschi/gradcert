@@ -1,0 +1,17 @@
+				<div class="row">
+
+							<div class="large-2 columns">
+
+							 <%= f.label tm('permission') %>
+
+											 <span data-tooltip aria-haspopup="true" class="has-tip" title="Durante a temporada de matrículas, você provavelmente irá informar bolsista neste campo."><%= t('required') %></span>
+
+									</div>
+
+									<div class="large-10 columns">
+
+										<%= f.collection_select :permission_id, retrieve_users_permissions_for(current_user).to_a.uniq, :id, :description,  {prompt: true} %>
+
+									</div>
+
+				</div>

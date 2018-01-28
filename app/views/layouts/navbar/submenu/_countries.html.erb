@@ -1,0 +1,21 @@
+<% if can? :read, @country %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(countries_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+  		  	
+  <%= link_to tm('country').capitalize.pluralize, countries_path %></li>
+
+	</ul>  	
+<% end %>
+
+
+

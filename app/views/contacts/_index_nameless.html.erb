@@ -1,0 +1,94 @@
+<div class="row custom-panel10">
+  <div class="row text-center">
+  <h4> <%= t('nameless_contacts_exist') %></h4>
+  </div>
+
+  <div class="row">
+
+    <h5>    <%= t('you_must_edit_or_remove_them').capitalize %>
+  </div>
+
+</div>
+
+<div class="row custom-panel7">
+  <h6>    <%= t('this_warning_will_automatically_disappear') %> </h5>
+
+  <h6>        <%= t('in_case_of_doubt_please_contact_the_team') %></h6>
+</div>
+
+<table>
+
+  <thead>
+    <tr>
+
+      <div class="row">
+
+        <div class="large-3 columns">
+
+          <th><%= sort_link(@search, :email, t('user_email'), default_order: :desc) %></th>
+
+        </div>
+
+        <% if (is_admin_or_readonly(current_user) || is_manager(current_user)) %>
+
+        <div class="large-3 columns">
+
+          <th><%= sort_link(@search, :institution_name, tm('institution').capitalize, default_order: :desc) %></th>
+
+        </div>
+
+        <% end %>
+
+        <div class="large-3 columns">
+
+          <th><%= sort_link(@search, :updated_at, t('updated_at').capitalize, default_order: :desc) %></th>
+
+        </div>
+
+        <div class="large-3 columns">
+
+          <th colspan="3"></th>
+
+        </div>
+
+      </div>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+  <% @nameless_contacts.each do |contact| %>
+  <tr>
+
+    <div class="large-3 columns">
+      <td><%= link_to contact.user.email, contact.user %></td>
+    </div>
+
+    <div class="large-3 columns">
+
+      <% if (is_admin_or_readonly(current_user) || is_manager(current_user)) %>
+
+      <td><%= contact.user.institution.name %></td>
+
+      <% end %>
+
+    </div>
+
+    <div class="large-3 columns">
+      <td><%= I18n.l(contact.updated_at, format: :short) %></td>
+    </div>
+
+    <%= render 'index_table_buttons.html.erb', contact: contact %>
+
+  </div>
+
+</tr>
+
+<% end %>
+
+</tbody>
+</table>
+
+</div>

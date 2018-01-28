@@ -1,0 +1,46 @@
+	<table>
+	  <thead>
+	    <tr>
+				<div class="row">
+					<th><%=	sort_link @search, :name, ta('profession.name') %></th>
+					<th><%=	sort_link @search, :occupationcode, ta('profession.occupationcode') %></th>
+		      <th><%= sort_link @search, :pap, ta('profession.pap')%></th>
+		      <th><%= sort_link @search, :medres, ta('profession.medres')%></th>		      
+		      <th colspan="3"></th> 
+	    </tr>
+	  </thead>
+	
+	  <tbody>
+	    <% @professions.each do |profession| %>
+	      <tr>
+	        <td><%= profession.name %></td>
+	        <td><%= profession.occupationcode %></td>
+	        <td><%= tickmark(profession.pap) %></td>
+	        <td><%= tickmark(profession.medres) %></td>
+	       	        
+	        <% if can? :read, profession %>
+		        <td><%= link_to t('actions.show'), profession, class: "mostrar" %></td>
+					<% end %>
+	
+	        <% if can? :update, profession %>
+			      <td><%= link_to t('actions.edit'), edit_profession_path(profession), class: "editar" %></td>   
+					<% end %>
+	
+	        <% if can? :destroy, profession %>
+		     		<td><%= link_to t('actions.delete'),profession, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+					  
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	<br>
+</div>
+
+<div class="row">
+
+  <%= paginate @professions %>
+
+  <br>
+		 
+</div>

@@ -1,0 +1,220 @@
+<div class="row">
+
+	<h2><%= tm('course').capitalize %>  </h2>
+
+	<h2><%= @course.coursename.name %> 	</h2>
+
+</div>
+
+<div class="row">
+		<table>
+			<tr>
+								
+							<div class="large-4 columns">
+					
+								<th><strong><%= tm('institution').capitalize %></strong></th>
+					
+							</div>
+
+							<div class="large-4 columns">
+
+								<th><strong><%= tm('program').capitalize%></strong></th>
+										
+							</div>
+			
+							<div class="large-4 columns">
+
+								<th><strong><%= t('kind').capitalize%></strong></th>
+				
+					
+							</div>
+		
+			</tr>						
+
+		<div class="row">
+		
+				<tr>
+		
+					<div class="large-4 columns">
+					
+						<td><%= link_to @course.institution_name, @course.program.institution %></td>
+					
+					</div>
+										
+					<div class="large-4 columns">
+					
+						<td><%= link_to @course.program_name, @course.program %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= core?(@course) %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+		<table>
+			<tr>
+								
+							<div class="large-3 columns">
+					
+								<th><strong><%= ta('course.supervisor_id')%></strong></th>
+					
+							</div>
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= ta('course.profession_id')%></strong></th>
+					
+							</div>
+			
+							<div class="large-3 columns">
+				
+								<th><strong><%= tm('methodology').capitalize %></strong></th>
+					
+							</div>
+
+							<div class="large-3 columns">
+					
+								<th><strong><%= ta('course.workload')%></strong></th>
+					
+							</div>
+		
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+		
+					<div class="large-3 columns">
+					
+						<td><%= link_to @course.supervisor.contact_name, @course.supervisor %></td>
+					
+					</div>
+										
+					<div class="large-3 columns">
+					
+						<td><%= @course.profession.name %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= @course.methodology.kind %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= pluralize(@course.workload, t('hour')) %></td>
+					
+					</div>
+
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<% if !@course.address.internal %>
+
+	<%= render 'show_address.html.erb' %>
+
+<% else %>
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= ta('address.header')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @course.address.header %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<% end %>
+
+
+<div class="row">
+		<table>
+			<tr>
+			
+							<div class="large-4 columns">
+					
+								<th><strong><%= t('activerecord.attributes.course.syllabus')%></strong></th>
+					
+							</div>
+					
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-12 columns">
+					
+						<td><%= @course.syllabus %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	
+	<% if can? :edit, @course %>
+
+		<%= link_to t('actions.edit'), edit_course_path(@course), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to t('actions.back'), courses_path,  class: "voltar"  %>
+
+</div>

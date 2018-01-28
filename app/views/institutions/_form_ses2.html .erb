@@ -1,0 +1,59 @@
+<div class="row"> <hr> </div>
+
+<div class="row">
+
+	 		<div class="large-4 columns", class: "left inline">
+
+				<%= form.label "Setor(es) da Ses com que se comunica" %>
+
+			</div>
+			
+	 		<div class="large-3 columns", class: "left inline">
+	
+				  <%= form.label t('activerecord.attributes.institution.pap')%><br>
+
+			</div>
+	 			 		
+	 		
+	 		<div class="large-1 column">
+  
+	   <%= form.check_box :pap %>        	
+ 
+			</div>
+
+	 		<div class="large-3 columns", class: "left inline">
+	
+				  <%= form.label t('activerecord.attributes.institution.medicalresidency')%><br>
+
+			</div>
+	 			 		
+	 		
+	 		<div class="large-1 column">
+  
+	   <%= form.check_box :medicalresidency %>        	
+ 
+			</div>
+
+</div>
+
+<div class="row">
+
+	<hr>
+
+</div>
+
+<div class="row">
+
+	 		<div class="large-5 columns", class: "left inline">
+	
+			  <%= form.label t('activerecord.attributes.institution.provisional')%><br>
+
+			</div>
+	 			 		
+	 		<div class="large-7 column">
+  
+	   <%= form.check_box :provisional %>        	
+ 
+			</div>
+
+</div>

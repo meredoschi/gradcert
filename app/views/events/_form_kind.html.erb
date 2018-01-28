@@ -1,0 +1,35 @@
+<div class="row">
+
+	 		<div class="large-3 columns", class: "left inline">
+
+      		<%= f.label :absence %>
+	
+			</div>
+ 		
+	 		<div class="large-9 columns">
+ 	   
+				<%= f.check_box :absence %>
+
+			</div>
+
+</div>
+
+<div class="row">
+
+			<div class="large-3 columns", class: "left inline">
+
+				<%= f.label tm('leave') %> <br>
+
+			</div>
+
+			<div class="large-9 columns", class: "left inline">
+				
+				<%# To do: write helper method %>
+				<%#= f.collection_select :leavetype_id, Leavetype.pap, :id, :name, include_blank: true %>
+
+				<%= f.collection_select :leavetype_id, Leavetype.pap, :id, :name, include_blank: true %>
+
+			</div>
+
+</div>
+

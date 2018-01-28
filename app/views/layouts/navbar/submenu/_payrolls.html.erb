@@ -1,0 +1,19 @@
+<% if can? :read, Payroll %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(payrolls_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('payroll').capitalize.pluralize, payrolls_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

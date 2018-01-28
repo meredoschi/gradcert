@@ -1,0 +1,19 @@
+<% if can? :read, @role %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(roles_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('role').capitalize.pluralize, roles_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

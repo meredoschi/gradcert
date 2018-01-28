@@ -1,0 +1,14 @@
+
+<div class="row custom-panel9"
+
+<div class="row">
+
+  <h5><%= tm('completion').capitalize %></h5>
+
+</div>
+
+  <%= form.fields_for :completion do |completion_fields| %>
+
+    <%= render 'form_completion_regular', completion_fields: completion_fields %>
+
+  <% end %>

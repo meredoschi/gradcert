@@ -1,0 +1,24 @@
+<% @program.schoolyears.each do |schoolyear| %>
+
+	<div class="row">
+
+		<div class="alert-box info">
+			<h4>
+				<%= I18n.t(schoolyear.programyear.ordinalize) %>  <%= I18n.t('year') %>
+			</h4>
+		</div>
+
+			<%= render 'show_workload.html.erb' , schoolyear: schoolyear %>
+
+
+			<div class="row">
+
+				<%#= render 'show_grants.html.erb' , schoolyear: schoolyear %>
+			</div>
+
+
+			<%= render 'show_enrollment.html.erb' , schoolyear: schoolyear %>
+
+	</div>
+
+<% end %>

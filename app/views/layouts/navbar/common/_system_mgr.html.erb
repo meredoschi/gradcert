@@ -1,0 +1,29 @@
+<% if ( is_active_link?(streetnames_path, :inclusive) || is_active_link?(permissions_path, :inclusive) || is_active_link?(stateregions_path, :inclusive) || is_active_link?(states_path, :inclusive) || is_active_link?(countries_path, :inclusive) || is_active_link?(municipalities_path, :inclusive) || is_active_link?(roles_path, :inclusive) || is_active_link?(institutiontypes_path, :inclusive) ) %>
+
+	<li class="has-dropdown active">
+	
+<% else %>
+	
+	<li class="has-dropdown">
+
+<% end %>
+
+  <a href="#"><%= t('restricted_access').capitalize+' - '+t('system').upcase %></a>
+
+    <ul class="dropdown">
+
+		<%= render 'layouts/navbar/submenu/streetnames.html.erb' %>		
+		
+		<%= render 'layouts/navbar/submenu/municipalities.html.erb' %>
+		<%= render 'layouts/navbar/submenu/roles.html.erb' %>		
+		<%= render 'layouts/navbar/submenu/countries.html.erb' %>
+
+		<%= render 'layouts/navbar/submenu/permissions.html.erb' %>
+		
+		<%= render 'layouts/navbar/submenu/stateregions.html.erb' %>
+
+		<%= render 'layouts/navbar/submenu/states.html.erb' %>		
+		<%= render 'layouts/navbar/submenu/institutiontypes.html.erb' %>
+
+
+	   </ul>

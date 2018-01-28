@@ -1,0 +1,28 @@
+<%= search_form_for @search do |f| %>
+
+<div class="row custom-panel">
+
+	<% if is_admin_or_manager(current_user) %>
+	
+		<%= render 'index_search_id', f: f %>
+
+	<% end %>
+	
+	<%= render 'index_search_payroll', f: f %>
+
+	<%= render 'index_search_registration', f: f %>
+
+	<%= render 'index_search_skip', f: f %>
+
+</div>
+
+
+	<%#= render 'index_search_schoolterm', f: f %>
+
+	<div class="row">
+		    	
+		<%= f.submit t('actions.search'), class: t('seek') %>
+	
+	</div>
+			 
+<% end %>

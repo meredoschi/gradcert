@@ -1,0 +1,121 @@
+ <thead>
+    <tr>
+
+			<% if is_admin_or_manager(current_user) && (@healthcareinfos.total_count>1) %>
+			
+	    	<div class="row">
+	    
+		  		
+			    	<div class="large-3 columns">
+	
+		  				<th><%= sort_link(@search, :institution_id, t('activerecord.attributes.institution.name')) %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= sort_link(@search, :totalbeds, t('activerecord.attributes.healthcareinfo.totalbeds')) %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= sort_link(@search, :icubeds, t('activerecord.attributes.healthcareinfo.icubeds')) %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= sort_link(@search, :consultations, t('activerecord.attributes.healthcareinfo.consultations')) %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= sort_link(@search, :surgeries, t('activerecord.attributes.healthcareinfo.surgeries')) %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= sort_link(@search, :ambulatoryrooms, t('activerecord.attributes.healthcareinfo.ambulatoryrooms')) %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= sort_link(@search, :admissions, t('activerecord.attributes.healthcareinfo.admissions')) %></th>
+	      
+	    			</div>
+	    			        		
+				<% else %>
+				
+					<div class="row">
+		  		
+			    	<div class="large-3 columns">
+	
+		  				<th><%= t('activerecord.attributes.institution.name') %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= t('activerecord.attributes.healthcareinfo.totalbeds') %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= t('activerecord.attributes.healthcareinfo.icubeds') %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= t('activerecord.attributes.healthcareinfo.consultations') %></th>
+	      
+	    			</div>
+	    			        
+			    	<div class="large-1 column">
+	
+		  				<th><%= t('activerecord.attributes.healthcareinfo.surgeries') %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= t('activerecord.attributes.healthcareinfo.ambulatoryrooms') %></th>
+	      
+	    			</div>
+	    			        
+					
+			    	<div class="large-1 column">
+	
+		  				<th><%= t('activerecord.attributes.healthcareinfo.admissions') %></th>
+	      
+	    			</div>
+	    			        
+
+				<% end %>
+					
+			    <div class="large-3 columns">
+	
+	      		<th colspan="3"></th>
+	
+					</div>
+					
+				</div>
+				
+    </tr>
+    
+</thead>

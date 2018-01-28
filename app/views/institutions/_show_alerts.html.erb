@@ -1,0 +1,29 @@
+<% if !@institution.with_infrastructure? && is_not_regular_user(current_user)  %>
+
+	<div class="row alert-box warning">
+	
+		<strong><%=  t('no_infrastructure_reported') %> (<%=tm('researchcenter') %>, <%=tm('healthcareinfo') %>, <%=tm('college') %>)</strong>
+
+	</div>
+
+<% end %>
+
+<% if !@institution.with_characteristic? && is_not_regular_user(current_user)  %>
+
+	<div class="row alert-box warning">
+	
+		<strong><%=  t('characteristics_not_on_file') %> </strong>
+
+	</div>
+
+<% end %>
+
+<% if !@institution.accreditation.details_on_file? && is_not_regular_user(current_user) %>
+
+	<div class="row alert-box alert">
+	
+		<strong><%=  t('accreditation_not_on_file') %></strong>
+
+	</div>
+	
+<% end %>

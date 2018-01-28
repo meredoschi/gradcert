@@ -1,0 +1,41 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+
+	    	<h2> <%= tm('event').pluralize.mb_chars.upcase  %> (<%= @events.total_count  %> /  <%= @num_events %>)</h2>
+
+
+	</div>
+
+	  <% if can? :create, Event %>
+
+			<% comment do %>
+
+							<%# Fix this! %>
+
+							<% if registrations_for(current_user).count > 0 %>
+
+						 		<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('event')), new_event_path %>
+
+
+								<% else %>
+
+								<div data-alert class="alert-box info radius">
+										<h6><%= t('event_creation_reminder_no_active_registrations_found') %></h6>
+
+								</div>
+
+								<% end %>
+
+			<% end %>
+
+				<div class="large-4 columns">
+
+					<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('event')), new_event_path %>
+
+			  </div>
+
+	<% end %>
+
+</div>

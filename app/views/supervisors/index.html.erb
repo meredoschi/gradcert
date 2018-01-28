@@ -1,0 +1,23 @@
+<%= render 'index_header' %>
+
+<% if teachers_exist_for(current_user) || @numsupervisors>0 %>
+
+	<div class="row">
+
+  		<%= render 'index_table' %>	
+  
+  		<%= render 'index_search' %>
+
+	</div>
+	
+<% else %>
+
+		<%= render 'warning_no_teachers_found.html.erb'%>
+ 	 		
+	<div class="row">
+
+		<%= link_to t('back_to_start_page'), root_path, class: 'small button warning' %>
+
+	</div>
+		
+<% end %>

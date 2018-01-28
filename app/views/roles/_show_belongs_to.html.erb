@@ -1,0 +1,49 @@
+<div class="row">
+
+
+	<h3 class="subheader">	<%= t('area').mb_chars.upcase  %> </h3>
+
+
+</div>
+
+<div class="row">
+
+	<table>
+				<tr>
+
+					<div class="row">
+	
+						<div class="large-6 columns">
+						
+							<th><strong><%= t('fullname.pap') %></th>
+	
+						</div>
+	
+						<div class="large-6 columns">
+	
+							<th><strong><%= t('fullname.medres') %></th>
+	
+						</div>
+	
+	
+					</div>
+					
+				</tr>
+			
+				<tr>
+				
+					<div class="row">
+					
+						<div class="large-6 columns">					
+							<td><%= tickmark(@role.pap) %></td>
+						</div>				
+
+						<div class="large-6 columns">								
+							<td><%= tickmark(@role.medres) %></td>
+						</div>				
+
+					</div>				
+			  </tr>
+	</table>
+
+</div>

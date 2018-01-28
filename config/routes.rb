@@ -1,57 +1,99 @@
-Rails.application.routes.draw do
-  resources :things
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+Gradcert::Application.routes.draw do
+  root 'welcome#index'
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  devise_for :users
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  get 'absentreports/show'
+  get 'admissions/edit'
+  get 'admissions/index'
+  get 'annotationreports/show'
+  get 'payrollcalculation/clear'
+  get 'payrollcalculation/show'
+  get 'producestatements/show'
+  get 'reports/annotations'
+  get 'welcome/index'
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  post 'reports/displayregistrations'
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  resources :academiccategories
+  resources :admissions, except: [:new, :create, :destroy]
+  resources :annotations
+  resources :assessments
+  resources :assignments
+  resources :bankbranches
+  resources :characteristics
+  resources :colleges
+  resources :contacts, except: [:new]
+  resources :councils
+  resources :countries
+  resources :coursenames
+  resources :courses
+  resources :degreetypes
+  resources :events
+  resources :feedbacks
+  resources :healthcareinfos
+  resources :institutions
+  resources :institutiontypes
+  resources :leavetypes
+  resources :makeupschedules
+  resources :methodologies
+  resources :municipalities
+  resources :permissions
+  resources :placesavailables
+  resources :professionalareas
+  resources :professionalfamilies
+  resources :professionalspecialties
+  resources :professions
+  resources :programnames
+  resources :programs
+  resources :programsituations
+  resources :regionaloffices
+  resources :registrations
+  resources :researchcenters
+  resources :roles
+  resources :rosters
+  resources :scholarships
+  resources :schoolnames
+  resources :schools
+  resources :schoolterms
+  resources :schooltypes
+  resources :stateregions
+  resources :states
+  resources :streetnames
+  resources :students
+  resources :supervisors
+  resources :taxations
+  resources :users
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  # ------------------------------
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  resources :bankpayments do
+    member do
+      get 'report'
+      get 'totalreport'
+      get 'producestatements'
+      get 'statementspdf'
+    end
+  end
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
+  resources :payrolls do
+    member do
+      get 'calculate'
+      get 'clear'
+      get 'report' # redirects to separate controller below
+      get 'absences' #  ditto
+      resource :annotationreports, only: [:show]
+      resource :absentreports, only: [:show]
+    end
+  end
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+   resources :statements
+
+#  resources :statements do
+#    member do
+#      get 'report'
+#    end
+#  end
+
 end

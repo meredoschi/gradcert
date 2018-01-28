@@ -1,0 +1,123 @@
+<div class="row">
+
+	<div class="large-8 columns">
+
+		<h2><%= tm('country').capitalize.pluralize %> (<%= @countries.total_count  %> /  <%= @numcountries %>)  	</h2>
+
+  </div>
+
+	<% if can? :manage, @country %>
+
+		<div class="large-4 columns">
+		 	
+  	  <%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('country')), new_country_path %>	 
+
+  	</div>
+	 
+	<% end %>
+
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>País (Brazilian name)</th>
+      <th>Name (international)</th>
+      <th>Abbreviation</th>
+      <th colspan="3"></th> 
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @countries.each do |country| %>
+      <tr>
+
+				<td><%= country.brname %></td>     
+        <td><%= country.name %></td>
+        <td><%= country.a3 %></td>
+
+				<div class="large-1 column">
+
+		        <% if can? :read, country %>
+	 				
+			        <td><%= link_to t('actions.show'), country, class: "mostrar" %>
+
+						<% end %>
+						
+					</div>
+	
+					<div class="large-1 column">
+					
+		        <% if can? :update, country %>
+	
+	    		  <td><%= link_to t('actions.edit'), edit_country_path(country), class: "editar" %></td>   
+			
+	  				<% end %>
+	
+					</div>
+				
+					<div class="large-1 column">
+		
+		        <% if can? :destroy, country %>
+	  			      
+ 		     		  <td><%= link_to t('actions.delete'),country, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+	              
+	    	    <% end %>
+	
+	        </div>
+                
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="row">
+
+  <%= paginate @countries %>
+  
+</div>
+
+
+		<%= search_form_for @search do |f| %>
+
+			<div class="row">
+		
+			 		<div class="large-4 columns", class: "left inline">
+			
+				  <%= f.label "Nome em português" %><br>
+		
+					</div>
+			 		
+			 		<div class="large-8 columns">
+		  
+			   <%= f.text_field :brname_cont %>        	
+		 
+					</div>
+		
+			</div>
+		
+			<div class="row">
+		
+			 		<div class="large-4 columns", class: "left inline">
+			
+				  <%= f.label "Name (nome internacional)" %><br>
+		
+					</div>
+			 		
+			 		<div class="large-8 columns">
+		  
+			   <%= f.text_field :name_cont %>        	
+		 
+					</div>
+		
+			</div>
+	
+			<div class="row">
+
+		  <%= f.submit t('actions.search'), class: "buscar" %>
+				
+			<% end %>
+	
+		 </div>	

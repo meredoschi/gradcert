@@ -1,0 +1,70 @@
+<table>
+
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+	<% @payrolls.each do |payroll| %>
+	<tr>
+		<div class="row">
+
+			<div class="large-2 columns">
+
+				<td><%= payroll.name %></td>
+
+			</div>
+
+			<% if is_admin_or_manager(current_user) %>
+
+				<div class="large-2 columns">
+
+					<td><%= I18n.l(payroll.paymentdate) %></td>
+
+				</div>
+
+				<div class="large-3 columns">
+
+						<td> <%= display_payment_amount(payroll) %> </td>
+
+				</div>
+
+
+				<div class="large-2 columns">
+
+					<td><%= link_to payroll.taxation.details, payroll.taxation %></td>
+
+				</div>
+
+			<% end %>
+
+			<div class="large-3 columns">
+
+				<% if can? :read, payroll %>
+				<td><%= link_to t('actions.show'), payroll, class: t('show') %></td>
+				<% end %>
+
+				<% if can? :update, payroll %>
+				<td><%= link_to t('actions.edit'), edit_payroll_path(payroll), class: t('edit') %></td>
+				<% end %>
+
+				<% if can? :destroy, payroll %>
+				<td><%= link_to t('actions.delete'),payroll, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+				<% end %>
+
+			</div>
+
+		</div>
+
+	</tr>
+	<% end %>
+</tbody>
+
+
+</table>
+
+<div class="row">
+
+	<%= paginate @payrolls %>
+
+</div>
+
+<br>

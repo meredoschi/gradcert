@@ -1,0 +1,19 @@
+<% if can? :read, @programname %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(programnames_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('programname').capitalize.pluralize, programnames_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

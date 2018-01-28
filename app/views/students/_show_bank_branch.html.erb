@@ -1,0 +1,72 @@
+<div class="row">
+
+		<h4 class="subheader"><%= tm('bankbranch').capitalize %></h4>
+		
+		<h5><%= @student.bankbranch_location %></h5>
+
+		<table>
+			<tr>
+
+				<div class="large-4 column">
+		
+					<th><strong><%= ta('bankbranch.name') %> </strong></th>
+		
+				</div>
+				
+				<div class="large-3 column">
+		
+					<th><strong><%= ta('bankbranch.code') %> </strong></th>
+		
+				</div>
+	
+				<div class="large-1 column">
+		
+					<th><strong><%= ta('bankbranch.verificationdigit') %> </strong></th>
+		
+				</div>
+
+				<div class="large-4 columns">
+		
+					<th><strong><%= ta('bankbranch.opened') %> </strong></th>
+		
+				</div>
+
+
+	
+			<tr>
+
+				<div class="row">
+				
+			<div class="large-4 columns">
+						
+							<td><%= link_to @student.bankaccount.bankbranch.name, @student.bankaccount.bankbranch %></td>
+								
+						</div>
+
+						<div class="large-3 columns">
+						
+							<td><%= @student.bankaccount.bankbranch.code %></td>
+								
+						</div>
+				
+	
+						<div class="large-1 column">
+						
+							<td><%= @student.bankaccount.bankbranch.verificationdigit %></td>
+								
+						</div>
+
+						<div class="large-4 columns">
+						
+							<td><%= I18n.l @student.bankaccount.bankbranch.opened %></td>
+								
+						</div>
+											
+				</div>
+								
+			</tr>						
+
+		</div>
+	</table>
+</div>
+

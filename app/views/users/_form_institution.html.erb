@@ -1,0 +1,15 @@
+<div class="row">
+
+  <div class="large-2 columns", class: "left inline">
+
+			 <%= f.label ta('institution.name') %>
+
+	</div>
+
+  <div class="large-10 columns">
+
+			 <%= f.collection_select :institution_id, Institution.all, :id, :name,  {prompt: true} %>
+			 	  
+	</div>
+
+</div>

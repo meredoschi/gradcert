@@ -1,0 +1,29 @@
+<% @programsituation.recommendations.each_with_index do |recommendation, i| %>
+
+		<div class="row">
+			
+			<h3 class="subheader"><%= as_ordinal(recommendation.programyear) %> <%= t('year') %></h3>
+
+		</div>
+
+		<%= render 'show_recommended_grants.html.erb', {recommendation: recommendation, i: i} %>
+
+ 	<% if @schoolyears.for_progyear(@programsituation.assessment.program_id, recommendation.programyear).exists? %>
+
+		<div class="row custom-panel2">
+ 	
+			<%= render 'show_workload_stats.html.erb', {recommendation: recommendation, i: i} %>
+			
+			<%= render 'show_theory_stats.html.erb', {recommendation: recommendation, i: i} %>
+
+			<%= render 'show_practice_stats.html.erb', {recommendation: recommendation, i: i} %>
+
+		</div>
+
+	<% else %>
+
+			<%= render 'show_recommended_load.html.erb', {recommendation: recommendation, i: i} %>
+				
+	<% end %>
+	
+<% end %>

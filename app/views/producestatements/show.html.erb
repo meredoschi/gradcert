@@ -1,0 +1,17 @@
+
+<h3>
+
+  <div class="row">
+  <%= tm('statement').pluralize.capitalize %>
+  <%= tm('bankpayment').downcase %>
+  <%= @bankpayment.name.downcase %>: <%= @num_statements %>
+
+  <div>
+    
+</h3>
+
+<div class="row">
+
+  <%= link_to t('actions.back'), statements_path,  class: t('back')  %>
+
+</div>

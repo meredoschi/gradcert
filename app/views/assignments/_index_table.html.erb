@@ -1,0 +1,79 @@
+<table>
+  
+	<%= render 'index_table_head.html.erb' %>
+ 	      
+<tbody>
+
+   <% @assignments.each do |assignment| %>
+      <tr>
+				<div class="row">
+				
+		   		<div class="large-2 column">
+	
+						<td><%= link_to assignment.program.programname.name, assignment.program %></td>
+  
+					</div>
+
+					<% if is_admin_or_manager(current_user) %>
+					
+			   		<div class="large-2 column">
+	
+		  	      <td><%= link_to assignment.program.institution.name, assignment.program.institution %></td>
+  
+						</div>
+
+					<% end %>
+			
+					<% if is_not_regular_user(current_user) %>
+			
+			   		<div class="large-2 column">
+	
+		  	      <td><%= link_to assignment.supervisor.contact.name, assignment.supervisor.contact %></td>
+  
+						</div>
+
+					<% end %>
+					
+		   		<div class="large-2 column">
+	
+	    	    <td><%= I18n.localize(assignment.start_date) %></td>
+  
+					</div>
+
+		   		<div class="large-1 column">
+	
+	      	  <td><%= supervisor_type(assignment) %></td>
+  
+					</div>
+					
+						
+		   <div class="large-3 columns">
+
+	        <% if can? :read, assignment %>
+		        <td><%= link_to t('actions.show'), assignment, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, assignment %>
+			      <td><%= link_to t('actions.edit'), edit_assignment_path(assignment), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, assignment %>
+		     		<td><%= link_to t('actions.delete'),assignment, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @assignments %>
+
+</div>

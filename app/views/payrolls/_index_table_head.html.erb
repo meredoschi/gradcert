@@ -1,0 +1,46 @@
+  <thead>
+    <tr>
+
+    	<div class="row">
+    
+
+		    	<div class="large-2 columns">
+
+	  				<th><%= sort_link(@search, :monthworked, ta('payroll.monthworked')) %></th>
+      
+    			</div>
+
+					<% if is_admin_or_manager(current_user) %>
+	  		
+			    	<div class="large-2 columns">
+	
+		  				<th><%= sort_link(@search, :paymentdate, ta('payroll.paymentdate')) %></th>
+	      
+	    			</div>
+	    		
+	    			<div class="large-3 columns">
+	
+		  				<th><%= sort_link(@search, :amount, ta('scholarship.amount')) %></th>
+	      
+	    			</div>
+
+					
+			    	<div class="large-2 columns">
+
+		  				<th><%= sort_link(@search, :taxation_id, ta('payroll.taxation_id')) %></th>
+    	  
+    				</div>
+    	  
+    	  	<% end %>  			            			        
+				
+		    <div class="large-3 columns">
+
+      		<th colspan="3"></th>
+
+				</div>
+				
+			</div>
+		
+    </tr>
+    
+  </thead>

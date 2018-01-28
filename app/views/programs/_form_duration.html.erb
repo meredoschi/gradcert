@@ -1,0 +1,40 @@
+<% if @program.without_registered_students? %>
+
+	<div class="row">
+
+	<a href="#" data-reveal-id="myModal"><em><%= t('help').capitalize %></em></a> 
+  	  	<div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog"> <h2 id="modalTitle"></h2> <p class="lead"><%= t('second_schoolyear_removal_instructions') %></p> <a class="close-reveal-modal" aria-label="Close">&#215;</a> 
+
+	</div>				
+
+<% end %>
+				
+<div class="row">
+		
+			<div class="large-3 columns", class: "left inline">
+
+		  <%= f.label ta('program.duration') %>
+
+	</div>
+	
+	 	<div class="large-1 column", class: "left inline">
+
+   <%= f.number_field :duration, in: 1..@maxduration  %>        	
+ 
+	</div>
+
+ 		<div class="large-4 columns", class: "left inline">
+
+    <%= f.label ta('program.internal') %><br>
+ 	
+		</div>
+ 		
+ 		<div class="large-4 columns">
+	   
+			<%= f.check_box :internal %>
+ 
+		</div>
+
+
+
+</div>

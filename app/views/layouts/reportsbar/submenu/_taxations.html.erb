@@ -1,0 +1,19 @@
+<% if can? :read, @taxation %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(taxations_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('taxation').capitalize.pluralize, taxations_path  %></li>	
+		    
+  </ul>    
+
+<% end %>

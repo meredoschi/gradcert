@@ -1,0 +1,116 @@
+
+<div class="nested-fields">
+ 
+
+	<div class="row">
+	
+		 		<div class="medium-2 columns", class: "left inline">
+	
+	 				<%= f.label tm('diploma') %>
+		
+				</div>
+		 			 		
+		 		<div class="medium-4 column">
+
+					<%= f.collection_select :degreetype_id, Degreetype.all, :id, :name,  {prompt: true} %>
+	
+				
+				</div>
+
+	 		<div class="medium-4 columns">
+	  
+					<%= f.collection_select :profession_id, Profession.pap, :id, :name,  {prompt: true} %>
+	 
+				</div>
+
+  		<div class="medium-2 columns">
+
+					  <%= link_to_remove_association t('actions.delete'), f, class: "remover" %>
+
+			</div>
+		 	
+	</div>
+  
+  	<div class="row">
+	
+		 		<div class="medium-2 columns", class: "left inline">
+		
+	 				<%= f.label tm('institution') %>
+	 
+				</div>
+		 			 		
+		 		
+		 		<div class="medium-8 columns", class: "left inline">
+	  
+					<%= f.collection_select :institution_id, Institution.undergraduate, :id, :name,  {prompt: true},  		include_blank: true %>
+	 
+				</div>
+
+		 		<div class="medium-2 columns">
+
+				</div>
+				
+		</div>
+
+  	<div class="row">
+
+		 		<div class="medium-2 columns", class: "left inline">
+		
+	 			  <%= f.label ta('diploma.awarded')  %><br>
+	
+				</div>
+
+		 		<div class="medium-6 columns select-dmy">
+	  
+
+						<%= f.date_select(:awarded, prompt: true,  start_year: Date.today.year - 60, end_year: Date.today.year+5) %>
+	
+	 
+				</div>
+	 		
+		 		<div class="medium-1 column">
+	  
+			  	<%= f.check_box :ongoing %>        		
+				</div>
+
+				<div class="medium-3 columns">
+		
+			    <em><%= f.label ta('diploma.ongoing')  %></em>
+	
+				</div>
+		
+	</div>
+
+
+ <div class="row">
+		
+		 		<div class="medium-2 columns", class: "left inline">
+		
+	 				<%= f.label t('other.f')+' '+tm('institution') %>
+	 
+				</div>
+		 			 		
+		 		
+		 		<div class="medium-8 columns", class: "left inline">
+	  
+					<%= f.text_field :externalinstitution %>
+	 
+				</div>
+
+		 		<div class="medium-2 columns">
+
+				</div>
+
+	</div>
+		
+	<div class="row">
+		
+			<div class="large-10 columns custom-panel2">
+				
+	 		</div>
+
+	</div>
+	
+	<br>
+
+</div>

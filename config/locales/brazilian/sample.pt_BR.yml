@@ -1,0 +1,11 @@
+---
+pt_BR:
+  sample:
+    area:
+      health_care: Atendimento de Saúde
+      life_sciences: Ciências Biológicas
+      management: Gestão
+    specialty:
+      biology: Biologia
+      business_administration: Administração
+      nursing: Enfermagem

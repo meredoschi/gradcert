@@ -1,0 +1,65 @@
+<table>
+  
+	<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @supervisors.each do |supervisor| %>
+      <tr>
+				<div class="row">
+				
+				<% if is_admin_or_manager(current_user) %>
+
+		   		<div class="large-3 column">
+	
+        		<td><%= link_to supervisor.institution_name, supervisor.contact.institution %></td>
+
+					</div>
+				
+				<% end %>
+	
+		   <div class="large-3 column">
+	
+        <td><%= link_to supervisor.contact_name, supervisor.contact %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 column">
+	
+        <td><%= link_to supervisor.profession_name, supervisor.profession %></td>
+
+			</div>
+				
+		
+		   <div class="large-3 columns">
+
+	        <% if can? :read, supervisor %>
+		        <td><%= link_to t('actions.show'), supervisor, class: "mostrar" %></td>
+					<% end %>
+
+        <% if can? :update, supervisor %>
+			      <td><%= link_to t('actions.edit'), edit_supervisor_path(supervisor), class: "editar" %></td>   
+					<% end %>
+
+	        <% if can? :destroy, supervisor %>
+		     		<td><%= link_to t('actions.delete'),supervisor, :method => :delete, data: { confirm: t('confirm.delete') }, class: "remover" %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @supervisors %>
+
+</div>
+
+<br>

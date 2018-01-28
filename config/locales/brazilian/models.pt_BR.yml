@@ -1,0 +1,1012 @@
+---
+pt_BR:
+  activerecord:
+    attributes:
+      academiccategory:
+        name: Nome
+      accreditation:
+        comment: Comentário
+        confirmed: Situação confirmada
+        original: Inicial
+        renewal: Renovação mais recente
+        renewed: Renovado
+        revocation: Data de cancelamento (revogação)
+        revoked: Revogado
+        start: Início
+        suspended: Suspenso
+        suspension: Data de suspensão
+        virtual:
+          pending: Situação pendente
+      address:
+        addr: Endereço
+        complement: Complemento
+        country: País
+        header: Local
+        internal: Interno
+        municipality: Cidade
+        municipality_id: Cidade
+        neighborhood: Bairro
+        postalcode: CEP
+        streetname_id: Tipo de logradouro
+        streetnum: Número da rua
+      admission:
+        absentfinalexam: Ausentes na 2ᵃ fase
+        absentfirstexam: Ausentes na 1ᵃ fase
+        accreditedgrants: Bolsas credenciadas
+        admitted: Aprovados na fase final do processo
+        appealsdeniedfinalexam: Recursos indeferidos (2ᵃ fase)
+        appealsdeniedfirstexam: Recursos indeferidos (1ᵃ fase)
+        appealsgrantedfinalexam: Recursos deferidos (2ᵃ fase)
+        appealsgrantedfirstexam: Recursos deferidos (1ᵃ fase)
+        candidates: Candidatos inscritos
+        convoked: Convocados para matrícula
+        finish: Fim
+        grantsasked: Bolsas solicitadas
+        grantsgiven: Bolsas autorizadas
+        insufficientfinalexamgrade: Reprovados na segunda fase
+        passedfirstexam: Passaram a 1ᵃ fase
+        program_id: Programa
+        start: Início
+        virtual:
+          appealslodgedfinalexam: Recursos impetrados (2ᵃ fase)
+          appealslodgedfirstexam: Recursos impetrados (1ᵃ fase)
+          registered_total: Total de matriculados
+          withdraws_within_registration_season: Desistências da matrícula
+      annotation:
+        absences: Número de faltas
+        automatic: Automática (gerada pelo sistema)
+        comment: Comentário
+        confirmed: Confirmada
+        discount: Estorno
+        event_id: Movimento
+        net: Impacto
+        payroll_id: Folha
+        registration_id: Matrícula do bolsista
+        skip: Ausente o mês inteiro da folha
+        supplement: Complemento
+        virtual:
+          attendance: Dias trabalhados
+          impact: Impacto
+          kind: Tipo
+          manual: Manual
+      assessment:
+        contact: Parecerista responsável
+        contact_id: Parecerista
+        profession: Público alvo (profissão)
+        profession_id: Público alvo (profissão)
+        program: Programa
+        program_id: Programa
+      assignment:
+        alternate: Suplente
+        main: Titular
+        program_id: Programa
+        start_date: Desde
+        supervisor: Docente
+        supervisor_id: Docente
+      band:
+        duration: Duração
+        name: Nome
+      bankaccount:
+        bankbranch_id: Agência bancária
+        branchdigit: Dígito da agência (ou X)
+        branchnum: Agência
+        controldigit: Dígito verificador
+        num: Número
+        verificationdigit: Digíto Verificador (ou X)
+      bankbranch:
+        code: Código
+        formername: Nome anterior
+        name: Nome
+        opened: Inauguração
+        verificationdigit: DV
+      bankfile:
+        bankpayment_id: Pagamento Bancário
+        user_id: Usuário
+      bankpayment:
+        comment: Observação para o arquivo bancário
+        dayfinished: Até (número do dia em que termina)
+        daystarted: De (número do dia em que começa)
+        done: Concluído
+        payroll_id: Folha
+        prepared: Arquivo preparado
+        resend: Reenvio
+        sequential: Sequencial
+      bracket:
+        deductible: Dedutível
+        finish: Até
+        num: número
+        rate: Alíquota
+        start: De
+        taxation_id: tributação
+        unlimited: Sem valor máximo
+      brackets:
+        finish: Fim
+        num: número
+        rate: Alíquota
+        start: Início
+        taxation_id: tributação
+        unlimited: Sem valor máximo
+      characteristic:
+        corevalues: Valores centrais
+        highlightareas: Áreas em que se destaca
+        institution_id: Instituição
+        mission: Missão
+        publicfundinglevel: Percentual de financiamento público
+        relationwithpublichealthcare: Vínculo com o SUS
+        stateregion_id: Região estadual em que atua principalmente
+        userprofile: Perfil dos usuários atendidos
+      college:
+        area: Área (m²)
+        classrooms: Salas de aula
+        foodplaces: Lanchonetes
+        gradcertificatecourses: Cursos de pós-graduação Lato Sensu oferecidos
+        institution_id: Instituição
+        libraries: Bibliotecas
+        otherrooms: Salas de apoio
+        previousyeargradcertcompletions: Cursos concluídos de pós Lato Sensu (ano anterior)
+        sportscourts: Quadras de esporte
+      completion:
+        dnf: desistiu
+        failure: reprovado
+        inprogress: cursando
+        mustmakeup: reposição obrigatória
+        pass: aprovado
+        registration_id: código da matrícula
+        short:
+          makeup: Obrigatória
+      contact:
+        addresscomplement: Complemento
+        id: Identificador do contato
+        mobile: Celular
+        municipality: Município
+        name: Nome
+        neighborhood: Bairro
+        phone: Telefone
+        phone2: Outro telefone
+        postalcode: CEP
+        role: Papel (função)
+        role_id: Papel (função)
+        staff: Membro da equipe
+        taxpayercode: CPF
+        termfinish: Término do mandato
+        termstart: Início do mandato
+        user: Usuário
+      council:
+        abbreviation: Abreviação
+        name: Nome
+        state_id: Estado de atuação
+      country:
+        brname: Nome do país
+        name: Nome internacional do país (ISO 3166)
+        number: Código numérico do país (norma ISO 3166)
+      course:
+        core: Núcleo comum
+        coursename_id: Nome
+        methodology_id: Metodologia didática
+        practical: Prático
+        profession_id: Área profissional
+        professionalrequirement: Obrigatório para a profissão
+        supervisor_id: Docente
+        syllabus: Ementa
+        workload: Carga horária
+      coursename:
+        active: Ativo
+        name: Nome
+      degreetype:
+        level: Nível
+        medres: RM
+        pap: PAP
+      diploma:
+        awarded: Conclusão do curso
+        council_id: Conselho
+        councilcredential: Número de inscrição (conselho profissional)
+        councilcredentialexpiration: Validade da inscrição no conselho
+        councilcredentialstatus: Situação da inscrição no conselho
+        coursename_id: Curso
+        degreetype_id: Grau
+        externalinstitution: Outra escola
+        finished: Concluído
+        institution_id: Instituição (já cadastrada)
+        medres: Resmed
+        ongoing: Em andamento
+        othercourse: Outro nome de curso
+        pap: PAP
+        profession_id: Profissão
+        school_id: Nome da escola onde se formou
+        schoolname_id: Nome da escola
+      enrollment:
+        schoolyear_id: Ano de programa
+        student_id: Aluno
+      errors:
+        delete_restriction: A remoção não foi possível devido a um controle lógico do sistema.  É possível que este registro possua descendentes.
+      event:
+        absence: Falta
+        archived: Arquivado
+        confirmed: Autorizado
+        dayfinished: Fim
+        daystarted: Início
+        finish: Fim
+        id: Código do movimento
+        leavetype_id: Tipo de licença
+        registration_id: Bolsista
+        residual: Referente à situação de matrícula
+        start: Início
+        supportingdocumentation: documentação justificativa
+        virtual:
+          actualdays: Dias
+          numdays: Subtotal
+          pending: Pendente (em análise)
+          regular: Movimento de rotina
+      feedback:
+        approved: Aprovado (pago)
+        bankpayment_id: Pagamento bancário
+        comment: Comentário
+        payroll_id: Folha
+        processed: Pagamento processado
+        processingdate: Data de processamento
+        registration_id: Matrícula
+        returned: Retornou (bloqueado)
+      funding:
+        agreements: Convênios
+        comment: Comentário
+        government: Setor público
+        other: Outros
+        percentvalues: Em percentual
+        ppp: Parcerias Público-privadas (ppp)
+        privatesector: Iniciativa privada (empresas)
+        total: Total de financiamento
+      healthcareinfo:
+        admissions: Internações
+        ambulatoryrooms: Salas ambulatoriais
+        consultations: Consultas
+        emergencyroombeds: Leitos do Pronto Socorro
+        equipmenthighlights: Destaques do equipamento médico-hospitalar
+        icubeds: Leitos da UTI
+        institution_id: Instituição
+        institution_name: Nome da instituição de atendimento de saúde
+        labexams: Exames de laboratório
+        labs: Número de laboratórios clínicos
+        radiologyprocedures: Procedimentos de radiologia
+        regularbeds: Leitos convencionais
+        surgeries: Cirurgias
+        totalbeds: Total de leitos
+      institution:
+        abbreviation: Abreviação
+        id: Identificador da instituição
+        legacycode: Código antigo
+        medres: Residência Médica
+        municipality: Município
+        name: Nome da instituição
+        pap: PAP
+        provisional: Dados incompletos ou desatualizados
+        sector: Setor
+        type: Tipo de instituição
+        undergraduate: Graduação
+        withprograms:
+          any: Possuem programas cadastrados
+          medres: Possui programas de Residência Médica (RM)
+          pap: Possui programas do PAP
+      institutiontype:
+        careprovider: Atendimento de Saúde
+        name: Tipo
+        research: Pesquisa
+        teaching: Ensino
+      leavetype:
+        comment: Observação
+        dayspaidcap: Limite de dias remunerados
+        maxnumdays: Período máximo (dias)
+        medres: RM
+        name: Nome
+        paid: Remunerada
+        pap: PAP
+        setnumdays: Número definido de dias
+        vacation: Férias
+      makeup:
+        finish: Fim
+        previousregistrationid: Matrícula anterior
+        registration_id: Matrícula
+        start: Início
+      makeupschedule:
+        finish: Fim
+        registration_id: Matrícula
+        start: Início
+      methodology:
+        kind: Tipo
+      municipality:
+        capital: Capital
+        name: Município
+        namewithstate: Cidade - UF
+        regionaloffice: Departamento regional de saúde
+        stateregion: Região estadual
+      payroll:
+        abbreviated:
+          monthpaid: Mês pag.
+          monthworked: Mês ref.
+          paymentdate: Data pag.
+        amount: Valor manual da bolsa
+        comment: Comentário
+        dataentryfinish: Fechamento (somente leitura)
+        dataentrystart: Abertura dos lançamentos
+        done: Concluída
+        medres: Residência Médica
+        monthworked: Mês de referência
+        pap: PAP
+        paymentdate: Data de processamento
+        purse: Bolsa
+        scholarship_id: Valor bruto da bolsa tabelado
+        special: Complementar
+        taxation_id: Tributação
+      permission:
+        description: Descrição
+        kind: Tipo
+      personalinfo:
+        country_id: País ou território de origem
+        dob: Data de nascimento
+        gender: Gênero
+        idnumber: Número
+        idtype: Documento
+        mothersname: Nome da mãe
+        municipality_id: Naturalidade
+        othername: Nome social
+        sex: Sexo
+        socialsecuritynumber: Previdência (NIT/PIS)
+        state_id: Estado emissor
+        tin: CPF
+      phone:
+        fax: Fax
+        main: Telefone principal
+        mobile: Celular
+        other: Outro telefone
+      placesavailable:
+        accredited: Credenciadas
+        allowregistrations: Permitir matrículas
+        authorized: Autorizadas
+        institution_id: Instituição
+        requested: Solicitadas
+        schoolterm_id: Período letivo
+        virtual:
+          activeregistrations: Novos ingressantes (ativos)
+          cancellations:
+            authorized: Cancelamentos autorizados
+            pending: Cancelamentos pendentes
+          total:
+            active: Total (ativos)
+            available: Disponíveis (primeiro-anistas)
+          veterans:
+            active: Veteranos ativos (PA2)
+      profession:
+        medres: Residência Médica
+        name: Nome
+        occupationcode: Código da ocupação
+        pap: Pap
+      professionalarea:
+        comment: Observação
+        legacy: Legada
+        medres: RM
+        name: Nome
+        pap: PAP
+        previouscode: Código anterior
+        previousname: Origem da nomenclatura
+      professionalfamily:
+        familycode: Código da família
+        medres: RM
+        name: Nome
+        pap: PAP
+        subgroup_id: Código do sub-grupo
+      professionalspecialty:
+        comment: Observação
+        legacy: Legada
+        medres: RM
+        name: Nome
+        pap: PAP
+        previouscode: Código anterior
+        previousname: Origem da nomenclatura
+        professionalarea_id: Área profissional
+      program:
+        active: Ativo
+        approved: Aprovado
+        comment: Comentário
+        duration: Duração
+        externalvenue: Realizado em endereço externo
+        first_year_grants: Bolsas (1o ano)
+        gradcert: Especialização
+        id: Número do programa
+        inactive: Inativo
+        institution_id: Instituição
+        instprogramnum: Número do programa na instituição (campo temporário, planilha da Eni)
+        internal: Realizado em endereço interno
+        medres: Residência Médica
+        new: Novo programa
+        pap: Pap
+        programname_id: Nome do programa
+        programnum: Número do programa (campo temporário, planilha da Eni)
+        schoolterm_id: Período letivo
+        updated_at: Atualizado em
+        virtual:
+          area: Área programática
+          parentid: ID do programa precedente (ano anterior)
+        workload: Carga horária
+      programname:
+        active: Ativo
+        ancestor_id: Ancestral
+        comment: Comentário
+        gradcert: Especialização
+        inactive: Inativo
+        medres: Residência Médica
+        name: Nome do programa
+        pap: Aprimoramento Profissional
+        previousname: Origem da nomenclatura
+        updated_at: Atualizado em
+      programsituation:
+        assessment: Avaliação
+        assessment_id: Avaliação
+        current_duration: Duração atual do programa
+        duration_change_requested: Alteração de duração recomendada
+        favorable: Favorável
+        goals: Resumo dos objetivos do programa
+        kind: Natureza do programa (vocação)
+        program_nature_vocation: Natureza e vocação do programa
+        recommended_duration: Duração recomendada
+        recommended_workload: Carga horária recomendada
+        workload_change_requested: Alteração de carga horária recomendada
+      programsupervisor:
+        alternate: Suplente
+        lead: Principal
+      project:
+        description: Descritivo
+        name: Nome do Projeto
+      recommendation:
+        grants: Bolsas (re)credenciadas
+        practice: Horas práticas
+        programyear: Ano do programa
+        theory: Horas teóricas
+        workload: Carga horária
+      recommendations:
+        grants: Bolsas (re)credenciadas
+        practice: Horas práticas
+        programyear: Ano do programa
+        theory: Horas teóricas
+      regionaloffice:
+        directorsname: Diretor
+        name: Nome
+        num: Número
+      registration:
+        accreditation:
+          confirmed: Confirmação
+          original: Matriculado
+          renewal: Data de reativação
+          renewed: Reativada a matrícula
+          revocation: Data de cancelamento
+          revoked: Matrícula cancelada
+          start: Data de ingresso
+          status: Situação
+          suspended: Suspenso
+          suspension: Data de suspensão
+        comment: Comentário
+        finalgrade: Nota final
+        id: Código da matrícula
+        returned: Retorno bancário
+        schoolterm_id: Turma
+        schoolyear_id: Ano do programa
+        student_id: Bolsista
+        supportingdocumentation: Documentação comprobatória
+        suspended: Suspensa
+        virtual:
+          accountingabsences: Faltas (registro contábil)
+          actualabsences: Ausências
+          totalabsences: Total de faltas
+          totalannotations: Total de anotações
+      registrationkind:
+        makeup: De reposição
+        previousregistrationid: Código da matrícula anterior
+        regular: Normal
+        repeat: Reingresso
+        veteran: Veterano
+        virtual:
+          special: especial
+      researchcenter:
+        domesticprojectsdone: Pesquisas nacionais concluídas (ano anterior)
+        institution_id: Instituição
+        intlprojectsdone: Pesquisas internacionais concluídas (ano anterior)
+        labs: Laboratórios de pesquisa
+        ongoingdomesticprojects: Pesquisas nacionais em andamento
+        ongoingintlprojects: Pesquisas internacionais em andamento
+        rooms: Salas de pesquisa
+      role:
+        clerical: Administrativa
+        collaborator: Colaborador externo
+        itstaff: TI
+        management: Gestão
+        medres: Residência Médica
+        name: Nome
+        pap: Pap
+        student: Bolsista
+        teaching: Docência
+      roster:
+        authorizedsupervisors: Número de supervisores autorizados
+        dataentryfinish: Fechamento do cadastro
+        dataentrystart: Abertura do cadastro
+        institution_id: Instituição
+        schoolterm_id: Período letivo
+        virtual:
+          name: Nome
+          schedule: Cronograma
+      scholarship:
+        amount: Valor bruto da bolsa
+        comment: Observação
+        daystarted: Vigência
+        finish: Expira em
+        medres: RM
+        name: Nome do programa de bolsas
+        pap: PAP
+        partialamount: Valor parcial da bolsa
+        start: Vigente a partir de
+        virtual:
+          effectiveperiod: Período de vigência
+        writtenform: Valor bruto por extenso
+        writtenformpartial: Valor parcial por extenso
+      school:
+        abbreviation: Abreviação
+        academiccategory_id: Categoria Acadêmica
+        ministrycode: Código do MEC
+        name: Nome
+        public: Pública
+      schoolname:
+        active: Ativo
+        name: Nome
+        previousname: Antigo nome
+      schoolterm:
+        active: Ativo
+        admissionsclosure: Término do prazo para detalhar os processos seletivos
+        admissionsdebut: Início do prazo para informar sobre os processos seletivos
+        finish: Fim
+        gradcert: ESP
+        medres: RM
+        pap: Pap
+        registrationseason: Temporada de matrículas
+        scholarshipsoffered: Ofertadas
+        seasonclosure: Encerramento das matrículas
+        seasondebut: Início do período de matrículas
+        start: Início
+        virtual:
+          admissionsdatareportingperiod: Prazo para informar detalhes dos processos seletivos
+      schooltype:
+        name: Nome
+      schoolyears:
+        approved: Número de aprovados no certame
+        enrollment: Matriculados
+        id: Número do ano de programa
+        practice: Horas práticas
+        program_id: Programa
+        programyear: Ano do programa
+        theory: Horas teóricas
+        workload: Carga horária
+      state:
+        abbreviation: Abreviação
+        code: Código do estado
+        country: País
+        name: Estado
+      statement:
+        bankpayment_id: Pagamento bancário
+        childsupport: Pensão alimentícia
+        grossamount: Valor bruto da bolsa
+        incometax: Imposto de Renda
+        netamount: Valor líquido
+        registration_id: Matrícula
+        socialsecurity: INSS
+        virtual:
+          absencesdiscount: Desconto por faltas
+      stateregion:
+        name: Região administrativa estadual
+      streetname:
+        designation: Denominação
+      student:
+        contact_id: Contato
+        council_id: Conselho profissional
+        councilmembership: Número de inscrição no conselho
+        id: Identificador do bolsista
+        nationalhealthcareworker: Assinale apenas se o bolsista possui vínculo empregatício com instituição ligada ao SUS
+        previouscode: Antigo código Pick
+        previousparticipant: Assinale apenas se o bolsista já participou do programa anteriormente
+        profession_id: Profissão
+        schoolterm_id: Turma de ingresso
+        virtual:
+          name: Nome do bolsista
+      supervisor:
+        alternate: Suplente
+        career_start_date: Início da carreira
+        contact_id: Docente
+        contract_type: Contrato atual
+        course: Responsável de curso
+        graduation_date: Data de conclusão
+        highest_degree_held: Maior titulação
+        kind: Função
+        main: Titular
+        profession: Profissão
+        program: Supervisor de programa
+        teaching_hours_week: Horas lecionadas semanalmente
+        total_working_hours_week: Horas trabalhadas semanalmente (total)
+      taxation:
+        bracket_id: faixa
+        finish: Expirou em
+        medres: RM
+        name: Nome
+        pap: PAP
+        socialsecurity: INSS
+        start: Entrada em vigor
+      user:
+        admin: Administrador do sistema
+        adminreadonly: Somente leitura ("read-only")
+        current_password: Senha atual
+        current_sign_in_at: Início deste acesso
+        current_sign_in_ip: IP atual
+        email: E-mail
+        id: Número de usuário
+        institution_id: Instituição
+        last_sign_in_at: Último acesso
+        last_sign_in_ip: IP anterior
+        medres: Residência Médica (usuário comum)
+        medrescollaborator: Colaborador RM (externo)
+        medreslocaladm: COREME (administrador local)
+        medresmgr: Gerência da Residência Médica
+        name: Nome
+        pap: PAP (usuário comum)
+        papcollaborator: Colaborador Pap (externo)
+        paplocaladm: Comissão local do PAP (administrador local)
+        papmgr: Gerência do Pap
+        password: Senha
+        password_confirmation: Confirmação da senha
+        permission: Permissão
+        permission_id: Permissão
+        profile: Perfil (permissões)
+        remember_me: Lembre-se de mim
+        reset_password_sent_at: Horário do envio da mensagem para regerar senha
+        sign_in_count: Total de acessos
+      vacancyallocation:
+        institution_id: instituição
+        limit: limite
+        schoolterm_id: período letivo
+      webinfo:
+        email: E-mail
+        facebook: Facebook
+        other: Outro
+        personal:
+          email: E-mail pessoal
+          site: Página pessoal
+        site: Site
+        twitter: Twitter
+    errors:
+      models:
+        accreditation:
+          attributes:
+            renewal:
+              may_not_be_in_the_future: não pode estar no futuro
+              may_not_be_prior_to_start: não pode ocorrer antes da matrícula (ou credenciamento) inicial ou no mesmo dia.  Informe uma data posterior.
+              may_not_be_prior_to_suspension: não pode ter ocorrido antes da suspensão
+              may_not_not_be_on_the_same_month_as_suspension: não pode ocorrer durante o mesmo mês que a suspensão.
+              present: não pode constar, de acordo a opção informada.
+            revocation:
+              cancellation_must_be_after_latest_event_finish_date: coincide com data de movimento.
+              may_not_be_in_the_future: não pode estar no futuro
+              may_not_be_prior_to_renewal: inconsistente. Não pode ter ocorrido antes da renovação mais recente.
+              may_not_be_prior_to_start: não pode ocorrer antes da matrícula (ou credenciamento) inicial.  Informe uma data posterior.
+              may_not_be_prior_to_suspension: inconsistente.  Não pode ter ocorrido antes da suspensão.
+              may_not_not_be_on_the_same_month_as_renewal: não pode ocorrer durante o mesmo mês que reativação.
+              may_not_overlap_completed_payrolls: 'não pode sobrepor uma folha já concluída.  Dica: informe uma data do mês de referência atual.'
+              present: só pode constar se a opção de revogar (cancelar) estiver marcada.  Do contrário, deve estar em branco esta data.
+            start:
+              may_not_be_in_the_future: não pode estar no futuro
+              may_not_be_prior_to_april_first: não pode ser anterior a primeiro de Abril.  Em caso de dúvidas, entre em contato com a equipe.
+              may_not_be_prior_to_first_day_in_term: não pode ser anterior ao primeiro dia do ano letivo correspondente.
+              not_possible_after_closing_date: muito no futuro.  Tem que estar dentro do período de matrículas do ano letivo correspondente.
+            suspension:
+              may_not_be_in_the_future: não pode estar no futuro
+              may_not_be_more_recent_than_renewal: inconsistente em relação à data da última renovação, por ter sido informada como posterior à ela
+              may_not_be_prior_to_renewal: inconsistente. Não pode ter ocorrido antes da renovação mais recente.
+              may_not_be_prior_to_start: não pode ser anterior à data do credenciamento inicial (ou no mesmo dia)
+              present: não pode constar, de acordo a opção informada.
+        address:
+          attributes:
+            postalcode:
+              invalid: 'tem que conter oito algarismos, separados por traço após o quinto número, exemplo: 02040-060'
+        admission:
+          attributes:
+            absentfinalexam:
+              inconsistent: inconsistente.
+            absentfirstexam:
+              inconsistent: inconsistente.
+              may_not_exceed_candidates: não pode exceder o número de candidatos inscritos.
+            admitted:
+              inconsistent_with_final_exam_results: inconsistente com os resultados da segunda fase.
+            appealsdeniedfinalexam:
+              inconsistent_with_final_exam_failures: inconsistente haja visto os reprovados na segunda fase.
+            appealsdeniedfirstexam:
+              inconsistent_with_first_exam_failures: inconsistente haja visto os reprovados na primeira fase.
+            appealsgrantedfinalexam:
+              inconsistent_with_final_exam_failures: inconsistente haja visto os reprovados na segunda fase.
+            appealsgrantedfirstexam:
+              inconsistent_with_first_exam_failures: inconsistente haja visto os reprovados na primeira fase.
+            candidates:
+              inconsistent: inconsistente.
+              may_not_exceed_grants_given: não pode exceder o número de bolsas autorizadas.
+            convoked:
+              may_not_exceed_admitted: não pode ultrapassar o número de aprovados no processo seletivo.
+            finish:
+              may_not_be_more_recent_than_start: não pode ser mais recente que o ínicio!
+            grantsasked:
+              inconsistent: inconsistente.
+              may_not_exceed_accredited: não pode exceder o número de bolsas credenciadas.
+            grantsgiven:
+              inconsistent: inconsistente.
+              more_than_accredited: não pode ser superior ao número de bolsas credenciadas.
+            insufficientfinalexamgrade:
+              inconsistent: inconsistente
+            passedfirstexam:
+              inconsistent: inconsistente.
+              may_not_exceed_takers: não pode ser maior o número de candidatos que prestaram a prova (contando-se o número de ausências)
+            start:
+              may_not_be_in_the_future: não pode estar no futuro
+        annotation:
+          attributes:
+            discount:
+              discount_may_not_be_more_than_gross_amount: não pode ser superior ao valor bruto da bolsa
+            supplement:
+              supplement_may_not_be_more_than_twice_gross_amount: não pode ultrapassar duas vezes o valor bruto da bolsa
+        assignment:
+          attributes:
+            start_date:
+              may_not_be_in_the_future: não pode ser no futuro
+        bankaccount:
+          attributes:
+            verificationdigit:
+              inconsistent: inconsistente!  Informe o número correto ou 'X' (em maiúsculo).
+        bankbranch:
+          attributes:
+            opened:
+              on_or_before: não pode ser uma data futura.
+            verificationdigit:
+              inconsistent: inconsistente! Informe o número correto ou 'X' (em maiúsculo).
+        bankpayment:
+          attributes:
+            payroll_id:
+              may_not_be_pending: não pode conter movimentos pendentes!  Precisam ser confirmados ou excluídos (caso sejam indeferidos) e as respectivas datas de falta lançadas.
+            sequential:
+              inconsistent: inconsistente!
+              taken: já utilizado!  Tente um número maior.
+              too_high: maior do que o necessário.  Tente um número menor.
+        contact:
+          attributes:
+            name:
+              capitalization: 'não pode conter (todas ou muitas) letras maíusculas.  Utilize o padrão (exemplo): Nome da Pessoa (ao invés de NOME DA PESSOA).'
+              may_not_contain_digits: não pode conter digitos!
+              must_be_all_characters: somente pode conter as letras do alfabeto (de A até Z)
+              must_have_consistent_whitespacing: tem que ter espaçamento consistente (máximo 1 entre palavras)
+            role_id:
+              staff_may_not_take_student_role: informado incorretamente, pois este está reservado exclusivamente para indicar bolsista do programa e não é pertinente a membros da equipe.
+              student_may_not_take_staff_role: informado incorretamente, pois este está reservado exclusivamente para indicar membros da equipe e não se aplica em caso de bolsista.
+            taxpayercode:
+              inconsistent: inconsistente.  Não existe esta numeração.
+        diploma:
+          attributes:
+            council_id:
+              must_be_informed: precisa constar quando um número de inscrição for informado.
+              required_if_details_provided: precisa ser selecionado, quando os campos de detalhamento do registro profissional tiverem sido informados.  A maioria dos conselhos do Estado de São Paulo já foi programada dentro do sistema, para sua comodidade.
+            councilcredential:
+              must_be_informed: tem que constar quando o conselho profissional for informado.
+            councilcredentialstatus:
+              present: só existirá se houver um conselho e um número de inscrição.
+            coursename_id:
+              must_be_informed: 'tem que ser selecionado, quase sempre.  A menos que um outro nome seja informado, por não constar da lista oficial do MEC (exemplo: titulação estrangeira, área do conhecimento nova).'
+            externalinstitution:
+              need_not_be_specified_manually: somente precisa ser informada em casos excepcionais.  Verifique se realmente esta é a situação, caso contrário este campo deve permanecer em branco e a escola devidamente escolhida a partir da lista de escolas (instituições de ensino superior).  Ou vice-versa.
+            school_id:
+              must_be_informed_somehow: 'via de regra, deve ser selecionado diretamente da lista.  Em casos excepcionais, por exemplo: alunos formados no exterior, queira por gentileza digitar manualmente a informação se o bolsista tiver sido formado em uma outra escola, sem selecionar nenhuma escola da lista.'
+        event:
+          attributes:
+            absence:
+              event_type_must_be_selected: deve ser assinalada a menos que se trate de licença.  Neste caso, você deve selecionar o tipo correspondente abaixo e manter esta opção de falta tal como está, desmarcada.
+            finish:
+              exceeds_the_vacation_days_quota: inconsistente, pois excede a quota dos dias de férias disponíveis para esta pessoa.
+              may_not_be_in_anticipation: muito no futuro.  Informe uma data consistente com o ciclo atual da folha de pagamentos e a natureza do lançamento (falta ou tipo de licença).
+              may_not_be_prior_to_start: inconsistente.  Data fim menor que data início.
+              may_not_be_retroactive: não pode ser retroativo.  Já foi processada a folha de pagamento referente a esta data.
+              may_not_occur_after_cancellation: não pode ocorrer após o cancelamento.
+              must_be_within_maximum_limit: 'não pode ser lançado tal como inserido, pois o limite máximo de dias para o tipo de licença indicado seria excedido (exemplo: férias).'
+              required: precisa constar.  Por favor selecione o dia, mês e ano.  Normalmente é diferente do início, exceto quando se tratar de falta (ou licença) de um dia só.
+            leavetype_id:
+              present: não pode ser lançada se houverem faltas.
+            registration_id:
+              must_be_active: 'não pode estar inativo (exemplo: matrícula cancelada)'
+            start:
+              after: não pode ser retroativo. Já foi processada a folha de pagamento referente a esta data.  Naquelas raras situações, devido a notificação tardia da instituição, recomenda-se primeiro lançar a parte das datas que é consistente (se houver) e então contactar a equipe para maiores orientações, informando o número do movimento correspondente.
+              may_not_be_in_anticipation: muito no futuro.  Informe uma data consistente com o ciclo atual da folha de pagamentos e a natureza do lançamento (falta ou tipo de licença).
+              may_not_be_retroactive: não pode ser retroativo.  Já foi processada a folha de pagamento referente a esta data.
+              may_not_occur_after_cancellation: não pode ocorrer após o cancelamento.
+              overlap: inconsistente.  Atenção! Já existe movimento cadastrado no período.
+              required: precisa constar.  Por favor selecione o dia, mês e ano.
+        feedback:
+          attributes:
+            registration_id:
+              may_not_be_active_on_special_payroll: tem que estar inativa se a folha for especial.
+              must_be_active_on_regular_payroll: tem que estar ativa se a folha for normal.
+        funding:
+          attributes:
+            percentvalues:
+              inconsistent: tem que somar 100.  Favor revisar os valores individuais de financiamento ou desmarque a opção.
+        healthcareinfo:
+          attributes:
+            totalbeds:
+              inconsistent: inconsistente.  É preciso que seja igual ou maior à soma da capacidade informada do pronto socorro e da terapia intensiva.
+        institution:
+          attributes:
+            abbreviation:
+              may_not_contain_special_characters: não pode conter caracteres especiais, exceto underscore _
+        leavetype:
+          attributes:
+            dayspaidcap:
+              days_paid_cap_not_exceed_max_num_days: não pode ultrapassar o número definido de dias.
+            paid:
+              must_be_true_for_vacation: opção tem que estar marcada em caso de férias.
+        payroll:
+          attributes:
+            amount:
+              present: não ser maior que zero se valor bolsa tabelado for informado (ou seja, em uma situação de folha normal)
+            paymentdate:
+              inconsistent: inconsistente!  Em uma folha normal, tem que cair durante o mês imediatamente após ao de referência (trabalhado).  Insira um dia válido ou assinale a opção 'especial', conforme for.
+            scholarship_id:
+              present: não pode constar se valor manual for informado (folha especial estiver marcada)
+        personalinfo:
+          attributes:
+            birth_date:
+              may_not_be_in_the_future: não pode ser no futuro
+            country_id:
+              present: somente precisa ser informado para quem não for brasileiro (i.e. utilizar RNE ou passaporte)
+            othername:
+              present: pode ser preenchido somente em caso de diversidade.  Ou seja, neste contexto, quando o sexo (característica biológica ao nascer, masculina ou feminina) for diferente do gênero (como a pessoa se identifica perante a sociedade) ou indefinido (X).
+            socialname:
+              present: é possível ser informado, e em caráter facultativo, somente em caso de transgêneros ou indeterminados "X".
+            socialsecuritynumber:
+              inconsistent: inconsistente.  A numeração informada não existe.  Favor verificar.
+            state_id:
+              present: não se aplica em caso de estrangeiros.  Campo tem de permanecer vazio neste caso.
+            tin:
+              inconsistent: inconsistente.  A numeração informada não existe.  Favor verificar.
+        placesavailable:
+          attributes:
+            authorized:
+              exceeds_total_number_of_scholarships: excede o número máximo de vagas disponilizadas, ao levar-se em consideração a previsão dos lugares reservadas aos veteranos, oriundos de programas com duração maior de um ano.  Tente um valor menor neste campo.
+        program:
+          attributes:
+            base:
+              unable_to_add_schoolyears_over_max: Não é possível adicionar mais anos de programa que o máximo estipulado.  Favor remova o excesso e tente de novo.
+            duration:
+              inconsistent: inconsistente com o número de anos de programa
+        programsituation:
+          attributes:
+            recommended_duration:
+              inconsistent: é inconsistente com a quantidade de anos de programa especificados
+        recommendation:
+          attributes:
+            programyear:
+              too_big: é grande demais referente à duração recomendada cadastrada e a atual do programa
+        registration:
+          attributes:
+            schoolyear_id:
+              not_enough_places_available: não há mais vagas autorizadas disponíveis.
+            supportingdocumentation:
+              file_size_is_less_than_or_equal_to: excedeu o tamanho máximo permitido e não pôde ser anexada.  Tente redimensionar o arquivo por meio de um program gráfico adequado ou ajuste os parâmetros pertinentes de sua leitora ótica (scanner), caso necessário.
+        role:
+          attributes:
+            clerical:
+              explanation: "(funcionário de escritório)"
+            collaborator:
+              explanation: "(avaliador, examinador, parecerista)"
+            management:
+              explanation: "(gerente, diretor)"
+            name:
+              all_blank: 'tem que pertencer a uma (e somente uma) das categorias abaixo: '
+            student:
+              explanation: "(bolsista, aprimorando, residente)"
+            teaching:
+              explanation: "(instrutor, professor, supervisor)"
+        scholarship:
+          attributes:
+            daystarted:
+              overlap: não pode se sobrepor a um período já cadastrado dentro do sistema.
+            start:
+              must_be_consistent: tem que ser consistente (data de início informada precisa ser anterior ao fim).
+        schoolterm:
+          attributes:
+            active:
+              more_than_one_not_allowed: opção inválida pois detectei um outro período letivo (ainda) ativo.  Desmarque onde for pertinente e tente novamente.
+        student:
+          attributes:
+            councilmembership:
+              present: tem que pertencer a um conselho que conste da relação dos cadastrados pelo sistema.
+        user:
+          attributes:
+            permission_id:
+              required: tem que constar.  Usuário significa aluno (bolsista) de um programa.
+        webinfo:
+          attributes:
+            site:
+              incorrect: digitado incorretamente.  Não é necessário incluir o prefixo http://
+    models:
+      academiccategory: categoria acadêmica
+      accreditation: credenciamento
+      address: endereço
+      admission: processo seletivo
+      annotation: anotação
+      assesment: avaliação
+      assessment: programa sob análise
+      assignment: alocação
+      band: Banda
+      bankaccount: conta bancária
+      bankbranch: agência bancária
+      bankfile: arquivo bancário
+      bankpayment: pagamento bancário
+      bbpayment: pagamento bb
+      box: caixa
+      bracket: faixa
+      characteristic: perfil institucional
+      college: faculdade
+      completion: Andamento
+      contact: contato
+      council: conselho profissional
+      country: país
+      course: disciplina
+      coursename: nome de curso
+      degreetype: tipo de diploma
+      diploma: título
+      enrollment: matrícula
+      event: movimento
+      feedback: retorno
+      funding: financiamento
+      healthcareinfo: estrutura de atendimento
+      institution: instituição
+      institutiontype: tipo de instituição
+      leave: licença
+      leavetype: tipo de licença
+      makeupschedule: cronograma de reposição
+      mesoregion: mesoregião
+      methodology: metodologia didática
+      municipality: município
+      password: senha
+      payroll: folha
+      permission: permissão
+      personalinfo: dados pessoais
+      phone: telefone
+      placesavailable: Quadro de vagas
+      profession: profissão
+      professionalarea: área profissional
+      professionalfamily: Família profissional
+      professionalspecialty: especialidade profissional
+      program: programa
+      programname: nome de programa
+      programsituation: parecer de programa
+      project: projeto
+      recommendation: recomendação
+      regionaloffice: departamento regional de saúde
+      registration: matrícula
+      registrationkind: tipo de matrícula
+      researchcenter: centro de pesquisa
+      role: papel
+      roster: Elenco
+      scholarship: valor bolsa
+      school: instituição de ensino superior
+      schoolname: nome de escola
+      schoolterm: período letivo
+      schooltype: tipo de instituição de ensino superior
+      schoolyear: Ano do programa
+      schoolyears: ano do programa
+      state: estado ou província
+      statement: demonstrativo
+      stateregion: região adm estadual
+      streetname: logradouro
+      student: bolsista
+      supervisor: docente supervisor
+      taxation: tributação
+      user: usuário
+      vacancyallocation: alocação de vaga
+      versions: versões
+      webinfo: internet

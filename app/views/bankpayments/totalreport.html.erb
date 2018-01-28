@@ -1,0 +1,29 @@
+<%= render 'totalreport_header.html.erb' %>
+
+<% if is_admin(current_user) %>
+
+	<%= render 'totalreport_initial_calculations.html.erb' %>
+
+<% end %>
+
+<%= render 'totalreport_final_calculations.html.erb' %>
+
+<div class="row">
+
+<h5><%= current_user.contact_name %></h5>
+
+</div>
+
+<div class="row">
+
+	<h5><%= I18n.l(Time.now) %></h5>
+	
+</div>
+
+<div class="row">
+	
+	<%= link_to t('actions.print'), report_bankpayment_path(@bankpayment), :onclick => 'window.print();return false;', class: 'small button info'%> | 
+
+	<%= link_to t('back').capitalize, bankpayments_path,  class: t('back')  %>
+
+</div>

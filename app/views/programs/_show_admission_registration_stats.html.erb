@@ -1,0 +1,47 @@
+
+<div class="row">
+
+	<table>
+
+		<tr>
+
+			<div class="row">
+
+				<div class="large-6 columns">
+
+					<th><strong>
+							<%= ta('admission.virtual.withdraws_within_registration_season') %>
+							<%= '('+t('until')+' '+show_when(admission.program.schoolterm.seasonclosure).downcase+')' %>
+							</strong>
+					</th>
+
+				</div>
+
+				<div class="large-6 columns">
+
+					<th><strong><%= ta('admission.virtual.registered_total')%></strong></th>
+
+				</div>
+
+			</div>
+
+		</tr>
+
+		<div class="row">
+
+		<tr>
+
+			<div class="large-6 columns">
+				<td><%= @program.numseasonwithdraws %></td>
+			</div>
+
+			<div class="large-6 columns">
+
+        <td><%=	@program.numregistrations %></td>
+
+			</div>
+
+		</div>
+	</table>
+
+</div>

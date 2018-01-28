@@ -1,0 +1,65 @@
+<%= form_for(@degreetype) do |f| %>
+  <% if @degreetype.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@degreetype.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @degreetype.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+		<div class="large-2 columns", class: "left inline">
+
+			<%= f.label :name %>
+
+		</div>
+
+		<div class="large-10 columns">
+
+	    <%= f.text_field :name %>
+
+		</div>
+
+</div>
+
+<div class="row">
+
+		<div class="large-2 columns", class: "left inline">
+
+			<%= f.label :level %>
+
+		</div>
+
+		<div class="large-2 columns">
+
+	    <%= f.number_field :level, min:0, max:100 %>
+
+		</div>
+
+		<div class="large-8 columns">
+
+
+		</div>
+
+</div>
+
+<%= render 'form_area_pap_medres.html.erb', f: f %>
+
+	<% if can? :update, Degreetype %>
+
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), degreetypes_path, class: "anular" %>
+
+	</div>
+
+<% end %>

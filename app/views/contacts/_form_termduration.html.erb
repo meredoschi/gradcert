@@ -1,0 +1,41 @@
+<div class="row">
+ 
+ <h3><%= t('term_of_office').capitalize %></h3>
+
+</div>
+
+<div class="row panel callout">
+
+		<div class="row">
+
+	    <div class="large-2 columns">
+	
+				<%= form.label ta('contact.termstart') %>
+	
+			</div>
+			
+	    <div class="large-7 columns select-birthdate">
+	
+		   <%= form.date_select :termstart, start_year: Date.today.year - 10, end_year: Date.today.year %>
+	
+			</div>
+			 		
+
+		</div>
+
+		<div class="row">
+
+	    <div class="large-2 columns">
+	
+				<%= form.label ta('contact.termfinish') %>
+	
+			</div>
+			
+	    <div class="large-7 columns select-birthdate">
+	
+		   <%= form.date_select :termfinish, start_year: Date.today.year, end_year: Date.today.year+10 %>
+	
+			</div>
+			 		
+
+		</div>

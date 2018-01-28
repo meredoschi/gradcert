@@ -1,0 +1,53 @@
+<%= search_form_for @search do |f| %>
+
+	<div class="row">
+	
+		<div class="field">
+			
+			<div class="large-3 columns">
+				
+				<%= f.label t('activerecord.attributes.municipality.name') %>
+
+			</div>
+	
+		
+			<div class="large-9 columns">
+			
+				<%= f.text_field :name_cont %>  
+			
+			</div>
+		    
+		</div>
+	
+	</div>
+	
+	<div class="row">
+	
+		<div class="field">
+			
+			<div class="large-3 columns">
+				
+				<%= f.label t('activerecord.attributes.state.name') %>
+			
+			</div>
+	
+		
+			<div class="large-9 columns">
+			
+				<%= f.text_field :stateregion_state_name_cont %>  
+			
+			</div>
+		    
+		</div>
+	
+	</div>
+	
+	
+	<div class="row">
+		    
+		<div class="large-6 columns">
+		  <%= f.submit "Busca", class: "buscar" %>
+		</div>
+	</div>
+
+<% end %>

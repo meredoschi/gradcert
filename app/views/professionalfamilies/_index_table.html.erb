@@ -1,0 +1,71 @@
+<table>
+ 
+<%= render 'index_table_head.html.erb' %>
+
+<tbody>
+   <% @professionalfamilies.each do |professionalfamily| %>
+      <tr>
+				<div class="row">
+				
+	
+	
+		   <div class="large-5 columns">
+	
+        <td><%= professionalfamily.name %></td>
+
+			</div>
+								
+	
+		   <div class="large-2 columns">
+	
+        <td><%= professionalfamily.familycode %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= tickmark(professionalfamily.pap) %></td>
+
+			</div>
+				
+	
+		   <div class="large-1 column">
+	
+        <td><%= tickmark(professionalfamily.medres) %></td>
+
+			</div>
+				
+	
+		   <div class="large-3 columns">
+
+	        <% if can? :read, professionalfamily %>
+		        <td><%= link_to t('actions.show'), professionalfamily, class: t('show') %></td>
+					<% end %>
+
+        <% if can? :update, professionalfamily %>
+			      <td><%= link_to t('actions.edit'), edit_professionalfamily_path(professionalfamily), class: t('edit') %></td>   
+					<% end %>
+
+	        <% if can? :destroy, professionalfamily %>
+		     		<td><%= link_to t('actions.delete'),professionalfamily, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+					<% end %>
+	
+    	</div>
+    	
+    		</div>
+    		
+      </tr>
+  <% end %>
+  </tbody>
+
+
+</table>
+
+<div class="row">
+
+  <%= paginate @professionalfamilies %>
+
+</div>
+
+<br>

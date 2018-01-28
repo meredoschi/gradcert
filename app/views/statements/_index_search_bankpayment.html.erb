@@ -1,0 +1,19 @@
+	<div class="row">
+
+		<div class="large-3 columns">
+		
+			<div class="field">
+			
+			  <th><%= f.label tm('bankpayment')%></th>
+		
+			</div>
+
+		</div>
+			
+		<div class="large-9 columns">
+				
+				<%= f.select :bankpayment_id_eq, options_from_collection_for_select(@bankpayments_with_statements, :id, :name), 		include_blank: true %>
+	
+		</div>
+	    
+	</div>

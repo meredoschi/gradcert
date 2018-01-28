@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+
+	<h2>Região Estadual</h2>
+
+</div>
+
+<div class="row">
+
+	<table>
+		<tr>
+		<th><strong><%= ta('stateregion.name')%></strong></th>
+		<th><strong><%= ta('state.name')%></strong></th>
+		<th><strong><%= ta('municipality.name').pluralize(@stateregion.municipality.count)%></strong></th>		
+		</tr>
+	
+		<tr>
+		<td><%= @stateregion.name %></td>
+		<td><%= link_to @stateregion.state.name, @stateregion.state %></td>	
+		<td><%= @stateregion.municipality.count %></td>	
+	  </tr>
+	</table>
+
+</div>
+
+<%= render 'show_municipalities.html.erb' %>
+
+<div class="row">
+
+	<% if can? :edit, @stateregion %>
+
+		<%= link_to 'Editar', edit_stateregion_path(@stateregion), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to 'Voltar', stateregions_path,  class: "voltar"  %>
+
+</div>

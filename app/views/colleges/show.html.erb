@@ -1,0 +1,169 @@
+<div class="row">
+
+	<h2><%= tm('college').capitalize %></h2>
+
+</div>
+
+
+<%= render 'show_institution.html.erb' %>
+
+<div class="row">
+		<table>
+			<tr>
+			
+				<div class="large-3 columns">
+		
+					<th><strong><%= t('activerecord.attributes.college.area')%></strong></th>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<th><strong><%= t('activerecord.attributes.college.libraries')%></strong></th>
+		
+				</div>
+		
+				<div class="large-3 columns">
+		
+					<th><strong><%= t('activerecord.attributes.college.classrooms')%></strong></th>
+		
+				</div>
+
+				<div class="large-3 columns">
+		
+					<th><strong><%= t('activerecord.attributes.college.otherrooms')%></strong></th>
+		
+				</div>
+		
+							
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-3 columns">
+					
+						<td><%= @college.area %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= @college.libraries %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= @college.classrooms %></td>
+					
+					</div>
+
+					<div class="large-3 columns">
+					
+						<td><%= @college.otherrooms %></td>
+					
+					</div>
+
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+
+<div class="row">
+		<table>
+			<tr>
+
+				<div class="large-4 columns">
+		
+					<th><strong><%= t('activerecord.attributes.college.foodplaces')%></strong></th>
+		
+				</div>
+	
+				<div class="large-4 columns">
+		
+					<th><strong><%= t('activerecord.attributes.college.sportscourts')%></strong></th>
+		
+				</div>
+					
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+
+					<div class="large-4 columns">
+					
+						<td><%= @college.foodplaces %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= @college.sportscourts %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+		<table>
+			<tr>
+					
+				<div class="large-4 columns">
+		
+					<th><strong><%= t('activerecord.attributes.college.gradcertificatecourses')%></strong></th>
+		
+				</div>
+			
+				<div class="large-4 columns">
+		
+					<th><strong><%= t('activerecord.attributes.college.previousyeargradcertcompletions')%></strong></th>
+		
+				</div>
+				
+			</tr>						
+		
+			<div class="row">
+		
+				<tr>
+					<div class="large-4 columns">
+					
+						<td><%= @college.gradcertificatecourses %></td>
+					
+					</div>
+
+					<div class="large-4 columns">
+					
+						<td><%= @college.previousyeargradcertcompletions %></td>
+					
+					</div>
+										
+				</tr>
+		</div>
+
+	</table>
+</div>
+
+
+<div class="row">
+	
+	<% if can? :edit, @college %>
+
+		<%= link_to 'Editar', edit_college_path(@college), class: "editar"  %> |
+
+	<% end %>
+	
+	<%= link_to 'Voltar', colleges_path,  class: "voltar"  %>
+
+</div>

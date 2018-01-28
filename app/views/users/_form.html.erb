@@ -1,0 +1,60 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+
+		 <h2><%= t('validation.messagetext.system_detected') %> <%= pluralize(@user.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %></h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row custom-panel">
+
+<% if is_admin(current_user) || is_manager(current_user) %>
+
+	<%= render 'form_institution', f: f %>
+
+<% end %>
+
+<% if is_staff(current_user) %>
+
+	<%= render 'form_email_password', f: f %>
+
+<% else %>
+
+	<%= render 'form_password', f: f %>
+
+<% end %>
+
+<%= render 'form_permission', f: f %>
+
+</div>
+
+ <div class="row">
+
+ 	<div class="large-4 columns">
+
+		<div class="actions">
+
+  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+
+		<% if can? :update, User %>
+
+  	 <%= link_to t('actions.cancel'), users_path, class: "anular" %>
+
+  	<% else %>
+
+  	 <%= link_to t('actions.cancel'), root_path, class: "anular" %>
+
+  	<% end %>
+
+		</div>
+
+	</div>
+
+</div>
+
+<% end %>

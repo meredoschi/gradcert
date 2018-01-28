@@ -1,0 +1,45 @@
+<div class="row">
+
+	<% if is_own_user(current_user) || is_regular_user(current_user) %>
+	
+			<h2><%= t('my.m').capitalize+' '+tm('user') %> </h2>	
+	
+	<% else %>
+	
+			<h2> <%= tm('user').capitalize %> </h2>	
+		
+	<% end %>
+
+	<h2 class="subheader"><%= ta('user.email') %>: <%= @user.email %> </h2>	
+
+</div>
+
+<div class="row">
+	
+		<span class="id-label"><h3><%= @user.id %> </h3></span>
+	
+</div>
+
+<% if is_staff(current_user) %>
+
+	<%= render 'show_contact_details.html.erb' %>
+
+<% end %>
+
+<div class="row">
+
+	<% if can? :update, User %>
+
+		<%= link_to 'Editar', edit_user_path(@user), class: "editar"  %> |
+
+	<% end %>
+
+	<%= link_to 'Voltar', users_path,  class: "voltar"  %>
+
+</div>
+
+<% if is_admin_or_manager(current_user) %>
+
+	<%= render 'show_last_updated.html.erb' %>
+
+<% end %>

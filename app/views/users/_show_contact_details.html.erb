@@ -1,0 +1,75 @@
+<div class="row">
+
+	<table>
+	
+		<div class="row">
+	
+			<tr>
+			
+			<% if has_contact_name(@user) %>
+			
+			  <div class="large-3 columns">					  
+		
+					<th><strong><%= ta('contact.name').capitalize %></strong></th>
+		
+				</div>					  
+		
+			<% end %>
+			
+		  <div class="large-3 columns">					  
+	
+				<th><strong><%= tm('institution').capitalize %></strong></th>
+	
+		  </div>					  
+	
+			<% if is_not_regular_user(current_user) %>
+	
+			  <div class="large-3 columns">					  
+		
+					<th><strong><%= tm('permission').capitalize %></strong></th>
+		
+			  </div>					  
+	
+			<% end %>
+			
+			</tr>
+	
+		</div>
+	
+		<div class="row">
+		
+			<tr>
+
+			<% if has_contact_name(@user) %>
+	
+			  <div class="large-3 columns">					  
+					
+						<td><%= link_to @user.contact.name, @user.contact %></td>
+
+				</div>
+	
+			<% end %>
+			
+		  <div class="large-3 columns">					  
+		
+				<td><%= link_to @user.institution.name, @user.institution %></td>
+	
+			</div>
+	
+			<% if !is_regular_user(current_user) %>
+	
+			  <div class="large-3 columns">					  
+			
+					<td><%= show_permission_for(@user) %> </td>
+		
+				</div>
+	
+			<% end %>
+			
+		  </tr>
+	
+		</div>
+	
+	</table>
+	
+</div>

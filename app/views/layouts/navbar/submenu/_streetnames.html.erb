@@ -1,0 +1,19 @@
+<% if can? :read, @streetname %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(streetnames_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+  		  	
+  <%= link_to t('activerecord.models.streetname').capitalize.pluralize, streetnames_path %></li>
+  	
+  </ul>
+  
+<% end %>

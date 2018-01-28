@@ -1,0 +1,49 @@
+<%= form_for @contact, :html => {:multipart => true} do |form| %>
+  <% if @contact.errors.any? %>
+  
+    <div id="error_explanation">
+			<h2><%= t('validation.messagetext.system_detected') %> <%= pluralize(@contact.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %></h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% if is_not_regular_user(current_user) %>
+
+	<%= render 'form_identification.html.erb', form: form %>
+
+<% end %>
+ 
+  <%= render 'form_personalinfo.html.erb', form: form %>
+
+	<%= render 'form_address.html.erb', form: form %>
+
+	<%= render 'form_phones.html.erb', form: form %>
+
+	<%= render 'form_webinfo.html.erb', form: form %>
+		
+	<% if has_management_role(@contact) %>
+		    	        
+	<%= render 'form_termduration.html.erb', form: form %>
+	
+	<% end %>
+
+</div>
+
+	<%= render 'form_photo.html.erb', form: form %>
+	
+	<% if can? :update, Contact %>
+	
+	   <div class="row actions">
+	  	<%= form.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), contacts_path, class: "anular" %>
+  </div>
+
+<% end %>	

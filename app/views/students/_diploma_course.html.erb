@@ -1,0 +1,41 @@
+<div class="custom-panel2">
+
+  	<div class="row">
+	
+		 		<div class="medium-2 columns", class: "left inline">
+		
+	 				<%= f.label :coursename_id %>
+	 
+				</div>
+		 			 		
+		 		
+		 		<div class="medium-10 columns", class: "left inline">
+	  
+					<%= f.collection_select :coursename_id, Coursename.all, :id, :name %>
+	 
+				</div>
+			
+		</div>
+
+</div>
+		
+ <div class="row">
+		
+		 		<div class="medium-2 columns", class: "left inline">
+		
+	 				<%= f.label :othercourse %>
+
+			  	<span data-tooltip aria-haspopup="true" class="has-tip" title="Este campo deve ser informado somente naqueles casos excepcionais onde o curso não constar da lista do MEC.  Exemplo: formados no exterior."><%= t('restricted') %></span>
+	 
+	 
+				</div>
+		 			 		
+		 		
+		 		<div class="medium-10 columns", class: "left inline">
+	  
+					<%= f.text_field :othercourse %>
+	 
+				</div>
+
+
+	</div>

@@ -1,0 +1,50 @@
+<%= form_for(@scholarship) do |f| %>
+  <% if @scholarship.errors.any? %>
+    <div id="error_explanation">
+
+			<h2> <%= t('validation.messagetext.system_detected') %> <%= pluralize(@scholarship.errors.count, t('validation.messagetext.error')) %> <%= t('validation.messagetext.please_correct_and_retry') %> </h2>
+
+      <ul>
+      <% @scholarship.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+	<div class="large-3 columns">
+
+    <%= f.label :name %>
+
+	</div>
+
+		<div class="large-9 columns">
+
+	  <%= f.text_field :name %>
+
+	 </div>
+
+</div>
+
+<%= render 'form_amounts_and_dates', f: f %>
+
+<% if is_admin(current_user) %>
+
+	<%= render 'form_pap_medres', f: f %>
+
+<% end %>
+
+	<% if can? :update, Scholarship %>
+	
+	   <div class="row actions">
+	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	 
+	<% end %>
+
+  	 <%= link_to t('actions.cancel'), scholarships_path, class: t('cancel') %>
+	
+	</div>
+
+<% end %>

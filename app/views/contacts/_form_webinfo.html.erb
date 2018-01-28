@@ -1,0 +1,86 @@
+<div class="row">
+ 
+ <h3><%= tm('webinfo').capitalize %></h3>
+
+</div>
+
+<div class="row custom-panel6">
+
+	<%= form.fields_for :webinfo do |webinfo| %>
+		
+		<div class="row">
+		
+			 		<div class="large-2 columns", class: "left inline">
+		
+		 				<%= webinfo.label ta('webinfo.personal.email') %>
+			
+					</div>
+			 			 		
+			 		<div class="large-4 columns">
+		
+		 
+					  <%= webinfo.text_field :email %>        	
+		    
+					</div>
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+						<%= webinfo.label ta('webinfo.personal.site') %>
+		 
+					</div>
+			 			 		
+			 		
+			 		<div class="large-4 columns">
+		  
+					   <%= webinfo.text_field :site %>        	
+		 
+					</div>
+			
+		</div>
+		
+		<div class="row">
+		
+			 		<div class="large-2 columns", class: "left inline">
+		
+		 				<%= webinfo.label ta('webinfo.facebook') %>
+			
+					</div>
+			 			 		
+			 		<div class="large-2 columns">
+		
+		 
+					  <%= webinfo.text_field :facebook %>        	
+		    
+					</div>
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+						<%= webinfo.label ta('webinfo.twitter') %>
+		 
+					</div>
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+					   <%= webinfo.text_field :twitter %>        	
+		 
+					</div>
+		
+		
+			 		<div class="large-2 columns", class: "left inline">
+			
+						<%= webinfo.label ta('webinfo.other') %>
+		 
+					</div>
+				 			 		
+			 		
+			 		<div class="large-2 columns">
+		  
+					   <%= webinfo.text_field :other %>        	
+		 
+					</div>
+			
+		</div>
+		
+	<% end %>
+	
+</div>

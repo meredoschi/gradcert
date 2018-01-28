@@ -1,0 +1,66 @@
+<div class="row custom-panel10">
+
+	<fieldset>
+  	<legend><%= t('kind') %><%= ' '%>(<%= t('please_tick_one') %>)
+  	</legend>
+
+			<div class="row">
+
+            <div class="row">
+
+              <div class="large-2 columns">
+
+                <%= f.label ta('registrationkind.regular')%>
+
+              </div>
+
+              <div class="large-2 columns">
+
+                <%= f.check_box :registrationkind_regular_true %>
+
+              </div>
+
+              <% if makeup_registrations_exist? %>
+
+                <div class="large-2 columns">
+
+                  <%= f.label ta('registrationkind.makeup')%>
+
+                </div>
+
+                <div class="large-2 columns">
+
+                  <%= f.check_box :registrationkind_makeup_true %>
+
+                </div>
+
+              <% end %>
+
+              <% if repeat_registrations_exist? %>
+
+                <div class="large-2 columns">
+
+                  <%= f.label ta('registrationkind.repeat')%>
+
+                </div>
+
+              <div class="large-2 columns">
+
+                <%= f.check_box :registrationkind_repeat_true %>
+
+              </div>
+
+              <% end %>
+
+            </div>
+
+
+
+			</div>
+
+
+	</fieldset>
+
+</div>
+<br>
+<hr>

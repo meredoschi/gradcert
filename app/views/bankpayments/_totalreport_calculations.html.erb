@@ -1,0 +1,19 @@
+<pre>
+
+		<%=	humanized_money(@regular_payment) %>*
+		<%= humanized_money(display_gross_amount(registration)) %>*
+		<%= humanized_money(display_social_security_fee(registration)) %>*
+		<%= humanized_money(display_income_tax(registration)) %>*
+		<%= humanized_money(display_net_amount(registration)) %>*
+			<% if annotated?(registration) %>
+			
+				<%= display_absence_penalty(registration) %>
+				;	
+			<% else %>
+			
+			0;
+			
+			<% end %>			
+
+</pre>
+			

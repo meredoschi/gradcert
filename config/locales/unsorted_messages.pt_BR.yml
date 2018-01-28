@@ -1,0 +1,167 @@
+---
+pt_BR:
+  a:
+    f: uma
+    m: um
+  abbreviation:
+    medicalresidency: RM
+    medres: RM
+    pap: PAP
+  actions:
+    back: Voltar
+    cancel: Anular
+    confirm: Confirmar
+    delete: Remover
+    edit: Editar
+    filter: Filtrar
+    generate: Gerar
+    inform: Informar
+    insert: Inserir
+    new:
+      f: Cadastrar uma nova
+      m: Cadastrar um novo
+    print: Imprimir
+    quit: Sair (encerrar sessão)
+    repeat: Repita (para confirmar)
+    search: Procurar
+    show: Mostrar
+    showing: Mostrando
+    update: Atualizar
+    upload: Carregar
+  active:
+    f: ativa
+    m: ativo
+  and: e
+  annotate: Anotar
+  annotated:
+    f: anotada
+    m: anotado
+    pl: anotados
+  another:
+    f: outra
+    m: outro
+  belongs:
+    medres: Pertence à Residência Médica
+    pap: Pertence ao Pap
+  calculated:
+    f: calculada
+    m: calculado
+    pl: calculados
+  cancelled:
+    f: cancelada
+    m: cancelado
+  confirm:
+    bankfile: 'Aviso: o procedimento de geração do arquivo bancário pode levar algum tempo (mais de um minuto) para ser concluído, dependendo do número de bolsistas e da velocidade do servidor.  Isto é normal.  Posso continuar?  '
+    delete: Você tem certeza que deseja remover?
+    visit_external_site: Você irá visitar um site externo.  Tem certeza ?
+  confirmed:
+    f: confirmada
+    m: confirmado
+  created:
+    f: criada
+    m: criado
+  deannotated:
+    f: desanotada
+    m: desanotado
+  deleted:
+    f: removida
+    m: removido
+  done:
+    f: concluída
+    m: concluído
+  duration_between: Duração entre
+  excluded:
+    f: excluída
+    m: excluído
+    pl: excluídos
+  found:
+    f: encontrada
+    m: encontrado
+  fullname:
+    gradcert: Programa de Especialização
+    medres: Programa de Residência Médica
+    pap: Programa de Aprimoramento Profissional
+  gender:
+    F: Feminino
+    M: Masculino
+    X: Indefinido/Entresexos/Não especificado
+  inactive:
+    f: inativa
+    m: inativo
+  institution_removal_lock:
+    medicalresidency: 'Aviso do sistema: não é possível remover uma instituição que pertença à Residência Médica.  Desmarque a opção respectiva e tente novamente, se realmente quiser fazer isto.'
+    notprovisional: 'Aviso do sistema: não é possível remover uma instituição que possua cadastrado confirmado.  Se realmente quiser fazer isto, você terá que marcá-lo como provisório (dados desatualizados) primeiro.'
+    pap: 'Aviso do sistema: não é possível remover uma instituição que pertença ao Pap.  Desmarque a opção respectiva e tente novamente, se realmente quiser fazer isto.'
+    withprograms: 'Aviso do sistema: não é possível remover uma instituição que possui programas cadastrados.  Remova os programas dela e tente novamente, se realmente quiser fazer isto.'
+    withusers: 'Aviso do sistema: não é possível remover uma instituição que contenha usuários.  Eles devem ser removidos, caso realmente queira apagá-la.'
+  institution_with_users:
+    all: Instituições com usuários
+    medres: Instituição com usuários da Residência Médica
+    pap: Instituição com usuários do Pap
+  max_num_scholarships_offered:
+    medres: Número máximo de bolsas'
+    pap: Número máximo de bolsas
+  my:
+    f: minha
+    fp: minhas
+    m: meu
+    mp: meus
+  new:
+    f: nova
+    m: novo
+  none:
+    f: Nenhuma
+    m: Nenhum
+  noun:
+    edit: Edição de
+    update: Atualização
+  num_veterans:
+    pap: Matriculados previstos para continuarem seus estudos (programas duração > 1 ano)
+  of:
+    f: da
+    m: do
+    n: de
+  ordinal:
+    '1': Primeiro
+    '10': Décimo
+    '2': Segundo
+    '3': Terceiro
+    '4': Quarto
+    '5': Quinto
+    '6': Sexto
+    '7': Sétimo
+    '8': Oitavo
+    '9': Nono
+  other:
+    f: outra
+    m: outro
+  our:
+    f: nossa
+    m: nosso
+  registered:
+    f: cadastrada
+    m: cadastrado
+  registered_so_far:
+    f: cadastrada até o momento
+    m: cadastrado até o momento
+  removed:
+    f: removida
+    m: removido
+  situation: Situação
+  succesfully: com sucesso.
+  suspended:
+    f: Suspensa
+    m: Suspenso
+  teaching_area: Área de ensino
+  unchanged:
+    f: inalterada
+    m: inalterado
+  updated:
+    f: atualizada
+    m: atualizado
+  user_removal_lock: 'Aviso do sistema: de modo a prevenir a remoção acidental de usuários, primeiro é preciso apagar os dados de contato do mesmo.  Se realmente deseja fazer isto, clique em voltar e o apague a partir da tela da relação de contatos.  Feito isto, você pode tentar remover o usuário novamente.'
+  validation:
+    messagetext:
+      error: erro
+      please_correct_and_retry: de preenchimento. Por favor corrija onde indicado e tente novamente.
+      system_detected: O sistema detectou

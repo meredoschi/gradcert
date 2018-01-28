@@ -1,0 +1,48 @@
+<div class="row">
+	
+	
+			<% if in_season? %>
+
+		 		<div class="large-3 columns", class: "left inline">
+		
+					<%= f.label ta('registration.schoolyear_id')%> <br>
+					<p></p>
+	
+				</div>
+
+		 		<div class="large-9 columns">
+
+					 	<%= f.collection_select :schoolyear_id, retrieve_schoolyears_for(current_user), :id, display_student_program_for(current_user) %>
+  				
+		
+				</div>
+
+
+			<% else %>
+			
+			
+			<div class="large-3 columns", class: "left inline">
+		
+
+				<h5>
+				
+						<%= ta('registration.schoolyear_id')%> <p></p>
+	
+				</h5>
+									
+				</div>
+
+		 		<div class="large-9 columns">
+
+				<h5 class="subheader">
+								
+			  			<%= display_details %>
+	  				
+
+				</h5>		
+		
+				</div>
+
+			<% end %>
+					
+</div>

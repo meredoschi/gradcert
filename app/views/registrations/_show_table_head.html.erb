@@ -1,0 +1,30 @@
+<tr>
+        <div class="large-3 columns">
+
+          <th><strong><%= t('activerecord.attributes.registration.student_id')%></strong></th>
+
+        </div>
+
+        <div class="large-3 columns">
+
+          <th><strong><%= t('activerecord.attributes.registration.schoolyear_id')%></strong></th>
+
+        </div>
+
+        <div class="large-3 columns">
+
+          <th><strong><%= t('activerecord.attributes.registration.schoolterm_id')%></strong></th>
+
+        </div>
+
+        <% if is_admin_or_manager(current_user) %>
+
+          <div class="large-3 columns">
+
+            <th><strong><%= tm('institution').capitalize%></strong></th>
+
+          </div>
+
+        <% end %>
+
+</tr>

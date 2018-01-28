@@ -1,0 +1,19 @@
+<div class="row">
+
+
+			 		<div class="large-3 columns", class: "left inline">
+
+				    <%= f.label :registration_id %>
+
+					</div>
+
+			 		<div class="large-9 columns">
+
+
+					<%= f.collection_select :registration_id, @registrations_with_institutions.ordered_by_contact_name, :id, :namecpfinstitution %>        	
+
+
+
+					</div>
+
+		</div>

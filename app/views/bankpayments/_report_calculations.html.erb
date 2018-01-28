@@ -1,0 +1,103 @@
+
+<table>
+	
+	<tr>
+
+		<div class="row">
+		
+			<div class="large-2 columns">
+					
+				<th><strong>
+			
+						<% if @bankpayment.payroll.special? %>
+		
+					  		<%= ta('payroll.amount')%>
+
+						<% else %>
+			
+					  		<%= ta('payroll.scholarship_id')%>
+			
+						<% end %>
+							
+					</strong></th>
+		
+			</div>
+			
+			<% if annotated?(registration) %>
+			
+				<div class="large-2 columns">
+		
+					<th><strong><%= t('after')+' '+tm('annotation')%></strong></th>
+			
+				</div>
+			
+			<% end %>
+		
+			
+		
+			<div class="large-2 columns">
+	
+				<th><strong><%= ta('taxation.socialsecurity')%></strong></th>
+	
+			</div>
+
+			<div class="large-2 columns">
+	
+				<th><strong><%= t('income_tax')%></strong></th>
+	
+			</div>
+
+			<div class="large-2 columns">
+	
+				<th><strong><%= t('net')%></strong></th>
+	
+			</div>
+
+
+
+		</div>
+	
+	</tr>
+
+	<div class="row">
+
+	<tr>
+			
+			<div class="large-2 columns">
+				<td>
+
+						<%=	humanized_money(@regular_payment) %>
+						
+				</td>
+
+			</div>
+		
+		<% if annotated?(registration) %>			
+
+			<div class="large-2 columns">
+				<td><%= humanized_money(display_gross_amount(registration)) %></td>
+			</div>
+						
+		<% end %>
+						
+		<div class="large-2 columns">
+			<td><%= humanized_money(display_social_security_fee(registration)) %></td>
+		</div>
+
+		<div class="large-2 columns">
+			<td><%= humanized_money(display_income_tax(registration)) %></td>
+		</div>
+
+		<div class="large-2 columns">
+			<td><%= humanized_money(display_net_amount(registration)) %></td>
+		</div>
+
+	</div>
+															
+</table>
+
+<% if annotated?(registration) %>
+
+	<%= display_annotation_details(registration) %>
+		
+<% end %>

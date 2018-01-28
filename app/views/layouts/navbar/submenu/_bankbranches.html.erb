@@ -1,0 +1,19 @@
+<% if can? :read, Bankbranch %>        
+
+	<ul class="left">
+
+		<% if is_active_link?(bankbranches_path, :inclusive) %>
+
+			<li class="active">
+			
+		<% else %>
+			
+			<li>
+
+		<% end %>
+	 			 			   											
+		  <%= link_to tm('bankbranch').capitalize.pluralize, bankbranches_path  %></li>	
+		    
+  </ul>    
+
+<% end %>
