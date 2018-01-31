@@ -1,5 +1,12 @@
 ---
 en:
+  application_title: "Graduate certificate"
+  my:
+    m: my
+    f: my
+  actions:
+    edit: edit
+  greetings: "Greetings"
   and: and
   date:
     formats:

@@ -1,8 +1,11 @@
----
 pt_BR:
-  bank: banco
-  branch: agência
-  business_taxpayer_id: CNPJ
-  nay: não
-  not_yet: ainda não
-  yay: sim
+ bank: 'banco'
+ branch: 'agência'
+ nay: 'não'
+ not_yet: 'ainda não'
+ yay: 'sim'
+ business_taxpayer_id: 'CNPJ'
+ contact_data_inexistent: "Com dados de contato inexistentes, favor clique em remover e o cadastre novamente (exceto se já tiver contato criado com outro e-mail de usuário desta mesma pessoa)"
+ there_are_contacts_which_may_become_students: "Há contatos cadastrados que poderiam se tornar bolsistas"
+ after_the_complete_data_is_entered: "após os dados completos serem informados (quando necessário)"
+ reminder: 'Lembrete'

@@ -12,13 +12,55 @@ Its production version (which contains additional code) has been running since A
 
 ## ABOUT
 
-In essence, the application's goal is to enable business/education managers to easily track post-graduate scholarship program recipients.
+### Matriculating students
 
-By design decision, it also allows participating institutions to view and enter data related to their own students, using a responsive user interface.  Theoretically, it should work with various browsers and mobile devices.
+The system allows participating institutions to matriculate students in a user friendly way, during the "registration season".
 
-## TO-DOS
+### Payroll
 
-In a future version, I plan on translating the slides (pdf document) to English and to fill in some missing i18n (activerecord model) attributes as well.
+In addition, each month, local staff at institutions inform which (current) students have absences and other events in preparation for the month's "payroll".  Otherwise, it is assumed (for the sake of efficiency) that the scholarship recipient showed up everyday and thus would receive a full monthly stipend.
+
+At the end of the payroll data entry period, program managers and administrative staff at "HQ" (i.e. the organization which manages the program and pays for the students) then proceed to verify the events recorded (which are initially marked as 'pending').  They also confirm any cancellations which may have occurred.  The system allows for attachments to be provided, which aid in this verification.
+
+The payroll is assumed to range from the first to the last calendar day (on a particular month).
+
+The system will generate a unique **annotation** for each student's registration, reflecting the one or more events which may have taken place during the month being analysed.  That is to say, students without events or registration changes (such as cancellations) will not be "annotated".  That is the most common case.
+
+### User interface
+
+The system uses a responsive user interface. Theoretically, it should work with various browsers and mobile devices.
+
+## SAMPLE LOGINS
+
+### You may wish to try and load the sample data provided, like so:
+```
+rake db:seed
+```
+
+or alternatively:
+
+```
+rake db:reset
+```
+
+You may use these login credentials:
+
+#### 1. System administrator (full access)
+
+E-mail: **system-admin@example.com**
+
+password: **samplepass**
+
+#### 2. Program manager (wide ranging access inside its program area)
+
+E-mail: **program-manager@example.com**
+
+password: **samplepass**
+
+#### 3. Local manager (sees local participating institution only)
+
+E-mail: **dean@state-u.org**
+password: **samplepass**
 
 ## RUBY VERSION
 
@@ -31,8 +73,11 @@ Developed on both Linux and Mac environments.
 Postgres 9.6.6
 
 ## LAST UPDATED
-*28/JAN/2018*
+*31/JAN/2018*
 
+## TO-DOS
+
+In a future version, I plan on translating the slides (pdf document) to English and to fill in some missing i18n (activerecord model) attributes as well.
 
 ## COPYRIGHT
 

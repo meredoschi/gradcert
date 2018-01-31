@@ -272,7 +272,7 @@ A message similar to the one below will appear, together with any deprecation wa
 
 Navigate with your web browser to http://localhost:3000.
 
-The "Welcome aboard" page should appear.
+The login prompt should appear.
 
 ---
 
@@ -282,4 +282,4 @@ rails new gradcert -d=postgresql -T --skip-gemfile --skip-bundle
 ---
 ##### Marcelo Eduardo Redoschi
 
-##### Last updated: November 2017
+##### Last updated: January 2018

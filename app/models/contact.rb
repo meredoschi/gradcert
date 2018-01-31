@@ -68,6 +68,21 @@ class Contact < ActiveRecord::Base
 
   validate :user_with_regular_permission_must_not_take_on_staff_role
 
+  # New for 2018
+
+  def self.latest_contacts_with_student_roles
+    with_student_role.where('contacts.created_at > ? ', Schoolterm.latest.start.beginning_of_year)
+  end
+
+  def self.latest_student_contact_ids
+    latest_contacts_with_student_roles.joins(:student).pluck(:contact_id)
+  end
+
+  # Latest
+  def self.ready_to_become_students
+    latest_contacts_with_student_roles.where.not(id: latest_student_contact_ids)
+  end
+
   # Added for convenience (audit rake tasks) - August 2017
   def self.called(fullname)
     where(name: fullname)
@@ -98,7 +113,8 @@ class Contact < ActiveRecord::Base
     errors.add(:personalinfo, :mothersname_must_be_present)
   end
 
-  def nit_dv # Brazilian Social Security Number - Verification digit
+  # Brazilian Social Security Number - Verification digit
+  def nit_dv
     personalinfo.nit_dv
   end
 
@@ -345,15 +361,7 @@ class Contact < ActiveRecord::Base
   end
 
   def self.possible_students_exist?
-    if have_not_become_students.with_student_role.count > 0
-
-      true
-
-    else
-
-      false
-
-    end
+    have_not_become_students.with_student_role.count > 0
   end
 
   # Contact with student role?
