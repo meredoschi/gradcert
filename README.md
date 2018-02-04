@@ -4,14 +4,14 @@
 
 Back in 2013, I first started writing what would then become **grad**uate **cert**ificate.
 
-It originated as a personal project and steadily grew.  As I learned more about Ruby on Rails, I later wrote some Rspec tests and began to use linters to beautify the code, when feasible.
-
-*This is its first public/international release (still on the development branch).  As such, it may contain some rough edges.*
+It originated as a personal project and steadily grew (developed entirely by myself).  As I learned more about Ruby on Rails, I later wrote some Rspec tests and began to use linters to beautify the code, when feasible.
 
 Its production version (which contains additional code) has been running since April 2016 with generally positive feedback from users.
 
-## ABOUT
-
+## ABOUT 
+ 
+   This is the first international version, so I am still in the process of translating, revising and refactoring some of the code.  
+ 
 ### Matriculating students
 
 The system allows participating institutions to matriculate students in a user friendly way, during the "registration season".
@@ -73,11 +73,11 @@ Developed on both Linux and Mac environments.
 Postgres 9.6.6
 
 ## LAST UPDATED
-*31/JAN/2018*
+*4/FEB/2018*
 
 ## TO-DOS
 
-In a future version, I plan on translating the slides (pdf document) to English and to fill in some missing i18n (activerecord model) attributes as well.
+In a future version, I plan on filling in some missing i18n (activerecord model) attributes.
 
 ## COPYRIGHT
 
