@@ -1,13 +1,13 @@
 <div class="row panel">
-						
-						
-	  
+
+
+
 		<h4><%= @num_skipped_annotations %></h4>
-		
-		<% @skipped_annotations.each_with_index do |annotation, i|  %>
-	
-			<h5>	<%=  link_to annotation.details, annotation %> </h5> 
-								
+
+		<% @skipped_annotations.ordered_by_contact_name.each_with_index do |annotation, i|  %>
+
+			<h5>	<%=  link_to annotation.details, annotation %> </h5>
+
 		<% end %>
-			
+
 </div>

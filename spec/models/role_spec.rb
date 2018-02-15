@@ -6,7 +6,7 @@ RSpec.describe Role, type: :model do
 
   let(:role) { FactoryBot.create(:role) }
 
-  let(:pap_role) { FactoryBot.create(:role, :pap) }
+  let(:pap_student) { FactoryBot.create(:role, :student, :pap) }
 
   let(:inconsistent_role) { FactoryBot.create(:role, :clerical_and_it) }
 

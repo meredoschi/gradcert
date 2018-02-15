@@ -26,6 +26,10 @@ FactoryBot.define do
       association :role, :factory => [:role, :clerical, :pap]
     end
 
+    trait :pap_student do
+      association :user, :factory => [:user] # student permission
+      association :role, :factory => [:role, :student, :pap]
+    end
 
 #   ************************************************************************
   end

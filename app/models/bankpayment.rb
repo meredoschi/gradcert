@@ -163,6 +163,21 @@ class Bankpayment < ActiveRecord::Base
     joins(:payroll).order('payrolls.dayfinished desc')
   end
 
+  # Added for 2018 - DIRF
+  def self.ordered_by_increasing_payment_date
+    joins(:payroll).order('payrolls.paymentdate asc')
+  end
+
+  # Year number: e.g. 2018
+  def self.performed_on_calendar_year(yr)
+    calendar_yr_start = yr.to_s + '-1-1'
+
+    joins(:payroll).where('payrolls.paymentdate >= ?',
+                             calendar_yr_start)
+      .where('payrolls.paymentdate < ? ',
+             calendar_yr_start.to_date + 1.year).ordered_by_increasing_payment_date
+  end
+
   def self.bankpayment_done
     joins(:bankpayment).merge(Bankpayment.done)
   end
@@ -259,7 +274,8 @@ class Bankpayment < ActiveRecord::Base
   #    boolean ? I18n.t('yes').capitalize : I18n.t('no').capitalize
   #  end
 
-  def clear_totalamount_when_needed # when recalculating
+  # when recalculating
+  def clear_totalamount_when_needed
     totalamount = 0 if prepared?
   end
 end

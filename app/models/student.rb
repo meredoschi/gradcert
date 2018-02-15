@@ -42,6 +42,19 @@ class Student < ActiveRecord::Base
 
   has_paper_trail
 
+  # 2018 hotfix
+  def self.pipeline
+    registered_students = joins(:registration)
+    registered_student_ids = registered_students.pluck(:student_id)
+    season_debut = Schoolterm.latest.seasondebut
+    where.not(id: registered_student_ids).where('students.created_at > ? ', season_debut)
+  end
+
+  def self.with_statements_in_calendar_year(yr)
+    where(id: Registration.with_statements_in_calendar_year(yr).student_ids)
+  end
+  # -- 2018
+
   # Barred from registering
   def self.not_barred
     not_previousparticipant.not_nationalhealthcareworker

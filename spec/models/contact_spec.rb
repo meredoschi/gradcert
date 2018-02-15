@@ -10,7 +10,12 @@ RSpec.describe Contact, type: :model do
 
   #  let(:contact) { FactoryBot.create(:contact, user: user) }
 
-  it 'can be created (PAP)' do
+  it 'can be created (PAP clerical staff)' do
     FactoryBot.create(:contact, :clerical_pap)
   end
+
+  it 'can be created (PAP student)' do
+    FactoryBot.create(:contact, :pap_student)
+  end
+
 end

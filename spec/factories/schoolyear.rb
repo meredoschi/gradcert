@@ -7,11 +7,13 @@ FactoryBot.define do
 
   trait :freshman do
     programyear 1
+    association :program, :factory => [:program, :annual]
 
   end
 
   trait :sophmore do
     programyear 2
+    association :program, :factory => [:program, :biannual]  
 
   end
 
