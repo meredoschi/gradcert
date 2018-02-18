@@ -57,14 +57,10 @@ Developed on both Linux and Mac environments.
 
 ## DATABASE
 
-Postgres 9.6.6
+Postgres 9.6.7
 
 ## LAST UPDATED
-*31/JAN/2018*
-
-## TO-DOS
-
-In a future version, I plan on translating the slides (pdf document) to English and to fill in some missing i18n (activerecord model) attributes as well.
+*18/FEB/2018*
 
 ## COPYRIGHT
 
