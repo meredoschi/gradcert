@@ -11,13 +11,13 @@ FactoryBot.define do
     sequence(:name) {|n| "#{I18n.t('activerecord.models.student')+' '+(n+1000).to_s}" }
 
     trait :pap do
-      pap false
+      pap true
       medres false
     end
 
     trait :medres do
       pap false
-      medres false
+      medres true
     end
 
   # ***********************************
@@ -30,6 +30,21 @@ FactoryBot.define do
     management false
     student false
     teaching false
+
+  end
+
+  # i.e. Student
+  trait :student do
+
+    # Set to PAP (default)
+    sequence(:name) {|n| "#{I18n.t('definitions.role.names.pap.student')+' '+(n+1000).to_s}" }
+
+    student true
+    management false
+    teaching false
+    clerical false
+    collaborator false
+    itstaff false
 
   end
 

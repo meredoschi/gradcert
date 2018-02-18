@@ -1,39 +1,67 @@
 ---
-layout: "post"
-title: "Suggested database setup"
+title: "Suggested gradcert database setup"
 author: "Marcelo Eduardo Redoschi"
-date: "2017-11-19 18:26"
 ---
 # Suggested database setup (postgres)
 
-These instructions are provided for completeness, since this database setup is fairly common among many Rails applications.
+These instructions are provided for completeness, since this database setup is fairly common among many Rails applications.  They should work comparably well on both Linux and Mac machines, with simple tweaks.
 
-They should work comparably well on both Linux and Mac machines.
+# 1. Cluster setup (in case of a brand new Postgres installation)
 
-## 1. PGDATA environment variable
+The location of these files may vary depending on your postgres version and operating system.
 
-### a) Existence verification
+## createuser
+```
+/usr/local/Cellar/postgresql@9.6/9.6.7/bin/createuser -s postgres
+```
+
+## initdb
+
+### International settings
 
 ```
-$ echo $PGDATA
-/usr/local/var/postgres
+/usr/local/Cellar/postgresql@9.6/9.6.7/bin/initdb *--lc-ctype=pt_BR.UTF-8* *--lc-collate=pt_BR.UTF-8* *--locale=pt_BR.UTF-8* -D /usr/local/var/postgresql@9.6.7
 ```
-*The actual location may be different, depending on your installation details.*
+Depending on your set up, "international settings" (such as ctype, locale and collation) may be different from what is shown above.   
 
-If you get something similar to this, that's great.  It means the variable was already set.  Proceed to step 2 directly.
+## alter postgres ROLE password
 
-### b) Export (set) the **Postgres data directory** variable
+*It is good practice to set a password for the postgres system administrator role*
+```
+ALTER ROLE postgres with encrypted password 'some-random-password';
+```
 
-You must manually set the variable to the appropriate path.
+
+
+# 2. Set the environment variables
+
+## a) *gradcert* specific
+```
+export GRADUATE_CERTIFICATE_DATABASE_PREFIX='gradcert_'
+export GRADUATE_CERTIFICATE_DATABASE_USER='gradcert'
+export GRADUATE_CERTIFICATE_DATABASE_PASSWORD='sample-db-password'
+```
+
+*You may wish to add the lines above to your shell environment file.*
+
+## b) PGDATA (useful for all databases)
+
 ```
 export PGDATA='/usr/local/var/postgres'
 ```
 
-Hint: you may wish to add the line with the appropriate path for your system to  **$HOME/.bashrc** (in case you are using bash). file.
+## c) Optional (use symlinks to organize the various versions, as time goes
+  along and you decide to upgrade postgres)
+```
+$ ln -s /usr/local/var/postgresql@9.6.7 **/usr/local/var/postgres**
+```
 
-If unsure what this path is, you may try the optional step below ->
+```
+$ ls -l /usr/local/var | grep postgres
+postgres -> postgresql@9.6.7/
+```
 
-### c) Optional (find out the data directory location using **psql**)
+## d) Optional (find out the data directory  location using **psql**)
 
 **Depending on how your postgres server is configured, you may be prompted for a password.**
 
@@ -49,7 +77,7 @@ show data_directory;
 (1 row)
 This location may be different on your system
 
-## 2. Add database entries to **pg_hba.conf** and restrict password less access.
+# 3. Add database entries to **pg_hba.conf** and restrict password less access.
 
 You may do this step either on the command line or with some graphical text editor.
 
@@ -59,27 +87,26 @@ access.
 ```
 nano -c $PGDATA/pg_hba.conf
 ```
-###
 
-### a) Local environment
-#### development database
+## a) Local environment
+### development database
 > host  **gradcert_development** *gradcert*  127.0.0.1/32 md5
 >
 > local **gradcert_development** *gradcert*  md5
 
-##### test database
+### test database
 > host  **gradcert_test** *gradcert*  127.0.0.1/32 md5
 >
 > local **gradcert_test** *gradcert*  md5
 
-### b) Server environment
+## b) Server environment
 
-#### production database
+### production database
 > host  **gradcert_production** *gradcert*  127.0.0.1/32 md5
 >
 > local **gradcert_production** *gradcert*  md5
 
-#### *Reminder: database user information*
+### *Reminder: database user information*
 
 When adding the database names to **pg_hba.conf** the user **gradcert** was specified.
 
@@ -87,199 +114,115 @@ When adding the database names to **pg_hba.conf** the user **gradcert** was spec
 
 *There are corresponding entries for all other environments.*
 
-#### c) Optional, but recommended.
-##### Restrict password-less connections to the postgres user.
+## c) Optional, but recommended.
+### Ask for password when connecting via the network (IPv4 and IPv6)  
 
-> \#"local" is for Unix domain socket connections only
+pg_hba.conf
 
-Commented the this line
-> \#local   all             all     trust
+> \# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+> \# IPv4 local connections:
 >
-Restrict **trusted local connections** to the *postgres* user only (i.e. user allowed to login without a password).
-> local  all postgres trust
+> \#host    all            all             127.0.0.1/32            trust
+>
+> host    all             all             127.0.0.1/32            md5
 
-*Likewise for **IPv4** and **IPV6** connections.*
+> \# IPv6 local connections:
+>
+> host    all             all             ::1/128                 md5
+>
+> \#host    all             postgres             ::1/128            trust
 
-> \# host    all             all             127.0.0.1/32            trust
+# 4. Create the *gradcert* role
 
-> host    all             **postgres**        127.0.0.1/32            trust
+```
+postgres=# create role gradcert with encrypted password 'sample-db-password' login createdb;
+CREATE ROLE
+```
 
-> \# host    all             all             ::1/128            trust
+## Optional (double check role creation)
 
-> host    all             **postgres**       ::1/128            trust
+```
+postgres=# \dg gradcert
 
+List of roles
+Role name | Attributes | Member of
+-----------+------------+-----------
+gradcert  | Create DB  | {}
 
-### 3. Create the database user (also known as role).
+```
 
-#### Recommended: create the *psqlr* shell alias.
-
-I suggest you create an **alias** (think of it as a kind of shorthand) to access Postgres via the command line more conveniently.
+## Optional (create a shell alias)
 
 ```
 alias psqlr='psql -U postgres'
 ```
-You may whish to it to your **$HOME/.bashrc** (or similar file).
 
-#### Connect via the command line
+# 5. Create, prepare the logical schema and populate the databases
+
+## Development
 
 ```
-psqlr
+rake db:create
 ```
-> psql (9.4.11)
->
+
+```
+rake db:migrate
+```
+
+```
+rake db:seed
+```
+
+## Test
+
+```
+RAILS_ENV=test rake db:migrate
+```
+
+```
+RAILS_ENV=test rake db:seed
+```
+
+# 6. Optional
+
+## a) Get database details, including space usage
+
+```
+postgres=# \l+ gradcert*
+                                                       List of databases
+         Name         |  Owner   | Encoding |   Collate   |    Ctype    | Access privileges | Size  | Tablespace | Description
+----------------------+----------+----------+-------------+-------------+-------------------+-------+------------+-------------
+ gradcert_development | gradcert | UTF8     | pt_BR.UTF-8 | pt_BR.UTF-8 |                   | 10 MB | pg_default |
+ gradcert_test        | gradcert | UTF8     | pt_BR.UTF-8 | pt_BR.UTF-8 |                   | 10 MB | pg_default |
+(2 rows)
+```
+
+## b) Verify gradcert connection via the postgres prompt (optional)
+
+```
+$ psql -d gradcert_development -U gradcert -h localhost
+```
+
+> Password for user gradcert:
+> psql (9.6.7)
 > Type "help" for help.
->
-> postgres=#
 
-#### Create the *gradcert* role
-
-```
-postgres=# create role gradcert with encrypted password 'sample-db-password' login;
-```
-> CREATE ROLE
-
-#### The role should appear on the list
-
-```
-postgres=# \dg
-                               List of roles
-   Role name   |                   Attributes                   | Member of
----------------+------------------------------------------------+-----------
- postgres      | Superuser, Create role, Create DB              | {}
-gradcert      |                                                | {}
-```
-### 4. Create the databases
-
-#### Development environment
-
-```
-postgres=# create database gradcert_development with owner gradcert;
-```
-> CREATE DATABASE
-
-```
-postgres=# create database gradcert_test with owner gradcert;
-```
-
-> CREATE DATABASE
-
-##### Optional (verify the newly created databases appear on the list.)
-```
-postgres=# \l
-                                      List of databases
-           Name            |     Owner     | Encoding | Collate | Ctype |  Access privileges
----------------------------+---------------+----------+---------+-------+---------------------
-gradcert_development       | gradcert      | UTF8     | pt_BR.utf8 | pt_BR.utf8 |
-gradcert_test              | gradcert      | UTF8     | pt_BR.utf8 | pt_BR.utf8 |
-```
-
-#### Production environment
-
-In a similar fashion, create the **gradcert_production** database.
-
-#### Collation and encoding details
-
-N.B. Depending on your region, language, and machine setup, collation and encoding information may be different than what is shown above.  Refer to the Postgres documentation for details. CREATE DATABASE accepts additional arguments.
-
-### 5. Export (set) the database password variable
-
-```
-$ grep ENV config/database.yml
-```
-
-> \# url: <%= ENV['DATABASE_URL'] %>
->
-> password: <%= ENV['GRADCERT_DATABASE_PASSWORD'] %>
->
-
-```
-export GRADCERT_DATABASE_PASSWORD='sample-db-password'
-```
-
-Be sure to add this to your **$HOME/.bashrc** (or similar file).
-
-```
-echo $GRADCERT_DATABASE_PASSWORD
-```
-
-> **sample-db-password**
-
-This should match exactly with the **gradcert** database password defined previously (at the psql prompt).
-
-### 6. Restart (or reload) Postgres
-
-This will depending the version and environment used.
-
-*For instance, on a Linux development machine (Centos).*
-
-```
-sudo service postgresql-9.4 restart
-```
-
-> Redirecting to /bin/systemctl restart  postgresql-9.4.service
-
-### 7. Verify connection via the postgres prompt (recommended)
-
-```
-psql -d gradcert_development -U gradcert
-```
-
-> Senha para usuário gradcert:
->
-
-*Enter password for the **gradcert** user*
-
->
-> psql (9.4.12)
->
-> Digite "help" para ajuda.
->
-> **gradcert_development**=>
->
+> gradcert_development=>
 
 Looks good!  Connected to the database.
 
 *control-D* exits.
 
-Repeat this step for the **gradcert_test** (local machine) and **gradcert_production** as well (server), when needed.
-
-### 8. Edit **config/database.yml**
-
-> development:
->
-> <<: *default
->
-> database: gradcert_development
->
-> **username: gradcert**
->
-> **password: <%= ENV['GRADCERT_DATABASE_PASSWORD'] %>**
-
-The lines to add are in bold.
-
-Proceed in an analogous fashion for the test environment.
-
-### 9. Finally, try to start the local server.
+# 7. Start the development server
 
 ```
 $ rails s
 ```
-A message similar to the one below will appear, together with any deprecation warnings.
 
-> => Rails 4.2.10 application starting in development on http://localhost:3000
->
-> Listening on localhost:3000, CTRL+C to stop
+#### For login credentials please refer to the *README* or take a look at the seed files directly.
 
-Navigate with your web browser to http://localhost:3000.
-
-The login prompt should appear.
-
----
-
-```
-rails new gradcert -d=postgresql -T --skip-gemfile --skip-bundle
-```
 ---
 ##### Marcelo Eduardo Redoschi
 
-##### Last updated: January 2018
+##### Last updated: February 2018

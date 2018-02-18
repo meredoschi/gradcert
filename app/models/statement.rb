@@ -51,6 +51,20 @@ class Statement < ActiveRecord::Base
     joins(registration: { student: { contact: { user: :institution } } }).where('institutions.id = ? ', i)
   end
 
+  # New for 2018
+  def self.ordered_by_payment_date
+
+    joins(bankpayment: :payroll).order('payrolls.paymentdate')
+
+  end
+
+  # Alias, for convenience
+  def self.chronologically
+
+    self.ordered_by_payment_date
+
+  end
+
   def self.ordered_by_most_recent_payroll_contact_name
     joins(bankpayment: :payroll).joins(registration: { student: :contact }).order('payrolls.dayfinished desc, contacts.name')
   end
@@ -63,6 +77,22 @@ class Statement < ActiveRecord::Base
   def self.ordered_by_contact_name_and_payment_date
     joins(registration: { student: :contact }).joins(bankpayment: :payroll).order('contacts.name, payrolls.paymentdate')
   end
+
+  # New for 2018
+
+  def self.for_payments_performed_on_calendar_year(yr)
+
+    joins(:bankpayment).merge(Bankpayment.performed_on_calendar_year(yr))
+
+  end
+
+  def self.registration_ids_for_payments_performed_on_calendar_year(yr)
+
+    self.for_payments_performed_on_calendar_year(yr).pluck(:registration_id).sort.uniq
+
+  end
+
+  # --- 2018
 
   def bankpayment_name
     bankpayment.name

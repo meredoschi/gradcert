@@ -17,6 +17,7 @@ FactoryBot.define do
     # Pap = default (student)
 
     # http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-FactoryBot/
+
     trait :paplocaladm do
       association :permission, :factory => [:permission, :paplocaladm]
     end
