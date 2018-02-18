@@ -61,12 +61,9 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-## TO-DOS
-
-In a future version, I plan on filling in some missing i18n (activerecord model) attributes.
-=======
 *18/FEB/2018*
 
+=======
 ## COPYRIGHT
 
 Copyright © 2018 Marcelo Eduardo Redoschi
