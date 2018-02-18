@@ -198,7 +198,7 @@ postgres=# \l+ gradcert*
 (2 rows)
 ```
 
-## b) Verify gradcert connection via the postgres prompt (optional)
+## b) Verify gradcert connection via the terminal
 
 ```
 $ psql -d gradcert_development -U gradcert -h localhost
