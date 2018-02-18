@@ -32,19 +32,6 @@ The system uses a responsive user interface. Theoretically, it should work with 
 
 ## SAMPLE LOGINS
 
-### You may wish to try and load the sample data provided, like so:
-```
-rake db:seed
-```
-
-or alternatively:
-
-```
-rake db:reset
-```
-
-You may use these login credentials:
-
 #### 1. System administrator (full access)
 
 E-mail: **system-admin@example.com**
