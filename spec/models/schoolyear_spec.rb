@@ -250,6 +250,14 @@ RSpec.describe Schoolyear, type: :model do
     expect(schoolyear_program_sector_i18n).to eq(schoolyear.sector_i18n)
   end
 
+  # Next program year
+  it '-nextlevel' do
+    schoolyear_next_level = schoolyear.program.schoolyears\
+                                      .where(programyear: schoolyear.programyear + 1).first
+
+    expect(schoolyear_next_level).to eq schoolyear.nextlevel
+  end
+
   it '-program_name_incoming_cohort_program_year' do
     schoolyear_program_name_incoming_cohort_program_year = schoolyear.name_incoming_cohort_i18n
 
