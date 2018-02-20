@@ -1,95 +1,52 @@
----
 pt_BR:
   definitions:
+    schoolyear:
+      sector_prefix:
+        pap: PA
+        medres: R
+        gradcert: E
     leavetype:
       paid:
-        bereavement: Nojo
-        blood_donation: Doação de sangue
-        election: Eleição
-        honeymoon: Gala
-        maternity: Maternidade
-        paternity: Paternidade
-        sick: Saúde
-        vacation: Férias
+          blood_donation: "Doação de sangue"
+          election: "Eleição"
+          vacation: "Férias"
+          honeymoon: "Gala"
+          maternity: "Maternidade"
+          bereavement: "Nojo"
+          paternity: "Paternidade"
+          sick: "Saúde"
       unpaid:
-        breast_feeding: Amamentação
-        personal: Particular
-        social_security: INSS
+          breast_feeding: "Amamentação"
+          social_security: "INSS"
+          personal: "Particular"
+    streetname:
+      designations: ["Aeroporto", "Alameda", "Área", "Avenida", "Boulevard", "Campo", "Campus", "Chácara", "Colônia", "Condomínio", "Conjunto", "Distrito", "Esplanada", "Estação", "Estrada", "Favela", "Fazenda", "Feira", "Jardim", "Ladeira", "Lago", "Lagoa", "Largo", "Loteamento", "Morro", "Núcleo", "Parque", "Passarela", "Praça", "Pátio", "Quadra", "Recanto", "Residencial", "Rodovia", "Rua", "Setor", "Superquadra", "Sítio", "Travessa", "Trecho", "Trevo", "Vale", "Vereda", "Via", "Viaduto", "Viela", "Vila"]
     role:
       names:
-        itstaff: Sistema
-        medres:
-          clerical: Apoio administrativo
-          collaborator: Colaborador da RM
-          localmanager: Coordenador da comissão de residência médica
-          localmanagersubstitute: Coordenador suplente da comissão de residência médica
-          student: Residente
-          supervisor: Preceptor
         pap:
-          clerical: Apoio administrativo
-          collaborator: Colaborador do PAP
-          localmanager: Coordenador da comissão local
-          localmanagersubstitute: Coordenador suplente da comissão local
-          student: Aprimorando
-          supervisor: Docente supervisor
-    streetname:
-      designations:
-      - Aeroporto
-      - Alameda
-      - Área
-      - Avenida
-      - Boulevard
-      - Campo
-      - Campus
-      - Chácara
-      - Colônia
-      - Condomínio
-      - Conjunto
-      - Distrito
-      - Esplanada
-      - Estação
-      - Estrada
-      - Favela
-      - Fazenda
-      - Feira
-      - Jardim
-      - Ladeira
-      - Lago
-      - Lagoa
-      - Largo
-      - Loteamento
-      - Morro
-      - Núcleo
-      - Parque
-      - Passarela
-      - Praça
-      - Pátio
-      - Quadra
-      - Recanto
-      - Residencial
-      - Rodovia
-      - Rua
-      - Setor
-      - Superquadra
-      - Sítio
-      - Travessa
-      - Trecho
-      - Trevo
-      - Vale
-      - Vereda
-      - Via
-      - Viaduto
-      - Viela
-      - Vila
+          clerical: "Apoio administrativo"
+          localmanager: "Coordenador da comissão local"
+          localmanagersubstitute: "Coordenador suplente da comissão local"
+          collaborator: "Colaborador do PAP"
+          supervisor: "Docente supervisor"
+          student: "Aprimorando"
+        medres:
+          clerical: "Apoio administrativo"
+          localmanager: "Coordenador da comissão de residência médica"
+          localmanagersubstitute: "Coordenador suplente da comissão de residência médica"
+          collaborator: "Colaborador da RM"
+          supervisor: "Preceptor"
+          student: "Residente"
+        itstaff: "Sistema"
     user_permission:
       description:
-        admin: Administrador do sistema (acesso total)
-        adminreadonly: Somente leitura - Read-only
-        medres: Residente
-        medrescollaborator: Colaborador Residência Médica
-        medreslocaladm: COREME
-        medresmgr: Gerente da Residência Médica
-        pap: Bolsista (PAP)
-        papcollaborator: Colaborador externo (PAP)
-        paplocaladm: Comissão Local (PAP)
-        papmgr: Gerente do PAP
+        admin: "Administrador do sistema (acesso total)"
+        adminreadonly: "Somente leitura - Read-only"
+        medres: "Residente"
+        medrescollaborator: "Colaborador Residência Médica"
+        medreslocaladm: "COREME"
+        medresmgr: "Gerente da Residência Médica"
+        pap: "Bolsista (PAP)"
+        papcollaborator: "Colaborador externo (PAP)"
+        paplocaladm: "Comissão Local (PAP)"
+        papmgr: "Gerente do PAP"
