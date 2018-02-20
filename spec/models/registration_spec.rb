@@ -9,9 +9,10 @@ RSpec.describe Registration, type: :model do
     print I18n.t('activerecord.models.registration').capitalize + ': '
     registration = FactoryBot.create(:registration)
     puts registration.name
+    puts registration.student.bankaccount.bankbranch.code.to_s
   end
 
-  it '#to_csv' do
-    @registrations = create_list(:registration, 3)
+  it 'multiple can be created' do
+    create_list(:registration, 4)
   end
 end
