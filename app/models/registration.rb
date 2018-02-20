@@ -88,18 +88,6 @@ class Registration < ActiveRecord::Base
   #   app/helpers//programs_helper.rb:128:
   #   when is_pap_manager(user) then Program.find_active_pap_programnames
 
-  # New for 2018
-
-  def self.with_statements_in_calendar_year(yr)
-    where(id: Statement.registration_ids_for_payments_performed_on_calendar_year(yr))
-  end
-
-  def self.student_ids
-
-    pluck(:student_id).sort.uniq
-
-  end
-
   def self.find_active_pap_programnames
     # Fix this !
     #
@@ -365,6 +353,10 @@ class Registration < ActiveRecord::Base
   # Alias
   def self.normal
     regular
+  end
+
+  def self.special
+    joins(:registrationkind).merge(Registrationkind.special)
   end
 
   def self.not_related_to_a_previous_one
@@ -649,16 +641,13 @@ class Registration < ActiveRecord::Base
     annotation.includes(:payroll)
   end
 
-  # includes skipped
   def self.all_annotations_for_payroll(p)
-    # self.joins(annotation: :payroll).where("annotations.payroll_id= ?",p)
+    # includes skipped
     joins(annotation: :payroll)
       .where('annotations.payroll_id= ?', p)
   end
 
-  # i.e. not skipped
   def self.annotations_for_payroll(p)
-    # self.joins(annotation: :payroll).where("annotations.payroll_id= ?",p)
     joins(annotation: :payroll)
       .where('annotations.payroll_id= ?', p)
       .merge(Annotation.not_skipped) # i.e. annotated and not skipped
@@ -957,7 +946,7 @@ class Registration < ActiveRecord::Base
   end
 
   def schoolyear_with_institution_and_term
-    schoolyear_ordinal + ' ' + program_name + ' [' + institution + '] ' + cohort_start
+    schoolyear_ordinal + program_name + ' [' + institution + '] ' + cohort_start
   end
 
   def institution_and_schoolyear

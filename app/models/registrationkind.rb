@@ -1,3 +1,4 @@
+# Implemented in order to properly account for "special" registrations
 class Registrationkind < ActiveRecord::Base
   # ------------------- References ------------------------
 
@@ -9,36 +10,59 @@ class Registrationkind < ActiveRecord::Base
 
   scope :repeat, -> { where(repeat: true) }
 
-=begin
+  # Tested code
 
-# 	has_many  :supervisor, :foreign_key => 'contact_id'
-
-# -------------------------------------------------------
-
-# ********* It is assumed an attribute called 'name' exists for most models.  Adjust or comment accordingly ************************
-
-  validates :name, presence: true, uniqueness: {case_sensitive: false}, length:  { maximum: 200 }
-
-  def self.default_scope
-      # this notation prevents ambiguity
-      order(name: :asc)
-      # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
+  def regular_i18n
+    I18n.t('activerecord.attributes.registrationkind.regular').downcase
   end
 
-=end
+  def makeup_i18n
+    I18n.t('activerecord.attributes.registrationkind.makeup').downcase
+  end
 
-  # ***********************************************************************************************************************************
+  def repeat_i18n
+    I18n.t('activerecord.attributes.registrationkind.repeat').downcase
+  end
+
+  # Pending
+  def school_term_name
+    registration.school_term_name
+  end
+
+  # Pending
+
+  def school_year_name
+    registration.schoolyear.name
+  end
+
+  # Pending
+  def name
+    student_name + ', ' + I18n.t('activerecord.models.registration') + ' ' + status \
+    + ', ' + school_year_name + ' (' + school_term_name + ')' # alias
+  end
+
+  # Tested code finish
+
+  # Alias (for convenience)
+  def self.normal
+    regular
+  end
+
+  def self.special
+    where.not(id: regular)
+  end
 
   def status
-    profile = if regular == true then I18n.t('activerecord.attributes.registrationkind.regular').downcase
-              elsif makeup == true then I18n.t('activerecord.attributes.registrationkind.makeup').downcase
-              elsif repeat == true then I18n.t('activerecord.attributes.registrationkind.repeat').downcase
-              else I18n.t('activerecord.models.registrationkind') + ': ???'
+    if regular == true then regular_i18n
+    elsif makeup == true then makeup_i18n
+    elsif repeat == true then repeat_i18n
+    else I18n.t('activerecord.models.registrationkind') + ': ???'
+      # 'Defensive programming', validations should prevent this
     end
   end
 
-  def name
-    registration.student.contact.name + ', ' + I18n.t('activerecord.models.registration') + ' ' + status + ', ' + registration.schoolyear.name + ' (' + registration.school_term_name + ')' # alias
+  def student_name
+    registrationkind.registration.student.contact.name
   end
 
   # From a previous registration
@@ -52,39 +76,15 @@ class Registrationkind < ActiveRecord::Base
   end
 
   def regular?
-    if regular == true
-
-      true
-
-    else
-
-      false
-
-    end
+    regular == true
   end
 
   def makeup?
-    if makeup == true
-
-      true
-
-    else
-
-      false
-
-    end
+    makeup == true
   end
 
   def repeat?
-    if repeat == true
-
-      true
-
-    else
-
-      false
-
-    end
+    repeat == true
   end
 
   # Does not refer to a previous registration, e.g. regular
