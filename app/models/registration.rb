@@ -88,6 +88,16 @@ class Registration < ActiveRecord::Base
   #   app/helpers//programs_helper.rb:128:
   #   when is_pap_manager(user) then Program.find_active_pap_programnames
 
+  # New for 2018
+
+  def self.with_statements_in_calendar_year(yr)
+    where(id: Statement.registration_ids_for_payments_performed_on_calendar_year(yr))
+  end
+
+  def self.student_ids
+    pluck(:student_id).sort.uniq
+  end
+
   def self.find_active_pap_programnames
     # Fix this !
     #
@@ -946,7 +956,7 @@ class Registration < ActiveRecord::Base
   end
 
   def schoolyear_with_institution_and_term
-    schoolyear_ordinal + program_name + ' [' + institution + '] ' + cohort_start
+    schoolyear_ordinal + ' ' + program_name + ' [' + institution + '] ' + cohort_start
   end
 
   def institution_and_schoolyear

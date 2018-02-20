@@ -173,9 +173,9 @@ class Bankpayment < ActiveRecord::Base
     calendar_yr_start = yr.to_s + '-1-1'
 
     joins(:payroll).where('payrolls.paymentdate >= ?',
-                             calendar_yr_start)
-      .where('payrolls.paymentdate < ? ',
-             calendar_yr_start.to_date + 1.year).ordered_by_increasing_payment_date
+                          calendar_yr_start)
+                   .where('payrolls.paymentdate < ? ',
+                          calendar_yr_start.to_date + 1.year).ordered_by_increasing_payment_date
   end
 
   def self.bankpayment_done
@@ -274,7 +274,7 @@ class Bankpayment < ActiveRecord::Base
   #    boolean ? I18n.t('yes').capitalize : I18n.t('no').capitalize
   #  end
 
-  # when recalculating
+  # To do: review this method
   def clear_totalamount_when_needed
     totalamount = 0 if prepared?
   end
