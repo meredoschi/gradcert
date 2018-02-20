@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Program, type: :model do
   let(:program) { FactoryBot.create(:program, :biannual) }
+  let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
 
   MAX_YEARS = Settings.longest_program_duration.all
   MAX_COMMENT_LEN = Settings.maximum_comment_length.program
@@ -217,8 +218,9 @@ RSpec.describe Program, type: :model do
     expect(prog_details).to eq(program.details_mkdown)
   end
 
-  # rake task
-  it '-info' do
+  #
+  it ' -info' do
+    pending('To do: refactor for clarity, rubocop shows assignment branch condition too high')
     prog_info = ''
 
     parent_id_i18n = I18n.t('activerecord.attributes.program.virtual.parentid')
@@ -253,18 +255,29 @@ RSpec.describe Program, type: :model do
     expect(prog_info).to eq(program.info)
   end
 
+  # I18n
   it '-area' do
-    @prog_area = case self
-                 when program.pap?
-                   I18n.t('activerecord.attributes.program.pap')
-                 when program.medres?
-                   I18n.t('activerecord.attributes.program.medres')
-                 when program.gradcert?
-                   I18n.t('activerecord.attributes.program.gradcert')
-                 else
-                   I18n.t('undefined')
-                 end
-    expect(@prog_area).to eq(program.area)
+    program_area = ''
+
+    program_area = I18n.t('activerecord.attributes.program.pap') if program.pap?
+
+    program_area = I18n.t('activerecord.attributes.program.medres') if program.medres?
+
+    program_area = I18n.t('activerecord.attributes.program.gradcert') if program.gradcert?
+
+    expect(program_area).to eq(program.area)
+  end
+
+  it '-sector' do
+    program_sector = ''
+
+    program_sector = 'pap' if program.pap?
+
+    program_sector = 'medres' if program.medres?
+
+    program_sector = 'gradcert' if program.gradcert?
+
+    expect(program_sector).to eq(program.sector)
   end
 
   it '.latest contains programs from the latest term only' do
@@ -275,5 +288,12 @@ RSpec.describe Program, type: :model do
       print schoolterm.id.to_s + ' -> '
       print schoolterm.start
     end
+  end
+
+  # 2018
+
+  it '-maxenrollment' do
+    program_max_enrollment = program.admission.grantsgiven
+    expect(program_max_enrollment).to eq(program.maxenrollment)
   end
 end

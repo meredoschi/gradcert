@@ -1,3 +1,4 @@
+# Provides logic for programs
 class Program < ActiveRecord::Base
   MAX_YEARS = Settings.longest_program_duration.all
   MAX_COMMENT_LEN = Settings.maximum_comment_length.program
@@ -60,13 +61,14 @@ class Program < ActiveRecord::Base
     validates required_field, presence: true
   end
 
-  validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: MAX_YEARS }
+  validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1,
+                                       less_than_or_equal_to: MAX_YEARS }
 
   validates_uniqueness_of :programname_id, scope: %i[institution_id schoolterm_id pap]
 
-  # ------------------- PENDING Tests  ----------------------------------------------------------------------------
+  # ------------------- PENDING Tests  ---------------------------------------------------
 
-#  validate :duration_consistency
+  validate :duration_consistency
 
   validate :schoolyear_range # http://stackoverflow.com/questions/10080488/rails3-cocoon-validate-nested-field-count
 
@@ -127,17 +129,29 @@ class Program < ActiveRecord::Base
   end
 
   def area
-    @prog_area = case self
-                 when pap?
-                   I18n.t('activerecord.attributes.program.pap')
-                 when medres?
-                   I18n.t('activerecord.attributes.program.medres')
-                 when gradcert?
-                   I18n.t('activerecord.attributes.program.gradcert')
-                 else
-                   I18n.t('undefined')
-                 end
-    @prog_area
+    program_area = ''
+
+    program_area = I18n.t('activerecord.attributes.program.pap') if pap?
+
+    program_area = I18n.t('activerecord.attributes.program.medres') if medres?
+
+    if gradcert?
+      program_area = I18n.t('activerecord.attributes.program.gradcert')
+    end
+
+    program_area
+  end
+
+  def sector
+    program_sector = ''
+
+    program_sector = 'pap' if pap?
+
+    program_sector = 'medres' if medres?
+
+    program_sector = 'gradcert' if gradcert?
+
+    program_sector
   end
 
   def name
@@ -277,13 +291,17 @@ class Program < ActiveRecord::Base
 
   # ----------------- Model finders ---------------------
 
+  # 2018 - Spec
+
+  def maxenrollment
+    admission.grantsgiven
+  end
+
+  # Tested code end
+
   # ----
   def self.from_institution(i)
     where(institution_id: i.id)
-  end
-
-  def self.default_scope
-    order(start: :desc)
   end
 
   def self.find_active_programnames
@@ -301,7 +319,7 @@ class Program < ActiveRecord::Base
   #
   # -----------------------------------------------------
 
-  # Contemporary.  At most two schoolterms are active, the current one and the following (once registration season begins).
+  # This method will be refactored.  To do: use contextual instead
   def self.recent
     joins(:schoolterm).merge(Schoolterm.active)
   end
