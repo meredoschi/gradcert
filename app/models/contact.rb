@@ -19,9 +19,7 @@ class Contact < ActiveRecord::Base
 
   # Primeiro digito verificador do CPF
 
-  belongs_to :supervisor
-
-  belongs_to :streetname
+  # Tests written - Marcelo - March 2018
 
   belongs_to :role
 
@@ -45,6 +43,40 @@ class Contact < ActiveRecord::Base
 
   has_one :personalinfo, foreign_key: 'contact_id'
   accepts_nested_attributes_for :personalinfo
+
+  def tin
+    personalinfo.tin
+  end
+
+  # Alias, for convenience (in Brazil)
+  def cpf
+    tin
+  end
+
+  def birth
+    personalinfo.birth
+  end
+
+  def name_birth
+    name + ' [' + birth + ']'
+  end
+
+  def name_birth_tin
+    name_birth + ' (' + tin + ')'
+  end
+
+  # Returns name with characters (and blanks) only
+  # Required for brazilian bank file generation
+  def bankingname
+    I18n.transliterate(alphabetical_name)
+  end
+
+  def alphabetical_name
+    name.gsub(/[^a-zA-Z\s]/, ' ')
+  end
+
+  # Tests finish
+
   # Training
   # validate :student_role?
 
@@ -121,12 +153,6 @@ class Contact < ActiveRecord::Base
   def ssn_is_consistent
     return unless personalinfo.nit_is_consistent
     errors.add(personalinfo, :nit_must_be_consistent)
-  end
-
-  # Returns name with characters (and blanks) only
-  # Required for brazilian bank file generation
-  def bankingname
-    I18n.transliterate(name).gsub(/[^a-zA-Z\s]/, ' ')
   end
 
   # New for 2017 - Ability

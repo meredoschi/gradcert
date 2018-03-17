@@ -5,7 +5,7 @@ FactoryBot.define do
     # bankaccount_id: integer, previouscode: integer, schoolterm_id: integer
     # previousparticipant: boolean, nationalhealthcareworker: boolean)
     #   ************ Associated models - factories to be created ***************
-    association :contact, factory: %i[contact pap_student]
+    association :contact, factory: %i[contact pap_student_role]
     profession_id 1
     bankaccount
     schoolterm_id 1

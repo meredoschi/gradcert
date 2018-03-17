@@ -15,10 +15,26 @@ class Student < ActiveRecord::Base
 
   validates :profession_id, presence: true
 
+  has_many  :annualstatement
+
+  # 2018
+
+  def self.with_annual_statements
+    Student.joins(:annualstatement)
+  end
+
+  def name_birth_tin
+    contact.name_birth_tin
+  end
+
+  def self.ordered_by_contact_name
+    joins(:contact).order('contacts.name')
+  end
+
   # 2017 registration season hotfix
   validates_uniqueness_of :contact_id
 
-  #	[:contact_id, :profession_id].each do |required_field|
+  #  [:contact_id, :profession_id].each do |required_field|
 
   [:contact_id].each do |required_field|
     validates required_field, presence: true
@@ -33,14 +49,20 @@ class Student < ActiveRecord::Base
   scope :not_nationalhealthcareworker, -> { where(nationalhealthcareworker: false) }
 
   # http://stackoverflow.com/questions/20914899/rails-validate-uniqueness-only-if-conditional
-  # 	validates :councilmembership, presence: true, if: 'council_id.present?'
+  #   validates :councilmembership, presence: true, if: 'council_id.present?'
   #  validates :councilmembership, absence: true, if: 'council_id.nil?'
 
-  # 	has_many  :supervisor, :foreign_key => 'contact_id'
+  #   has_many  :supervisor, :foreign_key => 'contact_id'
 
   # -------------------------------------------------------
 
   has_paper_trail
+
+  # Useful for annual statements
+  def self.institution_ids
+    joins(contact: [user: :institution])
+      .pluck('institutions.id').uniq.sort
+  end
 
   # 2018 hotfix
   def self.pipeline
@@ -53,6 +75,17 @@ class Student < ActiveRecord::Base
   def self.with_statements_in_calendar_year(yr)
     where(id: Registration.with_statements_in_calendar_year(yr).student_ids)
   end
+
+  # Required for DIRF generation (Brazilian tax report)
+  def self.ordered_by_taxpayer_id_number
+    joins(contact: :personalinfo).order('personalinfos.tin')
+  end
+
+  # Alias, for convenience
+  def self.ordered_by_cpf
+    ordered_by_taxpayer_id_number
+  end
+
   # -- 2018
 
   # Barred from registering
@@ -110,17 +143,27 @@ class Student < ActiveRecord::Base
     contact.name
   end
 
-  # 	def council_name
+  #   def council_name
 
-  # 			self.council.name
+  #       self.council.name
 
-  # 	end
+  #   end
 
-  # 	def council_abbreviation
+  #   def council_abbreviation
 
-  # 		self.council.abbreviation
+  #     self.council.abbreviation
 
-  # 	end
+  #   end
+
+  # To do: write spec for this method
+  def reimbursements
+    Reimbursement.where(registration_id: registration_ids)
+  end
+
+  # To do: write spec for this method
+  def reimbursed?
+    reimbursements.exists? # i.e. one or more reimbursement on file
+  end
 
   def profession_name
     profession.name

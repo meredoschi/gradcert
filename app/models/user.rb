@@ -18,31 +18,30 @@ class User < ActiveRecord::Base
 
   has_paper_trail
 
-  #   validates :permission_id, presence: true
-  validates :institution_id, presence: true
+  # ----- Tested code start -----
 
-  # http://stackoverflow.com/questions/808547/fully-custom-validation-error-message-with-rails
-  validates :permission_id, presence: true
-
-  validates :email, presence: true, uniqueness: true, length: { maximum: 255 }
+  # Associations
 
   belongs_to :institution
-
   belongs_to :permission
 
   has_one :contact, foreign_key: 'user_id'
 
-  # Permission kind
-  def kind
-    permission.kind
+  # Validations
+  # http://stackoverflow.com/questions/808547/fully-custom-validation-error-message-with-rails
+
+  %i[email institution_id permission_id].each do |required_field|
+    validates required_field, presence: true
   end
+
+  validates_uniqueness_of :email
+  validates :email, length: { maximum: 255 }
+
+  # Class methods
 
   def self.called(fullname)
     joins(:contact).merge(Contact.called(fullname))
   end
-  # User is related to the professional improvement program
-  # https://github.com/bbatsov/ruby-style-guide/issues/301
-  # rubocop:disable AsciiComments
 
   def self.pap
     joins(:permission).merge(Permission.pap)
@@ -62,11 +61,9 @@ class User < ActiveRecord::Base
     joins(:permission).where("permissions.kind<>'admin'")
   end
 
-  # User is related to the medical residency program ("Programa de Residência Médica")
+  # User is with the medical residency program
   def self.medres
     joins(:permission).merge(Permission.medres)
-
-    # 		 where("users.medres=true OR users.medreslocaladm=true OR users.medrescollaborator=true")
   end
 
   # Users which belong to the same institution
@@ -77,6 +74,53 @@ class User < ActiveRecord::Base
   # User permissions
   def self.permissions
     User.joins(:permission)
+  end
+
+  # Instance methods
+
+  def kind
+    permission.kind
+  end
+
+  # Added for institutions, show view, contacts partial
+  def management_role?
+    contact.role.management
+  end
+
+  # System administrator profile
+  def admin?
+    permission.admin?
+  end
+
+  # For convenience and clarity
+  # Managers have wide ranging permissions within their area
+  def manager?
+    permission.manager?
+  end
+
+  # clerical staff at the local institution which are responsible for their students
+  def localadmin?
+    permission.localadmin?
+  end
+
+  # Is this person related to the PAP?
+  def pap?
+    permission.pap?
+  end
+
+  # Is this person related to the medical residency program?
+  def medres?
+    permission.medres?
+  end
+
+  # New for 2017
+
+  def id_i18n
+    I18n.t('activerecord.attributes.user.id') + ': ' + id.to_s
+  end
+
+  def details
+    email + ' (' + id_i18n + ') | ' + permission.description + ' | ' + institution.name
   end
 
   # Convenience method - Demeter's Law
@@ -116,37 +160,6 @@ class User < ActiveRecord::Base
     without_student_role.without_management_role
   end
 
-  # Added for institutions, show view, contacts partial
-  def management_role?
-    contact.role.management
-  end
-
-  # System administrator profile
-  def admin?
-    permission.admin?
-  end
-
-  # For convenience and clarity
-  # Managers have wide ranging permissions within their area
-  def manager?
-    user.permission.manager?
-  end
-
-  # clerical staff at the local institution which are responsible for their students
-  def localadmin?
-    permission.localadmin?
-  end
-
-  # Is this person related to the PAP?
-  def pap?
-    permission.pap?
-  end
-
-  # Is this person related to the medical residency program?
-  def medres?
-    permission.medres?
-  end
-
   # Convenience method.  Order a list of persons (users) by (contact) name
   def self.ordered_by_contact_name
     includes(:contact).order('contacts.name') # http://stackoverflow.com/questions/12164088/ruby-on-rails-order-by-child-attribute
@@ -154,22 +167,20 @@ class User < ActiveRecord::Base
 
   # Default is to sort by email address.
   def self.default_scope
-    order(email: :asc) # this notation prevents ambiguity, good when working with Postgres
-    # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
+    ordered_by_email
   end
 
   # Finder method
   def self.ordered_by_email
-    order(email: :asc)
+    order(email: :asc) # this notation prevents ambiguity, good when working with Postgres
+    # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
   end
 
-  # New for 2017
-
-  def id_i18n
-    I18n.t('activerecord.attributes.user.id') + ': ' + id.to_s
+  def self.ids_with_contact
+    joins(:contact).pluck(:user_id)
   end
 
-  def details
-    email + ' (' + id_i18n + ') | ' + permission.description + ' | ' + institution.name
+  def self.without_contact
+    where.not(id: ids_with_contact) # negates the method above
   end
 end

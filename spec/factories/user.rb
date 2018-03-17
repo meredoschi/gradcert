@@ -1,54 +1,47 @@
 # This will guess the User class
 FactoryBot.define do
   factory :user do
-# User(email: string, encrypted_password: string, reset_password_token: string, reset_password_sent_at: datetime, remember_created_at: datetime, sign_in_count: integer, current_sign_in_at: datetime, last_sign_in_at: datetime, current_sign_in_ip: inet, last_sign_in_ip: inet, created_at: datetime, updated_at: datetime, institution_id: integer, permission_id: integer)
-#   ************ Associated models - factories to be created ***************
-    sample_pass="sample-pass"
-  #  email Faker::Internet.email
-    sequence(:email) {|n| "#{'A'+(n+1000).to_s+Faker::Internet.email}" }
-
-#    password "sample-pass"
-#    password_confirmation "sample-pass"
+    sample_pass = 'sample-pass'
+    sequence(:email) { |n| ('Sample' + (n + 1000).to_s + Faker::Internet.email).to_s }
     password sample_pass
     password_confirmation sample_pass
     institution_id 1
     permission
 
-    # Pap = default (student)
+    trait :pap do
+      association :permission, factory: %i[permission pap]
+    end
 
     # http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-FactoryBot/
-
     trait :paplocaladm do
-      association :permission, :factory => [:permission, :paplocaladm]
+      association :permission, factory: %i[permission paplocaladm]
     end
 
     trait :papmgr do
-      association :permission, :factory => [:permission, :papmgr]
+      association :permission, factory: %i[permission papmgr]
     end
 
     # Medical residency
 
     trait :medres do
-      association :permission, :factory => [:permission, :medres]
+      association :permission, factory: %i[permission medres]
     end
 
     trait :medreslocaladm do
-      association :permission, :factory => [:permission, :medreslocaladm]
+      association :permission, factory: %i[permission medreslocaladm]
     end
 
     trait :medresmgr do
-      association :permission, :factory => [:permission, :medresmgr]
+      association :permission, factory: %i[permission medresmgr]
     end
 
     # Admin and read-only
     trait :admin do
-      association :permission, :factory => [:permission, :admin]
+      association :permission, factory: %i[permission admin]
     end
 
     trait :adminreadonly do
-      association :permission, :factory => [:permission, :adminreadonly]
+      association :permission, factory: %i[permission adminreadonly]
     end
-
-#   ************************************************************************
   end
 end
