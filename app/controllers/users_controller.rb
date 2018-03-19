@@ -26,8 +26,9 @@ class UsersController < ApplicationController
   	@users=@search.result.page(params[:page]).per(10)
     @numusers=User.accessible_by(current_ability).count
 
-		retrieve_nameless_contacts
+		retrieve_users_without_contacts
 
+		retrieve_nameless_contacts
 
   end
 
@@ -191,42 +192,23 @@ def create
 
       flash[:success] = t('activerecord.models.user')+' '+t('created.m')+' '+t('succesfully')
 
+			presumed_contact_role_id=0
+
 			if (is_local_admin(current_user) || is_manager(current_user))
 
 				if @user.permission.regular?
 
-					roles=Role.pap.student
+					presumed_contact_role_id=Role.pap.student.first.id
 
 				else
 
-					roles=Role.clericalworker
+					presumed_contact_role_id=Role.clericalworker.first.id
 
 				end
 
-
-# To do: fix this
-
-#				if @user.pap?
-
-#				if @user.pap? || @user.admin? # Hotfix
-
-					role=roles.pap.first
-
-	#			end
-
-		#		if @user.medres?
-
-			#		role=roles.medres.first
-
-			#	end
-
-#			else
-
-		#		role=nil
-
 			end
 
-	    @contact=Contact.new(:user_id=>@user.id, :name=>'', role_id: role.id)
+	    @contact=Contact.new(:user_id=>@user.id, :name=>'', role_id: presumed_contact_role_id)
 
     	# Nested attributes ---------
     	@contact.build_address
@@ -265,6 +247,14 @@ end
 			# Added for 2017 - nameless
 			@nameless_contacts=Contact.accessible_by(current_ability).nameless
 			@num_nameless_contacts=@nameless_contacts.count
+
+	  end
+
+		def retrieve_users_without_contacts
+
+			# Added for 2018 - without contact
+			@users_without_contact=User.accessible_by(current_ability).without_contact
+			@num_users_without_contact=@users_without_contact.count
 
 	  end
 
