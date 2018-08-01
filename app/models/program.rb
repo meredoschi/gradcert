@@ -68,6 +68,7 @@ class Program < ActiveRecord::Base
 
   # ------------------- PENDING Tests  ---------------------------------------------------
 
+  # You may need to disable this validation temporarily in order to seed the programs.
   validate :duration_consistency
 
   validate :schoolyear_range # http://stackoverflow.com/questions/10080488/rails3-cocoon-validate-nested-field-count

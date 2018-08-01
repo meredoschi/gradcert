@@ -1,0 +1,1007 @@
+---
+en:
+  activerecord:
+    errors:
+      models:
+        placesavailable:
+          attributes:
+            authorized:
+              exceeds_total_number_of_scholarships: "exceeds the maximum number of seats made available, when taking into account the estimated number of places reserved for second-year (and higher) students enrolled in programs which last more than one year.  Please try to enter a smaller quantity in this field."
+        registration:
+          attributes:
+            supportingdocumentation:
+              file_size_is_less_than_or_equal_to: "exceeded the maximum allowed file size and may not be attached.  You may try to resize the file via image editing software or adjust the appropriate parameters in your scanner prior to saving it, if needed."
+            schoolyear_id:
+              not_enough_places_available: "there are no authorized vacancies left (or made available)."
+        institution:
+          attributes:
+            abbreviation:
+              may_not_contain_special_characters: "may not contain special characters, except underscore _"
+        user:
+          attributes:
+            permission_id:
+              required: "is required.  User means student (scholarship recipient) in a program."
+        schoolterm:
+          attributes:
+            active:
+              more_than_one_not_allowed: invalid option for I have detected another schoolterm which is (still) active.  'Uncheck' (deselect) where appropriate and try again.
+        feedback:
+          attributes:
+            registration_id:
+              must_be_active_on_regular_payroll: "must be set to 'active' in a regular payroll."
+              may_not_be_active_on_special_payroll: "must be marked as 'inactive' in a special payroll."
+        annotation:
+          attributes:
+            discount:
+              discount_may_not_be_more_than_gross_amount: "may not be higher than the scholarship's gross amount"
+            supplement:
+              supplement_may_not_be_more_than_twice_gross_amount: "may not be more than double the scholarship's gross amount"
+        scholarship:
+          attributes:
+            start:
+              must_be_consistent: "must be consistent (start must happen before the end date)."
+            daystarted:
+              overlap: may not overlap a time interval already recorded in the system.
+        event:
+          attributes:
+            start:
+              after: "may not be retroactive. The payroll pertaining to this period was already processed.  On those rare occasions, due to late notifications by the institutions, we recommend that those dates which are consistent (if any) be entered as usual (se houver) by the institution and then contact the team for further instructions, kindly informing the corresponding event number."
+              overlap: "inconsistent.  Please note: there is already an event recorded in that time period."
+              may_not_occur_after_cancellation: "may not occur after the cancellation."
+              may_not_be_retroactive: "may not be retroactive. The payroll pertaining to this time period was already processed."
+              may_not_be_in_anticipation: "may not be in anticipation (too much into the future).  Please inform a date consistent with the current payroll cycle and the nature of the occurrence (absence or leave type)."
+              required: "has to be informed.  Please select the day, month and year."
+            finish:
+              may_not_be_in_anticipation: "may not be in anticipation (too much into the future).  Please inform a date consistent with the current payroll cycle and the nature of the occurrence (absence or leave type)."
+              may_not_be_prior_to_start: "inconsistent.  May not occur prior to start date"
+              may_not_occur_after_cancellation: "may not occur after the cancellation date"
+              must_be_within_maximum_limit: "can't be recorded as entered, because that would exceed the maximum number of days allowed for the specified leave type (e.g. vacation)."
+              may_not_be_retroactive: "may not be retroactive. The payroll pertaining to this time period was already processed."
+              exceeds_the_vacation_days_quota: "inconsistent, since it exceeds the number of vacation days available for this person."
+              required: "has to be informed.  Please select the day, month and year.  Normally it is different from the start date, except when it is a one day absence (or leave)."
+            leavetype_id:
+              present: may not be entered when the information pertains to absences.
+            absence:
+              event_type_must_be_selected: must be marked, unless it is some kind of leave.  In that case, you must select the corresponding type and keep this 'absence' option unchecked.
+            registration_id:
+              must_be_active: "may not be inactive (for instance: registration cancelled)"
+        payroll:
+          attributes:
+            scholarship_id:
+              present: may not be present, if the amount is informed manually (in case the special payroll is marked)
+            amount:
+              present: may not be greather than zero, if the set (standard) scholarship amount methodology is being followed (in other words, in a regular payroll situation)
+            paymentdate:
+              inconsistent: inconsistent!  In a regular payroll, it must occur in the calendar month immediately after the month worked ('reference month').  Enter a valid date or mark the 'special' option, if the case may be.
+        student:
+          attributes:
+            councilmembership:
+              present: must belong to a professional council (guild, association) chosen from the list already recorded in the system.
+        leavetype:
+          attributes:
+            paid:
+              must_be_true_for_vacation: option must be marked in case of vacation.
+            dayspaidcap:
+              days_paid_cap_not_exceed_max_num_days: may not exceed the set number of days.
+        bankaccount:
+          attributes:
+            verificationdigit:
+              inconsistent: inconsistent!  Inform the correct digit or 'X' (in uppercase).
+        bankbranch:
+          attributes:
+            verificationdigit:
+              inconsistent: inconsistent!  Inform the correct digit or 'X' (in uppercase).
+            opened:
+              on_or_before: may not be on a future date.
+        bankpayment:
+          attributes:
+            payroll_id:
+              may_not_be_pending: may not contain future events!  They need to be confirmed or removed (in case they were denied) and the corresponding time period informed as 'absence'.
+            sequential:
+              taken: already taken.  Try a higher number.
+              too_high: higher than needed.  Try a smaller number.
+              inconsistent: inconsistent!
+        funding:
+          attributes:
+            percentvalues:
+              inconsistent: must add up to 100.  Please review each individual figure or uncheck this option.
+        address:
+          attributes:
+            postalcode:
+              invalid: 'must have (in Brazil) eight digits, separated by a dash after the fifth number, for instance: 02040-060'
+        role:
+          attributes:
+            name:
+              all_blank: 'must belong to one (and only one) of the categories below: '
+            clerical:
+              explanation: '(office worker)'
+            collaborator:
+              explanation: '(evaluator, assessor, reviewer)'
+            teaching:
+              explanation: '(instructor, professor, supervisor)'
+            management:
+              explanation: '(manager, director)'
+            student:
+              explanation: '(scholarship recipient, graduate student, professional training program participant, medical resident)'
+        contact:
+          attributes:
+            role_id:
+              staff_may_not_take_student_role: informed incorrectly.  This field signifies a scholarship program recipient and thus is not applicable to team members.
+              student_may_not_take_staff_role: informed incorrectly.  Students may not have a staff role.  This field is meant to indicate team members only.
+            taxpayercode:
+              inconsistent: inconsistent.  The taxpayer id number sequence entered is not valid.
+            name:
+              capitalization: "may not contain (all or mostly) uppercase characters.  Follow this guideline (as an example):  Jane Doe (instead of JANE DOE)."
+              may_not_contain_digits: "may not contain digits!"
+              must_be_all_characters: "may only contain alphabetical characters (from A to Z)"
+              must_have_consistent_whitespacing: "must have consistent spacing (at most 1 blank between words)"
+        healthcareinfo:
+          attributes:
+            totalbeds:
+              inconsistent: inconsistent.  Must be equal or greather than the sum of the emergency room and intensive care available capacity.
+        recommendation:
+          attributes:
+            programyear:
+              too_big: is too big in relation to the program's current as well as its recommended duration.
+        programsituation:
+          attributes:
+            recommended_duration:
+              inconsistent: is inconsistent with the number of program years specified.
+        diploma:
+          attributes:
+            coursename_id:
+              must_be_informed: "must be informed, almost always.  Unless another name is provided, given that it is not on the official Education Ministry list (for instance: foreign obtained degree, new field of knowledge)."
+            councilcredential:
+              must_be_informed: "must be specified, when the professional council (guild, association) option is marked."
+            councilcredentialstatus:
+              present: "will only exist when a professional council is selected and the corresponding member number is informed."
+            council_id:
+              required_if_details_provided: must be selected, when the professional council details fields have been informed.  For your convenience, some councils may already by recorded in the system.
+              must_be_informed: "must be specified when a member number has been provided"
+            school_id:
+              must_be_informed_somehow: "as a general rule, should be selected directly from the list.  Under exceptional circumstances, for instance: students which graduated abroad, kindly type the information, if the scholarship recipient happens to be a graduate from another school, without selecting anything from the list."
+            externalinstitution:
+              need_not_be_specified_manually: "does not need to be typed, unless in exceptional cases (such as foreign institutions not already recorded in the system list).  Please ascertain if this is indeed the situation, otherwise this field has to remain blank, and the school chosen from the list as usual."
+        assignment:
+          attributes:
+            start_date:
+              may_not_be_in_the_future: may not be in the future.
+        personalinfo:
+          attributes:
+            socialsecuritynumber:
+              inconsistent: inconsistent.  The numbering provided does not exist.  Please make sure it is valid.
+            birth_date:
+              may_not_be_in_the_future: may not be in the future.
+            tin:
+              inconsistent: inconsistent.  The numbering provided does not exist.  Please make sure it is valid.
+            socialname:
+              present: may be entered (if the person wishes to inform it, not required), only in case of transgender or indeterminate "X".
+            country_id:
+              present: only needs to be informed for those who are foreign citizens (in this case use passport number or foreign national's registration number)
+            state_id:
+              present: does not apply to foreign nationals.  In this case, this field must remain blank.
+            othername:
+              present: may be entered in case of diversity only.  That to say, in this context, when the sex (biological characteristic at birth), masculine or feminine) differs from the gender (how this individual chooses to identify his or herself in a social context) or is undefined (X).
+        webinfo:
+          attributes:
+            site:
+              incorrect: entered incorrectly.  The prefix http:// is not needed.
+        program:
+          attributes:
+            base:
+              unable_to_add_schoolyears_over_max: It is not possible to add school years over the system established limit.  Please remove the excess year(s) and try again.
+            duration:
+              inconsistent: inconsistent with the number of years in the program.
+        admission:
+          attributes:
+            admitted:
+              inconsistent_with_final_exam_results: inconsistent with the final exam phase results.
+            appealsgrantedfirstexam:
+              inconsistent_with_first_exam_failures: inconsistent with the number of first exam failures.
+            appealsdeniedfirstexam:
+              inconsistent_with_first_exam_failures: inconsistent with the number of first exam failures.
+            appealsgrantedfinalexam:
+              inconsistent_with_final_exam_failures: inconsistent with the number of final exam failures.
+            appealsdeniedfinalexam:
+              inconsistent_with_final_exam_failures: inconsistent with the number of final exam failures.
+            absentfirstexam:
+              may_not_exceed_candidates: may not exceed the number of candidates.
+              inconsistent: inconsistent.
+            absentfinalexam:
+              inconsistent: inconsistent.
+            candidates:
+              may_not_exceed_grants_given: may not exceed the number of grants given.
+              inconsistent: inconsistent.
+            grantsasked:
+              may_not_exceed_accredited: may not exceed the number of accredited grants.
+              inconsistent: inconsistent.
+            grantsgiven:
+              more_than_accredited: may not exceed the number of accredited grants.
+              inconsistent: inconsistent.
+            start:
+              may_not_be_in_the_future: may not be in the future
+            finish:
+              may_not_be_more_recent_than_start:  may not be more recent than the start date!
+            convoked:
+              may_not_exceed_admitted: may not exceed the number of people admitted in the selection process.
+            passedfirstexam:
+              may_not_exceed_takers: may not exceed the number of exam takers (taking into account the number of absences)
+              inconsistent: inconsistent.
+            insufficientfinalexamgrade:
+              inconsistent: inconsistent
+        accreditation:
+          attributes:
+            start:
+              may_not_be_prior_to_april_first: "may not be prior to April 1st.  In case of doubt, please contact the team."
+              may_not_be_in_the_future: may not be in the future
+              may_not_be_prior_to_first_day_in_term: "may not be prior to the first day of the school term it refers to."
+              not_possible_after_closing_date: "too much into the future.  Must be within the registration period for the school term it refers to.  "
+            renewal:
+              present: "cannot be present, given the option chosen."
+              may_not_be_in_the_future: may not be in the future
+              may_not_be_prior_to_start: "may not occur prior to the initial registration (or accreditation date) or occur on the same day.  Please enter a later date."
+              may_not_be_prior_to_suspension: couldn't have occurred prior to the suspension date
+              may_not_not_be_on_the_same_month_as_suspension: "may not occur in the same month as the suspension."
+            revocation:
+              may_not_overlap_completed_payrolls: "may not overlap an already processed payroll.  Hint: enter a day in the current reference month."
+              present: "cannot be present, given the option chosen."
+              may_not_be_in_the_future: may not be in the future
+              may_not_be_prior_to_suspension: "inconsistent.  couldn't have occurred prior to the suspension date."
+              may_not_be_prior_to_start: "may not occur prior to the initial registration (or accreditation) date.  Please enter a later date."
+              may_not_be_prior_to_renewal: "inconsistent. Could not have occurred before the latest renewal."
+              present: "may only be present when the option to revoke (cancel) is checked.  Otherwise, this data must remain blank."
+              may_not_not_be_on_the_same_month_as_renewal: "may not fall on the same month as the reactivation."
+              cancellation_must_be_after_latest_event_finish_date: "coincides with the dates for an event already in the system."
+            suspension:
+              present: "cannot be present, given the option chosen."
+              may_not_be_in_the_future: may not be in the future
+              may_not_be_prior_to_start: "may not be prior, or fall on the same day as the initial registration (or accreditation)."
+              may_not_be_more_recent_than_renewal: "inconsistent. May not be more recent than (the latest) renewal."
+              may_not_be_prior_to_renewal: "inconsistent.  Could not have occurred prior the latest renewal."
+    attributes:
+      academiccategory:
+        name:
+      accreditation:
+        comment: Comment
+        confirmed: Situation confirmed
+        original: Original
+        renewal: Latest renewal
+        renewed: Renewed
+        revocation: Cancellation date
+        revoked: Revoked
+        start: Start
+        suspended: Suspended
+        suspension: Date suspended
+        virtual:
+          pending: Situation pending
+      address:
+        addr: Address
+        complement: Complement
+        country: Country
+        header: Local
+        internal: Internal
+        municipality: City
+        municipality_id: City
+        neighborhood: neighborhood
+        postalcode: Postalcode
+        streetname_id: Street suffix
+        streetnum: Street number
+      admission:
+        absentfinalexam: Absent on final exam
+        absentfirstexam: Absent on first exam
+        accreditedgrants: Accredited grants
+        admitted: Selected for admission (passed)
+        appealsdeniedfinalexam: Appeals denied (final exam)
+        appealsdeniedfirstexam: Appeals denied (first exam)
+        appealsgrantedfinalexam: Appeals granted (final exam)
+        appealsgrantedfirstexam: Appeals granted (first exam)
+        candidates: Candidates
+        convoked: Convoked for matriculation
+        finish: Finish
+        grantsasked: Grants asked
+        grantsgiven: Grants given
+        insufficientfinalexamgrade: Did not pass final exam phase
+        passedfirstexam: Passed first exam phase
+        program_id: Program
+        start: Start
+        virtual:
+          appealslodgedfinalexam: Appeals lodged (final exam phase)
+          appealslodgedfirstexam: Appeals lodged (first exam phase)
+          registered_total: Total registered (matriculated)
+          withdraws_within_registration_season: Withdraws within the registration season
+      annotation:
+        absences: Number of absences
+        automatic: Automatic (system generated)
+        comment: Comment
+        confirmed: Confirmed
+        discount: Withheld (discount)
+        event_id: Event
+        net: Impacto
+        payroll_id: Payroll
+        registration_id: Scholarship recipient registration
+        skip: Absent during the entire payroll month
+        supplement: Supplement
+        virtual:
+          attendance: Days worked
+          impact: Impact
+          kind: Kind
+          manual: Manual
+      assessment:
+        contact: Evaluator responsible
+        contact_id: Evaluator
+        profession: Intended audience (profession)
+        profession_id: Intended audience (profession)
+        program: Program
+        program_id: Program
+      assignment:
+        alternate: Alternate
+        main: Primary
+        program_id: Program
+        start_date: Since
+        supervisor: Instructor
+        supervisor_id: Instructor
+      band:
+        duration: Duration
+        name: Name
+      bankaccount:
+        bankbranch_id: Bank branch
+        branchdigit: Bank branch digit (or X)
+        branchnum: Branch
+        controldigit: Control digit
+        num: Number
+        verificationdigit: Verification digit (or X)
+      bankbranch:
+        code: Code
+        formername: Former name
+        name: Name
+        opened: Opening date
+        verificationdigit: VD
+      bankfile:
+        bankpayment_id: Bank payment
+        user_id: Usuer
+      bankpayment:
+        comment: Bank file comment
+        dayfinished: Until (ending day number)
+        daystarted: From (starting day number)
+        done: Concluded
+        payroll_id: Payroll
+        prepared: File prepared
+        resend: Resend
+        sequential: Sequential
+      bracket:
+        deductible: Deductible
+        finish: Until
+        num: number
+        rate: Rate
+        start: From
+        taxation_id: taxation
+        unlimited: Unlimited
+      brackets:
+        finish: End
+        num: number
+        rate: Rate
+        start: Start
+        taxation_id: taxation
+        unlimited: Unlimited
+      characteristic:
+        corevalues: Core values
+        highlightareas: Areas to highlight
+        institution_id: Institution
+        mission: Mission
+        publicfundinglevel: Public financing percentage
+        relationwithpublichealthcare: Connected to the public healthcare system
+        stateregion_id: Region of the state in which it is active, primarily
+        userprofile: Typical profile of users served
+      college:
+        area: Área (m²)
+        classrooms: Classrooms
+        foodplaces: Places to eat
+        gradcertificatecourses: Graduate certificate courses offered
+        institution_id: Institution
+        libraries: Libraries
+        otherrooms: Supporting rooms (or others)
+        previousyeargradcertcompletions: Graduate certificate program graduates (previous year)
+        sportscourts: Sports courts
+      completion:
+        dnf: desisted (did not finish)
+        failure: reprovado
+        inprogress: course in progress
+        mustmakeup: must make up
+        pass: approved (passed)
+        registration_id: registration identifier
+        short:
+          makeup: Mandatory
+      contact:
+        addresscomplement: Complement
+        id: Contact identifier
+        mobile: Mobile
+        municipality: Municipality (city)
+        name: Name
+        neighborhood: Neighborhood
+        phone: Telephone
+        phone2: Other phone
+        postalcode: Postal code
+        role: Role (function)
+        role_id: Role (function)
+        staff: Team member
+        taxpayercode: Tax id number
+        termfinish: Term finish
+        termstart: Term start
+        user: User
+      council:
+        abbreviation: Abbreviation
+        name: Name
+        state_id: State where it operates
+      country:
+        brname: Country name
+        name: International country name (ISO 3166)
+        number: International country number (ISO 3166)
+      course:
+        core: Part of core curriculum
+        coursename_id: Name
+        methodology_id: Teaching methodology
+        practical: Practical
+        profession_id: Professional area
+        professionalrequirement: Mandatory for the profession
+        supervisor_id: Supervisor
+        syllabus: Syllabus
+        workload: Workload
+      coursename:
+        active: Active
+        name: Name
+      degreetype:
+        level: Level
+        medres: MRes
+        pap: PAP
+      diploma:
+        awarded: Awarded
+        council_id: Professional council
+        councilcredential: Member number (professional council)
+        councilcredentialexpiration: Council membership expiration date
+        councilcredentialstatus: Status of council credential
+        coursename_id: Course
+        degreetype_id: Degree type
+        externalinstitution: Another school
+        finished: Finished
+        institution_id: Institution (already registered)
+        medres: Medical Res
+        ongoing: Ongoing
+        othercourse: Other course name
+        pap: PAP
+        profession_id: Profession
+        school_id: Name of school graduated from
+        schoolname_id: Name of the school
+      enrollment:
+        schoolyear_id: Program year
+        student_id: Student
+      errors:
+        delete_restriction: Removal was prevented due to a system logical consistency check.  It is possible that this record has descendants.
+      event:
+        absence: Absence
+        archived: Archived
+        confirmed: Authorized
+        dayfinished: End
+        daystarted: Start (from)
+        finish: End (to)
+        id: Event ID
+        leavetype_id: Leave type
+        registration_id: Scholarship recipient
+        residual: Residual, related to the registration situation
+        start: Start
+        supportingdocumentation: Supporting documentation
+        virtual:
+          actualdays: Days
+          numdays: Subtotal
+          pending: Pending (under review)
+          regular: Routine event
+      feedback:
+        approved: Approved (paid)
+        bankpayment_id: Bank payment
+        comment: Comment
+        payroll_id: Payroll
+        processed: Payment processed
+        processingdate: Processing date
+        registration_id: Registration
+        returned: Returned (blocked by the Bank system)
+      funding:
+        agreements: Agreements
+        comment: Comment
+        government: Public sector
+        other: Other
+        percentvalues: values entered as percentages
+        ppp: Private public partnerships (ppp)
+        privatesector: Private enterprises (businesses)
+        total: Total amount of funding
+      healthcareinfo:
+        admissions: Admissions
+        ambulatoryrooms: Ambulatory Rooms
+        consultations: Consultations
+        emergencyroombeds: Emergency room beds
+        equipmenthighlights: Equipment highlights
+        icubeds: ICU beds
+        institution_id: Institution
+        institution_name: Name of the health care providing institution
+        labexams: Lab exams
+        labs: Clinical laboratories
+        radiologyprocedures: Radiology procedures
+        regularbeds: Standard beds
+        surgeries: Surgeries
+        totalbeds: Total beds
+      institution:
+        abbreviation: Abbreviation
+        id: Institution ID
+        legacycode: Legacy identifier
+        medres: Medical Residency
+        municipality: Municipality (city)
+        name: Institution name
+        pap: PAP
+        provisional: Data incomplete or not updated
+        sector: Sector
+        type: Kind of institution
+        undergraduate: Undergraduate
+        withprograms:
+          any: With programs registered in the system
+          medres: With Medical Residency (MRes) programs
+          pap: With Professional Advancement (PAP) programs
+      institutiontype:
+        careprovider: Healthcare provider
+        name: Kind
+        research: Research
+        teaching: Teaching
+      leavetype:
+        comment: Remark
+        dayspaidcap: Number of days paid limit
+        maxnumdays: Maximum timeframe allowed (days)
+        medres: MRes
+        name: Name
+        paid: Paid
+        pap: PAP
+        setnumdays: Set number of days
+        vacation: Vacation
+      makeup:
+        finish: End
+        previousregistrationid: Previous registration
+        registration_id: Registration
+        start: Start
+      makeupschedule:
+        finish: End
+        registration_id: Registration
+        start: Start
+      methodology:
+        kind: Kind
+      municipality:
+        capital: Capital
+        name: Municipality (city)
+        namewithstate: City - State
+        regionaloffice: Regional (health department) unit
+        stateregion: State region
+      payroll:
+        abbreviated:
+          monthpaid: Month paid
+          monthworked: Month worked
+          paymentdate: Payment date
+        amount: Custom scholarship amount
+        comment: Comment
+        dataentryfinish: Data entry finish (read only)
+        dataentrystart: Open for data entry (from)
+        done: Completed
+        medres: Medical Residency
+        monthworked: Reference month
+        pap: PAP
+        paymentdate: Processing date
+        purse: Bolsa
+        scholarship_id: Stipulated gross amount
+        special: Special
+        taxation_id: Taxation
+      permission:
+        description: Description
+        kind: Kind
+      personalinfo:
+        country_id: Country (or territory) of origin
+        dob: Date of birth
+        gender: Gender
+        idnumber: Number
+        idtype: Document
+        mothersname: Mother's name
+        municipality_id: Birthplace
+        othername: Social name
+        sex: Sex
+        socialsecuritynumber: Social Security Number (or equivalent)
+        state_id: Issuing state (or province)
+        tin: Tax id number
+      phone:
+        fax: Fax
+        main: Telephone (landline)
+        mobile: Mobile
+        other: Other phone
+      placesavailable:
+        accredited: Accredited
+        allowregistrations: Allow registrations
+        authorized: Authorized
+        institution_id: Institution
+        requested: Requested
+        schoolterm_id: School term
+        virtual:
+          activeregistrations: New entrants (active)
+          cancellations:
+            authorized: Cancellations authorized
+            pending: Cancellations pending
+          total:
+            active: Total (active)
+            available: Available (first year)
+          veterans:
+            active: Sophmores (or other 'veteran' students) active
+      profession:
+        medres: Medical Residency
+        name: Name
+        occupationcode: Occupation code
+        pap: Pap
+      professionalarea:
+        comment: Remark
+        legacy: Legacy
+        medres: MRes
+        name: Name
+        pap: PAP
+        previouscode: Previous code
+        previousname: Previous name
+      professionalfamily:
+        familycode: Family code
+        medres: MRes
+        name: Name
+        pap: PAP
+        subgroup_id: Subgroup ID
+      professionalspecialty:
+        comment: Remark
+        legacy: Legacy
+        medres: MRes
+        name: Name
+        pap: PAP
+        previouscode: Previous code
+        previousname: Previous name
+        professionalarea_id: Professional area
+      program:
+        active: Active
+        approved: Approved
+        comment: Comment
+        duration: Duration
+        externalvenue: Took place in another venue
+        first_year_grants: First year grants ("purses")
+        gradcert: Graduate certificate
+        id: Program number
+        inactive: Inactive
+        institution_id: Institution
+        internal: Took place within the premisses
+        medres: Medical Residency
+        new: New program
+        pap: Pap
+        programname_id: Program name
+        schoolterm_id: School term identifier
+        updated_at: Updated at
+        virtual:
+          area: Program area
+          parentid: Previous program ID
+        workload: Workload
+      programname:
+        active: Active
+        ancestor_id: Ancestor
+        comment: Comment
+        gradcert: Graduate certificate
+        inactive: Inactive
+        medres: Medical Residency
+        name: Program name
+        pap: Professional Advancement
+        previousname: Previous name
+        updated_at: Updated at
+      programsituation:
+        assessment: Assessment
+        assessment_id: Assessment
+        current_duration: Current program duration
+        duration_change_requested: Duration change requested
+        favorable: Favorable
+        goals: Summary of program objectives
+        kind: Nature of the program (aspirations)
+        program_nature_vocation: Program nature and vocation (aspiration)
+        recommended_duration: Recommended duration
+        recommended_workload: Recommended workload
+        workload_change_requested: Workload alteration recommended
+      programsupervisor:
+        alternate: Alternate
+        lead: Principal
+      project:
+        description: Description
+        name: Project name
+      recommendation:
+        grants: (re)accredited grants
+        practice: Practice hours
+        programyear: Program year
+        theory: Theory hours
+        workload: Workload
+      recommendations:
+        grants: (re)accredited grants
+        practice: Practice hours
+        programyear: Program year
+        theory: Theory hours
+      regionaloffice:
+        directorsname: Director
+        name: Name
+        num: Number
+      registration:
+        accreditation:
+          confirmed: Confirmed
+          original: Original
+          renewal: Renewal
+          renewed: Renewed
+          revocation: Cancellation date
+          revoked: Registration cancelled
+          start: Start date
+          status: Status
+          suspended: Suspended
+          suspension: Suspension date
+        comment: Comment
+        finalgrade: Final grade
+        id: Registration id
+        returned: Rejected by the bank
+        schoolterm_id: Schoolterm
+        schoolyear_id: Program year
+        student_id: Scholarship recipient
+        supportingdocumentation: Supporting documentation
+        suspended: Suspended
+        virtual:
+          accountingabsences: Absences (for accounting purposes)
+          actualabsences: Ausências
+          totalabsences: Absences total
+          totalannotations: Annotations total
+      registrationkind:
+        makeup: Make up
+        previousregistrationid: Previous registration ID
+        regular: Normal
+        repeat: Repeat
+        veteran: Veteran (sophmore or higher year)
+        virtual:
+          special: special
+      researchcenter:
+        domesticprojectsdone: Domestic research projects completed (previous year)
+        institution_id: Institution
+        intlprojectsdone: Internation research projects completed (previous year)
+        labs: Labs
+        ongoingdomesticprojects: Ongoing domestic research projects
+        ongoingintlprojects: Ongoing international research projects
+        rooms: Rooms
+      role:
+        clerical: Clerical
+        collaborator: Outside collaborator
+        itstaff: IT
+        management: Management
+        medres: Medical Residency
+        name: Name
+        pap: Pap
+        student: Scholarship recipient
+        teaching: Teaching
+      roster:
+        authorizedsupervisors: Number of authorized supervisors
+        dataentryfinish: Data entry finish
+        dataentrystart: Data entry start
+        institution_id: Institution
+        schoolterm_id: School term
+        virtual:
+          name: Name
+          schedule: Schedule
+      scholarship:
+        amount: Gross scholarship amount
+        comment: Remark
+        daystarted: Day started
+        finish: Expiration date
+        medres: MRes
+        name: Scholarship program name
+        pap: PAP
+        partialamount: Partial scholarship amount
+        start: In effect from
+        virtual:
+          effectiveperiod: Effective period
+        writtenform: Gross amount in written form
+        writtenformpartial: Partial gross amount in written form
+      school:
+        abbreviation: Abbreviation
+        academiccategory_id: Academic Category
+        ministrycode: Education ministry number
+        name: Name
+        public: Public
+      schoolname:
+        active: Active
+        name: Name
+        previousname: Former name
+      schoolterm:
+        active: Active
+        admissionsclosure: Deadline for selection process data entry
+        admissionsdebut: Start date for selection process data entry
+        finish: End
+        gradcert: Gradcert
+        medres: MRes
+        pap: Pap
+        registrationseason: Registration season
+        scholarshipsoffered: Offered
+        seasonclosure: Registrations end
+        seasondebut: Registration season start
+        start: Start
+        virtual:
+          admissionsdatareportingperiod: Admissions related information data entry period
+      schooltype:
+        name: Name
+      schoolyears:
+        approved: Number of people approved in the exams
+        enrollment: Matriculated (registered)
+        id: Program year number
+        practice: Practice hours
+        program_id: Program
+        programyear: Program year
+        theory: Theory hours
+        workload: Workload
+      state:
+        abbreviation: Abbreviation
+        code: State code
+        country: Country
+        name: State
+      statement:
+        bankpayment_id: Bank payment
+        childsupport: Child support
+        grossamount: Gross scholarship amount
+        incometax: Income Tax
+        netamount: Net amount
+        registration_id: Registration
+        socialsecurity: Social security
+        virtual:
+          absencesdiscount: Absences discount
+      stateregion:
+        name: State administrative region (subdivision)
+      streetname:
+        designation: Designation
+      student:
+        contact_id: Contact
+        council_id: Professional council (guild, association)
+        councilmembership: Council membership number
+        id: Scholarship recipient ID
+        nationalhealthcareworker: mark only if the scholarship recipient works for an institution connected to the government health care system.
+        previouscode: Legacy system ID (if applicable)
+        previousparticipant: mark only if the person already participated in the program in the past.
+        profession_id: Profession
+        schoolterm_id: Schoolterm in which entered
+        virtual:
+          name: Name of scholarship recipient
+      supervisor:
+        alternate: Alternate
+        career_start_date: Career start date
+        contact_id: Supervisor
+        contract_type: Current contract type
+        course: Responsible for the course
+        graduation_date: Graduation date
+        highest_degree_held: Highest degree held
+        kind: Kind
+        main: Primary
+        profession: Profession
+        program: Program supervisor
+        teaching_hours_week: Hours taught weekly
+        total_working_hours_week: Hours worked weekly (total)
+      taxation:
+        bracket_id: bracket
+        finish: Expired on
+        medres: MRes
+        name: Name
+        pap: PAP
+        socialsecurity: Social security
+        start: In effect from
+      user:
+        admin: System administrator
+        adminreadonly: Read-only
+        current_password: Current password
+        current_sign_in_at: Current sign in at
+        current_sign_in_ip: Current sign in IP address
+        email: E-mail
+        id: User ID
+        institution_id: Institution
+        last_sign_in_at: Last sign in at
+        last_sign_in_ip: Last sign in IP address
+        medres: Medical Residency (regular user)
+        medrescollaborator: MRes Collaborator (external reviewer)
+        medreslocaladm: Medical Residency Commission (at an institution)
+        medresmgr: Medical Residency Program Management Team (at HQ)
+        name: Name
+        pap: PAP (regular user)
+        papcollaborator: PAP Collaborator (external reviewer)
+        paplocaladm: PAP Local Commission (institution)
+        papmgr: Professional Advancement Program Management Team (at HQ)
+        password: password
+        password_confirmation: Password confirmation
+        permission: Permission
+        permission_id: Permission
+        profile: Profile (permissions)
+        remember_me: Remember me
+        reset_password_sent_at: Time in which the reset password message was sent
+        sign_in_count: Total sign in count
+      vacancyallocation:
+        institution_id: instituição
+        limit: limit
+        schoolterm_id: school term
+      webinfo:
+        email: E-mail
+        facebook: Facebook
+        other: Other
+        personal:
+          email: Personal email
+          site: Personal site
+        site: Site
+        twitter: Twitter
+    models:
+      academiccategory: Academic category
+      accreditation: Accreditation
+      address: Address
+      admission: Admission
+      annotation: Annotation
+      assesment: Assessment
+      assessment: Assessment
+      assignment: Assignment
+      bankaccount: Bank account
+      bankbranch: Bank branch
+      bankfile: Bank file
+      bankpayment: Bank payment
+      box: Box
+      bracket: Bracket
+      characteristic: Characteristic
+      college: College
+      completion: Completion
+      contact: Contact
+      council: professional association
+      country: Country
+      course: Course
+      coursename: Course name
+      degreetype: Degree type
+      diploma: Diploma
+      enrollment: Enrollment
+      event: Event
+      feedback: Initially declined transaction
+      funding: Funding
+      healthcareinfo: Healthcare information
+      institution: Institution
+      institutiontype: Institution type
+      leave: Leave
+      leavetype: Leavetype
+      makeupschedule: Makeup schedule
+      methodology: Methodology
+      municipality: Municipality
+      password: Password
+      payroll: Payroll
+      permission: Permission
+      personalinfo: Personal information
+      phone: Phone
+      placesavailable: Places available
+      profession: Profession
+      professionalarea: Professional area
+      professionalfamily: Professional family
+      professionalspecialty: Professional Specialty
+      program: Program
+      programname: Program name
+      programsituation: Program situation
+      recommendation: Recommendation
+      regionaloffice: Regional office
+      registration: Registration
+      registrationkind: “Registration kind"
+      researchcenter: Research center
+      role: Role
+      roster: Roster
+      scholarship: Scholarship
+      school: school
+      schoolname: School name
+      schoolterm: School term
+      schooltype: School type
+      schoolyear: School year
+      schoolyears: School years
+      state: State
+      statement: Statement
+      stateregion: State region
+      streetname: Street name
+      student: Student
+      supervisor: Supervisor
+      taxation: Taxation
+      user: User
+      vacancyallocation: Vacancy allocation
+      versions: Versions
+      webinfo: Web information
