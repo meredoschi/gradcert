@@ -8,10 +8,15 @@ It originated as a personal project and steadily grew (developed entirely by mys
 
 Its production version (which contains additional code) has been running since April 2016 with generally positive feedback from users.
 
-## ABOUT 
- 
-   This is the first international version, so I am still in the process of translating, revising and refactoring some of the code.  
- 
+## ABOUT
+
+   I am still in the process of revising and refactoring some of the code for this international version.
+
+   I have manually translated many of the i18n files and keys from Portuguese to English and are included in this update.
+   However, when run in English (the international default) *translation missing* notices may still appear.
+   This is a known situation. 
+
+
 ### Matriculating students
 
 The system allows participating institutions to matriculate students in a user friendly way, during the "registration season".
@@ -61,7 +66,7 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*18/FEB/2018*
+*24/AUG/2018*
 
 =======
 ## COPYRIGHT
