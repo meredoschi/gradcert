@@ -56,7 +56,7 @@
         <div class="large-1 column">
 
           <% if can? :read, admission %>
-          <td><%= link_to t('actions.show'), admission, class: t('show') %></td>
+          <td><%= link_to t('actions.show'), admission, class: 'mostrar' %></td>
           <% end %>
 
         </div>
@@ -64,7 +64,7 @@
         <div class="large-1 column">
 
           <% if can? :update, admission %>
-          <td><%= link_to t('actions.edit'), edit_admission_path(admission), class: t('edit') %></td>
+          <td><%= link_to t('actions.edit'), edit_admission_path(admission), class: 'editar' %></td>
           <% end %>
 
         </div>
@@ -72,7 +72,7 @@
         <div class="large-1 column">
 
           <% if can? :destroy, admission %>
-          <td><%= link_to t('actions.delete'),admission, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+          <td><%= link_to t('actions.delete'),admission, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>
           <% end %>
 
         </div>

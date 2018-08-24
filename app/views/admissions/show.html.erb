@@ -12,12 +12,10 @@
 	<%= render 'show_appeals.html.erb' %>
 </div>
 
-approved
 <div class="row custom-panel2">
 	<%= render 'show_approved.html.erb' %>
 </div>
 
-reg_stats
 <div class='row custom-panel9' %>
 	<%= render 'show_registration_stats.html.erb' %>
 </div>
@@ -27,10 +25,10 @@ reg_stats
 
 <% if can? :edit, @admission %>
 
-  <%= link_to t('actions.edit'), edit_admission_path(@admission), class: t('edit') %>
+  <%= link_to t('actions.edit'), edit_admission_path(@admission), class: 'editar' %>
 
 <% end %>
 
-  <%= link_to t('actions.back'), admissions_path,  class: t('back')  %>
+  <%= link_to t('actions.back'), admissions_path,  class: 'voltar'  %>
 
 </div>

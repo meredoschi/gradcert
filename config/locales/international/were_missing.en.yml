@@ -1,5 +1,6 @@
 ---
 en:
+  1st: 1st
   Não: false
   a:
     f: a
@@ -160,6 +161,8 @@ en:
   and: and
   annotation: Annotation
   application_title: Graduate certificate
+  cancellations: cancellations
+  course: course
   date:
     formats:
       compact: "%-d-%b-%y"
@@ -173,6 +176,7 @@ en:
       unofrscore: "%d_%b_%y"
       ym: "%B of %Y"
       ymd: "%Y-%m-%d"
+  duration_between: duration between
   entity: Organization
   faker:
     address:
@@ -182,7 +186,12 @@ en:
       - Fifth floor
   greetings: Greetings
   help: Help
+  hour: hour
   institution_summary: Institutions
+  institution_with_users:
+    all: Institutions with users
+    medres: Institutions with Med Res users
+    pap: Institutions with Pap users
   my:
     f: my
     m: my
@@ -198,6 +207,7 @@ en:
     actions:
       edit: edit
       new: new
+  until: until
   user_removal_lock: 'System warning: in order to prevent accidental user removal, first you must remove their contact information.  If you really mean to do so, click on ''back'' and erase it from the contact list screen.  Once that is done, you may try to remove the user again.'
   validation:
     messagetext:
@@ -208,4 +218,5 @@ en:
     diversity: Greetings
     female: Welcome
     male: Welcome
+  year: year
   'yes': 'Yes'

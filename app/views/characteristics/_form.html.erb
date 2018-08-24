@@ -17,36 +17,36 @@
 	<div class="row">
 
 		<% if action_name!='edit' %>
-			
+
 		 		<div class="large-5 columns", class: "left inline">
-		
+
 		    <%= f.label ta('institution.name') %><br>
-		
+
 				</div>
-		 		
+
 		 		<div class="large-7 columns">
-	  
+
 				  <%= f.collection_select :institution_id, Institution.registered.without_characteristic, :id, :name,  {prompt: true} %>
-			
-				
+
+
 				</div>
-	
+
 		<% else %>
 
 		 		<div class="large-5 columns">
 
 					<% if @characteristic.institution.present? %>
-					
+
 					  <h3><%= @characteristic.institution.name %></h3>
-		
+
 					<% end %>
-							
+
 				</div>
-		 		
-		 				
+
+
 		<% end %>
-		
-	</div>	 				  
+
+	</div>
 
 <% end %>
 
@@ -57,14 +57,14 @@
 
 
 	<% if can? :update, Characteristic  %>
-	
+
 	   <div class="row actions">
-	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
-	 
+	  	<%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
+
 	<% end %>
 
   	 <%= link_to t('actions.cancel'), characteristics_path, class: "anular" %>
-	
+
 	</div>
 
 <% end %>

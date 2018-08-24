@@ -70,16 +70,12 @@ en:
           site:
             incorrect: entered incorrectly.  The prefix http:// is not needed.
   date:
-    abbr_day_names: '["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]'
-    abbr_month_names: '[nil, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]'
-    day_names: '["Sunday", "Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday"]'
     formats:
       default: "%d/%m/%Y"
       long: "%d of %B %Y"
       seeder: "%-Y-%m-%d"
       short: "%d of %B"
       underscore: "%d_%b_%y"
-    month_names: '[nil, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]'
     order: "[:day, :month, :year]"
   datetime:
     distance_in_words:
@@ -235,10 +231,10 @@ en:
     am: am
     formats:
       compact: "%d/%b/%y, %H:%M:%S"
-      default: "%A, %d of %B %Y, %H:%Mh"
-      full: "%A, %d of %B %Y, %H:%M:%S"
+      default: "%A %d %B %Y at %H:%Mh"
+      full: "%A, %d of %B %Y at %H:%M:%S"
       hms: "%H:%M:%S"
-      long: "%A, %d of %B %Y, %H:%Mh"
+      long: "%A the %d of %B %Y at %H:%Mh"
       short: "%d/%m, %H:%M hs"
     pm: pm
   unauthorized:

@@ -19,11 +19,11 @@
 	<%= render 'form_phones.html.erb', form: form %>
 
 	<%= render 'form_webinfo.html.erb', form: form %>
-	
+
 </div>
 
 	<% if is_admin_or_manager(current_user) %>
-	
+
 		<%= render 'form_kind.html.erb', form: form %>
 
 	<div class="row">
@@ -31,25 +31,25 @@
 					<h4><%= tm('accreditation').capitalize %></h4>
 
 	</div>
-	
+
 
 			<%= render 'form_accreditation.html.erb', form: form %>
 
 			<%= render 'form_incomplete_data.html.erb', form: form %>
-	
-	
+
+
 	</div>
-		
+
 	<% end %>
 
-	
-		<%=	permitted_institution_options(current_user, form) %>			
 
- 
- 
+		<%=	permitted_institution_options(current_user, form) %>
+
+
+
 <div class="row actions">
   	<%= form.submit :value => "Confirmar", :class => 'button small success' %> |
   	<%= link_to 'Anular', institutions_path, class: "anular" %>
 </div>
-  
+
 <% end %>

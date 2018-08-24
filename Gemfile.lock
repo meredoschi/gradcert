@@ -48,6 +48,7 @@ GEM
       nokogiri (>= 1.4.1)
       rubyzip (~> 1.0.0)
     bcrypt (3.1.12)
+    brakeman (4.3.1)
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (2.2.0)
@@ -343,6 +344,7 @@ DEPENDENCIES
   active_link_to
   activerecord-reset-pk-sequence
   axlsx (~> 2.0)
+  brakeman
   byebug
   cancancan
   carrierwave

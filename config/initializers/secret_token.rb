@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Gradcert::Application.config.secret_key_base = '456d42bb2d50127fba3546f49e62481bf3dbc8e4cc517392ee853982e2cce83b82b801fd8dc3c263820503dc39a0cec2a060f9361a4fe66dbb2816ee6606d2fb'
+Gradcert::Application.config.secret_key_base = ENV['GRADUATE_CERTIFICATE_SESSION_SECRET']

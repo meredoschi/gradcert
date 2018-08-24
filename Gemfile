@@ -14,6 +14,7 @@ group :development do
   gem 'rspec-rails'
   gem 'spring'
   gem 'axlsx', '~> 2.0' # i18n-tasks xlsx-report
+  gem 'brakeman' # August 2018
 end
 
 group :test do

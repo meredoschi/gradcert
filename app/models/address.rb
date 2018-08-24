@@ -31,7 +31,7 @@ class Address < ActiveRecord::Base
   validates :streetname_id, presence: true, unless: :skip_validation
   validates :municipality_id, presence: true, unless: :skip_validation
 
-  validates_format_of :postalcode, with: /[0-9]{5}-[0-9]{3}/, unless: :skip_validation
+  validates_format_of :postalcode, with: /\A[0-9]{5}-[0-9]{3}\z/, unless: :skip_validation
 
   # 	scope :with_institution, lambda { joins(:institution) }
 

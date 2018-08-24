@@ -1,7 +1,6 @@
 ---
 en:
   10th: Tenth
-  1st: First
   2nd: Second
   3rd: Third
   4th: Fourth
@@ -59,7 +58,6 @@ en:
   calculate_payroll: Calculate payroll
   cancellation_already_processed_on_a_previous_payroll: Cancelation already processed in a previous payroll.
   cancellation_date: cancellation date
-  cancellations: cancellations
   cancelled_registrations_during_this_payroll: Registrations cancelled during this payroll
   category: category
   change_my_password: Change my password
@@ -74,7 +72,6 @@ en:
   contract_enforcement_period: contract enforcement period
   convocation_rate: convocation rate
   country_of_citizenship: Nationality (contry)
-  course: program and course
   create: create
   created_at: 'Date the record was created: '
   current_registration: current registration
@@ -135,7 +132,6 @@ en:
   has_many: Has many
   has_one: Has one
   health_leaves: Health leaves
-  hour: hour
   hours: hours
   identification: identification
   if_present_in_the_system: "(if already present in the system)"
@@ -350,7 +346,6 @@ en:
   undefined_value: "<<undefined value!>>"
   undergraduate_institution: Undergraduate institution
   unfavorable_assessment: unfavorable assessment
-  until: until
   updated_at: Most recent update (or creation)
   updated_by: Updated by
   url_entered_incorrectly: typed incorrectly.  You don't have to start with http://
@@ -369,7 +364,6 @@ en:
   without_financial_impact: Without financial impact
   workday: Work day
   workload: Work load
-  year: year
   year_number: Year number
   year_s: year(s)
   yearly_statistics: Annual operational statistics
