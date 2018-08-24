@@ -23,8 +23,7 @@ group :test do
 end
 
 group :test, :development do
-#  gem 'factory_bot_rails',  :require => false
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails',  :require => false
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
   gem 'rubocop' # August 2017
