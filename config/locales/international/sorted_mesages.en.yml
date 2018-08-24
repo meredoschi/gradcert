@@ -108,7 +108,7 @@ en:
   event_creation_reminder_no_active_registrations_found: 'Reminder: there must be at least one scholarship recipient active in order for events to be created.'
   external_venue: course offered on an external venue
   facilities: facilities
-  'false': no
+  'false': false
   favorable_assessment: favorable assessment
   file: File
   file_not_generated_yet: 'Aviso: ainda não foi gerado (ou regerado) o arquivo.'
@@ -145,9 +145,9 @@ en:
   incoming_cohort: incoming cohort
   inconsistent: inconsistent!
   infrastructure: Infrastructure
-  institution_file: "Institution's file"
+  institution_file: Institution's file
   institution_total: Institution total
-  institution_vacancies: "Seats available for matriculation (registration) at the institution."
+  institution_vacancies: Seats available for matriculation (registration) at the institution.
   institutions_with_confirmed_inactive: Institutions with confirmed cancellations
   institutions_with_pending_inactive: Institutions with pending cancellations
   institutions_with_students_set_to_makeup: Institutions with students set to make up
@@ -158,8 +158,8 @@ en:
   insurance_file: insurance file
   insurance_report: Insurance report
   interaction: interaction
-  internal_address_help: "This field's purpose is to indicate an internal address, that is to say, a course or program offered within the institution's own premisses.  Please indicate just the location (e.g. Room Number 5, Training center, etc)"
-  international: "international"
+  internal_address_help: This field's purpose is to indicate an internal address, that is to say, a course or program offered within the institution's own premisses.  Please indicate just the location (e.g. Room Number 5, Training center, etc)
+  international: international
   issue_legal_form_pdf: Issue a Legal Form (PDF)
   issue_no_employment_ties_with_the_public_health_sector_pdf: Not public healthcare sector employee (PDF)'
   issue_registration_receipt_pdf: Issue a Registration receipt (PDF)
@@ -204,8 +204,8 @@ en:
   no_programs_registered: No program registered so far
   no_supervisors_found: No course coordinator found within your hierarchy.  It must exist, in order to be assigned to a program.
   no_teachers_found: Supervisors are created from contacts with teaching roles in your institution, however none were found.  You may try again, after creating the respective user and filling in its contact information.
-  no_unregistered_students_found:  I've found no students whose scholarship recipient record still needs to be created.
-  not: no
+  no_unregistered_students_found: I've found no students whose scholarship recipient record still needs to be created.
+  not: false
   nothing_due: Nothing due
   num_authorized_scholarships_for_incoming_students: Authorized scholarships for incoming students
   num_days_worked_before_cancelling: Number of days worked prior to cancellation
@@ -265,7 +265,7 @@ en:
   record_not_found: record not found
   registration_season_ended: The registration season has ended.
   registration_summary: Registration summary
-  registration_tutorial: "Tutorial: first year student's registration - 2017"
+  registration_tutorial: 'Tutorial: first year student''s registration - 2017'
   registrations_confirmed_active: Registrations confirmed to be active
   registrations_confirmed_active_today: Registrations confirmed and active from today
   registrations_confirmed_inactive: Confirmed cancellations
@@ -343,7 +343,7 @@ en:
   total_absences_amount: Total absences amount
   total_report: Total report
   totals: Totals
-  'true': yes
+  'true': true
   tutorial: Tutorial
   tutorials: Tutorials
   unable_to_create_user: Unable to create user.  Please verify data entered and try again.
@@ -358,7 +358,7 @@ en:
     f: user
     m: user
   user_email: User e-mail
-  users_with_incomplete_contact_information_detected: "Users with incomplete contact information (name missing) were detected !"
+  users_with_incomplete_contact_information_detected: Users with incomplete contact information (name missing) were detected !
   various_paid_leave_types: Various types of paid leaves
   weekday: Day of the week
   were_registered: Were registered

@@ -47,9 +47,9 @@ en:
       not_cont: does not contain
       not_cont_all: does not contain all
       not_cont_any: does not contain any
-      not_end:  does not end in
-      not_end_all:  does not end in all
-      not_end_any:  does not end in any
+      not_end: does not end in
+      not_end_all: does not end in all
+      not_end_any: does not end in any
       not_eq: does not equal
       not_eq_all: does not equal all
       not_eq_any: does not equal any

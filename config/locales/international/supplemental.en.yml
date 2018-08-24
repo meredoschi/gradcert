@@ -5,8 +5,8 @@ en:
   branch: branch
   business_taxpayer_id: business taxpayer ID
   contact_data_inexistent: In case of non-existent contact information, please click on remove and then create a new user again (except if a contact already exists which belongs to this same person, but using a different (i.e. alternate) e-mail address in their user record.
-  nay: no
+  nay: false
   not_yet: not yet
   reminder: Reminder
   there_are_contacts_which_may_become_students: There are contacts created in the database which may become students
-  yay: yes
+  yay: true

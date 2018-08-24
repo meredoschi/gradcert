@@ -194,9 +194,9 @@ en:
         active: Active
         name: Name
       degreetype:
-        name: Name
         level: Level
         medres: MRes
+        name: Name
         pap: PAP
       diploma:
         awarded: Awarded
@@ -415,15 +415,15 @@ en:
         id: Program number
         inactive: Inactive
         institution_id: Institution
+        instprogramnum: Institution program number (temporary field, external spreadsheet)
         internal: Took place within the premisses
         medres: Medical Residency
         new: New program
         pap: Pap
         programname_id: Program name
+        programnum: Program number (temporary field, external spreadsheet)
         schoolterm_id: School term identifier
         updated_at: Updated at
-        instprogramnum: Institution program number (temporary field, external spreadsheet)
-        programnum: Program number (temporary field, external spreadsheet)
         virtual:
           area: Program area
           parentid: Previous program ID

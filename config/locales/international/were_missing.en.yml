@@ -1,53 +1,6 @@
 ---
 en:
-  annotation: Annotation
-  my_program_info: My program info
-  no_programs_found: No programs found
-  normal: Normal
-  scholarship_contract: Scholarship contract
-  'yes': 'Yes'
   Não: false
-  and: and
-  application_title: Graduate certificate
-  date:
-    formats:
-      compact: "%-d-%b-%y"
-      compactmonthyear: "%b/%y"
-      dashed: "%d—%m—%Y"
-      dmy: "%e of %B of %Y"
-      inverted: "%_y_%b_%d"
-      my: "%B of %Y"
-      myu: "%B_of_%Y"
-      seeofr: "%-Y-%m-%d"
-      unofrscore: "%d_%b_%y"
-      ym: "%B of %Y"
-      ymd: "%Y-%m-%d"
-  entity: Organization
-  faker:
-    address:
-      secondary_address:
-      - Suite 20
-      - Room 12
-      - Fifth floor
-  greetings: Greetings
-  help: Help
-  institution_summary: Institutions
-  my:
-    f: my
-    m: my
-  name: Name
-  people_management: People
-  restricted_access: Restricted Access
-  supplemental_remittance: resend attempts
-  unauthorized:
-    actions:
-      edit: edit
-      new: new
-  welcome:
-    diversity: Greetings
-    female: Welcome
-    male: Welcome
-  user_removal_lock: "System warning: in order to prevent accidental user removal, first you must remove their contact information.  If you really mean to do so, click on 'back' and erase it from the contact list screen.  Once that is done, you may try to remove the user again."
   a:
     f: a
     m: a
@@ -55,32 +8,7 @@ en:
     medicalresidency: MRes
     medres: MRes
     pap: PAP
-  validation:
-    messagetext:
-      error: error
-      please_correct_and_retry: when filling the information in.  Please correct where indicated and try again.
-      system_detected: The system detected
   actions:
-    back: Back
-    cancel: Cancel
-    confirm: Confirm
-    delete: Delete
-    edit: Edit
-    filter: Filter
-    generate: Generate
-    inform: Inform
-    insert: Insert
-    new:
-      f: Register a new
-      m: Register a new
-    print: Print
-    quit: Quit (end session)
-    repeat: Repeat (to confirm)
-    search: Search
-    show: Show
-    showing: Showing
-    update: Update
-    upload: Upload
     active:
       f: active
       m: active
@@ -92,6 +20,7 @@ en:
     another:
       f: another
       m: another
+    back: Back
     belongs:
       medres: Belongs to MR
       pap: Belongs to PAP
@@ -99,9 +28,11 @@ en:
       f: calculated
       m: calculated
       pl: calculated
+    cancel: Cancel
     cancelled:
       f: cancelled
       m: cancelled
+    confirm: Confirm
     confirm2:
       bankfile: 'Notice: the bankpayment file generation procedure may take a while (more than a minute), depending on the number of students and server speed.  This is normal.  Shall I proceed?  '
       delete: Are you certain you wish to delete?
@@ -115,6 +46,7 @@ en:
     deannotated:
       f: annotation cleared
       m: annotation cleared
+    delete: Delete
     deleted:
       f: removed
       m: removed
@@ -122,10 +54,12 @@ en:
       f: concluded
       m: concluded
     duration_between: Duration between
+    edit: Edit
     excluded:
       f: excluded
       m: excluded
       pl: excluded
+    filter: Filter
     found:
       f: found
       m: found
@@ -137,9 +71,12 @@ en:
       F: Feminine
       M: Masculine
       X: Undefined/Intersexes/Not specified
+    generate: Generate
     inactive:
       f: inactive
       m: inactive
+    inform: Inform
+    insert: Insert
     institution_removal_lock:
       medicalresidency: 'System warning: unable to remove an institution which is related to the Medical Residency Program, if that is what you meant.'
       notprovisional: 'System warning: unable to remove an institution with once its data is confirmed.  If you really intended to do so, you must first flag it as having provisional (incomplete, inacurate, etc) data.'
@@ -156,6 +93,9 @@ en:
     my:
       fp: my
       mp: my
+    new:
+      f: Register a new
+      m: Register a new
     new2:
       f: new
       m: new
@@ -188,6 +128,8 @@ en:
     our:
       f: our
       m: our
+    print: Print
+    quit: Quit (end session)
     registered:
       f: registered
       m: registered
@@ -197,6 +139,10 @@ en:
     removed:
       f: removed
       m: removed
+    repeat: Repeat (to confirm)
+    search: Search
+    show: Show
+    showing: Showing
     situation: Situation
     succesfully: succesfully.
     suspended:
@@ -206,6 +152,60 @@ en:
     unchanged:
       f: unchanged
       m: unchanged
+    update: Update
     updated:
       f: updated
       m: updated
+    upload: Upload
+  and: and
+  annotation: Annotation
+  application_title: Graduate certificate
+  date:
+    formats:
+      compact: "%-d-%b-%y"
+      compactmonthyear: "%b/%y"
+      dashed: "%d—%m—%Y"
+      dmy: "%e of %B of %Y"
+      inverted: "%_y_%b_%d"
+      my: "%B of %Y"
+      myu: "%B_of_%Y"
+      seeofr: "%-Y-%m-%d"
+      unofrscore: "%d_%b_%y"
+      ym: "%B of %Y"
+      ymd: "%Y-%m-%d"
+  entity: Organization
+  faker:
+    address:
+      secondary_address:
+      - Suite 20
+      - Room 12
+      - Fifth floor
+  greetings: Greetings
+  help: Help
+  institution_summary: Institutions
+  my:
+    f: my
+    m: my
+  my_program_info: My program info
+  name: Name
+  no_programs_found: No programs found
+  normal: Normal
+  people_management: People
+  restricted_access: Restricted Access
+  scholarship_contract: Scholarship contract
+  supplemental_remittance: resend attempts
+  unauthorized:
+    actions:
+      edit: edit
+      new: new
+  user_removal_lock: 'System warning: in order to prevent accidental user removal, first you must remove their contact information.  If you really mean to do so, click on ''back'' and erase it from the contact list screen.  Once that is done, you may try to remove the user again.'
+  validation:
+    messagetext:
+      error: error
+      please_correct_and_retry: when filling the information in.  Please correct where indicated and try again.
+      system_detected: The system detected
+  welcome:
+    diversity: Greetings
+    female: Welcome
+    male: Welcome
+  'yes': 'Yes'

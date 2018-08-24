@@ -2,8 +2,6 @@
 en:
   activerecord:
     attributes:
-      course:
-      degreetype:
       feedback:
         name: Name
       institution:
