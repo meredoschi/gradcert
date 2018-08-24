@@ -1,0 +1,377 @@
+---
+en:
+  10th: Tenth
+  1st: First
+  2nd: Second
+  3rd: Third
+  4th: Fourth
+  5th: Fifth
+  6th: Sixth
+  7th: Seventh
+  8th: Eight
+  9th: Ninth
+  Currently: Currently
+  Total: Total
+  abbreviations:
+    payment: pmt
+  about: about
+  about_the_registration_steps: Registration procedures
+  absence: absence
+  absences: absences
+  absences_adjustment: Absences adjustment
+  absences_or_personal_leaves: Absences, personal leaves or cancellations
+  absences_total: absences total
+  account: account
+  accreditation_not_on_file: Accreditation status not on file (unknown)
+  accreditation_status: Accreditatation status
+  active_registrations: Active registrations
+  actual_absences_explanation: Absences minus the number of days tallied for accounting purposes derived from late registration, cancellations and other similar situations (if any).
+  adjustments: Adjustments
+  after: After
+  all_current_registrations: All current registrations (including inactive)
+  all_registrations: All registrations (entire list)
+  already_exists: already exists
+  annotate_payroll: Calcule events
+  approval_rate: Approval rate
+  approximate_value: Approximate amount
+  assessed_institution: Institution assessed
+  assessed_program: Program assessed
+  assessor_recommendations: Evaluator's recommendations
+  associations: Associations
+  attribute_summary: Summary of responsibilities
+  attribution: Responsibile for
+  authorization: Authorization
+  authorized_vancancies_total: Authorized vacancies total
+  available: available
+  available_tutorials: Tutorials available
+  awarded_by: Awarded by
+  awardee: Awardee
+  back_to_start_page: Back to the start page
+  back_to_tutorials_home: Back to the tutorails main page
+  bankfile: Bank file
+  bankfile_amount: Bank file amount
+  bankpayment_explanation: Bank payment explanation
+  bankpayments_by_institution: Bank payments by institution
+  bed: bed
+  belongs_to: Belongs to
+  by_means_of: by means of
+  calculate: calculate
+  calculate_payroll: Calculate payroll
+  cancellation_already_processed_on_a_previous_payroll: Cancelation already processed in a previous payroll.
+  cancellation_date: cancellation date
+  cancellations: cancellations
+  cancelled_registrations_during_this_payroll: Registrations cancelled during this payroll
+  category: category
+  change_my_password: Change my password
+  characteristics_not_on_file: Institutional characteristics not on file yet
+  clear: clear
+  clear_payroll: Clear calculations
+  clear_payroll_annotations: Clear payroll annotations and (automatically generated, i.e. residual) events
+  click_the_above_message_to_jump_directly_to_the_contacts_page_and_learn_more: click on the message displayed aboved to jump directly to the contacts page and learn more.
+  cohort: cohort
+  contact_info: contact information
+  content: content
+  contract_enforcement_period: contract enforcement period
+  convocation_rate: convocation rate
+  country_of_citizenship: Nationality (contry)
+  course: program and course
+  create: create
+  created_at: 'Date the record was created: '
+  current_registration: current registration
+  current_situation: Current status
+  data: data
+  data_not_checked_recently: Information not verified recently.  May not be complete or up to date.
+  database_schema_version: Database schema version
+  date_created: Date created
+  date_issued: Date issued
+  date_updated: Date updated
+  day: day
+  deactivated:
+    f: deactivated
+    m: deactivated
+  deactivation: deactivated
+  deannotate: Clear annotations
+  declaration_that_person_is_not_employed_by_a_public_healthcare_institution:
+    filename_prefix: Individual_not_public_healthcare_worker_
+    letterhead_title: DECLARATION THAT THE PERSON DOES NOT WORK FOR AN INSTITUTION CONNECTED TO THE PUBLIC HEALTHCARE SYSTEM
+    screen_title: Declaration that the person does not work for an institution connected to the Public Healthcare System
+  description: Description
+  detailed_info: Detailed Information
+  diploma: Diploma
+  discounts: Discounts
+  discounts_and_supplements: Discounts and Supplements
+  diversity: diversity
+  early_cancellation: early cancellation
+  education: Education
+  end_of_report: End of report
+  entered_on: entered on
+  event_creation_reminder_no_active_registrations_found: 'Reminder: there must be at least one scholarship recipient active in order for events to be created.'
+  external_venue: course offered on an external venue
+  facilities: facilities
+  'false': no
+  favorable_assessment: favorable assessment
+  file: File
+  file_not_generated_yet: 'Aviso: ainda não foi gerado (ou regerado) o arquivo.'
+  file_was_prepared: 'Reminder: file processed.'
+  fill_in_if_applicable: Please fill in, if applicable
+  filter_by_profile: Filtrar by profile (choose only one)
+  for_passport_only: For passport only
+  foreigner: foreigner
+  foreigners: foreigner
+  from: from
+  function: function
+  general_characteristics: General characterstics
+  general_information: General information
+  generate: generate
+  generate_csv: Generate CSV file
+  generate_makeup_registrations: Generate make-up registrations
+  generate_pdf: Generate PDF file
+  geography: geography
+  given_the_search_parameters_provided: given the serch parameters provided
+  go_to_contacts_index: Go to the contacts list
+  grants_to_available_seats_percentage: "% Scholarships / Number available seats"
+  gross: Gross amount
+  gross_daily_scholarship_amount: Daily gross scholarship amount
+  has_many: Has many
+  has_one: Has one
+  health_leaves: Health leaves
+  hour: hour
+  hours: hours
+  identification: identification
+  if_present_in_the_system: "(if already present in the system)"
+  if_student: If student
+  in_case_of_doubt_please_contact_the_team: In case of doubt, please contact the team.
+  income_tax: Income tax
+  incoming_cohort: incoming cohort
+  inconsistent: inconsistent!
+  infrastructure: Infrastructure
+  institution_file: "Institution's file"
+  institution_total: Institution total
+  institution_vacancies: "Seats available for matriculation (registration) at the institution."
+  institutions_with_confirmed_inactive: Institutions with confirmed cancellations
+  institutions_with_pending_inactive: Institutions with pending cancellations
+  institutions_with_students_set_to_makeup: Institutions with students set to make up
+  institutions_with_students_that_advance: Institutions with students which advance to the next program year
+  institutions_without_annotations: Institutions without annotation on this payroll
+  institutions_without_confirmed_active: Institutions without at least one active and confirmed registration
+  insurance: Insurance
+  insurance_file: insurance file
+  insurance_report: Insurance report
+  interaction: interaction
+  internal_address_help: "This field's purpose is to indicate an internal address, that is to say, a course or program offered within the institution's own premisses.  Please indicate just the location (e.g. Room Number 5, Training center, etc)"
+  international: "international"
+  issue_legal_form_pdf: Issue a Legal Form (PDF)
+  issue_no_employment_ties_with_the_public_health_sector_pdf: Not public healthcare sector employee (PDF)'
+  issue_registration_receipt_pdf: Issue a Registration receipt (PDF)
+  issued_in: Issued in
+  iteration: Interaction Number
+  kind: Kind
+  kind_regards: Kind regards,
+  labs: labs
+  latest_update: 'Latested update: '
+  legacy: Legacy
+  legend: legend
+  list: list
+  listed_to_be_paid: Listed to be paid
+  main: main
+  main_attributes: highlighted characteristics
+  manager: manager
+  mandatory: mandatory
+  matriculate: matriculate (register)
+  may_not_contain_digits: may not contain digits
+  member: member
+  modified_by: Modified by
+  monetary_annotations: Annotations with financial impact
+  my_assignment_info: information about my assignment (allocation)
+  my_contact_info: my contact information
+  my_supervision_info: My supervision information
+  my_teaching: my teaching
+  nameless_contacts_exist: There are contacts with incomplete information (name missing) !
+  national: national
+  nature: nature
+  navbar_menu_name: model
+  negative: negative
+  negative_amount: negative amount
+  net: Net amount
+  no_absences: no absences
+  no_annotations_found: No annotations found
+  no_events_found: No events found
+  no_incoming_students_found: No incoming students found.
+  no_infrastructure_reported: No infrastructure information reported.
+  no_payrolls_found: No available payrolls were found.  In order to record a bank payment, the payroll it refers to must be created first.
+  no_photo: Without photo
+  no_programs_or_supervisors: There must be at least one program and one course coordinator entered in the system, within your (institution's) hierarchy, in order for the assignment (allocation) to be made.
+  no_programs_registered: No program registered so far
+  no_supervisors_found: No course coordinator found within your hierarchy.  It must exist, in order to be assigned to a program.
+  no_teachers_found: Supervisors are created from contacts with teaching roles in your institution, however none were found.  You may try again, after creating the respective user and filling in its contact information.
+  no_unregistered_students_found:  I've found no students whose scholarship recipient record still needs to be created.
+  not: no
+  nothing_due: Nothing due
+  num_authorized_scholarships_for_incoming_students: Authorized scholarships for incoming students
+  num_days_worked_before_cancelling: Number of days worked prior to cancellation
+  number_abbreviation: "#"
+  of_the_team: of the team
+  of_which_inactive: of which inactive
+  of_which_still_active: of which still active
+  ongoing: ongoing
+  only: only
+  only_letters_allowed: only characters (A to Z or a to z) allowed!
+  optional: optional
+  or: or
+  organization: organization
+  our_programs: Our programs
+  page: page
+  paid_leaves: Paid leaves (including vacation)
+  pay_slip: Payment slip
+  pay_slips: Payment slips
+  payroll_absences_report: Payroll absences report
+  payroll_annotations: payroll annotations
+  payroll_annotations_report: Payroll annotations report
+  pending: Pending
+  penultimate_day_in_month: Penultimate day of the month
+  percent: Percent
+  percent_from_total: "% total"
+  perform: performed
+  performed_on:
+    f: performed on
+    m: performed
+  person: person
+  personal_info: Personal info
+  personal_leaves_amount: Personal leaves amount
+  phone: phone
+  photo: photo
+  place_a_program_under_review: Place a program under review
+  please_provide_if_student: Mandatory data for a student
+  please_tick_one: Please tick one option
+  please_wait_for_processing: Please wait for processing.  I shall start as soon as you click 'Ok'.
+  possible_students_to_be_paid: Possible students to be paid
+  possible_values_for_the_attribute: Possible values for this field
+  practical: Practical
+  press_ok: Press ok to commence processing.  Then please wait.
+  previous: previous
+  previous_registration: previous registration
+  previous_work_week_day: Previous business day (i.e. Monday to Friday)
+  processed_in_a_previous_payroll: Processed in a previous payroll.
+  produce_statements: Generate this month's statements (after confirmation from the bank)
+  professional_experience: Professional experience
+  professional_field: Professional Area
+  program_duration: Program duration
+  proportion: Proportion
+  public_sector_financed: of public funding
+  quality: quality
+  recalc: Recalculation
+  recalculate_payroll: Recalculate payroll
+  record_found: record found
+  record_not_found: record not found
+  registration_season_ended: The registration season has ended.
+  registration_summary: Registration summary
+  registration_tutorial: "Tutorial: first year student's registration - 2017"
+  registrations_confirmed_active: Registrations confirmed to be active
+  registrations_confirmed_active_today: Registrations confirmed and active from today
+  registrations_confirmed_inactive: Confirmed cancellations
+  registrations_created_today: Registrations performed today
+  registrations_pending_inactive: Pending cancellations
+  registrations_report:
+    filename_prefix: registrations_situation_report
+    pdf_title: Registrations situation report
+    screen_title: Registrations report
+  registrations_set_for_makeup: Registrations set as 'must make up' (completion)
+  regular_absences: Regular absences
+  related_to_cancellations: Pertaining to cancellations
+  related_to_late_registrations: Pertaining to late registrations
+  remaining_scholarships: Scholarships remaining
+  remark: remark
+  report: Report
+  report_available: report available
+  report_requested_by: Report requested by
+  reprt: report
+  required: please fill in
+  research: research
+  resend: resend
+  responsible_department: Department responsible
+  restricted: data entry restricted
+  result: result
+  retroactive_cancellation_after_payroll_was_processed: retroactive cancellation after payroll was processed
+  rooms: rooms
+  rounding: Rounding
+  scholarship_amount: Scholarship amount
+  scholarship_recipient: Scholarship recipient
+  scholarship_registration_confirmation_receipt: Matriculation receipt
+  schoolterm_finish_explanation: The field schoolterm finish refers to the end date for programs which started (or will start) on the (initial) date specified.  For this reason, it might encompass more than 1 calendar year.
+  scientific_production: scientific production
+  screens: Screen
+  second_schoolyear_removal_instructions: Verify whether the sophmore (or possibly third, fourth, etc) year should be really there, given the program's duration.  If needed, this schoolyear may be safely removed.  To do so, click the appropriate icon on the row corresponding to the schoolyear number (2 or higher).
+  sector: Sector
+  seek: seek
+  settings: Settings
+  shortcut: shortcut
+  since: Since
+  skip_payment: Nothing due in this payroll
+  some_attributes: Some attributes
+  spreadsheet: spreadsheet
+  start: Start
+  start_date: Since
+  stats: Statistics
+  status: Situation
+  step:
+    f: step
+    m: step
+  still_valid: Still in effect
+  student_history: Student history
+  student_situation: Student situation
+  students_paid: Students which will receive something
+  students_skipped: Students with zero amount
+  subtotal: subtotal
+  summary: Summary
+  supervisor_professional_data: supervisor professional information
+  supplemental_info: Supplemental information
+  supplements: Supplements
+  suspended_registrations_during_this_payroll: Registrations suspended during this payroll
+  system_developer: System developer
+  target_public: Target public
+  teacher: Instructor responsible
+  teaching: Teaching
+  teaching_info: Teaching information
+  term_of_office: Term of office
+  theoretical: Theoretical
+  this_warning_will_automatically_disappear: This warning will disappear automatically when the situation that originated it does not occur again.  This is normal.
+  tie_freshman_student_to_their_schoolyear: Allocate freshman student to her or his program
+  to: a
+  to_be_done_in_this_order: To be done in this order
+  to_be_paid: to be paid.
+  total: total
+  total_absences_amount: Total absences amount
+  total_report: Total report
+  totals: Totals
+  'true': yes
+  tutorial: Tutorial
+  tutorials: Tutorials
+  unable_to_create_user: Unable to create user.  Please verify data entered and try again.
+  undefined_value: "<<undefined value!>>"
+  undergraduate_institution: Undergraduate institution
+  unfavorable_assessment: unfavorable assessment
+  until: until
+  updated_at: Most recent update (or creation)
+  updated_by: Updated by
+  url_entered_incorrectly: typed incorrectly.  You don't have to start with http://
+  user:
+    f: user
+    m: user
+  user_email: User e-mail
+  users_with_incomplete_contact_information_detected: "Users with incomplete contact information (name missing) were detected !"
+  various_paid_leave_types: Various types of paid leaves
+  weekday: Day of the week
+  were_registered: Were registered
+  when: When
+  with_annotations: With annotations
+  with_financial_impact: With financial impact
+  without_annotations: Without annotations
+  without_financial_impact: Without financial impact
+  workday: Work day
+  workload: Work load
+  year: year
+  year_number: Year number
+  year_s: year(s)
+  yearly_statistics: Annual operational statistics
+  you_must_edit_or_remove_them: You must edit and fill in the required information (in certain cases cases you may outright remove the contact, for instance, if another one has already been created and is associated with an e-mail address which belongs to the user - otherwise you will have to start again, by creating a new user.).
+  your_search_result_follows: Your search result as is follows

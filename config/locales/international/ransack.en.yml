@@ -1,0 +1,71 @@
+---
+en:
+  ransack:
+    all: all
+    and: e
+    any: any
+    asc: ascending
+    attribute: attribute
+    combinator: combinator
+    condition: condition
+    desc: descending
+    or: or
+    predicate: predicate
+    predicates:
+      blank: blank
+      cont: contains
+      cont_all: contains all
+      cont_any: contains any
+      does_not_match: does not match
+      does_not_match_all: does not match all
+      does_not_match_any: does not match any
+      end: ends in
+      end_all: ends in all
+      end_any: ends in any
+      eq: equal
+      eq_all: equal to all
+      eq_any: equal to any
+      'false': is false
+      gt: greather than
+      gt_all: greather than all
+      gt_any: greather than any
+      gteq: greather than or equal to
+      gteq_all: greather than or equal to all
+      gteq_any: greather than or equal to any
+      in: in
+      in_all: in all
+      in_any: in any
+      lt: less than
+      lt_all: less than all
+      lt_any: less than any
+      lteq: less than or equal to
+      lteq_all: less than or equal to all
+      lteq_any: less than or equal to any
+      matches: matches
+      matches_all: matches all
+      matches_any: matches any
+      not_cont: does not contain
+      not_cont_all: does not contain all
+      not_cont_any: does not contain any
+      not_end:  does not end in
+      not_end_all:  does not end in all
+      not_end_any:  does not end in any
+      not_eq: does not equal
+      not_eq_all: does not equal all
+      not_eq_any: does not equal any
+      not_in: is not in
+      not_in_all: is not in all
+      not_in_any: is not in any
+      not_null: is not null
+      not_start: does not start with
+      not_start_all: does not start with all
+      not_start_any: does not start with any
+      'null': is null
+      present: is present
+      start: starts with
+      start_all: starts with all
+      start_any: starts with any
+      'true': is true
+    search: search
+    sort: sort
+    value: value

@@ -1,13 +1,14 @@
 ---
 en:
-  application_title: "Graduate certificate"
-  my:
-    m: my
-    f: my
-  actions:
-    edit: edit
-  greetings: "Greetings"
+  annotation: Annotation
+  my_program_info: My program info
+  no_programs_found: No programs found
+  normal: Normal
+  scholarship_contract: Scholarship contract
+  'yes': 'Yes'
+  Não: false
   and: and
+  application_title: Graduate certificate
   date:
     formats:
       compact: "%-d-%b-%y"
@@ -28,8 +29,12 @@ en:
       - Suite 20
       - Room 12
       - Fifth floor
+  greetings: Greetings
   help: Help
   institution_summary: Institutions
+  my:
+    f: my
+    m: my
   name: Name
   people_management: People
   restricted_access: Restricted Access
@@ -42,3 +47,165 @@ en:
     diversity: Greetings
     female: Welcome
     male: Welcome
+  user_removal_lock: "System warning: in order to prevent accidental user removal, first you must remove their contact information.  If you really mean to do so, click on 'back' and erase it from the contact list screen.  Once that is done, you may try to remove the user again."
+  a:
+    f: a
+    m: a
+  abbreviation:
+    medicalresidency: MRes
+    medres: MRes
+    pap: PAP
+  validation:
+    messagetext:
+      error: error
+      please_correct_and_retry: when filling the information in.  Please correct where indicated and try again.
+      system_detected: The system detected
+  actions:
+    back: Back
+    cancel: Cancel
+    confirm: Confirm
+    delete: Delete
+    edit: Edit
+    filter: Filter
+    generate: Generate
+    inform: Inform
+    insert: Insert
+    new:
+      f: Register a new
+      m: Register a new
+    print: Print
+    quit: Quit (end session)
+    repeat: Repeat (to confirm)
+    search: Search
+    show: Show
+    showing: Showing
+    update: Update
+    upload: Upload
+    active:
+      f: active
+      m: active
+    annotate: Annotate
+    annotated:
+      f: annotated
+      m: annotated
+      pl: annotated
+    another:
+      f: another
+      m: another
+    belongs:
+      medres: Belongs to MR
+      pap: Belongs to PAP
+    calculated:
+      f: calculated
+      m: calculated
+      pl: calculated
+    cancelled:
+      f: cancelled
+      m: cancelled
+    confirm2:
+      bankfile: 'Notice: the bankpayment file generation procedure may take a while (more than a minute), depending on the number of students and server speed.  This is normal.  Shall I proceed?  '
+      delete: Are you certain you wish to delete?
+      visit_external_site: You will visit an external website.  Are you sure ?
+    confirmed:
+      f: confirmed
+      m: confirmed
+    created:
+      f: criada
+      m: criado
+    deannotated:
+      f: annotation cleared
+      m: annotation cleared
+    deleted:
+      f: removed
+      m: removed
+    done:
+      f: concluded
+      m: concluded
+    duration_between: Duration between
+    excluded:
+      f: excluded
+      m: excluded
+      pl: excluded
+    found:
+      f: found
+      m: found
+    fullname:
+      gradcert: Graduate Certificate Program
+      medres: Medical Residency Program
+      pap: Professional Advancement Program
+    gender:
+      F: Feminine
+      M: Masculine
+      X: Undefined/Intersexes/Not specified
+    inactive:
+      f: inactive
+      m: inactive
+    institution_removal_lock:
+      medicalresidency: 'System warning: unable to remove an institution which is related to the Medical Residency Program, if that is what you meant.'
+      notprovisional: 'System warning: unable to remove an institution with once its data is confirmed.  If you really intended to do so, you must first flag it as having provisional (incomplete, inacurate, etc) data.'
+      pap: 'System warning: unable to remove an institution which belongs to the PAP.  If you really intended to do so, uncheck the respective option and try again.'
+      withprograms: 'System warning: unable to remove an institution with programs (recorded in the database).  If you really intended to do so, its programs must first be removed.'
+      withuser: 'System warning: unable to remove an institution with users (recorded in the database).  If you really intended to do so, its users must first be removed.'
+    institution_with_users:
+      all: Institutions with users
+      medres: Institutions with MRes users
+      pap: Institutions with PAP users
+    max_num_scholarships_offered:
+      medres: Maximum number of scholarships offered
+      pap: Maximum number of scholarships offered
+    my:
+      fp: my
+      mp: my
+    new2:
+      f: new
+      m: new
+    none:
+      f: None
+      m: None
+    noun:
+      edit: Edit
+      update: Update
+    num_veterans:
+      pap: Matriculated students expected to continue with their programs (whose duration > 1 year)
+    of:
+      f: of
+      m: of
+      n: of
+    ordinal:
+      '1': First
+      '10': Tenth
+      '2': Second
+      '3': Third
+      '4': Fourth
+      '5': Fifth
+      '6': Sixth
+      '7': Seventh
+      '8': Eight
+      '9': Ninth
+    other:
+      f: other
+      m: other
+    our:
+      f: our
+      m: our
+    registered:
+      f: registered
+      m: registered
+    registered_so_far:
+      f: registered so far
+      m: registered so far
+    removed:
+      f: removed
+      m: removed
+    situation: Situation
+    succesfully: succesfully.
+    suspended:
+      f: Suspended
+      m: Suspended
+    teaching_area: Teaching area
+    unchanged:
+      f: unchanged
+      m: unchanged
+    updated:
+      f: updated
+      m: updated

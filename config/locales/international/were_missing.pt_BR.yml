@@ -1,0 +1,6 @@
+---
+pt_BR:
+  date:
+    formats:
+      seeofr: "%-Y-%m-%d"
+      unofrscore: "%d_%b_%y"

@@ -1,266 +1,9 @@
 ---
 en:
   activerecord:
-    errors:
-      models:
-        placesavailable:
-          attributes:
-            authorized:
-              exceeds_total_number_of_scholarships: "exceeds the maximum number of seats made available, when taking into account the estimated number of places reserved for second-year (and higher) students enrolled in programs which last more than one year.  Please try to enter a smaller quantity in this field."
-        registration:
-          attributes:
-            supportingdocumentation:
-              file_size_is_less_than_or_equal_to: "exceeded the maximum allowed file size and may not be attached.  You may try to resize the file via image editing software or adjust the appropriate parameters in your scanner prior to saving it, if needed."
-            schoolyear_id:
-              not_enough_places_available: "there are no authorized vacancies left (or made available)."
-        institution:
-          attributes:
-            abbreviation:
-              may_not_contain_special_characters: "may not contain special characters, except underscore _"
-        user:
-          attributes:
-            permission_id:
-              required: "is required.  User means student (scholarship recipient) in a program."
-        schoolterm:
-          attributes:
-            active:
-              more_than_one_not_allowed: invalid option for I have detected another schoolterm which is (still) active.  'Uncheck' (deselect) where appropriate and try again.
-        feedback:
-          attributes:
-            registration_id:
-              must_be_active_on_regular_payroll: "must be set to 'active' in a regular payroll."
-              may_not_be_active_on_special_payroll: "must be marked as 'inactive' in a special payroll."
-        annotation:
-          attributes:
-            discount:
-              discount_may_not_be_more_than_gross_amount: "may not be higher than the scholarship's gross amount"
-            supplement:
-              supplement_may_not_be_more_than_twice_gross_amount: "may not be more than double the scholarship's gross amount"
-        scholarship:
-          attributes:
-            start:
-              must_be_consistent: "must be consistent (start must happen before the end date)."
-            daystarted:
-              overlap: may not overlap a time interval already recorded in the system.
-        event:
-          attributes:
-            start:
-              after: "may not be retroactive. The payroll pertaining to this period was already processed.  On those rare occasions, due to late notifications by the institutions, we recommend that those dates which are consistent (if any) be entered as usual (se houver) by the institution and then contact the team for further instructions, kindly informing the corresponding event number."
-              overlap: "inconsistent.  Please note: there is already an event recorded in that time period."
-              may_not_occur_after_cancellation: "may not occur after the cancellation."
-              may_not_be_retroactive: "may not be retroactive. The payroll pertaining to this time period was already processed."
-              may_not_be_in_anticipation: "may not be in anticipation (too much into the future).  Please inform a date consistent with the current payroll cycle and the nature of the occurrence (absence or leave type)."
-              required: "has to be informed.  Please select the day, month and year."
-            finish:
-              may_not_be_in_anticipation: "may not be in anticipation (too much into the future).  Please inform a date consistent with the current payroll cycle and the nature of the occurrence (absence or leave type)."
-              may_not_be_prior_to_start: "inconsistent.  May not occur prior to start date"
-              may_not_occur_after_cancellation: "may not occur after the cancellation date"
-              must_be_within_maximum_limit: "can't be recorded as entered, because that would exceed the maximum number of days allowed for the specified leave type (e.g. vacation)."
-              may_not_be_retroactive: "may not be retroactive. The payroll pertaining to this time period was already processed."
-              exceeds_the_vacation_days_quota: "inconsistent, since it exceeds the number of vacation days available for this person."
-              required: "has to be informed.  Please select the day, month and year.  Normally it is different from the start date, except when it is a one day absence (or leave)."
-            leavetype_id:
-              present: may not be entered when the information pertains to absences.
-            absence:
-              event_type_must_be_selected: must be marked, unless it is some kind of leave.  In that case, you must select the corresponding type and keep this 'absence' option unchecked.
-            registration_id:
-              must_be_active: "may not be inactive (for instance: registration cancelled)"
-        payroll:
-          attributes:
-            scholarship_id:
-              present: may not be present, if the amount is informed manually (in case the special payroll is marked)
-            amount:
-              present: may not be greather than zero, if the set (standard) scholarship amount methodology is being followed (in other words, in a regular payroll situation)
-            paymentdate:
-              inconsistent: inconsistent!  In a regular payroll, it must occur in the calendar month immediately after the month worked ('reference month').  Enter a valid date or mark the 'special' option, if the case may be.
-        student:
-          attributes:
-            councilmembership:
-              present: must belong to a professional council (guild, association) chosen from the list already recorded in the system.
-        leavetype:
-          attributes:
-            paid:
-              must_be_true_for_vacation: option must be marked in case of vacation.
-            dayspaidcap:
-              days_paid_cap_not_exceed_max_num_days: may not exceed the set number of days.
-        bankaccount:
-          attributes:
-            verificationdigit:
-              inconsistent: inconsistent!  Inform the correct digit or 'X' (in uppercase).
-        bankbranch:
-          attributes:
-            verificationdigit:
-              inconsistent: inconsistent!  Inform the correct digit or 'X' (in uppercase).
-            opened:
-              on_or_before: may not be on a future date.
-        bankpayment:
-          attributes:
-            payroll_id:
-              may_not_be_pending: may not contain future events!  They need to be confirmed or removed (in case they were denied) and the corresponding time period informed as 'absence'.
-            sequential:
-              taken: already taken.  Try a higher number.
-              too_high: higher than needed.  Try a smaller number.
-              inconsistent: inconsistent!
-        funding:
-          attributes:
-            percentvalues:
-              inconsistent: must add up to 100.  Please review each individual figure or uncheck this option.
-        address:
-          attributes:
-            postalcode:
-              invalid: 'must have (in Brazil) eight digits, separated by a dash after the fifth number, for instance: 02040-060'
-        role:
-          attributes:
-            name:
-              all_blank: 'must belong to one (and only one) of the categories below: '
-            clerical:
-              explanation: '(office worker)'
-            collaborator:
-              explanation: '(evaluator, assessor, reviewer)'
-            teaching:
-              explanation: '(instructor, professor, supervisor)'
-            management:
-              explanation: '(manager, director)'
-            student:
-              explanation: '(scholarship recipient, graduate student, professional training program participant, medical resident)'
-        contact:
-          attributes:
-            role_id:
-              staff_may_not_take_student_role: informed incorrectly.  This field signifies a scholarship program recipient and thus is not applicable to team members.
-              student_may_not_take_staff_role: informed incorrectly.  Students may not have a staff role.  This field is meant to indicate team members only.
-            taxpayercode:
-              inconsistent: inconsistent.  The taxpayer id number sequence entered is not valid.
-            name:
-              capitalization: "may not contain (all or mostly) uppercase characters.  Follow this guideline (as an example):  Jane Doe (instead of JANE DOE)."
-              may_not_contain_digits: "may not contain digits!"
-              must_be_all_characters: "may only contain alphabetical characters (from A to Z)"
-              must_have_consistent_whitespacing: "must have consistent spacing (at most 1 blank between words)"
-        healthcareinfo:
-          attributes:
-            totalbeds:
-              inconsistent: inconsistent.  Must be equal or greather than the sum of the emergency room and intensive care available capacity.
-        recommendation:
-          attributes:
-            programyear:
-              too_big: is too big in relation to the program's current as well as its recommended duration.
-        programsituation:
-          attributes:
-            recommended_duration:
-              inconsistent: is inconsistent with the number of program years specified.
-        diploma:
-          attributes:
-            coursename_id:
-              must_be_informed: "must be informed, almost always.  Unless another name is provided, given that it is not on the official Education Ministry list (for instance: foreign obtained degree, new field of knowledge)."
-            councilcredential:
-              must_be_informed: "must be specified, when the professional council (guild, association) option is marked."
-            councilcredentialstatus:
-              present: "will only exist when a professional council is selected and the corresponding member number is informed."
-            council_id:
-              required_if_details_provided: must be selected, when the professional council details fields have been informed.  For your convenience, some councils may already by recorded in the system.
-              must_be_informed: "must be specified when a member number has been provided"
-            school_id:
-              must_be_informed_somehow: "as a general rule, should be selected directly from the list.  Under exceptional circumstances, for instance: students which graduated abroad, kindly type the information, if the scholarship recipient happens to be a graduate from another school, without selecting anything from the list."
-            externalinstitution:
-              need_not_be_specified_manually: "does not need to be typed, unless in exceptional cases (such as foreign institutions not already recorded in the system list).  Please ascertain if this is indeed the situation, otherwise this field has to remain blank, and the school chosen from the list as usual."
-        assignment:
-          attributes:
-            start_date:
-              may_not_be_in_the_future: may not be in the future.
-        personalinfo:
-          attributes:
-            socialsecuritynumber:
-              inconsistent: inconsistent.  The numbering provided does not exist.  Please make sure it is valid.
-            birth_date:
-              may_not_be_in_the_future: may not be in the future.
-            tin:
-              inconsistent: inconsistent.  The numbering provided does not exist.  Please make sure it is valid.
-            socialname:
-              present: may be entered (if the person wishes to inform it, not required), only in case of transgender or indeterminate "X".
-            country_id:
-              present: only needs to be informed for those who are foreign citizens (in this case use passport number or foreign national's registration number)
-            state_id:
-              present: does not apply to foreign nationals.  In this case, this field must remain blank.
-            othername:
-              present: may be entered in case of diversity only.  That to say, in this context, when the sex (biological characteristic at birth), masculine or feminine) differs from the gender (how this individual chooses to identify his or herself in a social context) or is undefined (X).
-        webinfo:
-          attributes:
-            site:
-              incorrect: entered incorrectly.  The prefix http:// is not needed.
-        program:
-          attributes:
-            base:
-              unable_to_add_schoolyears_over_max: It is not possible to add school years over the system established limit.  Please remove the excess year(s) and try again.
-            duration:
-              inconsistent: inconsistent with the number of years in the program.
-        admission:
-          attributes:
-            admitted:
-              inconsistent_with_final_exam_results: inconsistent with the final exam phase results.
-            appealsgrantedfirstexam:
-              inconsistent_with_first_exam_failures: inconsistent with the number of first exam failures.
-            appealsdeniedfirstexam:
-              inconsistent_with_first_exam_failures: inconsistent with the number of first exam failures.
-            appealsgrantedfinalexam:
-              inconsistent_with_final_exam_failures: inconsistent with the number of final exam failures.
-            appealsdeniedfinalexam:
-              inconsistent_with_final_exam_failures: inconsistent with the number of final exam failures.
-            absentfirstexam:
-              may_not_exceed_candidates: may not exceed the number of candidates.
-              inconsistent: inconsistent.
-            absentfinalexam:
-              inconsistent: inconsistent.
-            candidates:
-              may_not_exceed_grants_given: may not exceed the number of grants given.
-              inconsistent: inconsistent.
-            grantsasked:
-              may_not_exceed_accredited: may not exceed the number of accredited grants.
-              inconsistent: inconsistent.
-            grantsgiven:
-              more_than_accredited: may not exceed the number of accredited grants.
-              inconsistent: inconsistent.
-            start:
-              may_not_be_in_the_future: may not be in the future
-            finish:
-              may_not_be_more_recent_than_start:  may not be more recent than the start date!
-            convoked:
-              may_not_exceed_admitted: may not exceed the number of people admitted in the selection process.
-            passedfirstexam:
-              may_not_exceed_takers: may not exceed the number of exam takers (taking into account the number of absences)
-              inconsistent: inconsistent.
-            insufficientfinalexamgrade:
-              inconsistent: inconsistent
-        accreditation:
-          attributes:
-            start:
-              may_not_be_prior_to_april_first: "may not be prior to April 1st.  In case of doubt, please contact the team."
-              may_not_be_in_the_future: may not be in the future
-              may_not_be_prior_to_first_day_in_term: "may not be prior to the first day of the school term it refers to."
-              not_possible_after_closing_date: "too much into the future.  Must be within the registration period for the school term it refers to.  "
-            renewal:
-              present: "cannot be present, given the option chosen."
-              may_not_be_in_the_future: may not be in the future
-              may_not_be_prior_to_start: "may not occur prior to the initial registration (or accreditation date) or occur on the same day.  Please enter a later date."
-              may_not_be_prior_to_suspension: couldn't have occurred prior to the suspension date
-              may_not_not_be_on_the_same_month_as_suspension: "may not occur in the same month as the suspension."
-            revocation:
-              may_not_overlap_completed_payrolls: "may not overlap an already processed payroll.  Hint: enter a day in the current reference month."
-              present: "cannot be present, given the option chosen."
-              may_not_be_in_the_future: may not be in the future
-              may_not_be_prior_to_suspension: "inconsistent.  couldn't have occurred prior to the suspension date."
-              may_not_be_prior_to_start: "may not occur prior to the initial registration (or accreditation) date.  Please enter a later date."
-              may_not_be_prior_to_renewal: "inconsistent. Could not have occurred before the latest renewal."
-              present: "may only be present when the option to revoke (cancel) is checked.  Otherwise, this data must remain blank."
-              may_not_not_be_on_the_same_month_as_renewal: "may not fall on the same month as the reactivation."
-              cancellation_must_be_after_latest_event_finish_date: "coincides with the dates for an event already in the system."
-            suspension:
-              present: "cannot be present, given the option chosen."
-              may_not_be_in_the_future: may not be in the future
-              may_not_be_prior_to_start: "may not be prior, or fall on the same day as the initial registration (or accreditation)."
-              may_not_be_more_recent_than_renewal: "inconsistent. May not be more recent than (the latest) renewal."
-              may_not_be_prior_to_renewal: "inconsistent.  Could not have occurred prior the latest renewal."
     attributes:
       academiccategory:
-        name:
+        name: Nome
       accreditation:
         comment: Comment
         confirmed: Situation confirmed
@@ -442,6 +185,7 @@ en:
         methodology_id: Teaching methodology
         practical: Practical
         profession_id: Professional area
+        professionalfamily_id: Professional family
         professionalrequirement: Mandatory for the profession
         supervisor_id: Supervisor
         syllabus: Syllabus
@@ -450,6 +194,7 @@ en:
         active: Active
         name: Name
       degreetype:
+        name: Name
         level: Level
         medres: MRes
         pap: PAP
@@ -677,6 +422,8 @@ en:
         programname_id: Program name
         schoolterm_id: School term identifier
         updated_at: Updated at
+        instprogramnum: Institution program number (temporary field, external spreadsheet)
+        programnum: Program number (temporary field, external spreadsheet)
         virtual:
           area: Program area
           parentid: Previous program ID
@@ -711,13 +458,13 @@ en:
         description: Description
         name: Project name
       recommendation:
-        grants: (re)accredited grants
+        grants: "(re)accredited grants"
         practice: Practice hours
         programyear: Program year
         theory: Theory hours
         workload: Workload
       recommendations:
-        grants: (re)accredited grants
+        grants: "(re)accredited grants"
         practice: Practice hours
         programyear: Program year
         theory: Theory hours
@@ -930,6 +677,263 @@ en:
           site: Personal site
         site: Site
         twitter: Twitter
+    errors:
+      delete_restriction: Delete restriction
+      models:
+        accreditation:
+          attributes:
+            renewal:
+              may_not_be_in_the_future: may not be in the future
+              may_not_be_prior_to_start: may not occur prior to the initial registration (or accreditation date) or occur on the same day.  Please enter a later date.
+              may_not_be_prior_to_suspension: couldn't have occurred prior to the suspension date
+              may_not_not_be_on_the_same_month_as_suspension: may not occur in the same month as the suspension.
+              present: cannot be present, given the option chosen.
+            revocation:
+              cancellation_must_be_after_latest_event_finish_date: coincides with the dates for an event already in the system.
+              may_not_be_in_the_future: may not be in the future
+              may_not_be_prior_to_renewal: inconsistent. Could not have occurred before the latest renewal.
+              may_not_be_prior_to_start: may not occur prior to the initial registration (or accreditation) date.  Please enter a later date.
+              may_not_be_prior_to_suspension: inconsistent.  couldn't have occurred prior to the suspension date.
+              may_not_not_be_on_the_same_month_as_renewal: may not fall on the same month as the reactivation.
+              may_not_overlap_completed_payrolls: 'may not overlap an already processed payroll.  Hint: enter a day in the current reference month.'
+              present: may only be present when the option to revoke (cancel) is checked.  Otherwise, this data must remain blank.
+            start:
+              may_not_be_in_the_future: may not be in the future
+              may_not_be_prior_to_april_first: may not be prior to April 1st.  In case of doubt, please contact the team.
+              may_not_be_prior_to_first_day_in_term: may not be prior to the first day of the school term it refers to.
+              not_possible_after_closing_date: 'too much into the future.  Must be within the registration period for the school term it refers to.  '
+            suspension:
+              may_not_be_in_the_future: may not be in the future
+              may_not_be_more_recent_than_renewal: inconsistent. May not be more recent than (the latest) renewal.
+              may_not_be_prior_to_renewal: inconsistent.  Could not have occurred prior the latest renewal.
+              may_not_be_prior_to_start: may not be prior, or fall on the same day as the initial registration (or accreditation).
+              present: cannot be present, given the option chosen.
+        address:
+          attributes:
+            postalcode:
+              invalid: 'must have (in Brazil) eight digits, separated by a dash after the fifth number, for instance: 02040-060'
+        admission:
+          attributes:
+            absentfinalexam:
+              inconsistent: inconsistent.
+            absentfirstexam:
+              inconsistent: inconsistent.
+              may_not_exceed_candidates: may not exceed the number of candidates.
+            admitted:
+              inconsistent_with_final_exam_results: inconsistent with the final exam phase results.
+            appealsdeniedfinalexam:
+              inconsistent_with_final_exam_failures: inconsistent with the number of final exam failures.
+            appealsdeniedfirstexam:
+              inconsistent_with_first_exam_failures: inconsistent with the number of first exam failures.
+            appealsgrantedfinalexam:
+              inconsistent_with_final_exam_failures: inconsistent with the number of final exam failures.
+            appealsgrantedfirstexam:
+              inconsistent_with_first_exam_failures: inconsistent with the number of first exam failures.
+            candidates:
+              inconsistent: inconsistent.
+              may_not_exceed_grants_given: may not exceed the number of grants given.
+            convoked:
+              may_not_exceed_admitted: may not exceed the number of people admitted in the selection process.
+            finish:
+              may_not_be_more_recent_than_start: may not be more recent than the start date!
+            grantsasked:
+              inconsistent: inconsistent.
+              may_not_exceed_accredited: may not exceed the number of accredited grants.
+            grantsgiven:
+              inconsistent: inconsistent.
+              more_than_accredited: may not exceed the number of accredited grants.
+            insufficientfinalexamgrade:
+              inconsistent: inconsistent
+            passedfirstexam:
+              inconsistent: inconsistent.
+              may_not_exceed_takers: may not exceed the number of exam takers (taking into account the number of absences)
+            start:
+              may_not_be_in_the_future: may not be in the future
+        annotation:
+          attributes:
+            discount:
+              discount_may_not_be_more_than_gross_amount: may not be higher than the scholarship's gross amount
+            supplement:
+              supplement_may_not_be_more_than_twice_gross_amount: may not be more than double the scholarship's gross amount
+        assignment:
+          attributes:
+            start_date:
+              may_not_be_in_the_future: may not be in the future.
+        bankaccount:
+          attributes:
+            verificationdigit:
+              inconsistent: inconsistent!  Inform the correct digit or 'X' (in uppercase).
+        bankbranch:
+          attributes:
+            opened:
+              on_or_before: may not be on a future date.
+            verificationdigit:
+              inconsistent: inconsistent!  Inform the correct digit or 'X' (in uppercase).
+        bankpayment:
+          attributes:
+            payroll_id:
+              may_not_be_pending: may not contain future events!  They need to be confirmed or removed (in case they were denied) and the corresponding time period informed as 'absence'.
+            sequential:
+              inconsistent: inconsistent!
+              taken: already taken.  Try a higher number.
+              too_high: higher than needed.  Try a smaller number.
+        contact:
+          attributes:
+            name:
+              capitalization: 'may not contain (all or mostly) uppercase characters.  Follow this guideline (as an example):  Jane Doe (instead of JANE DOE).'
+              may_not_contain_digits: may not contain digits!
+              must_be_all_characters: may only contain alphabetical characters (from A to Z)
+              must_have_consistent_whitespacing: must have consistent spacing (at most 1 blank between words)
+            role_id:
+              staff_may_not_take_student_role: informed incorrectly.  This field signifies a scholarship program recipient and thus is not applicable to team members.
+              student_may_not_take_staff_role: informed incorrectly.  Students may not have a staff role.  This field is meant to indicate team members only.
+            taxpayercode:
+              inconsistent: inconsistent.  The taxpayer id number sequence entered is not valid.
+        diploma:
+          attributes:
+            council_id:
+              must_be_informed: must be specified when a member number has been provided
+              required_if_details_provided: must be selected, when the professional council details fields have been informed.  For your convenience, some councils may already by recorded in the system.
+            councilcredential:
+              must_be_informed: must be specified, when the professional council (guild, association) option is marked.
+            councilcredentialstatus:
+              present: will only exist when a professional council is selected and the corresponding member number is informed.
+            coursename_id:
+              must_be_informed: 'must be informed, almost always.  Unless another name is provided, given that it is not on the official Education Ministry list (for instance: foreign obtained degree, new field of knowledge).'
+            externalinstitution:
+              need_not_be_specified_manually: does not need to be typed, unless in exceptional cases (such as foreign institutions not already recorded in the system list).  Please ascertain if this is indeed the situation, otherwise this field has to remain blank, and the school chosen from the list as usual.
+            school_id:
+              must_be_informed_somehow: 'as a general rule, should be selected directly from the list.  Under exceptional circumstances, for instance: students which graduated abroad, kindly type the information, if the scholarship recipient happens to be a graduate from another school, without selecting anything from the list.'
+        event:
+          attributes:
+            absence:
+              event_type_must_be_selected: must be marked, unless it is some kind of leave.  In that case, you must select the corresponding type and keep this 'absence' option unchecked.
+            finish:
+              exceeds_the_vacation_days_quota: inconsistent, since it exceeds the number of vacation days available for this person.
+              may_not_be_in_anticipation: may not be in anticipation (too much into the future).  Please inform a date consistent with the current payroll cycle and the nature of the occurrence (absence or leave type).
+              may_not_be_prior_to_start: inconsistent.  May not occur prior to start date
+              may_not_be_retroactive: may not be retroactive. The payroll pertaining to this time period was already processed.
+              may_not_occur_after_cancellation: may not occur after the cancellation date
+              must_be_within_maximum_limit: can't be recorded as entered, because that would exceed the maximum number of days allowed for the specified leave type (e.g. vacation).
+              required: has to be informed.  Please select the day, month and year.  Normally it is different from the start date, except when it is a one day absence (or leave).
+            leavetype_id:
+              present: may not be entered when the information pertains to absences.
+            registration_id:
+              must_be_active: 'may not be inactive (for instance: registration cancelled)'
+            start:
+              after: may not be retroactive. The payroll pertaining to this period was already processed.  On those rare occasions, due to late notifications by the institutions, we recommend that those dates which are consistent (if any) be entered as usual (se houver) by the institution and then contact the team for further instructions, kindly informing the corresponding event number.
+              may_not_be_in_anticipation: may not be in anticipation (too much into the future).  Please inform a date consistent with the current payroll cycle and the nature of the occurrence (absence or leave type).
+              may_not_be_retroactive: may not be retroactive. The payroll pertaining to this time period was already processed.
+              may_not_occur_after_cancellation: may not occur after the cancellation.
+              overlap: 'inconsistent.  Please note: there is already an event recorded in that time period.'
+              required: has to be informed.  Please select the day, month and year.
+        feedback:
+          attributes:
+            registration_id:
+              may_not_be_active_on_special_payroll: must be marked as 'inactive' in a special payroll.
+              must_be_active_on_regular_payroll: must be set to 'active' in a regular payroll.
+        funding:
+          attributes:
+            percentvalues:
+              inconsistent: must add up to 100.  Please review each individual figure or uncheck this option.
+        healthcareinfo:
+          attributes:
+            totalbeds:
+              inconsistent: inconsistent.  Must be equal or greather than the sum of the emergency room and intensive care available capacity.
+        institution:
+          attributes:
+            abbreviation:
+              may_not_contain_special_characters: may not contain special characters, except underscore _
+        leavetype:
+          attributes:
+            dayspaidcap:
+              days_paid_cap_not_exceed_max_num_days: may not exceed the set number of days.
+            paid:
+              must_be_true_for_vacation: option must be marked in case of vacation.
+        payroll:
+          attributes:
+            amount:
+              present: may not be greather than zero, if the set (standard) scholarship amount methodology is being followed (in other words, in a regular payroll situation)
+            paymentdate:
+              inconsistent: inconsistent!  In a regular payroll, it must occur in the calendar month immediately after the month worked ('reference month').  Enter a valid date or mark the 'special' option, if the case may be.
+            scholarship_id:
+              present: may not be present, if the amount is informed manually (in case the special payroll is marked)
+        personalinfo:
+          attributes:
+            birth_date:
+              may_not_be_in_the_future: may not be in the future.
+            country_id:
+              present: only needs to be informed for those who are foreign citizens (in this case use passport number or foreign national's registration number)
+            othername:
+              present: may be entered in case of diversity only.  That to say, in this context, when the sex (biological characteristic at birth), masculine or feminine) differs from the gender (how this individual chooses to identify his or herself in a social context) or is undefined (X).
+            socialname:
+              present: may be entered (if the person wishes to inform it, not required), only in case of transgender or indeterminate "X".
+            socialsecuritynumber:
+              inconsistent: inconsistent.  The numbering provided does not exist.  Please make sure it is valid.
+            state_id:
+              present: does not apply to foreign nationals.  In this case, this field must remain blank.
+            tin:
+              inconsistent: inconsistent.  The numbering provided does not exist.  Please make sure it is valid.
+        placesavailable:
+          attributes:
+            authorized:
+              exceeds_total_number_of_scholarships: exceeds the maximum number of seats made available, when taking into account the estimated number of places reserved for second-year (and higher) students enrolled in programs which last more than one year.  Please try to enter a smaller quantity in this field.
+        program:
+          attributes:
+            base:
+              unable_to_add_schoolyears_over_max: It is not possible to add school years over the system established limit.  Please remove the excess year(s) and try again.
+            duration:
+              inconsistent: inconsistent with the number of years in the program.
+        programsituation:
+          attributes:
+            recommended_duration:
+              inconsistent: is inconsistent with the number of program years specified.
+        recommendation:
+          attributes:
+            programyear:
+              too_big: is too big in relation to the program's current as well as its recommended duration.
+        registration:
+          attributes:
+            schoolyear_id:
+              not_enough_places_available: there are no authorized vacancies left (or made available).
+            supportingdocumentation:
+              file_size_is_less_than_or_equal_to: exceeded the maximum allowed file size and may not be attached.  You may try to resize the file via image editing software or adjust the appropriate parameters in your scanner prior to saving it, if needed.
+        role:
+          attributes:
+            clerical:
+              explanation: "(office worker)"
+            collaborator:
+              explanation: "(evaluator, assessor, reviewer)"
+            management:
+              explanation: "(manager, director)"
+            name:
+              all_blank: 'must belong to one (and only one) of the categories below: '
+            student:
+              explanation: "(scholarship recipient, graduate student, professional training program participant, medical resident)"
+            teaching:
+              explanation: "(instructor, professor, supervisor)"
+        scholarship:
+          attributes:
+            daystarted:
+              overlap: may not overlap a time interval already recorded in the system.
+            start:
+              must_be_consistent: must be consistent (start must happen before the end date).
+        schoolterm:
+          attributes:
+            active:
+              more_than_one_not_allowed: invalid option for I have detected another schoolterm which is (still) active.  'Uncheck' (deselect) where appropriate and try again.
+        student:
+          attributes:
+            councilmembership:
+              present: must belong to a professional council (guild, association) chosen from the list already recorded in the system.
+        user:
+          attributes:
+            permission_id:
+              required: is required.  User means student (scholarship recipient) in a program.
+        webinfo:
+          attributes:
+            site:
+              incorrect: entered incorrectly.  The prefix http:// is not needed.
     models:
       academiccategory: Academic category
       accreditation: Accreditation

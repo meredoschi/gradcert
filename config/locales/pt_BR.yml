@@ -30,7 +30,6 @@ pt_BR:
         one: 'Não foi possível guardar %{model}: 1 erro'
         other: 'Não foi possível guardar %{model}: %{count} erros'
   activerecord:
-    attributes: 
     errors:
       messages:
         inclusion: ": campo não pode ser incluído da forma indicada.  Tente marcá-lo ou desmarcá-lo, caso seja booleano ('sim ou não').  Também é possível que existam múltiplas opções assinaladas onde somente uma é permitida.  Pode ser também um conflito de lógica com outro campo, que precisaria ser preenchido com um valor válido ou excluído, dependendo da situação."
@@ -70,7 +69,6 @@ pt_BR:
         attributes:
           site:
             incorrect: digitado incorretamente.  Não é necessário iniciar com http://
-    models: 
   date:
     abbr_day_names:
     - Dom
@@ -213,6 +211,7 @@ pt_BR:
       - Conjunto 20
       - Sala 12
       - 5 andar
+  hello: Hello world
   helpers:
     select:
       prompt: Por favor selecione

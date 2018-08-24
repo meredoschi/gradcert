@@ -1,0 +1,32 @@
+---
+pt_BR:
+  Não: Não
+  activerecord:
+    attributes:
+      course:
+        professionalfamily_id: Familia profissional
+      degreetype:
+        name: Nome
+      feedback:
+        name: Nome
+      institution:
+        medicalresidency: Residencia Médica
+      makeupschedule:
+        name: Nome
+      programsituation:
+        name: Nome
+      roster:
+        name: Nome
+      schoolterm:
+        name: Nome
+    errors:
+      delete_restriction: Delete restriction
+    registration:
+      accreditation:
+        renewal: Renewal
+  annotation: Annotation
+  my_program_info: My program info
+  no_programs_found: No programs found
+  normal: Normal
+  scholarship_contract: Scholarship contract
+  'yes': 'Yes'

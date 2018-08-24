@@ -1,0 +1,21 @@
+---
+en:
+  activerecord:
+    attributes:
+      course:
+      degreetype:
+      feedback:
+        name: Name
+      institution:
+        medicalresidency: Medicalresidency
+      makeupschedule:
+        name: Name
+      programsituation:
+        name: Name
+      roster:
+        name: Name
+      schoolterm:
+        name: Name
+    registration:
+      accreditation:
+        renewal: Renewal

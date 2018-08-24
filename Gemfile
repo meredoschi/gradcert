@@ -13,6 +13,7 @@ group :development do
   gem 'railroady' # https://github.com/preston/railroady
   gem 'rspec-rails'
   gem 'spring'
+  gem 'axlsx', '~> 2.0' # i18n-tasks xlsx-report
 end
 
 group :test do

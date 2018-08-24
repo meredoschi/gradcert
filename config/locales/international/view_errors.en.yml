@@ -1,0 +1,8 @@
+---
+en:
+  errors:
+    registrations:
+      no_programs_found: The institution does not have any programs yet.
+      no_students_found: The institution does not have any students yet.
+    students:
+      none_available: In order to enter a new student in the system, first the user record must be created and the contact information properly filled in.

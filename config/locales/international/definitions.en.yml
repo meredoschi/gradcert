@@ -1,0 +1,247 @@
+---
+en:
+  definitions:
+    leavetype:
+      paid:
+        bereavement: Bereavement
+        blood_donation: Blood donation
+        election: Election
+        honeymoon: Honeymoon
+        maternity: Maternity
+        paternity: Paternity
+        sick: Sick
+        vacation: Vacation
+      unpaid:
+        breast_feeding: Breast Feeding
+        personal: Private
+        social_security: Social Security
+    role:
+      names:
+        itstaff: IT Staff
+        medres:
+          clerical: Administrative assistant
+          collaborator: Colaborador da RM
+          localmanager: Local manager
+          localmanagersubstitute: Local manager (alternate)
+          student: Medical resident
+          supervisor: Medical Residency Supervisor
+        pap:
+          clerical: Administrative assistant
+          collaborator: PAP Collaborator
+          localmanager: Local manager
+          localmanagersubstitute: Local manager (alternate)
+          student: Student
+          supervisor: Supervising professor
+    schoolyear:
+      sector_prefix:
+        gradcert: E
+        medres: R
+        pap: PA
+    streetname:
+      designations:
+      - Alley
+      - Annex
+      - Apartment
+      - Approach
+      - Arcade
+      - Avenue
+      - Barrel
+      - Bayou
+      - Beach
+      - Bend
+      - Bluff
+      - Bottom
+      - Boulevard
+      - Box
+      - Branch
+      - Bridge
+      - Brook
+      - Burg
+      - Bypass
+      - Camp
+      - Can
+      - Canoe
+      - Canyon
+      - Cape
+      - Cartway
+      - Causeway
+      - Center
+      - Circle
+      - Cliff
+      - Club
+      - Common
+      - Condos
+      - Corns
+      - Corner
+      - Cottage
+      - Course
+      - Court
+      - Cove
+      - Creek
+      - Crescent
+      - Crest
+      - Crossing
+      - Crossroad
+      - Curve
+      - Dale
+      - Dam
+      - Divide
+      - Drive
+      - East
+      - Estate
+      - Expressway
+      - Extension
+      - Fall
+      - Fence
+      - Ferry
+      - Field
+      - Flat
+      - Ford
+      - Forest
+      - Forge
+      - Fork
+      - Fort
+      - Freeway
+      - Garden
+      - Gate
+      - Gateway
+      - Glass
+      - Glen
+      - Green
+      - Grove
+      - Harbor
+      - Haven
+      - Heights
+      - Highlands
+      - Highway
+      - Hill
+      - Hollow
+      - Inlet
+      - Island
+      - Isle
+      - Joist
+      - Junction
+      - Kame
+      - Key
+      - Knoll
+      - Lake
+      - Land
+      - Landing
+      - Lane
+      - Lawn
+      - Latch
+      - Leaf
+      - Light
+      - Loaf
+      - Lock
+      - Lodge
+      - Loop
+      - Mall
+      - Manor
+      - Meadow
+      - Meadows
+      - Mews
+      - Mill
+      - Mission
+      - Motorway
+      - Mount
+      - Mountain
+      - Neck
+      - Nook
+      - North
+      - Northeast
+      - Northwest
+      - Orchard
+      - Oval
+      - Overpass
+      - Park
+      - Parkway
+      - Pass
+      - Passage
+      - Path
+      - Perch
+      - Pudding
+      - Pike
+      - Pine
+      - Place
+      - Plain
+      - Plaza
+      - Point
+      - Port
+      - Post
+      - Prairie
+      - Radial
+      - Ramp
+      - Ranch
+      - Rapid
+      - Reach
+      - Rest
+      - Ridge
+      - Rise
+      - River
+      - Road
+      - Rock
+      - Route
+      - Row
+      - Run
+      - Shale
+      - Shoal
+      - Shore
+      - Skyway
+      - Sorrel
+      - South
+      - Southeast
+      - Southwest
+      - Sprig
+      - Spring
+      - Spur
+      - Square
+      - Station
+      - Stick
+      - Stone
+      - Stravenue
+      - Stream
+      - Street
+      - Stroll
+      - Summit
+      - Terrace
+      - Trellis
+      - Throughway
+      - Throw
+      - Trace
+      - Track
+      - Trafficway
+      - Trail
+      - Trailer
+      - Tunnel
+      - Turnpike
+      - Underpass
+      - Union
+      - Valley
+      - Viaduct
+      - View
+      - Villa
+      - Village
+      - Ville
+      - Vista
+      - Walk
+      - Wall
+      - Way
+      - Well
+      - Wells
+      - West
+      - Wind
+      - Wharf
+      - Yard
+    user_permission:
+      description:
+        admin: System administrator (full access)
+        adminreadonly: Read-only
+        medres: Resident
+        medrescollaborator: Medical Residency Collaborator
+        medreslocaladm: Local Medical Residency Commission
+        medresmgr: Medical Residency Program Manager
+        pap: PAP Student
+        papcollaborator: PAP Collaborator/Consultant
+        paplocaladm: Local PAP Commission
+        papmgr: PAP Manager
