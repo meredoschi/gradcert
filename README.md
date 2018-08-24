@@ -4,17 +4,19 @@
 
 Back in 2013, I first started writing what would then become **grad**uate **cert**ificate.
 
-It originated as a personal project and steadily grew (developed entirely by myself).  As I learned more about Ruby on Rails, I later wrote some Rspec tests and began to use linters to beautify the code, when feasible.
+It originated as a personal project and steadily grew (coded entirely by myself).  As I learned more about Ruby on Rails, I later wrote some Rspec tests and began to use linters to beautify the code, when feasible.
 
-Its production version (which contains additional code) has been running since April 2016 with generally positive feedback from users.
+The production version (in Portuguese) has been running since April 2016 with generally very positive feedback from users.
+During my stay at the São Paulo Health Department, I've regularly updated it for quality.  I tried and incorporated
+some valuable suggestions and recommendations from users, business analysts and the management staff.
 
 ## ABOUT
 
    I am still in the process of revising and refactoring some of the code for this international version.
 
-   I have manually translated many of the i18n files and keys from Portuguese to English and are included in this update.
-   However, when run in English (the international default) *translation missing* notices may still appear.
-   This is a known situation. 
+   This latest update includes additional text in English (i18n keys).  The translation is *almost* complete.
+
+   So when run in the English locale (the default for the international version) some *translation missing* notices may still appear.
 
 
 ### Matriculating students
