@@ -1,1 +1,11 @@
---- {}
+---
+en:
+  devise-custom:
+    access: Access
+    access_control: Access Control
+    change_your_password: Change your password
+    forgot_your_password: Forgot your password?
+    new_password: New password
+    provide_your_registered_email: Provide your e-mail address (as registered by the system)
+    repeat_new_password: Repeat the new password
+    send_me_instructions_to_generate_a_new_password: Send me instructions to generate a new password
