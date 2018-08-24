@@ -13,11 +13,11 @@
 
 		<% if can? :edit, @contact %>
 
-			<%= link_to t('actions.edit'), edit_contact_path(@contact), class: t('edit')  %> |
+			<%= link_to t('actions.edit'), edit_contact_path(@contact), class: 'editar'  %> |
 
 			<% end %>
 
-			<%= link_to t('actions.back'), contacts_path, class: t('back')  %>
+			<%= link_to t('actions.back'), contacts_path, class: 'voltar'  %>
 
 
 		</div>

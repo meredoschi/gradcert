@@ -161,6 +161,7 @@ en:
   and: and
   annotation: Annotation
   application_title: Graduate certificate
+  by_means_of: via
   cancellations: cancellations
   course: course
   create: create
@@ -177,6 +178,7 @@ en:
       unofrscore: "%d_%b_%y"
       ym: "%B of %Y"
       ymd: "%Y-%m-%d"
+  diversity: diversity
   duration_between: duration between
   entity: Organization
   external_venue: external venue
@@ -186,14 +188,17 @@ en:
       - Suite 20
       - Room 12
       - Fifth floor
+  foreigner: foreign national
   greetings: Greetings
   help: Help
   hour: hour
+  identification: identification
   institution_summary: Institutions
   institution_with_users:
     all: Institutions with users
     medres: Institutions with Med Res users
     pap: Institutions with Pap users
+  main: main
   my:
     f: my
     m: my
@@ -202,11 +207,16 @@ en:
   no_programs_found: No programs found
   normal: Normal
   number_abbreviation: Number abbreviation
+  other:
+    f: other
+    m: other
   people_management: People
+  photo: photo
   responsible_department: Department responsible
   restricted_access: Restricted Access
   scholarship_contract: Scholarship contract
   supplemental_remittance: resend attempts
+  term_of_office: Term of office
   unauthorized:
     actions:
       edit: edit

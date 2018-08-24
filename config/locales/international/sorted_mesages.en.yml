@@ -53,7 +53,6 @@ en:
   bankpayments_by_institution: Bank payments by institution
   bed: bed
   belongs_to: Belongs to
-  by_means_of: by means of
   calculate: calculate
   calculate_payroll: Calculate payroll
   cancellation_already_processed_on_a_previous_payroll: Cancelation already processed in a previous payroll.
@@ -96,7 +95,6 @@ en:
   diploma: Diploma
   discounts: Discounts
   discounts_and_supplements: Discounts and Supplements
-  diversity: diversity
   early_cancellation: early cancellation
   education: Education
   end_of_report: End of report
@@ -111,7 +109,6 @@ en:
   fill_in_if_applicable: Please fill in, if applicable
   filter_by_profile: Filtrar by profile (choose only one)
   for_passport_only: For passport only
-  foreigner: foreigner
   foreigners: foreigner
   from: from
   function: function
@@ -131,7 +128,6 @@ en:
   has_one: Has one
   health_leaves: Health leaves
   hours: hours
-  identification: identification
   if_present_in_the_system: "(if already present in the system)"
   if_student: If student
   in_case_of_doubt_please_contact_the_team: In case of doubt, please contact the team.
@@ -167,7 +163,6 @@ en:
   legend: legend
   list: list
   listed_to_be_paid: Listed to be paid
-  main: main
   main_attributes: highlighted characteristics
   manager: manager
   mandatory: mandatory
@@ -232,7 +227,6 @@ en:
   personal_info: Personal info
   personal_leaves_amount: Personal leaves amount
   phone: phone
-  photo: photo
   place_a_program_under_review: Place a program under review
   please_provide_if_student: Mandatory data for a student
   please_tick_one: Please tick one option
@@ -324,7 +318,6 @@ en:
   teacher: Instructor responsible
   teaching: Teaching
   teaching_info: Teaching information
-  term_of_office: Term of office
   theoretical: Theoretical
   this_warning_will_automatically_disappear: This warning will disappear automatically when the situation that originated it does not occur again.  This is normal.
   tie_freshman_student_to_their_schoolyear: Allocate freshman student to her or his program
