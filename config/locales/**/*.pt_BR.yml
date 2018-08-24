@@ -20,13 +20,13 @@ pt_BR:
       schoolterm:
         name: Nome
     errors:
-      delete_restriction: Delete restriction
+      delete_restriction: Restrição de remoção
     registration:
       accreditation:
-        renewal: Renewal
-  annotation: Annotation
-  my_program_info: My program info
-  no_programs_found: No programs found
+        renewal: Renovação
+  annotation: Annotação
+  my_program_info: Informação de meu programa
+  no_programs_found: Nenhum programa encontrado
   normal: Normal
-  scholarship_contract: Scholarship contract
-  'yes': 'Yes'
+  scholarship_contract: Contrato de bolsa de estudos
+  'yes': Sim

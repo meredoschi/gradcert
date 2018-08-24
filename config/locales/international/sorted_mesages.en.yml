@@ -111,7 +111,7 @@ en:
   'false': false
   favorable_assessment: favorable assessment
   file: File
-  file_not_generated_yet: 'Aviso: ainda não foi gerado (ou regerado) o arquivo.'
+  file_not_generated_yet: 'Warning: file was not generated (or generated again) yet.'
   file_was_prepared: 'Reminder: file processed.'
   fill_in_if_applicable: Please fill in, if applicable
   filter_by_profile: Filtrar by profile (choose only one)
@@ -336,7 +336,7 @@ en:
   theoretical: Theoretical
   this_warning_will_automatically_disappear: This warning will disappear automatically when the situation that originated it does not occur again.  This is normal.
   tie_freshman_student_to_their_schoolyear: Allocate freshman student to her or his program
-  to: a
+  to: to
   to_be_done_in_this_order: To be done in this order
   to_be_paid: to be paid.
   total: total

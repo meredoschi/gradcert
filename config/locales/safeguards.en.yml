@@ -1,6 +1,6 @@
 ---
 en:
   contact_removal_lock:
-    student: A remoção do contato não é permitida se houverem dados de bolsista cadastrados.
+    student: It is not possible to remove a contact when the person has a scholarship record in the system.
   student_removal_lock:
-    registration: A remoção do bolsista não é permitida se já tiver sido matriculado.
+    registration: A person's scholarship record may not be removed if they have a registration entered in the system.

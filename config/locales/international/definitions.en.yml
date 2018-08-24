@@ -20,7 +20,7 @@ en:
         itstaff: IT Staff
         medres:
           clerical: Administrative assistant
-          collaborator: Colaborador da RM
+          collaborator: MRes Collaborator
           localmanager: Local manager
           localmanagersubstitute: Local manager (alternate)
           student: Medical resident
@@ -34,8 +34,8 @@ en:
           supervisor: Supervising professor
     schoolyear:
       sector_prefix:
-        gradcert: E
-        medres: R
+        gradcert: GC
+        medres: MR
         pap: PA
     streetname:
       designations:

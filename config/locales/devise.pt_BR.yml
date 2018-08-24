@@ -10,7 +10,7 @@ pt_BR:
       inactive: A sua conta não foi ativada ainda.
       invalid: Usuário ou senha inválida.
       invalid_token: Token de autenticação inválido.
-      last_attempt: You have one more attempt before your account is locked.
+      last_attempt: Você dispõe de mais uma tentativa.  Em caso de dados incorretos, seu acesso será bloqueado.
       locked: Sua conta está bloqueada.
       not_found_in_database: Email ou senha inválida.
       timeout: A sua sessão expirou, por favor faça login novamente para continuar.
@@ -41,7 +41,7 @@ pt_BR:
       update_needs_confirmation: Você atualizou sua conta com sucesso, mas nós precisamos verificar seu endereço de e-mail. Por favor, verifique seus e-mails e clique no link de confirmação para finalizar a criação da sua conta.
       updated: Você atualizou sua conta com sucesso.
     sessions:
-      already_signed_out: Signed out successfully.
+      already_signed_out: Já havia saído do sistema.
       signed_in: Autenticado com sucesso.
       signed_out: Logout feito com sucesso.
     unlocks:

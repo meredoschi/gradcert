@@ -3,7 +3,7 @@ en:
   activerecord:
     attributes:
       academiccategory:
-        name: Nome
+        name: Name
       accreditation:
         comment: Comment
         confirmed: Situation confirmed
@@ -21,7 +21,7 @@ en:
         addr: Address
         complement: Complement
         country: Country
-        header: Local
+        header: Header
         internal: Internal
         municipality: City
         municipality_id: City
@@ -59,7 +59,7 @@ en:
         confirmed: Confirmed
         discount: Withheld (discount)
         event_id: Event
-        net: Impacto
+        net: Net impact
         payroll_id: Payroll
         registration_id: Scholarship recipient registration
         skip: Absent during the entire payroll month
@@ -136,7 +136,7 @@ en:
         stateregion_id: Region of the state in which it is active, primarily
         userprofile: Typical profile of users served
       college:
-        area: Área (m²)
+        area: Area (m²)
         classrooms: Classrooms
         foodplaces: Places to eat
         gradcertificatecourses: Graduate certificate courses offered
@@ -147,7 +147,7 @@ en:
         sportscourts: Sports courts
       completion:
         dnf: desisted (did not finish)
-        failure: reprovado
+        failure: failure
         inprogress: course in progress
         mustmakeup: must make up
         pass: approved (passed)
@@ -334,7 +334,7 @@ en:
         monthworked: Reference month
         pap: PAP
         paymentdate: Processing date
-        purse: Bolsa
+        purse: Purse
         scholarship_id: Stipulated gross amount
         special: Special
         taxation_id: Taxation
@@ -453,7 +453,7 @@ en:
         workload_change_requested: Workload alteration recommended
       programsupervisor:
         alternate: Alternate
-        lead: Principal
+        lead: Lead
       project:
         description: Description
         name: Project name
@@ -495,7 +495,7 @@ en:
         suspended: Suspended
         virtual:
           accountingabsences: Absences (for accounting purposes)
-          actualabsences: Ausências
+          actualabsences: Actual absences
           totalabsences: Absences total
           totalannotations: Annotations total
       registrationkind:
@@ -665,7 +665,7 @@ en:
         reset_password_sent_at: Time in which the reset password message was sent
         sign_in_count: Total sign in count
       vacancyallocation:
-        institution_id: instituição
+        institution_id: Institution
         limit: limit
         schoolterm_id: school term
       webinfo:

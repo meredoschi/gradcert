@@ -2,8 +2,8 @@
 en:
   unauthorized:
     edit:
-      all: 'Operação não permitida: [%{action} %{subject}]. Você não possui permissão para editar o registro solicitado.'
+      all: 'Operation not allowed: [%{action} %{subject}].  You do not have permission to edit the requested record.'
     index:
-      all: 'Operação não permitida: [%{action} %{subject}]. Você não possui permissão para ver a lista de registros solicitada.'
+      all: 'Operation not allowed: [%{action} %{subject}].  You do not have permission to view the list of records requested.'
     show:
-      all: 'Operação não permitida: [%{action} %{subject}]. Você não possui permissão para ver os detalhes do registro solicitado.'
+      all: 'Operation not allowed: [%{action} %{subject}].  You do not have permission to view the record requested.'

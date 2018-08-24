@@ -41,8 +41,8 @@ en:
       f: confirmed
       m: confirmed
     created:
-      f: criada
-      m: criado
+      f: created
+      m: created
     deannotated:
       f: annotation cleared
       m: annotation cleared

@@ -95,7 +95,7 @@ en:
       almost_x_years:
         one: almost 1 year
         other: almost %{count} years
-      half_a_minute: meio minute
+      half_a_minute: half a minute
       less_than_x_minutes:
         one: less than a minute
         other: less than %{count} minutes
@@ -240,7 +240,7 @@ en:
       hms: "%H:%M:%S"
       long: "%A, %d of %B %Y, %H:%Mh"
       short: "%d/%m, %H:%M hs"
-    pm: pms
+    pm: pm
   unauthorized:
     manage:
       all: Not allowed to %{action} %{subject}.

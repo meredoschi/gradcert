@@ -2,25 +2,25 @@
 en:
   area:
     gradcert:
-      abbreviation: ESP
-      fullname: Programa de Especialização
+      abbreviation: GC
+      fullname: Graduate Certificate Program
     medres:
-      abbreviation: RM
-      fullname: Programa de Residência Médica
+      abbreviation: MR
+      fullname: Medical Residency Program
     pap:
       abbreviation: PAP
-      fullname: Programa de Aprimoramento Profissional
-  cloning_process_start: Início do processo de clonagem
-  current schoolterm: período letivo atual
-  current_program: Programa atual (pai)
-  current_programs_detailed_info: Detalhamento dos programas atuais
-  data_saved: Dados salvos.
-  new_program: Novo programa
-  next_available_id: próximo identificador disponível
-  next_available_program_id: Próximo identificador de programa disponível
-  next_year_program_preparation_guide: Guia de preparo dos programas do próximo ano
-  number_of_programs_by_institution: número de programas por instituição
-  please_check: favor verificar
-  table: tabela
-  undefined: indefinido
-  warning_data_not_saved: Aviso dados não foram salvos
+      fullname: Professional Advancement Program
+  cloning_process_start: Cloning process start
+  current schoolterm: Current schoolterm
+  current_program: Current program (ancestor)
+  current_programs_detailed_info: Current program details
+  data_saved: Data saved.
+  new_program: New program
+  next_available_id: Next available identifier
+  next_available_program_id: Next available program identifier
+  next_year_program_preparation_guide: Next year program preparation guide
+  number_of_programs_by_institution: Number of programs by institution
+  please_check: please verify
+  table: table
+  undefined: undefined
+  warning_data_not_saved: Your attention please, data not saved

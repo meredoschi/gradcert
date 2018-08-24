@@ -211,7 +211,7 @@ pt_BR:
       - Conjunto 20
       - Sala 12
       - 5 andar
-  hello: Hello world
+  hello: Olá
   helpers:
     select:
       prompt: Por favor selecione
@@ -290,7 +290,7 @@ pt_BR:
       two_words_connector: " e "
       words_connector: ", "
   time:
-    am: am
+    am: da manhã (am)
     formats:
       compact: "%d/%b/%y, %H:%M:%S"
       default: "%A, %d de %B de %Y, %H:%Mh"
@@ -298,7 +298,7 @@ pt_BR:
       hms: "%H:%M:%S"
       long: "%A, %d de %B de %Y, %H:%Mh"
       short: "%d/%m, %H:%M hs"
-    pm: pm
+    pm: da tarde (pm)
   unauthorized:
     actions:
       edit: editar
