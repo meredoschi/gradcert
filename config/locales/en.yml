@@ -3,178 +3,178 @@ en:
   activemodel:
     format: "%{attribute} %{message}"
     messages:
-      accepted: tem de ser aceite
-      blank: tem que constar
-      confirmation: não coincide com a confirmação
-      empty: não pode estar vazio
-      equal_to: tem de ser igual a %{count}
-      even: tem de ser par
-      exclusion: é reservado
-      greater_than: tem de ser maior que %{count}
-      greater_than_or_equal_to: tem de ser maior ou igual a %{count}
-      inclusion: não está incluído na lista
-      invalid: é inválido
-      less_than: tem de ser menor que %{count}
-      less_than_or_equal_to: tem de ser menor ou igual a %{count}
-      not_a_number: não é um numeral
-      not_an_integer: tem de ser um inteiro
-      odd: tem de ser ímpar
-      record_invalid: 'A validação falhou: %{errors}'
-      taken: não está disponível (pois este dado já consta do sistema)
-      too_long: é demasiado grande (o máximo é de %{count} caracteres)
-      too_short: é demasiado pequeno (o mínimo é de %{count} caracteres)
-      wrong_length: comprimento errado (deve ter %{count} caracteres)
+      accepted: must be agreed to
+      blank: must be present (may not be blank)
+      confirmation: does not match confirmation
+      empty: may not be empty
+      equal_to: must equal %{count}
+      even: must be even
+      exclusion: is reserved (taken)
+      greater_than: must be greather than %{count}
+      greater_than_or_equal_to: must be greather than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be an odd number
+      record_invalid: 'The validation failed: %{errors}'
+      taken: is not available (since this data is already in the system)
+      too_long: is too long (there is a %{count} character limit)
+      too_short: is too short (there must be %{count} characters at least)
+      wrong_length: wrong length (it must be %{count} characters long)
     template:
-      body: 'Por favor, verifique os seguintes campos:'
+      body: 'Please check the following fields:'
       header:
-        one: 'Não foi possível guardar %{model}: 1 erro'
-        other: 'Não foi possível guardar %{model}: %{count} erros'
+        one: 'Unable to save %{model} due to an error:'
+        other: 'Unable to save %{model}: due to %{count} errors'
   activerecord:
     errors:
       messages:
-        inclusion: ": campo não pode ser incluído da forma indicada.  Tente marcá-lo ou desmarcá-lo, caso seja booleano ('sim ou não').  Também é possível que existam múltiplas opções assinaladas onde somente uma é permitida.  Pode ser também um conflito de lógica com outro campo, que precisaria ser preenchido com um valor válido ou excluído, dependendo da situação."
+        inclusion: ": field may not be added this way.  Try to set (mark, click) or unmark it, in case it is a boolean ('yes or no').  It may also happen that there are multiple options checked but only one allowed.  It could also be a logic conflict with another field, which would have to be filled with the correct value, or perhaps removed, according to the situation."
       pap1form:
         attributes:
           num_volumes:
-            present: não pode ser informado se o campo "biblioteca" estiver desmarcado.
+            present: may not be entered when the field "library" is not marked.
           outros_equipamentos:
-            present: não podem ser informados se a opção "possui outros equipamentos?" estiver desmarcada.
+            present: may not be entered when the option "has other equipment?" is not marked.
           quais_beneficios_alunos:
-            present: não podem ser informados se a opção "fornece outros benefícios?" estiver desmarcada.
+            present: may not be entered when the option "provides other benefits?" is not marked.
           quais_modalidades_ensino_sup:
-            present: não podem ser detalhadas se vocẽ não "ticou" sim na opção "possui outras modalidades de ensino superior".
+            present: may not be detailed unless you ticked yes in the option "provides other kinds of higher education?".
       role:
         attributes:
           clerical:
-            inclusion: apenas um tipo de perfil pode ser escolhido.
+            inclusion: only one type of role may be chosen.
           management:
-            inclusion: apenas um tipo de perfil pode ser escolhido.
+            inclusion: only one type of role may be chosen.
           teaching:
-            inclusion: apenas um tipo de perfil pode ser escolhido.
+            inclusion: only one type of role may be chosen.
       user:
         attributes:
           admin:
-            inclusion: só pode ser incluído se for o único.
+            inclusion: may only be added if unique
           adminreadonly:
-            inclusion: só pode ser incluído se for o único.
+            inclusion: may only be added if unique
           pap:
-            inclusion: só pode ser incluído se for o único.
+            inclusion: may only be added if unique
           paprh:
-            inclusion: só pode ser incluído se for o único.
+            inclusion: may only be added if unique
           resmed:
-            inclusion: só pode ser incluído se for o único.
+            inclusion: may only be added if unique
           resmedrh:
-            inclusion: só pode ser incluído se for o único.
+            inclusion: may only be added if unique
       webinfo:
         attributes:
           site:
-            incorrect: digitado incorretamente.  Não é necessário iniciar com http://
+            incorrect: entered incorrectly.  The prefix http:// is not needed.
   date:
-    abbr_day_names: '["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "S\u00E1b"]'
-    abbr_month_names: '[nil, "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]'
-    day_names: '["Domingo", "Segunda-feira", "Ter\u00E7a-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "S\u00E1bado"]'
+    abbr_day_names: '["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]'
+    abbr_month_names: '[nil, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]'
+    day_names: '["Sunday", "Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday"]'
     formats:
       default: "%d/%m/%Y"
-      long: "%d de %B de %Y"
+      long: "%d of %B %Y"
       seeder: "%-Y-%m-%d"
-      short: "%d de %B"
+      short: "%d of %B"
       underscore: "%d_%b_%y"
-    month_names: '[nil, "Janeiro", "Fevereiro", "Mar\u00E7o", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]'
+    month_names: '[nil, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]'
     order: "[:day, :month, :year]"
   datetime:
     distance_in_words:
       about_x_hours:
-        one: aproximadamente 1 hora
-        other: aproximadamente %{count} horas
+        one: approximately 1 hour
+        other: approximately %{count} hours
       about_x_months:
-        one: aproximadamente 1 mês
-        other: aproximadamente %{count} meses
+        one: approximately 1 month
+        other: approximately %{count} months
       about_x_years:
-        one: aproximadamente 1 ano
-        other: aproximadamente %{count} anos
+        one: approximately 1 year
+        other: approximately %{count} years
       almost_x_years:
-        one: quase 1 ano
-        other: quase %{count} anos
-      half_a_minute: meio minuto
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: meio minute
       less_than_x_minutes:
-        one: menos de um minuto
-        other: menos de %{count} minutos
+        one: less than a minute
+        other: less than %{count} minutes
       less_than_x_seconds:
-        one: menos de 1 segundo
-        other: menos de %{count} segundos
+        one: less than 1 second
+        other: less than %{count} seconds
       over_x_years:
-        one: mais de 1 ano
-        other: mais de %{count} anos
+        one: greather than 1 year
+        other: greather than %{count} years
       x_days:
-        one: 1 dia
-        other: "%{count} dias"
+        one: 1 day
+        other: "%{count} days"
       x_minutes:
-        one: 1 minuto
-        other: "%{count} minutos"
+        one: 1 minute
+        other: "%{count} minutes"
       x_months:
-        one: 1 mês
-        other: "%{count} meses"
+        one: 1 month
+        other: "%{count} months"
       x_seconds:
-        one: 1 segundo
-        other: "%{count} segundos"
+        one: 1 second
+        other: "%{count} seconds"
     prompts:
-      day: Dia
-      hour: Hora
-      minute: Minuto
-      month: Mês
-      second: Segundo
-      year: Ano
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Second
+      year: Year
   errors:
     format: "%{attribute} %{message}"
     messages:
-      accepted: tem de ser aceite
-      blank: tem que constar
-      confirmation: não coincide com a confirmação
-      empty: não pode estar vazio
-      equal_to: tem de ser igual a %{count}
-      even: tem de ser par
-      exclusion: é reservado
-      greater_than: tem de ser maior que %{count}
-      greater_than_or_equal_to: tem de ser maior ou igual a %{count}
-      inclusion: não está incluído na lista
-      invalid: é inválido
-      less_than: tem de ser menor que %{count}
-      less_than_or_equal_to: tem de ser menor ou igual a %{count}
-      not_a_number: não é um numeral
-      not_an_integer: tem de ser um inteiro
-      odd: tem de ser ímpar
-      record_invalid: 'A validação falhou: %{errors}'
-      taken: não está disponível (pois este dado já consta do sistema)
-      too_long: é demasiado grande (o máximo é de %{count} caracteres)
-      too_short: é demasiado pequeno (o mínimo é de %{count} caracteres)
-      wrong_length: comprimento errado (deve ter %{count} caracteres)
+      accepted: must be agreed to
+      blank: must be present (may not be blank)
+      confirmation: does not match confirmation
+      empty: may not be empty
+      equal_to: must equal %{count}
+      even: must be even
+      exclusion: is reserved (taken)
+      greater_than: must be greather than %{count}
+      greater_than_or_equal_to: must be greather than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be an odd number
+      record_invalid: 'The validation failed: %{errors}'
+      taken: is not available (since this data is already in the system)
+      too_long: is too long (there is a %{count} character limit)
+      too_short: is too short (there must be %{count} characters at least)
+      wrong_length: wrong length (it must be %{count} characters long)
     template:
-      body: 'Por favor, verifique os seguintes campos:'
+      body: 'Please check the following fields:'
       header:
-        one: 'Não foi possível guardar %{model}: 1 erro'
-        other: 'Não foi possível guardar %{model}: %{count} erros'
+        one: 'Unable to save %{model} due to an error:'
+        other: 'Unable to save %{model}: due to %{count} errors'
   hello: Hello world
   helpers:
     select:
-      prompt: Por favor selecione
+      prompt: Please select
     submit:
-      create: Criar %{model}
-      submit: Gravar %{model}
-      update: Atualizar %{model}
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
   number:
     currency:
       format:
-        delimiter: "."
+        delimiter: ","
         format: "%u%n"
         precision: '2'
-        separator: ","
+        separator: "."
         significant: Significant
         strip_insignificant_zeros: Strip insignificant zeros
-        unit: R$
+        unit: "$"
     format:
-      delimiter: "."
+      delimiter: ","
       precision: '3'
-      separator: ","
+      separator: "."
       significant: Significant
       strip_insignificant_zeros: Strip insignificant zeros
     human:
@@ -182,18 +182,18 @@ en:
         format: "%n %u"
         units:
           billion:
-            one: bilhão
-            other: bilhões
+            one: billion
+            other: billion
           million:
-            one: milhão
-            other: milhões
+            one: million
+            other: million
           quadrillion:
-            one: quadrilhão
-            other: quadrilhões
-          thousand: mil
+            one: quadrillion
+            other: quadrillion
+          thousand: thousand
           trillion:
-            one: trilhão
-            other: trilhões
+            one: trillion
+            other: trillion
           unit: Unit
       format:
         delimiter: Delimiter
@@ -217,37 +217,37 @@ en:
       format:
         delimiter: Delimiter
   ordinal:
-    eighth: Oitavo
-    fifth: Quinto
-    first: Primeiro
-    fourth: Quarto
-    ninth: Nono
-    second: Segundo
-    seventh: Sétimo
-    sixth: Sexto
-    third: Terceiro
+    eighth: Eight
+    fifth: Fifth
+    first: First
+    fourth: Fourth
+    ninth: Ninth
+    second: Second
+    seventh: Seventh
+    sixth: Sixth
+    third: Third
   support:
     array:
-      last_word_connector: ", e"
-      two_words_connector: " e "
+      last_word_connector: ", and"
+      two_words_connector: " and "
       words_connector: ", "
   time:
     am: am
     formats:
       compact: "%d/%b/%y, %H:%M:%S"
-      default: "%A, %d de %B de %Y, %H:%Mh"
-      full: "%A, %d de %B de %Y, %H:%M:%S"
+      default: "%A, %d of %B %Y, %H:%Mh"
+      full: "%A, %d of %B %Y, %H:%M:%S"
       hms: "%H:%M:%S"
-      long: "%A, %d de %B de %Y, %H:%Mh"
+      long: "%A, %d of %B %Y, %H:%Mh"
       short: "%d/%m, %H:%M hs"
-    pm: pm
+    pm: pms
   unauthorized:
     manage:
-      all: Sem autorização para %{action} %{subject}.
+      all: Not allowed to %{action} %{subject}.
   views:
     pagination:
-      first: "&laquo; Primeira"
-      last: Última &raquo;
-      next: Próxima &rsaquo;
-      previous: "&lsaquo; Anterior"
+      first: "&laquo; First"
+      last: Last &raquo;
+      next: Next &rsaquo;
+      previous: "&lsaquo; Previous"
       truncate: "&hellip;"
