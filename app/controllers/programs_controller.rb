@@ -97,7 +97,7 @@ class ProgramsController < ApplicationController
     # 	 	@program.schoolyears.build
 
     for i in 1..@maxduration
-      @program.schoolyears.build(programyear: i, grantsrequested: 0, grants: 0, scholarships: 0, maxenrollment: 0, theory: 0, practice: 0)
+      @program.schoolyears.build(programyear: i, pass: 0, theory: 0, practice: 0)
     end
 
     @program.build_accreditation

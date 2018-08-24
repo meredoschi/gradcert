@@ -163,6 +163,7 @@ en:
   application_title: Graduate certificate
   cancellations: cancellations
   course: course
+  create: create
   date:
     formats:
       compact: "%-d-%b-%y"
@@ -178,6 +179,7 @@ en:
       ymd: "%Y-%m-%d"
   duration_between: duration between
   entity: Organization
+  external_venue: external venue
   faker:
     address:
       secondary_address:
@@ -199,7 +201,9 @@ en:
   name: Name
   no_programs_found: No programs found
   normal: Normal
+  number_abbreviation: Number abbreviation
   people_management: People
+  responsible_department: Department responsible
   restricted_access: Restricted Access
   scholarship_contract: Scholarship contract
   supplemental_remittance: resend attempts

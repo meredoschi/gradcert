@@ -56,7 +56,7 @@
 
 
       <div class="row links">
-        <%= link_to_add_association t('actions.new.m')+' '+tm('schoolyears'), f, :schoolyears, class: "criar" %>
+        <%= link_to_add_association t('actions.new.m')+' '+tm('schoolyear').downcase, f, :schoolyears, class: "criar" %>
       </div>
     </div>
 
@@ -71,8 +71,8 @@
   <% end %>
 
   <div class="row actions">
-    <%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
-    <%= link_to 'Anular', programs_path, class: "anular" %>
+    <%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
+    <%= link_to t('actions.cancel'), programs_path, class: "anular" %>
   </div>
 
   <% end %>

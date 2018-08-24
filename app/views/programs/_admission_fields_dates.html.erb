@@ -9,7 +9,9 @@
 	<div class="medium-9 columns">
 
 
-		<%= f.date_select(:start, prompt: true, start_year: Date.today.year, end_year: Date.today.year-1, :include_blank => true) %>
+		<%#= f.date_select(:start, prompt: true, start_year: Date.today.year, end_year: Date.today.year-1, :include_blank => true) %>
+
+		<%= f.date_select(:start, prompt: true, :include_blank => true) %>
 
 
 	</div>

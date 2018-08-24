@@ -73,10 +73,13 @@ en:
     formats:
       default: "%d/%m/%Y"
       long: "%d of %B %Y"
+      order:
+      - :day
+      - :month
+      - :year
       seeder: "%-Y-%m-%d"
       short: "%d of %B"
       underscore: "%d_%b_%y"
-    order: "[:day, :month, :year]"
   datetime:
     distance_in_words:
       about_x_hours:

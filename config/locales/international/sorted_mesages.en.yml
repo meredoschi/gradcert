@@ -72,7 +72,6 @@ en:
   contract_enforcement_period: contract enforcement period
   convocation_rate: convocation rate
   country_of_citizenship: Nationality (contry)
-  create: create
   created_at: 'Date the record was created: '
   current_registration: current registration
   current_situation: Current status
@@ -103,7 +102,6 @@ en:
   end_of_report: End of report
   entered_on: entered on
   event_creation_reminder_no_active_registrations_found: 'Reminder: there must be at least one scholarship recipient active in order for events to be created.'
-  external_venue: course offered on an external venue
   facilities: facilities
   'false': false
   favorable_assessment: favorable assessment
@@ -205,7 +203,6 @@ en:
   nothing_due: Nothing due
   num_authorized_scholarships_for_incoming_students: Authorized scholarships for incoming students
   num_days_worked_before_cancelling: Number of days worked prior to cancellation
-  number_abbreviation: "#"
   of_the_team: of the team
   of_which_inactive: of which inactive
   of_which_still_active: of which still active
@@ -284,7 +281,6 @@ en:
   required: please fill in
   research: research
   resend: resend
-  responsible_department: Department responsible
   restricted: data entry restricted
   result: result
   retroactive_cancellation_after_payroll_was_processed: retroactive cancellation after payroll was processed
