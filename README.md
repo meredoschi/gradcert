@@ -2,13 +2,7 @@
 
 ## HISTORICAL BACKGROUND
 
-Back in 2013, I first started writing what would then become **grad**uate **cert**ificate.
-
-It originated as a personal project and steadily grew (coded entirely by myself).  As I learned more about Ruby on Rails, I later wrote some Rspec tests and began to use linters to beautify the code, when feasible.
-
-The production version (in Portuguese) has been running since April 2016 with generally very positive feedback from users.
-During my stay at the São Paulo Health Department, I've regularly updated it for quality.  I tried and incorporated
-some valuable suggestions and recommendations from users, business analysts and the management staff.
+Back in 2013, I first started writing what would then become **grad**uate **cert**ificate.  It originated as a personal project and steadily grew.  I've coded and installed the production version, which has been running in São Paulo (Brazil) since April 2016.  The feedback from users and the teams involved was generally very positive.  The production version uses Portuguese as the default language and the codebase is slightly different.  It contains various *rake tasks*, additional settings and bank payment functionality.
 
 ## ABOUT
 
