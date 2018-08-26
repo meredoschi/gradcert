@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Phone.create!([
                 { main: '11 5555-3275', mobile: '', other: '', contact_id: 1 },
                 { main: '11 5555-0450', mobile: '11 95555-0462', other: '', contact_id: 2 },

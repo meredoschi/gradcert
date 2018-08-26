@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Localized
 Professionalspecialty.create!([
                                 { name: I18n.t('sample.specialty.biology'), pap: true, professionalarea_id: 1 },

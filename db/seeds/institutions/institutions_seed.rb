@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Institution.create!([
                       { name: 'Example Organization', institutiontype_id: 1,
                         address_id: 1, phone_id: 1, webinfo_id: 1, accreditation_id: 1,

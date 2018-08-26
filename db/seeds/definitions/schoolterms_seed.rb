@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'date'
-# if Date.today.month>2
-#    start_y=Date.today.year+1
+# if Time.zone.today.month>2
+#    start_y=Time.zone.today.year+1
 # else
-#    start_y=Date.today.year
+#    start_y=Time.zone.today.year
 # end
 #
 # start_y = '2018'
@@ -21,10 +21,10 @@ require 'date'
 start_m = '3'
 start_d = '1'
 
-start_y = if Date.today.month > 2
-            Date.today.year + 1
+start_y = if Time.zone.today.month > 2
+            Time.zone.today.year + 1
           else
-            Date.today.year
+            Time.zone.today.year
           end
 
 term_duration = 2 # in years (for the longest program)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Streetname.create!([
                      { designation: 'Aeroporto' },
                      { designation: 'Alameda' },

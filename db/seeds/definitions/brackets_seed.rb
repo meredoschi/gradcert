@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Bracket.create!([
                   { num: 1, start_cents: 190_398, finish_cents: 282_665, unlimited: false, taxation_id: 1, rate: '7.5', deductible_cents: 14_280 },
                   { num: 2, start_cents: 282_666, finish_cents: 375_105, unlimited: false, taxation_id: 1, rate: '15.0', deductible_cents: 35_480 },

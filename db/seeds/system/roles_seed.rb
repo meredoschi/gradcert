@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Internationalized
 named = 'definitions.role.names.'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Municipality.create!([
                        { name: 'Água Boa', stateregion_id: 64, codmuni: 201, capital: false, regionaloffice_id: nil, asciiname: 'Agua Boa', namewithstate: 'Água Boa / MT', asciinamewithstate: 'Agua Boa / MT' },
                        { name: 'Água Branca', stateregion_id: 101, codmuni: 102, capital: false, regionaloffice_id: nil, asciiname: 'Agua Branca', namewithstate: 'Água Branca / AL', asciinamewithstate: 'Agua Branca / AL' },

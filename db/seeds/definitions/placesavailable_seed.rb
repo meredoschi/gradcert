@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Sample data for 2018
 next_term = Schoolterm.where(start: '2018-3-1').where(pap: true).first
 

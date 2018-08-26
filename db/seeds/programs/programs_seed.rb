@@ -2,11 +2,11 @@
 
 # Program(id:  institution_id:  pap: boolean, medres: boolean, address_id:  internal: boolean, accreditation_id:  admission_id:  schoolterm_id:  professionalspecialty_id:  previouscode: string, parentid:  gradcert: boolean)
 
-if Date.today.month>2
-   start_y=Date.today.year+1
-else
-   start_y=Date.today.year
-end
+start_y = if Time.zone.today.month > 2
+            Time.zone.today.year + 1
+          else
+            Time.zone.today.year
+          end
 
 # start_y = '2018'
 start_m = '3'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Internationalized
 desc = 'definitions.user_permission.description.'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Institutiontype.create!([
                           { name: 'Comunitária' },
                           { name: 'Filantrópica' },

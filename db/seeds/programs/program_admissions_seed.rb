@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Admission(id:  start: date, finish: date, created_at: datetime, updated_at: datetime, program_id:  grantsasked:  grantsgiven:  accreditedgrants:  appealsgrantedfinalexam:  appealsdeniedfinalexam:  candidates:  absentfirstexam:  absentfinalexam:  passedfirstexam:  appealsdeniedfirstexam:  appealsgrantedfirstexam:  admitted:  convoked:  insufficientfinalexamgrade: integer)
 
 Admission.create!([

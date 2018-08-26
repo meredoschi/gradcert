@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Country.create!([
                   { brname: 'Afeganistão', name: 'Afghanistan',
                     a2: 'AF', a3: 'AFG', number: 4 },

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Stateregion.create!([
                       { name: 'Agreste Alagoano', state_id: 2 },
                       { name: 'Agreste Paraibano', state_id: 15 },

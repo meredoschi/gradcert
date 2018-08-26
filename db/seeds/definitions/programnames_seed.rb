@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Programname.create!([
                       { name: 'Tropical biology', pap: true },
                       { name: 'Clinical Psychology', pap: true },
