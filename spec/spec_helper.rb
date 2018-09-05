@@ -23,6 +23,9 @@ require File.expand_path("../../config/environment", __FILE__)
 # http://www.rubydoc.info/gems/money-rails/0.8.1
 require "money-rails/test_helpers"
 
+# https://github.com/teamcapybara/capybara/blob/3.7_stable/README.md#using-capybara-with-rspec
+require 'capybara/rspec'
+
 # ------------
 # http://stackoverflow.com/questions/14402067/how-to-call-an-app-helper-method-from-an-rspec-test-in-rails
 def helper

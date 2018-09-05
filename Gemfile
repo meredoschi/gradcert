@@ -31,6 +31,7 @@ group :test, :development do
   gem 'rubocop' # August 2017
   gem 'shoulda-matchers', '~> 3.1' # July 2017
   gem 'json_converter', '~> 0.0.0' # November 2017
+  gem 'capybara' # September 2018
 end
 
 # General
