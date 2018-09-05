@@ -25,7 +25,7 @@ group :test do
 end
 
 group :test, :development do
-  gem 'factory_bot_rails',  :require => false
+  gem 'factory_bot_rails', require: false
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
   gem 'rubocop' # August 2017
@@ -80,7 +80,7 @@ gem 'tzinfo', '~> 1.2.1'
 gem 'validates_overlap' # April 2016
 gem 'validates_timeliness', '~> 4.0'
 gem 'yard' # Documentation
-gem 'zip-zip'
+#gem 'zip-zip'
 
 # gem 'holidays'
 # gem 'validates_existence', '>= 0.4'

@@ -1,5 +1,8 @@
 # Adapted from:  http://dennisreimann.de/blog/seeds-for-different-environments/
 
+# https://stackoverflow.com/questions/25648456/i-cant-seem-to-add-config-include-factorygirlsyntaxmethods-to-my-rspec-co
+require 'factory_bot'
+
 def model_name_i18n(name)
   I18n.t('activerecord.models.' + name).pluralize.capitalize
 end

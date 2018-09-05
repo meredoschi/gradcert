@@ -7,7 +7,8 @@ require 'spec_helper'
 require 'rspec/rails'
 # http://www.rubydoc.info/gems/factory_girl/file/GETTING_STARTED.md#RSpec
 # https://github.com/thoughtbot/factory_bot/blob/4-9-0-stable/UPGRADE_FROM_FACTORY_GIRL.md
-require 'support/factory_bot'
+#require 'support/factory_bot'
+require 'factory_bot_rails'
 
 # https://github.com/plataformatec/devise/wiki/How-To:-Test-controllers-with-Rails-3-and-4-%28and-RSpec%29#controller-specs
 require 'devise'
@@ -50,12 +51,14 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, :type => :controller
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # https://stackoverflow.com/questions/48091582/ruby-gem-uninitialized-constant-factorybot
+  #  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  # config.use_transactional_fixtures = true
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
