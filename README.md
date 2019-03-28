@@ -2,7 +2,18 @@
 
 ## HISTORICAL BACKGROUND
 
-Back in 2013, I first started writing what would then become **grad**uate **cert**ificate.  It originated as a personal project and steadily grew.  I've coded and installed the production version, which has been running in São Paulo (Brazil) since April 2016.  The feedback from users and the teams involved was generally very positive.  The production version uses Portuguese as the default language and the codebase is slightly different.  It contains various *rake tasks*, additional settings and bank payment functionality.
+Back in 2013, I first started writing what would then become **grad**uate **cert**ificate.  It started as a personal project and steadily grew.  I've coded and installed the production version.
+
+It ran from April 2016 and was successfully used during the 2016, 2017 and 2018 school years.
+
+The feedback from users and the teams involved was generally very positive.  The production version used Portuguese as the default language and the codebase was slightly different.  It included the various *rake tasks* I wrote, in addition to some other features related to Brazilian tax reporting requirements, for instance.
+
+*Since my departure from public service on April 2018, there have been two new administrations.*
+
+*My expectation, as the architect/developer, in line with original project requirements, was that the system would be in place for many years to come.  Much to my surprise, however, I just recently learned that this was no longer the case.
+Therefore, I thought it best to update this page accordingly, for the sake of completeness.*
+
+*It was, as far as I know, the first system in São Paulo State government to use Ruby on Rails technology.*
 
 ## ABOUT
 
@@ -62,11 +73,11 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*24/AUG/2018*
+*28/MAR/2019*
 
 =======
 ## COPYRIGHT
 
-Copyright © 2018 Marcelo Eduardo Redoschi
+Copyright © 2019 Marcelo Eduardo Redoschi
 
 *Licensed under the GNU Affero General Public License v3.0*
