@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "~> 2.5.5" # August 2019 
+
 # Specific to certain groups
 group :assets do
   gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .js.coffee assets and views
