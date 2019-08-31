@@ -79,7 +79,7 @@ pt_BR:
     - Sex
     - Sáb
     abbr_month_names:
-    -
+    - 
     - Jan
     - Fev
     - Mar
@@ -110,14 +110,14 @@ pt_BR:
       long: "%d de %B de %Y"
       my: "%B de %Y"
       myu: "%B_de_%Y"
+      order: "[:day, :month, :year]"
       seeder: "%-Y-%m-%d"
       short: "%d de %B"
       underscore: "%d_%b_%y"
-      order: "[:day, :month, :year]" 
       ym: "%B de %Y"
       ymd: "%Y-%m-%d"
     month_names:
-    -
+    - 
     - Janeiro
     - Fevereiro
     - Março

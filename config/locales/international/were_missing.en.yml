@@ -1,88 +1,5 @@
 ---
 en:
-  excluded:
-    f: excluded
-    m: excluded
-    pl: excluded
-  found:
-    f: found
-    m: found
-  fullname:
-    gradcert: Graduate Certificate Program
-    medres: Medical Residency Program
-    pap: Professional Advancement Program
-  gender:
-    F: Feminine
-    M: Masculine
-    X: Undefined/Intersexes/Not specified
-  institution_removal_lock:
-    medicalresidency: "System notice: it is not possible to remove an institution which contains programs that belong to the Medical Residency."
-    notprovisional: "System notice: it is not possible to remove an institution with a confirmed record.  If you really wish to do that, you will first have to mark it as having provisional status (data incomplete or not current)."
-    pap: "System notice: it is not possible to remove an institution which (contains programs that) belongs to the PAP."
-    withprograms: "System notice: it is not possible to remove an institution which contains programs.  Remove them first, if you really wish to do that."
-    withusers: "System notice: it is not possible to remove an institution once it contains user records.  Those must first be deleted, if you really wish to remove it."
-  institution_with_users:
-    all: Institutions with users
-    medres: Institutions with MRes users
-    pap: Institutions with PAP users
-  max_num_scholarships_offered:
-    medres: Maximum number of scholarships offered
-    pap: Maximum number of scholarships offered
-  deleted:
-    f: removed
-    m: removed
-  done:
-    f: concluded
-    m: concluded
-  duration_between: Duration between
-  confirm:
-    bankfile: 'Notice: the bankpayment file generation procedure may take a while (more than a minute), depending on the number of students and server speed.  This is normal.  Shall I proceed?  '
-    delete: Are you certain you wish to delete?
-    visit_external_site: You will visit an external website.  Are you sure ?
-  belongs:
-    medres: "Belongs to the Medical Residency Program"
-    pap: "Belongs to PAP"
-  calculated:
-    f: "calculated"
-    m: "calculated"
-    pl: "calculated"
-  cancelled:
-    f: "cancelled"
-    m: "cancelled"
-  annotated:
-    f: annotated
-    m: annotated
-    pl: annotated
-  another:
-    f: another
-    m: another
-  active:
-    f: "active"
-    m: "active"
-  ordinal:
-    1: "First"
-    2: "Second"
-    3: "Third"
-    4: "Fourth"
-    5: "Fifth"
-    6: "Sixth"
-    7: "Seventh"
-    8: "Eight"
-    9: "Ninth"
-    10: "Tenth"
-  none:
-    f: "none"
-    m: "none"
-  inactive:
-    f: "inactive"
-    m: "inactive"
-  annotate: "Annotate"
-  confirmed:
-    f: "confirmed"
-    m: "confirmed"
-  created:
-    f: "created"
-    m: "created"
   1st: 1st
   Não: false
   a:
@@ -92,49 +9,10 @@ en:
     medicalresidency: MRes
     medres: MRes
     pap: PAP
-  deannotated:
-    f: "annotation cleared"
-    m: "annotation cleared"
-  noun:
-    edit: Edit
-    update: Update
-  num_veterans:
-    pap: Matriculated students expected to continue with their programs (whose duration > 1 year)
-  of:
-    f: of
-    m: of
-    n: of
-  other:
-    f: other
-    m: other
-  our:
-    f: our
-    m: our
-  registered:
-    f: registered
-    m: registered
-  registered_so_far:
-    f: registered so far
-    m: registered so far
-  removed:
-    f: removed
-    m: removed
-  situation: Situation
-  succesfully: succesfully.
-  suspended:
-    f: Suspended
-    m: Suspended
-  teaching_area: Teaching area
-  unchanged:
-    f: unchanged
-    m: unchanged
-  updated:
-    f: updated
-    m: updated
   actions:
     back: Back
     cancel: Cancel
-    confirm: "Confirm"
+    confirm: Confirm
     delete: Delete
     edit: Edit
     filter: Filter
@@ -152,13 +30,44 @@ en:
     showing: Showing
     update: Update
     upload: Upload
+  active:
+    f: active
+    m: active
   and: and
+  annotate: Annotate
+  annotated:
+    f: annotated
+    m: annotated
+    pl: annotated
   annotation: Annotation
+  another:
+    f: another
+    m: another
   application_title: Graduate certificate
+  belongs:
+    medres: Belongs to the Medical Residency Program
+    pap: Belongs to PAP
   by_means_of: via
+  calculated:
+    f: calculated
+    m: calculated
+    pl: calculated
   cancellations: cancellations
+  cancelled:
+    f: cancelled
+    m: cancelled
+  confirm:
+    bankfile: 'Notice: the bankpayment file generation procedure may take a while (more than a minute), depending on the number of students and server speed.  This is normal.  Shall I proceed?  '
+    delete: Are you certain you wish to delete?
+    visit_external_site: You will visit an external website.  Are you sure ?
+  confirmed:
+    f: confirmed
+    m: confirmed
   course: course
   create: create
+  created:
+    f: created
+    m: created
   date:
     formats:
       compact: "%-d-%b-%y"
@@ -172,8 +81,22 @@ en:
       unofrscore: "%d_%b_%y"
       ym: "%B of %Y"
       ymd: "%Y-%m-%d"
+  deannotated:
+    f: annotation cleared
+    m: annotation cleared
+  deleted:
+    f: removed
+    m: removed
   diversity: diversity
+  done:
+    f: concluded
+    m: concluded
+  duration_between: Duration between
   entity: Organization
+  excluded:
+    f: excluded
+    m: excluded
+    pl: excluded
   external_venue: external venue
   faker:
     address:
@@ -182,32 +105,114 @@ en:
       - Room 12
       - Fifth floor
   foreigner: foreign national
+  found:
+    f: found
+    m: found
+  fullname:
+    gradcert: Graduate Certificate Program
+    medres: Medical Residency Program
+    pap: Professional Advancement Program
+  gender:
+    F: Feminine
+    M: Masculine
+    X: Undefined/Intersexes/Not specified
   greetings: Greetings
   help: Help
   hour: hour
   identification: identification
+  inactive:
+    f: inactive
+    m: inactive
+  institution_removal_lock:
+    medicalresidency: 'System notice: it is not possible to remove an institution which contains programs that belong to the Medical Residency.'
+    notprovisional: 'System notice: it is not possible to remove an institution with a confirmed record.  If you really wish to do that, you will first have to mark it as having provisional status (data incomplete or not current).'
+    pap: 'System notice: it is not possible to remove an institution which (contains programs that) belongs to the PAP.'
+    withprograms: 'System notice: it is not possible to remove an institution which contains programs.  Remove them first, if you really wish to do that.'
+    withusers: 'System notice: it is not possible to remove an institution once it contains user records.  Those must first be deleted, if you really wish to remove it.'
   institution_summary: Institutions
+  institution_with_users:
+    all: Institutions with users
+    medres: Institutions with MRes users
+    pap: Institutions with PAP users
   main: main
+  max_num_scholarships_offered:
+    medres: Maximum number of scholarships offered
+    pap: Maximum number of scholarships offered
+  my:
+    f: my
+    fp: my
+    m: my
+    mp: my
   my_program_info: My program info
   name: Name
+  new:
+    f: new
+    m: new
   no_programs_found: No programs found
+  none:
+    f: none
+    m: none
   normal: Normal
+  noun:
+    edit: Edition
+    update: Update
+  num_veterans:
+    pap: Matriculated students expected to continue their studies (programs with duration > 1 year)
   number_abbreviation: Number abbreviation
+  of:
+    f: of
+    m: of
+    n: of
+  ordinal:
+    '1': First
+    '10': Tenth
+    '2': Second
+    '3': Third
+    '4': Fourth
+    '5': Fifth
+    '6': Sixth
+    '7': Seventh
+    '8': Eight
+    '9': Ninth
   other:
     f: other
     m: other
+  our:
+    f: our
+    m: our
   people_management: People
   photo: photo
+  registered:
+    f: registered
+    m: registered
+  registered_so_far:
+    f: registered so far
+    m: registered so far
+  removed:
+    f: removed
+    m: removed
   responsible_department: Department responsible
   restricted_access: Restricted Access
   scholarship_contract: Scholarship contract
+  situation: situation
+  succesfully: succesfully
   supplemental_remittance: resend attempts
+  suspended:
+    f: suspended
+    m: suspended
+  teaching_area: Teaching area
   term_of_office: Term of office
   unauthorized:
     actions:
       edit: edit
       new: new
+  unchanged:
+    f: unchanged
+    m: unchanged
   until: until
+  updated:
+    f: updated
+    m: updated
   user_removal_lock: 'System warning: in order to prevent accidental user removal, first you must remove their contact information.  If you really mean to do so, click on ''back'' and erase it from the contact list screen.  Once that is done, you may try to remove the user again.'
   validation:
     messagetext:
@@ -220,44 +225,3 @@ en:
     male: Welcome
   year: year
   'yes': 'Yes'
-  my:
-    fp: "my"
-    mp: "my"
-    f: "my"
-    m: "my"
-  new:
-    f: "new"
-    m: "new"
-  noun:
-    edit: "Edition"
-    update: "Update"
-  num_veterans:
-    pap: "Matriculated students expected to continue their studies (programs with duration > 1 year)"
-  of:
-    f: "of"
-    m: "of"
-    n: "of"
-  our:
-    f: "our"
-    m: "our"
-  registered:
-    f: "registered"
-    m: "registered"
-  registered_so_far:
-    f: "registered so far"
-    m: "registered so far"
-  removed:
-    f: "removed"
-    m: "removed"
-  situation: "situation"
-  succesfully: "succesfully"
-  suspended:
-    f: "suspended"
-    m: "suspended"
-  unchanged:
-    f: "unchanged"
-    m: "unchanged"
-  updated:
-    f: "updated"
-    m: "updated"
-  teaching_area: "Teaching area"
