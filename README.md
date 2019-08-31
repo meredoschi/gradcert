@@ -61,7 +61,7 @@ password: **samplepass**
 
 ## RUBY VERSION
 
-2.3.5 (rvm)
+2.5.5 (rvm)
 
 Developed on both Linux and Mac environments.
 
