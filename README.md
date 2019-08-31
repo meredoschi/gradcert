@@ -19,9 +19,7 @@ Therefore, I thought it best to update this page accordingly, for the sake of co
 
    I am still in the process of revising and refactoring some of the code for this international version.
 
-   This latest update includes additional text in English (i18n keys).  The translation is *almost* complete.
-
-   So when run in the English locale (the default for the international version) some *translation missing* notices may still appear.
+   This latest update includes additional text in English.  The translation was completed, there are no missing keys.
 
 
 ### Matriculating students
@@ -73,7 +71,7 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*28/MAR/2019*
+*31/AUG/2019*
 
 =======
 ## COPYRIGHT
