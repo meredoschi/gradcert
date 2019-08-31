@@ -83,9 +83,6 @@ en:
         start_date: Since
         supervisor: Instructor
         supervisor_id: Instructor
-      band:
-        duration: Duration
-        name: Name
       bankaccount:
         bankbranch_id: Bank branch
         branchdigit: Bank branch digit (or X)

@@ -89,9 +89,9 @@ pt_BR:
     f: inativa
     m: inativo
   institution_removal_lock:
-    medicalresidency: 'Aviso do sistema: não é possível remover uma instituição que pertença à Residência Médica.  Desmarque a opção respectiva e tente novamente, se realmente quiser fazer isto.'
+    medicalresidency: 'Aviso do sistema: não é possível remover uma instituição que pertença à Residência Médica.'
     notprovisional: 'Aviso do sistema: não é possível remover uma instituição que possua cadastrado confirmado.  Se realmente quiser fazer isto, você terá que marcá-lo como provisório (dados desatualizados) primeiro.'
-    pap: 'Aviso do sistema: não é possível remover uma instituição que pertença ao Pap.  Desmarque a opção respectiva e tente novamente, se realmente quiser fazer isto.'
+    pap: 'Aviso do sistema: não é possível remover uma instituição que pertença ao Pap.'
     withprograms: 'Aviso do sistema: não é possível remover uma instituição que possui programas cadastrados.  Remova os programas dela e tente novamente, se realmente quiser fazer isto.'
     withusers: 'Aviso do sistema: não é possível remover uma instituição que contenha usuários.  Eles devem ser removidos, caso realmente queira apagá-la.'
   institution_with_users:

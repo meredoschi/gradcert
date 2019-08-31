@@ -83,9 +83,6 @@ pt_BR:
         start_date: Desde
         supervisor: Docente
         supervisor_id: Docente
-      band:
-        duration: Duração
-        name: Nome
       bankaccount:
         bankbranch_id: Agência bancária
         branchdigit: Dígito da agência (ou X)
@@ -940,12 +937,10 @@ pt_BR:
       assesment: avaliação
       assessment: programa sob análise
       assignment: alocação
-      band: Banda
       bankaccount: conta bancária
       bankbranch: agência bancária
       bankfile: arquivo bancário
       bankpayment: pagamento bancário
-      bbpayment: pagamento bb
       box: caixa
       bracket: faixa
       characteristic: perfil institucional
@@ -968,7 +963,6 @@ pt_BR:
       leave: licença
       leavetype: tipo de licença
       makeupschedule: cronograma de reposição
-      mesoregion: mesoregião
       methodology: metodologia didática
       municipality: município
       password: senha
@@ -984,7 +978,6 @@ pt_BR:
       program: programa
       programname: nome de programa
       programsituation: parecer de programa
-      project: projeto
       recommendation: recomendação
       regionaloffice: departamento regional de saúde
       registration: matrícula
