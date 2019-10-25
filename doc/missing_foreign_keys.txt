@@ -1,0 +1,51 @@
+#accreditations institution_id program_id registration_id
+#addresses bankbranch_id contact_id council_id country_id course_id institution_id municipality_id program_id regionaloffice_id streetname_id
+#admissions program_id
+#annotations payroll_id registration_id
+assessments contact_id profession_id program_id
+assignments program_id supervisor_id
+bankaccounts bankbranch_id student_id
+bankbranches address_id phone_id
+bankpayments payroll_id
+brackets taxation_id
+characteristics institution_id stateregion_id
+colleges institution_id
+completions registration_id
+contacts address_id personalinfo_id phone_id role_id user_id webinfo_id
+councils address_id phone_id state_id webinfo_id
+coursenames school_id
+courses address_id coursename_id methodology_id professionalfamily_id program_id supervisor_id
+diplomas council_id coursename_id degreetype_id institution_id profession_id school_id schoolname_id student_id supervisor_id
+events annotation_id leavetype_id registration_id
+feedbacks bankpayment_id payroll_id registration_id
+fundings characteristic_id
+healthcareinfos institution_id
+institutions accreditation_id address_id institutiontype_id phone_id webinfo_id
+makeupschedules registration_id
+municipalities regionaloffice_id stateregion_id
+payrolls scholarship_id taxation_id
+personalinfos contact_id country_id state_id
+phones bankbranch_id contact_id council_id institution_id regionaloffice_id
+placesavailables institution_id schoolterm_id
+professionalfamilies council_id subgroup_id
+professionalspecialties professionalarea_id
+professions professionalfamily_id
+programnames ancestor_id
+programs accreditation_id address_id admission_id institution_id professionalspecialty_id programname_id schoolterm_id
+programsituations assessment_id
+recommendations programsituation_id
+regionaloffices address_id phone_id webinfo_id
+registrationkinds registration_id
+registrations accreditation_id completion_id registrationkind_id schoolyear_id student_id
+researchcenters institution_id
+rosters institution_id schoolterm_id
+schools academiccategory_id
+schoolyears program_id
+statements bankpayment_id registration_id
+stateregions state_id
+states country_id
+students bankaccount_id contact_id profession_id schoolterm_id
+supervisors contact_id profession_id
+taxations bracket_id
+users institution_id permission_id
+webinfos contact_id council_id institution_id regionaloffice_id

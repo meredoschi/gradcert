@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191025224233) do
+ActiveRecord::Schema.define(version: 20191025224238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1056,4 +1056,20 @@ ActiveRecord::Schema.define(version: 20191025224233) do
   add_index "webinfos", ["institution_id"], name: "index_webinfos_on_institution_id", using: :btree
   add_index "webinfos", ["regionaloffice_id"], name: "index_webinfos_on_regionaloffice_id", using: :btree
 
+  add_foreign_key "accreditations", "institutions"
+  add_foreign_key "accreditations", "programs"
+  add_foreign_key "accreditations", "registrations"
+  add_foreign_key "addresses", "bankbranches"
+  add_foreign_key "addresses", "contacts"
+  add_foreign_key "addresses", "councils"
+  add_foreign_key "addresses", "countries"
+  add_foreign_key "addresses", "courses"
+  add_foreign_key "addresses", "institutions"
+  add_foreign_key "addresses", "municipalities"
+  add_foreign_key "addresses", "programs"
+  add_foreign_key "addresses", "regionaloffices"
+  add_foreign_key "addresses", "streetnames"
+  add_foreign_key "admissions", "programs"
+  add_foreign_key "annotations", "payrolls"
+  add_foreign_key "annotations", "registrations"
 end
