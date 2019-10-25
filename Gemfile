@@ -15,7 +15,7 @@ group :development do
   gem 'railroady' # https://github.com/preston/railroady
   gem 'rspec-rails'
   gem 'spring'
-  gem 'axlsx', '~> 2.0' # i18n-tasks xlsx-report
+  gem 'axlsx', '~> 3.0.0pre' # i18n-tasks xlsx-report
   gem 'brakeman' # August 2018
   #gem 'rails-erb-lint' # August 2018
 end
@@ -71,6 +71,7 @@ gem 'rails', '~> 4.2.10'
 gem 'rails-fix-permissions'
 gem 'ransack', '~> 1.8.0'
 gem 'raphael-rails'
+gem "rubyzip", ">= 1.3.0"
 gem 'seed_dump' # Marcelo - February 2016
 gem 'settingslogic'
 gem 'simple_xlsx_writer' # Excel export
