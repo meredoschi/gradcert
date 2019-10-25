@@ -47,6 +47,7 @@ en:
   belongs:
     medres: Belongs to the Medical Residency Program
     pap: Belongs to PAP
+  branch: branch
   by_means_of: via
   calculated:
     f: calculated
@@ -89,8 +90,8 @@ en:
     m: removed
   diversity: diversity
   done:
-    f: concluded
-    m: concluded
+    f: finalized
+    m: finalized
   duration_between: Duration between
   entity: Organization
   excluded:
@@ -134,6 +135,8 @@ en:
     all: Institutions with users
     medres: Institutions with MRes users
     pap: Institutions with PAP users
+  international: international
+  labs: labs
   main: main
   max_num_scholarships_offered:
     medres: Maximum number of scholarships offered
@@ -145,6 +148,7 @@ en:
     mp: my
   my_program_info: My program info
   name: Name
+  national: national
   new:
     f: new
     m: new
@@ -163,6 +167,7 @@ en:
     f: of
     m: of
     n: of
+  ongoing: ongoing
   ordinal:
     '1': First
     '10': Tenth
@@ -191,10 +196,14 @@ en:
   removed:
     f: removed
     m: removed
+  research: research paper
   responsible_department: Department responsible
   restricted_access: Restricted Access
+  rooms: rooms
   scholarship_contract: Scholarship contract
+  scientific_production: Scientific production
   situation: situation
+  subtotal: subtotal
   succesfully: succesfully
   supplemental_remittance: resend attempts
   suspended:
@@ -202,6 +211,11 @@ en:
     m: suspended
   teaching_area: Teaching area
   term_of_office: Term of office
+  tooltip:
+    bankaccount:
+      num:
+        must_be_unique_within_the_same_branch: Must_be_unique_within_a_given_branch.
+  total: total
   unauthorized:
     actions:
       edit: edit

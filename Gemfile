@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "~> 2.5.5" # August 2019 
+ruby "~> 2.5.5" # August 2019
 
 # Specific to certain groups
 group :assets do
@@ -57,7 +57,7 @@ gem 'i18n-tasks', '~> 0.9.20'
 gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'kaminari'
-gem 'mini_magick' # http://marsorange.com/files/rmagick_vs_minimagick.pdf
+gem 'mini_magick', ">= 4.9.4" # http://marsorange.com/files/rmagick_vs_minimagick.pdf
 gem 'money'
 gem 'money-rails'
 gem 'morrisjs-rails'
@@ -82,7 +82,7 @@ gem 'turbolinks' # Read more: https://github.com/rails/turbolinks
 gem 'tzinfo', '~> 1.2.1'
 gem 'validates_overlap' # April 2016
 gem 'validates_timeliness', '~> 4.0'
-gem 'yard' # Documentation
+gem 'yard', ">= 0.9.20" # Documentation
 #gem 'zip-zip'
 
 # gem 'holidays'

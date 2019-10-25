@@ -1,39 +1,48 @@
+<div class="custom-panel9">
 
-<div class="row custom-panel6">
 
-  <div class="large-3 columns">
+  <form>
+    <fieldset>
+      <legend><%= tm('bankaccount') %></legend>
 
-    <div class="field">
+      <div class="row">
 
-      <th><%= f.label ta('bankaccount.num')+' '+tm('bankaccount').downcase %></th>
-      <span data-tooltip aria-haspopup="true" class="has-tip" title="Aqui é possível, caso necessário, consultar se um número de conta bancária (sem o dígito verificador) já consta do sistema.  O cadastro de números de conta iguais é permitido somente se as agências forem distintas."><%= t('optional')+' ('+t('help')+')' %></span>
+        <div class="large-3 columns">
 
-    </div>
+          <div class="field">
 
-  </div>
+            <th><%= f.label ta('bankaccount.num') %></th>
+            <span data-tooltip aria-haspopup="true" class="has-tip [tip-top]" title=<%=t('tooltip.bankaccount.num.must_be_unique_within_the_same_branch')%>><%=t('help')%></span>
 
-  <div class="large-3 columns">
+          </div>
 
-      <%= f.text_field :bankaccount_num_cont %>
+        </div>
 
-  </div>
+        <div class="large-3 columns">
 
-  <div class="large-3 columns">
+          <%= f.text_field :bankaccount_num_cont %>
 
-    <div class="field">
+        </div>
 
-      <th><%= f.label tm('bankbranch')%></th>
+        <div class="large-3 columns">
 
-    </div>
+          <div class="field">
 
-  </div>
+            <th><%= f.label t('branch').capitalize%></th>
 
-  <div class="large-3 columns">
+          </div>
 
-      <%= f.text_field :bankaccount_bankbranch_code_cont %>
+        </div>
 
-  </div>
+        <div class="large-3 columns">
 
+          <%= f.text_field :bankaccount_bankbranch_code_cont %>
+
+        </div>
+
+      </div>
+
+    </fieldset>
+  </form>
 </div>
-
 </br>

@@ -2,7 +2,6 @@
 en:
   after_the_complete_data_is_entered: after the complete information is provided (when needed)
   bank: bank
-  branch: branch
   business_taxpayer_id: business taxpayer ID
   contact_data_inexistent: In case of non-existent contact information, please click on remove and then create a new user again (except if a contact already exists which belongs to this same person, but using a different (i.e. alternate) e-mail address in their user record.
   nay: false

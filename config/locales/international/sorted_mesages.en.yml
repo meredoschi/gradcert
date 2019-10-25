@@ -149,7 +149,6 @@ en:
   insurance_report: Insurance report
   interaction: interaction
   internal_address_help: This field's purpose is to indicate an internal address, that is to say, a course or program offered within the institution's own premisses.  Please indicate just the location (e.g. Room Number 5, Training center, etc)
-  international: international
   issue_legal_form_pdf: Issue a Legal Form (PDF)
   issue_no_employment_ties_with_the_public_health_sector_pdf: Not public healthcare sector employee (PDF)'
   issue_registration_receipt_pdf: Issue a Registration receipt (PDF)
@@ -157,7 +156,6 @@ en:
   iteration: Interaction Number
   kind: Kind
   kind_regards: Kind regards,
-  labs: labs
   latest_update: 'Latested update: '
   legacy: Legacy
   legend: legend
@@ -176,7 +174,6 @@ en:
   my_supervision_info: My supervision information
   my_teaching: my teaching
   nameless_contacts_exist: There are contacts with incomplete information (name missing) !
-  national: national
   nature: nature
   navbar_menu_name: model
   negative: negative
@@ -201,7 +198,6 @@ en:
   of_the_team: of the team
   of_which_inactive: of which inactive
   of_which_still_active: of which still active
-  ongoing: ongoing
   only: only
   only_letters_allowed: only characters (A to Z or a to z) allowed!
   optional: optional
@@ -273,18 +269,15 @@ en:
   report_requested_by: Report requested by
   reprt: report
   required: please fill in
-  research: research
   resend: resend
   restricted: data entry restricted
   result: result
   retroactive_cancellation_after_payroll_was_processed: retroactive cancellation after payroll was processed
-  rooms: rooms
   rounding: Rounding
   scholarship_amount: Scholarship amount
   scholarship_recipient: Scholarship recipient
   scholarship_registration_confirmation_receipt: Matriculation receipt
   schoolterm_finish_explanation: The field schoolterm finish refers to the end date for programs which started (or will start) on the (initial) date specified.  For this reason, it might encompass more than 1 calendar year.
-  scientific_production: scientific production
   screens: Screen
   second_schoolyear_removal_instructions: Verify whether the sophmore (or possibly third, fourth, etc) year should be really there, given the program's duration.  If needed, this schoolyear may be safely removed.  To do so, click the appropriate icon on the row corresponding to the schoolyear number (2 or higher).
   sector: Sector
@@ -307,7 +300,6 @@ en:
   student_situation: Student situation
   students_paid: Students which will receive something
   students_skipped: Students with zero amount
-  subtotal: subtotal
   summary: Summary
   supervisor_professional_data: supervisor professional information
   supplemental_info: Supplemental information
@@ -324,7 +316,6 @@ en:
   to: to
   to_be_done_in_this_order: To be done in this order
   to_be_paid: to be paid.
-  total: total
   total_absences_amount: Total absences amount
   total_report: Total report
   totals: Totals
