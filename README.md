@@ -10,7 +10,7 @@ The feedback from users and the teams involved was generally very positive.  The
 
 *Since my departure from public service on April 2018, there have been two new administrations.*
 
-*My expectation, as the architect/developer, in line with original project requirements, was that the system would be in place for many years to come.  Much to my surprise, however, I just recently learned that this was no longer the case.
+*My expectation, as the architect/developer, in line with original project requirements, was that the system would be in place for many years to come.  Much to my surprise, however, I later learned that this was no longer the case.
 Therefore, I thought it best to update this page accordingly, for the sake of completeness.*
 
 *It was, as far as I know, the first system in São Paulo State government to use Ruby on Rails technology.*
@@ -71,7 +71,7 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*31/AUG/2019*
+*25/OCT/2019*
 
 =======
 ## COPYRIGHT
