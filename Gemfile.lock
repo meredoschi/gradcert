@@ -373,7 +373,7 @@ DEPENDENCIES
   jquery-rails
   json_converter (~> 0.0.0)
   kaminari
-  mini_magick
+  mini_magick (>= 4.9.4)
   money
   money-rails
   morrisjs-rails
