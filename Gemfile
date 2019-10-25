@@ -82,7 +82,7 @@ gem 'turbolinks' # Read more: https://github.com/rails/turbolinks
 gem 'tzinfo', '~> 1.2.1'
 gem 'validates_overlap' # April 2016
 gem 'validates_timeliness', '~> 4.0'
-gem 'yard' # Documentation
+gem 'yard', ">= 0.9.20" # Documentation
 #gem 'zip-zip'
 
 # gem 'holidays'
