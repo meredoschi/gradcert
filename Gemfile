@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "~> 2.5.5" # August 2019
+ruby "2.5.5" # August 2019
 
 # Specific to certain groups
 group :assets do
@@ -11,11 +11,13 @@ end
 
 group :development do
 #  gem 'bullet'
+  gem 'active_record_doctor' # https://github.com/gregnavis/active_record_doctor # October 2019
+  gem 'axlsx', '~> 3.0.0pre' # i18n-tasks xlsx-report
+  gem 'mime-types', '~> 3.3'
   gem 'byebug' #  Dec 2016
   gem 'railroady' # https://github.com/preston/railroady
   gem 'rspec-rails'
   gem 'spring'
-  gem 'axlsx', '~> 3.0.0pre' # i18n-tasks xlsx-report
   gem 'brakeman' # August 2018
   #gem 'rails-erb-lint' # August 2018
 end
