@@ -1,7 +1,21 @@
 ---
 en:
+  scientific_production: 'Scientific production'
+  national: 'national'
+  international: 'international'
+  research: 'research paper'
+  ongoing: 'ongoing'
+  rooms: 'rooms'
+  labs: 'labs'
+  total: 'total'
+  subtotal: 'subtotal'
   1st: 1st
   Não: false
+  branch: 'branch'
+  tooltip:
+    bankaccount:
+      num:
+        must_be_unique_within_the_same_branch: 'Must_be_unique_within_a_given_branch.'
   a:
     f: a
     m: a
@@ -89,8 +103,8 @@ en:
     m: removed
   diversity: diversity
   done:
-    f: concluded
-    m: concluded
+    f: finalized
+    m: finalized
   duration_between: Duration between
   entity: Organization
   excluded:
