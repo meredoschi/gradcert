@@ -12,7 +12,7 @@ namespace :fixes do
       begin
         # To run prior executing this task:
         # rake active_record_doctor:missing_foreign_keys > missing_foreign_keys.txt
-        # https://github.com/gregnavis/active_record_doctor#detecting-models-referencing-undefined-tables
+        # https://github.com/gregnavis/active_record_doctor#detecting-missing-foreign-key-constraints
 
         missing_keys_fname = 'missing_foreign_keys.txt'
 
