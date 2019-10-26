@@ -286,6 +286,7 @@ en:
       full: "%A, %d of %B %Y at %H:%M:%S"
       hms: "%H:%M:%S"
       long: "%A the %d of %B %Y at %H:%Mh"
+      migration: "%Y%m%d%H%M%S"
       short: "%d/%m, %H:%M hs"
     pm: pm
   unauthorized:

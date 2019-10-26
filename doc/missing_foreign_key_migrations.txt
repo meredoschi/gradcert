@@ -1,0 +1,443 @@
+
+# 20191026215303_add_foreign_key_constraints_to_assessments.rb
+############################## 1 ##############################
+class AddForeignKeyConstraintsToAssessments
+  def change
+    add_foreign_key :assessments, :contacts
+    add_foreign_key :assessments, :professions
+    add_foreign_key :assessments, :programs
+  end
+end
+
+# 20191026215305_add_foreign_key_constraints_to_assignments.rb
+############################## 2 ##############################
+class AddForeignKeyConstraintsToAssignments
+  def change
+    add_foreign_key :assignments, :programs
+    add_foreign_key :assignments, :supervisors
+  end
+end
+
+# 20191026215306_add_foreign_key_constraints_to_bankaccounts.rb
+############################## 3 ##############################
+class AddForeignKeyConstraintsToBankaccounts
+  def change
+    add_foreign_key :bankaccounts, :bankbranches
+    add_foreign_key :bankaccounts, :students
+  end
+end
+
+# 20191026215307_add_foreign_key_constraints_to_bankbranches.rb
+############################## 4 ##############################
+class AddForeignKeyConstraintsToBankbranches
+  def change
+    add_foreign_key :bankbranches, :addresses
+    add_foreign_key :bankbranches, :phones
+  end
+end
+
+# 20191026215308_add_foreign_key_constraints_to_bankpayments.rb
+############################## 5 ##############################
+class AddForeignKeyConstraintsToBankpayments
+  def change
+    add_foreign_key :bankpayments, :payrolls
+  end
+end
+
+# 20191026215309_add_foreign_key_constraints_to_brackets.rb
+############################ 6 ############################
+class AddForeignKeyConstraintsToBrackets
+  def change
+    add_foreign_key :brackets, :taxations
+  end
+end
+
+# 20191026215310_add_foreign_key_constraints_to_characteristics.rb
+################################ 7 ################################
+class AddForeignKeyConstraintsToCharacteristics
+  def change
+    add_foreign_key :characteristics, :institutions
+    add_foreign_key :characteristics, :stateregions
+  end
+end
+
+# 20191026215311_add_foreign_key_constraints_to_colleges.rb
+############################ 8 ############################
+class AddForeignKeyConstraintsToColleges
+  def change
+    add_foreign_key :colleges, :institutions
+  end
+end
+
+# 20191026215312_add_foreign_key_constraints_to_completions.rb
+############################## 9 ##############################
+class AddForeignKeyConstraintsToCompletions
+  def change
+    add_foreign_key :completions, :registrations
+  end
+end
+
+# 20191026215313_add_foreign_key_constraints_to_contacts.rb
+############################ 10 ############################
+class AddForeignKeyConstraintsToContacts
+  def change
+    add_foreign_key :contacts, :addresses
+    add_foreign_key :contacts, :personalinfos
+    add_foreign_key :contacts, :phones
+    add_foreign_key :contacts, :roles
+    add_foreign_key :contacts, :users
+    add_foreign_key :contacts, :webinfos
+  end
+end
+
+# 20191026215315_add_foreign_key_constraints_to_councils.rb
+############################ 11 ############################
+class AddForeignKeyConstraintsToCouncils
+  def change
+    add_foreign_key :councils, :addresses
+    add_foreign_key :councils, :phones
+    add_foreign_key :councils, :states
+    add_foreign_key :councils, :webinfos
+  end
+end
+
+# 20191026215316_add_foreign_key_constraints_to_coursenames.rb
+############################## 12 ##############################
+class AddForeignKeyConstraintsToCoursenames
+  def change
+    add_foreign_key :coursenames, :schools
+  end
+end
+
+# 20191026215317_add_foreign_key_constraints_to_courses.rb
+############################ 13 ############################
+class AddForeignKeyConstraintsToCourses
+  def change
+    add_foreign_key :courses, :addresses
+    add_foreign_key :courses, :coursenames
+    add_foreign_key :courses, :methodologies
+    add_foreign_key :courses, :professionalfamilies
+    add_foreign_key :courses, :programs
+    add_foreign_key :courses, :supervisors
+  end
+end
+
+# 20191026215318_add_foreign_key_constraints_to_diplomas.rb
+############################ 14 ############################
+class AddForeignKeyConstraintsToDiplomas
+  def change
+    add_foreign_key :diplomas, :councils
+    add_foreign_key :diplomas, :coursenames
+    add_foreign_key :diplomas, :degreetypes
+    add_foreign_key :diplomas, :institutions
+    add_foreign_key :diplomas, :professions
+    add_foreign_key :diplomas, :schools
+    add_foreign_key :diplomas, :schoolnames
+    add_foreign_key :diplomas, :students
+    add_foreign_key :diplomas, :supervisors
+  end
+end
+
+# 20191026215319_add_foreign_key_constraints_to_events.rb
+########################### 15 ###########################
+class AddForeignKeyConstraintsToEvents
+  def change
+    add_foreign_key :events, :annotations
+    add_foreign_key :events, :leavetypes
+    add_foreign_key :events, :registrations
+  end
+end
+
+# 20191026215320_add_foreign_key_constraints_to_feedbacks.rb
+############################# 16 #############################
+class AddForeignKeyConstraintsToFeedbacks
+  def change
+    add_foreign_key :feedbacks, :bankpayments
+    add_foreign_key :feedbacks, :payrolls
+    add_foreign_key :feedbacks, :registrations
+  end
+end
+
+# 20191026215321_add_foreign_key_constraints_to_fundings.rb
+############################ 17 ############################
+class AddForeignKeyConstraintsToFundings
+  def change
+    add_foreign_key :fundings, :characteristics
+  end
+end
+
+# 20191026215322_add_foreign_key_constraints_to_healthcareinfos.rb
+################################ 18 ################################
+class AddForeignKeyConstraintsToHealthcareinfos
+  def change
+    add_foreign_key :healthcareinfos, :institutions
+  end
+end
+
+# 20191026215323_add_foreign_key_constraints_to_institutions.rb
+############################## 19 ##############################
+class AddForeignKeyConstraintsToInstitutions
+  def change
+    add_foreign_key :institutions, :accreditations
+    add_foreign_key :institutions, :addresses
+    add_foreign_key :institutions, :institutiontypes
+    add_foreign_key :institutions, :phones
+    add_foreign_key :institutions, :webinfos
+  end
+end
+
+# 20191026215324_add_foreign_key_constraints_to_makeupschedules.rb
+################################ 20 ################################
+class AddForeignKeyConstraintsToMakeupschedules
+  def change
+    add_foreign_key :makeupschedules, :registrations
+  end
+end
+
+# 20191026215325_add_foreign_key_constraints_to_municipalities.rb
+############################### 21 ###############################
+class AddForeignKeyConstraintsToMunicipalities
+  def change
+    add_foreign_key :municipalities, :regionaloffices
+    add_foreign_key :municipalities, :stateregions
+  end
+end
+
+# 20191026215326_add_foreign_key_constraints_to_payrolls.rb
+############################ 22 ############################
+class AddForeignKeyConstraintsToPayrolls
+  def change
+    add_foreign_key :payrolls, :scholarships
+    add_foreign_key :payrolls, :taxations
+  end
+end
+
+# 20191026215327_add_foreign_key_constraints_to_personalinfos.rb
+############################### 23 ###############################
+class AddForeignKeyConstraintsToPersonalinfos
+  def change
+    add_foreign_key :personalinfos, :contacts
+    add_foreign_key :personalinfos, :countries
+    add_foreign_key :personalinfos, :states
+  end
+end
+
+# 20191026215328_add_foreign_key_constraints_to_phones.rb
+########################### 24 ###########################
+class AddForeignKeyConstraintsToPhones
+  def change
+    add_foreign_key :phones, :bankbranches
+    add_foreign_key :phones, :contacts
+    add_foreign_key :phones, :councils
+    add_foreign_key :phones, :institutions
+    add_foreign_key :phones, :regionaloffices
+  end
+end
+
+# 20191026215329_add_foreign_key_constraints_to_placesavailables.rb
+################################ 25 ################################
+class AddForeignKeyConstraintsToPlacesavailables
+  def change
+    add_foreign_key :placesavailables, :institutions
+    add_foreign_key :placesavailables, :schoolterms
+  end
+end
+
+# 20191026215330_add_foreign_key_constraints_to_professionalfamilies.rb
+################################## 26 ##################################
+class AddForeignKeyConstraintsToProfessionalfamilies
+  def change
+    add_foreign_key :professionalfamilies, :councils
+    add_foreign_key :professionalfamilies, :subgroups
+  end
+end
+
+# 20191026215331_add_foreign_key_constraints_to_professionalspecialties.rb
+#################################### 27 ####################################
+class AddForeignKeyConstraintsToProfessionalspecialties
+  def change
+    add_foreign_key :professionalspecialties, :professionalareas
+  end
+end
+
+# 20191026215332_add_foreign_key_constraints_to_professions.rb
+############################## 28 ##############################
+class AddForeignKeyConstraintsToProfessions
+  def change
+    add_foreign_key :professions, :professionalfamilies
+  end
+end
+
+# 20191026215333_add_foreign_key_constraints_to_programnames.rb
+############################## 29 ##############################
+class AddForeignKeyConstraintsToProgramnames
+  def change
+    add_foreign_key :programnames, :ancestors
+  end
+end
+
+# 20191026215334_add_foreign_key_constraints_to_programs.rb
+############################ 30 ############################
+class AddForeignKeyConstraintsToPrograms
+  def change
+    add_foreign_key :programs, :accreditations
+    add_foreign_key :programs, :addresses
+    add_foreign_key :programs, :admissions
+    add_foreign_key :programs, :institutions
+    add_foreign_key :programs, :professionalspecialties
+    add_foreign_key :programs, :programnames
+    add_foreign_key :programs, :schoolterms
+  end
+end
+
+# 20191026215335_add_foreign_key_constraints_to_programsituations.rb
+################################# 31 #################################
+class AddForeignKeyConstraintsToProgramsituations
+  def change
+    add_foreign_key :programsituations, :assessments
+  end
+end
+
+# 20191026215336_add_foreign_key_constraints_to_recommendations.rb
+################################ 32 ################################
+class AddForeignKeyConstraintsToRecommendations
+  def change
+    add_foreign_key :recommendations, :programsituations
+  end
+end
+
+# 20191026215337_add_foreign_key_constraints_to_regionaloffices.rb
+################################ 33 ################################
+class AddForeignKeyConstraintsToRegionaloffices
+  def change
+    add_foreign_key :regionaloffices, :addresses
+    add_foreign_key :regionaloffices, :phones
+    add_foreign_key :regionaloffices, :webinfos
+  end
+end
+
+# 20191026215338_add_foreign_key_constraints_to_registrationkinds.rb
+################################# 34 #################################
+class AddForeignKeyConstraintsToRegistrationkinds
+  def change
+    add_foreign_key :registrationkinds, :registrations
+  end
+end
+
+# 20191026215339_add_foreign_key_constraints_to_registrations.rb
+############################### 35 ###############################
+class AddForeignKeyConstraintsToRegistrations
+  def change
+    add_foreign_key :registrations, :accreditations
+    add_foreign_key :registrations, :completions
+    add_foreign_key :registrations, :registrationkinds
+    add_foreign_key :registrations, :schoolyears
+    add_foreign_key :registrations, :students
+  end
+end
+
+# 20191026215340_add_foreign_key_constraints_to_researchcenters.rb
+################################ 36 ################################
+class AddForeignKeyConstraintsToResearchcenters
+  def change
+    add_foreign_key :researchcenters, :institutions
+  end
+end
+
+# 20191026215341_add_foreign_key_constraints_to_rosters.rb
+############################ 37 ############################
+class AddForeignKeyConstraintsToRosters
+  def change
+    add_foreign_key :rosters, :institutions
+    add_foreign_key :rosters, :schoolterms
+  end
+end
+
+# 20191026215342_add_foreign_key_constraints_to_schools.rb
+############################ 38 ############################
+class AddForeignKeyConstraintsToSchools
+  def change
+    add_foreign_key :schools, :academiccategories
+  end
+end
+
+# 20191026215343_add_foreign_key_constraints_to_schoolyears.rb
+############################## 39 ##############################
+class AddForeignKeyConstraintsToSchoolyears
+  def change
+    add_foreign_key :schoolyears, :programs
+  end
+end
+
+# 20191026215344_add_foreign_key_constraints_to_statements.rb
+############################# 40 #############################
+class AddForeignKeyConstraintsToStatements
+  def change
+    add_foreign_key :statements, :bankpayments
+    add_foreign_key :statements, :registrations
+  end
+end
+
+# 20191026215345_add_foreign_key_constraints_to_stateregions.rb
+############################## 41 ##############################
+class AddForeignKeyConstraintsToStateregions
+  def change
+    add_foreign_key :stateregions, :states
+  end
+end
+
+# 20191026215346_add_foreign_key_constraints_to_states.rb
+########################### 42 ###########################
+class AddForeignKeyConstraintsToStates
+  def change
+    add_foreign_key :states, :countries
+  end
+end
+
+# 20191026215347_add_foreign_key_constraints_to_students.rb
+############################ 43 ############################
+class AddForeignKeyConstraintsToStudents
+  def change
+    add_foreign_key :students, :bankaccounts
+    add_foreign_key :students, :contacts
+    add_foreign_key :students, :professions
+    add_foreign_key :students, :schoolterms
+  end
+end
+
+# 20191026215348_add_foreign_key_constraints_to_supervisors.rb
+############################## 44 ##############################
+class AddForeignKeyConstraintsToSupervisors
+  def change
+    add_foreign_key :supervisors, :contacts
+    add_foreign_key :supervisors, :professions
+  end
+end
+
+# 20191026215349_add_foreign_key_constraints_to_taxations.rb
+############################# 45 #############################
+class AddForeignKeyConstraintsToTaxations
+  def change
+    add_foreign_key :taxations, :brackets
+  end
+end
+
+# 20191026215350_add_foreign_key_constraints_to_users.rb
+########################### 46 ###########################
+class AddForeignKeyConstraintsToUsers
+  def change
+    add_foreign_key :users, :institutions
+    add_foreign_key :users, :permissions
+  end
+end
+
+# 20191026215351_add_foreign_key_constraints_to_webinfos.rb
+############################ 47 ############################
+class AddForeignKeyConstraintsToWebinfos
+  def change
+    add_foreign_key :webinfos, :contacts
+    add_foreign_key :webinfos, :councils
+    add_foreign_key :webinfos, :institutions
+    add_foreign_key :webinfos, :regionaloffices
+  end
+end

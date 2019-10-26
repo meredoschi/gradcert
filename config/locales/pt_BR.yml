@@ -298,6 +298,7 @@ pt_BR:
       full: "%A, %d de %B de %Y, %H:%M:%S"
       hms: "%H:%M:%S"
       long: "%A, %d de %B de %Y, %H:%Mh"
+      migration: "%Y%m%d%H%M%S"
       short: "%d/%m, %H:%M hs"
     pm: da tarde (pm)
   unauthorized:

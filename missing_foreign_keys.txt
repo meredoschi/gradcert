@@ -1,7 +1,3 @@
-#accreditations institution_id program_id registration_id
-#addresses bankbranch_id contact_id council_id country_id course_id institution_id municipality_id program_id regionaloffice_id streetname_id
-#admissions program_id
-#annotations payroll_id registration_id
 assessments contact_id profession_id program_id
 assignments program_id supervisor_id
 bankaccounts bankbranch_id student_id
