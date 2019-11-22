@@ -1,10 +1,9 @@
 <%= render 'index_header.html.erb' %>
 
-	<%= render 'index_table.html.erb' %>
+	<%= render 'index_table.html.erb' if @numassessments.positive?  %>
 
 <% if is_admin_or_manager(current_user) %>
 
 	<%= render 'index_search.html.erb' %>
 
 <% end %>
-	

@@ -1,20 +1,40 @@
 <div class="row">
 
 	<div class="large-8 columns">
-			
+
 		<h2><%= t('definition').pluralize.mb_chars.upcase %> </h2>
+
 		<h2 class="subheader"><%= tm('profession').pluralize(@professions.total_count).pluralize.mb_chars.capitalize %> (<%= @professions.total_count  %> /  <%= @numprofessions %>)  	</h2>
 
-  </div>
+	</div>
 
-	<% if can? :create, Profession %>
+	<div class="large-4 columns">
 
-		<div class="large-4 columns">
-			 	
-	  		<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('profession')), new_profession_path %>	 
+		<% if @numprofessionalfamilies.positive? %>
 
-	  </div>
+			<% if (can? :create, Profession)  %>
 
-	<% end %>
-		  
+			<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.f')+' '+tm('profession')), new_profession_path %>
+
+			<% end %>
+
+		<% else %>
+
+		<div class="row text-center">
+
+				<div data-alert class="alert-box warning">
+
+						<h3><%= t('no_professional_families') %></h3>
+
+
+			</div>
+
+		</div>
+		<% end %>
+
+	</div>
+
+
+</div>
+
 </div>

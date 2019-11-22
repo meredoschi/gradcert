@@ -11,14 +11,15 @@ class ProfessionsController < ApplicationController
   	@search = Profession.accessible_by(current_ability).ransack(params[:q])
   	@professions=@search.result.page(params[:page]).per(10)
 		@numprofessions=Profession.count
-    
+    @numprofessionalfamilies=Professionalfamily.count
+  
   end
 
   # GET /professions/1
   # GET /professions/1.json
   def show
     	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.profession').capitalize+' | '+t('actions.show')
-  
+
   end
 
   # GET /professions/new
@@ -43,8 +44,8 @@ class ProfessionsController < ApplicationController
     respond_to do |format|
       if @profession.save
 #         format.html { redirect_to @profession, notice: 'Profession was successfully created.' }
-				 format.html { redirect_to @profession, notice: t('activerecord.models.profession').capitalize+' '+t('created.f')+' '+t('succesfully') }       
-  
+				 format.html { redirect_to @profession, notice: t('activerecord.models.profession').capitalize+' '+t('created.f')+' '+t('succesfully') }
+
         format.json { render action: 'show', status: :created, location: @profession }
       else
         format.html { render action: 'new' }
@@ -58,7 +59,7 @@ class ProfessionsController < ApplicationController
   def update
     respond_to do |format|
       if @profession.update(profession_params)
-        format.html { redirect_to @profession, notice: t('activerecord.models.profession').capitalize+' '+t('updated.f')+' '+t('succesfully') }				
+        format.html { redirect_to @profession, notice: t('activerecord.models.profession').capitalize+' '+t('updated.f')+' '+t('succesfully') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

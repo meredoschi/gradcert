@@ -209,6 +209,7 @@ pt_BR:
   no_infrastructure_reported: Nenhuma infraestrutura informada
   no_payrolls_found: Nenhuma folha disponível encontrada.  Para se cadastrar um pagamento bancário, primeiro é necessário criar a respectiva folha.
   no_photo: Sem foto
+  no_professional_families: Nenhuma família profissional cadastrada até o momento.
   no_programs_or_supervisors: É preciso haver pelo menos um programa e um coordenador de curso cadastrados dentro de sua hierarquia de modo que a alocação possa ser efetuada.
   no_programs_registered: Nenhum programa cadastrado até o momento
   no_supervisors_found: Nenhum coordenador de curso encontrado dentro de sua hierarquia.  É necessário que exista de modo que possa ser alocado a um programa.

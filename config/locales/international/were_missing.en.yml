@@ -154,6 +154,7 @@ en:
   new:
     f: new
     m: new
+  no_professional_families: 'Warning: no family of professions present in the database yet!'
   no_programs_found: No programs found
   none:
     f: none

@@ -2,8 +2,8 @@
 
 	<div class="row">
 
-		<%= render 'index_table.html.erb' %>
+		<%= render 'index_table.html.erb' if @numprofessionalfamilies.positive? %>
 
 	</div>
-	
-	<%= render 'index_search.html.erb' %>
+
+	<%= render 'index_search.html.erb' if @numprofessionalfamilies.positive? %>
