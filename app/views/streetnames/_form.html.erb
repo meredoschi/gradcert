@@ -29,8 +29,8 @@
 
 
   <div class="row actions">
-  	<%= f.submit :value => "Confirmar", :class => 'button small success' %> |
-  	<%= link_to 'Anular', streetnames_path, class: "anular" %>
+  	<%= f.submit :value => t('actions.confirm'), :class => 'button small success' %> |
+  	<%= link_to t('actions.cancel'), streetnames_path, class: "anular" %>
  </div>
   
 <% end %>

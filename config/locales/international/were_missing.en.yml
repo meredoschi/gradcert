@@ -124,6 +124,7 @@ en:
   inactive:
     f: inactive
     m: inactive
+  infrastructure: infrastructure
   institution_removal_lock:
     medicalresidency: 'System notice: it is not possible to remove an institution which contains programs that belong to the Medical Residency.'
     notprovisional: 'System notice: it is not possible to remove an institution with a confirmed record.  If you really wish to do that, you will first have to mark it as having provisional status (data incomplete or not current).'
