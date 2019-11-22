@@ -69,15 +69,15 @@
 		   <div class="large-3 columns">
 
 	        <% if can? :read, annotation %>
-		        <td><%= link_to t('actions.show'), annotation, class: t('show') %></td>
+		        <td><%= link_to t('actions.show'), annotation, class: 'mostrar' %></td>
 					<% end %>
 
         <% if can? :update, annotation %>
-			      <td><%= link_to t('actions.edit'), edit_annotation_path(annotation), class: t('edit') %></td>
+			      <td><%= link_to t('actions.edit'), edit_annotation_path(annotation), class: 'editar' %></td>
 					<% end %>
 
 	        <% if can? :destroy, annotation %>
-		     		<td><%= link_to t('actions.delete'),annotation, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+		     		<td><%= link_to t('actions.delete'),annotation, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>
 					<% end %>
 
     	</div>

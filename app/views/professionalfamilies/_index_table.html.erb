@@ -40,15 +40,15 @@
 		   <div class="large-3 columns">
 
 	        <% if can? :read, professionalfamily %>
-		        <td><%= link_to t('actions.show'), professionalfamily, class: t('show') %></td>
+		        <td><%= link_to t('actions.show'), professionalfamily, class: 'mostrar' %></td>
 					<% end %>
 
         <% if can? :update, professionalfamily %>
-			      <td><%= link_to t('actions.edit'), edit_professionalfamily_path(professionalfamily), class: t('edit') %></td>   
+			      <td><%= link_to t('actions.edit'), edit_professionalfamily_path(professionalfamily), class: 'editar' %></td>   
 					<% end %>
 
 	        <% if can? :destroy, professionalfamily %>
-		     		<td><%= link_to t('actions.delete'),professionalfamily, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+		     		<td><%= link_to t('actions.delete'),professionalfamily, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>     
 					<% end %>
 	
     	</div>

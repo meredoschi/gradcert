@@ -47,15 +47,15 @@
 		   <div class="large-3 columns">
 
 	        <% if can? :read, school %>
-		        <td><%= link_to t('actions.show'), school, class: t('show') %></td>
+		        <td><%= link_to t('actions.show'), school, class: 'mostrar' %></td>
 					<% end %>
 
         <% if can? :update, school %>
-			      <td><%= link_to t('actions.edit'), edit_school_path(school), class: t('edit') %></td>
+			      <td><%= link_to t('actions.edit'), edit_school_path(school), class: 'editar' %></td>
 					<% end %>
 
 	        <% if can? :destroy, school %>
-		     		<td><%= link_to t('actions.delete'),school, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+		     		<td><%= link_to t('actions.delete'),school, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>
 					<% end %>
 
     	</div>

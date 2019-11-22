@@ -49,15 +49,15 @@
 		   <div class="large-3 columns">
 
 	        <% if can? :read, bankpayment %>
-		        <td><%= link_to t('actions.show'), bankpayment, class: t('show') %></td>
+		        <td><%= link_to t('actions.show'), bankpayment, class: 'mostrar' %></td>
 					<% end %>
 
         <% if can? :update, bankpayment %>
-			      <td><%= link_to t('actions.edit'), edit_bankpayment_path(bankpayment), class: t('edit') %></td>   
+			      <td><%= link_to t('actions.edit'), edit_bankpayment_path(bankpayment), class: 'editar' %></td>   
 					<% end %>
 
 	        <% if can? :destroy, bankpayment %>
-		     		<td><%= link_to t('actions.delete'),bankpayment, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+		     		<td><%= link_to t('actions.delete'),bankpayment, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>     
 					<% end %>
 	
     	</div>

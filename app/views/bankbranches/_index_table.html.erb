@@ -37,15 +37,15 @@
 		   <div class="large-3 columns">
 
 	        <% if can? :read, bankbranch %>
-		        <td><%= link_to t('actions.show'), bankbranch, class: t('show') %></td>
+		        <td><%= link_to t('actions.show'), bankbranch, class: 'mostrar' %></td>
 					<% end %>
 
         <% if can? :update, bankbranch %>
-			      <td><%= link_to t('actions.edit'), edit_bankbranch_path(bankbranch), class: t('edit') %></td>   
+			      <td><%= link_to t('actions.edit'), edit_bankbranch_path(bankbranch), class: 'editar' %></td>   
 					<% end %>
 
 	        <% if can? :destroy, bankbranch %>
-		     		<td><%= link_to t('actions.delete'),bankbranch, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+		     		<td><%= link_to t('actions.delete'),bankbranch, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>     
 					<% end %>
 	
     	</div>

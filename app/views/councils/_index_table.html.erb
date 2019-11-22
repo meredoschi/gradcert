@@ -42,7 +42,7 @@
 					<% end %>
 
 	        <% if can? :destroy, council %>
-		     		<td><%= link_to t('actions.delete'), council, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+		     		<td><%= link_to t('actions.delete'), council, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>
 					<% end %>
 
     	</div>

@@ -19,15 +19,15 @@
 		   <div class="large-3 columns">
 
 	        <% if can? :read, academiccategory %>
-		        <td><%= link_to t('actions.show'), academiccategory, class: t('show') %></td>
+		        <td><%= link_to t('actions.show'), academiccategory, class: 'mostrar' %></td>
 					<% end %>
 
         <% if can? :update, academiccategory %>
-			      <td><%= link_to t('actions.edit'), edit_academiccategory_path(academiccategory), class: t('edit') %></td>   
+			      <td><%= link_to t('actions.edit'), edit_academiccategory_path(academiccategory), class: 'editar' %></td>   
 					<% end %>
 
 	        <% if can? :destroy, academiccategory %>
-		     		<td><%= link_to t('actions.delete'),academiccategory, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>     
+		     		<td><%= link_to t('actions.delete'),academiccategory, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>     
 					<% end %>
 	
     	</div>

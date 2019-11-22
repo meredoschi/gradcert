@@ -61,15 +61,15 @@
 			   <div class="large-3 columns">
 
 		        <% if can? :read, schoolterm %>
-			        <td><%= link_to t('actions.show'), schoolterm, class: t('show') %></td>
+			        <td><%= link_to t('actions.show'), schoolterm, class: 'mostrar' %></td>
 						<% end %>
 
 	        <% if can? :update, schoolterm %>
-				      <td><%= link_to t('actions.edit'), edit_schoolterm_path(schoolterm), class: t('edit') %></td>
+				      <td><%= link_to t('actions.edit'), edit_schoolterm_path(schoolterm), class: 'editar' %></td>
 						<% end %>
 
 		        <% if can? :destroy, schoolterm %>
-			     		<td><%= link_to t('actions.delete'),schoolterm, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+			     		<td><%= link_to t('actions.delete'),schoolterm, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>
 						<% end %>
 
 	    	</div>

@@ -81,15 +81,15 @@
 		   <div class="large-3 columns">
 
 	        <% if can? :read, placesavailable %>
-		        <td><%= link_to t('actions.show'), placesavailable, class: t('show') %></td>
+		        <td><%= link_to t('actions.show'), placesavailable, class: 'mostrar' %></td>
 					<% end %>
 
         <% if can? :update, placesavailable %>
-			      <td><%= link_to t('actions.edit'), edit_placesavailable_path(placesavailable), class: t('edit') %></td>
+			      <td><%= link_to t('actions.edit'), edit_placesavailable_path(placesavailable), class: 'editar' %></td>
 					<% end %>
 
 	        <% if can? :destroy, placesavailable %>
-		     		<td><%= link_to t('actions.delete'),placesavailable, :method => :delete, data: { confirm: t('confirm.delete') }, class: t('remove') %></td>
+		     		<td><%= link_to t('actions.delete'),placesavailable, :method => :delete, data: { confirm: t('confirm.delete') }, class: 'remover' %></td>
 					<% end %>
 
     	</div>

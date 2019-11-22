@@ -2,7 +2,7 @@
 	
 	<% if can? :edit, @payroll %>
 
-		<%= link_to t('actions.edit'), edit_payroll_path(@payroll), class: t('edit')  %> |
+		<%= link_to t('actions.edit'), edit_payroll_path(@payroll), class: 'editar'  %> |
 
 		<% if @payroll.annotated? %>
 
