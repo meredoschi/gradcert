@@ -40,11 +40,11 @@
 <% if can? :update, Admission %>
 
    <div class="row actions">
-    <%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+    <%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
 
 <% end %>
 
-   <%= link_to t('actions.cancel'), admissions_path, class: t('cancel') %>
+   <%= link_to t('actions.cancel'), admissions_path, class: 'anular' %>
 
 </div>
 

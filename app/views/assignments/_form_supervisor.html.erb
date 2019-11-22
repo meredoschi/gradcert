@@ -5,37 +5,37 @@
     <%= f.label tm('supervisor') %>
 
 	</div>
-	
+
 	<div class="large-9 columns">
 
 		<% if is_admin_or_manager(current_user) %>
-	
+
 	  	<%= f.collection_select :supervisor_id, retrieve_supervisors_for(current_user), :id, :institution_contact_name,  {prompt: true} %>
 
 		<% else %>
 
 	  	<%= f.collection_select :supervisor_id, retrieve_supervisors_for(current_user), :id, :contact_name,  {prompt: true} %>
-		
+
 		<% end %>
-		
+
 	</div>
-	
+
 
 	</div>
 <div class="row">
-	
+
 		<div class="large-3 columns">
-	
+
 		  <%= f.label ta('supervisor.kind') %><br>
-	
+
 	  </div>
 
 		<div class="large-9 columns">
 
 			<%= f.select :main, [[ta('supervisor.main'), true], [ta('supervisor.alternate'), false]] %>
-	    
+
 	  </div>
-	
+
 </div>
 
 <div class="row">
@@ -45,24 +45,24 @@
     <%= f.label t('start_date') %><br>
 
 	</div>
-	
+
 		<div class="large-9 columns select-date-wrapper">
-		
+
 	  <%= f.date_select :start_date,  options={prompt: true, start_year: Date.today.year - 40, end_year: Date.today.year}, html_options = { class: 'select-date'} %>
 
 	 </div>
-	 
+
 </div>
 
 </div>
 
 	<% if can? :update, Assignment %>
-	
+
 	   <div class="row actions">
-	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
-	 
+	  	<%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
+
 	<% end %>
-	
+
 	  	 <%= link_to t('actions.cancel'), assignments_path, class: "anular" %>
-	  
+
 </div>

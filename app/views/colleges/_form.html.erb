@@ -19,179 +19,179 @@
 		<% if action_name=='new' %>
 
 			<div class="row">
-	
-			
+
+
 			 		<div class="large-3 columns", class: "left inline">
-			
+
 			    <%= f.label ta('institution.name') %><br>
-			
+
 					</div>
-			 		
+
 			 		<div class="large-9 columns">
-		  
+
 					  <%= f.collection_select :institution_id, Institution.registered.without_college, :id, :name,  {prompt: true} %>
-				
-					
+
+
 					</div>
-				
-		 	</div>	 				  
-	
+
+		 	</div>
+
 
 	<% else %>
 
 		<div class="row">
-	
+
 			<h2><%= link_to @college.institution_name, @college.institution %><h2>
 
 		</div>
-		
+
 	<% end %>
 
 <% end %>
-		  
+
 
 <div class="row">
 
 	<div class="panel callout">
-	
+
 	<fieldset>
 	    	<legend><%= t('infrastructure') %></legend>
-	
+
 			<div class="row">
-			
+
 		 		<div class="large-3 columns", class: "left inline">
-		
+
 			    <%= f.label ta('college.area')  %><br>
-	
+
 				</div>
-		 		
+
 		 		<div class="large-3 columns">
-	  
+
 				   <%= f.number_field :area, min: 0 %>
-				
+
 				</div>
-	
+
 	 		<div class="large-3 columns", class: "left inline">
-		
+
 			    <%= f.label ta('college.libraries')  %><br>
-	
+
 				</div>
-		 		
+
 		 		<div class="large-3 columns">
-	  
+
 				   <%= f.number_field :libraries, min: 0 %>
-				
+
 				</div>
-			</div>	 		
-	
+			</div>
+
 			<div class="row">
-			
+
 		 		<div class="large-3 columns", class: "left inline">
-		
+
 			    <%= f.label ta('college.classrooms')  %><br>
-	
+
 				</div>
-		 		
+
 		 		<div class="large-3 columns">
-	  
+
 				   <%= f.number_field :classrooms, min: 0 %>
-				
+
 				</div>
-	
+
 		 		<div class="large-3 columns", class: "left inline">
-		
+
 			    <%= f.label ta('college.otherrooms')  %><br>
-	
+
 				</div>
-		 		
+
 		 		<div class="large-3 columns">
-	  
+
 				   <%= f.number_field :otherrooms, min: 0 %>
-				
+
 				</div>
-			</div>	 				
-	
+			</div>
+
 			<div class="row">
-			
+
 		 		<div class="large-3 columns", class: "left inline">
-		
+
 			    <%= f.label ta('college.foodplaces')  %><br>
-	
+
 				</div>
-		 		
+
 		 		<div class="large-3 columns">
-	  
+
 				   <%= f.number_field :foodplaces, min: 0 %>
-				
+
 				</div>
-	
+
 	 		<div class="large-3 columns", class: "left inline">
-		
+
 			    <%= f.label ta('college.sportscourts')  %><br>
-	
+
 				</div>
-		 		
+
 		 		<div class="large-3 columns">
-	  
+
 				   <%= f.number_field :sportscourts, min: 0 %>
-				
+
 				</div>
-			</div>	 		
-					
+			</div>
+
 		</fieldset>
-</div>		  
-		  
+</div>
+
 <div class="panel">
 		<fieldset>
     	<legend><%= t('yearly_statistics') %></legend>
 
 	<div class="row">
-		
+
 	 		<div class="large-6 columns", class: "left inline">
-	
+
 		    <%= f.label ta('college.gradcertificatecourses')  %><br>
 
 			</div>
-	 		
+
 	 		<div class="large-6 columns">
-  
+
 			   <%= f.number_field :gradcertificatecourses, min: 0 %>
-			
+
 			</div>
-		
+
 	</div>
 
 	<div class="row">
-		
+
 	 		<div class="large-6 columns", class: "left inline">
-	
+
 		    <%= f.label ta('college.previousyeargradcertcompletions')  %><br>
 
 			</div>
-	 		
+
 	 		<div class="large-6 columns">
-  
+
 			   <%= f.number_field :previousyeargradcertcompletions, min: 0 %>
-			
+
 			</div>
-		
+
 	</div>
 
-	
+
 	</fieldset>
-</div>		  
-		
-	
+</div>
+
+
 
 	<% if can? :update, College  %>
-	
+
 	   <div class="row actions">
-	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
-	 
+	  	<%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
+
 	<% end %>
 
   	 <%= link_to t('actions.cancel'), colleges_path, class: "anular" %>
-	
+
 	</div>
 
 <% end %>

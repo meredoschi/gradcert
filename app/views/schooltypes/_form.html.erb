@@ -24,11 +24,11 @@
 	<% if can? :update, Schooltype %>
 	
 	   <div class="row actions">
-	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	  	<%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
 	 
 	<% end %>
 
-  	 <%= link_to t('actions.cancel'), schooltypes_path, class: t('cancel') %>
+  	 <%= link_to t('actions.cancel'), schooltypes_path, class: 'anular' %>
 	
 	</div>
 

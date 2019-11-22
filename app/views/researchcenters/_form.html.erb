@@ -19,32 +19,32 @@
 		<% if action_name=='new' %>
 
 			<div class="row">
-	
-			
+
+
 			 		<div class="large-3 columns", class: "left inline">
-			
+
 			    <%= f.label ta('institution.name') %><br>
-			
+
 					</div>
-			 		
+
 			 		<div class="large-9 columns">
-		  
+
 					  <%= f.collection_select :institution_id, Institution.registered.without_researchcenter, :id, :name,  {prompt: true} %>
-				
-					
+
+
 					</div>
-				
-		 	</div>	 				  
-	
+
+		 	</div>
+
 
 	<% else %>
 
 		<div class="row">
-	
+
 			<h2><%= link_to @researchcenter.institution_name, @researchcenter.institution %><h2>
 
 		</div>
-		
+
 	<% end %>
 
 
@@ -53,37 +53,37 @@
 <div class="row">
 		<table>
 			<tr>
-			
+
 							<div class="large-4 columns">
-					
+
 								<th><strong><%= ta('researchcenter.rooms').capitalize %></strong></th>
-					
+
 							</div>
 
 							<div class="large-4 columns">
-					
+
 								<th><strong><%= ta('researchcenter.labs').capitalize %></strong></th>
-					
+
 							</div>
-					
-							
-			</tr>						
-		
+
+
+			</tr>
+
 			<div class="row">
-		
+
 				<tr>
 					<div class="large-4 columns">
-					
+
 						<td><%= f.number_field :rooms, min: 0 %></td>
-					
+
 					</div>
 
 					<div class="large-4 columns">
-					
+
 						<td><%= f.number_field :labs, min: 0 %></td>
-					
+
 					</div>
-										
+
 				</tr>
 		</div>
 
@@ -95,74 +95,74 @@
 <div class="row">
 
 	<h4><%= t('scientific_production').capitalize+' ('+t('research').pluralize+')' %></h4>
-	
+
 </div>
 
 
 <div class="row">
 		<table>
 			<tr>
-			
+
 				<div class="large-4 columns">
-		
+
 					<th></th>
-		
+
 				</div>
-	
+
 				<div class="large-4 columns">
-		
+
 					<th><%= t('done.f').capitalize.pluralize %></th>
-		
+
 				</div>
 
 				<div class="large-4 columns">
-		
+
 					<th><%= t('ongoing').capitalize %></th>
-		
+
 				</div>
 
 			</tr>
 
 			<tr>
-			
+
 				<div class="large-4 columns">
-		
+
 					<td><strong><%= t('national').capitalize %></strong></td>
-		
-				</div>
-	
-				<div class="large-4 columns">
-		
-					<td><%= f.number_field :domesticprojectsdone, min: 0 %></td>
-		
+
 				</div>
 
 				<div class="large-4 columns">
-		
+
+					<td><%= f.number_field :domesticprojectsdone, min: 0 %></td>
+
+				</div>
+
+				<div class="large-4 columns">
+
 					<td><%= f.number_field :ongoingdomesticprojects, min: 0 %></td>
-		
+
 				</div>
 
 			</tr>
 
 			<tr>
-			
+
 				<div class="large-4 columns">
-		
+
 					<td><strong><%= t('international').capitalize %></strong></td>
-		
-				</div>
-	
-				<div class="large-4 columns">
-		
-					<td><%= f.number_field :intlprojectsdone, min: 0 %></td>
-		
+
 				</div>
 
 				<div class="large-4 columns">
-		
+
+					<td><%= f.number_field :intlprojectsdone, min: 0 %></td>
+
+				</div>
+
+				<div class="large-4 columns">
+
 					<td><%= f.number_field :ongoingintlprojects, min: 0 %></td>
-		
+
 				</div>
 
 			</tr>
@@ -172,17 +172,14 @@
 
 
 	<% if can? :update, Researchcenter  %>
-	
+
 	   <div class="row actions">
-	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
-	 
+	  	<%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
+
 	<% end %>
 
   	 <%= link_to t('actions.cancel'), researchcenters_path, class: "anular" %>
-	
+
 	</div>
 
 <% end %>
-
-
-

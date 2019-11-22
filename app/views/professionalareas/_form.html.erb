@@ -62,11 +62,11 @@
 	<% if can? :update, Professionalarea %>
 	
 	   <div class="row actions">
-	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
+	  	<%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
 	 
 	<% end %>
 
-  	 <%= link_to t('actions.cancel'), professionalareas_path, class: t('cancel') %>
+  	 <%= link_to t('actions.cancel'), professionalareas_path, class: 'anular' %>
 	
 	</div>
 

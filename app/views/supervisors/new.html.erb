@@ -4,7 +4,7 @@
 
 	<%= render 'form' %>
 	
-	<%= link_to t('actions.back'), supervisors_path, class: t('back') %>
+	<%= link_to t('actions.back'), supervisors_path, class: 'voltar' %>
 <% else %>
 
 	<div class="row">
@@ -15,7 +15,7 @@
 
     	</div>
 
-		<%= link_to t('go_to_contacts_index'), contacts_path, class: "small button info" %> | <%= link_to t('actions.back'), supervisors_path, class: t('back') %>
+		<%= link_to t('go_to_contacts_index'), contacts_path, class: "small button info" %> | <%= link_to t('actions.back'), supervisors_path, class: 'voltar' %>
 		
 </div>
  		

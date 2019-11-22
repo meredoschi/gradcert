@@ -18,18 +18,18 @@
 		    <%= f.label :name %><br>
 	    <%= f.text_field :name %>
 		  </div>
-	
+
 </div>
 
 	<% if can? :update, Academiccategory %>
-	
+
 	   <div class="row actions">
-	  	<%= f.submit :value => t('actions.confirm'), class: t('confirmation') %> |
-	 
+	  	<%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
+
 	<% end %>
 
-  	 <%= link_to t('actions.cancel'), academiccategories_path, class: t('cancel') %>
-	
+  	 <%= link_to t('actions.cancel'), academiccategories_path, class: 'anular' %>
+
 	</div>
 
 <% end %>
