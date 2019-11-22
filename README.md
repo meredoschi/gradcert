@@ -71,7 +71,7 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*25/OCT/2019*
+*22/NOV/2019*
 
 =======
 ## COPYRIGHT
