@@ -88,6 +88,7 @@ en:
   deleted:
     f: removed
     m: removed
+  department_in_charge: Department it pertains to
   diversity: diversity
   done:
     f: finalized
@@ -187,6 +188,7 @@ en:
     f: our
     m: our
   people_management: People
+  percent: percent
   photo: photo
   registered:
     f: registered
@@ -198,7 +200,6 @@ en:
     f: removed
     m: removed
   research: research paper
-  responsible_department: Department responsible
   restricted_access: Restricted Access
   rooms: rooms
   scholarship_contract: Scholarship contract

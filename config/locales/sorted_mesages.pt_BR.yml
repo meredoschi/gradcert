@@ -97,6 +97,7 @@ pt_BR:
     letterhead_title: DECLARAÇÃO DE INEXISTÊNCIA DE VÍNCULO EMPREGATÍCIO COM INSTITUIÇÕES VINCULADAS AO SUS
     screen_title: Declaração de inexistência de vínculo empregatício com instituições vinculadas ao SUS
   definition: definição
+  department_in_charge: Departamento responsável
   description: Descrição
   detailed_info: Informação detalhada
   diploma: Diploma
@@ -298,7 +299,6 @@ pt_BR:
   required: favor preencher
   research: pesquisa
   resend: Reenvio
-  responsible_department: Departamento responsável
   restricted: preenchimento restrito
   restricted_access: acesso restrito
   result: resultado

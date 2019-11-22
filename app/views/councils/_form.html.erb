@@ -21,7 +21,7 @@
 	<%= render 'form_webinfo.html.erb', form: f %>
 
 	<div class="row">
-			
+
 			<h3><%= tm('professionalfamily').capitalize.pluralize %></h3>
 
 	</div>
@@ -34,23 +34,23 @@
 			  <% end %>
 
 			 <div class="row links">
-			    <%= link_to_add_association t('actions.new.f')+' '+tm('professionalfamily').downcase, f, :professionalfamily, class: t('create') %>
+			    <%= link_to_add_association t('actions.new.f')+' '+tm('professionalfamily').downcase, f, :professionalfamily, class: 'criar' %>
 			 </div>
 			</div>
-		
+
 		<hr>
-		
-	</div>	
+
+	</div>
 
 	<% if can? :update, Council %>
-	
+
 	   <div class="row actions">
 	  	<%= f.submit :value => t('actions.confirm'), class: 'confirmar' %> |
-	 
+
 	<% end %>
 
   	 <%= link_to t('actions.cancel'), councils_path, class: "anular" %>
-	
+
 	</div>
 
 <% end %>

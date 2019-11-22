@@ -86,6 +86,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'quadro de vagas', 'quadros de vagas'
   inflect.irregular 'unidade da federação', 'unidades da federação'
   inflect.irregular 'valor bolsa', 'valores bolsa'
+  # International version
+  inflect.irregular 'family of professions', 'families of professions'
 
  # 	http://pt.stackoverflow.com/questions/19512/como-programar-em-portugu%C3%AAs-no-ruby-on-rails
  #    inflect.plural(/or$/i,  'ores')
