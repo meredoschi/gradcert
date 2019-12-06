@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Adapted from:  http://dennisreimann.de/blog/seeds-for-different-environments/
 
 # https://stackoverflow.com/questions/25648456/i-cant-seem-to-add-config-include-factorygirlsyntaxmethods-to-my-rspec-co
@@ -11,12 +13,37 @@ def loading_message_i18n(tablename)
   '  ** ' + I18n.t('loading').capitalize + " '" + tablename + "'"
 end
 
+# When locale is set to English, returns the international version (if it exists)
+def retrieve_seed_file(fname, seeds_dir_path, sub_directory_name)
+  if I18n.locale == :en
+
+    seed_file_intl = File.join(seeds_dir_path, sub_directory_name, 'international', fname)
+
+    seed_file = if File.exist?(seed_file_intl)
+
+                  seed_file_intl
+
+                else
+
+                  File.join(seeds_dir_path, sub_directory_name, fname)
+
+                end
+
+  end
+
+  seed_file
+end
+
 def load(tables, sub_directory_name)
   tables.each do |tablename|
     #    seed_file = "#{Rails.root}/db/seeds/#{tablename}_seed.rb"
     #    seed_file = "#{Rails.root}/db/seeds/new/#{tablename}_seed.rb" # To do: use join
+
+    seeds_dir_path = File.join(Rails.root, 'db', 'seeds')
+
     fname = tablename + '_seed.rb'
-    seed_file = File.join(Rails.root, 'db', 'seeds', sub_directory_name, fname)
+
+    seed_file = retrieve_seed_file(fname, seeds_dir_path, sub_directory_name)
 
     if File.exist?(seed_file)
       #  puts '  ** ' + I18n.t('loading').capitalize + " '" + tablename + "'"
@@ -34,7 +61,8 @@ end
 # Tables used in the institutions menu
 def institutions
   puts model_name_i18n('institution')
-  %w[institutions institution_accreditations institution_addresses institution_phones institution_webinfos]
+  %w[institutions]
+  #  %w[institutions placesavailable]
 end
 
 # Tables used in the people menu
@@ -52,23 +80,29 @@ end
 # Tables used in the definitions menu
 def definitions
   puts I18n.t('definition').pluralize.capitalize
-  %w[countries states stateregions municipalities streetnames schoolterms institutiontypes programnames taxations brackets placesavailable]
+
+  %w[countries states stateregions municipalities streetnames
+     schoolterms institutiontypes programnames taxations brackets]
 end
 
 # Tables used in the programs menu
 def programs
   puts I18n.t('activerecord.models.program').pluralize.capitalize
-  %w[professionalareas professionalspecialties program_accreditations program_admissions schoolyears programs]
-end
+  #  %w[professional_specialties_and_areas]
+  %w[professional_specialties_and_areas programs]
+  #  %w[programs]
 
+  #  %w[professional_specialties_and_areas program_accreditations
+  #     program_admissions schoolyears programs]
+end
 
 if Rails.env.test?
 
 else
 
-   load(system_tables, 'system')
-   load(definitions, 'definitions')
-   load(people, 'people')
-   load(institutions, 'institutions')
-   load(programs,'programs')
+  load(system_tables, 'system')
+  load(definitions, 'definitions')
+  load(institutions, 'institutions')
+  load(people, 'people')
+  load(programs, 'programs')
 end

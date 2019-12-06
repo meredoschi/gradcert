@@ -21,15 +21,15 @@ class Program < ActiveRecord::Base
 
   # ------------------- Nested models ----------------------------------------------------------
 
-  has_one :admission
+  has_one :admission, dependent: :destroy
   accepts_nested_attributes_for :admission
 
-  has_one :accreditation
+  has_one :accreditation, dependent: :destroy
   accepts_nested_attributes_for :accreditation
 
   # accepts_nested_attributes_for :accreditation, reject_if: :method___?,	:allow_destroy => true
 
-  has_one :address
+  has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address, reject_if: :internal_address?,	allow_destroy: true
 
   has_many :schoolyears, dependent: :destroy
@@ -69,9 +69,10 @@ class Program < ActiveRecord::Base
   # ------------------- PENDING Tests  ---------------------------------------------------
 
   # You may need to disable this validation temporarily in order to seed the programs.
-  validate :duration_consistency
+  validate :duration_consistency unless Settings.data_seed_imminent.programs
 
-  validate :schoolyear_range # http://stackoverflow.com/questions/10080488/rails3-cocoon-validate-nested-field-count
+  validate :schoolyear_range unless Settings.data_seed_imminent.programs
+  # http://stackoverflow.com/questions/10080488/rails3-cocoon-validate-nested-field-count
 
   def schoolyear_range
     if schoolyears.reject(&:marked_for_destruction?).count > MAX_YEARS

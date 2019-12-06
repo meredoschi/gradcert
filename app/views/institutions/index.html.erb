@@ -1,19 +1,10 @@
-
 <%= render 'index_header.html.erb' %>
 
-<% if is_admin_or_manager(current_user) %>
+<div class="row">
 
 	<%= render 'index_table.html.erb' %>
 
-<% else %>
-
-   <div class="row">
-
-	 <%= render 'index_table.html.erb' %>
-
-   </div>
-
-<% end %>
+</div>
 
 <% if is_admin_or_manager(current_user) %>
 

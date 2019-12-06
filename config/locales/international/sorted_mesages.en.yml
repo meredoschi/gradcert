@@ -110,7 +110,6 @@ en:
   filter_by_profile: Filtrar by profile (choose only one)
   for_passport_only: For passport only
   foreigners: foreigner
-  from: from
   function: function
   general_characteristics: General characterstics
   general_information: General information
@@ -311,7 +310,6 @@ en:
   theoretical: Theoretical
   this_warning_will_automatically_disappear: This warning will disappear automatically when the situation that originated it does not occur again.  This is normal.
   tie_freshman_student_to_their_schoolyear: Allocate freshman student to her or his program
-  to: to
   to_be_done_in_this_order: To be done in this order
   to_be_paid: to be paid.
   total_absences_amount: Total absences amount

@@ -1,6 +1,8 @@
 # config/application_settings.yml
 # https://github.com/settingslogic/settingslogic
 defaults: &defaults
+  data_seed_imminent:
+    programs: true       # Should be false, after initial data was seeded
   MEDRES_Permissions:
   - medres
   - medrescollaborator

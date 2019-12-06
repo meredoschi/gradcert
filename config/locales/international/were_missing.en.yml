@@ -110,6 +110,7 @@ en:
   found:
     f: found
     m: found
+  from: from
   fullname:
     gradcert: Graduate Certificate Program
     medres: Medical Residency Program
@@ -214,6 +215,7 @@ en:
     m: suspended
   teaching_area: Teaching area
   term_of_office: Term of office
+  to: to
   tooltip:
     bankaccount:
       num:
