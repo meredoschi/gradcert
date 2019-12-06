@@ -21,6 +21,11 @@ Therefore, I thought it best to update this page accordingly, for the sake of co
 
    This latest update includes additional text in English.  The translation was completed, there are no missing keys.
 
+   Regarding the sample data (which may be loaded via *rake db:seed*), most of it is in Portuguese, such as states
+   municipalities, countries, etc.  Street names are already in English, for the international version,
+   but should still appear in the user interface as a prefix.  This is normal and expected behaviour.
+
+   *Institutions and people's names are purely fictional.*
 
 ### Matriculating students
 
@@ -71,7 +76,7 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*22/NOV/2019*
+*6/DEC/2019*
 
 =======
 ## COPYRIGHT
