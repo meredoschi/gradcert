@@ -4,6 +4,7 @@ pt_BR:
     formats:
       seeofr: "%-Y-%m-%d"
       unofrscore: "%d_%b_%y"
+  on_the_team: na equipe
   tooltip:
     bankaccount:
       num:

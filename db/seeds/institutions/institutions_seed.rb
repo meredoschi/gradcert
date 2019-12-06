@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
 def accredited_institution(inst_name, inst_abbrv, dt_accredited)
-
   institutiontype_ids = Institutiontype.pluck(:id)
 
   institution = Institution.create(name: inst_name, abbreviation: inst_abbrv,
-  institutiontype_id: institutiontype_ids.sample)
+                                   institutiontype_id: institutiontype_ids.sample)
 
-  accreditation = Accreditation.create(institution_id: institution.id, original: true, start: dt_accredited,
-  revoked: false, suspended: false, renewed: false)
-    
+  Accreditation.create(institution_id: institution.id, original: true, start: dt_accredited,
+                       revoked: false, suspended: false, renewed: false)
+
   institution
 end
 

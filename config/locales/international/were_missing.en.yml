@@ -144,6 +144,7 @@ en:
   max_num_scholarships_offered:
     medres: Maximum number of scholarships offered
     pap: Maximum number of scholarships offered
+  member: member
   my:
     f: my
     fp: my
@@ -162,7 +163,7 @@ en:
     m: none
   normal: Normal
   noun:
-    edit: Edition
+    edit: Edit
     update: Update
   num_veterans:
     pap: Matriculated students expected to continue their studies (programs with duration > 1 year)
@@ -171,6 +172,7 @@ en:
     f: of
     m: of
     n: of
+  on_the_team: on the team
   ongoing: ongoing
   ordinal:
     '1': First

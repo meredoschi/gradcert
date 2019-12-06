@@ -14,9 +14,15 @@
 
 			 		<div class="medium-9 columns">
 
+							<% if is_admin_or_manager(current_user) %>
 
-							<%#= accreditation_fields.date_select(:start, prompt: true, start_year: Date.today.year - 10, end_year: Date.today.year, :include_blank => true) %>
+								<%= accreditation_fields.date_select(:start, prompt: true, start_year: Date.today.year - 10, end_year: Date.today.year, :include_blank => true) %>
 
+							<% else %>
+
+								<%= I18n.l(@institution.accreditation.start) %>
+
+							<% end %>
 
 					</div>
 
