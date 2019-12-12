@@ -19,7 +19,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'simplecov'
-SimpleCov.start 'rails'
+# SimpleCov.start 'rails'
 require File.expand_path('../config/environment', __dir__)
 
 # http://www.rubydoc.info/gems/money-rails/0.8.1

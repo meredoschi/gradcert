@@ -7,9 +7,9 @@ describe Dateutils, type: :helper do
 
   let(:dt) { Date.today - 200 }
 
-  let(:dt2) { Date.today - 198 }
+  let(:two_days_after_some_dt) { dt + 2 }
 
-  let(:dt3) { Date.today - 194 }
+  let(:six_days_after_some_dt) { dt + 6 }
 
   # It is assumed days_elapsed will always be non-negative
   it '-elapsed_to_regular_date(num_days_elapsed)' do
@@ -60,7 +60,7 @@ describe Dateutils, type: :helper do
     expect(date_in_civil_format).to eq Dateutils.to_civil(dt)
   end
 
-  it '-previous_weekday(dt) some time ago (baseline)' do
+  it '-previous_weekday(dt)' do
     #     res = case dt.wday
     res = case Dateutils.day_of_the_week_num(dt)
           when 0
@@ -74,32 +74,32 @@ describe Dateutils, type: :helper do
     expect(res).to eq(Dateutils.previous_weekday(dt))
   end
 
-  it '-previous_weekday(dt) two days before some time ago' do
+  it '-previous_weekday(two_days_after_some_dt)' do
     #     res = case dt.wday
-    res = case Dateutils.day_of_the_week_num(dt2)
+    res = case Dateutils.day_of_the_week_num(two_days_after_some_dt)
           when 0
-            dt2 - 2.day
+            two_days_after_some_dt - 2.day
           when 6
-            dt2 - 1.day
+            two_days_after_some_dt - 1.day
           else
-            dt2
+            two_days_after_some_dt
           end
 
-    expect(res).to eq(Dateutils.previous_weekday(dt2))
+    expect(res).to eq(Dateutils.previous_weekday(two_days_after_some_dt))
   end
 
-  it '-previous_weekday(dt) six days before some time ago' do
+  it '-previous_weekday(six_days_after_some_dt)' do
     #     res = case dt.wday
-    res = case Dateutils.day_of_the_week_num(dt3)
+    res = case Dateutils.day_of_the_week_num(six_days_after_some_dt)
           when 0
-            dt3 - 2.day
+            six_days_after_some_dt - 2.day
           when 6
-            dt3 - 1.day
+            six_days_after_some_dt - 1.day
           else
-            dt3
+            six_days_after_some_dt
           end
 
-    expect(res).to eq(Dateutils.previous_weekday(dt3))
+    expect(res).to eq(Dateutils.previous_weekday(six_days_after_some_dt))
   end
 
   it '-regular_to_elapsed(dt) regular_date_to_days_elapsed(dt)' do
