@@ -18,22 +18,25 @@ require 'date'
 # next_term_id = next_term.id
 #
 
-start_m = '3'
-start_d = '1'
+start_m = Settings.schoolterm.start.month
+start_d = Settings.schoolterm.start.day
 
-start_y = if Time.zone.today.month > 2
+start_y = if Time.zone.today.month >= start_m
             Time.zone.today.year + 1
           else
             Time.zone.today.year
           end
 
-term_duration = 2 # in years (for the longest program)
-num_days_from_season_opening_to_term_start = 45
-num_days_registrations_still_open_after_term_start = 32
-num_days_from_admissions_debut_to_term_start = 180
-num_days_from_admissions_closure_to_term_start = 90
+term_duration = Settings.schoolterm.duration # e.g. 2 years (for the longest program)
+num_days_from_season_opening_to_term_start = Settings.schoolterm.registrations.open.days_before_term_starts
+num_days_registrations_still_open_after_term_start = Settings.schoolterm.registrations.close.days_after_term_starts
+num_days_from_admissions_debut_to_term_start = Settings.schoolterm.admissions.open.days_before_term_starts
+num_days_from_admissions_closure_to_term_start = Settings.schoolterm.admissions.open.days_before_term_starts
 
-(0..3).each do |i|
+num_schoolterms_to_seed = Settings.schoolterm.sample_quantity - 1
+# index starts at 0
+
+(0..num_schoolterms_to_seed).each do |i|
   start_y_m_d = [(start_y - i), start_m, start_d].join('-')
   start_dt = Date.parse(start_y_m_d) # in date format
 
@@ -52,7 +55,7 @@ num_days_from_admissions_closure_to_term_start = 90
   admissions_closure = start_dt - num_days_from_admissions_closure_to_term_start
   admissions_closure_time = admissions_closure.to_datetime
 
-  num_scholarships = rand(900..1200)
+  num_scholarships = Settings.schoolterm.scholarships_offered
 
   Schoolterm.create!(start: start_y_m_d, finish: finish_y_m_d, pap: true, medres: false, registrationseason: true, scholarshipsoffered: num_scholarships, seasondebut: season_debut_time, seasonclosure: season_closure_time, admissionsdebut: admissions_debut_time, admissionsclosure: admissions_closure_time)
 end

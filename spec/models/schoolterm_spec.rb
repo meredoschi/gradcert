@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Schoolterm, type: :model do
@@ -6,7 +8,7 @@ RSpec.describe Schoolterm, type: :model do
   let(:schoolterm) { FactoryBot.create(:schoolterm, :pap) }
 
   it 'can be created' do
-    #    schoolterm=FactoryBot.create(:schoolterm, :pap)
+    FactoryBot.create(:schoolterm, :pap)
     #    print I18n.t('activerecord.models.schoolterm').capitalize+': '
     #    puts schoolterm.name
   end
@@ -16,6 +18,7 @@ RSpec.describe Schoolterm, type: :model do
     # http://stackoverflow.com/questions/1215245/how-to-fake-time-now
 
     now = Time.parse('2017-04-28 00:10:00')
+
     allow(Time).to receive(:now) { now }
 
     # ***********************************************************************
@@ -36,6 +39,7 @@ RSpec.describe Schoolterm, type: :model do
     # http://stackoverflow.com/questions/1215245/how-to-fake-time-now
 
     now = Time.parse('2017-5-1 00:00:01')
+
     allow(Time).to receive(:now) { now }
 
     # ***********************************************************************
@@ -73,7 +77,8 @@ RSpec.describe Schoolterm, type: :model do
     @program_admissions_data_entry_period = false
 
     if schoolterm.admissionsdebut.present? && schoolterm.admissionsclosure.present?
-      @program_admissions_data_entry_period = Logic.within?(schoolterm.admissionsdebut, schoolterm.admissionsclosure, now)
+      @program_admissions_data_entry_period = Logic.within?(schoolterm.admissionsdebut,
+                                                            schoolterm.admissionsclosure, now)
     end
 
     expect(@program_admissions_data_entry_period).to eq(schoolterm.admissions_data_entry_period?)
@@ -138,6 +143,7 @@ RSpec.describe Schoolterm, type: :model do
 
     dt = (schoolterm.admissionsclosure - 1.day).to_s
 
+    puts schoolterm.details
     now = Time.parse(dt)
     allow(Time).to receive(:now) { now }
 
@@ -159,12 +165,6 @@ RSpec.describe Schoolterm, type: :model do
     now = Time.parse('2018-4-30')
     allow(Time).to receive(:now) { now }
 
-    # ***********************************************************************
-
-    schoolterm = FactoryBot.create(:schoolterm)
-
-    # Schoolterm.latest in reality
-
     season_debut = '2018-1-5'
 
     season_closure = '2018-5-1'
@@ -180,12 +180,6 @@ RSpec.describe Schoolterm, type: :model do
 
     now = Time.parse('2017-11-30')
     allow(Time).to receive(:now) { now }
-
-    # ***********************************************************************
-
-    schoolterm = FactoryBot.create(:schoolterm)
-
-    # Schoolterm.latest in reality
 
     season_debut = '2018-1-5'
 
@@ -219,8 +213,6 @@ RSpec.describe Schoolterm, type: :model do
   end
 
   it '-details' do
-    #  Schoolterm(id: integer, start: date, finish: date, pap: boolean, medres: boolean, created_at: datetime, updated_at: datetime, registrationseason: boolean, s
-    #   cholarshipsoffered: integer, seasondebut: datetime, seasonclosure: datetime, admissionsdebut: datetime, admissionsclosure: datetime)
     sep = Settings.separator + ' '
     i18n_from = I18n.t('from')
     i18n_to = I18n.t('to')
@@ -229,9 +221,12 @@ RSpec.describe Schoolterm, type: :model do
     registration_season_i18n = I18n.t('activerecord.attributes.schoolterm.registrationseason')
     adm_i18n = I18n.t('activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod')
 
-    term_details += ' ' + I18n.l(schoolterm.finish) + ' ' + sep + registration_season_i18n + ' ' + i18n_from + ' '
-    term_details += I18n.l(schoolterm.seasondebut) + ' ' + i18n_to + ' ' + I18n.l(schoolterm.seasonclosure)
-    term_details += ' ' + sep + adm_i18n + ' ' + i18n_from + ' ' + I18n.l(schoolterm.admissionsdebut) + ' '
+    term_details += ' ' + I18n.l(schoolterm.finish) + ' ' + sep + \
+                    registration_season_i18n + ' ' + i18n_from + ' '
+    term_details += I18n.l(schoolterm.seasondebut) + ' ' + i18n_to + ' ' + \
+                    I18n.l(schoolterm.seasonclosure)
+    term_details += ' ' + sep + adm_i18n + ' ' + i18n_from + ' ' + \
+                    I18n.l(schoolterm.admissionsdebut) + ' '
     term_details += i18n_to + ' ' + I18n.l(schoolterm.admissionsclosure)
 
     expect(term_details).to eq(schoolterm.details)

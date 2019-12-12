@@ -1,6 +1,23 @@
 # config/application_settings.yml
 # https://github.com/settingslogic/settingslogic
 defaults: &defaults
+  schoolterm:
+    sample_quantity: 4
+    duration: 2 # in years
+    scholarships_offered: <%= "#{rand(900..1200)}" %>
+    start:
+      day: 1
+      month: 3
+    admissions:
+      open:
+        days_before_term_starts: 180
+      close:
+        days_before_term_starts:  90
+    registrations:
+      open:
+        days_before_term_starts:  45
+      close:
+        days_after_term_starts:   32
   data_seed_imminent:
     programs: true       # Should be false, after initial data was seeded
   MEDRES_Permissions:
@@ -21,8 +38,8 @@ defaults: &defaults
     organization: Example
     payment: pmt
   application:
-    version: 0.1
-    year: 2018
+    version: 0.2
+    year: 2019
   logo_file_name: app/assets/images/logo.png
   created_recently:
     maximum_number_days_ago: 10
