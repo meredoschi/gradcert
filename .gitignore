@@ -11,3 +11,4 @@ logfile
 !/log/.keep
 /tmp
 .DS_Store
+coverage

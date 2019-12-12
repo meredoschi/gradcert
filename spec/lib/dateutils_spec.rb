@@ -1,9 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Dateutils, type: :helper do
   let(:days_elapsed) { 4000 }
 
   let(:dt) { Date.today - 200 }
+
+  let(:dt2) { Date.today - 198 }
+
+  let(:dt3) { Date.today - 194 }
 
   # It is assumed days_elapsed will always be non-negative
   it '-elapsed_to_regular_date(num_days_elapsed)' do
@@ -29,8 +35,8 @@ describe Dateutils, type: :helper do
   end
 
   it '-to_gregorian(days_elapsed) aliases elapsed_to_regular_date(days_elapsed)' do
-     dt_in_standard_format = Dateutils.elapsed_to_regular_date(days_elapsed)
-     expect(dt_in_standard_format).to eq(Dateutils.to_gregorian(days_elapsed))
+    dt_in_standard_format = Dateutils.elapsed_to_regular_date(days_elapsed)
+    expect(dt_in_standard_format).to eq(Dateutils.to_gregorian(days_elapsed))
   end
 
   # d = Date
@@ -54,7 +60,7 @@ describe Dateutils, type: :helper do
     expect(date_in_civil_format).to eq Dateutils.to_civil(dt)
   end
 
-  it '-previous_weekday(dt)' do
+  it '-previous_weekday(dt) some time ago (baseline)' do
     #     res = case dt.wday
     res = case Dateutils.day_of_the_week_num(dt)
           when 0
@@ -66,6 +72,34 @@ describe Dateutils, type: :helper do
           end
 
     expect(res).to eq(Dateutils.previous_weekday(dt))
+  end
+
+  it '-previous_weekday(dt) two days before some time ago' do
+    #     res = case dt.wday
+    res = case Dateutils.day_of_the_week_num(dt2)
+          when 0
+            dt2 - 2.day
+          when 6
+            dt2 - 1.day
+          else
+            dt2
+          end
+
+    expect(res).to eq(Dateutils.previous_weekday(dt2))
+  end
+
+  it '-previous_weekday(dt) six days before some time ago' do
+    #     res = case dt.wday
+    res = case Dateutils.day_of_the_week_num(dt3)
+          when 0
+            dt3 - 2.day
+          when 6
+            dt3 - 1.day
+          else
+            dt3
+          end
+
+    expect(res).to eq(Dateutils.previous_weekday(dt3))
   end
 
   it '-regular_to_elapsed(dt) regular_date_to_days_elapsed(dt)' do
