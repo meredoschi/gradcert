@@ -29,7 +29,7 @@ group :test do
 end
 
 group :test, :development do
-  gem 'factory_bot_rails', require: false
+  gem 'factory_bot_rails', '4.11.0', require: false
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
   gem 'rubocop' # August 2017
