@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This will guess the User class
 FactoryBot.define do
   factory :registrationkind do
@@ -7,7 +9,7 @@ FactoryBot.define do
     regular true # Most registrations are "normal" (default)
     makeup false
     repeat false
-#    registration
+    #    registration
   end
 
   trait :makeup do

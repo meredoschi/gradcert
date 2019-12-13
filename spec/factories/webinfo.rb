@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 # This will guess the User class
 FactoryBot.define do
-
-  #  => Webinfo(email: string, site: string, facebook: string, twitter: string, other: string, institution_id: integer, contact_id: integer, created_at: datetime, updated_at: datetime, regionaloffice_id: integer, council_id: integer)
+  #  => Webinfo(email: string, site: string, facebook: string, twitter: string, other: string,
+  #  institution_id: integer, contact_id: integer, created_at: datetime, updated_at: datetime,
+  #  regionaloffice_id: integer, council_id: integer)
 
   factory :webinfo do
-
     email Faker::Internet.email
 
     trait :bankbranch do
@@ -14,12 +16,11 @@ FactoryBot.define do
 
     trait :contact do
       contact_id 1
-      twitter "#"+Faker::Internet.domain_word
+      twitter '#' + Faker::Internet.domain_word
     end
 
     trait :council do
       council_id 1
-
     end
 
     trait :institution do
@@ -31,6 +32,6 @@ FactoryBot.define do
       facebook Faker::Internet.slug
     end
 
-#   ************************************************************************
+    #   ************************************************************************
   end
 end
