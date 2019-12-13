@@ -16,8 +16,9 @@ FactoryBot.define do
     # postalcode {rand(99999).to_s+"-"+rand(999).to_s}
     postalcode '12345-678' # Brazilian format
     neighborhood 'Centro'
-    trait :bankbranch do
-      bankbranch_id 1
+
+    trait :bankbranchaddr do
+      bankbranch
     end
 
     trait :contact do

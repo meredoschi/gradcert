@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Leavetype, type: :model do
@@ -25,13 +27,9 @@ RSpec.describe Leavetype, type: :model do
 
     @leavetype_breadth = ''
 
-    if leavetype.setnumdays > 0
-      @leavetype_breadth += leavetype.setnumdays_i18n + sep
-    end
+    @leavetype_breadth += leavetype.setnumdays_i18n + sep if leavetype.setnumdays > 0
 
-    if leavetype.dayspaidcap > 0
-      @leavetype_breadth += leavetype.dayspaidcap_i18n + sep
-    end
+    @leavetype_breadth += leavetype.dayspaidcap_i18n + sep if leavetype.dayspaidcap > 0
 
     @leavetype_breadth += leavetype.maxnumdays_i18n if leavetype.maxnumdays > 0
 
@@ -86,7 +84,7 @@ RSpec.describe Leavetype, type: :model do
   it 'creation is blocked when !days_paid_cap_consistent_with_max_num_days?' do
     expect do
       FactoryBot.create(:leavetype, :honeymoon,
-                         :days_paid_cap_consistent)
+                        :days_paid_cap_consistent)
     end.to raise_error(ActiveRecord::RecordInvalid)
   end
 

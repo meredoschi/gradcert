@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Bankbranch, type: :model do
@@ -11,14 +13,20 @@ RSpec.describe Bankbranch, type: :model do
   it { is_expected.to validate_uniqueness_of(:code).case_insensitive }
   it { is_expected.to validate_numericality_of(:code).only_integer }
   it { is_expected.to validate_numericality_of(:code).is_greater_than_or_equal_to(0) }
-  it { is_expected.to validate_numericality_of(:code).is_less_than_or_equal_to(Settings.max_number_bankbranches) }
+  it {
+    is_expected.to validate_numericality_of(:code).is_less_than_or_equal_to(Settings
+    .max_number_bankbranches)
+  }
 
   #   validates :code, length: { in: 1..}
 
   it { is_expected.to validate_presence_of(:verificationdigit) }
   it { is_expected.to validate_length_of(:verificationdigit).is_equal_to(1) }
 
-  it { is_expected.to validate_length_of(:code).is_at_least(1).is_at_most(Settings.max_length_for_bankbranch_code) }
+  it {
+    is_expected.to validate_length_of(:code).is_at_least(1).is_at_most(Settings
+    .max_length_for_bankbranch_code)
+  }
 
   it 'can be created' do
     print I18n.t('activerecord.models.bankbranch').capitalize + ': '
@@ -29,16 +37,14 @@ RSpec.describe Bankbranch, type: :model do
 
   it '-details' do
     #    bankbranch = FactoryBot.create(:bankbranch)
-    bankbranch_details = bankbranch.code.to_s + '-' + bankbranch.verificationdigit.to_s + ' [' + bankbranch.name + '] '
+    bankbranch_details = bankbranch.code.to_s + '-' + bankbranch.verificationdigit.to_s + \
+                         ' [' + bankbranch.name + '] '
     expect(bankbranch.details).to eq(bankbranch_details)
   end
 
   it '-with_valid_dv?' do
-    if bankbranch.verificationdigit == Brazilianbanking.calculate_verification_digit(bankbranch.code, 4).to_s
-      @status = true
-    else
-      @status = false
-    end
+    @status = bankbranch.verificationdigit == Brazilianbanking
+              .calculate_verification_digit(bankbranch.code, 4).to_s
 
     @status
   end
@@ -46,11 +52,7 @@ RSpec.describe Bankbranch, type: :model do
   it '-future_opening_date?' do
     #    if bankbranch.opened.present? && bankbranch.opened > Date.today
 
-    @status = if bankbranch.opened > Date.today
-                true
-              else
-                false
-              end
+    @status = bankbranch.opened > Date.today
 
     @status
   end
@@ -70,12 +72,18 @@ RSpec.describe Bankbranch, type: :model do
 
   it 'creation is blocked if verification digit is inconsistent' do
     print I18n.t('activerecord.models.bankbranch').capitalize + ': '
-    expect { bankbranch = FactoryBot.create(:bankbranch, :incorrect_vd) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      bankbranch = FactoryBot.create(:bankbranch,
+                                     :incorrect_vd)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it 'creation is blocked if opening date is in the future' do
     print I18n.t('activerecord.models.bankbranch').capitalize + ': '
-    expect { bankbranch = FactoryBot.create(:bankbranch, :opens_in_a_month) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      bankbranch = FactoryBot.create(:bankbranch,
+                                     :opens_in_a_month)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it '-full' do

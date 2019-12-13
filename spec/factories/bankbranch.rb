@@ -20,7 +20,7 @@ FactoryBot.define do
     in_a_year = Date.today + 1.year
 
     # http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-FactoryBot/
-    association :address, factory: %i[address bankbranch]
+    association :address, factory: %i[address bankbranchaddr]
 
     name branch_name.to_s
     opened three_years_ago.to_s

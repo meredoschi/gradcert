@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Bankaccount, type: :model do
-  #  Bankaccount(id: integer, student_id: integer, bankbranch_id: integer, num: string, verificationdigit: string)
+  #  Bankaccount(id: integer, student_id: integer, bankbranch_id: integer, num: string,
+  #  verificationdigit: string)
   let(:bankaccount) { FactoryBot.create(:bankaccount) }
   MAX_LEN = Settings.max_length_for_bankaccount_number
   MAX_NUM = Settings.max_number_bankaccounts
@@ -40,7 +43,8 @@ RSpec.describe Bankaccount, type: :model do
     vd = bankaccount.verificationdigit
     @consistency = true
 
-    if vd && vd.casecmp('X').zero?
+    if
+vd&.casecmp('X')&.zero?
 
       # Compare strings
       if vd.to_s != Brazilianbanking.account_verification_digit(bankaccount.num).to_s
@@ -70,7 +74,7 @@ RSpec.describe Bankaccount, type: :model do
     if vd == 'X'
       bankaccount.verificationdigit = 1
     else
-      if vd = '9'
+      if vd == '9'
         bankaccount.verificationdigit = 0
 
       else # At most 8
@@ -91,6 +95,9 @@ RSpec.describe Bankaccount, type: :model do
   it 'creation is blocked if verification digit is inconsistent' do
     print I18n.t('activerecord.models.bankaccount').capitalize + ': '
 
-    expect { bankaccount = FactoryBot.create(:bankaccount, :incorrect_vd) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      bankaccount = FactoryBot.create(:bankaccount,
+                                      :incorrect_vd)
+    end .to raise_error(ActiveRecord::RecordInvalid)
   end
 end

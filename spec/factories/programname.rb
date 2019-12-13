@@ -3,6 +3,8 @@
 # This will guess the User class
 FactoryBot.define do
   factory :programname do
-    name Faker::Space.constellation
+    sequence(:name) { |n| (Faker::Space.constellation + ' ' + (n + rand(100000)
+ ).to_s).to_s }
+
   end
 end

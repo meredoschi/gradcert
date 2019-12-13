@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Payroll, type: :model do
@@ -282,60 +284,51 @@ RSpec.describe Payroll, type: :model do
 
   # On the specified date
   it '-ids_contextual_on(dt)' do
-
     contextual_ids = []
 
     dt_range = dt..dt
 
     Payroll.all.each do |payroll|
-
-      payroll_start=Dateutils.to_gregorian(payroll.daystarted)
-      payroll_finish=Dateutils.to_gregorian(payroll.dayfinished)
+      payroll_start = Dateutils.to_gregorian(payroll.daystarted)
+      payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
 
       # Alternatively, this could be done:
-#      payroll_start=payroll.monthworked.beginning_of_month
-#      payroll_finish=payroll.monthworked.end_of_month
+      #      payroll_start=payroll.monthworked.beginning_of_month
+      #      payroll_finish=payroll.monthworked.end_of_month
 
       payroll_range = payroll_start..payroll_finish # Payroll Cycle
 
       next unless Logic.intersect(dt_range, payroll_range) == dt_range
 
       contextual_ids << payroll.id
-
     end
 
-    expect(contextual_ids).to eq (Payroll.ids_contextual_on(dt))
-
+    expect(contextual_ids).to eq Payroll.ids_contextual_on(dt)
   end
 
   # On the specified date
   it '-ids_contextual_today' do
+    today = Date.today
 
-    today=Date.today
+    contextual_ids = Payroll.ids_contextual_on(today)
 
-    contextual_ids=Payroll.ids_contextual_on(today)
-
-    expect(contextual_ids).to eq (Payroll.ids_contextual_today)
-
+    expect(contextual_ids).to eq Payroll.ids_contextual_today
   end
 
-=begin
-  pending '#previous (with 12 months created)' do
-    #  if pluck(:monthworked).uniq.count > 1 # i.e. there is more than one month worked
-
-    created_payrolls = create_list(:payroll, 12, :personal_taxation)
-
-    print 'Distinct working months: '
-    puts Payroll.num_distinct_working_months
-    if Payroll.more_than_one_working_month_recorded?
-
-      puts 'More!!'
-      most_recent = []
-      #          most_recent << latest_finish_date
-      #          before_latest = (pluck(:dayfinished) - most_recent).max
-      #          where(dayfinished: before_latest)
-    end
-  end
-=end
-
+  #   pending '#previous (with 12 months created)' do
+  #     #  if pluck(:monthworked).uniq.count > 1 # i.e. there is more than one month worked
+  #
+  #     created_payrolls = create_list(:payroll, 12, :personal_taxation)
+  #
+  #     print 'Distinct working months: '
+  #     puts Payroll.num_distinct_working_months
+  #     if Payroll.more_than_one_working_month_recorded?
+  #
+  #       puts 'More!!'
+  #       most_recent = []
+  #       #          most_recent << latest_finish_date
+  #       #          before_latest = (pluck(:dayfinished) - most_recent).max
+  #       #          where(dayfinished: before_latest)
+  #     end
+  #   end
 end

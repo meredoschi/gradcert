@@ -8,10 +8,10 @@ FactoryBot.define do
     # previousparticipant: boolean, nationalhealthcareworker: boolean)
     #   ************ Associated models - factories to be created ***************
     association :contact, factory: %i[contact pap_student_role]
-    profession_id 1
-    bankaccount
-    schoolterm_id 1
+    profession
 
+   #  To do: recheck bankbranch, address, state, country factories and model tests
+   #  bankaccount
     #   ************************************************************************
   end
 end

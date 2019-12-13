@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
@@ -11,25 +13,21 @@ RSpec.describe Role, type: :model do
   let(:inconsistent_role) { FactoryBot.create(:role, :clerical_and_it) }
 
   context 'When a type is not selected' do
-
     it '-creation is blocked if no type is not specified' do
       expect do
-        sample_role=FactoryBot.create(:role)
-        print "Number of types: "
+        sample_role = FactoryBot.create(:role)
+        print 'Number of types: '
         puts sample_role.num_types_selected
       end.to raise_error(ActiveRecord::RecordInvalid)
     end
-
   end
 
   context 'Multiple role types selected' do
-
     it '-creation is blocked if two types are selected' do
       expect do
         FactoryBot.create(:role, :clerical_and_it)
       end.to raise_error(ActiveRecord::RecordInvalid)
     end
-
   end
 
   it '-types_selected' do
@@ -61,7 +59,6 @@ RSpec.describe Role, type: :model do
   # i.e. True
   # https://stackoverflow.com/questions/621176/how-to-dynamically-call-accessor-methods-in-ruby
   it '-num_types_selected' do
-
     role_num_types_selected = role.types_selected.count
 
     expect(role_num_types_selected).to eq role.num_types_selected

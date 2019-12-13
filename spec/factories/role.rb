@@ -15,7 +15,7 @@ FactoryBot.define do
 
     sequence(:name) do |n|
       (I18n.t('activerecord.models.student') + \
-      ' ' + (n + 1000).to_s).to_s
+      ' ' + (n + rand(100000)).to_s).to_s
     end
 
     trait :pap do
@@ -32,7 +32,7 @@ FactoryBot.define do
     trait :itstaff do
       sequence(:name) do |n|
         (I18n.t('definitions.role.names.itstaff') + \
-         ' ' + (n + 1000).to_s).to_s
+         ' ' + (n +  rand(100000)).to_s).to_s
       end
 
       clerical false
@@ -46,7 +46,7 @@ FactoryBot.define do
     trait :clerical do
       sequence(:name) do |n|
         (I18n.t('definitions.role.names.pap.clerical') + \
-         ' ' + (n + 1000).to_s).to_s
+         ' ' + (n + rand(100000)).to_s).to_s
       end
 
       clerical true
@@ -59,7 +59,7 @@ FactoryBot.define do
     trait :pap_student do
       sequence(:name) do |n|
         (I18n.t('definitions.role.names.pap.student') + \
-         ' ' + (n + 1000).to_s).to_s
+         ' ' + (n + rand(100000)).to_s).to_s
       end
 
       pap true

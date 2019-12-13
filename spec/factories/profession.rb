@@ -11,8 +11,8 @@ FactoryBot.define do
     #   ************ Associated models - factories to be created ***************
     sequence(:name) { |n| ('A' + (n + 1000).to_s + Faker::Company.profession).to_s }
     #    asciiname
-    sequence(:occupationcode) { |n| (n + 990_000).to_i.to_s }
-    professionalfamily_id 1
+    sequence(:occupationcode) { |n| (n + rand(990_000)).to_i.to_s }
+    professionalfamily
     #   ************************************************************************
   end
 end

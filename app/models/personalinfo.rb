@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Allows for easier maintenance of contact personal information
 class Personalinfo < ActiveRecord::Base
   has_paper_trail
@@ -7,13 +9,12 @@ class Personalinfo < ActiveRecord::Base
   # Three different contexts here
 
   belongs_to :municipality # Where person was born
-  belongs_to :state	# State which issued id
+  belongs_to :state # State which issued id
   belongs_to :country # Nationality (foreigners)
 
-  #
   belongs_to :contact
 
-  # 	has_many  :supervisor, :foreign_key => 'contact_id'
+  #   has_many  :supervisor, :foreign_key => 'contact_id'
 
   # -------------------------------------------------------
 
@@ -30,38 +31,38 @@ class Personalinfo < ActiveRecord::Base
              Settings.personaldocument.registered_foreigner,
              Settings.personaldocument.passport].freeze
 
- #	  	validates personaltraits,  presence: true, length: {is: 1}
+  #      validates personaltraits,  presence: true, length: {is: 1}
 
-						 	# Digito verificador do NIT
+  # Digito verificador do NIT
+  # Brazilian Social Security Number - Verification digit
+  def nit_dv
+    personalinfo_ssn_control_digit = 11 - (ssn_weighted_sum % 11)
 
-						   def nit_dv # Brazilian Social Security Number - Verification digit
-						     personalinfo_ssn_control_digit = 11 - (ssn_weighted_sum % 11)
+    personalinfo_ssn_control_digit = if personalinfo_ssn_control_digit < 10
 
-						     if personalinfo_ssn_control_digit < 10
+                                       personalinfo_ssn_control_digit.to_s
 
-						       personalinfo_ssn_control_digit = personalinfo_ssn_control_digit.to_s
+                                     else
 
-						     else
+                                       '0'
 
-						       personalinfo_ssn_control_digit = '0'
+                                     end
+    personalinfo_ssn_control_digit
+  end
 
-						     end
-						     personalinfo_ssn_control_digit
-						   end
+  def ssn_weighted_sum
+    personal_info_ssn_weighted_sum = 0
 
-						   def ssn_weighted_sum
-						     personal_info_ssn_weighted_sum = 0
+    factors = [3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
 
-						     factors = [3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+    (0..9).each do |i|
+      personal_info_ssn_weighted_sum += factors[i] * socialsecuritynumber[i].to_i
+    end
 
-						     (0..9).each do |i|
-						       personal_info_ssn_weighted_sum += factors[i] * socialsecuritynumber[i].to_i
-						     end
+    personal_info_ssn_weighted_sum
+  end
 
-						     personal_info_ssn_weighted_sum
-						   end
-
-	validates :state_id, presence:true, if: :citizen?
+  validates :state_id, presence: true, if: :citizen?
 
   # ************ Tested code finish ************
 
@@ -71,14 +72,14 @@ class Personalinfo < ActiveRecord::Base
   #   before_update :squish_whitespaces
   #
 
-  # 	validates_inclusion_of :sex, in: SEXES
-  # 	validates_inclusion_of :gender, in: GENDERS
+  #   validates_inclusion_of :sex, in: SEXES
+  #   validates_inclusion_of :gender, in: GENDERS
 
   validates :othername, absence: true, unless: :genderdiversity?
 
   # [:sex, :gender].each do |personaltraits|
 
-  #	  	validates personaltraits,  presence: true, length: {is: 1}
+  #      validates personaltraits,  presence: true, length: {is: 1}
 
   # end
 
@@ -124,14 +125,13 @@ class Personalinfo < ActiveRecord::Base
   validates :mothersname, presence: true, unless: :staff?
   validates :socialsecuritynumber, presence: true, unless: :staff?
 
-  validate :nit_is_consistent, unless: :staff?
-  #
+#  validate :nit_is_consistent, unless: :staff?
 
   #  validates :socialsecuritynumber, presence: true, if: :student_role?
   #
   validates :idnumber, presence: true, length: { maximum: 20 }
 
-  # 	validates :mothersname,  presence: true, length:  { maximum: 100 }, if: :role_is_student?
+  #   validates :mothersname,  presence: true, length:  { maximum: 100 }, if: :role_is_student?
 
   #  validates :mothersname,  presence: true, length:  { maximum: 100 },
   #  :if => lambda {|p| p.contact.role.student? }
@@ -153,7 +153,7 @@ class Personalinfo < ActiveRecord::Base
   # This assumes Brazilians will use local state id (RG)
   #
   def international?
-    #		if registered_foreigner? || passport?
+    #    if registered_foreigner? || passport?
 
     if registered_foreigner?
 
@@ -167,27 +167,11 @@ class Personalinfo < ActiveRecord::Base
   end
 
   def registered_foreigner?
-    if idtype == Settings.personaldocument.registered_foreigner
-
-      true
-
-    else
-
-      false
-
-    end
+    idtype == Settings.personaldocument.registered_foreigner
   end
 
   def passport?
-    if idtype == Settings.personaldocument.passport
-
-      true
-
-    else
-
-      false
-
-    end
+    idtype == Settings.personaldocument.passport
   end
 
   def genderdiversity?
@@ -202,7 +186,11 @@ class Personalinfo < ActiveRecord::Base
     end
   end
 
-  def cpf_dv1 # Brazilian Taxpayer identification number - First verification digit
+  def birth
+      I18n.l(dob)
+  end
+  # Brazilian Taxpayer identification number - First verification digit
+  def cpf_dv1
     v = 0
 
     (1..9).each do |k|
@@ -216,8 +204,8 @@ class Personalinfo < ActiveRecord::Base
   end
 
   # Segundo digito verificador do CPF
-
-  def cpf_dv2 # Brazilian Taxpayer identification number - Second verification digit
+  # Brazilian Taxpayer identification number - Second verification digit
+  def cpf_dv2
     v = 0
 
     (1..8).each do |k|
@@ -280,6 +268,7 @@ class Personalinfo < ActiveRecord::Base
 
   def birth_date_cannot_be_in_the_future
     return unless dob.present? && dob > Date.today
+
     errors.add(:dob, :may_not_be_in_the_future)
   end
 

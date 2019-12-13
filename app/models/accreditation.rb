@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Accreditation < ActiveRecord::Base
   has_paper_trail
 
@@ -9,12 +11,12 @@ class Accreditation < ActiveRecord::Base
 
   # hotfix - to close march payroll
   # Marcelo - Commented - January 2018
-#  before_validation :check_start_date
+  #  before_validation :check_start_date
   #  after_validation :check_start_date
   #
-#  before_validation :check_start_date, on: :create
+  #  before_validation :check_start_date, on: :create
 
-  # ---------- end comment 
+  # ---------- end comment
   # scopes
 
   scope :original, -> { where(original: true) }
@@ -65,11 +67,11 @@ class Accreditation < ActiveRecord::Base
 
   validate :registration_start_cannot_be_prior_to_first_day_in_schoolyear, if: :registration?
 
-#  validate :registration_start_cannot_be_prior_to_april_first, if: :registration?, on: :create?
+  #  validate :registration_start_cannot_be_prior_to_april_first, if: :registration?, on: :create?
 
   validate :renewal_cannot_be_in_the_future
   validate :suspension_cannot_be_in_the_future
-  # 	validate :revocation_cannot_be_in_the_future, unless: :open? # i.e. for next schoolterm - training setting
+  #   validate :revocation_cannot_be_in_the_future, unless: :open? # i.e. for next schoolterm - training setting
 
   validate :revocation_cannot_be_in_the_future, if: :registration?, unless: :registrations_open? # i.e. for next schoolterm - training setting
 
@@ -119,10 +121,9 @@ class Accreditation < ActiveRecord::Base
     kind_i18n = I18n.t('of.n')
     accreditation_i18n = I18n.t('activerecord.models.accreditation').capitalize
     start_i18n = I18n.t('start')
-    accr_details = accreditation_i18n + ' ' + kind_i18n + ' ' + kind
-    accr_details += ' [' + id.to_s + '] ' + start_i18n
-    accr_details += ' ' + I18n.l(start)
-    accr_details
+    accr_info = accreditation_i18n + ' ' + kind_i18n + ' ' + kind \
+    + ' [' + id.to_s + '] ' + start_i18n + ' ' + I18n.l(start)
+    accr_info
   end
 
   def institutional?
@@ -153,7 +154,7 @@ class Accreditation < ActiveRecord::Base
   end
 
   def registration_start_cannot_be_prior_to_first_day_in_schoolyear
-    if	start.present? && start < school_term.start # school_term=registration.schoolyear.program.schoolterm
+    if  start.present? && start < school_term.start # school_term=registration.schoolyear.program.schoolterm
 
       errors.add(:start, :may_not_be_prior_to_first_day_in_term)
      #   errors.add(:_, "Data de matrícula não pode ser anterior ao primeiro dia do ano letivo correspondente.")
@@ -162,7 +163,7 @@ class Accreditation < ActiveRecord::Base
 
   # quick block - hotfix
   def registration_start_cannot_be_prior_to_april_first
-    if	start.present? && start < school_term.start + 1.month # school_term=registration.schoolyear.program.schoolterm
+    if  start.present? && start < school_term.start + 1.month # school_term=registration.schoolyear.program.schoolterm
 
       errors.add(:start, :may_not_be_prior_to_april_first)
     end
@@ -215,7 +216,7 @@ class Accreditation < ActiveRecord::Base
   #  http://stackoverflow.com/questions/17935597/ruby-on-rails-i18n-want-to-translate-custom-messages-in-models
   # i18n Localized
 
-  # 	 def renewal_must_be_later_than_start
+  #    def renewal_must_be_later_than_start
   # distance in time
   #     if start.present? && renewal.present? & start == renewal
   #       errors.add(:renewal, :may_not_be_equal_to_start)
@@ -253,15 +254,11 @@ class Accreditation < ActiveRecord::Base
   end
 
   def start_cannot_be_in_the_future
-    if start.present? && start > Date.today
-      errors.add(:start, :may_not_be_in_the_future)
-    end
+    errors.add(:start, :may_not_be_in_the_future) if start.present? && start > Date.today
   end
 
   def renewal_cannot_be_in_the_future
-    if renewal.present? && renewal > Date.today
-      errors.add(:renewal, :may_not_be_in_the_future)
-    end
+    errors.add(:renewal, :may_not_be_in_the_future) if renewal.present? && renewal > Date.today
   end
 
   def suspension_cannot_be_in_the_future
@@ -348,15 +345,7 @@ class Accreditation < ActiveRecord::Base
   end
 
   def was_renewed?
-    if renewed == true
-
-      true
-
-    else
-
-      false
-
-    end
+    renewed == true
   end
 
   def institutional?
@@ -471,9 +460,6 @@ class Accreditation < ActiveRecord::Base
 
   # hotfix
   def check_start_date
-    if start && start < '2017-4-1'.to_date
-
-      errors.add(:start, :may_not_be_prior_to_april_first)
-    end
+    errors.add(:start, :may_not_be_prior_to_april_first) if start && start < '2017-4-1'.to_date
      end
 end

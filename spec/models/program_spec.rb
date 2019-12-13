@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Program, type: :model do
@@ -38,10 +40,18 @@ RSpec.describe Program, type: :model do
   pending 'validate :duration_consistency'
   pending 'validate schoolyear_range'
 
-  it 'can be created' do
+  it 'annual program can be created (with one schoolyear)' do
     print I18n.t('activerecord.models.schoolyear').capitalize + ': '
 
     program = FactoryBot.create(:program, :annual)
+
+    puts program.schoolyears.count.to_s
+  end
+
+  it 'biannual program can be created (with two schoolyears)' do
+    print I18n.t('activerecord.models.schoolyear').capitalize + ': '
+
+    program = FactoryBot.create(:program, :biannual)
 
     puts program.schoolyears.count.to_s
   end
@@ -159,7 +169,7 @@ RSpec.describe Program, type: :model do
   end
 
   #  it '-workload' do
-  #  	schoolyears.sum(:theory) + schoolyears.sum(:practice)
+  #    schoolyears.sum(:theory) + schoolyears.sum(:practice)
   #  end
 
   it '-theory' do
@@ -218,7 +228,6 @@ RSpec.describe Program, type: :model do
     expect(prog_details).to eq(program.details_mkdown)
   end
 
-  #
   it ' -info' do
     pending('To do: refactor for clarity, rubocop shows assignment branch condition too high')
     prog_info = ''
@@ -227,11 +236,7 @@ RSpec.describe Program, type: :model do
     program_i18n = I18n.t('activerecord.models.program').capitalize
     name_i18n = I18n.t('name').capitalize
     schoolterm_i18n = I18n.t('activerecord.models.schoolterm').capitalize
-    if program.parentid.present?
-
-      prog_info += parent_id_i18n + program.parentid.to_s + ' '
-
-    end
+    prog_info += parent_id_i18n + program.parentid.to_s + ' ' if program.parentid.present?
 
     if program.admission.present? && program.accreditation.present?
 

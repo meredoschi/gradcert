@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -169,7 +171,8 @@ RSpec.describe User, type: :model do
     contact = FactoryBot.build(:contact, :pap_student_role)
     contact.user_id = user.id
     contact.save
-    user_details = user.email + ' (' + user.id_i18n + ') | ' + user.permission.description + ' | ' + user.institution.name
+    user_details = user.email + ' (' + user.id_i18n + ') | ' + user.permission.description + \
+                   ' | ' + user.institution.name
     expect(user_details).to eq user.details
   end
 

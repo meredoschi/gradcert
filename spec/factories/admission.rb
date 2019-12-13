@@ -9,12 +9,13 @@ FactoryBot.define do
     # program_id: integer)
 
     #    program_id 1
-    sequence(:program_id, &:to_s)
+
 
     # program # verify why this was giving duplicate name problems
 
     trait :zero_amounts do
       # except start and finish, which are required
+      program 
       start '2016-10-1'
       finish '2016-11-30'
 

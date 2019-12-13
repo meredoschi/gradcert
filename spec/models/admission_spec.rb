@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Admission, type: :model do
@@ -55,7 +57,7 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
@@ -64,7 +66,8 @@ RSpec.describe Admission, type: :model do
   # Consistency verification methods
 
   def grants_asked_consistent_with_accredited?
-    status = if admission.grantsasked.present? && admission.accreditedgrants.present? && admission.grantsasked <= admission.accreditedgrants
+    status = if admission.grantsasked.present? && admission.accreditedgrants.present? \
+      && admission.grantsasked <= admission.accreditedgrants
 
                true
 
@@ -72,13 +75,14 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
 
   def grants_given_consistent_with_asked?
-    status = if admission.grantsasked.present? && admission.grantsgiven.present? && admission.grantsgiven <= admission.grantsasked
+    status = if admission.grantsasked.present? && admission.grantsgiven.present? \
+      && admission.grantsgiven <= admission.grantsasked
 
                true
 
@@ -86,14 +90,15 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
 
   # i.e. Is the number of candidates consistent with respect to the grants
   def candidates_consistent_with_grants?
-    status = if admission.candidates.present? && admission.grantsgiven.present? && admission.candidates <= admission.grantsgiven
+    status = if admission.candidates.present? && admission.grantsgiven.present? \
+      && admission.candidates <= admission.grantsgiven
 
                true
 
@@ -101,14 +106,15 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
 
   # i.e. Is the number of candidates consistent with respect to the grants
   def candidate_absences_on_first_exam_consistent?
-    status = if admission.candidates.present? && admission.absentfirstexam.present? && admission.absentfirstexam <= admission.candidates
+    status = if admission.candidates.present? && admission.absentfirstexam.present? \
+      && admission.absentfirstexam <= admission.candidates
 
                true
 
@@ -116,14 +122,15 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
 
-  # i.e. Is the number of candidates which passed (had a succesful grade) on the first exam in relation to test takers
+  # i.e. Is the number of people that passed the first exam plausible given how many took the test?
   def passed_first_exam_consistent?
-    status = if admission.passedfirstexam.present? && admission.firstexamtakers.present? && admission.passedfirstexam <= admission.firstexamtakers
+    status = if admission.passedfirstexam.present? && admission.firstexamtakers.present? \
+       && admission.passedfirstexam <= admission.firstexamtakers
 
                true
 
@@ -131,13 +138,14 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
 
   def convoked_consistent_with_admitted?
-    status = if admission.convoked.present? && admission.admitted.present? && admission.convoked <= admission.admitted
+    status = if admission.convoked.present? && admission.admitted.present?  \
+      && admission.convoked <= admission.admitted
 
                true
 
@@ -145,7 +153,7 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
@@ -162,13 +170,14 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
 
   def passed_final_exam_consistent?
-    status = if admission.passedfinalexam.present? && admission.finalexamtakers.present? && admission.passedfinalexam <= admission.finalexamtakers
+    status = if admission.passedfinalexam.present? && admission.finalexamtakers.present? \
+      && admission.passedfinalexam <= admission.finalexamtakers
 
                true
 
@@ -176,7 +185,7 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
@@ -195,7 +204,9 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
+
+    status
   end
 
   # i.e. Given the number of people which failed this exam
@@ -212,7 +223,7 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
   end
 
   #
@@ -223,7 +234,9 @@ RSpec.describe Admission, type: :model do
     failed_final_exam = admission.failedfinalexam
     admitted = admission.admitted
 
-    status = if passed_first_exam.present? && absent_final_exam.present? && failed_final_exam.present? && admitted.present? && (admitted == passed_first_exam - (absent_final_exam + failed_final_exam))
+    status = if passed_first_exam.present? && absent_final_exam.present? \
+      && failed_final_exam.present? && admitted.present? \
+       && (admitted == passed_first_exam - (absent_final_exam + failed_final_exam))
 
                true
 
@@ -231,7 +244,7 @@ RSpec.describe Admission, type: :model do
 
                false
 
-    end
+             end
 
     status
   end
@@ -248,15 +261,15 @@ RSpec.describe Admission, type: :model do
   end
 
   it 'name' do
-    if payroll.pending?
+    @payroll_name = if payroll.pending?
 
-      @payroll_name = I18n.l(monthworked, format: :my) + ' *' + I18n.t('pending') + '*'
+                      I18n.l(monthworked, format: :my) + ' *' + I18n.t('pending') + '*'
 
-    else
+                    else
 
-      @payroll_name = payroll.shortname
+                      payroll.shortname
 
-    end
+                    end
 
     # @payroll_name
 
@@ -273,11 +286,16 @@ RSpec.describe Admission, type: :model do
 
   it '-details' do
     sep = ';' # separator
-    txt = I18n.t('activerecord.attributes.admission.accreditedgrants') + ': ' + admission.accreditedgrants.to_s + sep + ' '
-    txt += I18n.t('activerecord.attributes.admission.grantsasked') + ': ' + admission.grantsasked.to_s + sep + ' '
-    txt += I18n.t('activerecord.attributes.admission.grantsgiven') + ': ' + admission.grantsgiven.to_s + sep + ' '
-    #    txt += I18n.t('activerecord.attributes.admission.candidates') + ': ' + admission.candidates.to_s + sep + ' '
-    txt += I18n.t('activerecord.attributes.admission.candidates') + ': ' + admission.candidates.to_s
+    txt = I18n.t('activerecord.attributes.admission.
+      accreditedgrants') + ': ' + admission.accreditedgrants.to_s + sep + ' '
+    txt += I18n.t('activerecord.attributes.admission.
+      grantsasked') + ': ' + admission.grantsasked.to_s + sep + ' '
+    txt += I18n.t('activerecord.attributes.admission.
+      grantsgiven') + ': ' + admission.grantsgiven.to_s + sep + ' '
+    #    txt += I18n.t('activerecord.attributes.admission.candidates')
+    # + ': ' + admission.candidates.to_s + sep + ' '
+    txt += I18n.t('activerecord.attributes.admission.
+      candidates') + ': ' + admission.candidates.to_s
 
     admission_details = txt
 
@@ -323,17 +341,22 @@ RSpec.describe Admission, type: :model do
 
     program = FactoryBot.create(:program, :annual)
 
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :final_exam_inconsistent) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :final_exam_inconsistent)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it '-appeals_lodged_because_of_first_exam_failures_consistent? true with valid data' do
-    program_admission = FactoryBot.build(:admission, :zero_amounts, :first_exam, :appeals_consistent_with_first_exam_failures)
+    program_admission = FactoryBot.build(:admission, :zero_amounts, :first_exam,
+                                         :appeals_consistent_with_first_exam_failures)
     # To be different from admission (from the Let)
     expect(program_admission.appeals_lodged_because_of_first_exam_failures_consistent?).to be true
   end
 
   it '-appeals_lodged_because_of_final_exam_failures_consistent? true with valid data' do
-    program_admission = FactoryBot.build(:admission, :zero_amounts, :final_exam, :appeals_consistent_with_final_exam_failures)
+    program_admission = FactoryBot.build(:admission, :zero_amounts, :final_exam,
+                                         :appeals_consistent_with_final_exam_failures)
     # To be different from admission (from the Let)
     expect(program_admission.appeals_lodged_because_of_final_exam_failures_consistent?).to be true
   end
@@ -353,13 +376,15 @@ RSpec.describe Admission, type: :model do
   end
 
   it '-appeals_lodged_because_of_first_exam_failures_consistent? false with incorrect data' do
-    program_admission = FactoryBot.build(:admission, :zero_amounts, :first_exam, :appeals_inconsistent_with_first_exam_failures)
+    program_admission = FactoryBot.build(:admission, :zero_amounts, :first_exam,
+                                         :appeals_inconsistent_with_first_exam_failures)
     # To be different from admission (from the Let)
     expect(program_admission.appeals_lodged_because_of_first_exam_failures_consistent?).to be false
   end
 
   it '-appeals_lodged_because_of_first_exam_failures_consistent? true with correct data' do
-    program_admission = FactoryBot.build(:admission, :zero_amounts, :first_exam, :appeals_inconsistent_with_first_exam_failures)
+    program_admission = FactoryBot.build(:admission, :zero_amounts, :first_exam,
+                                         :appeals_inconsistent_with_first_exam_failures)
     # To be different from admission (from the Let)
     expect(program_admission.appeals_lodged_because_of_first_exam_failures_consistent?).to be false
   end
@@ -373,7 +398,8 @@ RSpec.describe Admission, type: :model do
   end
 
   it '-convoked_consistent_with_admitted? true with valid data' do
-    program_admission = FactoryBot.create(:admission, :zero_amounts, :convoked_consistent_with_admitted)
+    program_admission = FactoryBot.create(:admission, :zero_amounts,
+                                          :convoked_consistent_with_admitted)
     expect(program_admission.convoked_consistent_with_admitted?).to be true
   end
 
@@ -463,7 +489,10 @@ RSpec.describe Admission, type: :model do
 
     program = FactoryBot.create(:program, :annual)
 
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :asked_more_than_accredited) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :asked_more_than_accredited)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
     # https://stackoverflow.com/questions/35455104/why-is-this-rspec-expect-to-raise-error-failing-when-the-message-returned-is
   end
 
@@ -472,7 +501,10 @@ RSpec.describe Admission, type: :model do
 
     program = FactoryBot.create(:program, :annual)
 
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :given_more_than_accredited) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :given_more_than_accredited)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
     # https://stackoverflow.com/questions/35455104/why-is-this-rspec-expect-to-raise-error-failing-when-the-message-returned-is
   end
 
@@ -481,49 +513,80 @@ RSpec.describe Admission, type: :model do
 
     program = FactoryBot.create(:program, :annual)
 
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :convoked_more_than_admitted) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :convoked_more_than_admitted)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it 'creation is blocked if grants given > asked' do
     #  program = FactoryBot.create(:program, :annual)
     #    admission = FactoryBot.build(:admission, :zero_amounts, :given_more_than_asked)
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :given_more_than_asked) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :given_more_than_asked)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
     # https://stackoverflow.com/questions/35455104/why-is-this-rspec-expect-to-raise-error-failing-when-the-message-returned-is
   end
 
   # Logic condition possibly reversed - flagged during user review
   #  it 'creation is blocked if candidates > grants given' do
-  #    expect { admission = FactoryBot.create(:admission, :zero_amounts, :candidates_more_than_grants_given) }.to raise_error(ActiveRecord::RecordInvalid)
+  #    expect { admission = FactoryBot.create(:admission, :zero_amounts,
+  #    :candidates_more_than_grants_given) }.to raise_error(ActiveRecord::RecordInvalid)
   #  end
 
   it 'creation is blocked unless candidate_absences_on_first_exam_consistent?' do
-    #    expect { admission = FactoryBot.create(:admission, :absent_first_exam_more_than_candidates) }.to raise_error(ActiveRecord::RecordInvalid, I18n.t('activerecord.errors.models.admission.attributes.absentfirstexam.may_not_exceed_candidates'))
+    #    expect { admission = FactoryBot.create(:admission,
+    #               :absent_first_exam_more_than_candidates) }.to
+    #   raise_error(ActiveRecord::RecordInvalid, I18n.t('activerecord.errors.
+    #     models.admission.attributes.absentfirstexam.may_not_exceed_candidates'))
     #   Actual error message (I18n) is longer so test was failing when custom message was applied.
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :absent_first_exam_more_than_candidates) }.to raise_error(ActiveRecord::RecordInvalid)
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :absent_first_exam_more_than_candidates)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it 'creation is blocked unless grants_given_consistent_with_asked?' do
-    #    expect { admission = FactoryBot.create(:admission, :absent_first_exam_more_than_candidates) }.to raise_error(ActiveRecord::RecordInvalid, I18n.t('activerecord.errors.models.admission.attributes.absentfirstexam.may_not_exceed_candidates'))
-    #   Actual error message (I18n) is longer so test was failing when custom message was applied.
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :more_grants_given_than_asked) }.to raise_error(ActiveRecord::RecordInvalid)
+    #    expect { admission = FactoryBot.create(:admission,
+    #      :absent_first_exam_more_than_candidates) }.to raise_error(ActiveRecord::RecordInvalid,
+    #      I18n.t('activerecord.errors.
+    #              models.admission.attributes.absentfirstexam.may_not_exceed_candidates'))
+    #    Actual error message (I18n) is longer so test was failing when custom message was applied.
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :more_grants_given_than_asked)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it 'creation is blocked unless passed_first_exam_consistent?' do
     # uncomment to show detailed error message
-    #  expect { admission = FactoryBot.create(:admission, :zero_amounts, :passed_first_exam_inconsistent)}.to raise_error(ActiveRecord::RecordInvalid,'A')
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :passed_first_exam_inconsistent) }.to raise_error(ActiveRecord::RecordInvalid)
+    #  expect { admission = FactoryBot.create(:admission, :zero_amounts,
+    #   :passed_first_exam_inconsistent)}.to raise_error(ActiveRecord::RecordInvalid,'A')
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :passed_first_exam_inconsistent)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it 'creation is blocked unless appeals_lodged_because_of_first_exam_failures_consistent?' do
     # uncomment to show detailed error message
-    #  expect { admission = FactoryBot.create(:admission, :zero_amounts, :passed_first_exam_inconsistent)}.to raise_error(ActiveRecord::RecordInvalid,'A')
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :appeals_inconsistent_with_first_exam_failures) }.to raise_error(ActiveRecord::RecordInvalid)
+    #  expect { admission = FactoryBot.create(:admission, :zero_amounts,
+    #  :passed_first_exam_inconsistent)}.to raise_error(ActiveRecord::RecordInvalid,'A')
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :appeals_inconsistent_with_first_exam_failures)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it 'creation is blocked unless appeals_lodged_because_of_final_exam_failures_consistent?' do
     # uncomment to show detailed error message
-    #  expect { admission = FactoryBot.create(:admission, :zero_amounts, :passed_final_exam_inconsistent)}.to raise_error(ActiveRecord::RecordInvalid,'A')
-    expect { admission = FactoryBot.create(:admission, :zero_amounts, :appeals_inconsistent_with_final_exam_failures) }.to raise_error(ActiveRecord::RecordInvalid)
+    #  expect { admission = FactoryBot.create(:admission, :zero_amounts,
+    #  :passed_final_exam_inconsistent)}.to raise_error(ActiveRecord::RecordInvalid,'A')
+    expect do
+      admission = FactoryBot.create(:admission, :zero_amounts,
+                                    :appeals_inconsistent_with_final_exam_failures)
+    end    .to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it '-firstexamtakers' do
@@ -547,11 +610,7 @@ RSpec.describe Admission, type: :model do
 
     fields_present = candidates.present? && absentfirstexam.present? && passedfirstexam.present?
 
-    if fields_present
-
-      @failed_first_exam = candidates - absentfirstexam - passedfirstexam
-
-    end
+    @failed_first_exam = candidates - absentfirstexam - passedfirstexam if fields_present
 
     expect(admission.failedfirstexam).to eq @failed_first_exam
   end
@@ -564,11 +623,7 @@ RSpec.describe Admission, type: :model do
 
     fields_present = appealsgrantedfirstexam.present? && appealsdeniedfirstexam.present?
 
-    if fields_present
-
-      @appeals_lodged_first_exam = appealsgrantedfirstexam + appealsdeniedfirstexam
-
-    end
+    @appeals_lodged_first_exam = appealsgrantedfirstexam + appealsdeniedfirstexam if fields_present
 
     expect(admission.appealslodgedfirstexam).to eq @appeals_lodged_first_exam
   end
@@ -581,11 +636,7 @@ RSpec.describe Admission, type: :model do
 
     fields_present = appealsgrantedfinalexam.present? && appealsdeniedfinalexam.present?
 
-    if fields_present
-
-      @appeals_lodged_final_exam = appealsgrantedfinalexam + appealsdeniedfinalexam
-
-    end
+    @appeals_lodged_final_exam = appealsgrantedfinalexam + appealsdeniedfinalexam if fields_present
 
     expect(admission.appealslodgedfinalexam).to eq @appeals_lodged_final_exam
   end

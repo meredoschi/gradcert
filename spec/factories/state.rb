@@ -3,8 +3,8 @@
 # This will guess the User class
 FactoryBot.define do
   factory :state do
-    sequence(:abbreviation) { |n| (Faker::Address.state_abbr + ' ' + n.to_s).to_s }
-    sequence(:name) { |n| (Faker::Address.state + ' ' + n.to_s).to_s }
+    sequence(:abbreviation) { |n| (Faker::Address.state_abbr + ' ' + (rand(100000)+n).to_s).to_s }
+    sequence(:name) { |n| (Faker::Address.state + ' ' + (rand(100000)+n).to_s).to_s }
     country
   end
 end

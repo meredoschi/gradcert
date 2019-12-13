@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Roster, type: :model do
@@ -28,7 +30,8 @@ RSpec.describe Roster, type: :model do
   it 'has a name virtual attribute' do
     roster_name = roster.schoolterm.name
 
-    roster_name = roster.institution.name + ' - ' + I18n.t('activerecord.models.schoolterm').capitalize + ' ' + roster.schoolterm.name.downcase
+    roster_name = roster.institution.name + ' - ' + I18n.t('activerecord.models.
+      schoolterm').capitalize + ' ' + roster.schoolterm.name.downcase
 
     expect(roster.name).to eq roster_name
   end

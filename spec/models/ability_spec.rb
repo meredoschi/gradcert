@@ -23,7 +23,8 @@ describe 'Ability' do
   #     it "can only view episodes which are published" do
   #       @ability.should be_able_to(:index, :episodes)
   #       @ability.should be_able_to(:show, Factory.build(:episode, :published_at => 2.days.ago))
-  #       @ability.should_not be_able_to(:show, Factory.build(:episode, :published_at => 2.days.from_now))
+  #       @ability.should_not be_able_to(:show, Factory.build(:episode,
+  #          :published_at => 2.days.from_now))
   #       @ability.should_not be_able_to(:create, :episodes)
   #       @ability.should_not be_able_to(:update, :episodes)
   #       @ability.should_not be_able_to(:destroy, :episodes)
