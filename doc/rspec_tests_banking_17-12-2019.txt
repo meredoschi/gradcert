@@ -1,0 +1,11 @@
+RAILS_ENV=test rake db:reset
+RAILS_ENV=test rspec spec/lib/brazilianbanking_spec.rb
+8 examples, 0 failures
+
+RAILS_ENV=test rake db:reset
+RAILS_ENV=test rspec spec/models/bankbranch_spec.rb
+25 examples, 1 failure
+
+RAILS_ENV=test rake db:reset
+RAILS_ENV=test rspec spec/models/bankaccount_spec.rb
+12 examples, 0 failures

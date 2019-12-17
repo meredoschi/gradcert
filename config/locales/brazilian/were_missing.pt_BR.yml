@@ -1,5 +1,8 @@
 ---
 pt_BR:
+  alert:
+    different_length: Alerta!!! Comprimento diferente
+    than_expected: do esperado
   date:
     formats:
       seeofr: "%-Y-%m-%d"

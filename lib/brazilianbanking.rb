@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Methods pertinent to the Brazilian Financial System
 module Brazilianbanking
   # Maxdigits = 8 for Banco do Brasil checking accounts
@@ -5,24 +7,29 @@ module Brazilianbanking
 
   # Trim to n characters (from left to right)
 
-  def self.trim_text_to(txt, n)
-    txt[0..n - 1]
+  # e.g. Febraban (Brazilian banking federation) positional layout version 8.4 = 240 characters
+  DEFAULT_LINE_SIZE = 240
+
+  def self.trim_text_to(txt, indx)
+    txt[0..indx - 1]
   end
 
   def self.consistent_length(line)
-    specified_length = 240
-
-    (line.length == specified_length)
+    (line.length == DEFAULT_LINE_SIZE)
   end
 
   def self.inconsistent_length(line)
     !consistent_length(line)
   end
 
+  # Useful when debugging line length consistency issues with CNAB files
   def self.checklength(line)
     if inconsistent_length(line)
 
-      line + ' Alerta!!! Comprimento diferente (' + line.length.to_s + ') do esperado. '
+      alert_msg = '***' + I18n.t('alert.different_length') + ' (' + line.length.to_s + \
+                  ') ' + I18n.t('alert.than_expected') + '***'
+
+      alert_msg + line
 
     else
 
@@ -30,6 +37,24 @@ module Brazilianbanking
 
     end
   end
+
+  def self.skew(correct_verification_digit)
+    vd = correct_verification_digit[0] # 'defensive programming', make sure length is 1
+
+    forcibly_incorrect_digit = if vd =~ /[0-8]/
+
+                                 vd.next
+
+                               else
+
+                                 '0'
+
+                               end
+
+    forcibly_incorrect_digit
+  end
+
+  # Methods below are not tested yet
 
   def self.calculate_verification_digit(num, maxdigits)
     num = Pretty.zerofy_left(num.to_i, maxdigits)
@@ -67,7 +92,7 @@ module Brazilianbanking
   #
   #
   #
-  # -------------------------------------------------------------------------------------------------
+  # ----------------------------------------------------------------------
 
   # Takes 9 digit (character string)
   # Returns eleven zeros if incorrect length is provided
@@ -82,7 +107,7 @@ module Brazilianbanking
           end
 
     cpf
-   end
+  end
 
   # Takes 10 digit (character string)
   # Returns eleven zeros if incorrect length is provided
@@ -96,7 +121,7 @@ module Brazilianbanking
           end
 
     nit
-   end
+  end
 
   # Generates NIT - Brazilian Social Security Number - control digit
   def self.nit_dv(str)
@@ -104,7 +129,7 @@ module Brazilianbanking
 
     weighted_sum = 0
 
-    for i in 0..9
+    (0..9).each do |i|
       weighted_sum += factors[i] * str[i].to_i
     end
 
@@ -134,27 +159,26 @@ module Brazilianbanking
     v.to_s
   end
 
-  # a, b are Ruby ranges
-
-  def self.intersect(a, b)
+  # e.g. range_one=1..100, range_two=50..150, true
+  def self.intersect(range_one, range_two)
     @disjoint = 0
 
-    if b.include?(a.first)
-      @actual_start = a.first
+    if range_two.include?(range_one.first)
+      @actual_start = range_one.first
     else
       @disjoint += 1
-      @actual_start = b.first
-      end
+      @actual_start = range_two.first
+    end
 
-    if b.include?(a.last)
-      @actual_finish = a.last
+    if range_two.include?(range_one.last)
+      @actual_finish = range_one.last
     else
       @disjoint += 1
-      @actual_finish = b.last
-      end
+      @actual_finish = range_two.last
+    end
 
     if @disjoint == 2
-      if a.first <= b.first && a.last >= b.last
+      if range_one.first <= range_two.first && range_one.last >= range_two.last
         return p
       else
         return nil
@@ -162,7 +186,7 @@ module Brazilianbanking
     else
       return (@actual_start..@actual_finish)
     end
- end
+  end
 
   # Segundo digito verificador do CPF
 
