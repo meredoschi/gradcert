@@ -1,6 +1,7 @@
 # config/application_settings.yml
 # https://github.com/settingslogic/settingslogic
 defaults: &defaults
+  default_line_size: 240
   schoolterm:
     sample_quantity: 4
     duration: 2 # in years

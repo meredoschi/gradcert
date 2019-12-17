@@ -8,7 +8,7 @@ module Brazilianbanking
   # Trim to n characters (from left to right)
 
   # e.g. Febraban (Brazilian banking federation) positional layout version 8.4 = 240 characters
-  DEFAULT_LINE_SIZE = 240
+  DEFAULT_LINE_SIZE = Settings.default_line_size
 
   def self.trim_text_to(txt, indx)
     txt[0..indx - 1]

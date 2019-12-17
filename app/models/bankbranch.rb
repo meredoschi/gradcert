@@ -40,7 +40,7 @@ class Bankbranch < ActiveRecord::Base
   validates_date :opened, on_or_before: :today
 
   def verification_digit_is_consistent
-    errors.add(:opened, :inconsistent) unless with_valid_vd?
+    errors.add(:verificationdigit, :inconsistent) unless with_valid_vd?
   end
 
   def details

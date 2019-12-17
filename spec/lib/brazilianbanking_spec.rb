@@ -29,8 +29,8 @@ describe Brazilianbanking, type: :helper do
     expect(Brazilianbanking::DEFAULT_LINE_SIZE).not_to be_nil
   end
 
-  it 'DEFAULT_LINE_SIZE is expected to be 240' do
-    expect(Brazilianbanking::DEFAULT_LINE_SIZE).to eq(240)
+  it 'DEFAULT_LINE_SIZE equals to Settings.default_line_size (should be 240 in Brazil)' do
+    expect(Brazilianbanking::DEFAULT_LINE_SIZE).to eq(Settings.default_line_size)
   end
 
   it '#consistent_length(line_with_two_hundred_and_forty_chars)' do
