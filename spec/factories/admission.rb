@@ -10,12 +10,11 @@ FactoryBot.define do
 
     #    program_id 1
 
-
     # program # verify why this was giving duplicate name problems
 
     trait :zero_amounts do
       # except start and finish, which are required
-      program 
+      program
       start '2016-10-1'
       finish '2016-11-30'
 

@@ -54,27 +54,83 @@ module Brazilianbanking
     forcibly_incorrect_digit
   end
 
-  # Methods below are not tested yet
+  # December 2019 refactoring
+  def self.compute_verification_sum(num, maxdigits)
+    padded_num = Pretty.zerofy_left(num.to_i, maxdigits)
 
-  def self.calculate_verification_digit(num, maxdigits)
-    num = Pretty.zerofy_left(num.to_i, maxdigits)
-
-    @verification_sum = 0
+    verification_sum = 0
 
     (0..maxdigits + 1).each do |i|
-      @verification_sum += (maxdigits + 1 - i) * num[i].to_i
+      verification_sum += (maxdigits + 1 - i) * padded_num[i].to_i
     end
 
-    @remainder = @verification_sum % 11
-
-    @checkdigit = 11 - @remainder
-
-    @checkdigit = 'X' if @checkdigit == 10
-
-    @checkdigit = '0' if @checkdigit == 11
-
-    @checkdigit
+    verification_sum
   end
+
+  def self.calculate_verification_digit(num, maxdigits)
+    verification_sum = compute_verification_sum(num, maxdigits)
+
+    remainder = verification_sum % 11
+
+    checkdigit = 11 - remainder
+
+    checkdigit = 'X' if checkdigit == 10
+
+    checkdigit = '0' if checkdigit == 11
+
+    checkdigit
+  end
+
+  # Primeiro digito verificador do CPF | First verification digit (Brazilian personal tax id)
+  def self.cpf_dv1(cpf_prefix)
+    verification_digit = 0
+
+    (1..9).each do |k|
+      verification_digit += k * cpf_prefix[k - 1].to_i
+    end
+
+    verification_digit = verification_digit % 11
+    verification_digit = verification_digit % 10
+
+    first_verification_digit = verification_digit.to_s
+
+    first_verification_digit
+  end
+
+  # Segundo digito verificador do CPF | Second verification digit (Brazilian personal tax id)
+  def self.cpf_dv2(cpf_prefix)
+    verification_digit = 0
+
+    (1..8).each do |k|
+      verification_digit += k * cpf_prefix[k].to_i
+    end
+
+    verification_digit += 9 * Brazilianbanking.cpf_dv1(cpf_prefix).to_i # Chama DV1
+
+    verification_digit = verification_digit % 11
+    verification_digit = verification_digit % 10
+
+    cpf_second_verification_digit = verification_digit.to_s
+
+    cpf_second_verification_digit
+  end
+
+  # Takes 9 digit (character string)
+  # Returns eleven zeros if incorrect length is provided
+
+  def self.generate_cpf(cpf_prefix)
+    cpf = if cpf_prefix.length == 9
+
+            cpf_prefix + Brazilianbanking.cpf_dv1(cpf_prefix) + Brazilianbanking.cpf_dv2(cpf_prefix)
+
+          else Pretty.repeat_chars('0', 11)
+            #         else  '00000000000'
+          end
+
+    cpf
+  end
+
+  # Methods below are not tested yet
 
   # June 2017
   # Alias, for convenience
@@ -93,21 +149,6 @@ module Brazilianbanking
   #
   #
   # ----------------------------------------------------------------------
-
-  # Takes 9 digit (character string)
-  # Returns eleven zeros if incorrect length is provided
-
-  def self.generate_cpf(prefix)
-    cpf = if prefix.length == 9
-
-            prefix + cpf_dv1(prefix) + cpf_dv2(prefix)
-
-          else '00000000000'
-
-          end
-
-    cpf
-  end
 
   # Takes 10 digit (character string)
   # Returns eleven zeros if incorrect length is provided
@@ -146,19 +187,6 @@ module Brazilianbanking
     end
   end
 
-  def self.cpf_dv1(str)
-    v = 0
-
-    (1..9).each do |k|
-      v += k * str[k - 1].to_i
-    end
-
-    v = v % 11
-    v = v % 10
-
-    v.to_s
-  end
-
   # e.g. range_one=1..100, range_two=50..150, true
   def self.intersect(range_one, range_two)
     @disjoint = 0
@@ -186,22 +214,5 @@ module Brazilianbanking
     else
       return (@actual_start..@actual_finish)
     end
-  end
-
-  # Segundo digito verificador do CPF
-
-  def self.cpf_dv2(str)
-    v = 0
-
-    (1..8).each do |k|
-      v += k * str[k].to_i
-    end
-
-    v += 9 * cpf_dv1(str).to_i # Chama DV1
-
-    v = v % 11
-    v = v % 10
-
-    v.to_s
   end
 end

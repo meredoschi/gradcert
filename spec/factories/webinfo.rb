@@ -7,7 +7,7 @@ FactoryBot.define do
   #  regionaloffice_id: integer, council_id: integer)
 
   factory :webinfo do
-    email Faker::Internet.email
+    email { Faker::Internet.email }
 
     trait :bankbranch do
       bankbranch_id 1

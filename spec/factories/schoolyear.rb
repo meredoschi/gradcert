@@ -5,7 +5,7 @@ FactoryBot.define do
   factory :schoolyear do
     # => Schoolyear(id: integer, programyear: integer, program_id: integer, pass: integer,
     # theory: integer, practice: integer)
-    program
+    # program
   end
 
   trait :freshman do

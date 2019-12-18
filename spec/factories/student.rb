@@ -10,8 +10,8 @@ FactoryBot.define do
     association :contact, factory: %i[contact pap_student_role]
     profession
 
-   #  To do: recheck bankbranch, address, state, country factories and model tests
-   #  bankaccount
+    #  To do: recheck bankbranch, address, state, country factories and model tests
+    #  bankaccount
     #   ************************************************************************
   end
 end

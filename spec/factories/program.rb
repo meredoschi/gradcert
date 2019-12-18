@@ -15,9 +15,9 @@ FactoryBot.define do
     institution
     accreditation
     association :admission, factory: %i[admission zero_amounts]
-     pap true
-     medres false
-     gradcert false
+    pap true
+    medres false
+    gradcert false
 
     # http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-FactoryBot/
     #  association :accreditation, :factory => [:accreditation, :program]

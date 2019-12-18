@@ -4,7 +4,7 @@
 FactoryBot.define do
   factory :contact do
     user
-    sequence(:name) { |n| ('B' + (n + rand(100000)).to_s + Faker::Name.name).to_s }
+    sequence(:name) { |n| ('B' + (n + rand(100_000)).to_s + Faker::Name.name).to_s }
     address
     personalinfo
 
