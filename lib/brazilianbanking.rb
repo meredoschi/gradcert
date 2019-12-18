@@ -195,30 +195,6 @@ module Brazilianbanking
 
   # e.g. range_one=1..100, range_two=50..150, true
   def self.intersect(range_one, range_two)
-    @disjoint = 0
-
-    if range_two.include?(range_one.first)
-      @actual_start = range_one.first
-    else
-      @disjoint += 1
-      @actual_start = range_two.first
-    end
-
-    if range_two.include?(range_one.last)
-      @actual_finish = range_one.last
-    else
-      @disjoint += 1
-      @actual_finish = range_two.last
-    end
-
-    if @disjoint == 2
-      if range_one.first <= range_two.first && range_one.last >= range_two.last
-        return p
-      else
-        return nil
-      end
-    else
-      return (@actual_start..@actual_finish)
-    end
+    Logic.intersect(range_one, range_two)
   end
 end

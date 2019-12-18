@@ -221,4 +221,9 @@ describe Brazilianbanking, type: :helper do
     expect(account_verification_digit).to eq(Brazilianbanking
       .account_verification_digit(acct_num))
   end
+
+  it '#intersect(range_one, range_two) alias to Logic.intersect(range_one, range_two)' do
+    expect(Brazilianbanking.intersect(range_one, range_two))
+      .to eq(Logic.intersect(range_one, range_two))
+  end
 end
