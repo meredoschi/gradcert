@@ -130,7 +130,49 @@ module Brazilianbanking
     cpf
   end
 
-  # Methods below are not tested yet
+  def self.compute_weighted_sum(nit_prefix)
+    factors = [3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+
+    weighted_sum = 0
+
+    (0..9).each do |i|
+      weighted_sum += factors[i] * nit_prefix[i].to_i
+    end
+
+    weighted_sum
+  end
+
+  # Generates NIT - Brazilian Social Security Number - control digit
+  def self.nit_dv(nit_prefix)
+    weighted_sum = Brazilianbanking.compute_weighted_sum(nit_prefix)
+
+    res = 11 - (weighted_sum % 11)
+
+    nit_dv = if res < 10
+
+               res.to_s
+
+             else
+
+               '0'
+
+             end
+
+    nit_dv
+  end
+
+  # Takes 10 digit (character string), returns eleven zeros if incorrect length is provided
+  def self.generate_nit(nit_prefix)
+    nit = if nit_prefix.length == 10
+
+            nit_prefix + Brazilianbanking.nit_dv(nit_prefix)
+
+          else '00000000000'
+
+          end
+
+    nit
+  end
 
   # June 2017
   # Alias, for convenience
@@ -144,48 +186,12 @@ module Brazilianbanking
     calculate_verification_digit(num, Settings.max_length_for_bankaccount_number)
   end
 
+  # Methods below are not tested yet
   # Methods below produce the Bankpayment File
   #
   #
   #
   # ----------------------------------------------------------------------
-
-  # Takes 10 digit (character string)
-  # Returns eleven zeros if incorrect length is provided
-  def self.generate_nit(prefix)
-    nit = if prefix.length == 10
-
-            prefix + nit_dv(prefix)
-
-          else '00000000000'
-
-          end
-
-    nit
-  end
-
-  # Generates NIT - Brazilian Social Security Number - control digit
-  def self.nit_dv(str)
-    factors = [3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
-
-    weighted_sum = 0
-
-    (0..9).each do |i|
-      weighted_sum += factors[i] * str[i].to_i
-    end
-
-    res = 11 - (weighted_sum % 11)
-
-    if res < 10
-
-      return res.to_s
-
-    else
-
-      return '0'
-
-    end
-  end
 
   # e.g. range_one=1..100, range_two=50..150, true
   def self.intersect(range_one, range_two)

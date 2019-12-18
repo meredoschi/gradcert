@@ -6,6 +6,8 @@ describe Brazilianbanking, type: :helper do
   let(:correct_verification_digit) { '4' }
   let(:sample_text) { 'THIS IS A SAMPLE TEXT' }
   let(:indx) { 5 }
+  let(:range_one) { (1..5) }
+  let(:range_two) { (7..9) }
 
   # Febraban (Brazilian banking federation) positional layout 8.4 (line width = 240 characters)
   let(:line_with_two_hundred_and_forty_chars) do
@@ -18,9 +20,11 @@ describe Brazilianbanking, type: :helper do
   let(:line_with_three_characters) { 'ABC' }
 
   let(:num) { '700' } # e.g. branch number (in string format)
+  let(:acct_num) { '12345' } # Sample account number
   let(:maxdigits) { 4 } # e.g. brazilian bank branch
   # First 9 digits of the Brazilian tax identification number (in string format)
   let(:cpf_prefix) { '123456789' }
+  let(:nit_prefix) { '1234567890' }
 
   it '#trim_text_to(sample_txt, indx)' do
     trimmed_txt = sample_text[0..indx - 1]
@@ -139,5 +143,82 @@ describe Brazilianbanking, type: :helper do
           end
 
     expect(cpf).to eq(Brazilianbanking.generate_cpf(cpf_prefix))
+  end
+
+  it '#generate_cpf(cpf_prefix)' do
+    cpf = if cpf_prefix.length == 9
+
+            cpf_prefix + Brazilianbanking.cpf_dv1(cpf_prefix) + Brazilianbanking.cpf_dv2(cpf_prefix)
+
+          else Pretty.repeat_chars('0', 11)
+            #         else  '00000000000'
+          end
+
+    expect(cpf).to eq(Brazilianbanking.generate_cpf(cpf_prefix))
+  end
+
+  it '#compute_weighted_sum(nit_prefix)' do
+    factors = [3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+
+    weighted_sum = 0
+
+    (0..9).each do |i|
+      weighted_sum += factors[i] * nit_prefix[i].to_i
+    end
+
+    expect(weighted_sum).to eq(Brazilianbanking.compute_weighted_sum(nit_prefix))
+  end
+
+  # Generates NIT - Brazilian Social Security Number - control digit
+  it '#nit_dv(nit_prefix)' do
+    weighted_sum = Brazilianbanking.compute_weighted_sum(nit_prefix)
+
+    res = 11 - (weighted_sum % 11)
+
+    nit_dv = if res < 10
+
+               res.to_s
+
+             else
+
+               '0'
+
+             end
+
+    expect(nit_dv).to eq(Brazilianbanking.nit_dv(nit_prefix))
+  end
+
+  # Takes 10 digit (character string), returns eleven zeros if incorrect length is provided
+  it '#generate_nit(nit_prefix)' do
+    nit = if nit_prefix.length == 10
+
+            nit_prefix + Brazilianbanking.nit_dv(nit_prefix)
+
+          else '00000000000'
+
+          end
+
+    expect(nit).to eq(Brazilianbanking.generate_nit(nit_prefix))
+  end
+
+  # June 2017
+  # Alias, for convenience
+  it '#branch_verification_digit(num)' do
+    branch_verification_digit = Brazilianbanking
+                                .calculate_verification_digit(num, Settings
+                                  .max_length_for_bankbranch_code)
+    expect(branch_verification_digit).to eq(Brazilianbanking
+      .branch_verification_digit(num))
+  end
+
+  # June 2017
+  # Alias, for convenience
+  it '#account_verification_digit(num)' do
+    account_verification_digit = Brazilianbanking
+                                 .calculate_verification_digit(acct_num,
+                                                               Settings
+                                                               .max_length_for_bankaccount_number)
+    expect(account_verification_digit).to eq(Brazilianbanking
+      .account_verification_digit(acct_num))
   end
 end
