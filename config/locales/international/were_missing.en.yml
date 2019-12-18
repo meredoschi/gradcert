@@ -98,6 +98,9 @@ en:
     m: finalized
   duration_between: Duration between
   entity: Organization
+  error:
+    invalid_size:
+      too_small: Error! Invalid size! Too small!
   excluded:
     f: excluded
     m: excluded

@@ -7,6 +7,9 @@ pt_BR:
     formats:
       seeofr: "%-Y-%m-%d"
       unofrscore: "%d_%b_%y"
+  error:
+    invalid_size:
+      too_small: Erro! Tamanho inválido! Pequeno demais!
   on_the_team: na equipe
   tooltip:
     bankaccount:

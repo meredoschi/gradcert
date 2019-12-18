@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 # Convenience methods
+
 module Pretty
   # Add n blank spaces
-  def self.spacer(n)
+  def self.spacer(n) # rubocop:disable Naming/UncommunicativeMethodParamName
     repeat_chars(' ', n)
   end
 
@@ -13,16 +16,6 @@ module Pretty
   # Alias, for convenience
   def self.blank_special_chars(txt)
     replace_special_chars_with_single_blank(txt)
-  end
-  #
-
-  #
-  # i = index
-  # usually inside a loop, e.g.
-  # object_list.each_with_index |obj, i|
-  def self.display_index_progress(i, small_interval, big_interval)
-    print (i + 1).to_s + ' ' if i % small_interval == 0
-    puts if i > 0 && i % big_interval == 0
   end
 
   # Initial caps - Brazilian Portuguese
@@ -67,9 +60,70 @@ module Pretty
   end
 
   # Retorna valor em reais - Brazilian reals
-  def self.to_BRL(cents)
+  def self.to_BRL(cents) # rubocop:disable Naming/MethodName
     Money.new(cents, 'BRL').format(separator: ',', delimiter: '.')
   end
+
+  # Increase the text size by appending spaces to the left
+  # Useful for Brazilian bankpayments
+  def self.alphabetize(txt, field_width)
+    spaces = field_width - txt.length
+
+    spaces.times { txt += ' ' }
+
+    txt[0..field_width - 1]
+  end
+
+  # Takes an integer and converts it to a string with zeros on the left up to the field width
+  def self.zerofy_left(num, width)
+    txt = ''
+
+    size = Pretty.compute_size(num, width)
+
+    if size <= width
+
+      (width - size).times do
+        txt += '0'
+      end
+
+      txt += num.to_s
+
+    else
+
+      puts I18n.t('error.invalid_size.too_small')
+
+      width.times do
+        txt += '?'
+      end
+
+    end
+
+    txt
+  end
+
+  # Repeat a single character n times
+  def self.repeat_chars(ch, n) # rubocop:disable Naming/UncommunicativeMethodParamName
+    txt = ''
+    n.times { txt += ch }
+
+    txt
+  end
+
+  def self.compute_size(num, _width)
+    size = if num != 0
+
+             Math.log10(num.abs).floor + 1
+
+           else
+
+             1
+
+           end
+
+    size
+  end
+
+  # Methods below not tested yet
 
   # Returns female ordinal (in Portuguese)
   def self.ordinalize_feminine(txt)
@@ -82,72 +136,12 @@ module Pretty
     txt
   end
 
-  # Increase the text size by appending spaces to the left
-  # Useful for Brazilian bankpayments
-  def self.alphabetize(txt, size)
-    spaces = size - txt.length
-
-    (1..spaces).each do |_i|
-      txt.concat(' ')
-    end
-
-    txt[0..size - 1]
-  end
-
-  # Takes an integer and converts it to text string with zeros on the left
-  def self.zerofy_left(num, width)
-    txt = ''
-
-    size = if num != 0
-
-             Math.log10(num.abs).floor + 1
-
-           else
-
-             1
-
-           end
-
-    #		puts "Num = "+num.to_s
-    #		puts "Num size = "+size.to_s
-    #		puts "Field width = "+width.to_s
-
-    if size <= width
-
-      # 	puts "Filled with left zeros (if needed) = "+width.to_s
-
-      (width - size).times do
-        # http://ruby-doc.org/core-1.9.3/String.html#method-i-prepend
-        txt.prepend('0')
-      end
-
-      txt += num.to_s
-
-    #		 puts "Text len = "+txt.size.to_s
-
-    else
-
-      puts 'Error! Invalid size!  Too small!'
-
-      width.times do
-        txt.prepend('?')
-      end
-
-    end
-
-    #		puts "Text = "+txt
-
-    txt
-  end
-
-  # Repeat a single character n times
-  def self.repeat_chars(ch, n)
-    txt = ''
-
-    (1..n).each do |_i|
-      txt.concat(ch)
-    end
-
-    txt
+  # i = index
+  # usually inside a loop, e.g.
+  # object_list.each_with_index |obj, i|
+  def self.display_index_progress(i, small_interval, big_interval) # rubocop:disable Naming/UncommunicativeMethodParamName
+    n = i + 1
+    print n.to_s + ' ' if (i % small_interval).zero?
+    puts if i.positive? && i % big_interval.zero?
   end
 end
