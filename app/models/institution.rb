@@ -16,29 +16,19 @@ class Institution < ActiveRecord::Base
 
   has_paper_trail
 
-  belongs_to :municipality
-
-  belongs_to :streetname
-
   belongs_to :institutiontype
 
-  has_many  :roster, foreign_key: 'institution_id'
-
   has_many  :characteristic, foreign_key: 'institution_id'
-
-  has_many  :researchcenter, foreign_key: 'institution_id'
-
-  has_many  :healthcareinfo, foreign_key: 'institution_id'
-
   has_many  :college, foreign_key: 'institution_id'
-
-  has_many  :program, foreign_key: 'institution_id'
-
-  has_many  :user, foreign_key: 'institution_id'
-
-  has_many  :user, dependent: :restrict_with_exception
-
+  has_many  :healthcareinfo, foreign_key: 'institution_id'
   has_many  :placesavailable, foreign_key: 'institution_id'
+  has_many  :program, foreign_key: 'institution_id'
+  has_many  :researchcenter, foreign_key: 'institution_id'
+  has_many  :roster, foreign_key: 'institution_id'
+  has_many  :user, foreign_key: 'institution_id', dependent: :restrict_with_exception
+
+  has_one :accreditation
+  accepts_nested_attributes_for :accreditation
 
   has_one :address
   accepts_nested_attributes_for :address
@@ -49,13 +39,6 @@ class Institution < ActiveRecord::Base
   has_one :webinfo
   accepts_nested_attributes_for :webinfo
 
-  has_one :accreditation
-  accepts_nested_attributes_for :accreditation
-
-  belongs_to :user, foreign_key: 'user_id'
-
-  #  belongs_to :clericalunit
-
   scope :paulista, -> { joins(:stateregion).merge(Stateregion.paulista).order(:name) }
 
   #   validates :url, length:  { maximum: 150 }
@@ -65,14 +48,13 @@ class Institution < ActiveRecord::Base
 
   #   validates :abbreviation, format: { without: /([\W])/, message: I18n.t('activerecord.errors.models.institution.attributes.abbreviation.may_not_contain_special_characters')}
 
-  validates_uniqueness_of :name
+  # https://stackoverflow.com/questions/690664/rails-validates-uniqueness-of-case-sensitivity
+  validates :name, uniqueness: {case_sensitive: false}
 
   # 	validates :legacycode, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 999}
 
-  has_many :users, foreign_key: 'institution_id'
-
 # To do: review this validation
-#  validate :abbreviation_without_special_characters
+  validate :abbreviation_without_special_characters
 
   # Institutions with registrations (active or otherwise)
   def self.with_registrations
@@ -96,7 +78,7 @@ class Institution < ActiveRecord::Base
 
   # New for 2017
   def abbrv
-    max_len = 65
+    max_len = Settings.max_length_for_institution_abbreviation # default is 65
 
     if abbreviation.present?
 
@@ -110,14 +92,29 @@ class Institution < ActiveRecord::Base
   end
 
   # --------------
-  # Enrollment on a particular schoolterm
-  def schoolterm_enrollment(s)
-    Registration.on_schoolterm(s).from_institution(self).count
+  # Enrollment on a particular schoolterm - returns an active record relation
+  def schoolterm_enrollment_list(schterm)
+    Registration.on_schoolterm(schterm).from_institution(self)
   end
 
-  # i.e. *confirmed* cancellations ("deactivations")  Suspension not currently used.
-  def schoolterm_inactive_registrations(s)
-    Registration.on_schoolterm(s).from_institution(self).inactive.confirmed.count
+  # Enrollment on a particular schoolterm
+  def schoolterm_enrollment(schterm)
+    schoolterm_enrollment_list(schterm).count
+  end
+
+  # i.e. Number of *confirmed* cancellations ("deactivations")  Suspension not currently used.
+  def schoolterm_inactive_registrations_list(schterm)
+    schoolterm_enrollment_list(schterm).inactive.confirmed
+  end
+
+  # i.e. Number of *confirmed* cancellations ("deactivations")  Suspension not currently used.
+  def schoolterm_inactive_registrations(schterm)
+    schoolterm_inactive_registrations_list(schterm).count
+  end
+
+  # Alias, convenience
+  def num_schoolterm_inactive_registrations(schterm)
+    schoolterm_inactive_registrations(schterm)
   end
 
   def schoolterm_quota_info(s)
@@ -141,7 +138,7 @@ class Institution < ActiveRecord::Base
 
   # Enrollment control
   def self.with_contacts
-    joins(users: :contact).uniq.order(:name)
+    joins(user: :contact).uniq.order(:name)
   end
 
   def user_contact_name

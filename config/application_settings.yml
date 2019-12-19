@@ -66,6 +66,7 @@ defaults: &defaults
   managing_institution: Example COM
   max_length_for_bankaccount_number: 8
   max_length_for_bankbranch_code: 4
+  max_length_for_institution_abbreviation: 65
   max_number_bankaccounts: 99999999
   max_number_bankbranches: 9999
   max_number_diplomas: 4

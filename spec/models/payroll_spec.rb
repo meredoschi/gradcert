@@ -185,8 +185,8 @@ RSpec.describe Payroll, type: :model do
     expect(payment_date_consistency).to eq(payroll.payment_date_consistent?)
   end
 
-  it '-creation is blocked if payment date is too much in the future' do
-    expect { payroll = FactoryBot.create(:payroll) }.to raise_error(ActiveRecord::RecordInvalid)
+  it '-creation is blocked if payment date is too far in the future' do
+    expect { FactoryBot.create(:payroll) }.to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it 'can be created' do
@@ -273,7 +273,7 @@ RSpec.describe Payroll, type: :model do
   end
 
   it 'several can be created' do
-    created_payrolls = create_list(:payroll, 12, :personal_taxation)
+    12.times { FactoryBot.create(:payroll, :personal_taxation) }
   end
 
   # Important: it is assumed to be from the 1st of the month to the last

@@ -11,5 +11,9 @@ FactoryBot.define do
     sequence(:name) { |n| (Faker::University.name + (n + 1000).to_s).to_s }
 
     institutiontype
+
+    trait :special_characters_in_the_abbreviation do
+      abbreviation 'XYZˆ'
+    end
   end
 end
