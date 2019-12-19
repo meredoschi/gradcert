@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191026224747) do
+ActiveRecord::Schema.define(version: 20191219221108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -465,8 +465,6 @@ ActiveRecord::Schema.define(version: 20191026224747) do
   create_table "institutions", force: :cascade do |t|
     t.string   "name",               limit: 250,                 null: false
     t.integer  "institutiontype_id"
-    t.boolean  "pap"
-    t.boolean  "medres"
     t.boolean  "provisional",                    default: false
     t.datetime "created_at"
     t.datetime "updated_at"

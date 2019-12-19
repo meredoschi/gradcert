@@ -5,11 +5,9 @@ FactoryBot.define do
   factory :placesavailable do
     #  accredited 20
     #  requested 15
-    authorized 12
+    authorized 50
     allowregistrations true
-    #   ************ Associated models - factories to be created ***************
-    institution_id 1
-    schoolterm_id 1
-    #   ************************************************************************
+    institution
+    schoolterm
   end
 end

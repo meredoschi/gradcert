@@ -68,10 +68,110 @@ RSpec.describe Institution, type: :model do
       institutions_with_contacts = Institution.joins(user: :contact).uniq.order(:name)
       expect(institutions_with_contacts).to eq(Institution.with_contacts)
     end
+
+    it '#ordered_by_name' do
+      institutions_ordered_by_name = Institution.order(name: :asc) # notation to prevent ambiguity
+      expect(institutions_ordered_by_name).to eq(Institution.ordered_by_name)
+    end
+
+    it '#with_active_programs' do
+      institutions_with_active_programs = Institution.joins(:program).merge(Program.active)
+      expect(institutions_with_active_programs).to eq(Institution.with_active_programs)
+    end
+
+    it '#pap' do
+      pap_participating_institutions = Institution.joins(:program).merge(Program.pap)
+      expect(pap_participating_institutions).to eq(Institution.pap)
+    end
+
+    it '#medres' do
+      medical_residency_participating_institutions = Institution
+                                                     .joins(:program).merge(Program.medres)
+      expect(medical_residency_participating_institutions).to eq(Institution.medres)
+    end
+
+    it '#gradcert' do
+      graduate_certificate_participating_institutions = Institution
+                                                        .joins(:program).merge(Program.gradcert)
+      expect(graduate_certificate_participating_institutions).to eq(Institution.gradcert)
+    end
+
+    it '#undergraduate' do
+      undergraduate_degree_awarding_institutions = Institution.where(undergraduate: true)
+      expect(undergraduate_degree_awarding_institutions).to eq(Institution.undergraduate)
+    end
+
+    it '#with_users' do
+      institutions_with_users = Institution.joins(:user).uniq
+      expect(institutions_with_users).to eq(Institution.with_users)
+    end
+
+    it '#with_pap_users' do
+      institutions_with_pap_users = Institution.joins(:user).merge(User.pap)
+      expect(institutions_with_pap_users).to eq(Institution.with_pap_users)
+    end
+
+    it '#with_medres_users' do
+      institutions_with_medres_users = Institution.joins(:user).merge(User.medres)
+      expect(institutions_with_medres_users).to eq(Institution.with_medres_users)
+    end
+
+    it '#with_users_seen_by_readonly' do
+      institutions_with_users_seen_by_readonly = Institution.with_users
+                                                            .merge(User.visible_to_readonly)
+      expect(institutions_with_users_seen_by_readonly)
+        .to eq(Institution.with_users_seen_by_readonly)
+    end
+
+    # i.e. with more detailed information (characteristics) entered in the system
+    it '#with_characteristic' do
+      institutions_with_characteristics_info = Institution.joins(:characteristic).order(:name)
+      expect(institutions_with_characteristics_info).to eq(Institution.with_characteristic)
+    end
+
+    # with college (educational institution) infrastructure
+    it '#with_college' do
+      institutions_with_college = Institution.joins(:college).order(:name)
+      expect(institutions_with_college).to eq(Institution.with_college)
+    end
+
+    # i.e. with detailed health care infrastructure entered in the system
+    it '#with_healthcareinfo' do
+      institutions_with_healthcare_info = Institution.joins(:healthcareinfo).order(:name)
+      expect(institutions_with_healthcare_info).to eq(Institution.with_healthcareinfo)
+    end
+
+    # without more detailed information (characteristics) entered in the system
+    it '#without_characteristic' do
+      institutions_without_characteristics_info = Institution
+                                                  .where.not(id: Institution.with_characteristic)
+      expect(institutions_without_characteristics_info).to eq(Institution.without_characteristic)
+    end
+
+    # without college
+    it '#without_college' do
+      institutions_without_college = Institution
+                                     .where.not(id: Institution.with_college)
+      expect(institutions_without_college).to eq(Institution.without_college)
+    end
+
+    # i.e. without detailed health care infrastructure entered in the system
+    it '#without_healthcareinfo' do
+      institutions_without_healthcare_info = Institution
+                                             .where.not(id: Institution.with_healthcareinfo)
+      expect(institutions_without_healthcare_info).to eq(Institution.without_healthcareinfo)
+    end
+
+    # i.e. without detailed health care infrastructure entered in the system
+    it '#without_researchcenter' do
+      institutions_without_research_center_info = Institution
+                                                  .where.not(id: Institution.researchcenter)
+      #      scope :researchcenter, -> { joins(:researchcenter) }
+      expect(institutions_without_research_center_info).to eq(Institution.without_researchcenter)
+    end
   end
 
   context 'Instance methods' do
-
     it 'can be created' do
       FactoryBot.create(:institution)
     end
@@ -154,18 +254,87 @@ RSpec.describe Institution, type: :model do
         .to eq(institution.num_schoolterm_inactive_registrations(sample_schoolterm))
     end
 
-    it '-enrollment_reached_maximum_on_schoolterm?(s)' do
+    it '-enrollment_reached_maximum_on_schoolterm?(sample_schoolterm)' do
       maximum_enrollment_status = institution
                                   .remaining_vacancies_on_schoolterm(sample_schoolterm) == 0
       expect(maximum_enrollment_status)
         .to eq(institution.enrollment_reached_maximum_on_schoolterm?(sample_schoolterm))
     end
 
-    it '-user_contact_name' do
-      persons_name = institution.user.contact.name
-      expect(persons_name).to eq(institution.user_contact_name)
+    it '-with_healthcare_info?' do
+      is_health_care_facility = institution.healthcareinfo.exists?
+      expect(is_health_care_facility).to eq(institution.with_healthcare_info?)
     end
 
-  end # context
+    it '-with_research_center?' do
+      is_research_center = institution.researchcenter.exists?
+      expect(is_research_center).to eq(institution.with_research_center?)
+    end
 
+    it '-with_college?' do
+      is_college = institution.college.exists?
+      expect(is_college).to eq(institution.with_college?)
+    end
+
+    it '-with_characteristic?' do
+      is_characteristics_info_in_the_system = institution.characteristic.exists?
+      expect(is_characteristics_info_in_the_system).to eq(institution.with_characteristic?)
+    end
+
+    it '-with_programs?' do
+      does_institution_have_at_least_one_program = institution.program.exists?
+      expect(does_institution_have_at_least_one_program).to eq(institution.with_programs?)
+    end
+
+    it '-with_active_programs?' do
+      does_institution_have_at_least_one_active_program = institution.program.active.exists?
+      expect(does_institution_have_at_least_one_active_program)
+        .to eq(institution.with_active_programs?)
+    end
+
+    it '-with_infrastructure?' do
+      status = false
+      if institution.with_research_center? || institution.with_college? \
+        || institution.with_healthcare_info?
+
+        status = true
+      end
+
+      expect(status).to eq(institution.with_infrastructure?)
+    end
+
+    it '-with_gradcert_programs?' do
+      status = false
+      status = true if institution.program.gradcert.count > 0
+      expect(status).to eq(institution.with_gradcert_programs?)
+    end
+
+    it '-with_medres_programs?' do
+      status = false
+      status = true if institution.program.medres.count > 0
+      expect(status).to eq(institution.with_medres_programs?)
+    end
+
+    it '-with_pap_programs?' do
+      status = false
+      status = true if institution.program.pap.count > 0
+      expect(status).to eq(institution.with_pap_programs?)
+    end
+  end
+
+  it '-higherlearning?' do
+    status = false
+    if institution.undergraduate || institution.with_pap_programs? \
+       || institution.with_medres_programs? || institution.with_gradcert_programs?
+
+      status = true
+    end
+    expect(status).to eq(institution.higherlearning?)
+  end
 end
+
+#
+# def programs
+#   program
+# end
+#
