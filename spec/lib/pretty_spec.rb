@@ -7,12 +7,12 @@ describe Pretty, type: :helper do
   let(:original_txt) { 'Sample text' }
   let(:b) { 20 }
   let(:x) { 15 }
-  let(:n) { 50 }   # number of repeats
-  let(:ch) { '-' } # char to be repeated
+  let(:n) { 50 }        # number of repeats
+  let(:ch) { '-' }      # char to be repeated
   let(:num) { 123 }
-  let(:width) { 8 } # Width to fill
-  let(:cents) { 200 } # Used in Banking arithmetic
-  let(:name) { "FULANO DOS TAIS" }
+  let(:width) { 8 }     # Width to fill
+  let(:cents) { 200 }   # Used in Banking arithmetic
+  let(:name) { 'FULANO DOS TAIS' }
 
   # Used for timestamping files mostly
   it '#right_now' do
@@ -33,7 +33,6 @@ describe Pretty, type: :helper do
     rnow += t.sec.to_s
 
     expect(rnow).to eq(Pretty.right_now)
-
   end
 
   it '#replace_special_chars_with_single_blank(txt)' do
@@ -42,7 +41,7 @@ describe Pretty, type: :helper do
   end
 
   it '#to_BRL(cents)' do
-    formatted_cents=Money.new(cents, 'BRL').format(separator: ',', delimiter: '.')
+    formatted_cents = Money.new(cents, 'BRL').format(separator: ',', delimiter: '.')
     expect(formatted_cents).to eq(Pretty.to_BRL(cents))
   end
 
@@ -54,10 +53,9 @@ describe Pretty, type: :helper do
     expect(txt).to eq(Pretty.repeat_chars(ch, n))
   end
 
-
   # Alias, for convenience
   it '#blank_special_chars(original_txt)' do
-    processed_txt=Pretty.replace_special_chars_with_single_blank(original_txt)
+    processed_txt = Pretty.replace_special_chars_with_single_blank(original_txt)
     expect(processed_txt).to eq(Pretty.blank_special_chars(original_txt))
   end
 
@@ -67,19 +65,17 @@ describe Pretty, type: :helper do
   end
 
   it '#compute_size(num, width)' do
+    size = if num != 0
 
-  size = if num != 0
+             Math.log10(num.abs).floor + 1
 
-           Math.log10(num.abs).floor + 1
+           else
 
-         else
+             1
 
-           1
+           end
 
-         end
-
-         expect(size).to eq(Pretty.compute_size(num, width))
-
+    expect(size).to eq(Pretty.compute_size(num, width))
   end
 
   # Takes an integer and converts it to a string with zeros on the left up to the field width
@@ -88,10 +84,10 @@ describe Pretty, type: :helper do
 
     size = Pretty.compute_size(num, width)
 
-    if (size <= width)
+    if size <= width
 
       (width - size).times do
-        txt+='0'
+        txt += '0'
       end
 
       txt += num.to_s
@@ -101,7 +97,7 @@ describe Pretty, type: :helper do
       puts I18n.t('error.invalid_size.too_small')
 
       width.times do
-        txt+='?'
+        txt += '?'
       end
 
     end
@@ -114,9 +110,9 @@ describe Pretty, type: :helper do
   it '#alphabetize(original_txt, width)' do
     spaces = width - original_txt.length
 
-    spaces.times { original_txt+=' ' }
+    spaces.times { original_txt += ' ' }
 
-    spaced_txt=original_txt[0..width - 1]
+    spaced_txt = original_txt[0..width - 1]
 
     expect(spaced_txt).to eq(Pretty.alphabetize(original_txt, width))
   end
@@ -140,5 +136,4 @@ describe Pretty, type: :helper do
 
     expect(formatted_name).to eq(Pretty.initialcaps(name))
   end
-
 end
