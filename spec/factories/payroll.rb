@@ -9,19 +9,26 @@ FactoryBot.define do
     # medres: boolean, done: boolean)
 
     this_months_beginning = Date.today.beginning_of_month
-    next_months_beginning = this_months_beginning + 1.month
-    pay_day_on_the_tenth = next_months_beginning + 9.day
+    #  next_months_beginning = this_months_beginning + 1.month
+    #    pay_day_on_the_tenth = next_months_beginning + 9.day
 
-    #    monthworked {this_months_beginning}
-    #   paymentdate {pmt_date_on_the_tenth} # 10th day
-    #    dataentrystart {next_months_beginning-3.days}
-    #    dataentryfinish {next_months_beginning+2.days}
+    #     monthworked {this_months_beginning}
+    #     paymentdate {pmt_date_on_the_tenth} # 10th day
+    #      dataentrystart {next_months_beginning-3.days}
+    #      dataentryfinish {next_months_beginning+2.days}
+
+    before(:create) do |payroll|
+      payroll.paymentdate = payroll.monthworked + 9.day
+      payroll.dataentrystart = payroll.monthworked + 27.day
+      payroll.dataentryfinish = payroll.monthworked + 32.day
+    end
 
     sequence(:monthworked) { |n| (this_months_beginning + n.month).to_s }
-    sequence(:paymentdate) { |n| (pay_day_on_the_tenth + n.month).to_s }
 
-    sequence(:dataentrystart) { |n| (next_months_beginning - 3.days + n.month).to_s }
-    sequence(:dataentryfinish) { |n| (next_months_beginning + 2.days + n.month).to_s }
+    #    sequence(:paymentdate) { |n| (pay_day_on_the_tenth + n.month).to_s }
+
+    #    sequence(:dataentrystart) { |n| (next_months_beginning - 3.days + n.month).to_s }
+    #    sequence(:dataentryfinish) { |n| (next_months_beginning + 2.days + n.month).to_s }
 
     pap true # Default, since medres is reserved for future use
     medres false
@@ -54,7 +61,11 @@ FactoryBot.define do
     trait :payment_date_in_the_future
 
     before(:create) do |payroll|
-      payroll.paymentdate += 3.months
+      offset = 5.years
+      payroll.monthworked += offset
+      payroll.paymentdate += offset
+      payroll.dataentrystart += offset
+      payroll.dataentryfinish += offset
     end
   end
 end

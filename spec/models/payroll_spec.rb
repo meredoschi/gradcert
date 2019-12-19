@@ -6,7 +6,7 @@ RSpec.describe Payroll, type: :model do
   #  pending "add some examples to (or delete) #{__FILE__}"
 
   let(:payroll) { FactoryBot.create(:payroll, :personal_taxation) }
-
+  let(:taxation) { FactoryBot.create(:taxation, :personal) }
   let(:dt) { Date.today - 60 }
 
   MAX_COMMENT_LEN = Settings.maximum_comment_length.payroll
@@ -202,7 +202,7 @@ RSpec.describe Payroll, type: :model do
     puts registration.detailed
   end
 
-  pending 'next payroll can be created' do
+  it 'next payroll can be created' do
     highest_id = Payroll.pluck(:id).max
 
     payroll = Payroll.find highest_id
@@ -211,16 +211,10 @@ RSpec.describe Payroll, type: :model do
 
     @payday = payroll.paymentdate.to_date + 1.month
 
-    next_payroll = Payroll.create! paymentdate: @payday, monthworked: @month_worked, pap: true
+    next_payroll = Payroll.create! paymentdate: @payday,
+                                   monthworked: @month_worked, pap: true, taxation_id: taxation.id
 
     puts next_payroll
-  end
-
-  it '-commentedname' do
-    payroll_commented_name = prefix + I18n.l(payroll.monthworked, format: :my)
-    payroll_commented_name += ' (' + I18n.l(payroll.paymentdate, format: :compact) + ')'
-
-    expect(payroll_commented_name).to eq payroll.commentedname
   end
 
   # i.e. payrolls refering to two or more unique months worked exist

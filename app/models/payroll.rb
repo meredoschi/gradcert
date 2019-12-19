@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Monthly scholarship recipients payroll
 # IMPORTANT: Working month is assumed to start on the first calendar day
 # i.e. Payroll cycle goes from the 1st to 28..31 depending on the Month/Year
@@ -8,9 +10,9 @@ class Payroll < ActiveRecord::Base
 
   belongs_to :scholarship
 
-  # 	has_many  :supervisor, :foreign_key => 'contact_id'
+  #   has_many  :supervisor, :foreign_key => 'contact_id'
 
-  #		has_one :bankpayment
+  #    has_one :bankpayment
 
   #  Changed here!
 
@@ -39,33 +41,27 @@ class Payroll < ActiveRecord::Base
 
   # Marcelo - December 2017 - Tested code
 
-  def self.ids_contextual_on(dt)
-
+  def self.ids_contextual_on(specified_dt)
     contextual_ids = []
 
-    dt_range = dt..dt
+    dt_range = specified_dt..specified_dt
 
     Payroll.all.each do |payroll|
-
-      payroll_start=Dateutils.to_gregorian(payroll.daystarted)
-      payroll_finish=Dateutils.to_gregorian(payroll.dayfinished)
+      payroll_start = Dateutils.to_gregorian(payroll.daystarted)
+      payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
 
       payroll_range = payroll_start..payroll_finish # Payroll cycle
 
       next unless Logic.intersect(dt_range, payroll_range) == dt_range
 
       contextual_ids << payroll.id
-
     end
 
     contextual_ids
-
   end
 
   def self.ids_contextual_today
-
-    self.ids_contextual_on(Date.today)
-
+    ids_contextual_on(Date.today)
   end
 
   # --- RSPEC block finish
@@ -73,8 +69,8 @@ class Payroll < ActiveRecord::Base
   # Contextual on a specified date - returns an active record relation
   # Only one payroll, per area, should exist.
   # Reminder: use .first to get the object
-  def self.contextual_on(dt)
-    where(id: ids_contextual_on(dt))
+  def self.contextual_on(specified_dt)
+    where(id: ids_contextual_on(specified_dt))
   end
 
   def self.contextual_today
@@ -83,27 +79,27 @@ class Payroll < ActiveRecord::Base
 
   # Alias, for convenience
   def self.current
-    self.contextual_today
+    contextual_today
   end
 
   def self.past
-    current_reference_month=Payroll.current.first.monthworked
-    where("monthworked < ?", current_reference_month)
+    current_reference_month = Payroll.current.first.monthworked
+    where('monthworked < ?', current_reference_month)
   end
 
   def self.actual
-     self.all
-#    where.not(id: planned)
+    all
+    #    where.not(id: planned)
   end
 
   # Future
   def self.planned
-#    current_reference_month=Payroll.current.first.monthworked
-#    if current_reference_month? 
-#     where("monthworked > ?", current_reference_month)
-#    else
-#    nil 
-#    end 
+    #    current_reference_month=Payroll.current.first.monthworked
+    #    if current_reference_month?
+    #     where("monthworked > ?", current_reference_month)
+    #    else
+    #    nil
+    #    end
     nil
   end
 
@@ -118,11 +114,6 @@ class Payroll < ActiveRecord::Base
   end
 
   # Alias
-  def self.ordered_by_most_recent
-    ordered_by_reference_month_desc
-  end
-
-  # Another alias
   def self.ordered_by_most_recent
     ordered_by_reference_month_desc
   end
@@ -157,9 +148,7 @@ class Payroll < ActiveRecord::Base
   # This may return nil if payrolls are created in advance of the cycle
   # (since they, logically, will not be completed yet)
   def self.latest_completed
-
-      self.latest.completed
-
+    latest.completed
   end
 
   # i.e. with the most recent (or most in the future) finish date
@@ -191,14 +180,7 @@ class Payroll < ActiveRecord::Base
   end
 
   def self.existence?
-    num_distinct_working_months > 0
-  end
-
-  # Version with comment
-  def commentedname
-    txt = prefix + I18n.l(monthworked, format: :my)
-    txt += ' (' + I18n.l(paymentdate, format: :compact) + ')'
-    txt
+    num_distinct_working_months.positive?
   end
 
   # Short version of name
@@ -210,9 +192,7 @@ class Payroll < ActiveRecord::Base
     txt += ' ('
     txt += I18n.l(paymentdate, format: :compact) + ')'
 
-    if special?
-      txt += ' *' + I18n.t('activerecord.attributes.payroll.special') + '*'
-    end
+    txt += ' *' + I18n.t('activerecord.attributes.payroll.special') + '*' if special?
 
     txt
   end
@@ -226,15 +206,15 @@ class Payroll < ActiveRecord::Base
   end
 
   def name
-    if pending?
+    @payroll_name = if pending?
 
-      @payroll_name = I18n.l(monthworked, format: :my) + ' *' + I18n.t('pending') + '*'
+                      I18n.l(monthworked, format: :my) + ' *' + I18n.t('pending') + '*'
 
-    else
+                    else
 
-      @payroll_name = shortname
+                      shortname
 
-    end
+                    end
 
     @payroll_name
   end
@@ -273,7 +253,7 @@ class Payroll < ActiveRecord::Base
     !is_annotated?
   end
 
-  def	payment_date_coherent
+  def payment_date_coherent
     errors.add(:paymentdate, :inconsistent) unless payment_date_consistent?
   end
 
@@ -295,25 +275,24 @@ class Payroll < ActiveRecord::Base
 
   def payment_date_consistent?
     return unless monthworked.present? && paymentdate.present?
+
     monthworked.beginning_of_month == paymentdate.beginning_of_month.last_month
   end
 
   # RSPEC --- to do
   # Returns latest finish date (i.e. pertaining to the most recent payroll)
   def self.latest_finish_date
-    pluck(:dayfinished).max if count > 0
+    pluck(:dayfinished).max if count.positive?
   end
 
   # Fixed, december 2017: where(done: true)
   def self.done
-
     joins(:bankpayment).merge(Bankpayment.done)
-
   end
 
   # Latest payroll(s)
   def self.latest
-    where(dayfinished: latest_finish_date) if count > 0
+    where(dayfinished: latest_finish_date) if count.positive?
   end
 
   # Important: This assumes payroll is from the beginning to the end of the month
@@ -326,6 +305,7 @@ class Payroll < ActiveRecord::Base
   def self.previous
     #  if pluck(:monthworked).uniq.count > 1 # i.e. there is more than one month worked
     return unless more_than_one_working_month_recorded?
+
     most_recent = []
     most_recent << latest_finish_date
     before_latest = (pluck(:dayfinished) - most_recent).max
@@ -361,7 +341,7 @@ class Payroll < ActiveRecord::Base
 
   # i.e. with events pending
   def pending?
-    pending_events.count > 0
+    pending_events.count.positive?
   end
 
   def confirmed?
@@ -390,8 +370,6 @@ class Payroll < ActiveRecord::Base
     Scholarship.on_month(monthworked) # numdays = virtual attribute
   end
 
-  #
-
   def referencemonth
     I18n.l(monthworked, format: :my)
   end
@@ -406,7 +384,7 @@ class Payroll < ActiveRecord::Base
   end
 
   def manual_amount
-    errors.add(:amount, :present) if scholarship_id.present? && amount > 0
+    errors.add(:amount, :present) if scholarship_id.present? && amount.positive?
   end
 
   def self.scheduled
