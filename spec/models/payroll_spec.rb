@@ -6,44 +6,185 @@ RSpec.describe Payroll, type: :model do
   #  pending "add some examples to (or delete) #{__FILE__}"
 
   let(:payroll) { FactoryBot.create(:payroll, :personal_taxation) }
+
   let(:taxation) { FactoryBot.create(:taxation, :personal) }
   let(:dt) { Date.today - 60 }
+  #  let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
 
   MAX_COMMENT_LEN = Settings.maximum_comment_length.payroll
 
-  # Currently applies to special payrolls only
-  def prefix
-    @txt = ''
+  context 'associations' do
+    it { is_expected.to belong_to(:scholarship) }
+    it { is_expected.to belong_to(:taxation) }
+    it { is_expected.to have_many(:annotation).dependent(:restrict_with_exception) }
+    it { is_expected.to have_many(:bankpayment) }
+    it { is_expected.to have_many(:feedback) }
+  end
 
-    if payroll.special?
-      @txt = '*' + I18n.t('activerecord.attributes.payroll.special')
-      @txt += ' *  [' + comment + '] '
+  context 'validations' do
+    it { is_expected.to validate_length_of(:comment).is_at_most(MAX_COMMENT_LEN) }
+    context 'required fields' do
+      it { is_expected.to validate_presence_of(:paymentdate) }
+      it { is_expected.to validate_presence_of(:taxation_id) }
+      it { is_expected.to validate_presence_of(:monthworked) }
+    end
+  end
 
+  context 'class methods' do
+    context 'working months' do
+      # The date when the most recent payroll cycle theoretically started
+      # Even if the actual payroll information hasn't been entered in the system yet
+      #
+      it '#start_dt_corresponding_to_today' do
+        current_month_worked = Date.today.beginning_of_month
+        # IMPORTANT! The payroll cycle goes from the first to the last calendar day in every month.
+
+        expect(current_month_worked).to eq Payroll.start_dt_corresponding_to_today
+
+        # To do: can can
+      end
+
+      it '#distinct_working_months' do
+        distinct_payroll_working_months = Payroll.pluck(:monthworked).uniq
+
+        expect(distinct_payroll_working_months).to eq Payroll.distinct_working_months
+
+        # To do: can can
+      end
+
+      it '#existence?' do
+        payroll_existence = Payroll.num_distinct_working_months > 0
+
+        expect(payroll_existence).to eq(Payroll.existence?)
+      end
+
+      it '#num_distinct_working_months' do
+        num_distinct_payroll_working_months = Payroll.distinct_working_months.count
+
+        expect(num_distinct_payroll_working_months).to eq Payroll.num_distinct_working_months
+
+        # To do: can can
+      end
+
+      it '#less_than_two_working_months_recorded?' do
+        status = Payroll.num_distinct_working_months < 2
+        expect(status).to eq(Payroll.less_than_two_working_months_recorded?)
+      end
+
+      # i.e. payrolls refering to two or more unique months worked exist
+      it '#more_than_one_working_month_recorded?' do
+        status = Payroll.num_distinct_working_months > 1
+
+        expect(status).to eq(Payroll.more_than_one_working_month_recorded?)
+        # To do: use can can (ability) in the future for finer grained Tests
+        # e.g. Medical Residence user.
+      end
     end
 
-    @txt = ''
+    context 'Contextual' do
+      # On the specified date
+      it '#ids_contextual_on(dt)' do
+        contextual_ids = []
+
+        dt_range = dt..dt
+
+        Payroll.all.each do |payroll|
+          payroll_start = Dateutils.to_gregorian(payroll.daystarted)
+          payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
+
+          # Alternatively, this could be done:
+          #      payroll_start=payroll.monthworked.beginning_of_month
+          #      payroll_finish=payroll.monthworked.end_of_month
+
+          payroll_range = payroll_start..payroll_finish # Payroll Cycle
+
+          next unless Logic.intersect(dt_range, payroll_range) == dt_range
+
+          contextual_ids << payroll.id
+        end
+
+        expect(contextual_ids).to eq Payroll.ids_contextual_on(dt)
+      end
+
+      # On the specified date
+      it '#ids_contextual_today' do
+        today = Date.today
+
+        contextual_ids = Payroll.ids_contextual_on(today)
+
+        expect(contextual_ids).to eq Payroll.ids_contextual_today
+      end
+
+      # Contextual on a specified date - returns an active record relation
+      # Only one payroll, per area, should exist.
+      # Reminder: use .first to get the object
+      it '#contextual_on(dt)' do
+        payrolls_contextual_on_dt = Payroll.where(id: Payroll.ids_contextual_on(dt))
+        expect(payrolls_contextual_on_dt).to eq(Payroll.contextual_on(dt))
+      end
+
+      it '#contextual_today' do
+        payrolls_contextual_today = Payroll.where(id: Payroll.ids_contextual_today)
+        expect(payrolls_contextual_today).to eq(Payroll.contextual_today)
+      end
+
+      # Returns an active record relation
+      it '#current' do
+        current_payrolls = Payroll.contextual_today
+        expect(current_payrolls).to eq(Payroll.current)
+      end
+    end
+
+    context 'Timeline' do
+      it '#past' do
+        possible_current_payrolls = Payroll.current
+
+        previous_payrolls = nil
+
+        if possible_current_payrolls.present? # not nil
+
+          # It is assumed payrolls are either of type pap or medical residency (but not both)
+          # Future to do: add gradcert (boolean field) to the model
+          current_payroll = possible_current_payrolls.first
+          current_month_worked = current_payroll.monthworked
+          previous_payrolls = Payroll.where('monthworked < ?', current_month_worked)
+
+        end
+
+        expect(previous_payrolls).to eq(Payroll.past)
+      end
+
+      # Not in effect yet, scheduled for future payroll cycles
+      it '#planned' do
+        subsequently_scheduled_payrolls = Payroll.where('monthworked > ?',
+                                                        Payroll.start_dt_corresponding_to_today)
+        expect(subsequently_scheduled_payrolls).to eq(Payroll.planned)
+      end
+
+      # Current or past (already closed)
+      it '#actual' do
+        actual_payrolls = Payroll.where.not(id: Payroll.planned)
+        expect(actual_payrolls).to eq(Payroll.actual)
+      end
+
+      # Most recent "monthworked" or farthest in the future (if already in the system)
+      # Returns a date object
+      it '#reference_month_most_in_the_future' do
+        reference_month_most_in_the_future = Payroll.order(monthworked: :desc).first.monthworked
+        expect(reference_month_most_in_the_future).to eq(Payroll.reference_month_most_in_the_future)
+      end
+
+      # Returns an active record relation
+      it '#with_reference_month_most_in_the_future' do
+        with_reference_month_most_in_the_future = Payroll.where(monthworked: Payroll
+          .reference_month_most_in_the_future)
+        expect(with_reference_month_most_in_the_future)
+          .to eq(Payroll.with_reference_month_most_in_the_future)
+      end
+    end
   end
 
-  it { is_expected.to validate_length_of(:comment).is_at_most(MAX_COMMENT_LEN) }
-
-  #  let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
-
-  it { is_expected.to validate_presence_of(:paymentdate) }
-  it { is_expected.to validate_presence_of(:taxation_id) }
-  it { is_expected.to validate_presence_of(:monthworked) }
-
-  it '-dstart' do
-    payroll_dstart = payroll.start.to_datetime.to_i / (3600 * 24)
-
-    expect(payroll_dstart).to eq(payroll.dstart)
-  end
-
-  # Day finished - as integers
-
-  it '-dfinish' do
-    payroll_dfinish = payroll.finish.to_datetime.to_i / (3600 * 24)
-
-    expect(payroll_dfinish).to eq(payroll.dfinish)
+  context 'instance methods' do
   end
 
   it 'pap? is true for PAP payroll' do
@@ -99,46 +240,6 @@ RSpec.describe Payroll, type: :model do
     expect(payroll.not_annotated?).to eq(!payroll.is_annotated?)
   end
 
-  it '#dataentrystart (local admins at institutions)' do
-    # payroll = FactoryBot.create(:payroll)
-
-    payroll_dataentrystart = payroll.dataentrystart
-
-    expect(payroll_dataentrystart).to eq(payroll.dataentrystart)
-  end
-
-  it '#dataentrystart can be set to right now' do
-    # payroll = FactoryBot.create(:payroll)
-
-    right_now = Time.now
-
-    payroll.dataentrystart = right_now
-
-    expect(payroll.dataentrystart).to eq(right_now)
-  end
-
-  it '#dataentryfinish (local admins at institutions)' do
-    # payroll = FactoryBot.create(:payroll)
-
-    payroll_dataentryfinish = payroll.dataentryfinish
-
-    expect(payroll_dataentryfinish).to eq(payroll.dataentryfinish)
-  end
-
-  it '#dataentryfinish can be set to right now' do
-    puts '#dataentryfinish can be set to right now'
-
-    right_now = Time.now
-
-    # payroll = FactoryBot.create(:payroll)
-
-    payroll.dataentryfinish = right_now
-
-    expect(payroll.dataentryfinish).to eq(right_now)
-
-    puts right_now.to_s
-  end
-
   it '-dataentryperiod' do
     # payroll = FactoryBot.create(:payroll)
 
@@ -148,9 +249,14 @@ RSpec.describe Payroll, type: :model do
   end
 
   it '-prefix' do
-    payroll_prefix = payroll.prefix
+    special_prefix = ''
 
-    expect(payroll.prefix).to eq(payroll_prefix)
+    if payroll.special?
+      special_prefix = '*' + I18n.t('activerecord.attributes.payroll.special') + \
+                       ' *  [' + payroll.comment + '] '
+    end
+
+    expect(special_prefix).to eq(payroll.prefix)
   end
 
   it '-range' do
@@ -195,12 +301,12 @@ RSpec.describe Payroll, type: :model do
     puts payroll.name
   end
 
-  pending '-pending registrations (or changes therein)' do
-    # payroll = FactoryBot.create(:payroll)
-    registration = FactoryBot.create(:registration)
+  #  pending '-pending registrations (or changes therein)' do
+  # payroll = FactoryBot.create(:payroll)
+  #    registration = FactoryBot.create(:registration)
 
-    puts registration.detailed
-  end
+  #    puts registration.detailed
+  #  end
 
   it 'next payroll can be created' do
     highest_id = Payroll.pluck(:id).max
@@ -217,47 +323,11 @@ RSpec.describe Payroll, type: :model do
     puts next_payroll
   end
 
-  # i.e. payrolls refering to two or more unique months worked exist
-  it '#more_than_one_working_month_recorded?' do
-    Payroll.num_distinct_working_months > 1
-
-    # To do: use can can (ability) in the future for finer grained Tests
-    # e.g. Medical Residence user.
-  end
-
-  it '#distinct_working_months' do
-    distinct_payroll_working_months = Payroll.pluck(:monthworked).uniq
-
-    expect(distinct_payroll_working_months).to eq Payroll.distinct_working_months
-
-    # To do: can can
-  end
-
-  it '#num_distinct_working_months' do
-    num_distinct_payroll_working_months = Payroll.distinct_working_months.count
-
-    expect(num_distinct_payroll_working_months).to eq Payroll.num_distinct_working_months
-
-    # To do: can can
-  end
-
-  it '#less_than_two_working_months_recorded' do
-    Payroll.num_distinct_working_months < 2
-  end
-
-  it '#existence?' do
-    payroll_existence = Payroll.num_distinct_working_months > 0
-
-    expect(payroll_existence).to eq(Payroll.existence?)
-  end
-
   it 'shortname' do
-    payroll_short_name = ''
+    payroll = FactoryBot.create(:payroll, :personal_taxation, :special)
 
-    payroll_short_name += I18n.l(payroll.monthworked, format: :my)
-
-    payroll_short_name += ' ('
-    payroll_short_name += I18n.l(payroll.paymentdate, format: :compact) + ')'
+    payroll_short_name = I18n.l(payroll.monthworked, format: :my) \
+    + ' (' + I18n.l(payroll.paymentdate, format: :compact) + ')'
 
     if payroll.special?
       payroll_short_name += ' *' + I18n.t('activerecord.attributes.payroll.special') + '*'
@@ -274,39 +344,6 @@ RSpec.describe Payroll, type: :model do
   it '-cycle' do
     payroll_cycle = payroll.start..payroll.finish
     expect(payroll_cycle).to eq payroll.cycle
-  end
-
-  # On the specified date
-  it '-ids_contextual_on(dt)' do
-    contextual_ids = []
-
-    dt_range = dt..dt
-
-    Payroll.all.each do |payroll|
-      payroll_start = Dateutils.to_gregorian(payroll.daystarted)
-      payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
-
-      # Alternatively, this could be done:
-      #      payroll_start=payroll.monthworked.beginning_of_month
-      #      payroll_finish=payroll.monthworked.end_of_month
-
-      payroll_range = payroll_start..payroll_finish # Payroll Cycle
-
-      next unless Logic.intersect(dt_range, payroll_range) == dt_range
-
-      contextual_ids << payroll.id
-    end
-
-    expect(contextual_ids).to eq Payroll.ids_contextual_on(dt)
-  end
-
-  # On the specified date
-  it '-ids_contextual_today' do
-    today = Date.today
-
-    contextual_ids = Payroll.ids_contextual_on(today)
-
-    expect(contextual_ids).to eq Payroll.ids_contextual_today
   end
 
   #   pending '#previous (with 12 months created)' do
