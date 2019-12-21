@@ -141,15 +141,15 @@ class Payroll < ActiveRecord::Base
 
   # Alias
   def self.ordered_by_most_recent
-    ordered_by_reference_month_desc
+    ordered_by_monthworked_paymentdate_special_createdat_desc
   end
 
   def self.ordered_by_reference_month_desc
     order(monthworked: :desc)
   end
 
-  def self.ordered_by_payment_date_reference_month_desc
-    order(paymentdate: :desc, monthworked: :desc, special: :desc, created_at: :desc)
+  def self.ordered_by_monthworked_paymentdate_special_createdat_desc
+    order(monthworked: :desc, paymentdate: :desc, special: :desc, created_at: :desc)
   end
 
   def self.ordered_by_reference_month
@@ -174,16 +174,36 @@ class Payroll < ActiveRecord::Base
   # This may return nil if payrolls are created in advance of the cycle
   # (since they, logically, will not be completed yet)
   def self.latest_completed
-    latest.completed
+    latest_completed_sql
+  end
+
+  # December 2019 - Implemented via raw sql
+  # Usually returns a single record: the most recently completed payroll (if there are any)
+  # Unless one or more special payrolls exist for the most recent payment date and reference month
+  def self.latest_completed_sql
+    query = 'WITH Completed_Payrolls_CTE(monthworked, paymentdate) '\
+    'AS (select p.monthworked, p.paymentdate from payrolls p inner join bankpayments bp on'\
+    '(p.id=bp.payroll_id) where bp.done=true)'\
+    ','\
+    'Latest_Completed_Payroll_CTE(monthworked, paymentdate) AS ('\
+    'select * from Completed_Payrolls_CTE order by monthworked desc, paymentdate desc limit 1'\
+    '),'\
+    'Latest_Completed_Payroll_monthworked_CTE(monthworked) AS ('\
+    'select monthworked from Latest_Completed_Payroll_CTE'\
+    '),'\
+    'Latest_Completed_Payroll_paymentdate_CTE(paymentdate) AS ('\
+    'select paymentdate from Latest_Completed_Payroll_CTE'\
+    ')'\
+    'select * from Payrolls where monthworked '\
+    'in (select monthworked from Latest_Completed_Payroll_monthworked_CTE) and '\
+    'paymentdate in (select paymentdate from Latest_Completed_Payroll_paymentdate_CTE);'
+
+    find_by_sql(query)
   end
 
   # i.e. with the most recent (or most in the future) finish date
   def self.newest
     order(:dayfinished).last
-  end
-
-  def self.scheduled
-    joins(:bankpayment)
   end
 
   # Closed, bank payment performed.
@@ -200,12 +220,23 @@ class Payroll < ActiveRecord::Base
 
   # Payroll is not yet completed (closed).
   def self.active
-    where(done: false)
+    contextual_today.incomplete
   end
 
-  # Events (automatically) computed into annotations
-  def self.annotated
-    where(annotated: true)
+  # Find the information using sql (less portable, but generally faster than active record)
+  # Provided for convenience
+  def self.annotated_ids_sql
+    # raw sql query
+    query = 'SELECT distinct p.id FROM payrolls p INNER JOIN annotations a ON '\
+    '(p.id = a.payroll_id);'
+    Payroll.find_by_sql(query)
+  end
+
+  def self.annotated_sql
+    # sql query
+    query = 'select * from payrolls p2 where id in (SELECT distinct p.id FROM payrolls p ' \
+    'INNER JOIN annotations a ON (p.id = a.payroll_id));'
+    Payroll.find_by_sql(query)
   end
 
   # Not calculated yet.
@@ -213,12 +244,29 @@ class Payroll < ActiveRecord::Base
     where.not(id: annotated)
   end
 
+  def self.not_annotated_sql
+    # sql query
+    query = 'select * from payrolls p2 where id not in (SELECT distinct p.id FROM payrolls p ' \
+    'INNER JOIN annotations a ON (p.id = a.payroll_id));'
+    Payroll.find_by_sql(query)
+  end
+
+  # Returns the ids for those payrolls with at least one annotation (via active record)
+  def self.annotated_ids
+    Payroll.joins(:annotation).pluck(:id).uniq
+  end
+
+  # Returns payrolls with at least one annotation
+  def self.annotated
+    Payroll.where(id: Payroll.annotated_ids)
+  end
+
   def self.regular
-    where.not(id: special)
+    where(special: false)
   end
 
   def self.not_scheduled
-    where.not(id: scheduled)
+    where.not(id: with_bankpayment)
   end
 
   def self.special
@@ -234,31 +282,9 @@ class Payroll < ActiveRecord::Base
     where(medres: true, pap: false)
   end
 
-  def self.numeric_ranges_by_id
-    order(:id).pluck(:id, :daystarted, :dayfinished)
-  end
-
-  def self.ranges_by_id
-    date_ranges_by_id = []
-
-    numeric_ranges_by_id.each do |payroll_dates|
-      payroll_dates[1] = Settings.dayone + payroll_dates[1].to_i # start
-      payroll_dates[2] = Settings.dayone + payroll_dates[2].to_i # finish
-      date_ranges_by_id << payroll_dates
-    end
-
-    date_ranges_by_id
-  end
-
-  # RSPEC --- to do
-  # Returns latest finish date (i.e. pertaining to the most recent payroll)
-  def self.latest_finish_date
-    pluck(:dayfinished).max if count.positive?
-  end
-
-  # Fixed, december 2017: where(done: true)
+  # Alias (formerly a boolean attribute)
   def self.done
-    joins(:bankpayment).merge(Bankpayment.done)
+    completed
   end
 
   # Latest payroll(s)
@@ -281,21 +307,29 @@ class Payroll < ActiveRecord::Base
     Payroll.where(monthworked: Payroll.reference_month_most_in_the_future)
   end
 
-  # Previous month's payroll
+  # Returns the most recently completed (regular) payroll, if any
   def self.previous
-    #  if pluck(:monthworked).uniq.count > 1 # i.e. there is more than one month worked
-    return unless more_than_one_working_month_recorded?
+    query = 'WITH Completed_Payrolls_CTE(monthworked, paymentdate) AS '\
+    '(select p.monthworked, p.paymentdate from payrolls p inner join bankpayments bp on '\
+    '(p.id=bp.payroll_id) where bp.done=true)'\
+    ','\
+    'Latest_Completed_Payroll_CTE(monthworked, paymentdate) AS ('\
+    'select * from Completed_Payrolls_CTE order by monthworked desc, paymentdate desc limit 1'\
+    '),'\
+    'Latest_Completed_Payroll_monthworked_CTE(monthworked) AS ('\
+    'select monthworked from Latest_Completed_Payroll_CTE'\
+    ')'\
+    'select * from Payrolls p where monthworked in '\
+    '(select monthworked from Latest_Completed_Payroll_monthworked_CTE) and p.special=false;'
 
-    most_recent = []
-    most_recent << latest_finish_date
-    before_latest = (pluck(:dayfinished) - most_recent).max
-    where(dayfinished: before_latest)
+    Payroll.find_by_sql(query)
   end
 
   # Last day of the payroll which is most in the future
   def self.farthestcalculabledate
     latest.first.monthworked.end_of_month
   end
+
   # ---------------------------------------------------------
 
   # ---------------- Instance methods -----------------------

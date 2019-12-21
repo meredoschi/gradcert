@@ -19,7 +19,7 @@ class PayrollsController < ApplicationController
 
 #     @payrolls = Payroll.ordered_by_reference_month # i.e. Month worked
 
-#    @payrolls = Payroll.ordered_by_payment_date_reference_month_desc
+#    @payrolls = Payroll.ordered_by_monthworked_paymentdate_special_createdat_desc
 
 		@title=t('list')+' '+t('activerecord.models.payroll').pluralize
 
