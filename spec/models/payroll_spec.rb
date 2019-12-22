@@ -6,8 +6,8 @@ RSpec.describe Payroll, type: :model do
   #  pending "add some examples to (or delete) #{__FILE__}"
 
   let(:payroll) { FactoryBot.create(:payroll, :personal_taxation) }
-
   let(:taxation) { FactoryBot.create(:taxation, :personal) }
+
   let(:dt) { Date.today - 60 }
   #  let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
 
@@ -27,6 +27,22 @@ RSpec.describe Payroll, type: :model do
       it { is_expected.to validate_presence_of(:paymentdate) }
       it { is_expected.to validate_presence_of(:taxation_id) }
       it { is_expected.to validate_presence_of(:monthworked) }
+    end
+
+    context 'date consistency' do
+      it '-payment_on_the_usual_dt?' do
+        customary_payment_dt = payroll.monthworked + \
+                               Settings.payroll.payday.days_following_month_worked.days + 1.month
+
+        is_payment_on_the_customary_dt = payroll.paymentdate == customary_payment_dt
+
+        expect(is_payment_on_the_customary_dt).to eq(payroll.payment_on_the_usual_dt?)
+      end
+
+      pending 'payment must be on the customary date' do
+        expect { FactoryBot.create(:payroll, :personal_taxation, :late_payment) }
+          .to raise_error(ActiveRecord::RecordInvalid)
+      end
     end
   end
 
@@ -183,7 +199,7 @@ RSpec.describe Payroll, type: :model do
       end
     end
 
-    context 'missing' do
+    context 'ordering' do
       it '#newest_first' do
         payrolls_ordered_by_day_finished_desc = Payroll.order(dayfinished: :desc).uniq
         expect(payrolls_ordered_by_day_finished_desc).to eq Payroll.newest_first
@@ -221,6 +237,14 @@ RSpec.describe Payroll, type: :model do
         expect(payrolls_ordered_by_reference_month).to eq(Payroll.ordered_by_reference_month)
       end
 
+      # i.e. with the most recent (or most in the future) finish date
+      it '#newest' do
+        newest_payrolls = Payroll.order(:dayfinished).last
+        expect(newest_payrolls).to eq(Payroll.newest)
+      end
+    end
+
+    context 'situation' do
       it '#with_bankpayment' do
         payrolls_with_bankpayment = Payroll.joins(:bankpayment).uniq
         expect(payrolls_with_bankpayment).to eq(Payroll.with_bankpayment)
@@ -285,11 +309,6 @@ RSpec.describe Payroll, type: :model do
         previous_payroll = Payroll.find_by_sql(query)
         expect(previous_payroll).to eq(Payroll.previous)
       end
-      # i.e. with the most recent (or most in the future) finish date
-      it '#newest' do
-        newest_payrolls = Payroll.order(:dayfinished).last
-        expect(newest_payrolls).to eq(Payroll.newest)
-      end
 
       # Closed, bank payment performed.
       it '#completed' do
@@ -351,10 +370,10 @@ RSpec.describe Payroll, type: :model do
         expect(payrolls_not_annotated).to eq(Payroll.not_annotated)
       end
 
-      # i.e. where special is not true (false or
-      it '#regular' do
-        regular_payrolls = Payroll.where(special: false)
-        expect(regular_payrolls).to eq(Payroll.regular)
+      # Alias to completed
+      it '#done' do
+        payrolls_done = Payroll.completed
+        expect(payrolls_done).to eq(Payroll.done)
       end
 
       it '#not_scheduled' do
@@ -362,25 +381,27 @@ RSpec.describe Payroll, type: :model do
         expect(payrolls_not_scheduled_to_be_paid_yet).to eq(Payroll.not_scheduled)
       end
 
-      it '#special' do
-        special_payrolls = Payroll.where(special: true)
-        expect(special_payrolls).to eq(Payroll.special)
-      end
+      context 'kind' do
+        # i.e. where special is not true (false or
+        it '#regular' do
+          regular_payrolls = Payroll.where(special: false)
+          expect(regular_payrolls).to eq(Payroll.regular)
+        end
 
-      it '#pap' do
-        pap_payrolls = Payroll.where(pap: true, medres: false)
-        expect(pap_payrolls).to eq(Payroll.pap)
-      end
+        it '#special' do
+          special_payrolls = Payroll.where(special: true)
+          expect(special_payrolls).to eq(Payroll.special)
+        end
 
-      it '#medres' do
-        medres_payrolls = Payroll.where(medres: true, pap: false)
-        expect(medres_payrolls).to eq(Payroll.medres)
-      end
+        it '#pap' do
+          pap_payrolls = Payroll.where(pap: true, medres: false)
+          expect(pap_payrolls).to eq(Payroll.pap)
+        end
 
-      # Fixed, december 2017: where(done: true)
-      it '#done' do
-        payrolls_done = Payroll.completed
-        expect(payrolls_done).to eq(Payroll.done)
+        it '#medres' do
+          medres_payrolls = Payroll.where(medres: true, pap: false)
+          expect(medres_payrolls).to eq(Payroll.medres)
+        end
       end
     end
   end
@@ -388,9 +409,7 @@ RSpec.describe Payroll, type: :model do
   context 'instance methods' do
     context 'creation' do
       it 'can be created' do
-        print I18n.t('activerecord.models.payroll').capitalize + ': '
-        # payroll = FactoryBot.create(:payroll)
-        puts payroll.name
+        FactoryBot.create(:payroll, :personal_taxation)
       end
 
       it 'several can be created' do
@@ -402,14 +421,12 @@ RSpec.describe Payroll, type: :model do
 
         payroll = Payroll.find highest_id
 
-        @month_worked = payroll.monthworked + 1.month
+        month_worked = payroll.monthworked + 1.month
 
-        @payday = payroll.paymentdate.to_date + 1.month
+        payday = payroll.paymentdate.to_date + 1.month
 
-        next_payroll = Payroll.create! paymentdate: @payday, monthworked: @month_worked,
-                                       pap: true, taxation_id: taxation.id
-
-        puts next_payroll
+        Payroll.create! paymentdate: payday, monthworked: month_worked,
+                        taxation_id: taxation.id, pap: true
       end
 
       it '-creation is blocked if payment date is too far in the future' do
@@ -504,15 +521,11 @@ RSpec.describe Payroll, type: :model do
   end
 
   it '-range' do
-    puts 'Inside payroll range'
     payroll_range = payroll.range
     expect(payroll.range).to eq(payroll_range)
-    puts payroll.range
   end
 
   it '-dataentrypermitted?' do
-    # payroll = FactoryBot.create(:payroll)
-
     start = payroll.dataentrystart
 
     finish = payroll.dataentryfinish
@@ -548,5 +561,70 @@ RSpec.describe Payroll, type: :model do
   it '-cycle' do
     payroll_cycle = payroll.start..payroll.finish
     expect(payroll_cycle).to eq payroll.cycle
+  end
+
+  it 'done alias to done?' do
+    is_payroll_done = payroll.done?
+
+    expect(is_payroll_done).to eq(payroll.done)
+  end
+
+  it '-done?' do
+    is_payroll_done = if payroll.bankpayment.exists? && payroll.bankpayment.done == true
+                        true
+                      else
+                        false
+                      end
+
+    expect(is_payroll_done).to eq(payroll.done?)
+  end
+
+  it '-regular?' do
+    is_payroll_regular = payroll.regular?
+    expect(is_payroll_regular).to eq(payroll.regular?)
+  end
+
+  it '-with_events?' do
+    is_payroll_with_events = payroll.events.exists?
+    expect(is_payroll_with_events).to eq(payroll.with_events?)
+  end
+
+  it '-confirmed?' do
+    is_payroll_confirmed = !payroll.pending?
+    expect(is_payroll_confirmed).to eq(payroll.confirmed?)
+  end
+
+  it '-completed? (alias to done?)' do
+    is_payroll_completed = payroll.done
+    expect(is_payroll_completed).to eq(payroll.completed?)
+  end
+
+  it '-incomplete?' do
+    is_payroll_incomplete = !payroll.done?
+    expect(is_payroll_incomplete).to eq(payroll.incomplete?)
+  end
+
+  it '-with_bankpayment?' do
+    is_payroll_with_bankpayment = payroll.bankpayment.exists?
+    expect(is_payroll_with_bankpayment).to eq(payroll.with_bankpayment?)
+  end
+
+  it '-without_bankpayment?' do
+    is_payroll_without_bankpayment = !payroll.with_bankpayment?
+    expect(is_payroll_without_bankpayment).to eq(payroll.without_bankpayment?)
+  end
+
+  it '-details' do
+    month_worked_i18n = I18n.t('activerecord.attributes.payroll.monthworked')
+    payment_date_i18n = I18n.t('activerecord.attributes.payroll.paymentdate')
+    amount_i18n = I18n.t('activerecord.attributes.payroll.amount')
+    special_i18n = I18n.t('activerecord.attributes.payroll.special')
+    sep = Settings.separator + ' '
+    payroll_details = '[' + payroll.id.to_s + ']' + sep + \
+                      month_worked_i18n + ': ' + I18n.l(payroll.monthworked) + sep + \
+                      payment_date_i18n + ': ' + I18n.l(payroll.paymentdate) + sep + \
+                      amount_i18n + ': ' + payroll.amount_cents.to_s + sep + \
+                      special_i18n + ': ' + payroll.special.to_s
+    expect(payroll_details).to eq(payroll.details)
   end
 end

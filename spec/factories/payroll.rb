@@ -18,9 +18,12 @@ FactoryBot.define do
     #      dataentryfinish {next_months_beginning+2.days}
 
     before(:create) do |payroll|
-      payroll.paymentdate = payroll.monthworked + 9.day
-      payroll.dataentrystart = payroll.monthworked + 27.day
-      payroll.dataentryfinish = payroll.monthworked + 32.day
+      payroll.paymentdate = payroll.monthworked + 1.month + \
+                            Settings.payroll.payday.days_following_month_worked.days
+      payroll.dataentrystart = payroll.monthworked + \
+                               Settings.payroll.data_entry.start.days_after_month_worked.days
+      payroll.dataentryfinish = payroll.monthworked + 1.month + \
+                                Settings.payroll.data_entry.finish.days_following_month_worked.days
     end
 
     sequence(:monthworked) { |n| (this_months_beginning + n.month).to_s }
@@ -61,11 +64,15 @@ FactoryBot.define do
     trait :payment_date_in_the_future
 
     before(:create) do |payroll|
-      offset = 5.years
+      offset = 1.year
       payroll.monthworked += offset
       payroll.paymentdate += offset
       payroll.dataentrystart += offset
       payroll.dataentryfinish += offset
     end
+  end
+
+  trait :late_payment do
+    paymentdate Date.today + 100.years
   end
 end

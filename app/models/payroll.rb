@@ -26,6 +26,12 @@ class Payroll < ActiveRecord::Base
 
   validates_uniqueness_of :paymentdate, unless: :special?
 
+  # validate :timely_payment
+
+  def timely_payment
+    errors.add(:paymentdate, :inconsistent) unless payment_on_the_usual_dt?
+  end
+
   def manual_amount
     errors.add(:amount, :present) if scholarship_id.present? && amount.positive?
   end
@@ -453,10 +459,6 @@ class Payroll < ActiveRecord::Base
     Scholarship.on_month(monthworked) # numdays = virtual attribute
   end
 
-  def referencemonth
-    I18n.l(monthworked, format: :my)
-  end
-
   # Starting day in numeric format.  Number of days since application's "epoch"
   def start
     monthworked.beginning_of_month
@@ -468,13 +470,13 @@ class Payroll < ActiveRecord::Base
 
   # If done = true, complemented = true.
   def completed?
-    done
+    done?
   end
 
   # If done is false, return true.  And vice-versa.
   def incomplete?
     # To do: fix this
-    !done
+    !done?
   end
 
   def cycle
@@ -487,7 +489,7 @@ class Payroll < ActiveRecord::Base
   end
 
   def without_bankpayment?
-    !with_bankpayment
+    !with_bankpayment?
   end
 
   def regular?
@@ -518,5 +520,42 @@ class Payroll < ActiveRecord::Base
     right_now = Time.now
 
     Logic.within?(start, finish, right_now) # convenience method -returs a boolean
+  end
+
+  def done?
+    is_payroll_done = if bankpayment.exists? && bankpayment.done == true
+                        true
+                      else
+                        false
+                      end
+
+    is_payroll_done
+  end
+
+  def done
+    done?
+  end
+
+  def details
+    month_worked_i18n = I18n.t('activerecord.attributes.payroll.monthworked')
+    payment_date_i18n = I18n.t('activerecord.attributes.payroll.paymentdate')
+    amount_i18n = I18n.t('activerecord.attributes.payroll.amount')
+    special_i18n = I18n.t('activerecord.attributes.payroll.special')
+    sep = Settings.separator + ' '
+    payroll_details = '[' + id.to_s + ']' + sep + \
+                      month_worked_i18n + ': ' + I18n.l(monthworked) + sep + \
+                      payment_date_i18n + ': ' + I18n.l(paymentdate) + sep + \
+                      amount_i18n + ': ' + amount_cents.to_s + sep + \
+                      special_i18n + ': ' + special.to_s
+    payroll_details
+  end
+
+  def payment_on_the_usual_dt?
+    customary_payment_dt = monthworked + \
+                           Settings.payroll.payday.days_following_month_worked.days + 1.month
+
+    is_payment_on_the_customary_dt = paymentdate == customary_payment_dt
+
+    is_payment_on_the_customary_dt
   end
 end

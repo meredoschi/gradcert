@@ -2,6 +2,14 @@
 # https://github.com/settingslogic/settingslogic
 defaults: &defaults
   default_line_size: 240
+  payroll:
+    payday:
+      days_following_month_worked: 9 # e.g. payment on the 10th of the following month
+    data_entry:
+      start:
+         days_after_month_worked: 26 #  e.g. on the 27th of the same month
+      finish:
+         days_following_month_worked: 2 #  e.g. on the 3rd of the following month
   schoolterm:
     sample_quantity: 4
     duration: 2 # in years
