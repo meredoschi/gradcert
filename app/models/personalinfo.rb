@@ -62,8 +62,6 @@ class Personalinfo < ActiveRecord::Base
     personal_info_ssn_weighted_sum
   end
 
-  validates :state_id, presence: true, if: :citizen?
-
   # ************ Tested code finish ************
 
   #
@@ -155,7 +153,7 @@ class Personalinfo < ActiveRecord::Base
   def international?
     #    if registered_foreigner? || passport?
 
-    if registered_foreigner?
+    if registered_foreigner? || passport?
 
       true
 

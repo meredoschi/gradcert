@@ -1,208 +1,216 @@
 <div class="row">
 
- <h3><%= tm('personalinfo').capitalize %></h3>
+  <h3><%= tm('personalinfo').capitalize %></h3>
 
 </div>
 
 <div class="row">
 
-	<%= form.fields_for :personalinfo do |personalinfo_fields| %>
+  <%= form.fields_for :personalinfo do |personalinfo_fields| %>
 
-			<div class="row">
+  <div class="row">
 
-		    <div class="large-2 columns">
+    <div class="large-2 columns">
 
-					<%= personalinfo_fields.label ta('personalinfo.dob') %>
+      <%= personalinfo_fields.label ta('personalinfo.dob') %>
 
-				</div>
+    </div>
 
-		    <div class="large-7 columns select-birthdate">
+    <div class="large-7 columns select-birthdate">
 
-			   <%= personalinfo_fields.date_select :dob, start_day: 1, start_year: Date.today.year - 16, end_year: Date.today.year-80, :prompt => true %>
+      <%= personalinfo_fields.date_select :dob, start_day: 1, start_year: Date.today.year - 16, end_year: Date.today.year-80, :prompt => true %>
 
-				</div>
+    </div>
 
-		 		<div class="large-2 columns", class: "left inline">
+    <div class="large-2 columns", class: "left inline">
 
-				  <%= personalinfo_fields.label ta('personalinfo.sex')%>
-				  		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.sex.required')%>"><%= t('required') %></span>
-
-
-				</div>
-
-		 		<div class="large-1 column" >
-
-			 	 <%= personalinfo_fields.select :sex, Personalinfo::SEXES, prompt: "--->" %>
-
-				</div>
+      <%= personalinfo_fields.label ta('personalinfo.sex')%>
+      <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.sex.required')%>"><%= t('required') %></span>
 
 
-		</div>
+    </div>
 
-		<div class="row">
+    <div class="large-1 column" >
 
-	 		<div class="large-2 columns", class: "left inline">
+      <%= personalinfo_fields.select :sex, Personalinfo::SEXES, prompt: "--->" %>
 
-			<%= personalinfo_fields.label ta('personalinfo.mothersname') %>
-			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.mothersname.please_provide_if_student')%>"><%= t('please_provide_if_student') %></span>
-
-			</div>
-
-		 	<div class="large-10 columns">
-
-				<%= personalinfo_fields.text_field :mothersname %>
-
-			</div>
+    </div>
 
 
-		</div>
+  </div>
 
-			<div class="row">
+  <div class="row">
 
-				<h5><%= t('diversity').capitalize %></h5>
+    <div class="large-2 columns", class: "left inline">
 
-			</div>
+      <%= personalinfo_fields.label ta('personalinfo.mothersname') %>
+      <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.mothersname.please_provide_if_student')%>"><%= t('please_provide_if_student') %></span>
 
+    </div>
 
-		<div class="row panel">
+    <div class="large-10 columns">
 
-	 			<div class="large-3 columns", class: "left inline">
+      <%= personalinfo_fields.text_field :mothersname %>
 
-				<%= personalinfo_fields.label ta('personalinfo.othername') %>
-			  			    		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.socialname.restricted')%>"><%= t('restricted') %></span>
-
-				</div>
-
-		 		<div class="large-4 columns">
-
-					<%= personalinfo_fields.text_field :othername %>
-
-				</div>
-
-		 		<div class="large-3 columns", class: "left inline">
-
-			  <%= personalinfo_fields.label ta('personalinfo.gender')%>
-			    		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.gender.restricted')%>"><%= t('restricted') %></span>
-			</div>
-
-	 		<div class="large-2 column">
-
-		 	 <%= personalinfo_fields.select :gender, Personalinfo::GENDERS, include_blank: true  %>
-
-			</div>
+    </div>
 
 
+  </div>
 
-			 	 <%#= personalinfo_fields.label ta('personalinfo.municipality_id') %>
-	  		 <%#= personalinfo_fields.collection_select :municipality_id, Municipality.all, :id, :name_with_state, prompt: true, include_blank: true %>
+  <div class="row">
+
+    <h5><%= t('diversity').capitalize %></h5>
+
+  </div>
 
 
-	</div>
+  <div class="row panel">
+
+    <div class="large-3 columns", class: "left inline">
+
+      <%= personalinfo_fields.label ta('personalinfo.othername') %>
+      <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.socialname.restricted')%>"><%= t('restricted') %></span>
+
+    </div>
+
+    <div class="large-4 columns">
+
+      <%= personalinfo_fields.text_field :othername %>
+
+    </div>
+
+    <div class="large-3 columns", class: "left inline">
+
+      <%= personalinfo_fields.label ta('personalinfo.gender')%>
+      <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.gender.restricted')%>"><%= t('restricted') %></span>
+    </div>
+
+    <div class="large-2 column">
+
+      <%= personalinfo_fields.select :gender, Personalinfo::GENDERS, include_blank: true  %>
+
+    </div>
+
+
+
+    <%#= personalinfo_fields.label ta('personalinfo.municipality_id') %>
+    <%#= personalinfo_fields.collection_select :municipality_id, Municipality.all, :id, :name_with_state, prompt: true, include_blank: true %>
+
+
+  </div>
 
 </div>
 
 
-	<div class="row">
+<div class="row">
 
-	 <h3><%= t('identification').capitalize %></h3>
+  <h3><%= t('identification').capitalize %></h3>
 
-	</div>
+</div>
 
-		<div class="row">
-
-
-		 		<div class="large-2 columns", class: "left inline">
-
-				  <%#= personalinfo_fields.label ta('personalinfo.idtype')%>
-
-				  		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.idtype.document')%>"><%= ta('personalinfo.idtype') %></span>
-
-				</div>
-
-		 		<div class="large-2 columns", class: "left inline" >
-
-			 	 <%= personalinfo_fields.select :idtype, Personalinfo::IDTYPES %>
-
-				</div>
+<div class="row">
 
 
-		 		<div class="large-2 columns">
+  <div class="large-2 columns", class: "left inline">
 
-				  <%= personalinfo_fields.text_field :idnumber %>
+    <%#= personalinfo_fields.label ta('personalinfo.idtype')%>
 
-				</div>
+    <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.idtype.document')%>"><%= ta('personalinfo.idtype') %></span>
 
-		 		<div class="large-2 columns", class: "left inline" >
+  </div>
 
-			 	 <%= personalinfo_fields.label ta('personalinfo.state_id') %>
+  <div class="large-2 columns", class: "left inline" >
 
-				</div>
+    <%= personalinfo_fields.select :idtype, Personalinfo::IDTYPES %>
 
-			 	<div class="large-4 column">
-
-	  		 <%= personalinfo_fields.collection_select :state_id, State.all, :id, :name, prompt: true, include_blank: true %>
-
-				</div>
-
-		</div>
-
-	<div class="row">
-
-	 		<div class="large-2 columns", class: "left inline">
-
-			<%= personalinfo_fields.label ta('personalinfo.tin') %>
-
-			</div>
-
-	 		<div class="large-4 columns">
-
-				<%= personalinfo_fields.text_field :tin %>
-
-			</div>
-
-			<div class="large-2 columns", class: "left inline">
-
-				<%= personalinfo_fields.label ta('personalinfo.socialsecuritynumber') %>
-
-        <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.mothersname.please_provide_if_student')%>"><%= t('please_provide_if_student') %></span>
-
-				</div>
-
-		 		<div class="large-4 columns">
-
-					<%= personalinfo_fields.text_field :socialsecuritynumber %>
-
-				</div>
-	</div>
+  </div>
 
 
+  <div class="large-2 columns">
+
+    <%= personalinfo_fields.text_field :idnumber %>
+
+  </div>
+
+  <div class="large-2 columns", class: "left inline" >
+
+    <%= personalinfo_fields.label ta('personalinfo.state_id') %>
+
+  </div>
+
+  <div class="large-4 column">
+
+    <%= personalinfo_fields.collection_select :state_id, State.all, :id, :name, prompt: true, include_blank: true %>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="large-2 columns", class: "left inline">
+
+    <%= personalinfo_fields.label ta('personalinfo.tin') %>
+
+  </div>
+
+  <div class="large-4 columns">
+
+    <%= personalinfo_fields.text_field :tin %>
+
+  </div>
+
+  <div class="large-2 columns", class: "left inline">
+
+    <%= personalinfo_fields.label ta('personalinfo.socialsecuritynumber') %>
+
+    <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.mothersname.please_provide_if_student')%>"><%= t('please_provide_if_student') %></span>
+
+  </div>
+
+  <div class="large-4 columns">
+
+    <%= personalinfo_fields.text_field :socialsecuritynumber %>
+
+  </div>
+</div>
 
 
-		<div class="row">
 
-		 	<div class="large-2 columns">
 
-	  	 <%= t('foreigner').capitalize %>
+<div class="row">
 
-			</div>
+  <div class="large-2 columns">
 
-			<div class="large-4 columns", class: "left inline" >
+    <%= t('foreigner').capitalize %>
 
-			 	 <%#= personalinfo_fields.label ta('personalinfo.country_id') %>
-	  		    		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.foreign_national.country')%>"><%= ta('personalinfo.country_id') %></span>
+  </div>
 
-				</div>
+  <div class="large-4 columns", class: "left inline" >
 
-			 	<div class="large-6 columns">
+    <%#= personalinfo_fields.label ta('personalinfo.country_id') %>
+    <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.foreign_national.country')%>"><%= ta('personalinfo.country_id') %></span>
 
-	  		 <%= personalinfo_fields.collection_select :country_id, Country.foreign, :id, :brname, include_blank: true %>
+  </div>
 
-				</div>
+  <div class="large-6 columns">
 
-		</div>
+    <% if I18n.locale==:pt_BR %>
 
-	</div>
+      <%= personalinfo_fields.collection_select :country_id, Country.foreign, :id, :brname, include_blank: true %>
 
-	<% end %>
+    <% else %>
+
+      <%= personalinfo_fields.collection_select :country_id, Country.foreign.unscoped.order(:name), :id, :name, include_blank: true %>
+
+    <% end %>
+
+  </div>
+
+</div>
+
+</div>
+
+<% end %>
 
 </div>
