@@ -113,6 +113,22 @@ RSpec.describe Address, type: :model do
     end
   end
 
+  # International version
+  it '-street_intl' do
+    streetname = address.streetname
+    addr = address.addr
+    streetnum = address.streetnum
+    complement = address.complement
+
+    if complement.present?
+      [streetnum, addr, streetname.designation, complement].join(' ')
+    elsif streetname.id.present?
+      [streetnum, addr, streetname.designation].join(' ')
+    else
+      [streetnum, addr].join(' ')
+    end
+  end
+
   it '-street_number (alias to streetnumber)' do
     address_street_number = address.streetnum
     expect(address_street_number).to eq(address.streetnum)

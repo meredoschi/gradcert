@@ -14,9 +14,9 @@ RSpec.describe Personalinfo, type: :model do
   end
 
   let(:idtypes) do
-    [Settings.personaldocument.state_registration,
-     Settings.personaldocument.registered_foreigner,
-     Settings.personaldocument.passport]
+    [I18n.t('personal_document.state_registration'),
+     I18n.t('personal_document.registered_foreigner'),
+     I18n.t('personal_document.passport')]
   end
 
   it 'can be created' do

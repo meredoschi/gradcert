@@ -9,7 +9,8 @@ FactoryBot.define do
 
     #    home_state_abbreviation = Settings.home_state_abbreviation
     dob Faker::Date.birthday(18, 70)
-    idtype Settings.personaldocument.state_registration
+    idtype I18n.t('personal_document.state_registration')
+
     # association :contact_id, [:contact, :clerical_pap]
     # association :contact, [:clerical_pap]
     # association :contact, [:pap_student_role]

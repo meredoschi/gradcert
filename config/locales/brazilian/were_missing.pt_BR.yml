@@ -11,7 +11,27 @@ pt_BR:
     invalid_size:
       too_small: Erro! Tamanho inválido! Pequeno demais!
   on_the_team: na equipe
+  personal_document:
+    passport: Passaporte
+    registered_foreigner: RNE/CIE
+    state_registration: RGE
   tooltip:
     bankaccount:
       num:
         must_be_unique_within_the_same_branch: Tem_que_ser_diferentes_dentro_de_uma_mesma_agência.
+    personalinfo:
+      foreign_national:
+        country: Informe somente quando não for brasileiro (i.e. documento apresentado for carteira de identidade de estrangeiro ou passaporte de outro país).  Neste caso não informe estado emissor (como se faz com RG).
+      gender:
+        restricted: É possível preencher um valor diferente de suas características biológicas aqui caso a pessoa se considere assim (mesmo que não tenha realizado cirurgia de mudança de sexo ou tratamento hormonal).
+      idtype:
+        document: 'Selecione o tipo de documento e informe o número ao lado.  Em caso de estrangeiro: selecione RNE/CIE (de preferência) ou então passaporte e informe a nacionalidade.'
+      mothersname:
+        please_provide_if_student: Favor preencher este campo sempre que for bolsista (aprimorando). É opcional para os outros papéis.
+      sex:
+        required: 'Sexo biológico da pessoa ao nascer (aspecto físico, cromossômico, gonoidal).  Geralmente aqui se marca: F=Feminino ou M=Masculino.  É possível informar X se for indefinido, entresexos ou não especificado.'
+      socialname:
+        restricted: 'Nome como a pessoa prefere ser chamada em sociedade, que reflete um gênero diferente do sexo biológico ao nascer.  Informar esta linha diversidade somente quando o sexo biológico e gênero forem distintos ou indefinidos (X).  Recomenda-se que a instituição mantenha cópia da devida documentação comprobatória (ex: laudo médico, psicólogo, endocrinológico).'
+    phone:
+      main:
+        help: 'Comece pelo DDD (dois digitos), dê um espaço e então informe o número (o traço é opcional).  Exemplo: 11 5555-1234'

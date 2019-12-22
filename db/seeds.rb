@@ -68,7 +68,8 @@ end
 # Tables used in the people menu
 def people
   puts I18n.t('people').capitalize
-  %w[users contacts contact_personalinfos contact_phones contact_addresses contact_webinfos]
+  #  %w[users contacts contact_personalinfos contact_phones contact_addresses contact_webinfos]
+  %w[users]
 end
 
 # System tables
@@ -88,12 +89,7 @@ end
 # Tables used in the programs menu
 def programs
   puts I18n.t('activerecord.models.program').pluralize.capitalize
-  #  %w[professional_specialties_and_areas]
   %w[professional_specialties_and_areas programs]
-  #  %w[programs]
-
-  #  %w[professional_specialties_and_areas program_accreditations
-  #     program_admissions schoolyears programs]
 end
 
 if Rails.env.test?
@@ -104,5 +100,5 @@ else
   load(definitions, 'definitions')
   load(institutions, 'institutions')
   load(people, 'people')
-  load(programs, 'programs')
+  # load(programs, 'programs') # sample programs seed under review (for fine tuning).
 end

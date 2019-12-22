@@ -92,10 +92,6 @@ defaults: &defaults
     female: F
     male: M
     unspecified: X
-  personaldocument:
-    passport: Passaporte
-    registered_foreigner: RNE/CIE
-    state_registration: RG
   registration_season:
     finish: <%= "#{'2018-4-1'.to_date}" %>
     start: <%= "#{'2018-1-01'.to_date}" %>

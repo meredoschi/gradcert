@@ -220,7 +220,6 @@ en:
   personal_leaves_amount: Personal leaves amount
   phone: phone
   place_a_program_under_review: Place a program under review
-  please_provide_if_student: Mandatory data for a student
   please_tick_one: Please tick one option
   please_wait_for_processing: Please wait for processing.  I shall start as soon as you click 'Ok'.
   possible_students_to_be_paid: Possible students to be paid
@@ -264,9 +263,7 @@ en:
   report_available: report available
   report_requested_by: Report requested by
   reprt: report
-  required: please fill in
   resend: resend
-  restricted: data entry restricted
   result: result
   retroactive_cancellation_after_payroll_was_processed: retroactive cancellation after payroll was processed
   rounding: Rounding

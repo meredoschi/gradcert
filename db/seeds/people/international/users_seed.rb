@@ -22,13 +22,13 @@ local_manager = Role.where(name: 'Local manager').first
 
 jane_contact = Contact.create!(user_id: jane.id, name: 'Jane Sample', role_id: it_staff.id)
 mark_contact = Contact.create!(user_id: mark.id, name: 'Mark Doe', role_id: administrative_assistant.id)
-nat_contact = Contact.create!(user_id: nat.id, name: 'Natalie Stevens', role_id: local_manager.id)
+nat_contact = Contact.create!(user_id: nat.id, name: 'Nat Stevens', role_id: local_manager.id)
 
 # Addresses
 
-Address.create!(streetname_id: 34, addr: 'das Borboletas', complement: '', neighborhood: 'Centro', municipality_id: 2626, postalcode: '01000-000', contact_id: jane_contact.id, streetnum: 1)
-Address.create!(streetname_id: 3, addr: 'Matriz', complement: '', neighborhood: 'Centro', municipality_id: 452, postalcode: '39665-000', contact_id: mark_contact.id, streetnum: 200)
-Address.create!(streetname_id: 22, addr: 'do Soarez', complement: '', neighborhood: 'Chácara Nova', municipality_id: 5480, postalcode: '87450-000', contact_id: nat_contact.id, streetnum: 25)
+Address.create!(streetname_id: 34, addr: 'Butterflies', complement: '', neighborhood: 'City center', municipality_id: 2626, postalcode: '01000-000', contact_id: jane_contact.id, streetnum: 1)
+Address.create!(streetname_id: 3, addr: 'Gilbert', complement: '', neighborhood: 'Downtown', municipality_id: 452, postalcode: '39665-000', contact_id: mark_contact.id, streetnum: 200)
+Address.create!(streetname_id: 22, addr: 'Sullivan', complement: '', neighborhood: 'New meadow', municipality_id: 5480, postalcode: '87450-000', contact_id: nat_contact.id, streetnum: 25)
 
 # Personal infos
 
@@ -42,6 +42,6 @@ Phone.create!(main: '11 5555-0450', mobile: '11 95555-0462', other: '', contact_
 Phone.create!(main: '44 5555-8932', mobile: '', other: '44 5555-4378', contact_id: nat_contact.id)
 
 # Web infos
-Webinfo.create!(email: '', site: '', facebook: '', twitter: '#janesampleexampleonly', other: '', contact_id: jane_contact.id)
+Webinfo.create!(email: '', site: '', facebook: '', twitter: '#janesample', other: '', contact_id: jane_contact.id)
 Webinfo.create!(email: '', site: 'www.markdoe.net', facebook: '', twitter: '', other: '', contact_id: mark_contact.id)
-Webinfo.create!(email: '', site: '', facebook: '', twitter: '#natexamplesample', other: '', contact_id: nat_contact.id)
+Webinfo.create!(email: '', site: '', facebook: '', twitter: '#natiouw', other: '', contact_id: nat_contact.id)

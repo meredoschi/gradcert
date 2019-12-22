@@ -199,7 +199,12 @@ en:
     m: our
   people_management: People
   percent: percent
+  personal_document:
+    passport: Passport
+    registered_foreigner: Registered foreigner
+    state_registration: State ID
   photo: photo
+  please_provide_if_student: Please provide if student
   registered:
     f: registered
     m: registered
@@ -209,7 +214,9 @@ en:
   removed:
     f: removed
     m: removed
+  required: required
   research: research paper
+  restricted: applicable cases only
   restricted_access: Restricted Access
   rooms: rooms
   scholarship_contract: Scholarship contract
@@ -229,6 +236,22 @@ en:
     bankaccount:
       num:
         must_be_unique_within_the_same_branch: Must_be_unique_within_a_given_branch.
+    personalinfo:
+      foreign_national:
+        country: Enter this information only when the person is not a country national (e.g. document provided is a registration card for foreign nationals, passport issued by another country).  In this case, do not fill in the issuing state information (as is done for State IDs).
+      gender:
+        restricted: Here it is possible to inform a value different from the physical characteristics in case the person so identifies (even without undergoing hormone treatment or sex change surgery).
+      idtype:
+        document: 'Select the identification document provided and enter its number to the side.  In case of foreigner: choose registered foreigner (preferably) or passport and inform the person''s nationality.'
+      mothersname:
+        please_provide_if_student: Please always fill in this information for students (scholarship recipients). It is optional for other roles.
+      sex:
+        required: Person's biological sex at birth (physical, chromosomic, gonadal aspects).  Generally F=Female or M=Male is marked here.  It is possible to inform X in case it is undefined, inter-sexes or not specified.
+      socialname:
+        restricted: Name with which the person prefers to be called within the society, reflecting a different gender than the one identified at birth.  Fill in this diversity information only when the biological sex and gender are different or undefined (X).  It is recommended that the institution keep a copy of the relevant comprobatory documentation on file (e.g. doctor, psychologist, endocrinologist certificate).
+    phone:
+      main:
+        help: 'Start with the city dialing code (two digits), add spaces and then enter the number (dashes are optional).  Exemple: 11 5555-1234'
   total: total
   unauthorized:
     actions:

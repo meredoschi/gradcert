@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Originally developed following Brazilian address conventions
 class Address < ActiveRecord::Base
   # http://www.sitepoint.com/complex-rails-forms-with-nested-attributes/
 
@@ -16,9 +19,9 @@ class Address < ActiveRecord::Base
 
   has_paper_trail
 
-  # 	attr_accessor	 :skip_validation  # http://stackoverflow.com/questions/5975047/how-to-validate-a-nested-model-object-based-on-the-state-of-the-parent-object
+  #   attr_accessor   :skip_validation  # http://stackoverflow.com/questions/5975047/how-to-validate-a-nested-model-object-based-on-the-state-of-the-parent-object
 
-  # 	[:streetname_id, :municipality_id, :country_id].each do |ids|
+  #   [:streetname_id, :municipality_id, :country_id].each do |ids|
 
   # RSPEC start
 
@@ -33,7 +36,7 @@ class Address < ActiveRecord::Base
 
   validates_format_of :postalcode, with: /\A[0-9]{5}-[0-9]{3}\z/, unless: :skip_validation
 
-  # 	scope :with_institution, lambda { joins(:institution) }
+  #   scope :with_institution, lambda { joins(:institution) }
 
   # http://stackoverflow.com/questions/8620547/rails-scope-for-is-not-null-and-is-not-empty-blank
   scope :institution, -> { where.not(institution_id: nil) }
@@ -75,18 +78,24 @@ class Address < ActiveRecord::Base
 
       [streetname.designation, addr, streetnum, complement].join(' ')
 
+    elsif streetname_id.present?
+
+      [streetname.designation, addr, streetnum].join(' ')
+
     else
 
-      if streetname_id.present?
+      [addr, streetnum].join(' ')
 
-        [streetname.designation, addr, streetnum].join(' ')
+    end
+  end
 
-      else
-
-        [addr, streetnum].join(' ')
-
-      end
-
+  def street_intl
+    if complement.present?
+      [streetnum, addr, streetname.designation, complement].join(' ')
+    elsif streetname.id.present?
+      [streetnum, addr, streetname.designation].join(' ')
+    else
+      [streetnum, addr].join(' ')
     end
   end
 
@@ -107,6 +116,7 @@ class Address < ActiveRecord::Base
 
     postal_code = I18n.t('activerecord.attributes.address.postalcode') + ' ' + postalcode
     mailing_address = [street_addr, neighborhood, city_and_state, postal_code].join(' - ')
+    mailing_address
   end
 
   # International address(with country names)

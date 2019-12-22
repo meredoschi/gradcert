@@ -27,9 +27,9 @@ class Personalinfo < ActiveRecord::Base
   GENDERS = SEXES #
   #   https://www.ag.gov.au/publications/documents/australiangovernmentguidelinesontherecognitionofsexandgender/australiangovernmentguidelinesontherecognitionofsexandgender.doc
 
-  IDTYPES = [Settings.personaldocument.state_registration,
-             Settings.personaldocument.registered_foreigner,
-             Settings.personaldocument.passport].freeze
+  IDTYPES = [I18n.t('personal_document.state_registration'),
+             I18n.t('personal_document.registered_foreigner'),
+             I18n.t('personal_document.passport')].freeze
 
   #      validates personaltraits,  presence: true, length: {is: 1}
 
@@ -125,7 +125,7 @@ class Personalinfo < ActiveRecord::Base
   validates :mothersname, presence: true, unless: :staff?
   validates :socialsecuritynumber, presence: true, unless: :staff?
 
-#  validate :nit_is_consistent, unless: :staff?
+  #  validate :nit_is_consistent, unless: :staff?
 
   #  validates :socialsecuritynumber, presence: true, if: :student_role?
   #
@@ -167,11 +167,11 @@ class Personalinfo < ActiveRecord::Base
   end
 
   def registered_foreigner?
-    idtype == Settings.personaldocument.registered_foreigner
+    idtype == I18n.t('personal_document.registered_foreigner')
   end
 
   def passport?
-    idtype == Settings.personaldocument.passport
+    idtype == I18n.t('personal_document.passport')
   end
 
   def genderdiversity?
@@ -187,8 +187,9 @@ class Personalinfo < ActiveRecord::Base
   end
 
   def birth
-      I18n.l(dob)
+    I18n.l(dob)
   end
+
   # Brazilian Taxpayer identification number - First verification digit
   def cpf_dv1
     v = 0

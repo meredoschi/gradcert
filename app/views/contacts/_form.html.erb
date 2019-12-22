@@ -20,7 +20,15 @@
 
   <%= render 'form_personalinfo.html.erb', form: form %>
 
-	<%= render 'form_address.html.erb', form: form %>
+	<% if I18n.locale==:pt_BR %>
+
+	 <%= render 'form_address.html.erb', form: form %>
+
+  <% else %>
+
+  <%= render 'form_address_intl.html.erb', form: form %>
+
+  <% end %>
 
 	<%= render 'form_phones.html.erb', form: form %>
 

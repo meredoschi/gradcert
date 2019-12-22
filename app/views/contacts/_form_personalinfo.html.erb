@@ -25,7 +25,7 @@
 		 		<div class="large-2 columns", class: "left inline">
 
 				  <%= personalinfo_fields.label ta('personalinfo.sex')%>
-				  		<span data-tooltip aria-haspopup="true" class="has-tip" title="Sexo biológico da pessoa ao nascer (aspecto físico, cromossômico, gonoidal).  Geralmente aqui se marca: F=Feminino ou M=Masculino.  É possível informar X se for indefinido, entresexos ou não especificado."><%= t('required') %></span>
+				  		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.sex.required')%>"><%= t('required') %></span>
 
 
 				</div>
@@ -44,8 +44,7 @@
 	 		<div class="large-2 columns", class: "left inline">
 
 			<%= personalinfo_fields.label ta('personalinfo.mothersname') %>
-			<span data-tooltip aria-haspopup="true" class="has-tip" title="Favor preencher este campo sempre que for bolsista (aprimorando).  É opcional para os outros papéis."><%= t('please_provide_if_student') %></span>
-
+			<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.mothersname.please_provide_if_student')%>"><%= t('please_provide_if_student') %></span>
 
 			</div>
 
@@ -70,7 +69,7 @@
 	 			<div class="large-3 columns", class: "left inline">
 
 				<%= personalinfo_fields.label ta('personalinfo.othername') %>
-			  			    		<span data-tooltip aria-haspopup="true" class="has-tip" title="Nome como a pessoa prefere ser chamada em sociedade, que reflete um gênero diferente do sexo biológico ao nascer.  Informar esta linha diversidade somente quando o sexo biológico e gênero forem distintos ou indefinidos (X).  Recomenda-se que a instituição mantenha cópia da devida documentação comprobatória (ex: laudo médico, psicólogo, endocrinológico)."><%= t('restricted') %></span>
+			  			    		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.socialname.restricted')%>"><%= t('restricted') %></span>
 
 				</div>
 
@@ -83,8 +82,7 @@
 		 		<div class="large-3 columns", class: "left inline">
 
 			  <%= personalinfo_fields.label ta('personalinfo.gender')%>
-			    		<span data-tooltip aria-haspopup="true" class="has-tip" title="É possível preencher um valor diferente de suas características biológicas aqui caso a pessoa se considere assim (mesmo que não tenha realizado cirurgia de mudança de sexo ou tratamento hormonal)."><%= t('restricted') %></span>
-
+			    		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.gender.restricted')%>"><%= t('restricted') %></span>
 			</div>
 
 	 		<div class="large-2 column">
@@ -117,7 +115,7 @@
 
 				  <%#= personalinfo_fields.label ta('personalinfo.idtype')%>
 
-				  		<span data-tooltip aria-haspopup="true" class="has-tip" title="Selecione o tipo de documento e informe o número ao lado.  Em caso de estrangeiro: selecione RNE/CIE (de preferência) ou então passaporte e informe a nacionalidade."><%= ta('personalinfo.idtype') %></span>
+				  		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.idtype.document')%>"><%= ta('personalinfo.idtype') %></span>
 
 				</div>
 
@@ -166,7 +164,7 @@
 
 				<%= personalinfo_fields.label ta('personalinfo.socialsecuritynumber') %>
 
-        <span data-tooltip aria-haspopup="true" class="has-tip" title="Favor preencher este campo sempre que for bolsista (aprimorando).  É opcional para os outros papéis."><%= t('please_provide_if_student') %></span>
+        <span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.mothersname.please_provide_if_student')%>"><%= t('please_provide_if_student') %></span>
 
 				</div>
 
@@ -191,7 +189,7 @@
 			<div class="large-4 columns", class: "left inline" >
 
 			 	 <%#= personalinfo_fields.label ta('personalinfo.country_id') %>
-	  		    		<span data-tooltip aria-haspopup="true" class="has-tip" title="Informe somente quando não for brasileiro (i.e. documento apresentado for carteira de identidade de estrangeiro ou passaporte de outro país).  Neste caso não informe estado emissor (como se faz com RG)."><%= ta('personalinfo.country_id') %></span>
+	  		    		<span data-tooltip aria-haspopup="true" class="has-tip" title="<%= I18n.t('tooltip.personalinfo.foreign_national.country')%>"><%= ta('personalinfo.country_id') %></span>
 
 				</div>
 

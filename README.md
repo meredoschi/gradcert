@@ -19,11 +19,10 @@ Therefore, I thought it best to update this page accordingly, for the sake of co
 
    I am still in the process of revising and refactoring some of the code for this international version.
 
-   This latest update includes additional text in English.  The translation was completed, there are no missing keys.
-
+   This latest update includes additional text in English, such as localized help tooltips ("balloons") in the contact form.
+   
    Regarding the sample data (which may be loaded via *rake db:seed*), most of it is in Portuguese, such as states
-   municipalities, countries, etc.  Street names are already in English, for the international version,
-   but should still appear in the user interface as a prefix.  This is normal and expected behaviour.
+   municipalities, countries, etc.  Street names are already in English, for the international version.
 
    *Institutions and people's names are purely fictional.*
 
@@ -61,7 +60,7 @@ password: **samplepass**
 
 #### 3. Local manager (sees local participating institution only)
 
-E-mail: **dean@state-u.org**
+E-mail: **dean@example.org**
 password: **samplepass**
 
 ## RUBY VERSION
@@ -76,7 +75,7 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*6/DEC/2019*
+*22/DEC/2019*
 
 =======
 ## COPYRIGHT
