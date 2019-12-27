@@ -28,9 +28,9 @@ class Payroll < ActiveRecord::Base
 
   # validate :timely_payment
 
-  def timely_payment
-    errors.add(:paymentdate, :inconsistent) unless payment_on_the_usual_dt?
-  end
+  #  def timely_payment
+  #    errors.add(:paymentdate, :inconsistent) unless payment_on_the_usual_dt?
+  #  end
 
   def manual_amount
     errors.add(:amount, :present) if scholarship_id.present? && amount.positive?
@@ -96,25 +96,6 @@ class Payroll < ActiveRecord::Base
     find_by_sql [query, numeric_dt, numeric_dt]
   end
 
-  def self.ids_contextual_on_active_rec(specified_dt)
-    contextual_ids = []
-
-    dt_range = specified_dt..specified_dt
-
-    Payroll.all.find_each do |payroll|
-      payroll_start = Dateutils.to_gregorian(payroll.daystarted)
-      payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
-
-      payroll_range = payroll_start..payroll_finish # Payroll cycle
-
-      next unless Logic.intersect(dt_range, payroll_range) == dt_range
-
-      contextual_ids << payroll.id
-    end
-
-    contextual_ids
-  end
-
   def self.ids_contextual_today
     ids_contextual_on(Time.zone.today)
   end
@@ -151,25 +132,6 @@ class Payroll < ActiveRecord::Base
 
     # i.e. finish date has passed, but not necessarily completed (bank payment performed)
     find_by_sql [query, numeric_dt]
-  end
-
-  # Active record version
-  def self.past_active_rec
-    possible_current_payrolls = Payroll.current
-
-    previous_payrolls = nil
-
-    if possible_current_payrolls.present? # not nil
-
-      # It is assumed payrolls are either of type pap or medical residency (but not both)
-      # Future to do: add gradcert (boolean field) to the model
-      current_payroll = possible_current_payrolls.first
-      current_month_worked = current_payroll.monthworked
-      previous_payrolls = where('monthworked < ?', current_month_worked)
-
-    end
-
-    previous_payrolls
   end
 
   def self.actual
@@ -270,16 +232,7 @@ class Payroll < ActiveRecord::Base
 
   # Payroll is not yet completed (closed).
   def self.active
-    contextual_today.incomplete
-  end
-
-  # Returns payrolls with at least one annotation - active record version
-  def self.annotated_active_rec
-    where(id: annotated_ids)
-  end
-
-  def self.not_annotated_active_rec
-    where.not(id: annotated_active_rec)
+    incomplete.contextual_today
   end
 
   # Find the information using sql (less portable, but generally faster than active record)
@@ -298,16 +251,9 @@ class Payroll < ActiveRecord::Base
     find_by_sql(query) # payroll_ids_without_annotations
   end
 
-  # Not calculated yet.
+  # Returns payrolls with at least one annotation - active record version (i.e. already calculated)
   def self.not_annotated
     where.not(id: annotated)
-  end
-
-  def self.not_annotated_sql
-    # sql query
-    query = 'select * from payrolls p2 where id not in (SELECT distinct p.id FROM payrolls p ' \
-    'INNER JOIN annotations a ON (p.id = a.payroll_id));'
-    find_by_sql(query)
   end
 
   # Returns the ids for those payrolls with at least one annotation (via active record)
@@ -347,15 +293,20 @@ class Payroll < ActiveRecord::Base
     completed
   end
 
-  # Latest payroll(s)
-  def self.latest
-    where(dayfinished: latest_finish_date) if count.positive?
+  # The last accountable day on the previous payroll (if it exists)
+  def self.previous_dt_finished
+
+    if previous_payrolls.present?
+      previous_payroll = previous_payrolls.first # active record object, first is needed here
+      dt_finished = Dateutils.to_gregorian(previous_payroll.dayfinished)
+    end
+
+    dt_finished
   end
 
-  # Important: This assumes payroll is from the beginning to the end of the month
-  # Farthest finish date
-  def self.latestfinishdate
-    done.latest.first.monthworked.end_of_month
+  # Alias to current
+  def self.latest
+    current
   end
 
   def self.reference_month_most_in_the_future
@@ -472,10 +423,6 @@ class Payroll < ActiveRecord::Base
     !is_annotated?
   end
 
-  def payment_date_coherent
-    errors.add(:paymentdate, :inconsistent) unless payment_date_consistent?
-  end
-
   # Sector (area, division, department) which the payroll belongs to (e.g. PAP, Medres)
   def sector
     txt = I18n.t('activerecord.attributes.payroll.pap') if pap?
@@ -485,12 +432,7 @@ class Payroll < ActiveRecord::Base
     txt
   end
 
-  # To test -->
   #   validate :payment_date_is_consistent, unless: :special?
-
-  # validate :payment_date_coherent
-
-  # Tested code end
 
   def payment_date_consistent?
     return unless monthworked.present? && paymentdate.present?

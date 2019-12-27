@@ -128,53 +128,6 @@ RSpec.describe Payroll, type: :model do
         expect(matching_payrolls).to eq Payroll.contextual_on_sql(dt)
       end
 
-      it '#ids_contextual_sql(dt)' do
-        contextual_ids = []
-
-        dt_range = dt..dt
-
-        Payroll.all.each do |payroll|
-          payroll_start = Dateutils.to_gregorian(payroll.daystarted)
-          payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
-
-          # Alternatively, this could be done:
-          #      payroll_start=payroll.monthworked.beginning_of_month
-          #      payroll_finish=payroll.monthworked.end_of_month
-
-          payroll_range = payroll_start..payroll_finish # Payroll Cycle
-
-          next unless Logic.intersect(dt_range, payroll_range) == dt_range
-
-          contextual_ids << payroll.id
-        end
-
-        expect(contextual_ids).to eq Payroll.ids_contextual_on(dt)
-      end
-
-      # On the specified date (active record version)
-      it '#ids_contextual_on_active_rec(dt)' do
-        contextual_ids = []
-
-        dt_range = dt..dt
-
-        Payroll.all.each do |payroll|
-          payroll_start = Dateutils.to_gregorian(payroll.daystarted)
-          payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
-
-          # Alternatively, this could be done:
-          #      payroll_start=payroll.monthworked.beginning_of_month
-          #      payroll_finish=payroll.monthworked.end_of_month
-
-          payroll_range = payroll_start..payroll_finish # Payroll Cycle
-
-          next unless Logic.intersect(dt_range, payroll_range) == dt_range
-
-          contextual_ids << payroll.id
-        end
-
-        expect(contextual_ids).to eq Payroll.ids_contextual_on(dt)
-      end
-
       # On the specified date
       it '#ids_contextual_today' do
         today = Time.zone.today
@@ -210,9 +163,26 @@ RSpec.describe Payroll, type: :model do
         current_payrolls = Payroll.contextual_today
         expect(current_payrolls).to eq(Payroll.current)
       end
+
+      # Alias to current, returns an active record relation
+      it '#latest' do
+        latest_payrolls = Payroll.contextual_today
+        expect(latest_payrolls).to eq(Payroll.latest)
+      end
     end
 
     context 'Timeline' do
+      # The last accountable day on the previous (i.e. most recent) fully processed payroll.
+      it '#previous_dt_finished' do
+        previous_payrolls = Payroll.previous # active record object
+
+        if previous_payrolls.present?
+          previous_payroll = previous_payrolls.first # first is needed
+          dt_finished = Dateutils.to_gregorian(previous_payroll.dayfinished)
+        end
+
+        expect(dt_finished).to eq(Payroll.previous_dt_finished)
+      end
       # Last day of the payroll which is most in the future
       it '#farthestaccountabledate_activerec' do
         farthest_accountable_dt = Dateutils.elapsed_to_regular_date(Payroll.maximum(:dayfinished))
@@ -255,24 +225,6 @@ RSpec.describe Payroll, type: :model do
       it '#past' do
         past_payrolls = Payroll.where(id: Payroll.past_ids_sql)
         expect(past_payrolls).to eq(Payroll.past)
-      end
-
-      it '#past_active_rec' do
-        possible_current_payrolls = Payroll.current
-
-        previous_payrolls = nil
-
-        if possible_current_payrolls.present? # not nil
-
-          # It is assumed payrolls are either of type pap or medical residency (but not both)
-          # Future to do: add gradcert (boolean field) to the model
-          current_payroll = possible_current_payrolls.first
-          current_month_worked = current_payroll.monthworked
-          previous_payrolls = Payroll.where('monthworked < ?', current_month_worked)
-
-        end
-
-        expect(previous_payrolls).to eq(Payroll.past_active_rec)
       end
 
       # Not in effect yet, scheduled for future payroll cycles
@@ -428,8 +380,8 @@ RSpec.describe Payroll, type: :model do
       end
 
       it '#active' do
-        active_payrolls = Payroll.contextual_today.incomplete
-        expect(active_payrolls).to eq(Payroll.contextual_today.incomplete)
+        active_payrolls = Payroll.incomplete.contextual_today
+        expect(active_payrolls).to eq(Payroll.active)
       end
 
       # Find the information using raw sql (less portable, but generally faster than active record)
@@ -647,6 +599,20 @@ RSpec.describe Payroll, type: :model do
 
   #    puts registration.detailed
   #  end
+
+  it '-name' do
+    payroll_name = if payroll.pending?
+
+                     I18n.l(payroll.monthworked, format: :my) + ' *' + I18n.t('pending') + '*'
+
+                   else
+
+                     payroll.shortname
+
+                   end
+
+    expect(payroll_name).to eq(payroll.name)
+  end
 
   it 'shortname' do
     payroll = FactoryBot.create(:payroll, :personal_taxation, :special)
