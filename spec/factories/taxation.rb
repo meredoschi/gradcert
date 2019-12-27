@@ -1,18 +1,19 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :taxation do
-    # Taxation(id: integer, socialsecurity: decimal, bracket_id: integer, name: string, start: date, finish: date, pap: boolean, medres: boolean)
-    two_years_ago=Date.today-2.years
-    in_a_year=Date.today+1.year
+    # Taxation(id: integer, socialsecurity: decimal, bracket_id: integer, name: string,
+    # start: date, finish: date, pap: boolean, medres: boolean)
+    two_years_ago = Date.today - 2.years
+    in_a_year = Date.today + 1.year
 
-    start "#{two_years_ago}"
-    finish "#{in_a_year}"
+    start two_years_ago.to_s
+    finish in_a_year.to_s
     pap true
-    name "Brazilian taxes"
+    name 'Brazilian taxes'
     socialsecurity 11
 
     trait :personal do
-
-
       before(:create) do |taxation|
         initial_bracket = FactoryBot.create(:bracket, :initial)
         second_bracket = FactoryBot.create(:bracket, :second)
@@ -23,13 +24,7 @@ FactoryBot.define do
         taxation.brackets << second_bracket
         taxation.brackets << third_bracket
         taxation.brackets << fourth_bracket
-
       end
-
     end
-
-
-
-
   end
 end

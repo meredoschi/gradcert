@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Address, type: :model do
@@ -108,6 +110,22 @@ RSpec.describe Address, type: :model do
       [streetname.designation, addr, streetnum].join(' ')
     else
       [addr, streetnum].join(' ')
+    end
+  end
+
+  # International version
+  it '-street_intl' do
+    streetname = address.streetname
+    addr = address.addr
+    streetnum = address.streetnum
+    complement = address.complement
+
+    if complement.present?
+      [streetnum, addr, streetname.designation, complement].join(' ')
+    elsif streetname.id.present?
+      [streetnum, addr, streetname.designation].join(' ')
+    else
+      [streetnum, addr].join(' ')
     end
   end
 

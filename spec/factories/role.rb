@@ -1,13 +1,22 @@
+# frozen_string_literal: true
+
 # This will guess the User class
 FactoryBot.define do
   factory :role do
-    # Role(id: integer, name: string, management: boolean, teaching: boolean, clerical: boolean, created_at: datetime, updated_at: datetime, pap: boolean, medres: boolean, collaborator: boolean, student: boolean, itstaff: boolean)
-    #  (id: integer, name: string, management: boolean, teaching: boolean, clerical: boolean, created_at: datetime, updated_at: datetime, pap: boolean, medres: boolean, collaborator: boolean, student: boolean, itstaff: boolean)
-    # name => ["Apoio administrativo", "Aprimorando", "Colaborador Pap", "Colaborador RM", "Coordenador da comissão local", "Coordenador suplente da comissão local", "Docente supervisor", "Residente", "Sistema"]
+    # Role(id: integer, name: string, management: boolean, teaching: boolean, clerical: boolean,
+    # pap: boolean, medres: boolean, collaborator: boolean, student: boolean, itstaff: boolean)
+    #  (id: integer, name: string, management: boolean, teaching: boolean, clerical: boolean,
+    #  pap: boolean, medres: boolean, collaborator: boolean, student: boolean, itstaff: boolean)
+    # name => ["Apoio administrativo", "Aprimorando", "Colaborador Pap", "Colaborador RM",
+    # "Coordenador da comissão local", "Coordenador suplente da comissão local",
+    # "Docente supervisor", "Residente", "Sistema"]
 
     #    sequence(:name) {|n| "#{I18n.t('definitions.role.names.pap.student')+' '+(n+1000).to_s}" }
 
-    sequence(:name) { |n| (I18n.t('activerecord.models.student') + ' ' + (n + 1000).to_s).to_s }
+    sequence(:name) do |n|
+      (I18n.t('activerecord.models.student') + \
+      ' ' + (n + rand(100_000)).to_s).to_s
+    end
 
     trait :pap do
       pap false
@@ -21,7 +30,10 @@ FactoryBot.define do
 
     # ***********************************
     trait :itstaff do
-      sequence(:name) { |n| (I18n.t('definitions.role.names.itstaff') + ' ' + (n + 1000).to_s).to_s }
+      sequence(:name) do |n|
+        (I18n.t('definitions.role.names.itstaff') + \
+         ' ' + (n + rand(100_000)).to_s).to_s
+      end
 
       clerical false
       itstaff true
@@ -32,7 +44,10 @@ FactoryBot.define do
 
     # "clerical role" (not systems admin)
     trait :clerical do
-      sequence(:name) { |n| (I18n.t('definitions.role.names.pap.clerical') + ' ' + (n + 1000).to_s).to_s }
+      sequence(:name) do |n|
+        (I18n.t('definitions.role.names.pap.clerical') + \
+         ' ' + (n + rand(100_000)).to_s).to_s
+      end
 
       clerical true
       itstaff false
@@ -42,7 +57,10 @@ FactoryBot.define do
     end
 
     trait :pap_student do
-      sequence(:name) { |n| (I18n.t('definitions.role.names.pap.student') + ' ' + (n + 1000).to_s).to_s }
+      sequence(:name) do |n|
+        (I18n.t('definitions.role.names.pap.student') + \
+         ' ' + (n + rand(100_000)).to_s).to_s
+      end
 
       pap true
       student true

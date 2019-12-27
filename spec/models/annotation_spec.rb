@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 include ActionView::Helpers::NumberHelper
@@ -6,14 +8,18 @@ include ActionView::Helpers::TextHelper
 RSpec.describe Annotation, type: :model do
   let(:registration) { Registration.contextual_today.active.last }
   let(:payroll) { Payroll.last }
-  let(:annotation) { FactoryBot.create(:annotation, registration_id: registration.id, payroll_id: payroll.id) }
+  let(:annotation) do
+    FactoryBot.create(:annotation, registration_id: registration.id,
+                                   payroll_id: payroll.id)
+  end
 
   it 'can be created' do
     # replaced by let above
 
     #  registration=Registration.contextual_today.active.last
     #  payroll=Payroll.last
-    #  annotation = FactoryBot.create(:annotation, registration_id: registration.id, payroll_id: payroll.id)
+    #  annotation = FactoryBot.create(:annotation, registration_id: registration.id,
+    #               payroll_id: payroll.id)
 
     print I18n.t('activerecord.models.annotation').capitalize + ': '
     puts annotation.detailed
@@ -32,15 +38,15 @@ RSpec.describe Annotation, type: :model do
   it '-kind' do
     @annotation_kind = I18n.t('activerecord.attributes.annotation.virtual.kind') + ': '
 
-    if annotation.automatic?
+    @annotation_kind += if annotation.automatic?
 
-      @annotation_kind += I18n.t('activerecord.attributes.annotation.automatic').downcase
+                          I18n.t('activerecord.attributes.annotation.automatic').downcase
 
-    else
+                        else
 
-      @annotation_kind += I18n.t('activerecord.attributes.annotation.virtual.manual').downcase
+                          I18n.t('activerecord.attributes.annotation.virtual.manual').downcase
 
-    end
+                        end
 
     expect(@annotation_kind).to eq(annotation.kind)
   end
@@ -72,14 +78,15 @@ RSpec.describe Annotation, type: :model do
 
     annotation_impact_details = I18n.t('discounts_and_supplements').capitalize + '-> '
 
-    annotation_impact_details += I18n.t('activerecord.attributes.annotation.virtual.impact') + ': ' + impact_amount
+    annotation_impact_details += I18n.t('activerecord.attributes.annotation.
+      virtual.impact') + ': ' + impact_amount
 
-    if annotation.impact < 0
-      annotation_impact_details += ' (' + I18n.t('negative') + ')'
-    end
+    annotation_impact_details += ' (' + I18n.t('negative') + ')' if annotation.impact < 0
 
-    annotation_impact_details += +' [' + I18n.t('activerecord.attributes.annotation.supplement') + ': ' + supplement_amount
-    annotation_impact_details += +' ; ' + I18n.t('activerecord.attributes.annotation.discount') + ': ' + discount_amount + ']'
+    annotation_impact_details += +' [' + I18n.t('activerecord.attributes.annotation.
+      supplement') + ': ' + supplement_amount
+    annotation_impact_details += +' ; ' + I18n.t('activerecord.attributes.annotation.
+      discount') + ': ' + discount_amount + ']'
 
     expect(annotation_impact_details).to eq(annotation.impactdetails)
 
@@ -87,7 +94,9 @@ RSpec.describe Annotation, type: :model do
   end
 
   it 'discount or supplement may not be negative' do
-    annotation_attempt = FactoryBot.build(:annotation, registration_id: registration.id, payroll_id: payroll.id, discount: -400, supplement: -300)
+    annotation_attempt = FactoryBot.build(:annotation, registration_id: registration.id,
+                                                       payroll_id: payroll.id,
+                                                       discount: -400, supplement: -300)
 
     expect(annotation_attempt).to be_invalid
   end
@@ -101,7 +110,8 @@ RSpec.describe Annotation, type: :model do
 
     puts scholarship.detailed
 
-    annotation_attempt = FactoryBot.build(:annotation, registration_id: registration.id, payroll_id: payroll.id, supplement: 100_300)
+    annotation_attempt = FactoryBot.build(:annotation, registration_id: registration.id,
+                                                       payroll_id: payroll.id, supplement: 100_300)
 
     expect(annotation_attempt).to be_invalid
   end
@@ -115,19 +125,22 @@ RSpec.describe Annotation, type: :model do
 
     puts scholarship.detailed
 
-    annotation_attempt = FactoryBot.build(:annotation, registration_id: registration.id, payroll_id: payroll.id, supplement: 100_300)
+    annotation_attempt = FactoryBot.build(:annotation, registration_id: registration.id,
+                                                       payroll_id: payroll.id, supplement: 100_300)
 
     expect(annotation_attempt).to be_invalid
   end
 
   it '-fulldetails' do
-    annotation_full_details = annotation.detailed + ' [' + annotation.kind + '] ' + annotation.absencesinfo + ' - ' + annotation.impactdetails
+    annotation_full_details = annotation.detailed + ' [' + annotation.kind + \
+                              '] ' + annotation.absencesinfo + ' - ' + annotation.impactdetails
 
     expect(annotation_full_details).to eq annotation.fulldetails
   end
 
   it '-info' do
-    annotation_info = ' [' + annotation.kind + '] ' + annotation.absencesinfo + ' - ' + annotation.impactdetails
+    annotation_info = ' [' + annotation.kind + '] ' + annotation.absencesinfo + \
+                      ' - ' + annotation.impactdetails
     expect(annotation_info).to eq annotation.info
   end
 end

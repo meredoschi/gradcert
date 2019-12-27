@@ -32,7 +32,8 @@ group :test, :development do
   gem 'factory_bot_rails', '4.11.0', require: false
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
-  gem 'rubocop' # August 2017
+  gem 'rubocop', '~> 0.78.0' # December 2019
+  gem 'rubocop-rails', '~> 2.4'
   gem 'shoulda-matchers', '~> 3.1' # July 2017
   gem 'json_converter', '~> 0.0.0' # November 2017
   gem 'capybara' # September 2018

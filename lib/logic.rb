@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # Important logical verifications
 module Logic
-  def self.within?(a, b, x)
+  def self.within?(a, b, x) # rubocop:disable Naming/UncommunicativeMethodParamName
     if x >= a && x <= b
 
       true
@@ -12,60 +14,21 @@ module Logic
     end
   end
 
-  # Assumes a, b are ranges which overlap
-  def self.intersection_size(a, b)
-    if b.first >= a.first
-
-      if b.last <= a.last
-
-        b.size
-
-      else
-
-        (b.first..a.last).size
-
-      end
-
-    else
-
-      if b.last <= a.last
-
-        (a.first..b.last).size
-
-      else
-
-        a.size
-
-      end
-
-    end
+  # A,B are integer ranges
+  def self.intersection_size(a, b) # rubocop:disable Naming/UncommunicativeMethodParamName
+    res = nil # result
+    intersection = intersect(a, b)
+    res = intersection if intersection.present?
+    res
   end
 
-  def self.intersect(a, b)
-    @disjoint = 0
+  # Returns the intersection of the two ranges, if it exists, otherwise nil.
+  def self.intersect(range_a, range_b)
+    intersection = nil
+    lower_bound = [range_a.min, range_b.min].max
+    upper_bound = [range_a.max, range_b.max].min
+    intersection = (lower_bound..upper_bound) if upper_bound >= lower_bound
 
-    if b.include?(a.first)
-      @actual_start = a.first
-    else
-      @disjoint += 1
-      @actual_start = b.first
-      end
-
-    if b.include?(a.last)
-      @actual_finish = a.last
-    else
-      @disjoint += 1
-      @actual_finish = b.last
-      end
-
-    if @disjoint == 2
-      if a.first <= b.first && a.last >= b.last
-        return p
-      else
-        return nil
-      end
-    else
-      return (@actual_start..@actual_finish)
-    end
-   end
+    intersection
+  end
 end

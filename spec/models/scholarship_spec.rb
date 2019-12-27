@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Scholarship, type: :model do
@@ -23,16 +25,18 @@ RSpec.describe Scholarship, type: :model do
 
       schoolyear_finish = estimated_finish.to_s
 
-      scholarship = FactoryBot.create(:scholarship, start: schoolyear_start, finish: schoolyear_finish, amount: base_amount * 1.05**i)
+      scholarship = FactoryBot.create(:scholarship,
+                                      start: schoolyear_start, finish: schoolyear_finish,
+                                      amount: base_amount * 1.05**i)
     end
   end
 
-  def print_scholarship_details(s)
-    print s.name
+  def print_scholarship_details(sch)
+    print sch.name
     print ' '
-    print s.amount
+    print sch.amount
     print ' '
-    print s.effectiveperiod
+    print sch.effectiveperiod
     print ' '
     print I18n.t('created_at')
     puts I18n.l(scholarship.created_at)
@@ -41,8 +45,9 @@ RSpec.describe Scholarship, type: :model do
   # I18n textual representation
   it '-kind' do
     scholarship_kind = if scholarship.pap? then I18n.t('activerecord.attributes.scholarship.pap')
-                       elsif scholarship.medres? then I18n.t('activerecord.attributes.scholarship.medres')
-  end
+                       elsif scholarship.medres? then I18n.t('activerecord.attributes.
+                         scholarship.medres')
+                       end
 
     expect(scholarship_kind).to eq(scholarship.kind)
   end
@@ -54,13 +59,17 @@ RSpec.describe Scholarship, type: :model do
 
     scholarship_amount = helper.number_to_currency(scholarship.amount)
 
-    #    detailed_info=scholarship.name+' '+scholarship_amount+' '+scholarship.effectivedates+' '+I18n.t('created_at')+I18n.l(scholarship.created_at)
+    #    detailed_info=scholarship.name+' '+scholarship_amount+' '+scholarship.effectivedates+ \
+    #    ' '+I18n.t('created_at')+I18n.l(scholarship.created_at)
 
-    detailed_info = scholarship.name + ' - ' + scholarship.sector + ' - ' + I18n.t('activerecord.attributes.scholarship.amount') + ' ' + scholarship_amount + ' - '
+    detailed_info = scholarship.name + ' - ' + scholarship.sector + ' - ' + \
+                    I18n.t('activerecord.attributes.scholarship.amount') + ' ' \
+                     + scholarship_amount + ' - '
 
     if scholarship.partialamount?
 
-      detailed_info += I18n.t('activerecord.attributes.scholarship.partialamount') + ' ' + helper.number_to_currency(scholarship.partialamount) + ' - '
+      detailed_info += I18n.t('activerecord.attributes.scholarship.partialamount') + ' ' + \
+                       helper.number_to_currency(scholarship.partialamount) + ' - '
 
     end
 
@@ -71,15 +80,7 @@ RSpec.describe Scholarship, type: :model do
 
   # Has partial scholarship amount - for future use
   it '-partialamount?' do
-    @has_partial_amount = if scholarship.partialamount > 0
-
-                            true
-
-                          else
-
-                            false
-
-                        end
+    @has_partial_amount = scholarship.partialamount > 0
 
     expect(@has_partial_amount).to eq(scholarship.partialamount?)
   end
@@ -101,9 +102,10 @@ RSpec.describe Scholarship, type: :model do
   # just the boolean attribute's name (whichever is true)
   it '-sector' do
     scholarship_sector = if scholarship.pap? then I18n.t('activerecord.attributes.scholarship.pap')
-                         elsif scholarship.medres? then I18n.t('activerecord.attributes.scholarship.medres')
+                         elsif scholarship.medres? then I18n.t('activerecord.attributes.
+                           scholarship.medres')
 
-  end
+                         end
 
     expect(scholarship_sector).to eq(scholarship.sector)
   end
@@ -140,7 +142,10 @@ RSpec.describe Scholarship, type: :model do
     start_date = today + 1.year
     finish_date = today - 6.months
 
-    expect { FactoryBot.create(:scholarship, start: start_date, finish: finish_date) }.to raise_error
+    expect do
+      FactoryBot.create(:scholarship, start: start_date,
+                                      finish: finish_date)
+    end    .to raise_error
   end
 
   it '-effectiveperiod' do
@@ -150,7 +155,8 @@ RSpec.describe Scholarship, type: :model do
   end
 
   it '-effectivedates' do
-    effective_dates = I18n.t('activerecord.attributes.scholarship.virtual.effectiveperiod').capitalize + ':'
+    effective_dates = I18n.t('activerecord.attributes.scholarship.virtual.effectiveperiod')
+                          .capitalize + ':'
 
     effective_dates += I18n.l(scholarship.start, format: :dmy) + ' -> ' # textual representation
 
@@ -167,20 +173,14 @@ RSpec.describe Scholarship, type: :model do
     start_date = today + 1.year
     finish_date = today - 6.months
 
-    scholarship = FactoryBot.build(:scholarship, name: 'PAP - Test', pap: true, medres: false, start: start_date, finish: finish_date)
+    scholarship = FactoryBot.build(:scholarship, name: 'PAP - Test',
+                                                 pap: true, medres: false,
+                                                 start: start_date, finish: finish_date)
     # create here throws an active record invalid error
 
     # to replace the one created by let
 
-    @consistency = if scholarship.start < scholarship.finish
-
-                     true
-
-                   else
-
-                     false
-
-                   end
+    @consistency = scholarship.start < scholarship.finish
 
     # .consistent_start_finish?
     expect(scholarship.consistent_start_finish?).to be_falsey
@@ -192,17 +192,10 @@ RSpec.describe Scholarship, type: :model do
     start_date = today + 1.year
     finish_date = start_date + 5.months
 
-    scholarship = FactoryBot.create(:scholarship, start: start_date, finish: finish_date, amount: 500)
+    scholarship = FactoryBot.create(:scholarship, start: start_date,
+                                                  finish: finish_date, amount: 500)
 
-    @consistency = if scholarship.start < scholarship.finish
-
-                     true
-
-                   else
-
-                     false
-
-                   end
+    @consistency = scholarship.start < scholarship.finish
 
     expect(scholarship.consistent_start_finish?).to be_truthy
   end
@@ -225,7 +218,9 @@ RSpec.describe Scholarship, type: :model do
 
       schoolyear_finish = estimated_finish.to_s
 
-      scholarship = FactoryBot.create(:scholarship, start: schoolyear_start, finish: schoolyear_finish, amount: base_amount * 1.05**i)
+      scholarship = FactoryBot.create(:scholarship, start: schoolyear_start,
+                                                    finish: schoolyear_finish,
+                                                    amount: base_amount * 1.05**i)
 
       print_scholarship_details(scholarship)
     end
@@ -254,7 +249,9 @@ RSpec.describe Scholarship, type: :model do
 
       schoolyear_finish = estimated_finish.to_s
 
-      scholarship = FactoryBot.create(:scholarship, start: schoolyear_start, finish: schoolyear_finish, amount: base_amount * 1.05**i)
+      scholarship = FactoryBot.create(:scholarship, start: schoolyear_start,
+                                                    finish: schoolyear_finish,
+                                                    amount: base_amount * 1.05**i)
 
       puts scholarship.detailed
 

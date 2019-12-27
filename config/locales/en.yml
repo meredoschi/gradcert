@@ -213,14 +213,14 @@ en:
       format:
         delimiter: ","
         format: "%u%n"
-        precision: '2'
+        precision: 2
         separator: "."
         significant: Significant
         strip_insignificant_zeros: Strip insignificant zeros
-        unit: "$"
+        unit: "€"
     format:
       delimiter: ","
-      precision: '3'
+      precision: 3
       separator: "."
       significant: Significant
       strip_insignificant_zeros: Strip insignificant zeros

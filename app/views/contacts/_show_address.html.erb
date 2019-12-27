@@ -1,70 +1,77 @@
 <div class="row">
-		<table>
+	<table>
+		<tr>
+
+			<div class="large-4 columns">
+
+				<th><strong><%= tm('address').capitalize %></strong></th>
+
+			</div>
+
+
+		</tr>
+
+		<div class="row">
+
 			<tr>
-			
-							<div class="large-4 columns">
-					
-								<th><strong><%= tm('address').capitalize %></strong></th>
-					
-							</div>
-					
-							
-			</tr>						
-		
-			<div class="row">
-		
-				<tr>
-					
-						<td><%= @contact.address.street %></td>
-					
-										
-				</tr>
 
-				<% if @contact.address.neighborhood.present? %>
-				
-					<tr>
-					
-							<td><%= @contact.address.neighborhood %></td>
-					
-											
-					</tr>
-				
+				<td>
+					<% if I18n.locale==:pt_BR %>
+						<%= @contact.address.street %>
+					<% else %>
+						<%= @contact.address.street_intl %>
+					<% end %>
+
+				</td>
+
+
+			</tr>
+
+			<% if @contact.address.neighborhood.present? %>
+
+			<tr>
+
+				<td><%= @contact.address.neighborhood %></td>
+
+
+			</tr>
+
+			<% end %>
+
+			<tr>
+
+				<% if @contact.address.municipality.present? %>
+
+				<td>
+
+
+					<%= @contact.address.municipality.name_with_state %>
+
+				</td>
+
 				<% end %>
-				
-				<tr>
 
-					<% if @contact.address.municipality.present? %>
-					
-						<td>
-						
-						
-								<%= @contact.address.municipality.name_with_state %>
-														
-						</td>
-					
-						<% end %>
-										
-				</tr>
+			</tr>
 
-				<tr>
-					
-						<% if @contact.address.postalcode.present? %>
-					
-					
-						<td>
-							<%= ta('address.postalcode') %> <%= @contact.address.postalcode %>
-							
-						</td>
+			<tr>
 
-						<% end %>
-					
-					
-					</div>
-										
-				</tr>
+				<% if @contact.address.postalcode.present? %>
 
-		
-		</div>
 
-	</table>
+				<td>
+					<%= ta('address.postalcode') %> <%= @contact.address.postalcode %>
+
+				</td>
+
+				<% end %>
+
+
+			</div>
+
+		</tr>
+
+
+	</div>
+
+</table>
 </div>

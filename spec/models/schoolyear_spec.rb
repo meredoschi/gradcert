@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
@@ -6,9 +7,17 @@ RSpec.describe Schoolyear, type: :model do
   let(:program) { FactoryBot.create(:program, :annual) }
   let(:schoolyear) { program.schoolyears.last }
 
+
+  it 'can be created' do
+    print I18n.t('activerecord.models.schoolyear').capitalize + ': '
+    schoolyear = FactoryBot.create(:schoolyear, :freshman)
+  #  puts schoolyear.info
+  end
+
   # ----
   # 2018
 
+=begin
   it '-identifier_i18n' do
     identifier_i18n_txt = I18n.t('activerecord.attributes.schoolyears.id')\
                               .capitalize + ' [ ' + schoolyear.id.to_s + ' ]'
@@ -272,4 +281,7 @@ RSpec.describe Schoolyear, type: :model do
     expect(schoolyear_program_name_incoming_cohort_program_year)\
       .to eq(schoolyear.program_name_incoming_cohort_program_year)
   end
+
+=end
+
 end

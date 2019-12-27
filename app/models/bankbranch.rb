@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Brazilian bank branches
 class Bankbranch < ActiveRecord::Base
   # ------------------- References ------------------------
 
@@ -45,21 +48,13 @@ class Bankbranch < ActiveRecord::Base
   end
 
   def with_valid_vd?
-    @status = if verificationdigit == Brazilianbanking.calculate_verification_digit(code, 4).to_s
-                true
-              else
-                false
-              end
+    @status = verificationdigit == Brazilianbanking.branch_verification_digit(code).to_s
 
     @status
   end
 
   def future_opening_date?
-    @status = if opened > Date.today
-                true
-              else
-                false
-              end
+    @status = opened > Date.today
 
     @status
   end
@@ -80,14 +75,13 @@ class Bankbranch < ActiveRecord::Base
     municipality_name + ' - ' + state
   end
 
+  def municipality
+    address.municipality
+  end
+
   def municipality_name
     address.municipality.name
   end
-
-=begin
-
-# ---
-=end
 
   # -------------------------------------------------------
 
@@ -100,5 +94,5 @@ class Bankbranch < ActiveRecord::Base
     # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
   end
 
-  # ***********************************************************************************************************************************
+  # *************************************************************************************
 end

@@ -1,113 +1,185 @@
+# frozen_string_literal: true
+
 # Monthly scholarship recipients payroll
 # IMPORTANT: Working month is assumed to start on the first calendar day
 # i.e. Payroll cycle goes from the 1st to 28..31 depending on the Month/Year
 class Payroll < ActiveRecord::Base
-  # ------------------- References ------------------------
+  has_paper_trail # Needed for auditing
 
-  belongs_to :taxation
+  # http://stackoverflow.com/questions/1019939/ruby-on-rails-best-method-of-handling-currency-money
+  monetize :amount_cents
 
+  # ------------------- Associations ------------------------
   belongs_to :scholarship
+  belongs_to :taxation
+  has_many :annotation, dependent: :restrict_with_exception
+  has_many :bankpayment, dependent: :restrict_with_exception
+  has_many :feedback, dependent: :restrict_with_exception
+  # ---------------------------------------------------------
 
-  # 	has_many  :supervisor, :foreign_key => 'contact_id'
-
-  #		has_one :bankpayment
-
-  #  Changed here!
-
-  has_paper_trail
-
-  has_many :bankpayment
-
-  has_many :feedback
-
-  validates_uniqueness_of :paymentdate, unless: :special?
-
+  # ------------------- Validations -------------------------
+  validates :comment, length: { maximum: 200 }
+  validate :manual_amount
   %i[paymentdate taxation_id monthworked].each do |required_field|
     validates required_field, presence: true
   end
 
-  validates :comment, length: { maximum: 200 }
+  validates :paymentdate, uniqueness: { unless: :special? }
 
-  # No longer used - Use scholarship table instead
-  #    validates :amount, presence: true, numericality: { greater_than: 0 }, if: :special?
+  # validate :timely_payment
 
-  #    validates :scholarship_id, presence: true, unless: :special?
+  def timely_payment
+    errors.add(:paymentdate, :inconsistent) unless payment_on_the_usual_dt?
+  end
 
-  #     validates :scholarship_id, absence: true, if: :special?
+  def manual_amount
+    errors.add(:amount, :present) if scholarship_id.present? && amount.positive?
+  end
 
-  # *****************  Rspec - Tests - July 2017
+  # ---------------------------------------------------------
 
-  # Marcelo - December 2017 - Tested code
+  # ------------------- Class methods -----------------------
 
-  def self.ids_contextual_on(dt)
+  def self.distinct_working_months
+    pluck(:monthworked).uniq
+  end
 
+  def self.num_distinct_working_months
+    distinct_working_months.count
+
+    # To do: can can
+  end
+
+  def self.existence?
+    num_distinct_working_months.positive?
+  end
+
+  def self.more_than_one_working_month_recorded?
+    num_distinct_working_months > 1
+  end
+
+  def self.less_than_two_working_months_recorded?
+    num_distinct_working_months < 2
+  end
+
+  def self.start_dt_corresponding_to_today
+    # IMPORTANT! The payroll cycle goes from the first to the last calendar day in every month.
+    Time.zone.today.beginning_of_month
+  end
+
+  # --- Contextual methods start
+
+  def self.ids_contextual_on_sql(specified_dt)
+    # Date represented in numeric format
+    numeric_dt = Dateutils.regular_to_elapsed(specified_dt)
+
+    query = 'select id from payrolls where id not in '\
+    '(Select id from payrolls where daystarted > ? or dayfinished<?)'
+
+    find_by_sql [query, numeric_dt, numeric_dt]
+  end
+
+  def self.ids_contextual_on(specified_dt)
+    ids_contextual_on_sql(specified_dt)
+  end
+
+  def self.contextual_on_sql(specified_dt)
+    # Date represented in numeric format
+    numeric_dt = Dateutils.regular_to_elapsed(specified_dt)
+
+    # Filter payrolls yet to start as well as those already completed
+    query = 'select * from payrolls where id not in '\
+    '(Select id from payrolls where daystarted > ? or dayfinished<?)'
+
+    # This is written in plural form, for occasionally there may be special payrolls.
+    # There should be at most one regular payroll per program area (e.g. medical residency).
+    find_by_sql [query, numeric_dt, numeric_dt]
+  end
+
+  def self.ids_contextual_on_active_rec(specified_dt)
     contextual_ids = []
 
-    dt_range = dt..dt
+    dt_range = specified_dt..specified_dt
 
-    Payroll.all.each do |payroll|
-
-      payroll_start=Dateutils.to_gregorian(payroll.daystarted)
-      payroll_finish=Dateutils.to_gregorian(payroll.dayfinished)
+    Payroll.all.find_each do |payroll|
+      payroll_start = Dateutils.to_gregorian(payroll.daystarted)
+      payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
 
       payroll_range = payroll_start..payroll_finish # Payroll cycle
 
       next unless Logic.intersect(dt_range, payroll_range) == dt_range
 
       contextual_ids << payroll.id
-
     end
 
     contextual_ids
-
   end
 
   def self.ids_contextual_today
-
-    self.ids_contextual_on(Date.today)
-
+    ids_contextual_on(Time.zone.today)
   end
-
-  # --- RSPEC block finish
 
   # Contextual on a specified date - returns an active record relation
   # Only one payroll, per area, should exist.
   # Reminder: use .first to get the object
-  def self.contextual_on(dt)
-    where(id: ids_contextual_on(dt))
+  def self.contextual_on(specified_dt)
+    where(id: ids_contextual_on_sql(specified_dt))
   end
 
   def self.contextual_today
-    where(id: ids_contextual_today)
+    #  where(id: ids_contextual_today) # active record version
+    contextual_on(Time.zone.today)
   end
 
   # Alias, for convenience
   def self.current
-    self.contextual_today
+    contextual_today
   end
 
+  # --- Contextual methods finish
+
   def self.past
-    current_reference_month=Payroll.current.first.monthworked
-    where("monthworked < ?", current_reference_month)
+    where(id: past_ids_sql)
+  end
+
+  def self.past_ids_sql
+    # Date represented in numeric format
+    numeric_dt = Dateutils.regular_to_elapsed(Time.zone.today)
+
+    # Filter payrolls yet to start as well as those already completed
+    query = 'select id from payrolls where id in (Select id from payrolls where dayfinished<?)'
+
+    # i.e. finish date has passed, but not necessarily completed (bank payment performed)
+    find_by_sql [query, numeric_dt]
+  end
+
+  # Active record version
+  def self.past_active_rec
+    possible_current_payrolls = Payroll.current
+
+    previous_payrolls = nil
+
+    if possible_current_payrolls.present? # not nil
+
+      # It is assumed payrolls are either of type pap or medical residency (but not both)
+      # Future to do: add gradcert (boolean field) to the model
+      current_payroll = possible_current_payrolls.first
+      current_month_worked = current_payroll.monthworked
+      previous_payrolls = where('monthworked < ?', current_month_worked)
+
+    end
+
+    previous_payrolls
   end
 
   def self.actual
-     self.all
-#    where.not(id: planned)
+    where.not(id: planned)
   end
 
   # Future
   def self.planned
-#    current_reference_month=Payroll.current.first.monthworked
-#    if current_reference_month? 
-#     where("monthworked > ?", current_reference_month)
-#    else
-#    nil 
-#    end 
-    nil
+    where('monthworked > ?', start_dt_corresponding_to_today)
   end
-
-  # --- SCOPES
 
   def self.newest_first
     order(dayfinished: :desc).uniq
@@ -119,20 +191,15 @@ class Payroll < ActiveRecord::Base
 
   # Alias
   def self.ordered_by_most_recent
-    ordered_by_reference_month_desc
-  end
-
-  # Another alias
-  def self.ordered_by_most_recent
-    ordered_by_reference_month_desc
+    ordered_by_monthworked_paymentdate_special_createdat_desc
   end
 
   def self.ordered_by_reference_month_desc
     order(monthworked: :desc)
   end
 
-  def self.ordered_by_payment_date_reference_month_desc
-    order(paymentdate: :desc, monthworked: :desc, special: :desc, created_at: :desc)
+  def self.ordered_by_monthworked_paymentdate_special_createdat_desc
+    order(monthworked: :desc, paymentdate: :desc, special: :desc, created_at: :desc)
   end
 
   def self.ordered_by_reference_month
@@ -157,64 +224,218 @@ class Payroll < ActiveRecord::Base
   # This may return nil if payrolls are created in advance of the cycle
   # (since they, logically, will not be completed yet)
   def self.latest_completed
+    latest_completed_sql
+  end
 
-      self.latest.completed
+  # December 2019 - Implemented via raw sql
+  # Usually returns a single record: the most recently completed payroll (if there are any)
+  # Unless one or more special payrolls exist for the most recent payment date and reference month
+  def self.latest_completed_sql
+    query = 'WITH Completed_Payrolls_CTE(monthworked, paymentdate) '\
+    'AS (select p.monthworked, p.paymentdate from payrolls p inner join bankpayments bp on'\
+    '(p.id=bp.payroll_id) where bp.done=true)'\
+    ','\
+    'Latest_Completed_Payroll_CTE(monthworked, paymentdate) AS ('\
+    'select * from Completed_Payrolls_CTE order by monthworked desc, paymentdate desc limit 1'\
+    '),'\
+    'Latest_Completed_Payroll_monthworked_CTE(monthworked) AS ('\
+    'select monthworked from Latest_Completed_Payroll_CTE'\
+    '),'\
+    'Latest_Completed_Payroll_paymentdate_CTE(paymentdate) AS ('\
+    'select paymentdate from Latest_Completed_Payroll_CTE'\
+    ')'\
+    'select * from Payrolls where monthworked '\
+    'in (select monthworked from Latest_Completed_Payroll_monthworked_CTE) and '\
+    'paymentdate in (select paymentdate from Latest_Completed_Payroll_paymentdate_CTE);'
 
+    find_by_sql(query)
   end
 
   # i.e. with the most recent (or most in the future) finish date
   def self.newest
     order(:dayfinished).last
   end
-  # ---
+
+  # Closed, bank payment performed.
+  def self.completed
+    joins(:bankpayment).merge(Bankpayment.done)
+  end
+
+  # Closed, bank payment performed.
+  def self.incomplete
+    #    where.not(id: completed)
+    # New, after attribute was removed
+    joins(:bankpayment).merge(Bankpayment.not_done)
+  end
+
+  # Payroll is not yet completed (closed).
+  def self.active
+    contextual_today.incomplete
+  end
+
+  # Returns payrolls with at least one annotation - active record version
+  def self.annotated_active_rec
+    where(id: annotated_ids)
+  end
+
+  def self.not_annotated_active_rec
+    where.not(id: annotated_active_rec)
+  end
+
+  # Find the information using sql (less portable, but generally faster than active record)
+  # Provided for convenience
+  def self.annotated_ids_sql
+    # raw sql query
+    query = 'SELECT distinct p.id FROM payrolls p INNER JOIN annotations a ON '\
+    '(p.id = a.payroll_id);'
+    find_by_sql(query)
+  end
+
+  def self.not_annotated_ids_sql
+    # sql query
+    query = 'select id from payrolls p2 where id not in (SELECT distinct p.id FROM payrolls p ' \
+    'INNER JOIN annotations a ON (p.id = a.payroll_id));'
+    find_by_sql(query) # payroll_ids_without_annotations
+  end
+
+  # Not calculated yet.
+  def self.not_annotated
+    where.not(id: annotated)
+  end
+
+  def self.not_annotated_sql
+    # sql query
+    query = 'select * from payrolls p2 where id not in (SELECT distinct p.id FROM payrolls p ' \
+    'INNER JOIN annotations a ON (p.id = a.payroll_id));'
+    find_by_sql(query)
+  end
+
+  # Returns the ids for those payrolls with at least one annotation (via active record)
+  def self.annotated_ids
+    #    Payroll.joins(:annotation).pluck(:id).uniq
+    annotated_ids_sql
+  end
+
+  # Returns payrolls with at least one annotation
+  def self.annotated
+    where(id: Payroll.annotated_ids)
+  end
+
+  def self.regular
+    where(special: false)
+  end
+
+  def self.not_scheduled
+    where.not(id: with_bankpayment)
+  end
+
+  def self.special
+    where(special: true)
+  end
+
+  # Fix
+  def self.pap
+    where(pap: true, medres: false)
+  end
+
+  def self.medres
+    where(medres: true, pap: false)
+  end
+
+  # Alias (formerly a boolean attribute)
+  def self.done
+    completed
+  end
+
+  # Latest payroll(s)
+  def self.latest
+    where(dayfinished: latest_finish_date) if count.positive?
+  end
+
+  # Important: This assumes payroll is from the beginning to the end of the month
+  # Farthest finish date
+  def self.latestfinishdate
+    done.latest.first.monthworked.end_of_month
+  end
+
+  def self.reference_month_most_in_the_future
+    order(monthworked: :desc).first.monthworked
+  end
+
+  # Returns an active record relation
+  def self.with_reference_month_most_in_the_future
+    where(monthworked: reference_month_most_in_the_future)
+  end
+
+  # Returns the most recently completed (regular) payroll, if any
+  def self.previous
+    query = 'WITH Completed_Payrolls_CTE(monthworked, paymentdate) AS '\
+    '(select p.monthworked, p.paymentdate from payrolls p inner join bankpayments bp on '\
+    '(p.id=bp.payroll_id) where bp.done=true)'\
+    ','\
+    'Latest_Completed_Payroll_CTE(monthworked, paymentdate) AS ('\
+    'select * from Completed_Payrolls_CTE order by monthworked desc, paymentdate desc limit 1'\
+    '),'\
+    'Latest_Completed_Payroll_monthworked_CTE(monthworked) AS ('\
+    'select monthworked from Latest_Completed_Payroll_CTE'\
+    ')'\
+    'select * from Payrolls p where monthworked in '\
+    '(select monthworked from Latest_Completed_Payroll_monthworked_CTE) and p.special=false;'
+
+    find_by_sql(query)
+  end
+
+  # Last day of the payroll which is most in the future
+  def self.farthestaccountabledate
+    farthestaccountabledate_sql
+  end
+
+  # Last day of the payroll which is most in the future
+  # Active record version - more portable
+  def self.farthestaccountabledate_activerec
+    Dateutils.elapsed_to_regular_date(maximum(:dayfinished))
+  end
+
+  # Returns a date object (if at least one payroll exists)
+  def self.farthestaccountabledate_sql
+    return unless count.positive?
+
+    query = 'WITH max_dt(monthworked) AS (Select monthworked from payrolls '\
+    'order by monthworked desc limit 1)'\
+    ', farthest_finish(tm) '\
+    "as(select monthworked + interval '1 month' - interval '1 day' from max_dt) "\
+    'select tm::date as farthest_calculable_payroll_dt from farthest_finish'
+    result = ActiveRecord::Base.connection.execute(query)
+    result.values[0][0].to_date
+  end
+  # ---------------------------------------------------------
+
+  # ---------------- Instance methods -----------------------
 
   # Expressed as a date range (start to finish)
-
   def range
     start..finish
   end
 
   def prefix
-    @txt = ''
+    special_prefix = ''
 
     if special?
-      @txt = '*' + I18n.t('activerecord.attributes.payroll.special')
-      @txt += ' *  [' + comment + '] '
-
+      special_prefix = '*' + I18n.t('activerecord.attributes.payroll.special') \
+      + ' *  [' + comment + '] '
     end
 
-    @txt = ''
-  end
-
-  def self.more_than_one_working_month_recorded?
-    num_distinct_working_months > 1
-  end
-
-  def self.existence?
-    num_distinct_working_months > 0
-  end
-
-  # Version with comment
-  def commentedname
-    txt = prefix + I18n.l(monthworked, format: :my)
-    txt += ' (' + I18n.l(paymentdate, format: :compact) + ')'
-    txt
+    special_prefix
   end
 
   # Short version of name
   def shortname
-    txt = ''
+    payroll_short_name = I18n.l(monthworked, format: :my) \
+    + ' (' + I18n.l(paymentdate, format: :compact) + ')'
 
-    txt += I18n.l(monthworked, format: :my)
+    payroll_short_name += ' *' + I18n.t('activerecord.attributes.payroll.special') + '*' if special?
 
-    txt += ' ('
-    txt += I18n.l(paymentdate, format: :compact) + ')'
-
-    if special?
-      txt += ' *' + I18n.t('activerecord.attributes.payroll.special') + '*'
-    end
-
-    txt
+    payroll_short_name
   end
 
   def pap?
@@ -226,39 +447,17 @@ class Payroll < ActiveRecord::Base
   end
 
   def name
-    if pending?
+    @payroll_name = if pending?
 
-      @payroll_name = I18n.l(monthworked, format: :my) + ' *' + I18n.t('pending') + '*'
+                      I18n.l(monthworked, format: :my) + ' *' + I18n.t('pending') + '*'
 
-    else
+                    else
 
-      @payroll_name = shortname
+                      shortname
 
-    end
+                    end
 
     @payroll_name
-  end
-
-  def self.num_distinct_working_months
-    distinct_working_months.count
-
-    # To do: can can
-  end
-
-  def self.distinct_working_months
-    pluck(:monthworked).uniq
-  end
-
-  # Day started - as integer
-
-  def dstart
-    start.to_datetime.to_i / (3600 * 24)
-  end
-
-  # Day finished - as integers
-
-  def dfinish
-    finish.to_datetime.to_i / (3600 * 24)
   end
 
   def is_annotated?
@@ -273,7 +472,7 @@ class Payroll < ActiveRecord::Base
     !is_annotated?
   end
 
-  def	payment_date_coherent
+  def payment_date_coherent
     errors.add(:paymentdate, :inconsistent) unless payment_date_consistent?
   end
 
@@ -295,54 +494,12 @@ class Payroll < ActiveRecord::Base
 
   def payment_date_consistent?
     return unless monthworked.present? && paymentdate.present?
+
     monthworked.beginning_of_month == paymentdate.beginning_of_month.last_month
   end
 
-  # RSPEC --- to do
-  # Returns latest finish date (i.e. pertaining to the most recent payroll)
-  def self.latest_finish_date
-    pluck(:dayfinished).max if count > 0
-  end
-
-  # Fixed, december 2017: where(done: true)
-  def self.done
-
-    joins(:bankpayment).merge(Bankpayment.done)
-
-  end
-
-  # Latest payroll(s)
-  def self.latest
-    where(dayfinished: latest_finish_date) if count > 0
-  end
-
-  # Important: This assumes payroll is from the beginning to the end of the month
-  # Farthest finish date
-  def self.latestfinishdate
-    done.latest.first.monthworked.end_of_month
-  end
-
-  # Previous month's payroll
-  def self.previous
-    #  if pluck(:monthworked).uniq.count > 1 # i.e. there is more than one month worked
-    return unless more_than_one_working_month_recorded?
-    most_recent = []
-    most_recent << latest_finish_date
-    before_latest = (pluck(:dayfinished) - most_recent).max
-    where(dayfinished: before_latest)
-  end
-
-  validate :manual_amount
-
   # Performs validations unless payroll is special
-
   # -------------------------------------------------------
-
-  # http://stackoverflow.com/questions/1019939/ruby-on-rails-best-method-of-handling-currency-money
-
-  monetize :amount_cents
-
-  has_many :annotation, dependent: :restrict_with_exception
 
   # i.e. With at least one event
   def with_events?
@@ -361,39 +518,17 @@ class Payroll < ActiveRecord::Base
 
   # i.e. with events pending
   def pending?
-    pending_events.count > 0
+    pending_events.count.positive?
   end
 
   def confirmed?
     !pending?
   end
 
-  def self.numeric_ranges_by_id
-    order(:id).pluck(:id, :daystarted, :dayfinished)
-  end
-
-  def self.ranges_by_id
-    date_ranges_by_id = []
-
-    numeric_ranges_by_id.each do |payroll_dates|
-      payroll_dates[1] = Settings.dayone + payroll_dates[1].to_i # start
-      payroll_dates[2] = Settings.dayone + payroll_dates[2].to_i # finish
-      date_ranges_by_id << payroll_dates
-    end
-
-    date_ranges_by_id
-  end
-
   # Get the appropriate scholarship (i.e. amount) for the month worked
   # This way, cost of living adjustments (if applicable) are handled properly
   def scholarships_on_month
     Scholarship.on_month(monthworked) # numdays = virtual attribute
-  end
-
-  #
-
-  def referencemonth
-    I18n.l(monthworked, format: :my)
   end
 
   # Starting day in numeric format.  Number of days since application's "epoch"
@@ -405,66 +540,19 @@ class Payroll < ActiveRecord::Base
     monthworked.end_of_month
   end
 
-  def manual_amount
-    errors.add(:amount, :present) if scholarship_id.present? && amount > 0
-  end
-
-  def self.scheduled
-    joins(:bankpayment)
-  end
-
   # If done = true, complemented = true.
   def completed?
-    done
+    done?
   end
 
   # If done is false, return true.  And vice-versa.
   def incomplete?
     # To do: fix this
-    !done
+    !done?
   end
 
   def cycle
     start..finish
-  end
-
-  # Closed, bank payment performed.
-  def self.completed
-    joins(:bankpayment).merge(Bankpayment.done)
-  end
-
-  # Closed, bank payment performed.
-  def self.incomplete
-    #    where.not(id: completed)
-    # New, after attribute was removed
-    joins(:bankpayment).merge(Bankpayment.not_done)
-  end
-
-  # Payroll is not yet completed (closed).
-  def self.active
-    where(done: false)
-  end
-
-  # Events (automatically) computed into annotations
-  def self.annotated
-    where(annotated: true)
-  end
-
-  # Not calculated yet.
-  def self.not_annotated
-    where.not(id: annotated)
-  end
-
-  def self.regular
-    where.not(id: special)
-  end
-
-  def self.not_scheduled
-    where.not(id: scheduled)
-  end
-
-  def self.special
-    where(special: true)
   end
 
   # Payment could be done or still in progress.  This merely checks existence.
@@ -473,7 +561,7 @@ class Payroll < ActiveRecord::Base
   end
 
   def without_bankpayment?
-    !with_bankpayment
+    !with_bankpayment?
   end
 
   def regular?
@@ -482,21 +570,6 @@ class Payroll < ActiveRecord::Base
 
   def special?
     special
-  end
-
-  # Fix
-  def self.pap
-    where(pap: true, medres: false)
-  end
-
-  def self.medres
-    where(medres: true, pap: false)
-  end
-  # ---
-
-  # Last day of the payroll which is most in the future
-  def self.farthestcalculabledate
-    latest.first.monthworked.end_of_month
   end
 
   # Expressed as a range (to define when institutions are allowed to enter payroll events)
@@ -516,8 +589,45 @@ class Payroll < ActiveRecord::Base
 
     return false unless start.present? && finish.present?
 
-    right_now = Time.now
+    right_now = Time.zone.now
 
     Logic.within?(start, finish, right_now) # convenience method -returs a boolean
+  end
+
+  def done?
+    is_payroll_done = if bankpayment.exists? && bankpayment.done == true
+                        true
+                      else
+                        false
+                      end
+
+    is_payroll_done
+  end
+
+  def done
+    done?
+  end
+
+  def details
+    month_worked_i18n = I18n.t('activerecord.attributes.payroll.monthworked')
+    payment_date_i18n = I18n.t('activerecord.attributes.payroll.paymentdate')
+    amount_i18n = I18n.t('activerecord.attributes.payroll.amount')
+    special_i18n = I18n.t('activerecord.attributes.payroll.special')
+    sep = Settings.separator + ' '
+    payroll_details = '[' + id.to_s + ']' + sep + \
+                      month_worked_i18n + ': ' + I18n.l(monthworked) + sep + \
+                      payment_date_i18n + ': ' + I18n.l(paymentdate) + sep + \
+                      amount_i18n + ': ' + amount_cents.to_s + sep + \
+                      special_i18n + ': ' + special.to_s
+    payroll_details
+  end
+
+  def payment_on_the_usual_dt?
+    customary_payment_dt = monthworked + \
+                           Settings.payroll.payday.days_following_month_worked.days + 1.month
+
+    is_payment_on_the_customary_dt = paymentdate == customary_payment_dt
+
+    is_payment_on_the_customary_dt
   end
 end

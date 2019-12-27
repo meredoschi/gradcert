@@ -12,7 +12,6 @@ def initial_accreditation(program, from_dt)
   accreditation
 end
 
-
 most_recent_schoolterm_start_dt = Schoolterm.pluck(:start).max
 
 most_recent_schoolterm = Schoolterm.where(start: most_recent_schoolterm_start_dt).first
@@ -53,10 +52,10 @@ tropical_biology_program = Program.new(schoolterm_id: most_recent_schoolterm.id,
                                        programname_id: tropical_biology.id, institution_id: first_institution.id,
                                        professionalspecialty_id: biology_specialty.id, duration: 2)
 
-#Accreditation.delete_all
-#Admission.delete_all
-#Schoolyear.delete_all
-#Program.delete_all
+# Accreditation.delete_all
+# Admission.delete_all
+# Schoolyear.delete_all
+# Program.delete_all
 
 Schoolyear.create(program_id: tropical_biology_program.id, programyear: 1)
 Schoolyear.create(program_id: tropical_biology_program.id, programyear: 2)

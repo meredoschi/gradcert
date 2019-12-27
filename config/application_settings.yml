@@ -1,6 +1,15 @@
 # config/application_settings.yml
 # https://github.com/settingslogic/settingslogic
 defaults: &defaults
+  default_line_size: 240
+  payroll:
+    payday:
+      days_following_month_worked: 9 # e.g. payment on the 10th of the following month
+    data_entry:
+      start:
+         days_after_month_worked: 26 #  e.g. on the 27th of the same month
+      finish:
+         days_following_month_worked: 2 #  e.g. on the 3rd of the following month
   schoolterm:
     sample_quantity: 4
     duration: 2 # in years
@@ -65,6 +74,7 @@ defaults: &defaults
   managing_institution: Example COM
   max_length_for_bankaccount_number: 8
   max_length_for_bankbranch_code: 4
+  max_length_for_institution_abbreviation: 65
   max_number_bankaccounts: 99999999
   max_number_bankbranches: 9999
   max_number_diplomas: 4
@@ -82,10 +92,6 @@ defaults: &defaults
     female: F
     male: M
     unspecified: X
-  personaldocument:
-    passport: Passaporte
-    registered_foreigner: RNE/CIE
-    state_registration: RG
   registration_season:
     finish: <%= "#{'2018-4-1'.to_date}" %>
     start: <%= "#{'2018-1-01'.to_date}" %>

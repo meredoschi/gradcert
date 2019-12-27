@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 # This will guess the User class
 FactoryBot.define do
   factory :permission do
-    # => ["admin", "pap", "papcollaborator", "medrescollaborator", "paplocaladm", "medreslocaladm", "medresmgr", "papmgr", "medres", "adminreadonly"]
+    # => ["admin", "pap", "papcollaborator", "medrescollaborator", "paplocaladm",
+    # "medreslocaladm", "medresmgr", "papmgr", "medres", "adminreadonly"]
 
     # ************* Default *************
     kind 'pap'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This will guess the User class
 FactoryBot.define do
   #  => Address(streetname_id: integer, addr: string, complement: string, neighborhood: string
@@ -8,14 +10,15 @@ FactoryBot.define do
   factory :address do
     streetname
     addr Faker::Address.street_name
-    streetnum { rand(1..1000) } #
+    streetnum { rand(1..1000) }
     complement Faker::Address.secondary_address
     municipality
     # postalcode {rand(99999).to_s+"-"+rand(999).to_s}
     postalcode '12345-678' # Brazilian format
     neighborhood 'Centro'
-    trait :bankbranch do
-      bankbranch_id 1
+
+    trait :bankbranchaddr do
+      bankbranch
     end
 
     trait :contact do

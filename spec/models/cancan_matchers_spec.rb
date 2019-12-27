@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TestingAbility
   include CanCan::Ability
 
@@ -29,12 +31,30 @@ describe 'CanCan custom RSpec::Matchers' do
   let(:expected_error) { RSpec::Expectations::ExpectationNotMetError }
   it { expect { should have_abilities(:destroy, other_user) }.to raise_error(expected_error) }
   it { expect { should have_abilities([:destroy], other_user) }.to raise_error(expected_error) }
-  it { expect { should have_abilities(%i[read destroy], other_user) }.to raise_error(expected_error) }
-  it { expect { should have_abilities({ read: true, destroy: true }, other_user) }.to raise_error(expected_error) }
-  it { expect { should have_abilities({ read: false, destroy: false }, other_user) }.to raise_error(expected_error) }
-  it { expect { should have_abilities({ read: false, destroy: true }, other_user) }.to raise_error(expected_error) }
-  it { expect { should not_have_abilities(%i[read destroy], other_user) }.to raise_error(expected_error) }
-  it { expect { should not_have_abilities({ destroy: false }, other_user) }.to raise_error(ArgumentError) }
+  it {
+    expect { should have_abilities(%i[read destroy], other_user) }
+      .to raise_error(expected_error)
+  }
+  it {
+    expect { should have_abilities({ read: true, destroy: true }, other_user) }
+      .to raise_error(expected_error)
+  }
+  it {
+    expect { should have_abilities({ read: false, destroy: false }, other_user) }
+      .to raise_error(expected_error)
+  }
+  it {
+    expect { should have_abilities({ read: false, destroy: true }, other_user) }
+      .to raise_error(expected_error)
+  }
+  it {
+    expect { should not_have_abilities(%i[read destroy], other_user) }
+      .to raise_error(expected_error)
+  }
+  it {
+    expect { should not_have_abilities({ destroy: false }, other_user) }
+      .to raise_error(ArgumentError)
+  }
 
   # Never use should_not with have_abilities.
 end

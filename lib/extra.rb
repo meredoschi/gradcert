@@ -1,9 +1,7 @@
+# frozen_string_literal: true
+
 # Extra methods
 module Extra
-  def hello
-    'hello'
-  end
-
   # New method
   # base_amount = amount_cents (integer)
   # socialsecurity = bigdecimal
