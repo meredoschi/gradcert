@@ -8,7 +8,7 @@ FactoryBot.define do
     # daystarted: integer, dayfinished: integer, annotated: boolean, pap: boolean,
     # medres: boolean, done: boolean)
 
-    this_months_beginning = Date.today.beginning_of_month
+    this_months_beginning = Time.zone.today.beginning_of_month
     #  next_months_beginning = this_months_beginning + 1.month
     #    pay_day_on_the_tenth = next_months_beginning + 9.day
 
@@ -20,6 +20,11 @@ FactoryBot.define do
     before(:create) do |payroll|
       payroll.paymentdate = payroll.monthworked + 1.month + \
                             Settings.payroll.payday.days_following_month_worked.days
+
+      # Dates represented as integers
+      payroll.daystarted = Dateutils.regular_to_elapsed(payroll.monthworked)
+      payroll.dayfinished = Dateutils.regular_to_elapsed(payroll.monthworked + 1.month - 1.day)
+
       payroll.dataentrystart = payroll.monthworked + \
                                Settings.payroll.data_entry.start.days_after_month_worked.days
       payroll.dataentryfinish = payroll.monthworked + 1.month + \
@@ -73,6 +78,6 @@ FactoryBot.define do
   end
 
   trait :late_payment do
-    paymentdate Date.today + 100.years
+    paymentdate Time.zone.today + 100.years
   end
 end

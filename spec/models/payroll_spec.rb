@@ -5,10 +5,10 @@ require 'rails_helper'
 RSpec.describe Payroll, type: :model do
   #  pending "add some examples to (or delete) #{__FILE__}"
 
-  let(:payroll) { FactoryBot.create(:payroll, :personal_taxation) }
-  let(:taxation) { FactoryBot.create(:taxation, :personal) }
+  let!(:payroll) { FactoryBot.create(:payroll, :personal_taxation) }
+  let!(:taxation) { FactoryBot.create(:taxation, :personal) }
 
-  let(:dt) { Date.today - 60 }
+  let(:dt) { Time.zone.today - 60 }
   #  let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
 
   MAX_COMMENT_LEN = Settings.maximum_comment_length.payroll
@@ -52,7 +52,7 @@ RSpec.describe Payroll, type: :model do
       # Even if the actual payroll information hasn't been entered in the system yet
       #
       it '#start_dt_corresponding_to_today' do
-        current_month_worked = Date.today.beginning_of_month
+        current_month_worked = Time.zone.today.beginning_of_month
         # IMPORTANT! The payroll cycle goes from the first to the last calendar day in every month.
 
         expect(current_month_worked).to eq Payroll.start_dt_corresponding_to_today
@@ -61,7 +61,7 @@ RSpec.describe Payroll, type: :model do
       end
 
       it '#distinct_working_months' do
-        distinct_payroll_working_months = Payroll.pluck(:monthworked).uniq
+        distinct_payroll_working_months = Payroll.uniq.pluck(:monthworked)
 
         expect(distinct_payroll_working_months).to eq Payroll.distinct_working_months
 
@@ -98,8 +98,61 @@ RSpec.describe Payroll, type: :model do
     end
 
     context 'Contextual' do
-      # On the specified date
-      it '#ids_contextual_on(dt)' do
+      it '#ids_contextual_on_sql(dt)' do
+        # Date represented in numeric format
+        numeric_dt = Dateutils.regular_to_elapsed(dt)
+
+        # Filter payrolls yet to start as well as those already completed
+        query = 'select id from payrolls where id not in '\
+        '(Select id from payrolls where daystarted > ? or dayfinished<?)'
+
+        # This is written in plural form, for occasionally there may be special payrolls.
+        # There should be at most one regular payroll per program area (e.g. medical residency).
+        matching_payroll_ids = Payroll.find_by_sql [query, numeric_dt, numeric_dt]
+
+        expect(matching_payroll_ids).to eq Payroll.ids_contextual_on_sql(dt)
+      end
+
+      it '#contextual_on_sql(dt)' do
+        # Date represented in numeric format
+        numeric_dt = Dateutils.regular_to_elapsed(dt)
+
+        # Filter payrolls yet to start as well as those already completed
+        query = 'select * from payrolls where id not in '\
+        '(Select id from payrolls where daystarted > ? or dayfinished<?)'
+
+        # This is written in plural form, for occasionally there may be special payrolls.
+        # There should be at most one regular payroll per program area (e.g. medical residency).
+        matching_payrolls = Payroll.find_by_sql [query, numeric_dt, numeric_dt]
+
+        expect(matching_payrolls).to eq Payroll.contextual_on_sql(dt)
+      end
+
+      it '#ids_contextual_sql(dt)' do
+        contextual_ids = []
+
+        dt_range = dt..dt
+
+        Payroll.all.each do |payroll|
+          payroll_start = Dateutils.to_gregorian(payroll.daystarted)
+          payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
+
+          # Alternatively, this could be done:
+          #      payroll_start=payroll.monthworked.beginning_of_month
+          #      payroll_finish=payroll.monthworked.end_of_month
+
+          payroll_range = payroll_start..payroll_finish # Payroll Cycle
+
+          next unless Logic.intersect(dt_range, payroll_range) == dt_range
+
+          contextual_ids << payroll.id
+        end
+
+        expect(contextual_ids).to eq Payroll.ids_contextual_on(dt)
+      end
+
+      # On the specified date (active record version)
+      it '#ids_contextual_on_active_rec(dt)' do
         contextual_ids = []
 
         dt_range = dt..dt
@@ -124,7 +177,7 @@ RSpec.describe Payroll, type: :model do
 
       # On the specified date
       it '#ids_contextual_today' do
-        today = Date.today
+        today = Time.zone.today
 
         contextual_ids = Payroll.ids_contextual_on(today)
 
@@ -135,6 +188,14 @@ RSpec.describe Payroll, type: :model do
       # Only one payroll, per area, should exist.
       # Reminder: use .first to get the object
       it '#contextual_on(dt)' do
+        payrolls_contextual_on_dt = Payroll.where(id: Payroll.ids_contextual_on_sql(dt))
+
+        #    payrolls_contextual_on_dt = Payroll.contextual_on_sql(dt)
+
+        expect(payrolls_contextual_on_dt).to eq(Payroll.contextual_on(dt))
+      end
+
+      it '#contextual_on_active_rec(dt)' do
         payrolls_contextual_on_dt = Payroll.where(id: Payroll.ids_contextual_on(dt))
         expect(payrolls_contextual_on_dt).to eq(Payroll.contextual_on(dt))
       end
@@ -152,7 +213,51 @@ RSpec.describe Payroll, type: :model do
     end
 
     context 'Timeline' do
+      # Last day of the payroll which is most in the future
+      it '#farthestaccountabledate_activerec' do
+        farthest_accountable_dt = Dateutils.elapsed_to_regular_date(Payroll.maximum(:dayfinished))
+        expect(farthest_accountable_dt).to eq(Payroll.farthestaccountabledate_activerec)
+      end
+
+      it '#farthestaccountabledate is an alias to farthestaccountabledate_sql' do
+        farthest_accountable_dt = Payroll.farthestaccountabledate_sql
+        expect(farthest_accountable_dt).to eq(Payroll.farthestaccountabledate)
+      end
+
+      it '#farthestaccountabledate_sql' do
+        result = nil
+
+        if Payroll.count > 0
+
+          query = 'WITH max_dt(monthworked) AS (Select monthworked from payrolls '\
+          'order by monthworked desc limit 1), farthest_finish(tm) as('\
+          "select monthworked + interval '1 month' - interval '1 day' from max_dt)"\
+          'select tm::date as farthest_calculable_payroll_dt from farthest_finish'
+          result = ActiveRecord::Base.connection.execute(query).values[0][0].to_date
+        end
+
+        expect(result).to eq(Payroll.farthestaccountabledate_sql)
+      end
+
+      it '#past_ids_sql' do
+        # Date represented in numeric format
+        numeric_dt = Dateutils.regular_to_elapsed(Time.zone.today)
+
+        # Filter payrolls yet to start as well as those already completed
+        query = 'select id from payrolls where id in (Select id from payrolls where dayfinished<?)'
+
+        # i.e. finish date has passed, but not necessarily completed (bank payment performed)
+        past_payroll_ids = Payroll.find_by_sql [query, numeric_dt]
+
+        expect(past_payroll_ids).to eq Payroll.past_ids_sql
+      end
+
       it '#past' do
+        past_payrolls = Payroll.where(id: Payroll.past_ids_sql)
+        expect(past_payrolls).to eq(Payroll.past)
+      end
+
+      it '#past_active_rec' do
         possible_current_payrolls = Payroll.current
 
         previous_payrolls = nil
@@ -167,7 +272,7 @@ RSpec.describe Payroll, type: :model do
 
         end
 
-        expect(previous_payrolls).to eq(Payroll.past)
+        expect(previous_payrolls).to eq(Payroll.past_active_rec)
       end
 
       # Not in effect yet, scheduled for future payroll cycles
@@ -337,20 +442,13 @@ RSpec.describe Payroll, type: :model do
         expect(annotated_ids_sql).to eq(Payroll.annotated_ids_sql)
       end
 
-      it '#annotated_sql' do
+      it '#not_annotated_ids_sql' do
         # sql query
-        query = 'select * from payrolls p2 where id in (SELECT distinct p.id FROM payrolls p ' \
-        'INNER JOIN annotations a ON (p.id = a.payroll_id));'
-        annotated_sql = Payroll.find_by_sql(query)
-        expect(annotated_sql).to eq(Payroll.annotated_sql)
-      end
-
-      it '#not_annotated_sql' do
-        # sql query
-        query = 'select * from payrolls p2 where id not in (SELECT distinct p.id FROM payrolls p ' \
-        'INNER JOIN annotations a ON (p.id = a.payroll_id));'
-        payrolls_without_annotations = Payroll.find_by_sql(query)
-        expect(payrolls_without_annotations).to eq(Payroll.not_annotated_sql)
+        query = 'select id from payrolls p2 where id not in '\
+        ' (SELECT distinct p.id FROM payrolls p ' \
+        ' INNER JOIN annotations a ON (p.id = a.payroll_id));'
+        payroll_ids_without_annotations = Payroll.find_by_sql(query)
+        expect(payroll_ids_without_annotations).to eq(Payroll.not_annotated_ids_sql)
       end
 
       # Returns the ids for those payrolls with at least one annotation (via active record)
@@ -359,15 +457,21 @@ RSpec.describe Payroll, type: :model do
         expect(annotated_payroll_ids).to eq(Payroll.annotated_ids_sql)
       end
 
+      it '#annotated_ids and annotated_ids_sql return the same results' do
+        expect(Payroll.annotated_ids).to eq(Payroll.annotated_ids_sql)
+      end
+
       # Returns payrolls with at least one annotation
       it '#annotated' do
-        annotated_payrolls = Payroll.where(id: Payroll.annotated_ids)
+        # annotated_payrolls = Payroll.where(id: Payroll.annotated_ids) # active record version
+        annotated_payrolls = Payroll.where(id: Payroll.annotated_ids_sql) # calls the sql version
         expect(annotated_payrolls).to eq(Payroll.annotated)
       end
 
+      # Not calculated yet.
       it '#not_annotated' do
-        payrolls_not_annotated = Payroll.where.not(id: Payroll.annotated)
-        expect(payrolls_not_annotated).to eq(Payroll.not_annotated)
+        payrolls_without_annotations = Payroll.where.not(id: Payroll.annotated)
+        expect(payrolls_without_annotations).to eq(Payroll.not_annotated)
       end
 
       # Alias to completed
@@ -530,7 +634,7 @@ RSpec.describe Payroll, type: :model do
 
     finish = payroll.dataentryfinish
 
-    right_now = Time.now
+    right_now = Time.zone.now
 
     data_entry_permitted = Logic.within?(start, finish, right_now) # returs a boolean
 

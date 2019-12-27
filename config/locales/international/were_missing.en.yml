@@ -1,5 +1,12 @@
 ---
 en:
+  warning:
+    block:
+      removal:
+        payroll:
+          annotated: "Warning: unable to remove a payroll with annotations."
+          completed: "Warning: unable to remove a completed payroll."
+          done: "Warning: unable to remove a completed payroll." # Alias
   1st: 1st
   Não: false
   a:

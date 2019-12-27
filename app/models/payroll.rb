@@ -13,8 +13,8 @@ class Payroll < ActiveRecord::Base
   belongs_to :scholarship
   belongs_to :taxation
   has_many :annotation, dependent: :restrict_with_exception
-  has_many :bankpayment
-  has_many :feedback
+  has_many :bankpayment, dependent: :restrict_with_exception
+  has_many :feedback, dependent: :restrict_with_exception
   # ---------------------------------------------------------
 
   # ------------------- Validations -------------------------
@@ -24,7 +24,7 @@ class Payroll < ActiveRecord::Base
     validates required_field, presence: true
   end
 
-  validates_uniqueness_of :paymentdate, unless: :special?
+  validates :paymentdate, uniqueness: { unless: :special? }
 
   # validate :timely_payment
 
@@ -64,17 +64,44 @@ class Payroll < ActiveRecord::Base
 
   def self.start_dt_corresponding_to_today
     # IMPORTANT! The payroll cycle goes from the first to the last calendar day in every month.
-    Date.today.beginning_of_month
+    Time.zone.today.beginning_of_month
   end
 
   # --- Contextual methods start
 
+  def self.ids_contextual_on_sql(specified_dt)
+    # Date represented in numeric format
+    numeric_dt = Dateutils.regular_to_elapsed(specified_dt)
+
+    query = 'select id from payrolls where id not in '\
+    '(Select id from payrolls where daystarted > ? or dayfinished<?)'
+
+    find_by_sql [query, numeric_dt, numeric_dt]
+  end
+
   def self.ids_contextual_on(specified_dt)
+    ids_contextual_on_sql(specified_dt)
+  end
+
+  def self.contextual_on_sql(specified_dt)
+    # Date represented in numeric format
+    numeric_dt = Dateutils.regular_to_elapsed(specified_dt)
+
+    # Filter payrolls yet to start as well as those already completed
+    query = 'select * from payrolls where id not in '\
+    '(Select id from payrolls where daystarted > ? or dayfinished<?)'
+
+    # This is written in plural form, for occasionally there may be special payrolls.
+    # There should be at most one regular payroll per program area (e.g. medical residency).
+    find_by_sql [query, numeric_dt, numeric_dt]
+  end
+
+  def self.ids_contextual_on_active_rec(specified_dt)
     contextual_ids = []
 
     dt_range = specified_dt..specified_dt
 
-    Payroll.all.each do |payroll|
+    Payroll.all.find_each do |payroll|
       payroll_start = Dateutils.to_gregorian(payroll.daystarted)
       payroll_finish = Dateutils.to_gregorian(payroll.dayfinished)
 
@@ -89,18 +116,19 @@ class Payroll < ActiveRecord::Base
   end
 
   def self.ids_contextual_today
-    ids_contextual_on(Date.today)
+    ids_contextual_on(Time.zone.today)
   end
 
   # Contextual on a specified date - returns an active record relation
   # Only one payroll, per area, should exist.
   # Reminder: use .first to get the object
   def self.contextual_on(specified_dt)
-    where(id: ids_contextual_on(specified_dt))
+    where(id: ids_contextual_on_sql(specified_dt))
   end
 
   def self.contextual_today
-    where(id: ids_contextual_today)
+    #  where(id: ids_contextual_today) # active record version
+    contextual_on(Time.zone.today)
   end
 
   # Alias, for convenience
@@ -111,6 +139,22 @@ class Payroll < ActiveRecord::Base
   # --- Contextual methods finish
 
   def self.past
+    where(id: past_ids_sql)
+  end
+
+  def self.past_ids_sql
+    # Date represented in numeric format
+    numeric_dt = Dateutils.regular_to_elapsed(Time.zone.today)
+
+    # Filter payrolls yet to start as well as those already completed
+    query = 'select id from payrolls where id in (Select id from payrolls where dayfinished<?)'
+
+    # i.e. finish date has passed, but not necessarily completed (bank payment performed)
+    find_by_sql [query, numeric_dt]
+  end
+
+  # Active record version
+  def self.past_active_rec
     possible_current_payrolls = Payroll.current
 
     previous_payrolls = nil
@@ -121,7 +165,7 @@ class Payroll < ActiveRecord::Base
       # Future to do: add gradcert (boolean field) to the model
       current_payroll = possible_current_payrolls.first
       current_month_worked = current_payroll.monthworked
-      previous_payrolls = Payroll.where('monthworked < ?', current_month_worked)
+      previous_payrolls = where('monthworked < ?', current_month_worked)
 
     end
 
@@ -229,20 +273,29 @@ class Payroll < ActiveRecord::Base
     contextual_today.incomplete
   end
 
+  # Returns payrolls with at least one annotation - active record version
+  def self.annotated_active_rec
+    where(id: annotated_ids)
+  end
+
+  def self.not_annotated_active_rec
+    where.not(id: annotated_active_rec)
+  end
+
   # Find the information using sql (less portable, but generally faster than active record)
   # Provided for convenience
   def self.annotated_ids_sql
     # raw sql query
     query = 'SELECT distinct p.id FROM payrolls p INNER JOIN annotations a ON '\
     '(p.id = a.payroll_id);'
-    Payroll.find_by_sql(query)
+    find_by_sql(query)
   end
 
-  def self.annotated_sql
+  def self.not_annotated_ids_sql
     # sql query
-    query = 'select * from payrolls p2 where id in (SELECT distinct p.id FROM payrolls p ' \
+    query = 'select id from payrolls p2 where id not in (SELECT distinct p.id FROM payrolls p ' \
     'INNER JOIN annotations a ON (p.id = a.payroll_id));'
-    Payroll.find_by_sql(query)
+    find_by_sql(query) # payroll_ids_without_annotations
   end
 
   # Not calculated yet.
@@ -254,17 +307,18 @@ class Payroll < ActiveRecord::Base
     # sql query
     query = 'select * from payrolls p2 where id not in (SELECT distinct p.id FROM payrolls p ' \
     'INNER JOIN annotations a ON (p.id = a.payroll_id));'
-    Payroll.find_by_sql(query)
+    find_by_sql(query)
   end
 
   # Returns the ids for those payrolls with at least one annotation (via active record)
   def self.annotated_ids
-    Payroll.joins(:annotation).pluck(:id).uniq
+    #    Payroll.joins(:annotation).pluck(:id).uniq
+    annotated_ids_sql
   end
 
   # Returns payrolls with at least one annotation
   def self.annotated
-    Payroll.where(id: Payroll.annotated_ids)
+    where(id: Payroll.annotated_ids)
   end
 
   def self.regular
@@ -305,12 +359,12 @@ class Payroll < ActiveRecord::Base
   end
 
   def self.reference_month_most_in_the_future
-    Payroll.order(monthworked: :desc).first.monthworked
+    order(monthworked: :desc).first.monthworked
   end
 
   # Returns an active record relation
   def self.with_reference_month_most_in_the_future
-    Payroll.where(monthworked: Payroll.reference_month_most_in_the_future)
+    where(monthworked: reference_month_most_in_the_future)
   end
 
   # Returns the most recently completed (regular) payroll, if any
@@ -328,14 +382,32 @@ class Payroll < ActiveRecord::Base
     'select * from Payrolls p where monthworked in '\
     '(select monthworked from Latest_Completed_Payroll_monthworked_CTE) and p.special=false;'
 
-    Payroll.find_by_sql(query)
+    find_by_sql(query)
   end
 
   # Last day of the payroll which is most in the future
-  def self.farthestcalculabledate
-    latest.first.monthworked.end_of_month
+  def self.farthestaccountabledate
+    farthestaccountabledate_sql
   end
 
+  # Last day of the payroll which is most in the future
+  # Active record version - more portable
+  def self.farthestaccountabledate_activerec
+    Dateutils.elapsed_to_regular_date(maximum(:dayfinished))
+  end
+
+  # Returns a date object (if at least one payroll exists)
+  def self.farthestaccountabledate_sql
+    return unless count.positive?
+
+    query = 'WITH max_dt(monthworked) AS (Select monthworked from payrolls '\
+    'order by monthworked desc limit 1)'\
+    ', farthest_finish(tm) '\
+    "as(select monthworked + interval '1 month' - interval '1 day' from max_dt) "\
+    'select tm::date as farthest_calculable_payroll_dt from farthest_finish'
+    result = ActiveRecord::Base.connection.execute(query)
+    result.values[0][0].to_date
+  end
   # ---------------------------------------------------------
 
   # ---------------- Instance methods -----------------------
@@ -517,7 +589,7 @@ class Payroll < ActiveRecord::Base
 
     return false unless start.present? && finish.present?
 
-    right_now = Time.now
+    right_now = Time.zone.now
 
     Logic.within?(start, finish, right_now) # convenience method -returs a boolean
   end

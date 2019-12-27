@@ -1,5 +1,11 @@
 ---
 pt_BR:
+  warning:
+    block:
+      removal:
+        payroll:
+          annotated: "Alerta: não é possível remover uma folha que contiver anotações."
+          completed: "Alerta: não é possível remover uma folha já concluída."
   alert:
     different_length: Alerta!!! Comprimento diferente
     than_expected: do esperado
