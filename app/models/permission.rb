@@ -1,28 +1,25 @@
+# frozen_string_literal: true
+
 # Attempt to handle the various permissions gracefully
 # Refer to ability.rb (CanCan)
 class Permission < ActiveRecord::Base
-  has_many :user, foreign_key: 'permission_id'
+  has_many :user, foreign_key: 'permission_id', dependent: :restrict_with_exception,
+                  inverse_of: :permission
+
+  scope :ordered_by_description, -> { order(desc: :asc) }
 
   def self.readonly
-    where("permissions.kind<>'admin'")
+    where(kind: 'adminreadonly')
   end
 
-  # Alternate syntax
   def self.paplocalhr
-    where("permissions.kind='paplocaladm'")
+    where(kind: 'paplocaladm')
   end
 
   # Permissions granted to pap local administrators - excludes external experts "papcollaborators"
+  # Alias, for clarity
   def self.paplocal
-    if Schoolterm.open_season?
-
-      where("permissions.kind='pap'")
-
-    else
-
-      where("permissions.kind='paplocaladm'")
-
-    end
+    paplocalrealm
   end
 
   # Refer to: users_helper.rb, retrieve_users_permissions_for(user)
@@ -51,12 +48,12 @@ class Permission < ActiveRecord::Base
 
   def self.paplocalrealm
     where(kind: %i[pap paplocaladm])
-    #		where(kind: %i[pap papcollaborator paplocaladm]) # For the future
+    #    where(kind: %i[pap papcollaborator paplocaladm]) # For the future
   end
 
   def self.medreslocalrealm
     where(kind: %i[medres medreslocaladm])
-    #		where(kind: %i[medres medrescollaborator medreslocaladm]) # For the future
+    #    where(kind: %i[medres medrescollaborator medreslocaladm]) # For the future
   end
 
   # Student or Collaborator
@@ -106,9 +103,5 @@ class Permission < ActiveRecord::Base
 
   def self.own_institution(user)
     joins(user: :institution).where('institutions.id = ?  ', user.institution_id).uniq
-  end
-
-  def self.default_scope
-    order('description ASC')
   end
 end
