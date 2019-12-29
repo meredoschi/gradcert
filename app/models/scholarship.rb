@@ -11,6 +11,10 @@ class Scholarship < ActiveRecord::Base
   scope :medres, -> { where(medres: true) }
 
   #  scope :pap, -> { where(pap: true, medres: false) }
+  # https://stackoverflow.com/questions/29701265/how-to-build-scope-to-order-title
+  scope :ordered_by_oldest_start_date, -> { reorder(start: :desc) }
+  scope :ordered_by_newest_start_date, -> { reorder(start: :asc) }
+  scope :ordered_by_newest, -> { reorder(start: :asc) }
 
   def self.default_scope
     # this notation prevents ambiguity
@@ -28,13 +32,13 @@ class Scholarship < ActiveRecord::Base
 
   # **********************************************************************************************
 
-  validates [:pap], inclusion: { in: [true], unless: :medres? }
+  validates :pap, inclusion: { in: [true], unless: :medres? }
 
-  validates [:medres], inclusion: { in: [true], unless: :pap? }
+  validates :medres, inclusion: { in: [true], unless: :pap? }
 
-  validates [:medres], inclusion: { in: [false], if: :pap? }
+  validates :medres, inclusion: { in: [false], if: :pap? }
 
-  validates [:pap], inclusion: { in: [false], if: :medres? }
+  validates :pap, inclusion: { in: [false], if: :medres? }
 
   validates :name, presence: true, length: { maximum: 100 }
 
@@ -69,24 +73,9 @@ class Scholarship < ActiveRecord::Base
     @consistency
   end
 
-  def self.ordered_by_oldest_start_date
-    order(start: :desc)
-  end
-
-  def self.ordered_by_newest_start_date
-    order(start: :asc)
-  end
-
-  # Alias, for convenience
-  def self.ordered_by_newest
-    ordered_by_newest_start_date
-  end
-
   def contextual_today?
     today = Time.zone.today
-    todays_range = today..today
-
-    effectiveperiod.overlaps? todays_range
+    (start <= today) && (finish >= today)
   end
 
   # Alias - for convenience
@@ -120,28 +109,18 @@ class Scholarship < ActiveRecord::Base
     start..finish # defined as a range
   end
 
-  # TDD
-  # Active means "contextual today"
-  def self.contextual_today
-    today = Time.zone.today
-    todays_range = today..today
-
-    contextual_ids = []
-
-    scholarships = Scholarship.ordered_by_newest
-
-    scholarships.each do |s|
-      next unless s.active?
-
-      contextual_ids << s.id
-    end
-
-    active_scholarships = scholarships.where(id: contextual_ids)
-
-    active_scholarships
+  # Alias, for clarity (refactored version)
+  def self.contextual_on(specified_dt)
+    in_effect_on(specified_dt)
   end
 
-  # Alias - for convenience
+  # TDD
+  # Alias, for clarity
+  def self.contextual_today
+    in_effect_on(Time.zone.today)
+  end
+
+  # Another alias
   def self.active
     contextual_today
   end
@@ -186,19 +165,6 @@ class Scholarship < ActiveRecord::Base
 
   def details
     amount.symbol + ' ' + amount.to_s + ' (' + name + ')'
-  end
-
-  # Takes a date object
-  def self.for_reference_month
-    where(Time.zone.today.to_i > :finish)
-  end
-
-  def self.pap
-    where(pap: true)
-  end
-
-  def self.medres
-    where(medres: true)
   end
 
   def pap?

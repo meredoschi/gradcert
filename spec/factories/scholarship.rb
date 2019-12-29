@@ -18,6 +18,8 @@ FactoryBot.define do
       amount_cents 300_000
       # Pap has only one scholarship amount.  Medical residency has two: 100% and 80% (partial)
       partialamount_cents 250_000
+      start '2020-3-1' # Arbitrary dates in the past (for testing)
+      finish '2021-2-28'
     end
 
     trait :pap do
