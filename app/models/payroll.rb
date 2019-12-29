@@ -295,7 +295,6 @@ class Payroll < ActiveRecord::Base
 
   # The last accountable day on the previous payroll (if it exists)
   def self.previous_dt_finished
-
     if previous_payrolls.present?
       previous_payroll = previous_payrolls.first # active record object, first is needed here
       dt_finished = Dateutils.to_gregorian(previous_payroll.dayfinished)

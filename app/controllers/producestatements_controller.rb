@@ -144,7 +144,7 @@ class ProducestatementsController < ApplicationController
 
   def set_payment_amount
 
-	    payment=Scholarship.for_payroll(@bankpayment.payroll).first.amount
+	    payment=Scholarship.in_effect_for(@bankpayment.payroll).first.amount
 
 		    return payment
 

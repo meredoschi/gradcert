@@ -1,35 +1,40 @@
+# frozen_string_literal: true
+
+# Holds scholarship information
 class Scholarship < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
 
-  has_many :payroll, foreign_key: 'scholarship_id'
+  has_many :payroll, foreign_key: 'scholarship_id', dependent: :restrict_with_exception,
+                     inverse_of: :scholarship
 
   scope :pap, -> { where(pap: true) }
   scope :medres, -> { where(medres: true) }
 
-  #	scope :pap, -> { where(pap: true, medres: false) }
+  #  scope :pap, -> { where(pap: true, medres: false) }
 
   def self.default_scope
     # this notation prevents ambiguity
     order(start: :desc)
-    # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
+    # http://stackoverflow.com/questions/16896937/
+    #      rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
   end
 
-  # ***********************************************************************************************************************************
+  # **********************************************************************************************
 
   # http://stackoverflow.com/questions/1019939/ruby-on-rails-best-method-of-handling-currency-money
 
   monetize :amount_cents
   monetize :partialamount_cents
 
-  # ***********************************************************************************************************************************
+  # **********************************************************************************************
 
-  validates_inclusion_of [:pap], in: [true], unless: :medres?
+  validates [:pap], inclusion: { in: [true], unless: :medres? }
 
-  validates_inclusion_of [:medres], in: [true], unless: :pap?
+  validates [:medres], inclusion: { in: [true], unless: :pap? }
 
-  validates_inclusion_of [:medres], in: [false], if: :pap?
+  validates [:medres], inclusion: { in: [false], if: :pap? }
 
-  validates_inclusion_of [:pap], in: [false], if: :medres?
+  validates [:pap], inclusion: { in: [false], if: :medres? }
 
   validates :name, presence: true, length: { maximum: 100 }
 
@@ -42,7 +47,7 @@ class Scholarship < ActiveRecord::Base
 
   validate :start_finish_consistency
 
-  # 	validates :daystarted, :dayfinished, :overlap => {:scope => "pap"}
+  #   validates :daystarted, :dayfinished, :overlap => {:scope => "pap"}
 
   # TDD
   def start_finish_consistency
@@ -59,7 +64,7 @@ class Scholarship < ActiveRecord::Base
 
                      false
 
-                     end
+                   end
 
     @consistency
   end
@@ -78,7 +83,7 @@ class Scholarship < ActiveRecord::Base
   end
 
   def contextual_today?
-    today = Date.today
+    today = Time.zone.today
     todays_range = today..today
 
     effectiveperiod.overlaps? todays_range
@@ -94,29 +99,19 @@ class Scholarship < ActiveRecord::Base
   # TDD
   # Textual representation, for convenience
   def effectivedates
-    effective_dates = I18n.t('activerecord.attributes.scholarship.virtual.effectiveperiod').capitalize + ':'
-
-    effective_dates += I18n.l(start, format: :dmy) + ' -> ' # textual representation
-
-    #		effective_dates+=I18n.t('until')+' '
-
-    effective_dates += I18n.l(finish, format: :dmy) # textual representation
-
-    effective_dates
+    I18n.t('activerecord.attributes.scholarship.virtual.effectiveperiod').capitalize \
+    + ':' + I18n.l(start, format: :dmy) + ' -> ' \
+    + I18n.l(finish, format: :dmy) # textual representation
   end
 
-  # In effect for a payroll period
-  def self.for_payroll(p)
-    # self.first
-
-    where('daystarted <= ? and dayfinished >= ?', p.daystarted, p.dayfinished)
+  # specified_dt generally will be a payroll's start date (monthworked attribute)
+  def self.in_effect_on(specified_dt)
+    where('start <= ? and finish >= ?', specified_dt, specified_dt)
   end
 
-  # Similar concept, more general based on reference month - works for special payrolls
-  def self.on_month(m)
-    dstart = (m - Settings.dayone).to_i # Converts date to integers
-
-    where('daystarted <= ? and dayfinished >= ?', dstart, dstart)
+  # Scholarship information for a specific payroll
+  def self.in_effect_for(payroll)
+    in_effect_on(payroll.monthworked)
   end
 
   # Effective period
@@ -128,7 +123,7 @@ class Scholarship < ActiveRecord::Base
   # TDD
   # Active means "contextual today"
   def self.contextual_today
-    today = Date.today
+    today = Time.zone.today
     todays_range = today..today
 
     contextual_ids = []
@@ -153,15 +148,7 @@ class Scholarship < ActiveRecord::Base
 
   # TDD
   def partialamount?
-    @has_partial_amount = if partialamount > 0
-
-                            true
-
-                          else
-
-                            false
-
-                          end
+    @has_partial_amount = partialamount.positive?
 
     @has_partial_amount
   end
@@ -169,34 +156,32 @@ class Scholarship < ActiveRecord::Base
   def detailed
     scholarship_amount = number_to_currency(amount)
 
-    detailed_info = name + ' - ' + sector + ' - ' + I18n.t('activerecord.attributes.scholarship.amount') + ' ' + scholarship_amount + ' - '
+    detailed_info = name + ' - ' + sector + ' - ' + ta('scholarship.amount') + \
+                    ' ' + scholarship_amount + ' - '
 
     if partialamount?
 
-      detailed_info += I18n.t('activerecord.attributes.scholarship.partialamount') + ' ' + number_to_currency(partialamount) + ' - '
+      detailed_info += ta('scholarship.partialamount') + ' ' \
+       + number_to_currency(partialamount) + ' - '
 
     end
 
-    detailed_info += effectivedates
+    detailed_info + effectivedates
   end
 
   def sector
-    scholarship_sector = if pap? then I18n.t('activerecord.attributes.scholarship.pap')
-                         elsif medres? then I18n.t('activerecord.attributes.scholarship.medres')
-
+    if pap? then I18n.t('activerecord.attributes.scholarship.pap')
+    elsif medres? then I18n.t('activerecord.attributes.scholarship.medres')
+    end
   end
-
-    scholarship_sector
-end
 
   # TDD
   def kind
-    scholarship_kind = if pap? then I18n.t('activerecord.attributes.scholarship.pap')
-                       elsif medres? then I18n.t('activerecord.attributes.scholarship.medres')
-
-  end
-
-    scholarship_kind
+    if pap?
+      I18n.t('activerecord.attributes.scholarship.pap')
+    elsif medres?
+      I18n.t('activerecord.attributes.scholarship.medres')
+    end
   end
 
   def details
@@ -205,12 +190,7 @@ end
 
   # Takes a date object
   def self.for_reference_month
-    where(Date.today.to_i > :finish)
-  end
-
-  # Takes a date object
-  def self.for_reference_month
-    where(Date.today.to_i > :finish)
+    where(Time.zone.today.to_i > :finish)
   end
 
   def self.pap

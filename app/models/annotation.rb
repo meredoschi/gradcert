@@ -146,7 +146,7 @@ class Annotation < ActiveRecord::Base
 
     gross = if payroll.regular?
 
-              Scholarship.for_payroll(payroll).first.amount
+              Scholarship.in_effect_for(payroll).first.amount
 
             else
 
@@ -186,7 +186,7 @@ class Annotation < ActiveRecord::Base
   def discount_can_not_be_more_than_gross_amount
     payroll = self.payroll
 
-    gross = Scholarship.for_payroll(payroll).first.amount
+    gross = Scholarship.in_effect_for(payroll).first.amount
 
     if discount > gross
 

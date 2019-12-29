@@ -76,7 +76,7 @@ class StatementsController < ApplicationController
 
 	 	@payroll=@statement.bankpayment.payroll
 
- 		@scholarship_gross_amount=Scholarship.for_payroll(@payroll).first.amount
+ 		@scholarship_gross_amount=Scholarship.in_effect_for(@payroll).first.amount
 
  		@absences_discount=@scholarship_gross_amount-@statement.grossamount
 
@@ -223,7 +223,7 @@ class StatementsController < ApplicationController
 
 		else
 
-	    payment=Scholarship.for_payroll(@statement.bankpayment.payroll).first.amount
+	    payment=Scholarship.in_effect_for(@statement.bankpayment.payroll).first.amount
 
   	end
 

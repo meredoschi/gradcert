@@ -12,3 +12,7 @@ logfile
 /tmp
 .DS_Store
 coverage
+# rubocop report
+rubo.txt
+# testing script
+test.sh  

@@ -6,6 +6,10 @@ RSpec.describe Scholarship, type: :model do
   # http://www.rubydoc.info/gems/money-rails/0.8.1
   include MoneyRails::TestHelpers
 
+  let(:taxation) { FactoryBot.create(:taxation, :personal) }
+  let(:payroll) { FactoryBot.create(:payroll, :personal_taxation, :special) }
+  let(:specified_dt) { Time.zone.today - 60 }
+
   # single scholarship
   let(:scholarship) { scholarship = FactoryBot.create(:scholarship, :pap) }
 
@@ -309,4 +313,18 @@ RSpec.describe Scholarship, type: :model do
 
     expect(active_scholarships).to eq(Scholarship.active)
   end
+
+  # specified_dt generally will be a payroll's start date (monthworked attribute)
+  it '#in_effect_on(specified_dt)' do
+    scholarships_in_effect=Scholarship.where('start <= ? and finish >= ?', specified_dt, specified_dt)
+    expect(scholarships_in_effect).to eq(Scholarship.in_effect_on(specified_dt))
+  end
+
+  it '#in_effect_for(payroll)' do
+      # Generally one, but theoretically there may be more (e.g. medical residency and gradcert)
+      scholarships_in_effect_for_payroll=Scholarship.in_effect_on(payroll.monthworked)
+      expect(scholarships_in_effect_for_payroll).to eq(Scholarship.in_effect_for(payroll))
+      # The kind will generally be filtered by the pertinent ability at the controller level
+  end
+
 end

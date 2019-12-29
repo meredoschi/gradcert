@@ -258,7 +258,7 @@ class PayrollsController < ApplicationController
     @all_events=Event.includes(:leavetype).includes(:registration) # used in report_annotations view (bullet)
     @all_institutions=Institution.all
     @all_registrations=Registration.all
-    @scholarship_for_payroll=Scholarship.for_payroll(@payroll)
+    @scholarship_for_payroll=Scholarship.in_effect_for(@payroll)
 
     @payroll_annotations=@all_annotations.for_payroll(@payroll)
 

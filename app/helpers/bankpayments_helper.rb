@@ -168,7 +168,7 @@ module BankpaymentsHelper
 
 		else
 		
-	    payment=Scholarship.for_payroll(@bankpayment.payroll).first.amount
+	    payment=Scholarship.in_effect_for(@bankpayment.payroll).first.amount
   
   	end
 	

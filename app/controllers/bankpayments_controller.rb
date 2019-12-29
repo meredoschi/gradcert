@@ -102,7 +102,7 @@ class BankpaymentsController < ApplicationController
     @rounding = @net - @bankpayment.totalamount
     @absences_adjustment = @rounding / (1 - @social_security_rate)
     @annotated_registrations = Registration.annotations_for_payroll(@bankpayment.payroll)
-    # @scholarship_amount=Scholarship.for_payroll(@bankpayment.payroll)
+    # @scholarship_amount=Scholarship.in_effect_for(@bankpayment.payroll)
 
     @absences_final_amount = @absences_total_amount + @absences_adjustment
 
@@ -425,7 +425,7 @@ class BankpaymentsController < ApplicationController
 
     # 	else
 
-    payment = Scholarship.for_payroll(@bankpayment.payroll).first.amount
+    payment = Scholarship.in_effect_for(@bankpayment.payroll).first.amount
 
     #  	end
 
