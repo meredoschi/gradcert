@@ -7,6 +7,7 @@ describe ApplicationpermissionsHelper, type: :helper do
 
   let(:permission) { FactoryBot.create(:permission) }
   let(:user) { FactoryBot.create(:user, :pap) }
+  let(:current_user) { :user }
   #  let(:current_user) { FactoryBot.create(:user, :pap) }
 
   it '-permission_for(user)' do
@@ -24,6 +25,18 @@ describe ApplicationpermissionsHelper, type: :helper do
     is_user_admin_or_readonly = helper.user_signed_in? && \
                                 (%w[admin adminreadonly].include? helper.permission_for(user))
     expect(is_user_admin_or_readonly).to eq(helper.admin_or_readonly?(user))
+  end
+
+  it '-able_to_edit_users?(_user)' do
+    is_able_to_edit_users = (helper.manager?(current_user) || helper.local_admin?(current_user) || \
+    helper.admin?(current_user))
+    expect(is_able_to_edit_users).to eq(helper.able_to_edit_users?(user))
+  end
+
+  # Checks if user is admin readonly (e.g. senior management or external auditing agency)
+  it '-admin_readonly?(user)' do
+    is_user_read_only_admin = (helper.permission_for(user) == 'adminreadonly')
+    expect(is_user_read_only_admin).to eq(helper.admin_readonly?(user))
   end
 
   context 'pap' do

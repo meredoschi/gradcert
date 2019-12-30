@@ -2,26 +2,12 @@
 
 # Called on ApplicationController (originally on application helper)
 module ApplicationpermissionsHelper
-  # Fetch students
-  def registrations_for(user)
-    records = if permission_for(user) == 'admin' then Registration.all
-              elsif permission_for(user) == 'papmgr' then Registration.pap
-              elsif permission_for(user) == 'paplocaladm'
-                Registration.pap.from_own_institution(user)
-              end
+  # <><><><><><><><><>
+  # Tested code start
+  # <><><><><><><><><>
 
-    records
-  end
-
-  def registration_details(user)
-    profile = if permission_for(user) == 'admin' then :student_name_schoolyear_institution_abbrv
-
-              elsif permission_for(user) == 'papmgr' then :student_name_schoolyear_institution_abbrv
-              elsif permission_for(user) == 'paplocaladm' then :student_name_id_schoolyear_term
-              else 'indefinido'
-              end
-
-    profile
+  def admin_or_readonly?(user)
+    user_signed_in? && (%w[admin adminreadonly].include? permission_for(user))
   end
 
   def permission_for(user)
@@ -32,65 +18,58 @@ module ApplicationpermissionsHelper
     safe_join([user.permission.description])
   end
 
+  # PAP
+
   def pap_staff?(user)
     (pap_local_admin?(user) || pap_manager?(user))
   end
 
+  def pap_manager?(user)
+    (user_signed_in? && (permission_for(user) == 'papmgr'))
+  end
+
+  # Medical residency
   def medres_staff?(user)
     (medical_residency_local_admin?(user) || medres_manager?(user))
+  end
+
+  def medres_manager?(user)
+    (user_signed_in? && (permission_for(user) == 'medresmgr'))
+  end
+
+  def medres_local_admin?(user)
+    (permission_for(user) == 'medreslocaladm' && user_signed_in?)
   end
 
   # user role checking
 
   def able_to_edit_users?(_user)
-    if manager?(current_user) || local_admin?(current_user) || admin?(current_user)
-
-      true
-
-    else false
-
-    end
+    (manager?(current_user) || local_admin?(current_user) || admin?(current_user))
   end
 
-  def pap_manager?(user)
-    if user_signed_in? && (permission_for(user) == 'papmgr')
-      true
-    else
-      false
-    end
-  end
-
-  def medres_manager?(user)
-    if user_signed_in? && (permission_for(user) == 'medresmgr')
-      true
-    else
-      false
-    end
-  end
-
-  # Checks if user is admin readonly
+  # Checks if user is admin readonly (e.g. senior management or external auditing agency)
   def admin_readonly?(user)
     (permission_for(user) == 'adminreadonly')
   end
 
-  def admin_or_readonly?(user)
-    user_signed_in? && (%w[admin adminreadonly].include? permission_for(user))
-  end
+  # <><><><><><><><><>
+  # Tested code finish
+  # <><><><><><><><><>
 
   def admin?(user)
-    true if user_signed_in? && (permission_for(user) == 'admin')
+    (user_signed_in? && (permission_for(user) == 'admin'))
   end
 
   def adminreadonly?(user)
-    true if user_signed_in? && (permission_for(user) == 'adminreadonly')
+    (user_signed_in? && (permission_for(user) == 'adminreadonly'))
   end
 
   def staff?(user)
-    true if local_admin?(user) || manager?(user) || admin_or_readonly?(user)
+    (local_admin?(user) || manager?(user) || admin_or_readonly?(user))
   end
 
   def medical_residency_local_admin?(user)
-    true if user_signed_in? && (permission_for(user) == 'medreslocaladm')
+    (user_signed_in? && (permission_for(user) == 'medreslocaladm'))
   end
 
   def pap_local_admin?(user)
@@ -192,9 +171,29 @@ module ApplicationpermissionsHelper
     user.permission.kind.in?(%w[medres medrescollaborator medreslocaladm medresmgr])
   end
 
-  # December 2019
-  def medres_local_admin?(user)
-    (permission_for(user) == 'medreslocaladm' && user_signed_in?)
+  # Future to do: write tests for the methods below.
+  # Possible step before this: review registrations and its associated models.
+
+  # Fetch students
+  def registrations_for(user)
+    records = if permission_for(user) == 'admin' then Registration.all
+              elsif permission_for(user) == 'papmgr' then Registration.pap
+              elsif permission_for(user) == 'paplocaladm'
+                Registration.pap.from_own_institution(user)
+              end
+
+    records
+  end
+
+  def registration_details(user)
+    profile = if permission_for(user) == 'admin' then :student_name_schoolyear_institution_abbrv
+
+              elsif permission_for(user) == 'papmgr' then :student_name_schoolyear_institution_abbrv
+              elsif permission_for(user) == 'paplocaladm' then :student_name_id_schoolyear_term
+              else 'indefinido'
+              end
+
+    profile
   end
 
   # Retrieve the sorted list of professions for the role
