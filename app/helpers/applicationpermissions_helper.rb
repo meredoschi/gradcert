@@ -36,7 +36,7 @@ module ApplicationpermissionsHelper
     (is_pap_local_admin(user) || is_pap_manager(user))
   end
 
-  def is_medres_staff(user)
+  def medres_staff?(user)
     (is_medical_residency_local_admin(user) || is_medres_manager(user))
   end
 
