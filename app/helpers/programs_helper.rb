@@ -110,8 +110,8 @@ module ProgramsHelper
 		names = case
 		
 		  when is_admin_or_readonly(user) then Schoolterm.find_active_schoolterms 
-		  when is_pap_manager(user) then Schoolterm.find_active_pap_schoolterms  				
-		  when is_medres_manager(user) then Schoolterm.find_active_medres_schoolterms
+		  when pap_manager?(user) then Schoolterm.find_active_pap_schoolterms  				
+		  when medres_manager?(user) then Schoolterm.find_active_medres_schoolterms
 		 						 	
 		return names
 		  
@@ -125,8 +125,8 @@ module ProgramsHelper
 		names = case
 		
 		  when is_admin_or_readonly(user) then Program.find_active_programnames 
-		  when is_pap_manager(user) then Program.find_active_pap_programnames				
-		  when is_medres_manager(user) then Program.find_active_medres_programnames
+		  when pap_manager?(user) then Program.find_active_pap_programnames				
+		  when medres_manager?(user) then Program.find_active_medres_programnames
 		  # when pap_staff?(user) then Program.find_active_programnames.pap 
       # when medres_staff?(user) then Program.find_active_programnames.medres 
       # if local admins where allowed to create, read, update them.  Comment manager lines above accordingly if so.

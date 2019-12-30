@@ -222,10 +222,10 @@ module RegistrationsHelper
 				schoolyearlist = case
 
 				when is_admin(user) then Schoolyear.contextual_today.ordered_by_programname_and_year
-	        when is_pap_manager(user) then Schoolyear.contextual_today.ordered_by_programname_and_year
-  	# 			when is_pap_local_admin(user) then Schoolyear.nextterm.for_users_institution(user)
-			when is_pap_local_admin(user) then Schoolyear.freshman.open.for_users_institution(user).ordered_by_programname_and_year
-#  				when is_pap_local_admin(user) then @all_schoolyears.open.for_users_institution(user).freshman
+	        when pap_manager?(user) then Schoolyear.contextual_today.ordered_by_programname_and_year
+  	# 			when pap_local_admin?(user) then Schoolyear.nextterm.for_users_institution(user)
+			when pap_local_admin?(user) then Schoolyear.freshman.open.for_users_institution(user).ordered_by_programname_and_year
+#  				when pap_local_admin?(user) then @all_schoolyears.open.for_users_institution(user).freshman
 
   #        when permission_for(user)=='medreslocaladm' then return Contact.are_not_registered_supervisors.with_teaching_role.from_own_institution(current_user).medres
   #        when permission_for(user)=='pap' then return Contact.are_not_registered_supervisors.where(user_id: user.id)

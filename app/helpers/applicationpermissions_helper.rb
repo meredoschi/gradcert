@@ -33,16 +33,16 @@ module ApplicationpermissionsHelper
   end
 
   def pap_staff?(user)
-    (is_pap_local_admin(user) || is_pap_manager(user))
+    (pap_local_admin?(user) || pap_manager?(user))
   end
 
   def medres_staff?(user)
-    (is_medical_residency_local_admin(user) || is_medres_manager(user))
+    (is_medical_residency_local_admin(user) || medres_manager?(user))
   end
 
   # user role checking
 
-  def is_able_to_edit_users(_user)
+  def able_to_edit_users?(_user)
     if is_manager(current_user) || is_local_admin(current_user) || is_admin(current_user)
 
       true
@@ -52,7 +52,7 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_pap_manager(user)
+  def pap_manager?(user)
     if user_signed_in? && (permission_for(user) == 'papmgr')
       true
     else
@@ -60,7 +60,7 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_medres_manager(user)
+  def medres_manager?(user)
     if user_signed_in? && (permission_for(user) == 'medresmgr')
       true
     else
@@ -97,7 +97,7 @@ module ApplicationpermissionsHelper
     true if user_signed_in? && (permission_for(user) == 'medreslocaladm')
   end
 
-  def is_pap_local_admin(user)
+  def pap_local_admin?(user)
     true if user_signed_in? && (permission_for(user) == 'paplocaladm')
   end
 
@@ -178,7 +178,7 @@ module ApplicationpermissionsHelper
   end
 
   def is_local_admin(user)
-    true if is_medical_residency_local_admin(user) || is_pap_local_admin(user)
+    true if is_medical_residency_local_admin(user) || pap_local_admin?(user)
   end
 
   def is_logged_in(_user)
@@ -194,7 +194,7 @@ module ApplicationpermissionsHelper
   end
 
   def is_manager(user)
-    if is_medres_manager(user) || is_pap_manager(user)
+    if medres_manager?(user) || pap_manager?(user)
       true
     else
       false

@@ -22,13 +22,13 @@ describe ApplicationpermissionsHelper, type: :helper do
 
   context 'pap' do
     it '-pap_staff?(user)' do
-      is_user_pap_staff = (helper.is_pap_local_admin(user) || helper.is_pap_manager(user))
+      is_user_pap_staff = (helper.pap_local_admin?(user) || helper.pap_manager?(user))
       expect(is_user_pap_staff).to eq(helper.pap_staff?(user))
     end
 
-    it '-is_pap_manager(user)' do
+    it '-pap_manager?(user)' do
       is_user_pap_manager = (helper.permission_for(user) == 'papmgr') && user_signed_in?
-      expect(is_user_pap_manager).to eq(helper.is_pap_manager(user))
+      expect(is_user_pap_manager).to eq(helper.pap_manager?(user))
     end
   end
 
