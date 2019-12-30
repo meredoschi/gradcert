@@ -23,7 +23,7 @@
 
 <% end %>
 
-<% if is_admin_or_manager(current_user) %>
+<% if admin_or_manager?(current_user) %>
 
 
 		<% if @bankpayment.without_statements? %>
@@ -73,7 +73,7 @@
 
 		<% if @bankpayment.unprepared? %>
 
-		<% if is_admin_or_manager(current_user) %>
+		<% if admin_or_manager?(current_user) %>
 
 			<%= link_to t('actions.generate')+' '+t('bankfile'), generatefile_bankpayment_path(@bankpayment), class: t('generate')  %> |
 
@@ -83,7 +83,7 @@
 
 		<% else %>
 
-			<% if is_admin_or_manager(current_user) %>
+			<% if admin_or_manager?(current_user) %>
 
 					<%= render 'show_available_reports' %>
 

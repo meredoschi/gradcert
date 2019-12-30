@@ -31,7 +31,7 @@
 							<% end %>
 					
 									
-							<% if is_admin(current_user) %>
+							<% if admin?(current_user) %>
 
 								<div class="large-1 column">											
 						
@@ -84,7 +84,7 @@
 	
 					<% end %>
 					
-					<% if is_admin(current_user) %>
+					<% if admin?(current_user) %>
 
 					<div class="large-1 column">
 					

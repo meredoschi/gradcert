@@ -28,7 +28,7 @@ module RegistrationsHelper
 	# Used in form view partial
 	def display_details
 
-		if is_admin_or_manager(current_user)
+		if admin_or_manager?(current_user)
 
 			txt=@registration.schoolyear_with_institution_and_term
 
@@ -221,7 +221,7 @@ module RegistrationsHelper
 
 				schoolyearlist = case
 
-				when is_admin(user) then Schoolyear.contextual_today.ordered_by_programname_and_year
+				when admin?(user) then Schoolyear.contextual_today.ordered_by_programname_and_year
 	        when pap_manager?(user) then Schoolyear.contextual_today.ordered_by_programname_and_year
   	# 			when pap_local_admin?(user) then Schoolyear.nextterm.for_users_institution(user)
 			when pap_local_admin?(user) then Schoolyear.freshman.open.for_users_institution(user).ordered_by_programname_and_year

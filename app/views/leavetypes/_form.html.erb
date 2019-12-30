@@ -16,7 +16,7 @@
 
 <%= render 'form_days_limit', f: f %>
 
-<% if is_admin(current_user) %>
+<% if admin?(current_user) %>
 
 	<%= render 'form_pap_medres', f: f %>
 

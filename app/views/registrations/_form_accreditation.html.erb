@@ -14,7 +14,7 @@
 		<%#= render 'form_accreditation_start.html.erb', accreditation_fields: accreditation_fields %>
 
 		<%# comment do %>
-		<% if action_name=='new' || is_admin_or_manager(current_user) %>
+		<% if action_name=='new' || admin_or_manager?(current_user) %>
 
 			<%= render 'form_accreditation_start.html.erb', accreditation_fields: accreditation_fields %>
 
@@ -26,8 +26,8 @@
 
 		<%# end %>
 
-		<%# if is_admin_or_manager(current_user) %>
-		<% if is_admin(current_user) %>
+		<%# if admin_or_manager?(current_user) %>
+		<% if admin?(current_user) %>
 
 			<%= render 'form_accreditation_suspension.html.erb', accreditation_fields: accreditation_fields %>
 

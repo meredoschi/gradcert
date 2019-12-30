@@ -1,6 +1,6 @@
 <h2> <%= t('noun.edit')+' '+tm('college')%> </h2>
 
-<% if is_local_admin(current_user) %>
+<% if local_admin?(current_user) %>
 
 	<div class="row">
 

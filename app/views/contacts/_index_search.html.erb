@@ -1,6 +1,6 @@
 <%= search_form_for @search do |f| %>
 
-	<% if is_staff(current_user) %>
+	<% if staff?(current_user) %>
 
 		<div class="row">
 
@@ -45,7 +45,7 @@
 
 	<%= render 'index_search_role_email', f: f %>
 
-<% if is_admin_or_manager(current_user) %>
+<% if admin_or_manager?(current_user) %>
 
 	<div class="row">
 

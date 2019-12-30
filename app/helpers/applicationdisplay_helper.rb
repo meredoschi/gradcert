@@ -4,7 +4,7 @@ require 'i18n'
 
   # Display summary information for the user, when logged in
   def display_header(user)
-    if is_logged_in(user)
+    if logged_in?(user)
 
       if Rails.env == 'development'
 

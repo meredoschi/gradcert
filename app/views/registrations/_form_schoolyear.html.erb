@@ -1,6 +1,6 @@
 <div class="row">
 
-			<% if in_season? && (action_name=='new' ||  is_admin_or_manager(current_user) ) %>
+			<% if in_season? && (action_name=='new' ||  admin_or_manager?(current_user) ) %>
 
 				<%= render 'form_schoolyear_choose.html.erb', f: f %>
 
@@ -14,7 +14,7 @@
 
 <% comment do %>
 
-<% if in_season? && is_admin_or_manager(current_user) && action_name!='new' && @registration.school_term==Schoolterm.latest %>
+<% if in_season? && admin_or_manager?(current_user) && action_name!='new' && @registration.school_term==Schoolterm.latest %>
 
 <div class="row panel callout">
 

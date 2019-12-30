@@ -16,7 +16,7 @@
 
 		<%# if open_season? && places_available?(current_user) %>
 
-          <% if is_local_admin(current_user) %>
+          <% if local_admin?(current_user) %>
 
 		<% if registrations_permitted? && places_available?(current_user) %>
 

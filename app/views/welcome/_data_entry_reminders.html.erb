@@ -1,4 +1,4 @@
-<% if is_local_admin(current_user) %>
+<% if local_admin?(current_user) %>
 
   <% if data_entry_permitted_on_latest_payroll? %>
 

@@ -1,7 +1,7 @@
 	<%#	confirmed_registrations_from_institution=@confirmedregistrations_report2.from_institution(institution) %>
 	<%	confirmed_registrations_from_institution=@confirmedregistrations_report2.includes(schoolyear: :program).from_institution(institution) %> 
 : 
-			<% if is_admin_or_manager(current_user) %>
+			<% if admin_or_manager?(current_user) %>
 
 				<div class="row">
 

@@ -13,7 +13,7 @@
 
 	<h5>
 
-		<% if is_admin_or_manager(current_user) %>
+		<% if admin_or_manager?(current_user) %>
 			
 			<%= registration.name %> 
 	

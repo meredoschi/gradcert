@@ -15,7 +15,7 @@
 
 <%= render 'form_name', f: f %>
 	
-<% if is_admin(current_user) %>
+<% if admin?(current_user) %>
 
 	<%= render 'form_belongsto', f: f %>
 

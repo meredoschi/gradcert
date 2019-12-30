@@ -1,6 +1,6 @@
 <%= search_form_for @search do |f| %>
 
-	<% if is_staff(current_user) %>
+	<% if staff?(current_user) %>
 	
 		<div class="row">
 		

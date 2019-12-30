@@ -36,13 +36,13 @@
 
 <% end %>
 
-<% if is_admin_or_manager(current_user) %>
+<% if admin_or_manager?(current_user) %>
 
 	<%= render 'form_confirmed', f: f %>
 
 <% end %>
 
-<% if is_staff(current_user) %>
+<% if staff?(current_user) %>
 
 		<%= render 'form_supportingdoc', f: f %>
 

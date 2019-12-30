@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <% if is_local_admin(current_user) %>
+  <% if local_admin?(current_user) %>
 
     <%#= render 'form_display_available_institution_vacancies' %>
 
@@ -24,7 +24,7 @@
 
     <%= render 'form_schoolyear', f: f%>
 
-    <% if is_staff(current_user) %>
+    <% if staff?(current_user) %>
 
         <%= render 'form_accreditation.html.erb', form: f %>
 
@@ -36,7 +36,7 @@
 
         </div>
 
-        <% if is_admin(current_user) %>
+        <% if admin?(current_user) %>
 
           <%= render 'form_registration_kind', form: f %>
 
@@ -46,7 +46,7 @@
 
     <% end %>
 
-    <% if is_admin_or_manager(current_user) %>
+    <% if admin_or_manager?(current_user) %>
 
       <div class="row">
 

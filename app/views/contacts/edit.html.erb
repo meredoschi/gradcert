@@ -1,6 +1,6 @@
 <div class="row">
 	
-			<% if is_own_contact(current_user) || is_regular_user(current_user) %>
+			<% if is_own_contact(current_user) || regular_user?(current_user) %>
 
 				<h2> <%= t('actions.edit').capitalize+' '+t('my.m')+' '+tm('contact') %> </h2>
 						

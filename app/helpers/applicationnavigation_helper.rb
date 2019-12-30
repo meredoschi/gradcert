@@ -2,7 +2,7 @@ module ApplicationnavigationHelper
   # http://stackoverflow.com/questions/12361631/rendering-partials-from-a-helper-method
 
   def navigation_bar(user)
-    if is_logged_in(user)
+    if logged_in?(user)
 
       profile = if permission_for(user) == 'admin' then render partial: 'layouts/navbar/system_administrator'
                 elsif permission_for(user) == 'adminreadonly' then render partial: 'layouts/navbar/readonly'
@@ -24,7 +24,7 @@ module ApplicationnavigationHelper
   # http://stackoverflow.com/questions/12361631/rendering-partials-from-a-helper-method
 
   def reports_bar(user)
-    if is_logged_in(user)
+    if logged_in?(user)
 
       profile = if permission_for(user) == 'admin' then render partial: 'layouts/reportsbar/system_administrator'
                 elsif permission_for(user) == 'adminreadonly' then render partial: 'layouts/reportsbar/readonly'

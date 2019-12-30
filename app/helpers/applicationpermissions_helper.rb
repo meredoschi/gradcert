@@ -37,13 +37,13 @@ module ApplicationpermissionsHelper
   end
 
   def medres_staff?(user)
-    (is_medical_residency_local_admin(user) || medres_manager?(user))
+    (medical_residency_local_admin?(user) || medres_manager?(user))
   end
 
   # user role checking
 
   def able_to_edit_users?(_user)
-    if is_manager(current_user) || is_local_admin(current_user) || is_admin(current_user)
+    if manager?(current_user) || local_admin?(current_user) || admin?(current_user)
 
       true
 
@@ -69,11 +69,11 @@ module ApplicationpermissionsHelper
   end
 
   # Checks if user is admin readonly
-  def is_admin_readonly(user)
+  def admin_readonly?(user)
     (permission_for(user) == 'adminreadonly')
   end
 
-  def is_admin_or_readonly(user)
+  def admin_or_readonly?(user)
     if user_signed_in? && (permission_for(user) == 'admin' || permission_for(user) == 'adminreadonly')
 
       true
@@ -81,19 +81,19 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_admin(user)
+  def admin?(user)
     true if user_signed_in? && (permission_for(user) == 'admin')
   end
 
-  def is_adminreadonly(user)
+  def adminreadonly?(user)
     true if user_signed_in? && (permission_for(user) == 'adminreadonly')
   end
 
-  def is_staff(user)
-    true if is_local_admin(user) || is_manager(user) || is_admin_or_readonly(user)
+  def staff?(user)
+    true if local_admin?(user) || manager?(user) || admin_or_readonly?(user)
   end
 
-  def is_medical_residency_local_admin(user)
+  def medical_residency_local_admin?(user)
     true if user_signed_in? && (permission_for(user) == 'medreslocaladm')
   end
 
@@ -101,11 +101,11 @@ module ApplicationpermissionsHelper
     true if user_signed_in? && (permission_for(user) == 'paplocaladm')
   end
 
-  def is_pap_collaborator(user)
+  def pap_collaborator?(user)
     true if user_signed_in? && (permission_for(user) == 'papcollaborator')
   end
 
-  def is_medres_collaborator(user)
+  def medres_collaborator?(user)
     true if user_signed_in? && (permission_for(user) == 'medrescollaborator')
   end
 
@@ -133,7 +133,7 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_regular_user(user)
+  def regular_user?(user)
     if regular_pap_user?(user) || regular_medres_user?(user)
 
       true
@@ -146,7 +146,7 @@ module ApplicationpermissionsHelper
   end
 
   def not_regular_user?(user)
-    if is_regular_user(user)
+    if regular_user?(user)
 
       false
 
@@ -157,7 +157,7 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_not_collaborator(_user)
+  def not_collaborator?(_user)
     # Important: this is used in the contact view, when editing *another* user, so it does not check for signed_in
 
     #   if !(@contact.user.medrescollaborator || @contact.user.papcollaborator)
@@ -174,26 +174,26 @@ module ApplicationpermissionsHelper
   end
 
   def collaborator?(user)
-    true if is_medres_collaborator(user) || is_pap_collaborator(user)
+    true if medres_collaborator?(user) || pap_collaborator?(user)
   end
 
-  def is_local_admin(user)
-    true if is_medical_residency_local_admin(user) || pap_local_admin?(user)
+  def local_admin?(user)
+    true if medical_residency_local_admin?(user) || pap_local_admin?(user)
   end
 
-  def is_logged_in(_user)
+  def logged_in?(_user)
     true if user_signed_in?
   end
 
-  def is_not_logged_in(_user)
+  def not_logged_in?(_user)
     true unless user_signed_in?
   end
 
-  def is_administrator(user)
-    true if is_admin(user) || is_local_admin(user)
+  def administrator?(user)
+    true if admin?(user) || local_admin?(user)
   end
 
-  def is_manager(user)
+  def manager?(user)
     if medres_manager?(user) || pap_manager?(user)
       true
     else
@@ -202,12 +202,12 @@ module ApplicationpermissionsHelper
   end
 
   # Returns true if user is Admin, Manager or Admin readonly
-  def is_admin_or_manager_or_readonly(user)
-    (is_admin_or_manager(user) || is_admin_readonly(user))
+  def admin_or_manager_or_readonly?(user)
+    (admin_or_manager?(user) || admin_readonly?(user))
   end
 
-  def is_admin_or_manager(user)
-    if is_manager(user) || is_admin_or_readonly(user)
+  def admin_or_manager?(user)
+    if manager?(user) || admin_or_readonly?(user)
 
       true
     else
@@ -215,8 +215,8 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_not_admin_or_manager(user)
-    if is_admin_or_manager(user)
+  def not_admin_or_manager?(user)
+    if admin_or_manager?(user)
 
       false
 

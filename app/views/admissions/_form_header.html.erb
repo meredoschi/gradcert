@@ -1,6 +1,6 @@
 <div class="row custom-panel 5 text-center">
 
-  <% if is_admin_or_manager(current_user) %>
+  <% if admin_or_manager?(current_user) %>
 
   <div class="custom-panel9">
     <h3> <%= @program.institution.name %> </h3>

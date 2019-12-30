@@ -9,7 +9,7 @@
 					<td><%= user.email %></td> 
 			</div>
 
-			<% if is_admin_or_readonly(current_user) || is_manager(current_user) %>		  
+			<% if admin_or_readonly?(current_user) || manager?(current_user) %>		  
 						
 				      <div class="large-3 columns">
 

@@ -64,7 +64,7 @@
 
   </div>
 
-  <% if is_admin(current_user) %>
+  <% if admin?(current_user) %>
 
   <% render 'form_teaching_area', f: f%>
 

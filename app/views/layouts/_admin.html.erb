@@ -1,4 +1,4 @@
-<% if is_admin_or_readonly(current_user) || is_manager(current_user) %>
+<% if admin_or_readonly?(current_user) || manager?(current_user) %>
 
   <li class="has-dropdown">
     <a href="#">Admin</a>

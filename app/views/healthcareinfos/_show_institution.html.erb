@@ -2,7 +2,7 @@
 
 	<h2>
 			
-				<% if is_admin_or_manager(current_user) %>
+				<% if admin_or_manager?(current_user) %>
 
 					<%= link_to @healthcareinfo.institution.name, @healthcareinfo.institution %>
 				

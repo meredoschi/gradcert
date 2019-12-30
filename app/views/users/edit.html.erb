@@ -2,7 +2,7 @@
 
 	<div class="large-9 columns">
 	
-		<% if is_own_user(current_user) || is_regular_user(current_user) %>
+		<% if is_own_user(current_user) || regular_user?(current_user) %>
 
 			<h2><%= t('actions.edit')+' '+t('my.m')+' '+tm('user') %></h2>
 							

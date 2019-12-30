@@ -1,6 +1,6 @@
 <%= render 'totalreport_header.html.erb' %>
 
-<% if is_admin(current_user) %>
+<% if admin?(current_user) %>
 
 	<%= render 'totalreport_initial_calculations.html.erb' %>
 

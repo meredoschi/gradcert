@@ -25,7 +25,7 @@
 
 					<%#= f.collection_select :registration_id, Registration.current.ordered_by_contact_name, :id, :namecpfinstitution %>
 
-    		<% if !is_admin_or_manager(current_user) && (action_name!='new')  %>
+    		<% if !admin_or_manager?(current_user) && (action_name!='new')  %>
 
 						<%= @annotation.registration.namecpfinstitutionstatus %>
 
@@ -123,7 +123,7 @@
 
 </div>
 
-<% if is_admin_or_manager(current_user) %>
+<% if admin_or_manager?(current_user) %>
 
 	<div class="row">
 

@@ -18,7 +18,7 @@
 				
 						<strike>	
 						
-								<% if is_admin_or_manager(current_user) %>
+								<% if admin_or_manager?(current_user) %>
 								
 									<%=  link_to annotation.full_details, annotation %> 
 						
@@ -34,7 +34,7 @@
 				
 				<% else %>
 	
-									<% if is_admin_or_manager(current_user) %>
+									<% if admin_or_manager?(current_user) %>
 								
 									<%=  link_to annotation.full_details, annotation %> 
 						

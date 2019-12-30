@@ -1,7 +1,7 @@
  <thead>
     <tr>
 
-			<% if is_admin_or_manager(current_user) && (@researchcenters.total_count>1) %>
+			<% if admin_or_manager?(current_user) && (@researchcenters.total_count>1) %>
 			
 	    	<div class="row">
 	    

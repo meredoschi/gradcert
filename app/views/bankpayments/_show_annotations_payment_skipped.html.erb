@@ -16,7 +16,7 @@
 
 					<strike>
 
-						<% if is_admin_or_manager(current_user) %>
+						<% if admin_or_manager?(current_user) %>
 							
 							 <%=  link_to registration.full_details, registration %>  
 			
@@ -30,7 +30,7 @@
 
 				<% else %>
 
-						<% if is_admin_or_manager(current_user) %>
+						<% if admin_or_manager?(current_user) %>
 
 								<%=  link_to registration.full_details, registration %>  
 			

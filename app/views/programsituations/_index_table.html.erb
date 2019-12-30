@@ -5,7 +5,7 @@
 <tbody>
    <% @programsituations.each do |programsituation| %>
 
-		<% if is_staff(current_user) %>
+		<% if staff?(current_user) %>
 		     
       <tr>
 

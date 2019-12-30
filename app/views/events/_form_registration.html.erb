@@ -10,20 +10,20 @@
 
 		 	<div class="large-9 columns">
 
-				<% if !is_manager(current_user) || action_name=='new' %>
+				<% if !manager?(current_user) || action_name=='new' %>
 
 		 			<%#= f.collection_select :registration_id, registrations_for(current_user), :id, registration_details(current_user),  {prompt: true} %>
 
 					<%# to do: verify model and application helper definitions --> registration_details(current_user)%>
 					<%# quick fix start %>
 
-					<% if is_local_admin(current_user) %>
+					<% if local_admin?(current_user) %>
 
 						<%= f.collection_select :registration_id, active_registrations_for(current_user), :id, :student_name_id_schoolyear_term,  {prompt: true} %>
 
 					<% end %>
 
-					<% if is_admin_or_manager(current_user) %>
+					<% if admin_or_manager?(current_user) %>
 
 						<%= f.collection_select :registration_id, active_registrations_for(current_user), :id, :student_name_schoolyear_institution_abbrvs,  {prompt: true} %>
 

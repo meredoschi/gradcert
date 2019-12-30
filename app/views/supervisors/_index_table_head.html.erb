@@ -1,12 +1,12 @@
 <thead>
     <tr>
 
-			<% if is_staff(current_user) && (@supervisors.total_count>1) %>
+			<% if staff?(current_user) && (@supervisors.total_count>1) %>
 			
 	    	<div class="row">
 	    
 
-					<% if is_admin_or_manager(current_user)  %>
+					<% if admin_or_manager?(current_user)  %>
 			  		
 				    	<div class="large-3 columns">
 		

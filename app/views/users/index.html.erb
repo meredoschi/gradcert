@@ -10,7 +10,7 @@
 
 	<%= render 'index_table.html.erb' %>
 
-	<% if is_staff(current_user)  %>
+	<% if staff?(current_user)  %>
 
 		<%= render 'index_search.html.erb' %>
 

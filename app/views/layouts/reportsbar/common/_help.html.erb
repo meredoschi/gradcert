@@ -1,13 +1,13 @@
 <!-- Right Nav Section -->
 <ul class="right">
 
-<% if is_logged_in(current_user) %>
+<% if logged_in?(current_user) %>
 
   <li class="has-dropdown">
     <a href="#"><%= t('help').upcase %></a>
     <ul class="dropdown">
 
-			<% if is_logged_in(current_user) %>
+			<% if logged_in?(current_user) %>
     
     		<li><%= link_to( t('actions.edit').capitalize+' '+t('my.m')+' '+tm('contact'), edit_contact_path(current_user.contact))  %></li>	
    

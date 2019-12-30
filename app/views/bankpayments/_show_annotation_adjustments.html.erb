@@ -12,7 +12,7 @@
 		
 				<h5><%= (i+1).to_s%>	
 
-				<% if is_admin_or_manager(current_user) %>
+				<% if admin_or_manager?(current_user) %>
 								
 					<%=  link_to annotation.full_details, annotation %> 
 	

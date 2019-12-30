@@ -6,7 +6,7 @@
 
 	<%= render 'show_diplomas.html.erb' %>
 
-	<% if is_staff(current_user) %>
+	<% if staff?(current_user) %>
 
 		<%= render 'show_contract_type.html.erb' %>
 

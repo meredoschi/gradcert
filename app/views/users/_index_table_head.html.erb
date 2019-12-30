@@ -1,7 +1,7 @@
  <thead>
     <tr>
 
-		<% if is_staff(current_user) && (@users.total_count>1) %>
+		<% if staff?(current_user) && (@users.total_count>1) %>
 
 			
     	<div class="row">
@@ -14,7 +14,7 @@
     			</div>
     			        
 
-    			<% if (is_admin_or_readonly(current_user) || is_manager(current_user)) %>		  
+    			<% if (admin_or_readonly?(current_user) || manager?(current_user)) %>		  
 	        
 			    	<div class="large-3 columns">
 	
@@ -43,7 +43,7 @@
       
     			</div>
 
-    			<% if (is_admin_or_readonly(current_user) || is_manager(current_user)) %>		  
+    			<% if (admin_or_readonly?(current_user) || manager?(current_user)) %>		  
 	        
 			    	<div class="large-3 columns">
 	

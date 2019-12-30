@@ -6,7 +6,7 @@
 
 <%= render 'index_search_schoolterm.html.erb', f: f %>
 
-<% if is_admin_or_manager(current_user) %>
+<% if admin_or_manager?(current_user) %>
 
 <%= render 'index_search_institution.html.erb', f: f %>
 
@@ -22,7 +22,7 @@
 
 <hr>
 
-<%# if is_admin(current_user) %>
+<%# if admin?(current_user) %>
 
 <%#= render 'index_search_kind.html.erb', f: f %>
 
@@ -40,7 +40,7 @@
 
 	</div>
 
-	<% if is_admin(current_user) %>
+	<% if admin?(current_user) %>
 
 		<div class="large-6 columns">
 

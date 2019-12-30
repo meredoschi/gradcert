@@ -8,7 +8,7 @@
 
 	<div class="large-9 columns">
 
-		<% if is_admin_or_manager(current_user) %>
+		<% if admin_or_manager?(current_user) %>
 
 	  	<%= f.collection_select :supervisor_id, retrieve_supervisors_for(current_user), :id, :institution_contact_name,  {prompt: true} %>
 

@@ -2,7 +2,7 @@
 
 	<div class="large-8 columns">
 			
-		<% if is_regular_user(current_user) %>
+		<% if regular_user?(current_user) %>
 					
 			<h2><%= t('my_program_info').mb_chars.upcase  %></h2>	
 

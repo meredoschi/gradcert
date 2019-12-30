@@ -1,5 +1,5 @@
 
-  <% if is_local_admin(current_user) %>
+  <% if local_admin?(current_user) %>
 
   <% if Student.accessible_by(current_ability).not_barred.not_registered.count > 0 %>
 

@@ -5,14 +5,14 @@
 
 <%= render 'index_search_tin_legacy', f: f %>
 
-<% if is_admin_or_manager(current_user) %>
+<% if admin_or_manager?(current_user) %>
 
 	<%= render 'index_search_institution', f: f %>
 
 
 <% end %>
 
-<% if is_staff(current_user) %>
+<% if staff?(current_user) %>
 
 	<%= render 'index_search_bank_info', f: f %>
 

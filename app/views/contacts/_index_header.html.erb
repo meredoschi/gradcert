@@ -1,4 +1,4 @@
-<% if is_regular_user(current_user)  || is_own_user(current_user) %>
+<% if regular_user?(current_user)  || is_own_user(current_user) %>
 
 	<div class="row">
 	
@@ -18,7 +18,7 @@
 	
 		<div class="large-12 columns">
 	
-		 		<%  if is_staff(current_user) %>  		
+		 		<%  if staff?(current_user) %>  		
 	
 					<h2 class="text-center"><%= t('people').upcase %> </h2> 
 			

@@ -50,7 +50,7 @@
 
 		<% end %>
 		
-			<% if is_admin(current_user) %>
+			<% if admin?(current_user) %>
 						
 		 		<div class="large-2 columns", class: "left inline">
 		
@@ -100,7 +100,7 @@
 	
 	</div>
 	
-	<% if is_admin(current_user) %>
+	<% if admin?(current_user) %>
 	
 		<div class="row">
 	

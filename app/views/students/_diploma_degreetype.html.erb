@@ -8,7 +8,7 @@
 
 		 		<div class="medium-6 column">
 
-					<% if is_local_admin(current_user) && Schoolterm.open_season? %>
+					<% if local_admin?(current_user) && Schoolterm.open_season? %>
 
 						<%= f.collection_select :degreetype_id, Degreetype.pap, :id, :name,  {prompt: true} %>
 

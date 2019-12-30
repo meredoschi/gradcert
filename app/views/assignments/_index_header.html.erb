@@ -4,7 +4,7 @@
 
 	<% if @assignments.total_count>0 %>
 			
-			<% if is_regular_user(current_user) %>
+			<% if regular_user?(current_user) %>
 						
 				<h2><%= t('my_assignment_info').mb_chars.upcase  %></h2>	
 

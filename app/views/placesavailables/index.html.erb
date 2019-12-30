@@ -1,6 +1,6 @@
 <%= render 'index_header.html.erb' %>
 
-<% if is_admin_or_manager(current_user) %>
+<% if admin_or_manager?(current_user) %>
 
 		<%= render 'index_summary.html.erb' %>
 <% end %>
@@ -13,7 +13,7 @@
 
 	</div>
 
-	<% if is_admin_or_manager(current_user) %>
+	<% if admin_or_manager?(current_user) %>
 
 		<%= render 'index_search.html.erb' %>
 

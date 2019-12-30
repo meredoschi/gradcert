@@ -1,4 +1,4 @@
-<% if is_regular_user(current_user) || is_own_supervisor(current_user)  %>
+<% if regular_user?(current_user) || is_own_supervisor(current_user)  %>
 
 	<h2> <%= t('actions.edit').capitalize+' '+t('my.f')+' '+t('teaching_info') %> </h2>
 

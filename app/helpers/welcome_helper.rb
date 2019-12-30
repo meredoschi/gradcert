@@ -6,8 +6,8 @@ module WelcomeHelper
 
     when belongs_to_pap(user) then ta('programname.pap')
     when belongs_to_medres(user) then ta('programname.medres')
-    when is_admin(user) then "Admin"
-    when is_adminreadonly(user) then "Readonly"  
+    when admin?(user) then "Admin"
+    when adminreadonly?(user) then "Readonly"  
     else
       return profile
 
