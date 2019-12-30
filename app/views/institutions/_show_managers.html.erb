@@ -1,4 +1,4 @@
-<% if is_not_regular_user(current_user) && @num_institution_team_members>0 %>
+<% if not_regular_user?(current_user) && @num_institution_team_members>0 %>
 
 	<table>
 		<tr>

@@ -18,7 +18,7 @@
 
 		  <%= render 'form_target_public.html.erb', f: f %>
 
-<% if !is_collaborator(current_user) %>
+<% if !collaborator?(current_user) %>
  
 			<%= render 'form_evaluator.html.erb', f: f %>
 

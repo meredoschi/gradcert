@@ -1,5 +1,5 @@
 
-<% if is_not_regular_user(current_user) && @institution.programs.count>0 %>
+<% if not_regular_user?(current_user) && @institution.programs.count>0 %>
 
 
 <div class="row">

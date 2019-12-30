@@ -13,7 +13,7 @@
   <% end %>
 
 
-<% if is_not_regular_user(current_user) && action_name!='edit' %>
+<% if not_regular_user?(current_user) && action_name!='edit' %>
 
 	<div class="row">
 

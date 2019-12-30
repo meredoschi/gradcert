@@ -1,4 +1,4 @@
-<% if !@institution.with_infrastructure? && is_not_regular_user(current_user)  %>
+<% if !@institution.with_infrastructure? && not_regular_user?(current_user)  %>
 
 	<div class="row alert-box warning">
 	
@@ -8,7 +8,7 @@
 
 <% end %>
 
-<% if !@institution.with_characteristic? && is_not_regular_user(current_user)  %>
+<% if !@institution.with_characteristic? && not_regular_user?(current_user)  %>
 
 	<div class="row alert-box warning">
 	
@@ -18,7 +18,7 @@
 
 <% end %>
 
-<% if !@institution.accreditation.details_on_file? && is_not_regular_user(current_user) %>
+<% if !@institution.accreditation.details_on_file? && not_regular_user?(current_user) %>
 
 	<div class="row alert-box alert">
 	

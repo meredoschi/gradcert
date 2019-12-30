@@ -23,7 +23,7 @@
 		</div>
 
 
-<% if is_not_regular_user(current_user) %>
+<% if not_regular_user?(current_user) %>
 
 	<%= render 'show_last_updated.html.erb' %>
 

@@ -15,9 +15,9 @@
 
 <div class="row custom-panel">
 
-<%# if is_not_regular_user(current_user) && action_name=='new' %>
+<%# if not_regular_user?(current_user) && action_name=='new' %>
 
-<% if is_not_regular_user(current_user)  %>
+<% if not_regular_user?(current_user)  %>
 
 	<% if action_name=='edit'%>
 	

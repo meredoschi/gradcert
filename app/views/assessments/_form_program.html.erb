@@ -8,7 +8,7 @@
 
 		<div class="large-9 columns">
 	
-			<% if is_admin_or_manager(current_user) || is_collaborator(current_user) %>
+			<% if is_admin_or_manager(current_user) || collaborator?(current_user) %>
 			
 			  <%= f.collection_select :program_id, retrieve_programs_for(current_user), :id, :program_institution_short_name,  {prompt: true} %>
 				

@@ -109,7 +109,7 @@ module ApplicationpermissionsHelper
     true if user_signed_in? && (permission_for(user) == 'medrescollaborator')
   end
 
-  def is_regular_medres_user(user)
+  def regular_medres_user?(user)
     if user_signed_in? && (permission_for(user) == 'medrescollaborator' || permission_for(user) == 'medres')
 
       true
@@ -121,7 +121,7 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_regular_pap_user(user)
+  def regular_pap_user?(user)
     if user_signed_in? && (permission_for(user) == 'papcollaborator' || permission_for(user) == 'pap')
 
       true
@@ -134,7 +134,7 @@ module ApplicationpermissionsHelper
   end
 
   def is_regular_user(user)
-    if is_regular_pap_user(user) || is_regular_medres_user(user)
+    if regular_pap_user?(user) || regular_medres_user?(user)
 
       true
 
@@ -145,7 +145,7 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_not_regular_user(user)
+  def not_regular_user?(user)
     if is_regular_user(user)
 
       false
@@ -173,7 +173,7 @@ module ApplicationpermissionsHelper
     end
   end
 
-  def is_collaborator(user)
+  def collaborator?(user)
     true if is_medres_collaborator(user) || is_pap_collaborator(user)
   end
 

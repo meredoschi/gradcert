@@ -16,7 +16,7 @@
 
 <%= render 'show_schoolyears.html.erb' %>
 
-<% if @program.accreditation.details_on_file? && is_not_regular_user(current_user) %>
+<% if @program.accreditation.details_on_file? && not_regular_user?(current_user) %>
 
 	<%= render 'show_accreditation.html.erb' %>
 
