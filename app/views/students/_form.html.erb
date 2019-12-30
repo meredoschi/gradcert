@@ -67,7 +67,7 @@
 		 		<div class="large-9 columns">
 
               <%# quick patch.  To do: verify helper method is working for pap local admin as expected. %>
-              <% if is_pap_staff(current_user) %>
+              <% if pap_staff?(current_user) %>
 
                 <%= f.collection_select :profession_id, Profession.paplocal, :id, :name,  {prompt: true} %>
 

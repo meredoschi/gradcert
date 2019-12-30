@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Called on ApplicationController (originally on application helper)
 module ApplicationpermissionsHelper
-
   # Fetch students
   def registrations_for(user)
     records = if permission_for(user) == 'admin' then Registration.all
@@ -28,10 +29,10 @@ module ApplicationpermissionsHelper
   end
 
   def profile(user)
-    user.permission.description.html_safe
+    safe_join([user.permission.description])
   end
 
-  def is_pap_staff(user)
+  def pap_staff?(user)
     (is_pap_local_admin(user) || is_pap_manager(user))
   end
 
@@ -89,11 +90,7 @@ module ApplicationpermissionsHelper
   end
 
   def is_staff(user)
-    if is_local_admin(user) || is_manager(user) || is_admin_or_readonly(user)
-
-      true
-
-    end
+    true if is_local_admin(user) || is_manager(user) || is_admin_or_readonly(user)
   end
 
   def is_medical_residency_local_admin(user)
@@ -163,9 +160,9 @@ module ApplicationpermissionsHelper
   def is_not_collaborator(_user)
     # Important: this is used in the contact view, when editing *another* user, so it does not check for signed_in
 
-    # 	if !(@contact.user.medrescollaborator || @contact.user.papcollaborator)
+    #   if !(@contact.user.medrescollaborator || @contact.user.papcollaborator)
 
-    if	!(permission_for(@contact.user) == 'medrescollaborator' || permission_for(@contact.user) == 'papcollaborator')
+    if !(permission_for(@contact.user) == 'medrescollaborator' || permission_for(@contact.user) == 'papcollaborator')
 
       true
 
@@ -243,20 +240,18 @@ module ApplicationpermissionsHelper
   # Used for supervisors, students
 
   def retrieve_professions_for(user)
+    profile = case
 
-        profile = case
+              when permission_for(user) == 'admin' then return Profession.all
+              when permission_for(user) == 'papmgr'then return Profession.pap
+              when permission_for(user) == 'medresmgr' then return Profession.medres
+              when permission_for(user) == 'paplocaladm' then return Profession.pap
+              when permission_for(user) == 'medreslocaladm' then return Profession.medres
+              when permission_for(user) == 'pap' then return Profession.pap
+              when permission_for(user) == 'papcollaborator' then return Profession.pap
+              when permission_for(user) == 'medres' then return Profession.medres
+              when permission_for(user) == 'medrescollaborator' then return Profession.medres
 
-          when permission_for(user)=='admin' then return Profession.all
-          when permission_for(user)=='papmgr'then return Profession.pap
-          when permission_for(user)=='medresmgr' then return Profession.medres
-          when permission_for(user)=='paplocaladm' then return Profession.pap
-          when permission_for(user)=='medreslocaladm' then return Profession.medres
-          when permission_for(user)=='pap' then return Profession.pap
-          when permission_for(user)=='papcollaborator' then return Profession.pap
-          when permission_for(user)=='medres' then return Profession.medres
-          when permission_for(user)=='medrescollaborator' then return Profession.medres
-
-        end
+    end
   end
-
 end
