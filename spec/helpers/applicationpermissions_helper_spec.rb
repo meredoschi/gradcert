@@ -21,10 +21,10 @@ describe ApplicationpermissionsHelper, type: :helper do
     expect(safe_txt).to eq(helper.profile(user))
   end
 
-  it '-admin_or_readonly?(user)' do
+  it '-admin_or_adminreadonly?(user)' do
     is_user_admin_or_readonly = helper.user_signed_in? && \
                                 (%w[admin adminreadonly].include? helper.permission_for(user))
-    expect(is_user_admin_or_readonly).to eq(helper.admin_or_readonly?(user))
+    expect(is_user_admin_or_readonly).to eq(helper.admin_or_adminreadonly?(user))
   end
 
   it '-able_to_edit_users?(_user)' do

@@ -6,7 +6,7 @@ module ApplicationpermissionsHelper
   # Tested code start
   # <><><><><><><><><>
 
-  def admin_or_readonly?(user)
+  def admin_or_adminreadonly?(user)
     user_signed_in? && (%w[admin adminreadonly].include? permission_for(user))
   end
 
@@ -65,7 +65,7 @@ module ApplicationpermissionsHelper
   end
 
   def staff?(user)
-    (local_admin?(user) || manager?(user) || admin_or_readonly?(user))
+    (local_admin?(user) || manager?(user) || admin_or_adminreadonly?(user))
   end
 
   def medical_residency_local_admin?(user)
@@ -142,7 +142,7 @@ module ApplicationpermissionsHelper
   end
 
   def admin_or_manager?(user)
-    if manager?(user) || admin_or_readonly?(user)
+    if manager?(user) || admin_or_adminreadonly?(user)
 
       true
     else

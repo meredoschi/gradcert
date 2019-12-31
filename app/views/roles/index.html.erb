@@ -2,7 +2,7 @@
 
 <%= render 'index_table.html.erb' %>
 
-<% if admin_or_readonly?(current_user) %>
+<% if admin_or_adminreadonly?(current_user) %>
 
 	<%= render 'index_search_belongs_to.html.erb' %>
 

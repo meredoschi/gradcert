@@ -14,7 +14,7 @@
     			</div>
     			        
 
-    			<% if (admin_or_readonly?(current_user) || manager?(current_user)) %>		  
+    			<% if (admin_or_adminreadonly?(current_user) || manager?(current_user)) %>		  
 	        
 			    	<div class="large-3 columns">
 	
@@ -43,7 +43,7 @@
       
     			</div>
 
-    			<% if (admin_or_readonly?(current_user) || manager?(current_user)) %>		  
+    			<% if (admin_or_adminreadonly?(current_user) || manager?(current_user)) %>		  
 	        
 			    	<div class="large-3 columns">
 	
