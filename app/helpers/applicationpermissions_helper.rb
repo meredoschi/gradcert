@@ -138,10 +138,6 @@ module ApplicationpermissionsHelper
     end
   end
 
-  # <><><><><><><><><>
-  # Tested code finish
-  # <><><><><><><><><>
-
   def manager?(user)
     (medres_manager?(user) || pap_manager?(user))
   end
@@ -154,6 +150,11 @@ module ApplicationpermissionsHelper
   def belongs_to_medres?(user)
     user.permission.kind.in?(%w[medres medrescollaborator medreslocaladm medresmgr])
   end
+
+  # <><><><><><><><><>
+  # Tested code finish
+  # <><><><><><><><><>
+
 
   # Future to do: write tests for the methods below.
   # Possible step before this: review registrations and its associated models.
