@@ -4,8 +4,8 @@ module WelcomeHelper
 
     profile = case
 
-    when belongs_to_pap(user) then ta('programname.pap')
-    when belongs_to_medres(user) then ta('programname.medres')
+    when belongs_to_pap?(user) then ta('programname.pap')
+    when belongs_to_medres?(user) then ta('programname.medres')
     when admin?(user) then "Admin"
     when adminreadonly?(user) then "Readonly"  
     else
@@ -41,13 +41,13 @@ module WelcomeHelper
   end
   
   # Welcome screen 
-  def belongs_to_pap(user)
+  def belongs_to_pap?(user)
 
 		  return user.permission.kind.in?(['pap','papcollaborator','paplocaladm','papmgr'])
 
 	end
 	
-	def belongs_to_medres(user)
+	def belongs_to_medres?(user)
 
 		  return user.permission.kind.in?(['medres','medrescollaborator','medreslocaladm','medresmgr'])
 

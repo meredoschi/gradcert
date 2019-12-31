@@ -1,6 +1,6 @@
 <%= search_form_for @search do |f| %>
 
-	<% if admin_or_manager_or_readonly?(current_user) %>
+	<% if admin_or_manager_or_adminreadonly?(current_user) %>
 
 		<%= render 'index_search_institution.html.erb', f: f %>
 

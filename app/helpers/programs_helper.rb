@@ -142,8 +142,8 @@ module ProgramsHelper
 				profile = case
 				
 	        when permission_for(user)=='admin' then render partial: 'form_belongs_to', locals: { f: f } 		
-				  when permission_for(user)=='medresmgr' then  render partial: 'form_belongs_to_medres', locals: { f: f }
-				  when permission_for(user)=='papmgr' then  render partial: 'form_belongs_to_pap', locals: { f: f }				
+				  when permission_for(user)=='medresmgr' then  render partial: 'form_belongs_to_medres?', locals: { f: f }
+				  when permission_for(user)=='papmgr' then  render partial: 'form_belongs_to_pap?', locals: { f: f }				
 				
 				end	 				
 							

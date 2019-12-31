@@ -6,8 +6,8 @@ module RolesHelper
 				
           when permission_for(user)=='adminreadonly' then  render partial: 'index_search_belongs_to.html.erb'										  
 				  when permission_for(user)=='admin' then  render partial: 'index_search_belongs_to.html.erb'	 					
-        #   when permission_for(user)=='papmgr' then  render partial: 'index_search_belongs_to_pap.html.erb'						
-        #   when permission_for(user)=='medresmgr' then  render partial: 'index_search_belongs_to_medres.html.erb'				
+        #   when permission_for(user)=='papmgr' then  render partial: 'index_search_belongs_to_pap?.html.erb'						
+        #   when permission_for(user)=='medresmgr' then  render partial: 'index_search_belongs_to_medres?.html.erb'				
 				
 				end	 				
 							

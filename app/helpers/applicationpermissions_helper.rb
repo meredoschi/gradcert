@@ -30,7 +30,7 @@ module ApplicationpermissionsHelper
 
   # Medical residency
   def medres_staff?(user)
-    (medical_residency_local_admin?(user) || medres_manager?(user))
+    (medres_local_admin?(user) || medres_manager?(user))
   end
 
   def medres_manager?(user)
@@ -43,18 +43,14 @@ module ApplicationpermissionsHelper
 
   # user role checking
 
-  def able_to_edit_users?(_user)
-    (manager?(current_user) || local_admin?(current_user) || admin?(current_user))
+  def able_to_edit_users?(user)
+    (manager?(user) || local_admin?(user) || admin?(user))
   end
 
   # Checks if user is admin readonly (e.g. senior management or external auditing agency)
   def admin_readonly?(user)
     (permission_for(user) == 'adminreadonly')
   end
-
-  # <><><><><><><><><>
-  # Tested code finish
-  # <><><><><><><><><>
 
   def admin?(user)
     (user_signed_in? && (permission_for(user) == 'admin'))
@@ -66,10 +62,6 @@ module ApplicationpermissionsHelper
 
   def staff?(user)
     (local_admin?(user) || manager?(user) || admin_or_adminreadonly?(user))
-  end
-
-  def medical_residency_local_admin?(user)
-    (user_signed_in? && (permission_for(user) == 'medreslocaladm'))
   end
 
   def pap_local_admin?(user)
@@ -99,13 +91,13 @@ module ApplicationpermissionsHelper
   end
 
   def not_regular_user?(user)
-    regular_user?(user)
+    !regular_user?(user)
   end
 
   # Used in the contact view, when editing *another* user, so it does not check for signed_in
   # e.g. not_collaborator?(@contact.user)
   def not_collaborator?(user)
-    !(permission_for(user) == 'medrescollaborator' || permission_for(user) == 'papcollaborator')
+    !collaborator?(user)
   end
 
   def collaborator?(user)
@@ -113,7 +105,20 @@ module ApplicationpermissionsHelper
   end
 
   def local_admin?(user)
-    (medical_residency_local_admin?(user) || pap_local_admin?(user))
+    (medres_local_admin?(user) || pap_local_admin?(user))
+  end
+
+  # Returns true if user is Admin, Manager or Admin readonly
+  def admin_or_manager_or_adminreadonly?(user)
+    (admin_or_manager?(user) || admin_readonly?(user))
+  end
+
+  def admin_or_manager?(user)
+    (manager?(user) || admin_or_adminreadonly?(user))
+  end
+
+  def not_admin_or_manager?(user)
+    !admin_or_manager?(user)
   end
 
   def logged_in?(_user)
@@ -124,50 +129,29 @@ module ApplicationpermissionsHelper
     !user_signed_in?
   end
 
-  def administrator?(user)
-    true if admin?(user) || local_admin?(user)
+  # Retrieve the sorted list of professions for the role
+  # Used for supervisors, students
+  def retrieve_professions_for(user)
+    if permission_for(user) == 'admin' then Profession.all
+    elsif belongs_to_pap?(user) then Profession.pap
+    elsif belongs_to_medres?(user) then Profession.medres
+    end
   end
+
+  # <><><><><><><><><>
+  # Tested code finish
+  # <><><><><><><><><>
 
   def manager?(user)
-    if medres_manager?(user) || pap_manager?(user)
-      true
-    else
-      false
-    end
-  end
-
-  # Returns true if user is Admin, Manager or Admin readonly
-  def admin_or_manager_or_readonly?(user)
-    (admin_or_manager?(user) || admin_readonly?(user))
-  end
-
-  def admin_or_manager?(user)
-    if manager?(user) || admin_or_adminreadonly?(user)
-
-      true
-    else
-      false
-    end
-  end
-
-  def not_admin_or_manager?(user)
-    if admin_or_manager?(user)
-
-      false
-
-    else
-
-      true
-
-    end
+    (medres_manager?(user) || pap_manager?(user))
   end
 
   # Welcome screen
-  def belongs_to_pap(user)
+  def belongs_to_pap?(user)
     user.permission.kind.in?(%w[pap papcollaborator paplocaladm papmgr])
   end
 
-  def belongs_to_medres(user)
+  def belongs_to_medres?(user)
     user.permission.kind.in?(%w[medres medrescollaborator medreslocaladm medresmgr])
   end
 
@@ -194,24 +178,5 @@ module ApplicationpermissionsHelper
               end
 
     profile
-  end
-
-  # Retrieve the sorted list of professions for the role
-  # Used for supervisors, students
-
-  def retrieve_professions_for(user)
-    profile = case
-
-              when permission_for(user) == 'admin' then return Profession.all
-              when permission_for(user) == 'papmgr'then return Profession.pap
-              when permission_for(user) == 'medresmgr' then return Profession.medres
-              when permission_for(user) == 'paplocaladm' then return Profession.pap
-              when permission_for(user) == 'medreslocaladm' then return Profession.medres
-              when permission_for(user) == 'pap' then return Profession.pap
-              when permission_for(user) == 'papcollaborator' then return Profession.pap
-              when permission_for(user) == 'medres' then return Profession.medres
-              when permission_for(user) == 'medrescollaborator' then return Profession.medres
-
-              end
   end
 end
