@@ -20,7 +20,7 @@ Therefore, I thought it best to update this page accordingly, for the sake of co
    I am still in the process of revising and refactoring some of the code for this international version.
 
    This latest update includes additional text in English, such as localized help tooltips ("balloons") in the contact form.
-   
+
    Regarding the sample data (which may be loaded via *rake db:seed*), most of it is in Portuguese, such as states
    municipalities, countries, etc.  Street names are already in English, for the international version.
 
@@ -75,11 +75,11 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*22/DEC/2019*
+*3/JAN/2020*
 
 =======
 ## COPYRIGHT
 
-Copyright © 2019 Marcelo Eduardo Redoschi
+Copyright © 2020 Marcelo Eduardo Redoschi
 
 *Licensed under the GNU Affero General Public License v3.0*
