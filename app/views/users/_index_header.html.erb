@@ -4,7 +4,7 @@
 
 		<% if is_own_user(current_user) || regular_user?(current_user) %>
 
-			<h2 class="text-center"><%= t('personal_info').mb_chars.upcase %> </h2>
+			<h2 class="text-center"><%= t('people_management').mb_chars.upcase %> </h2>
 			<h2 class="subheader"><%= t('my.m').capitalize+' '+tm('user') %> </h2>
 
 		<% else %>

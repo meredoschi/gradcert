@@ -42,10 +42,11 @@
 
 	<% end %>
 
-
-		<%=	permitted_institution_options(current_user, form) %>
-
-
+    <%# boolean fields removed from the database (from earlier development) %>
+    <%# A participating institution will belong to a teaching area if it has one or more programs %>
+    <%# To do: create methods such as institution.gradcert alias to with_gradcert_programs? %>
+    <%# institution.medres alias to with_medres_programs? %>
+		<%#= permitted_institution_options(current_user, form) %>
 
 <div class="row actions">
   	<%= form.submit :value => t('actions.confirm'), class: 'confirmar' %> |

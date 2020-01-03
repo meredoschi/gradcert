@@ -51,10 +51,10 @@ class InstitutionsController < ApplicationController
 
     @num_institutionprograms=@institutionprograms.count
 
-		@institution_managers=@institution.users.with_management_role
+		@institution_managers=@institution.user.with_management_role
 		@num_institution_managers=@institution_managers.count
 
-		@institution_team_members=@institution.users.neither_student_nor_management
+		@institution_team_members=@institution.user.neither_student_nor_management
 		@num_institution_team_members=@institution_team_members.count
 
 		@institution_registrations=Registration.from_institution(@institution)

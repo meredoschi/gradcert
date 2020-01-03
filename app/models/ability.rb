@@ -93,7 +93,9 @@ class Ability
       cannot :crud, Contact, user: { permission: { kind: 'adminreadonly' } }
       cannot :crud, Contact, user: { permission: { kind: 'admin' } }
 
-      cannot [:destroy], Institution, pap: true, provisional: false
+#      cannot [:destroy], Institution, pap: true, provisional: false
+      cannot [:destroy], Institution, provisional: false
+
       cannot %i[update destroy], Program, pap: true
       cannot %i[update destroy], Programname, pap: true
 
@@ -204,7 +206,9 @@ class Ability
       cannot :crud, Contact, user: { permission: { kind: 'adminreadonly' } }
       cannot :crud, Contact, user: { permission: { kind: 'admin' } }
 
-      cannot [:destroy], Institution, medres: true, provisional: false
+#     cannot [:destroy], Institution, medres: true, provisional: false
+      cannot [:destroy], Institution, provisional: false
+
       cannot %i[update destroy], Program, medres: true
       cannot %i[update destroy], Programname, medres: true
       cannot [:destroy], Programname.with_children
