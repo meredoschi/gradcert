@@ -1,11 +1,5 @@
 ---
 pt_BR:
-  warning:
-    block:
-      removal:
-        payroll:
-          annotated: "Alerta: não é possível remover uma folha que contiver anotações."
-          completed: "Alerta: não é possível remover uma folha já concluída."
   alert:
     different_length: Alerta!!! Comprimento diferente
     than_expected: do esperado
@@ -41,3 +35,10 @@ pt_BR:
     phone:
       main:
         help: 'Comece pelo DDD (dois digitos), dê um espaço e então informe o número (o traço é opcional).  Exemplo: 11 5555-1234'
+  warning:
+    block:
+      removal:
+        payroll:
+          annotated: 'Alerta: não é possível remover uma folha que contiver anotações.'
+          completed: 'Alerta: não é possível remover uma folha já concluída.'
+          done: 'Alerta: não é possível remover uma folha já concluída.'
