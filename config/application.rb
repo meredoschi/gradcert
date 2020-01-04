@@ -37,6 +37,8 @@ module Gradcert
 #    config.time_zone = 'Brasilia'
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'brazilian', '*.{rb,yml}').to_s]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'international', '*.{rb,yml}').to_s]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**/model*.yml').to_s]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**/definitions*.yml').to_s]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**/sample*.yml').to_s]
