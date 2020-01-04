@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Provides user functionality
 class User < ActiveRecord::Base
   # @!attribute email
@@ -25,7 +27,8 @@ class User < ActiveRecord::Base
   belongs_to :institution
   belongs_to :permission
 
-  has_one :contact, foreign_key: 'user_id'
+  has_one :contact, foreign_key: 'user_id', dependent:
+   :restrict_with_exception, inverse_of: :user
 
   # Validations
   # http://stackoverflow.com/questions/808547/fully-custom-validation-error-message-with-rails
@@ -34,7 +37,7 @@ class User < ActiveRecord::Base
     validates required_field, presence: true
   end
 
-  validates_uniqueness_of :email
+  validates :email, uniqueness: { case_sensitive: false }
   validates :email, length: { maximum: 255 }
 
   # Class methods
@@ -78,9 +81,7 @@ class User < ActiveRecord::Base
 
   # Instance methods
 
-  def kind
-    permission.kind
-  end
+  delegate :kind, to: :permission
 
   # Added for institutions, show view, contacts partial
   def management_role?
@@ -88,30 +89,20 @@ class User < ActiveRecord::Base
   end
 
   # System administrator profile
-  def admin?
-    permission.admin?
-  end
+  delegate :admin?, to: :permission
 
   # For convenience and clarity
   # Managers have wide ranging permissions within their area
-  def manager?
-    permission.manager?
-  end
+  delegate :manager?, to: :permission
 
   # clerical staff at the local institution which are responsible for their students
-  def localadmin?
-    permission.localadmin?
-  end
+  delegate :localadmin?, to: :permission
 
   # Is this person related to the PAP?
-  def pap?
-    permission.pap?
-  end
+  delegate :pap?, to: :permission
 
   # Is this person related to the medical residency program?
-  def medres?
-    permission.medres?
-  end
+  delegate :medres?, to: :permission
 
   # New for 2017
 
@@ -124,9 +115,7 @@ class User < ActiveRecord::Base
   end
 
   # Convenience method - Demeter's Law
-  def contact_name
-    contact.name
-  end
+  delegate :name, to: :contact, prefix: true
 
   # Convenience method
   def permission_type

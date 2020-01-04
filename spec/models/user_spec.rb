@@ -11,14 +11,13 @@ RSpec.describe User, type: :model do
 
   it { is_expected.to belong_to(:institution) }
   it { is_expected.to belong_to(:permission) }
-  it { is_expected.to have_one(:contact) }
+  it { is_expected.to have_one(:contact).dependent(:restrict_with_exception).inverse_of(:user) }
 
   # Validations
   # http://stackoverflow.com/questions/808547/fully-custom-validation-error-message-with-rails
 
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
-  pending { is_expected.to validate_uniqueness_of(:email) }
 
   it { is_expected.to validate_length_of(:email).is_at_most(255) }
 
@@ -187,6 +186,6 @@ RSpec.describe User, type: :model do
   # Convenience method
   it '-permission_type' do
     user_permission_kind = user.permission.kind
-    expect(user_permission_kind).to eq user.permission.kind
+    expect(user_permission_kind).to eq user.permission_type
   end
 end
