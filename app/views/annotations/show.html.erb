@@ -46,7 +46,7 @@
 </div>
 
 
-	<% if @num_events > 0 %>
+	<% if @num_events.positive? %>
 	
 		<%= render 'show_events.html.erb' %>
 

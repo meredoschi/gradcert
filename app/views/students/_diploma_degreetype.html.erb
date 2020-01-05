@@ -8,11 +8,15 @@
 
 		 		<div class="medium-6 column">
 
-					<% if local_admin?(current_user) && Schoolterm.open_season? %>
+					<% if local_admin?(current_user) %>
 
-						<%= f.collection_select :degreetype_id, Degreetype.pap, :id, :name,  {prompt: true} %>
+					<%# International version - January 2010 %>
 
-					<% else %>
+					<%# if local_admin?(current_user) && Schoolterm.open_season? %>
+
+						<%#= f.collection_select :degreetype_id, Degreetype.pap, :id, :name,  {prompt: true} %>
+
+					<%# else %>
 
 						<%= f.collection_select :degreetype_id, Degreetype.all, :id, :name,  {prompt: true} %>
 

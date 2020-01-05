@@ -14,7 +14,7 @@
 
 							<%# Fix this! %>
 
-							<% if registrations_for(current_user).count > 0 %>
+							<% if registrations_for(current_user).count.positive? %>
 
 						 		<%= link_to image_tag('plus.png', class: "header-create-new", alt: t('actions.new.m')+' '+tm('event')), new_event_path %>
 

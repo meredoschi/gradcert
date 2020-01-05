@@ -243,5 +243,11 @@ class Placesavailable < ActiveRecord::Base
     # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
   end
 
+#  For local admins - deprecated - used in welcome view
+#  def places_available?(user)
+#    Placesavailable.where(institution_id: user.institution_id, schoolterm_id: Schoolterm.latest,
+#                          allowregistrations: true).exists?
+#  end
+
   # ***********************************************************************************************************************************
 end

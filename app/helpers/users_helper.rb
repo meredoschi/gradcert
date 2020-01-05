@@ -62,10 +62,10 @@ module UsersHelper
   def institution_with_users_exists_for(user)
       profile = case
 
-             when permission_for(user) == 'admin' && Institution.with_users.count > 0 then return true
-             when permission_for(user) == 'adminreadonly' && Institution.with_users_seen_by_readonly.count > 0 then return true
-             when permission_for(user) == 'papmgr' && Institution.with_pap_users.count > 0 then return true
-             when permission_for(user) == 'medresmgr' && Institution.with_medres_users.count > 0 then return true
+             when permission_for(user) == 'admin' && Institution.with_users.count.positive? then return true
+             when permission_for(user) == 'adminreadonly' && Institution.with_users_seen_by_readonly.count.positive? then return true
+             when permission_for(user) == 'papmgr' && Institution.with_pap_users.count.positive? then return true
+             when permission_for(user) == 'medresmgr' && Institution.with_medres_users.count.positive? then return true
 
       end
   end

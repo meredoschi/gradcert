@@ -734,7 +734,7 @@ class Ability
   # New for May 2017
   def data_entry_permitted_on_latest_payroll?
 
-    if Payroll.actual.count > 0
+    if Payroll.actual.count.positive?
           latest_payroll = Payroll.actual.latest.first
           latest_payroll.dataentrypermitted?
     else

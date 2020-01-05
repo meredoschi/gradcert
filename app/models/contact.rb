@@ -387,7 +387,7 @@ class Contact < ActiveRecord::Base
   end
 
   def self.possible_students_exist?
-    have_not_become_students.with_student_role.count > 0
+    have_not_become_students.with_student_role.count.positive?
   end
 
   # Contact with student role?

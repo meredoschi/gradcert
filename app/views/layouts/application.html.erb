@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<title> <%= title %></title>
+<title> <%= display_page_info(@title) %></title>
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<%# http://foundation.zurb.com/forum/posts/17900-print-with-foundation-rails %>		
+		<%# http://foundation.zurb.com/forum/posts/17900-print-with-foundation-rails %>
     <%= stylesheet_link_tag "application", media: 'all' %>
-    
+
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
-    
+
   </head>
 
   <body>
 
 		<%= display_header(current_user) %>
-									
+
 		<%= render 'layouts/navigationbar' %>
-  
+
 		<%= render 'layouts/messages' %>
 
     <%= javascript_include_tag "application" %>
@@ -27,4 +27,3 @@
     <%= yield %>
   </body>
 </html>
-

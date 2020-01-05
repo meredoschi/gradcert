@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Annotations
 class Annotation < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::TextHelper
@@ -5,12 +8,12 @@ class Annotation < ActiveRecord::Base
 
   # ------------------- References ------------------------
 
-  # 	has_many  :supervisor, :foreign_key => 'contact_id'
+  #   has_many  :supervisor, :foreign_key => 'contact_id'
 
   # -------------------------------------------------------
 
   # To do ->
-  #	before_save :set_absences_to_zero_if_null
+  #  before_save :set_absences_to_zero_if_null
 
   has_paper_trail
 
@@ -21,13 +24,13 @@ class Annotation < ActiveRecord::Base
 
   # validates :registration_id, presence: true
 
-  # 	validate :registration_is_active, if: :regular_payroll?
+  #   validate :registration_is_active, if: :regular_payroll?
 
   #  validate :registration_is_inactive, if: :special_payroll?
 
   validates :payroll_id, presence: true
 
-  validates_uniqueness_of :registration_id, scope: [:payroll_id]
+  validates :registration_id, uniqueness: { scope: [:payroll_id] }
 
   monetize :supplement_cents
 
@@ -35,13 +38,13 @@ class Annotation < ActiveRecord::Base
 
   monetize :net_cents
 
-  # 	validate :discount_can_not_be_more_than_gross_amount
+  #   validate :discount_can_not_be_more_than_gross_amount
 
   # validate :supplement_can_not_be_more_than_twice_gross_amount
 
   scope :automatic, -> { where(automatic: true) } # Set to true when created by events
 
-  scope :manual, -> { where(automatic: false) }	# Default (i.e. automatic = false)
+  scope :manual, -> { where(automatic: false) } # Default (i.e. automatic = false)
 
   # Computes final impact
   def impact
@@ -49,7 +52,9 @@ class Annotation < ActiveRecord::Base
   end
 
   def detailed
-    I18n.t('activerecord.models.annotation').capitalize + ' ' + id.to_s + ' - ' + I18n.t('activerecord.models.payroll').capitalize + ': ' + payroll.name + ' - ' + registration.detailed
+    I18n.t('activerecord.models.annotation').capitalize + ' ' + id.to_s + \
+      ' - ' + I18n.t('activerecord.models.payroll').capitalize + ': ' + payroll.name \
+    + ' - ' + registration.detailed
   end
 
   def institution
@@ -61,7 +66,8 @@ class Annotation < ActiveRecord::Base
   end
 
   def self.ordered_by_institution_and_contact_name
-    joins(registration: [student: [contact: { user: :institution }]]).order('institutions.name', 'contacts.name')
+    joins(registration: [student: [contact: { user: :institution }]])
+      .order('institutions.name', 'contacts.name')
   end
 
   def regular_payroll?
@@ -74,16 +80,7 @@ class Annotation < ActiveRecord::Base
 
   # Ensures registration is active
   def registration_is_inactive
-    if active_registration?
-
-      errors.add(:registration_id, :must_be_inactive_on_special_payroll)
-
-    end
-  end
-
-  # Ensure that registration is active, i.e. is select on regular payroll
-  def	registration_is_active
-    errors.add(:registration_id, :must_be_active) if inactive_registration?
+    errors.add(:registration_id, :must_be_inactive_on_special_payroll) if active_registration?
   end
 
   # Checks if registration is active
@@ -99,20 +96,16 @@ class Annotation < ActiveRecord::Base
 
   # Ensures registration is active
   def registration_is_active
-    if registration.inactive?
-
-      errors.add(:registration_id, :must_be_active_on_regular_payroll)
-
-    end
+    errors.add(:registration_id, :must_be_active_on_regular_payroll) if registration.inactive?
   end
 
   # p = Payroll
-  def self.prior_to_payroll(p)
-    joins(:payroll).where('payrolls.monthworked<?', p.monthworked.last_month)
-  end
+  #  def self.prior_to_payroll(p)
+  #    joins(:payroll).where('payrolls.monthworked<?', p.monthworked.last_month)
+  # end
 
   def self.adjustment
-    where('discount_cents > 0 or supplement_cents>0')
+    where('discount_cents.positive? or supplement_cents>0')
   end
 
   # Returns the (student's) registration total absences
@@ -135,11 +128,16 @@ class Annotation < ActiveRecord::Base
     !automatic
   end
 
+  # To do: separate manual from adjustment (concept)
+  def adjustment?
+    !usual?
+  end
+
   # To do: test this method properly
   # Useful for manual annotations (including from rake tasks)
   def set_absences_to_zero_if_null
     self.absences = 0 if absences.nil?
-   end
+  end
 
   def supplement_can_not_be_more_than_twice_gross_amount
     payroll = self.payroll
@@ -165,7 +163,8 @@ class Annotation < ActiveRecord::Base
   def self.num_absences_for_registration_on_payroll(r, p)
     if exists_for_registration_on_payroll?(r, p)
 
-      for_registration_on_payroll(r, p).pluck(:absences)[0] # Important: it is assumed this array will return only one element, so we get the first one.
+      # Important: it is assumed this array will return only one element, so we get the first one.
+      for_registration_on_payroll(r, p).pluck(:absences)[0]
 
     else
 
@@ -188,11 +187,7 @@ class Annotation < ActiveRecord::Base
 
     gross = Scholarship.in_effect_for(payroll).first.amount
 
-    if discount > gross
-
-      errors.add(:discount, :discount_may_not_be_more_than_gross_amount)
-
-    end
+    errors.add(:discount, :discount_may_not_be_more_than_gross_amount) if discount > gross
   end
 
   def self.absent
@@ -208,7 +203,7 @@ class Annotation < ActiveRecord::Base
   end
 
   def absent?
-    (absences > 0)
+    absences.positive?
   end
 
   def assiduous?
@@ -223,23 +218,15 @@ class Annotation < ActiveRecord::Base
     where(discount_cents: 0, supplement_cents: 0)
   end
 
+  # http://stackoverflow.com/questions/25086952/
+  # rails-how-do-i-exclude-records-with-entries-in-a-join-table
   def self.manual
-    # http://stackoverflow.com/questions/25086952/rails-how-do-i-exclude-records-with-entries-in-a-join-table
     where.not(id: usual)
   end
 
   # a = Annotation
   def usual?
-    (discount_cents == 0 && supplement_cents == 0)
-  end
-
-  # To do: separate manual from adjustment (concept)
-  def manual?
-    !usual?
-  end
-
-  def adjustment?
-    !usual?
+    (discount_cents.zero? && supplement_cents.zero?)
   end
 
   # Annotations confirmed by managers
@@ -276,44 +263,47 @@ class Annotation < ActiveRecord::Base
 
     annotation_impact_details = I18n.t('discounts_and_supplements').capitalize + '-> '
 
-    annotation_impact_details += I18n.t('activerecord.attributes.annotation.virtual.impact') + ': ' + impact_amount
+    annotation_impact_details += I18n.t('activerecord.attributes.annotation.virtual.impact') \
+    + ': ' + impact_amount
 
     annotation_impact_details += ' (' + I18n.t('negative') + ')' if impact < 0
 
-    annotation_impact_details += +' [' + I18n.t('activerecord.attributes.annotation.supplement') + ': ' + supplement_amount
-    annotation_impact_details += +' ; ' + I18n.t('activerecord.attributes.annotation.discount') + ': ' + discount_amount + ']'
+    annotation_impact_details += +' [' + I18n.t('activerecord.attributes.annotation.supplement') \
+    + ': ' + supplement_amount
+    annotation_impact_details += +' ; ' + I18n.t('activerecord.attributes.annotation.discount') \
+     + ': ' + discount_amount + ']'
 
     annotation_impact_details
   end
 
   # --- TDD ---
-  def payroll_name
-    payroll.name
-  end
+  delegate :name, to: :payroll, prefix: true
   # -----------
 
   def kind
     @annotation_kind = I18n.t('activerecord.attributes.annotation.virtual.kind') + ': '
 
-    if automatic?
+    @annotation_kind += if automatic?
 
-      @annotation_kind += I18n.t('activerecord.attributes.annotation.automatic').downcase
+                          I18n.t('activerecord.attributes.annotation.automatic').downcase
 
-    else
+                        else
 
-      @annotation_kind += I18n.t('activerecord.attributes.annotation.virtual.manual').downcase
+                          I18n.t('activerecord.attributes.annotation.virtual.manual').downcase
 
-    end
+                        end
 
     @annotation_kind
   end
 
   def self.for_institution_id(institution_id)
-    joins(registration: [student: [contact: [{ user: :institution }]]]).where('institutions.id= ? ', institution_id)
+    joins(registration: [student: [contact: [{ user: :institution }]]])
+      .where('institutions.id= ? ', institution_id)
   end
 
   def self.for_institution(i)
-    joins(registration: [student: [contact: [{ user: :institution }]]]).where('institutions.id= ? ', i.id)
+    joins(registration: [student: [contact: [{ user: :institution }]]])
+      .where('institutions.id= ? ', i.id)
   end
 
   def self.skipped
@@ -330,8 +320,20 @@ class Annotation < ActiveRecord::Base
     not_skipped
   end
 
-  def net_cents
-    supplement_cents.to_i - discount_cents.to_i
+  def self.num_absences_txt(registration, payroll)
+    num_absences = num_absences_for_registration_on_payroll(registration, payroll)
+
+    if num_absences.positive?
+
+      num_absences.to_s + ' ' + I18n.t('activerecord.attributes.event.absence')
+                                    .pluralize(num_absences).downcase
+    #      return safe_join([num_absences.to_s + ' ' + absences_label])
+
+    else
+
+      I18n.t('no_absences').capitalize
+
+    end
   end
 
   def skip?
@@ -345,8 +347,10 @@ class Annotation < ActiveRecord::Base
 
   # http://stackoverflow.com/questions/19175084/activerecord-query-through-multiple-joins
   def self.institution_ids
-    # 		joins(registration: [ student: [ contact: [ {user: :institution}]]]).order("institutions.name").pluck(:institution_id).uniq
-    joins(registration: [student: [contact: [{ user: :institution }]]]).order('institutions.name').pluck('institutions.id').uniq
+    #     joins(registration: [ student: [ contact: [ {user: :institution}]]])
+    # .order("institutions.name").pluck(:institution_id).uniq
+    joins(registration: [student: [contact: [{ user: :institution }]]])
+      .order('institutions.name').pluck('institutions.id').uniq
   end
 
   def self.for_payroll(p)
@@ -372,22 +376,16 @@ class Annotation < ActiveRecord::Base
     joins(:payroll).merge(Payroll.ordered_by_most_recent)
   end
 
-  def namecpf
-    registration.namecpf
-  end
+  delegate :namecpf, to: :registration
 
   def name
     registration.student_name + ' ' + payroll.name
   end
 
   # To be deprecated
-  def full_details
-    registration.full_details
-  end
+  delegate :full_details, to: :registration
 
-  def details
-    registration.details
-  end
+  delegate :details, to: :registration
 
   def absencesinfo
     annotation_absences_info = ''
@@ -395,14 +393,14 @@ class Annotation < ActiveRecord::Base
 
     absences_i18n = I18n.t('activerecord.attributes.event.absence')
 
-    if absences.present? && absences > 0
+    if absences.present? && absences.positive?
       annotation_absences_info = pluralize(absences, absences_i18n).downcase
 
       annotation_absences_info += ' - ' + skip_i18n if skip?
 
     else
       annotation_absences_info = I18n.t('no_absences').capitalize
-  end
+    end
 
     annotation_absences_info
   end

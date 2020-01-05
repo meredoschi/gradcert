@@ -187,7 +187,7 @@ end
   def delta(previous, current)
     result = (current.to_f - previous.to_f) / previous.to_f * 100
 
-    if result.nan? || previous.to_i == 0
+    if result.nan? || previous.to_i.zero?
 
       return '---'.html_safe
 

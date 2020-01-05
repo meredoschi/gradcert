@@ -19,7 +19,7 @@ module ProgramsituationsHelper
 
 	def assessments_exist?(user)
 
-		if assessment_count_for(user) > 0 then
+		if assessment_count_for(user).positive? then
 
 			return true
 		

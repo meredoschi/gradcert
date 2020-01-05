@@ -170,7 +170,7 @@ class Accreditation < ActiveRecord::Base
   end
 
   def cancellation_date_must_be_after_latest_event_finish_date
-    if Registration.count > 0 && Event.count > 0 && revocation.present?
+    if Registration.count.positive? && Event.count.positive? && revocation.present?
 
       most_recent_event_date = Event.most_recent_finish_date_for_registration(registration)
 

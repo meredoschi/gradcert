@@ -187,7 +187,7 @@ class Program < ActiveRecord::Base
   end
 
   def with_registered_students?
-    numregistrations > 0 # boolean
+    numregistrations.positive? # boolean
   end
 
   def without_registered_students?

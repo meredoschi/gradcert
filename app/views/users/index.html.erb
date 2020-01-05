@@ -1,6 +1,6 @@
 <%= render 'index_header.html.erb' %>
 
-<% if @num_nameless_contacts > 0 %>
+<% if @num_nameless_contacts.positive? %>
 
 	<%= render 'nameless_contacts_warning_and_shortcut.html.erb' %>
 

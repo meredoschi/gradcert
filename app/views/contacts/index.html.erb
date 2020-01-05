@@ -1,6 +1,6 @@
 <%= render 'index_header.html.erb' %>
 
-<% if @num_nameless_contacts > 0 %>
+<% if @num_nameless_contacts.positive? %>
 
 	<%= render 'index_nameless_warning.html.erb' %>
 
@@ -14,7 +14,7 @@
 
 <% end %>
 
-<% if @num_contacts_ready_to_become_students > 0 %>
+<% if @num_contacts_ready_to_become_students.positive? %>
 
 	<%= render 'index_ready_to_be_students_warning.html.erb' %>
 

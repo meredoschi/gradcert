@@ -67,7 +67,7 @@ class Registrationkind < ActiveRecord::Base
 
   # From a previous registration
   def related_to_a_previous_registration?
-    (makeup? || repeat?) && previousregistrationid > 0
+    (makeup? || repeat?) && previousregistrationid.positive?
   end
 
   # i.e. Regular registration

@@ -20,7 +20,7 @@ class Assignment < ActiveRecord::Base
   validates :main, uniqueness: { scope: :program_id }, if: :main
 
   def self.has_main_supervisor?(prog)
-    if for_program(prog).main.count > 0
+    if for_program(prog).main.count.positive?
 
       true
 
@@ -64,7 +64,7 @@ end
 
   # http://stackoverflow.com/questions/22720472/select-objects-based-on-grandchild-attribute-with-joins-in-activerecord
   def self.exists_for_supervisor?(user)
-    if Assignment.includes(supervisor: :contact).where(contacts: { user_id: user }).count > 0
+    if Assignment.includes(supervisor: :contact).where(contacts: { user_id: user }).count.positive?
 
       true
 

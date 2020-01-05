@@ -25,7 +25,7 @@ class Leavetype < ActiveRecord::Base
   def setnumdays_i18n
     @leavetype_setnumdays_txt = ''
 
-    if setnumdays.present? && setnumdays > 0
+    if setnumdays.present? && setnumdays.positive?
       attrib = 'activerecord.attributes.leavetype.setnumdays'
       @leavetype_setnumdays_txt = I18n.t(attrib) + ': ' + setnumdays.to_s
     end
@@ -36,7 +36,7 @@ class Leavetype < ActiveRecord::Base
   def maxnumdays_i18n
     @leavetype_maxnumdays_i18n = ''
 
-    if maxnumdays.present? && maxnumdays > 0
+    if maxnumdays.present? && maxnumdays.positive?
       attrib = 'activerecord.attributes.leavetype.maxnumdays'
       @leavetype_maxnumdays_i18n = I18n.t(attrib) + ': ' + maxnumdays.to_s
     end
@@ -47,7 +47,7 @@ class Leavetype < ActiveRecord::Base
   def dayspaidcap_i18n
     @leavetype_dayspaidcap_i18n = ''
 
-    if dayspaidcap.present? && dayspaidcap > 0
+    if dayspaidcap.present? && dayspaidcap.positive?
       attrib = 'activerecord.attributes.leavetype.dayspaidcap'
       @leavetype_dayspaidcap_i18n = I18n.t(attrib) + ': ' + dayspaidcap.to_s
     end
@@ -88,7 +88,7 @@ class Leavetype < ActiveRecord::Base
   end
 
   def self.limited
-    where('dayswithpaylimit > 0')
+    where('dayswithpaylimit.positive?')
   end
 
   def limited?
@@ -121,7 +121,7 @@ class Leavetype < ActiveRecord::Base
   # Some types of leave have set number of days established by law
 
   def rigid?
-    if days.present? && days > 0
+    if days.present? && days.positive?
       true
     else
       false
