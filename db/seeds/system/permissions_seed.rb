@@ -5,7 +5,7 @@ desc = 'definitions.user_permission.description.'
 
 Permission.create!([
                      { kind: 'admin', description: I18n.t(desc + 'admin') },
-                     { kind: 'pap', description: I18n.t(desc + 'admin') },
+                     { kind: 'pap', description: I18n.t(desc + 'pap') },
                      { kind: 'medreslocaladm', description: I18n.t(desc + 'medreslocaladm') },
                      { kind: 'papcollaborator', description: I18n.t(desc + 'papcollaborator') },
                      { kind: 'medrescollaborator', description: I18n.t(desc + 'medrescollaborator') },

@@ -47,9 +47,9 @@ module ApplicationHelper
   end
 
   # Returns a title on a per-page basis.
-  def display_page_info(_custom_title)
-    default_title = t('application_title')
-    "#{default_title} | #{title}"
+  def display_page_info(title)
+    generic_title = t('application_title')
+    "#{generic_title} | #{title}"
   end
 
   def pluraltitle(text)
@@ -75,7 +75,7 @@ module ApplicationHelper
 
   def accreditation_status(accr)
     status = if accr.is_original? then ta('accreditation.original')
-             elsif accr.was_renewed? then ta('accreditation.renewed')
+              elsif accr.was_renewed? then ta('accreditation.renewed')
              elsif accr.was_suspended? then ta('accreditation.suspended')
              elsif accr.was_revoked? then ta('accreditation.revoked')
              else t('undefined_value')

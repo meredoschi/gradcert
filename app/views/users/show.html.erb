@@ -1,6 +1,8 @@
 <div class="row">
 
-	<% if is_own_user(current_user) || regular_user?(current_user) %>
+	<%# if is_own_user(current_user) || regular_user?(current_user) %>
+
+	<% if regular_user?(current_user) %>
 
 			<h2><%= t('my.m').capitalize+' '+tm('user') %> </h2>
 
