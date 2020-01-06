@@ -122,6 +122,8 @@ class User < ActiveRecord::Base
     permission.kind
   end
 
+  delegate :name, to: :institution, prefix: true
+
   # All users will have an associated contact, and some will be students.
   # E.g. PAP student, medical resident
   def self.with_student_role

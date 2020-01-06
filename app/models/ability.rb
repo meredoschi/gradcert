@@ -461,12 +461,12 @@ class Ability
 
       # Training - Registration season
 
-      #	    can [:destroy],  Contact.childless, contact:
+      #	    can [:destroy],  Contact.plain, contact:
       #     { user: {:institution_id=> user.institution_id } }
 
       #   can [:destroy],  Contact, contact: { user: {:institution_id=> user.institution_id } }
 
-      can [:destroy],  Contact.not_confirmed.childless
+      can [:destroy],  Contact.not_confirmed.plain
 
       can [:destroy],  Student.not_registered, contact:
       { user: { institution_id: user.institution_id } }

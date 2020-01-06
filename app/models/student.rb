@@ -193,7 +193,7 @@ class Student < ActiveRecord::Base
     joins(:registration)
   end
 
-  def self.registerable_at_users_institution(u)
+  def self.from_own_institution_but_not_registered_yet(u)
     from_own_institution(u).not_registered
   end
 

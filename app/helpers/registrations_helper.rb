@@ -201,7 +201,7 @@ module RegistrationsHelper
           when permission_for(user)=='paplocaladm' then Student.from_own_institution(current_user).incoming
 
 
-# 	        when permission_for(user)=='paplocaladm' then Student.registerable_at_users_institution(user)
+# 	        when permission_for(user)=='paplocaladm' then Student.from_own_institution_but_not_registered_yet(user)
 
   #        when permission_for(user)=='medresmgr' then return Contact.are_not_registered_supervisors.with_teaching_role.medres
   #        when permission_for(user)=='paplocaladm' then return Contact.are_not_registered_supervisors.with_teaching_role.from_own_institution(current_user).pap

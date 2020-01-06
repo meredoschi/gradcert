@@ -188,4 +188,9 @@ RSpec.describe User, type: :model do
     user_permission_kind = user.permission.kind
     expect(user_permission_kind).to eq user.permission_type
   end
+
+  it '-institution_name' do
+    user_institution_name = user.institution.name
+    expect(user_institution_name).to eq(user.institution_name)
+  end
 end
