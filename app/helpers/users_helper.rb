@@ -100,11 +100,11 @@ module UsersHelper
     relevant_to_read_only = Permission.all.joins(:user)
 
     # Pap
-    relevant_to_pap_local = Permission.own_institution(user).paplocal.joins(:user)
+    relevant_to_pap_local_admin = Permission.own_institution(user).paplocal.joins(:user)
     relevant_to_pap_manager = Permission.pap.joins(:user)
 
     # Medical residency
-    relevant_to_medres_local = Permission.own_institution(user).medres.joins(:user)
+    relevant_to_medres_local_admin = Permission.own_institution(user).medres.joins(:user)
     relevant_to_medres_manager = Permission.medres.joins(:user)
 
     # Future to do: Graduate certificate
@@ -146,7 +146,7 @@ module UsersHelper
               when permission_for(user) == 'adminreadonly' then return Permission.readonly.joins(:user).uniq
               when permission_for(user) == 'papmgr' then return Permission.pap.joins(:user).uniq
               when permission_for(user) == 'medresmgr' then return Permission.medres.joins(:user).uniq
-              when permission_for(user) == 'medreslocaladm' then return Permission.own_institution(user).medreslocal.joins(:user).uniq
+              when permission_for(user) == 'medreslocaladm' then return Permission.own_institution(user).medres.joins(:user).uniq
               when permission_for(user) == 'paplocaladm' then return Permission.own_institution(user).paplocal.joins(:user).uniq
     end
   end
@@ -154,7 +154,6 @@ module UsersHelper
   def retrieve_institution_with_users_for(user)
     profile = case
 
-              when permission_for(user) == 'admin' then return Institution.with_users.to_a.uniq
               when permission_for(user) == 'admin' then return Institution.with_users.to_a.uniq
               when permission_for(user) == 'adminreadonly' then return Institution.with_users_seen_by_readonly.to_a.uniq
               when permission_for(user) == 'papmgr' then return Institution.with_pap_users.to_a.uniq

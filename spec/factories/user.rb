@@ -23,6 +23,10 @@ FactoryBot.define do
       association :permission, factory: %i[permission papmgr]
     end
 
+    trait :papcollaborator do
+      association :permission, factory: %i[permission papcollaborator]
+    end
+
     # Medical residency
 
     trait :medres do
@@ -35,6 +39,10 @@ FactoryBot.define do
 
     trait :medresmgr do
       association :permission, factory: %i[permission medresmgr]
+    end
+
+    trait :medrescollaborator do
+      association :permission, factory: %i[permission medrescollaborator]
     end
 
     # Admin and read-only
