@@ -176,15 +176,9 @@ class Personalinfo < ActiveRecord::Base
   end
 
   def genderdiversity?
-    if sex.present? && gender.present? && ((sex != gender) || sex == 'X' || gender == 'X')
-
-      true
-
-    else
-
-      false
-
-    end
+    unspecified = I18n.t('activerecord.constants.personalinfo.personal_characteristic.unspecified')
+    (sex.present? && gender.present? && \
+      ((sex != gender) || sex == unspecified || gender == unspecified))
   end
 
   def birth

@@ -65,5 +65,43 @@ RSpec.describe Personalinfo, type: :model do
                                        end
       expect(personalinfo_ssn_control_digit).to eq(personalinfo.nit_dv)
     end
+
+    it '-birth' do
+      formatted_birth_date = I18n.l(personalinfo.dob)
+      expect(formatted_birth_date).to eq(personalinfo.birth)
+    end
+    # Brazilian Taxpayer identification number - First verification digit
+
+    it '-cpf_dv1' do
+      v = 0
+      (1..9).each do |k|
+        v += k * personalinfo.tin[k - 1].to_i
+      end
+      v = v % 11
+      v = v % 10
+      expect(v).to eq(personalinfo.cpf_dv1)
+    end
+
+    # Segundo digito verificador do CPF
+    # Brazilian Taxpayer identification number - Second verification digit
+    it '-cpf_dv2' do
+      v = 0
+      (1..8).each do |k|
+        v += k * personalinfo.tin[k].to_i
+      end
+      v += 9 * personalinfo.cpf_dv1.to_i # Chama DV1
+      v = v % 11
+      v = v % 10
+      expect(v).to eq(personalinfo.cpf_dv2)
+    end
+
+    it '-genderdiversity?' do
+      unspecified = I18n.t('activerecord.constants.personalinfo.
+        personal_characteristic.unspecified')
+      is_diversity = (personalinfo.sex.present? && personalinfo.gender.present? &&  \
+        ((personalinfo.sex != personalinfo.gender) || personalinfo.sex == unspecified  \
+        || personalinfo.gender == unspecified))
+      expect(is_diversity).to eq(personalinfo.genderdiversity?)
+    end
   end
 end
