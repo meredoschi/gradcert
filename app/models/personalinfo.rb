@@ -21,15 +21,15 @@ class Personalinfo < ActiveRecord::Base
   # ************ RSPEC ************
 
   # SEXES=%w(F M X) # biological sex and gender types
-  SEXES = [Settings.personalcharacteristic.female,
-           Settings.personalcharacteristic.male,
-           Settings.personalcharacteristic.unspecified].freeze
+  SEXES = [I18n.t('activerecord.constants.personalinfo.personal_characteristic.female'),
+           I18n.t('activerecord.constants.personalinfo.personal_characteristic.male'),
+           I18n.t('activerecord.constants.personalinfo.personal_characteristic.unspecified')].freeze
   GENDERS = SEXES #
   #   https://www.ag.gov.au/publications/documents/australiangovernmentguidelinesontherecognitionofsexandgender/australiangovernmentguidelinesontherecognitionofsexandgender.doc
 
-  IDTYPES = [I18n.t('personal_document.state_registration'),
-             I18n.t('personal_document.registered_foreigner'),
-             I18n.t('personal_document.passport')].freeze
+  IDTYPES = [I18n.t('activerecord.constants.personalinfo.idtype.state_registration'),
+             I18n.t('activerecord.constants.personalinfo.idtype.registered_foreigner'),
+             I18n.t('activerecord.constants.personalinfo.idtype.passport')].freeze
 
   #      validates personaltraits,  presence: true, length: {is: 1}
 
@@ -87,7 +87,7 @@ class Personalinfo < ActiveRecord::Base
 
   validates :socialsecuritynumber, length: { maximum: 20 }
 
-  validates :idtype, length: { maximum: 15 }
+  validates :idtype, length: { maximum: 40 }
 
   validate :birth_date_cannot_be_in_the_future
 
@@ -95,9 +95,9 @@ class Personalinfo < ActiveRecord::Base
 
   validates :tin, numericality: { only_integer: true }
 
-  validates_uniqueness_of :tin
+  validates :tin, uniqueness: true
 
-  validates_uniqueness_of :socialsecuritynumber, unless: :staff?
+  validates :socialsecuritynumber, uniqueness: { unless: :staff? }
 
   validates :country_id, presence: true, if: :international?
 
@@ -165,11 +165,11 @@ class Personalinfo < ActiveRecord::Base
   end
 
   def registered_foreigner?
-    idtype == I18n.t('personal_document.registered_foreigner')
+    idtype == I18n.t('activerecord.constants.personalinfo.idtype.registered_foreigner')
   end
 
   def passport?
-    idtype == I18n.t('personal_document.passport')
+    idtype == I18n.t('activerecord.constants.personalinfo.idtype.passport')
   end
 
   def genderdiversity?
@@ -220,7 +220,7 @@ class Personalinfo < ActiveRecord::Base
   end
 
   def mothers_name_is_present
-    errors.add(:mothersname, :missing) unless mothersname.present?
+    errors.add(:mothersname, :missing) if mothersname.blank?
   end
 
   # Brazilian Social Security Number
@@ -254,11 +254,13 @@ class Personalinfo < ActiveRecord::Base
   end
 
   def male?
-    (!genderdiversity? && sex == 'M')
+    (!genderdiversity? && sex == I18n
+      .t('activerecord.constants.personalinfo.personal_characteristic.male'))
   end
 
   def female?
-    (!genderdiversity? && sex == 'F')
+    (!genderdiversity? && sex == I18n
+      .t('activerecord.constants.personalinfo.personal_characteristic.female'))
   end
 
   def student_role?
@@ -266,7 +268,7 @@ class Personalinfo < ActiveRecord::Base
   end
 
   def birth_date_cannot_be_in_the_future
-    return unless dob.present? && dob > Date.today
+    return unless dob.present? && dob > Time.zone.today
 
     errors.add(:dob, :may_not_be_in_the_future)
   end

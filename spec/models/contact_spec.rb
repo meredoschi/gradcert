@@ -67,42 +67,48 @@ RSpec.describe Contact, type: :model do
   end
 
   context 'validations' do
+
     it '-user_with_staff_permission_must_not_take_on_student_role' do
       role_id_i18n = I18n.t('activerecord.attributes.contact.role_id')
 
-      msg = I18n.t('activerecord.errors.models.contact.attributes.role_id'\
-        '.staff_may_not_take_student_role')
+      msg = I18n.t('validation_failed')+': ' +role_id_i18n + ' ' + \
+      I18n.
+      t('activerecord.errors.models.contact.attributes.role_id.staff_may_not_take_student_role')
+
       expect do
         FactoryBot.create(:contact, :staff_permission_with_student_role)
 
         #        FactoryBot.create(:contact, :student_permission_with_staff_role)
         # https://stackoverflow.com/questions/45128434/comparing-rspec-custom-activerecordrecordinvalid-errors-messages
-      end .to raise_error(ActiveRecord::RecordInvalid,
-                          'Validation failed: ' + role_id_i18n + ' ' + msg)
+      end .to raise_error(ActiveRecord::RecordInvalid, msg)
     end
 
     it '-user_with_student_permission_must_not_take_on_staff_role' do
       role_id_i18n = I18n.t('activerecord.attributes.contact.role_id')
 
-      msg = I18n.t('activerecord.errors.models.contact.attributes.role_id'\
-        '.student_may_not_take_staff_role')
+        msg = I18n.t('validation_failed')+': ' +role_id_i18n + ' ' + \
+        I18n.
+        t('activerecord.errors.models.contact.attributes.role_id.student_may_not_take_staff_role')
+
+
       expect do
         FactoryBot.create(:contact, :student_permission_with_staff_role)
         # https://stackoverflow.com/questions/45128434/comparing-rspec-custom-activerecordrecordinvalid-errors-messages
-      end .to raise_error(ActiveRecord::RecordInvalid,
-                          'Validation failed: ' + role_id_i18n + ' ' + msg)
+      end .to raise_error(ActiveRecord::RecordInvalid, msg)
     end
 
     it '-name_whitespacing_is_consistent' do
       name_i18n = I18n.t('activerecord.attributes.contact.name')
 
-      msg = I18n.t('activerecord.errors.models.contact.attributes.name'\
-        '.must_have_consistent_whitespacing')
+        msg = I18n.t('validation_failed')+': ' +name_i18n + ' ' + \
+        I18n.
+        t('activerecord.errors.models.contact.attributes.name.must_have_consistent_whitespacing')
+
+
       expect do
         FactoryBot.create(:contact, :name_with_blanks)
         # https://stackoverflow.com/questions/45128434/comparing-rspec-custom-activerecordrecordinvalid-errors-messages
-      end .to raise_error(ActiveRecord::RecordInvalid,
-                          'Validation failed: ' + name_i18n + ' ' + msg)
+      end .to raise_error(ActiveRecord::RecordInvalid, msg)
     end
 
   end

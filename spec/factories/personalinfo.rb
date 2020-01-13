@@ -9,13 +9,13 @@ FactoryBot.define do
 
     #    home_state_abbreviation = Settings.home_state_abbreviation
     dob Faker::Date.birthday(18, 70)
-    idtype I18n.t('personal_document.state_registration')
+    idtype I18n.t('activerecord.constants.personalinfo.idtype.state_registration')
 
     # association :contact_id, [:contact, :clerical_pap]
     # association :contact, [:clerical_pap]
     # association :contact, [:pap_student_role]
 
-    sequence(:tin) { |n| Brazilianbanking.generate_cpf((100_000_000 + n + rand(100_000)).to_s).to_s }
+    sequence(:tin) { |n| Brazilianbanking.generate_cpf((n + 100_000_000 + rand(100_000)).to_s) }
     sequence(:idnumber) { |n| (10_000 + n).to_s.to_s }
     sex 'F'
     state

@@ -88,10 +88,6 @@ defaults: &defaults
   num_scholarships_offered:
     pap: 1170
   operational_start: <%= "#{'2016-3-01'.to_date}" %>
-  personalcharacteristic:
-    female: F
-    male: M
-    unspecified: X
   registration_season:
     finish: <%= "#{'2018-4-1'.to_date}" %>
     start: <%= "#{'2018-1-01'.to_date}" %>

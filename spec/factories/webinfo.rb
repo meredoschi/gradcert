@@ -9,6 +9,10 @@ FactoryBot.define do
   factory :webinfo do
     email { Faker::Internet.email }
 
+    trait :website_url_starts_with_http do
+      site 'http://example.com'
+    end
+
     trait :bankbranch do
       bankbranch_id 1
       site Faker::Internet.domain_name

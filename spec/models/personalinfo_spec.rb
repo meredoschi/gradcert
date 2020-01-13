@@ -8,15 +8,17 @@ RSpec.describe Personalinfo, type: :model do
   end
 
   let(:sexes) do
-    [Settings.personalcharacteristic.female,
-     Settings.personalcharacteristic.male,
-     Settings.personalcharacteristic.unspecified]
+    [I18n.t('activerecord.constants.personalinfo.personal_characteristic.female'),
+     I18n.t('activerecord.constants.personalinfo.personal_characteristic.male'),
+     I18n.t('activerecord.constants.personalinfo.personal_characteristic.unspecified')].freeze
   end
 
+  let(:genders) { :sexes }
+
   let(:idtypes) do
-    [I18n.t('personal_document.state_registration'),
-     I18n.t('personal_document.registered_foreigner'),
-     I18n.t('personal_document.passport')]
+    [I18n.t('activerecord.constants.personalinfo.idtype.state_registration'),
+     I18n.t('activerecord.constants.personalinfo.idtype.registered_foreigner'),
+     I18n.t('activerecord.constants.personalinfo.idtype.passport')].freeze
   end
 
   it 'can be created' do
@@ -24,21 +26,16 @@ RSpec.describe Personalinfo, type: :model do
   end
 
   it {
-    puts 'SEXES (constant)'
-    expect(Personalinfo::SEXES).to eq(sexes)
+    expect(Personalinfo::GENDERS).to eq(genders)
   }
+
   it {
-    puts 'GENDERS (constant)'
-    expect(Personalinfo::GENDERS).to eq(sexes)
-  }
-  it {
-    puts 'IDTYPES (constant)'
-    puts 'Currently this is not i18n (refer to application_settings.yml)'
     expect(Personalinfo::IDTYPES).to eq(idtypes)
   }
-  pending do
+
+  it do
     should validate_inclusion_of(:idtype)
-      .in_array(%w[open resolved unresolved])
+      .in_array(idtypes)
   end
   #
   # Digito verificador do NIT

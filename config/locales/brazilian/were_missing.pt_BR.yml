@@ -11,10 +11,6 @@ pt_BR:
     invalid_size:
       too_small: Erro! Tamanho inválido! Pequeno demais!
   on_the_team: na equipe
-  personal_document:
-    passport: Passaporte
-    registered_foreigner: RNE/CIE
-    state_registration: RGE
   tooltip:
     bankaccount:
       num:

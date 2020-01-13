@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Web information
 class Webinfo < ActiveRecord::Base
   # ------------------- References ------------------------
 
@@ -6,7 +9,7 @@ class Webinfo < ActiveRecord::Base
   belongs_to :institution
   belongs_to :regionaloffice
 
-  validate :site_URL_is_clean
+  validate :site_url_without_protocol
 
   validates :site, length: { maximum: 150 }
 
@@ -16,9 +19,7 @@ class Webinfo < ActiveRecord::Base
     validates s, length: { maximum: 40 }
   end
 
-  def site_URL_is_clean
-    #       errors.add(:url, 'digitada incorretamente.  Não é necessário iniciar com http://') if url =~ %r{\Ahttps?://}
-
+  def site_url_without_protocol
     errors.add(:site, :incorrect) if site =~ %r{\Ahttps?://}
   end
 end

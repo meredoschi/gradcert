@@ -267,7 +267,10 @@ class Contact < ActiveRecord::Base
   end
 
   def name_whitespacing_is_consistent
-    return unless (name =~ /['  ']/).nil?
+    # may not start with a whitespace
+    # two (or more) spaces in sequence are not allowed
+    # may not end with a blank space
+    return if (name =~ /(\A\s|\s{2,}|\s\z)/).blank?
 
     errors.add(:name, :must_have_consistent_whitespacing)
   end

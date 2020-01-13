@@ -674,6 +674,16 @@ en:
           site: Personal site
         site: Site
         twitter: Twitter
+    constants:
+      personal_characteristic:
+        female: F
+        male: M
+        unspecified: X
+      personalinfo:
+        idtype:
+          passport: Passport
+          registered_foreigner: Registered foreigner
+          state_registration: State ID
     errors:
       delete_restriction: Delete restriction
       models:

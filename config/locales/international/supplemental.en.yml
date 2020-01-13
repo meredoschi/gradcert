@@ -8,4 +8,5 @@ en:
   not_yet: not yet
   reminder: Reminder
   there_are_contacts_which_may_become_students: There are contacts created in the database which may become students
+  validation_failed: "Validation failed" # Rspec - custom active record error msgs - January 2020 
   yay: true

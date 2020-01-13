@@ -672,6 +672,16 @@ pt_BR:
           site: Página pessoal
         site: Site
         twitter: Twitter
+    constants:
+      personalinfo:
+        idtype:
+          passport: Passaporte
+          registered_foreigner: RNE/CIE
+          state_registration: RG
+        personal_characteristic:
+          female: F
+          male: M
+          unspecified: X
     errors:
       models:
         accreditation:
