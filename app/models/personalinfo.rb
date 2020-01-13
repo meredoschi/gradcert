@@ -91,11 +91,9 @@ class Personalinfo < ActiveRecord::Base
 
   validate :birth_date_cannot_be_in_the_future
 
-  validates :tin, presence: true, length: { is: 11 }
+  validates :tin, presence: true, uniqueness: true
 
-  validates :tin, numericality: { only_integer: true }
-
-  validates :tin, uniqueness: true
+  validates :tin, length: { is: 11 }, numericality: { only_integer: true }, if: :brazilian_version?
 
   validates :socialsecuritynumber, uniqueness: { unless: :staff? }
 
@@ -134,7 +132,12 @@ class Personalinfo < ActiveRecord::Base
   #  validates :mothersname,  presence: true, length:  { maximum: 100 },
   #  :if => lambda {|p| p.contact.role.student? }
 
-  validate :cpf_is_consistent # CPF = Brazil's Taxpayer identification number (TIN)
+  # CPF = Brazil's Taxpayer identification number (TIN)
+  validate :cpf_is_consistent, if: :brazilian_version?
+
+  def brazilian_version?
+    (I18n.locale == :pt_BR)
+  end
 
   def staff?
     (contact.present? && contact.role.present? && contact.role.staff?)

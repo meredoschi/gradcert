@@ -675,15 +675,15 @@ en:
         site: Site
         twitter: Twitter
     constants:
-      personal_characteristic:
-        female: F
-        male: M
-        unspecified: X
       personalinfo:
         idtype:
           passport: Passport
           registered_foreigner: Registered foreigner
           state_registration: State ID
+        personal_characteristic:
+          female: F
+          male: M
+          unspecified: X
     errors:
       delete_restriction: Delete restriction
       models:
