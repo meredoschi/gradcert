@@ -9,5 +9,5 @@ pt_BR:
   not_yet: ainda não
   reminder: Lembrete
   there_are_contacts_which_may_become_students: Há contatos cadastrados que poderiam se tornar bolsistas
-  validation_failed: "A validação falhou" # Rspec - custom active record error msgs - January 2020
+  validation_failed: A validação falhou
   yay: sim
