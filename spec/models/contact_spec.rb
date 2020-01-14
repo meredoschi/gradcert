@@ -119,10 +119,16 @@ RSpec.describe Contact, type: :model do
       expect(registered_student_contacts).to eq(Contact.registered)
     end
 
-    # Are not regitered students
+    # Are not registered students
     it '#not_registered' do
       contacts_who_are_not_registered_students = Contact.where.not(id: Contact.registered)
       expect(contacts_who_are_not_registered_students).to eq(Contact.not_registered)
+    end
+
+    # Are not registered students
+    it '#not_supervisor' do
+      contacts_who_are_not_supervisors = Contact.where.not(id: Contact.supervisor)
+      expect(contacts_who_are_not_supervisors).to eq(Contact.not_supervisor)
     end
 
     it '#latest_contacts_with_student_roles' do

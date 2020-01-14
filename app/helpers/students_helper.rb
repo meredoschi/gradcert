@@ -55,12 +55,12 @@ module StudentsHelper
 	        when permission_for(user)=='admin' then Contact.may_become_students
   				when permission_for(user)=='papmgr'then Contact.may_become_students.pap
   				when permission_for(user)=='paplocaladm'then Contact.from_own_institution(user).may_become_students.pap
-  #        when permission_for(user)=='medresmgr' then return Contact.are_not_registered_supervisors.with_teaching_role.medres
-  #        when permission_for(user)=='paplocaladm' then return Contact.are_not_registered_supervisors.with_teaching_role.from_own_institution(current_user).pap
-  #        when permission_for(user)=='medreslocaladm' then return Contact.are_not_registered_supervisors.with_teaching_role.from_own_institution(current_user).medres
-  #        when permission_for(user)=='pap' then return Contact.are_not_registered_supervisors.where(user_id: user.id)
+  #        when permission_for(user)=='medresmgr' then return Contact.not_supervisor.with_teaching_role.medres
+  #        when permission_for(user)=='paplocaladm' then return Contact.not_supervisor.with_teaching_role.from_own_institution(current_user).pap
+  #        when permission_for(user)=='medreslocaladm' then return Contact.not_supervisor.with_teaching_role.from_own_institution(current_user).medres
+  #        when permission_for(user)=='pap' then return Contact.not_supervisor.where(user_id: user.id)
   #        when permission_for(user)=='papcollaborator' then return Contact.where(user_id: user.id)
-  #        when permission_for(user)=='medres' then return Contact.are_not_registered_supervisors.where(user_id: user.id)
+  #        when permission_for(user)=='medres' then return Contact.not_supervisor.where(user_id: user.id)
   #        when permission_for(user)=='medrescollaborator' then return Contact.where(user_id: user.id)
 			  end
 

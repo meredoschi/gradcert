@@ -113,6 +113,11 @@ class Contact < ActiveRecord::Base
     joins(:supervisor)
   end
 
+  # Not supervisors (i.e. without a supervisor record associated with it, regardless of role)
+  def self.not_supervisor
+    where.not(id: supervisor)
+  end
+
   # New for 2018
 
   def self.latest_contacts_with_student_roles

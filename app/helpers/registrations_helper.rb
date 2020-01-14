@@ -203,12 +203,12 @@ module RegistrationsHelper
 
 # 	        when permission_for(user)=='paplocaladm' then Student.from_own_institution_but_not_registered_yet(user)
 
-  #        when permission_for(user)=='medresmgr' then return Contact.are_not_registered_supervisors.with_teaching_role.medres
-  #        when permission_for(user)=='paplocaladm' then return Contact.are_not_registered_supervisors.with_teaching_role.from_own_institution(current_user).pap
-  #        when permission_for(user)=='medreslocaladm' then return Contact.are_not_registered_supervisors.with_teaching_role.from_own_institution(current_user).medres
-  #        when permission_for(user)=='pap' then return Contact.are_not_registered_supervisors.where(user_id: user.id)
+  #        when permission_for(user)=='medresmgr' then return Contact.not_supervisor.with_teaching_role.medres
+  #        when permission_for(user)=='paplocaladm' then return Contact.not_supervisor.with_teaching_role.from_own_institution(current_user).pap
+  #        when permission_for(user)=='medreslocaladm' then return Contact.not_supervisor.with_teaching_role.from_own_institution(current_user).medres
+  #        when permission_for(user)=='pap' then return Contact.not_supervisor.where(user_id: user.id)
   #        when permission_for(user)=='papcollaborator' then return Contact.where(user_id: user.id)
-  #        when permission_for(user)=='medres' then return Contact.are_not_registered_supervisors.where(user_id: user.id)
+  #        when permission_for(user)=='medres' then return Contact.not_supervisor.where(user_id: user.id)
   #        when permission_for(user)=='medrescollaborator' then return Contact.where(user_id: user.id)
 			  end
 
@@ -227,10 +227,10 @@ module RegistrationsHelper
 			when pap_local_admin?(user) then Schoolyear.freshman.open.for_users_institution(user).ordered_by_programname_and_year
 #  				when pap_local_admin?(user) then @all_schoolyears.open.for_users_institution(user).freshman
 
-  #        when permission_for(user)=='medreslocaladm' then return Contact.are_not_registered_supervisors.with_teaching_role.from_own_institution(current_user).medres
-  #        when permission_for(user)=='pap' then return Contact.are_not_registered_supervisors.where(user_id: user.id)
+  #        when permission_for(user)=='medreslocaladm' then return Contact.not_supervisor.with_teaching_role.from_own_institution(current_user).medres
+  #        when permission_for(user)=='pap' then return Contact.not_supervisor.where(user_id: user.id)
   #        when permission_for(user)=='papcollaborator' then return Contact.where(user_id: user.id)
-  #        when permission_for(user)=='medres' then return Contact.are_not_registered_supervisors.where(user_id: user.id)
+  #        when permission_for(user)=='medres' then return Contact.not_supervisor.where(user_id: user.id)
   #        when permission_for(user)=='medrescollaborator' then return Contact.where(user_id: user.id)
 
 			  end
