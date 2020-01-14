@@ -37,6 +37,7 @@ group :test, :development do
   gem 'shoulda-matchers', '~> 3.1' # July 2017
   gem 'json_converter', '~> 0.0.0' # November 2017
   gem 'capybara' # September 2018
+  gem 'httparty' # January 2020 
 end
 
 # General

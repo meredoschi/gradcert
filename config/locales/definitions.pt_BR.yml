@@ -15,6 +15,9 @@ pt_BR:
         breast_feeding: Amamentação
         personal: Particular
         social_security: INSS
+    municipality:
+      default:
+        asciinamewithstate: Sao Paulo / SP
     role:
       names:
         itstaff: Sistema

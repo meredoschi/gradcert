@@ -1,9 +1,6 @@
 ---
 en:
   definitions:
-    municipality:
-      default:
-        asciinamewithstate: "Sao Paulo / SP" # Municipalities seed are not internationalized yet
     leavetype:
       paid:
         bereavement: Bereavement
@@ -18,6 +15,9 @@ en:
         breast_feeding: Breast Feeding
         personal: Private
         social_security: Social Security
+    municipality:
+      default:
+        asciinamewithstate: Sao Paulo / SP
     role:
       names:
         itstaff: IT Staff
