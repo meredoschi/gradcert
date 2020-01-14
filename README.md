@@ -13,7 +13,7 @@ The feedback from users and the teams involved was generally very positive.  The
 *My expectation, as the architect/developer, in line with original project requirements, was that the system would be in place for many years to come.  Much to my surprise, however, I later learned that this was no longer the case.
 Therefore, I thought it best to update this page accordingly, for the sake of completeness.*
 
-*It was, as far as I know, the first system in São Paulo State government to use Ruby on Rails technology.*
+*It was, as far as I know, the first system in the São Paulo State government to use Ruby on Rails technology.*
 
 ## ABOUT
 
@@ -75,7 +75,7 @@ Postgres 9.6.7
 
 ## LAST UPDATED
 
-*3/JAN/2020*
+*14/JAN/2020*
 
 =======
 ## COPYRIGHT
