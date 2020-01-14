@@ -67,13 +67,13 @@ RSpec.describe Contact, type: :model do
   end
 
   context 'validations' do
-
     it '-user_with_staff_permission_must_not_take_on_student_role' do
       role_id_i18n = I18n.t('activerecord.attributes.contact.role_id')
 
-      msg = I18n.t('validation_failed')+': ' +role_id_i18n + ' ' + \
-      I18n.
-      t('activerecord.errors.models.contact.attributes.role_id.staff_may_not_take_student_role')
+      msg = I18n.t('validation_failed') + ': ' + role_id_i18n + ' ' + \
+            I18n
+            .t('activerecord.errors.models.
+              contact.attributes.role_id.staff_may_not_take_student_role')
 
       expect do
         FactoryBot.create(:contact, :staff_permission_with_student_role)
@@ -86,10 +86,10 @@ RSpec.describe Contact, type: :model do
     it '-user_with_student_permission_must_not_take_on_staff_role' do
       role_id_i18n = I18n.t('activerecord.attributes.contact.role_id')
 
-        msg = I18n.t('validation_failed')+': ' +role_id_i18n + ' ' + \
-        I18n.
-        t('activerecord.errors.models.contact.attributes.role_id.student_may_not_take_staff_role')
-
+      msg = I18n.t('validation_failed') + ': ' + role_id_i18n + ' ' + \
+            I18n
+            .t('activerecord.errors.models.contact.attributes.
+              role_id.student_may_not_take_staff_role')
 
       expect do
         FactoryBot.create(:contact, :student_permission_with_staff_role)
@@ -100,17 +100,16 @@ RSpec.describe Contact, type: :model do
     it '-name_whitespacing_is_consistent' do
       name_i18n = I18n.t('activerecord.attributes.contact.name')
 
-        msg = I18n.t('validation_failed')+': ' +name_i18n + ' ' + \
-        I18n.
-        t('activerecord.errors.models.contact.attributes.name.must_have_consistent_whitespacing')
-
+      msg = I18n.t('validation_failed') + ': ' + name_i18n + ' ' + \
+            I18n
+            .t('activerecord.errors.models.contact.attributes.name
+              .must_have_consistent_whitespacing')
 
       expect do
         FactoryBot.create(:contact, :name_with_blanks)
         # https://stackoverflow.com/questions/45128434/comparing-rspec-custom-activerecordrecordinvalid-errors-messages
       end .to raise_error(ActiveRecord::RecordInvalid, msg)
     end
-
   end
 
   context 'class methods' do
@@ -162,6 +161,16 @@ RSpec.describe Contact, type: :model do
       end
 
       expect(contacts_ready_to_become_students).to eq(Contact.ready_to_become_students)
+    end
+
+    it '#num_ready_to_become_students' do
+      num_contacts_ready_to_become_students = 0
+
+      if Contact.ready_to_become_students.present?
+        num_contacts_ready_to_become_students = Contact.ready_to_become_students.count
+      end
+
+      expect(num_contacts_ready_to_become_students).to eq(Contact.num_ready_to_become_students)
     end
 
     # Added for convenience (audit rake tasks) - August 2017

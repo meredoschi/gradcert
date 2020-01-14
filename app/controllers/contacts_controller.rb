@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # Contains contact information (required of all system users)
 class ContactsController < ApplicationController
   before_action :set_contact, only: %i[show edit update destroy]
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   # Marcelo - CanCan
   load_and_authorize_resource
@@ -34,9 +36,12 @@ class ContactsController < ApplicationController
     @numcontacts = @contacts_for_current_ability.count
 
     # New for 2018 registration season
-    @contacts_ready_to_become_students = @contacts_for_current_ability.ready_to_become_students
+    @contacts_ready_to_become_students = @contacts_for_current_ability
+                                         .ready_to_become_students
 
-    @num_contacts_ready_to_become_students = @contacts_ready_to_become_students.count
+    # January 2020 convenience method, handles nil condition
+    @num_contacts_ready_to_become_students = @contacts_for_current_ability
+                                             .num_ready_to_become_students
 
     retrieve_nameless_contacts
   end
@@ -57,12 +62,10 @@ class ContactsController < ApplicationController
              end
 
     # it could have been seeded in which case we must test for nil
-    unless @contact.versions.last.nil?
+    (return if @contact.versions.last.nil?)
 
-      @userid = @contact.versions.last.whodunnit
-      @userwho = User.where(id: @userid).first
-
-    end
+    @userid = @contact.versions.last.whodunnit
+    @userwho = User.where(id: @userid).first
   end
 
   # GET /contacts/new
@@ -152,7 +155,7 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
-    # 	@user=User.find(params[@contact.user_id])
+    #   @user=User.find(params[@contact.user_id])
 
     if @contact.student.present?
       flash[:alert] = t('contact_removal_lock.student')

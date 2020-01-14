@@ -352,6 +352,16 @@ class Contact < ActiveRecord::Base
     may_become_students.count.positive?
   end
 
+  def self.num_ready_to_become_students
+    num_contacts_ready_to_become_students = 0
+
+    if ready_to_become_students.present?
+      num_contacts_ready_to_become_students = Contact.ready_to_become_students.count
+    end
+
+    num_contacts_ready_to_become_students
+  end
+
   # <<< Instance methods >>>
 
   delegate :country, to: :address, prefix: true
