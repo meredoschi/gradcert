@@ -125,7 +125,7 @@ RSpec.describe Contact, type: :model do
       expect(contacts_who_are_not_registered_students).to eq(Contact.not_registered)
     end
 
-    # Are not registered students
+    # Not supervisors (i.e. without a supervisor record associated with it, regardless of role)
     it '#not_supervisor' do
       contacts_who_are_not_supervisors = Contact.where.not(id: Contact.supervisor)
       expect(contacts_who_are_not_supervisors).to eq(Contact.not_supervisor)

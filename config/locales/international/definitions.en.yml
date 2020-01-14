@@ -1,6 +1,9 @@
 ---
 en:
   definitions:
+    municipality:
+      default:
+        asciinamewithstate: "Sao Paulo / SP" # Municipalities seed are not internationalized yet
     leavetype:
       paid:
         bereavement: Bereavement

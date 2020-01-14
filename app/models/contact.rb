@@ -84,7 +84,7 @@ class Contact < ActiveRecord::Base
   # Training sessions 2017 (institutional users)
 
   # validate :mothers_name_is_present, if: :student_role?
-  # validate :ssn_is_consistent, if: :student_role?
+  # validate :nit_is_consistent, if: :student_role?
 
   validate :name_whitespacing_is_consistent
 
@@ -181,7 +181,7 @@ class Contact < ActiveRecord::Base
     errors.add(:personalinfo, :mothersname_must_be_present)
   end
 
-  def ssn_is_consistent
+  def nit_is_consistent
     return unless personalinfo.nit_is_consistent
 
     errors.add(personalinfo, :nit_must_be_consistent)

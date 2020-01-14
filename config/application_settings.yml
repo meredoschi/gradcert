@@ -53,7 +53,6 @@ defaults: &defaults
   created_recently:
     maximum_number_days_ago: 10
   dayone: <%= "#{'1967-12-31'.to_date}" %>
-  default_municipality_ascii_name_with_state: Sao Paulo / SP
   feedback:
     registrations_contextual_from:
       number_days_ago: 70
