@@ -16,4 +16,15 @@ RSpec.describe Country, type: :model do
   it 'can be created' do
     FactoryBot.create(:country)
   end
+
+  # home country?
+  it 'domestic?' do
+    is_home_country = (country.a3 == Settings.home_country_abbreviation)
+    expect(is_home_country).to eq(country.domestic?)
+  end
+
+  it 'foreign?' do
+    is_foreign_country = !country.domestic?
+    expect(is_foreign_country).to eq(country.foreign?)
+  end
 end
