@@ -10,13 +10,9 @@ RSpec.describe Stateregion, type: :model do
 
     it {
       is_expected.to have_many(:municipality)
-        .dependent(:restrict_with_exception).inverse_of(:stateregion)
+        .dependent(:delete_all).inverse_of(:stateregion)
     }
 
-    it {
-      is_expected.to have_many(:characteristic)
-        .dependent(:restrict_with_exception).inverse_of(:stateregion)
-    }
   end
 
   it { is_expected.to validate_presence_of(:name) }

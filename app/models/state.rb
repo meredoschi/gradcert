@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 # Highest subnational division
 class State < ActiveRecord::Base
   #   has_many  :municipality, :foreign_key => 'brstate_id'
-  has_many  :stateregion, foreign_key: 'state_id'
-  has_many  :personalinfo, foreign_key: 'state_id'
-  belongs_to :country
+  has_many  :stateregion, foreign_key: 'state_id',
+                          dependent: :restrict_with_exception, inverse_of: :state
+  has_many  :personalinfo, foreign_key: 'state_id',
+                           dependent: :restrict_with_exception, inverse_of: :state
 
-  has_many :council
+  has_many :council, foreign_key: 'state_id',
+                     dependent: :restrict_with_exception, inverse_of: :state
 
   def self.default_scope
     order(name: :asc)

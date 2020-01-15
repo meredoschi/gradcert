@@ -4,10 +4,8 @@
 class Stateregion < ActiveRecord::Base
   belongs_to :state
 
-  has_many  :municipality, foreign_key: 'stateregion_id',
-                           dependent: :restrict_with_exception, inverse_of: :stateregion
-  has_many  :characteristic, foreign_key: 'stateregion_id',
-                             dependent: :restrict_with_exception, inverse_of: :stateregion
+  has_many :municipality, foreign_key: 'stateregion_id',
+                          dependent: :delete_all, inverse_of: :stateregion
 
   scope :paulista, -> { joins(:state).where(states: { abbreviation: 'SP' }) }
 
