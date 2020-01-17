@@ -25,8 +25,17 @@ RSpec.describe Programname, type: :model do
 
   # Shortened, abbreviated name
   it '-short' do
-    programname_short = programname.name[0..Settings.shortname_len.program] + '...'
-    expect(programname_short).to eq programname.short
+    shortened_name = if programname.name.length > Programname::ABBREVIATION_LENGTH
+
+                       programname.name[0..len] + '...'
+
+                     else
+
+                       programname.name
+
+                     end
+
+    expect(shortened_name).to eq(programname.short)
   end
 
   # Alias

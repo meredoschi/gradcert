@@ -10,11 +10,11 @@ FactoryBot.define do
     # previouscode: string, parentid: integer
 
     programname
-    schoolterm
+    #  schoolterm
     comment 'Test'
-    institution
-    accreditation
-    association :admission, factory: %i[admission zero_amounts]
+    #  institution
+    #  accreditation
+    #  association :admission, factory: %i[admission zero_amounts]
     pap true
     medres false
     gradcert false
@@ -43,5 +43,24 @@ FactoryBot.define do
       program.schoolyears << freshman_year
       program.schoolyears << sophmore_year
     end
+  end
+
+  trait :medical_residency do
+    medres true
+    pap false
+    gradcert false
+  end
+
+  trait :graduate_certificate do
+    gradcert true
+    pap false
+    medres false
+  end
+
+  # Used for testing purposes only
+  trait :undefined do
+    gradcert false
+    pap false
+    medres false
   end
 end

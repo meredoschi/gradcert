@@ -4,6 +4,10 @@ require 'rails_helper'
 
 RSpec.describe Program, type: :model do
   let(:program) { FactoryBot.create(:program, :biannual) }
+  let(:medical_residency_program) { FactoryBot.create(:program, :annual, :medical_residency) }
+  let(:graduate_certificate_program) { FactoryBot.create(:program, :annual, :graduate_certificate) }
+  let(:undefined_program) { FactoryBot.create(:program, :annual, :undefined) }
+
   let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
 
   MAX_YEARS = Settings.longest_program_duration.all
@@ -40,31 +44,87 @@ RSpec.describe Program, type: :model do
   pending 'validate :duration_consistency'
   pending 'validate schoolyear_range'
 
-  it 'annual program can be created (with one schoolyear)' do
-    print I18n.t('activerecord.models.schoolyear').capitalize + ': '
+  context 'Revised methods (development-schoolyears)' do
+    it 'Annual program can be created (with one schoolyear)' do
+      print '      ' + I18n.t('activerecord.models.schoolyear').capitalize + ': '
 
-    program = FactoryBot.create(:program, :annual)
+      program = FactoryBot.create(:program, :annual)
 
-    puts program.schoolyears.count.to_s
-  end
+      puts program.schoolyears.count.to_s
+    end
 
-  it 'biannual program can be created (with two schoolyears)' do
-    print I18n.t('activerecord.models.schoolyear').capitalize + ': '
+    it 'Biannual program can be created (with two schoolyears)' do
+      print '      ' + I18n.t('activerecord.models.schoolyear').capitalize + ': '
 
-    program = FactoryBot.create(:program, :biannual)
+      program = FactoryBot.create(:program, :biannual)
 
-    puts program.schoolyears.count.to_s
+      puts program.schoolyears.count.to_s
+    end
+
+    it '-numschoolyears' do
+      num_schoolyears = program.schoolyears.count
+      expect(program.numschoolyears).to eq(num_schoolyears)
+    end
+
+    context 'Programname' do
+      it '-name' do
+        #    program = FactoryBot.create(:program, :annual)
+
+        the_program_name = program.name
+
+        expect(program.name).to eq(the_program_name)
+      end
+
+      it '-area' do
+        prog_area = case # rubocop:disable EmptyCaseCondition
+                    when program.pap? then I18n.t('activerecord.attributes.program.pap')
+                    when program.medres? then I18n.t('activerecord.attributes.program.medres')
+                    when program.gradcert? then I18n.t('activerecord.attributes.program.gradcert')
+                    else
+                      I18n.t('undefined_value')
+                    end
+
+        expect(prog_area).to eq(program.area)
+      end
+
+      it 'area (medical_residency)' do
+        expect(I18n.t('activerecord.attributes.program.medres'))
+          .to eq(medical_residency_program.area)
+      end
+
+      it 'area (graduate_certificate)' do
+        expect(I18n.t('activerecord.attributes.program.gradcert'))
+          .to eq(graduate_certificate_program.area)
+      end
+
+      it 'area (undefined)' do
+        expect(I18n.t('undefined_value'))
+          .to eq(undefined_program.area)
+      end
+
+      it '-schoolyear_quantity' do
+        program_schoolyear_quantity = program.schoolyears.reject(&:marked_for_destruction?).count
+        expect(program_schoolyear_quantity).to eq(program.schoolyear_quantity)
+      end
+
+      it '-shortname' do
+        expect(program.shortname).to eq(program.programname.short)
+      end
+    end
+
+    it '-shortname abbreviates a really long program name' do
+      #        program=FactoryBot.create(:program, :biannual)
+      #        program.programname=Pretty.repeat_chars('a',100)
+      #        programname.save(validate: false)
+
+      #        expect(program.name[0..len] + '...').to eq(program.shortname)
+    end
   end
 
   it '-is_active?' do
     program_accreditation = program.accreditation # submodel
     situation = program_accreditation.is_original_or_was_renewed?
     expect(program.is_active?).to eq(situation)
-  end
-
-  it '-numschoolyears' do
-    num_schoolyears = program.schoolyears.count
-    expect(program.numschoolyears).to eq(num_schoolyears)
   end
 
   # Returns a boolean
@@ -76,14 +136,6 @@ RSpec.describe Program, type: :model do
   # Returns a boolean
   it '-external_address?' do
     expect(program.external_address?).to eq(!program.internal_address?)
-  end
-
-  it '-name' do
-    #    program = FactoryBot.create(:program, :annual)
-
-    the_program_name = program.name
-
-    expect(program.name).to eq(the_program_name)
   end
 
   #  expect(program.seasonwithdraws).to eq(season_withdraws)
@@ -137,30 +189,14 @@ RSpec.describe Program, type: :model do
     expect(program.without_registered_students?).to eq(!program.with_registered_students?)
   end
 
-  # To become deprecated.  Use name instead
-
+  # Deprecated.  Use name instead
   it '-program_name' do
-    program.programname.name
+    program_name = program.programname.name
+    expect(program_name).to eq(program.program_name)
   end
 
   it '-program_name_schoolterm' do
     program.name + ' (' + program.schoolterm.name + ')'
-  end
-
-  it '-shortname' do
-    name = program.name
-
-    @abbreviated_name = if name.length > ABBREVIATION_LENGTH # calls name method (already defined)
-
-                          name[0..len] + '...'
-
-                        else
-
-                          name
-
-                        end
-
-    expect(program.shortname).to eq(@abbreviated_name)
   end
 
   # Alias to
@@ -260,29 +296,8 @@ RSpec.describe Program, type: :model do
     expect(prog_info).to eq(program.info)
   end
 
-  # I18n
-  it '-area' do
-    program_area = ''
-
-    program_area = I18n.t('activerecord.attributes.program.pap') if program.pap?
-
-    program_area = I18n.t('activerecord.attributes.program.medres') if program.medres?
-
-    program_area = I18n.t('activerecord.attributes.program.gradcert') if program.gradcert?
-
-    expect(program_area).to eq(program.area)
-  end
-
   it '-sector' do
-    program_sector = ''
-
-    program_sector = 'pap' if program.pap?
-
-    program_sector = 'medres' if program.medres?
-
-    program_sector = 'gradcert' if program.gradcert?
-
-    expect(program_sector).to eq(program.sector)
+    expect(program.sector).to eq(program.area)
   end
 
   it '.latest contains programs from the latest term only' do

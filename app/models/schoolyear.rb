@@ -8,7 +8,7 @@ class Schoolyear < ActiveRecord::Base
 
   #  ******* Review in progres - January 2020 ********
   #  has_many :registration, dependent: :restrict_with_exception
-  #  belongs_to :program
+  belongs_to :program
   #  *************************************************
 
   #   validate :valid_program_year, on: :update

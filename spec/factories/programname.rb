@@ -7,5 +7,13 @@ FactoryBot.define do
       (Faker::Space.constellation + ' ' + (n + rand(100_000)
                                           ).to_s).to_s
     end
+
+    # used for testing only.
+    trait :long_name do
+      sequence(:name) do |n|
+        (Faker::Space.constellation + Pretty.repeat_chars('a', 100) + (n + rand(100_000)
+                                                                      ).to_s).to_s
+      end
+    end
   end
 end
