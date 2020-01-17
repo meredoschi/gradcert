@@ -196,7 +196,7 @@ class Registration < ActiveRecord::Base
 
     relevant_terms.each_with_index do |s, i|
       term_registrations = @all_registrations.on_schoolterm(s)
-      registration_ids_in_term_context = term_registrations.merge(Schoolyear.for_year((1 + i)))
+      registration_ids_in_term_context = term_registrations.merge(Schoolyear.for_programyear((1 + i)))
       @registration_ids_in_context << registration_ids_in_term_context
     end
 
