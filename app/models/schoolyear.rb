@@ -22,35 +22,134 @@ class Schoolyear < ActiveRecord::Base
                                                           greater_than_or_equal_to: 1,
                                                           less_than_or_equal_to: 5 }
 
-  #
-  #   # Methods which use the program association
-  #
-  #   def program_sector
-  #     program.sector
-  #   end
-  #
-  #   def sector_i18n
-  #     I18n.t('definitions.schoolyear.sector_prefix' + '.' + program_sector)
-  #   end
-  #
-  #   def program_id_i18n
-  #     I18n.t('activerecord.attributes.schoolyears.program_id')\
-  #         .capitalize + ' [ ' + program.id.to_s + ' ]'
-  #   end
-  #
-  #   # All schoolyears which belong to the program
-  #   def program_schoolyears
-  #     program.schoolyears
-  #   end
-  #
-  #   def num_program_schoolyears
-  #     program_schoolyears.count
-  #   end
-  #
-  #   # Next program year
-  #   def nextlevel
-  #     program.schoolyears.where(programyear: programyear + 1).first
-  #   end
+  #  Reviewed January 2020
+
+  ## Class methods
+
+  # e.g. First year, second, third, fourth, fifth training year (e.g. medical residency programs)
+  def self.level(year)
+    where(programyear: year)
+  end
+
+  # Alias, for convenience
+  def self.on_programyear(year)
+    level(year)
+  end
+
+  def self.freshman
+    where(programyear: 1)
+  end
+
+  def self.veteran
+    where.not(id: freshman)
+  end
+
+  def self.senior
+    most_senior_programyear_offered = pluck(:programyear).max.to_i
+    where(programyear: most_senior_programyear_offered) if most_senior_programyear_offered > 1
+  end
+
+  ## Instance methods
+
+  #    All schoolyears which belong to the program
+  delegate :schoolyears, to: :program, prefix: true
+
+  delegate :sector, to: :program, prefix: true
+
+  def details
+    schoolyear_details = ordinalyr + ' '
+    schoolyear_details += I18n.t('activerecord.models.schoolyears')
+    schoolyear_details += ' [ id : ' + id.to_s + ' ]'
+    schoolyear_details
+  end
+
+  def first_year?
+    programyear == 1
+  end
+
+  def identifier_i18n
+    I18n.t('activerecord.attributes.schoolyears.id').capitalize + ' [ ' + id.to_s + ' ]'
+  end
+
+  def info
+    sep = Pretty.sep
+    identifier_i18n + sep + ' ' + \
+      program_id_i18n + sep + ' ' + \
+      programyear_id_i18n + sep + ' ' + \
+      workload_i18n
+  end
+
+  def level
+    programyear
+  end
+
+  def name
+    program_name
+  end
+
+  def ordinal_year_i18n
+    ordinalyr + ' ' + I18n.t('year')
+  end
+
+  def ordinalyr
+    programyear.to_s + Pretty.ordinal_suffix
+  end
+
+  def num_program_schoolyears
+    program_schoolyears.count
+  end
+
+  # The next grade level
+  def nxtlevel
+    program.schoolyears.find_by programyear: programyear + 1
+  end
+
+  def practice_i18n
+    I18n.t('activerecord.attributes.schoolyears.practice')\
+        .capitalize + ': ' + practice.to_s
+  end
+
+  def program_id_i18n
+    I18n.t('activerecord.attributes.schoolyears.program_id')\
+        .capitalize + ' [ ' + program.id.to_s + ' ]'
+  end
+
+  def program_name
+    programyear.to_s + Pretty.ordinal_suffix + ' ' + program.name
+  end
+
+  def programyear_id_i18n
+    I18n.t('activerecord.attributes.schoolyears.programyear')\
+        .capitalize + ' [ ' + programyear.to_s + ' ]'
+  end
+
+#  def sep
+#    Settings.separator_info
+#  end
+
+  def theory_i18n
+    I18n.t('activerecord.attributes.schoolyears.theory')\
+        .capitalize + ': ' + theory.to_s
+  end
+
+  def workload_i18n
+    theory_i18n + Pretty.sep + ' ' + practice_i18n
+  end
+
+  def workload
+    theory + practice
+  end
+
+  def sector_i18n
+    I18n.t('definitions.schoolyear.sector_prefix' + '.' + program_sector)
+  end
+
+  ## January 2020 reviewed methods above
+
+  #  def name_incoming_cohort_i18n
+  #    program_name + ' - ' + I18n.t('incoming_cohort').capitalize + ' ' + yr.to_s
+  #  end
+
   #
   #   def school_term
   #     program.schoolterm
@@ -65,6 +164,8 @@ class Schoolyear < ActiveRecord::Base
   #     I18n.t('cohort') + ': ' + I18n.t('start') + ' ' + I18n.l(program.schoolterm.start)
   #   end
   #
+
+  #   # From early development (functionality not implemented)
   #   def full?
   #     enrollment == program.maxenrollment
   #   end
@@ -78,25 +179,6 @@ class Schoolyear < ActiveRecord::Base
   #   def self.with_institution_id(i)
   #     joins(program: :institution).where('institutions.id = ? ', i)
   #   end
-  #
-
-  #
-  #   def info
-  #     sep = Settings.separator_info
-  #     identifier_i18n + sep + ' ' + \
-  #       program_id_i18n + sep + ' ' + \
-  #       programyear_id_i18n + sep + ' ' + \
-  #       workload_i18n
-  #   end
-  #
-  #   def name
-  #     program_name
-  #   end
-  #
-  #   def program_name
-  #     programyear.to_s + ordinal_suffix + ' ' + program.program_name
-  #   end
-  #
   #
 
   # Schoolterm
@@ -139,82 +221,6 @@ class Schoolyear < ActiveRecord::Base
   # end
   #
 
-  #  Reviewed January 2020
-
-  # Implemented for Portuguese
-  def ordinal_suffix
-    if I18n.default_locale == 'pt_BR'
-      'º'
-    else ''
-    end
-  end
-
-  def ordinal_year_i18n
-    ordinalyr + ' ' + I18n.t('year')
-  end
-
-  # 2018 - TDD
-
-  def identifier_i18n
-    I18n.t('activerecord.attributes.schoolyears.id').capitalize + ' [ ' + id.to_s + ' ]'
-  end
-
-  def programyear_id_i18n
-    I18n.t('activerecord.attributes.schoolyears.programyear')\
-        .capitalize + ' [ ' + programyear.to_s + ' ]'
-  end
-
-  def theory_i18n
-    I18n.t('activerecord.attributes.schoolyears.theory')\
-        .capitalize + ': ' + theory.to_s
-  end
-
-  def practice_i18n
-    I18n.t('activerecord.attributes.schoolyears.practice')\
-        .capitalize + ': ' + practice.to_s
-  end
-
-  def sep
-    Settings.separator_info
-  end
-
-  def workload_i18n
-    theory_i18n + sep + ' ' + practice_i18n
-  end
-
-  # Programyear alias
-  def level
-    programyear
-  end
-
-  # TDD - Marcelo - Nov 2017
-
-  def details
-    schoolyear_details = ordinalyr + ' '
-    schoolyear_details += I18n.t('activerecord.models.schoolyears')
-    schoolyear_details += ' [ id : ' + id.to_s + ' ]'
-    schoolyear_details
-  end
-
-  # Tested code (specs written afterwards)
-
-  # Program year ordinal
-  def ordinalyr
-    programyear.to_s + ordinal_suffix
-  end
-
-  def first_year?
-    programyear == 1
-  end
-
-  #  def name_incoming_cohort_i18n
-  #    program_name + ' - ' + I18n.t('incoming_cohort').capitalize + ' ' + yr.to_s
-  #  end
-
-  def workload
-    theory + practice
-  end
-
   #
   # def institution
   #   program.institution.name
@@ -249,8 +255,6 @@ class Schoolyear < ActiveRecord::Base
   #
   #     schoolyear_program_name_incoming_cohort_program_year
   #   end
-
-  # Tested code end
 
   # [:theory, :practice].each do |h|
   #    validates h, numericality: { only_integer: true, greater_than_or_equal_to: 0,
@@ -379,37 +383,11 @@ class Schoolyear < ActiveRecord::Base
   #   program.institution.placesavailable
   # end
   #
-  # def self.for_program_id(programid)
-  #   where(program_id: programid)
-  # end
-  #
   # To do: fix argument
   # def self.for_program(programid)
   #   where(program_id: programid)
   # end
   #
-
-  def self.for_programyear(year)
-    where(programyear: year)
-  end
-
-  # Alias, for convenience
-  def self.on_programyear(year)
-    for_programyear(year)
-  end
-
-  def self.freshman
-    where(programyear: 1)
-  end
-
-  def self.veteran
-    where.not(id: freshman)
-  end
-
-  def self.senior
-    most_senior_programyear_offered = pluck(:programyear).max.to_i
-    where(programyear: most_senior_programyear_offered) if most_senior_programyear_offered > 1
-  end
 
   # Which belong to the next registration season
 

@@ -196,7 +196,7 @@ class Registration < ActiveRecord::Base
 
     relevant_terms.each_with_index do |s, i|
       term_registrations = @all_registrations.on_schoolterm(s)
-      registration_ids_in_term_context = term_registrations.merge(Schoolyear.for_programyear((1 + i)))
+      registration_ids_in_term_context = term_registrations.merge(Schoolyear.from_programyear((1 + i)))
       @registration_ids_in_context << registration_ids_in_term_context
     end
 
@@ -832,7 +832,7 @@ class Registration < ActiveRecord::Base
   # CSV Format
 
   def ordinal
-    schoolyear.ordinal_suffix
+    Pretty.ordinal_suffix
   end
 
   # Alias - Useful for Brazil
@@ -935,7 +935,7 @@ class Registration < ActiveRecord::Base
 
   def self.for_programyear(yr)
     prog_year = yr.to_i
-    joins(:schoolyear).merge(Schoolyear.for_programyear(prog_year))
+    joins(:schoolyear).merge(Schoolyear.from_programyear(prog_year))
   end
 
   # Also aliased on schoolyear.rb, for convenience

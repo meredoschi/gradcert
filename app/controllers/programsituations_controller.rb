@@ -48,7 +48,7 @@ class ProgramsituationsController < ApplicationController
 
 #   	@schoolyears=Schoolyear.all
 
-#   	@schoolyears=Schoolyear.for_program(357)
+#   	@schoolyears=Schoolyear.from_program(357)
  
 #  	if !@programsituation.name.nil?
     
@@ -173,7 +173,7 @@ class ProgramsituationsController < ApplicationController
 
 	def set_schoolyears
 
-		@schoolyears=Schoolyear.for_program(@programsituation.assessment.program_id)
+		@schoolyears=Schoolyear.from_program(@programsituation.assessment.program_id)
 
 	end
 

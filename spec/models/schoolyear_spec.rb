@@ -4,13 +4,13 @@ require 'rails_helper'
 
 RSpec.describe Schoolyear, type: :model do
   #  let(:biannual_program) { FactoryBot.create(:program, :biannual) }
-  #  let(:program) { FactoryBot.create(:program, :annual) }
   #  let(:schoolyear) { program.schoolyears.last }
 
   let(:year) { 1 }
-  let(:schoolyear) { FactoryBot.create(:schoolyear, :freshman) }
+  let(:program) { FactoryBot.create(:program, :biannual) }
+  let(:schoolyear) { FactoryBot.create(:schoolyear, :freshman, program_id: program.id) } # first
 
-  let!(:second_schoolyear) { FactoryBot.create(:schoolyear, :sophmore) }
+  let!(:second_schoolyear) { FactoryBot.create(:schoolyear, :sophmore, program_id: program.id) }
 
   context 'creation' do
     it 'can be created' do
@@ -36,9 +36,7 @@ RSpec.describe Schoolyear, type: :model do
     end
 
     it '-workload_i18n' do
-      sep = schoolyear.sep
-
-      workload_i18n = schoolyear.theory_i18n + sep + ' ' + schoolyear.practice_i18n
+      workload_i18n = schoolyear.theory_i18n + Pretty.sep + ' ' + schoolyear.practice_i18n
 
       expect(workload_i18n).to eq schoolyear.workload_i18n
     end
@@ -55,22 +53,6 @@ RSpec.describe Schoolyear, type: :model do
       expect(programyear_id_i18n).to eq(schoolyear.programyear_id_i18n)
     end
 
-    #   it '-sep' do
-    #     sep = Settings.separator_info
-    #
-    #     expect(sep).to eq schoolyear.sep
-    #   end
-
-    it '-ordinal_suffix' do
-      schoolyear_ordinal_suffix = if I18n.default_locale == :pt_BR
-                                    'º'
-                                  else
-                                    ''
-                                  end
-
-      expect(schoolyear_ordinal_suffix).to eq(schoolyear.ordinal_suffix)
-    end
-
     it '-ordinal_year_i18n' do
       schoolyear_ordinal_year_i18n = schoolyear.ordinalyr + ' ' + I18n.t('year')
       expect(schoolyear_ordinal_year_i18n).to eq(schoolyear.ordinal_year_i18n)
@@ -78,7 +60,7 @@ RSpec.describe Schoolyear, type: :model do
 
     #       Program year ordinal
     it '-ordinalyr' do
-      schoolyear_ordinal_year = schoolyear.programyear.to_s + schoolyear.ordinal_suffix
+      schoolyear_ordinal_year = schoolyear.programyear.to_s + Pretty.ordinal_suffix
       expect(schoolyear_ordinal_year).to eq(schoolyear.ordinalyr)
     end
 
@@ -108,17 +90,77 @@ RSpec.describe Schoolyear, type: :model do
     end
   end
 
+  context 'New' do
+    it '-info' do
+      sep = Pretty.sep
+
+      schoolyear_info2 = schoolyear.identifier_i18n + sep + ' ' + \
+                         schoolyear.program_id_i18n + sep + ' ' + \
+                         schoolyear.programyear_id_i18n + sep + ' ' + \
+                         schoolyear.workload_i18n
+
+      expect(schoolyear_info2).to eq(schoolyear.info)
+    end
+
+    it '-name' do
+      schoolyear_name = schoolyear.program_name
+      expect(schoolyear_name).to eq(schoolyear.name)
+    end
+
+    it '-program_name' do
+      schoolyear_program_name = schoolyear.programyear.to_s\
+       + Pretty.ordinal_suffix + ' ' + schoolyear.program.name
+
+      expect(schoolyear_program_name).to eq(schoolyear.program_name)
+    end
+
+    it '-program_sector' do
+      schoolyear_program_sector = schoolyear.program.sector
+      expect(schoolyear_program_sector).to eq(schoolyear.program_sector)
+    end
+
+    it '-sector_i18n' do
+      schoolyear_program_sector_i18n = I18n.t('definitions.schoolyear.sector_prefix'\
+         + '.' + schoolyear.program_sector)
+      expect(schoolyear_program_sector_i18n).to eq(schoolyear.sector_i18n)
+    end
+
+    #      Next program year
+    it '-nxtlevel' do
+      schoolyear_next_level = schoolyear.program.schoolyears
+                                        .find_by programyear: schoolyear.programyear + 1
+      expect(schoolyear_next_level).to eq schoolyear.nxtlevel
+    end
+
+    it '-program_schoolyears' do
+      prog_schoolyears = schoolyear.program.schoolyears
+
+      expect(prog_schoolyears).to eq(schoolyear.program_schoolyears)
+    end
+
+    it '-num_program_schoolyears' do
+      num_prog_schoolyears = schoolyear.program_schoolyears.count
+
+      expect(num_prog_schoolyears).to eq(schoolyear.num_program_schoolyears)
+    end
+
+    it '-program_id_i18n' do
+      program_id_i18n_txt = I18n.t('activerecord.attributes.schoolyears.program_id')\
+                                .capitalize + ' [ ' + program.id.to_s + ' ]'
+
+      expect(program_id_i18n_txt).to eq schoolyear.program_id_i18n
+    end
+  end
   context 'Class methods' do
     # e.g. freshman, sophmore
-    it '#for_programyear(year)' do
-      schoolyears_for_programyear = Schoolyear.for_programyear(year)
-      expect(schoolyears_for_programyear).to eq(Schoolyear.for_programyear(year))
+    it '#level(year)' do
+      schoolyear_levels = Schoolyear.level(year)
+      expect(schoolyear_levels).to eq(Schoolyear.level(year))
     end
 
     # Alias, for convenience
     it '#on_programyear(year)' do
-      schoolyears_on_programyear = Schoolyear.on_programyear(year)
-      expect(schoolyears_on_programyear).to eq(Schoolyear.on_programyear(year))
+      expect(Schoolyear.level(year)).to eq(Schoolyear.on_programyear(year))
     end
 
     it '#freshman' do
@@ -147,53 +189,8 @@ end
 # 2018
 
 #
-#   it '-program_id_i18n' do
-#     program_id_i18n_txt = I18n.t('activerecord.attributes.schoolyears.program_id')\
-#                               .capitalize + ' [ ' + program.id.to_s + ' ]'
-#
-#     expect(program_id_i18n_txt).to eq schoolyear.program_id_i18n
-#   end
-#  #
-#
-#
-#   it 'program_schoolyears' do
-#     prog_schoolyears = schoolyear.program.schoolyears
-#
-#     expect(prog_schoolyears).to eq(schoolyear.program_schoolyears)
-#   end
-#
-#   it 'num_program_schoolyears' do
-#     num_prog_schoolyears = schoolyear.program_schoolyears.count
-#
-#     expect(num_prog_schoolyears).to eq(schoolyear.num_program_schoolyears)
-#   end
-#
-
-#    it '-info' do
-#       sep = Settings.separator_info
-
-#       schoolyear_info2 = schoolyear.identifier_i18n + sep + ' ' + \
-#                    schoolyear.program_id_i18n + sep + ' ' + \
-#                          schoolyear.programyear_id_i18n + sep + ' ' + \
-#                          schoolyear.workload_i18n
-
-#       expect(schoolyear_info2).to eq(schoolyear.info)
-#     end
-
-#
 #   # Specs for previously untested code
-#
-#   it '-name' do
-#     schoolyear_name = schoolyear.program_name
-#     expect(schoolyear_name).to eq(schoolyear.name)
-#   end
-#
-#   it '-program_name' do
-#     schoolyear_program_name = schoolyear.programyear.to_s\
-#      + schoolyear.ordinal_suffix + ' ' + schoolyear.program.program_name
-#
-#     expect(schoolyear_program_name).to eq(schoolyear.program_name)
-#   end
+##
 #
 
 #   it '- cohort_start' do
@@ -212,10 +209,13 @@ end
 #     expect(schoolyear_program_schoolterm_name).to eq(schoolyear.school_term_name)
 #   end
 #
+
+#   From early development, not used
 #   it '-full?' do
-#     schoolyear_is_full = (schoolyear.enrollment == schoolyear.program.maxenrollment)
+#     schoolyear_is_full = (schoolyear.enrollment == schoolyear.program.)
 #     expect(schoolyear_is_full).to eq schoolyear.full?
 #   end
+
 #
 #
 #   # 2018
@@ -299,25 +299,6 @@ end
 #     expect(schoolyear_enrollment).to eq(schoolyear.enrollment)
 #   end
 #
-#
-#   it '-program_sector' do
-#     schoolyear_program_sector = schoolyear.program.sector
-#     expect(schoolyear_program_sector).to eq(schoolyear.program_sector)
-#   end
-#
-#   it '-sector_i18n' do
-#     schoolyear_program_sector_i18n = I18n.t('definitions.schoolyear.sector_prefix'\
-#        + '.' + schoolyear.program_sector)
-#     expect(schoolyear_program_sector_i18n).to eq(schoolyear.sector_i18n)
-#   end
-#
-#   # Next program year
-#   it '-nextlevel' do
-#     schoolyear_next_level = schoolyear.program.schoolyears\
-#                                       .where(programyear: schoolyear.programyear + 1).first
-#
-#     expect(schoolyear_next_level).to eq schoolyear.nextlevel
-#   end
 #
 #   it '-program_name_incoming_cohort_program_year' do
 #     schoolyear_program_name_incoming_cohort_program_year = schoolyear.name_incoming_cohort_i18n

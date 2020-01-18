@@ -9,14 +9,30 @@ describe Pretty, type: :helper do
   let(:x) { 15 }
   let(:n) { 50 }        # number of repeats
   let(:ch) { '-' }      # char to be repeated
+  let(:blank) { ' ' }
   let(:num) { 123 }
-  let(:width) { 8 }     # Width to fill
-  let(:cents) { 200 }   # Used in Banking arithmetic
+  let(:width) { 50 } # Width to fill
+  let(:cents) { 200 } # Used in Banking arithmetic
   let(:name) { 'FULANO DOS TAIS' }
+
+  it '#sep' do
+    separator = Settings.separator_info
+    expect(separator).to eq(Pretty.sep)
+  end
+
+  it '#ordinal_suffix' do
+    ord_suffix = if I18n.locale == :pt_BR
+                   'º'
+                 else
+                   ''
+                 end
+
+    expect(ord_suffix).to eq(Pretty.ordinal_suffix)
+  end
 
   # Used for timestamping files mostly
   it '#right_now' do
-    t = Time.now
+    t = Time.zone.now
 
     rnow = t.day.to_s + '_' + t.month.to_s + '_' + t.year.to_s + '_' + t.hour.to_s + 'h'
 
@@ -105,16 +121,17 @@ describe Pretty, type: :helper do
     expect(txt).to eq(Pretty.zerofy_left(num, width))
   end
 
-  # Increase the text size by appending spaces to the left
-  # Useful for Brazilian bankpayments
+  # Increase the text size by appending spaces to the left - Useful for Brazilian bankpayment files
   it '#alphabetize(original_txt, width)' do
-    spaces = width - original_txt.length
+    txt_size = original_txt.size
+    if width > txt_size
+      num_spaces = width - txt_size
+      spaced_txt = original_txt + Pretty.spacer(num_spaces)
+    else
+      spaced_txt = original_txt
+    end
 
-    spaces.times { original_txt += ' ' }
-
-    spaced_txt = original_txt[0..width - 1]
-
-    expect(spaced_txt).to eq(Pretty.alphabetize(original_txt, width))
+    expect(spaced_txt[0..width - 1]).to eq(Pretty.alphabetize(original_txt, width))
   end
 
   # Initial caps - Brazilian Portuguese

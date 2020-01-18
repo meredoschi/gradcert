@@ -1,10 +1,21 @@
 # frozen_string_literal: true
 
 # Convenience methods
-
 module Pretty
+  # Originally in schoolyears
+  def self.ordinal_suffix
+    if I18n.locale == :pt_BR
+      'º'
+    else ''
+    end
+  end
+
+  def self.sep
+    Settings.separator_info
+  end
+
   # Add n blank spaces
-  def self.spacer(n) # rubocop:disable Naming/UncommunicativeMethodParamName
+  def self.spacer(n)
     repeat_chars(' ', n)
   end
 
@@ -40,7 +51,7 @@ module Pretty
 
   # Used for timestamping files mostly
   def self.right_now
-    t = Time.now
+    t = Time.zone.now
 
     rnow = t.day.to_s + '_' + t.month.to_s + '_' + t.year.to_s + '_' + t.hour.to_s + 'h'
 
@@ -64,14 +75,16 @@ module Pretty
     Money.new(cents, 'BRL').format(separator: ',', delimiter: '.')
   end
 
-  # Increase the text size by appending spaces to the left
-  # Useful for Brazilian bankpayments
-  def self.alphabetize(txt, field_width)
-    spaces = field_width - txt.length
+  # Increase the text size by appending spaces to the left (if possible)
+  def self.alphabetize(txt, width)
+    txt_size = txt.size
+    spaced_txt = if width > txt_size
+                   txt + spacer(width - txt_size)
+                 else
+                   txt # Unchanged in case an insufficient width is provided.
+                 end
 
-    spaces.times { txt += ' ' }
-
-    txt[0..field_width - 1]
+    spaced_txt[0..width - 1] # might truncate (depending on width)
   end
 
   # Takes an integer and converts it to a string with zeros on the left up to the field width
@@ -102,7 +115,7 @@ module Pretty
   end
 
   # Repeat a single character n times
-  def self.repeat_chars(ch, n) # rubocop:disable Naming/UncommunicativeMethodParamName
+  def self.repeat_chars(ch, n)
     txt = ''
     n.times { txt += ch }
 
@@ -139,7 +152,7 @@ module Pretty
   # i = index
   # usually inside a loop, e.g.
   # object_list.each_with_index |obj, i|
-  def self.display_index_progress(i, small_interval, big_interval) # rubocop:disable Naming/UncommunicativeMethodParamName
+  def self.display_index_progress(i, small_interval, big_interval)
     n = i + 1
     print n.to_s + ' ' if (i % small_interval).zero?
     puts if i.positive? && i % big_interval.zero?
