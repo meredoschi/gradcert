@@ -3,6 +3,10 @@
 # School calendar from first day of classes to the last
 # As a general rule, events are limited to the same schoolterm
 class Schoolterm < ActiveRecord::Base
+  ADMISSIONS_PERIOD_I18N = I18n.t\
+    'activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod'
+  REGISTRATION_SEASON_I18N = I18n.t('activerecord.attributes.schoolterm.registrationseason')
+
   # ------------------- References ------------------------
 
   has_many :program, foreign_key: 'schoolterm_id',
@@ -30,28 +34,30 @@ class Schoolterm < ActiveRecord::Base
     end
   end
 
-  def details
-    #  Schoolterm(id: integer, start: date, finish: date, pap: boolean, medres: boolean,
-    #  registrationseason: boolean, scholarshipsoffered: integer, seasondebut: datetime,
-    #  seasonclosure: datetime, admissionsdebut: datetime, admissionsclosure: datetime)
-    sep = Settings.separator + ' '
+  def start_finish_dts
+    i18n_to = I18n.t('to')
+    I18n.l(start) + ' ' + i18n_to + ' ' + I18n.l(finish)
+  end
 
+  def registration_period
     i18n_from = I18n.t('from')
     i18n_to = I18n.t('to')
-    admissions_i18n = I18n
-                      .t('activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod')
-    registration_season_i18n = I18n.t('activerecord.attributes.schoolterm.registrationseason')
+    REGISTRATION_SEASON_I18N + ' ' + i18n_from + ' ' + I18n.l(seasondebut) + ' ' + i18n_to \
+     + ' ' + I18n.l(seasonclosure)
+  end
 
-    term_start_finish_dts = I18n.l(start) + ' ' + i18n_to + ' ' + I18n.l(finish)
-    registration_season_debut_closure_dts = registration_season_i18n + ' ' + i18n_from + ' ' \
-     + I18n.l(seasondebut) + ' ' + i18n_to + ' ' + I18n.l(seasonclosure)
-    admissions_debut_closure_dts = admissions_i18n + ' ' + i18n_from + ' ' \
-     + I18n.l(admissionsdebut) + ' ' + i18n_to + ' ' + I18n.l(admissionsclosure)
+  def admissions_period
+    i18n_from = I18n.t('from')
+    i18n_to = I18n.t('to')
 
-    term_details = term_start_finish_dts + ' ' + sep + registration_season_debut_closure_dts \
-     + ' ' + sep + admissions_debut_closure_dts
+    ADMISSIONS_PERIOD_I18N + ' ' + i18n_from + ' ' + I18n.l(admissionsdebut) + ' ' \
+    + i18n_to + ' ' + I18n.l(admissionsclosure)
+  end
 
-    term_details
+  def details
+    sep = ' ' + Settings.separator + ' '
+
+    start_finish_dts + sep + registration_period + sep + admissions_period
   end
 
   def admissions_data_entry_period?

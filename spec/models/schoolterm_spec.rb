@@ -8,6 +8,64 @@ RSpec.describe Schoolterm, type: :model do
   let(:schoolterm) { FactoryBot.create(:schoolterm, :pap) }
   let(:medical_residency_schoolterm) { FactoryBot.create(:schoolterm, :medres) }
   let(:undefined_schoolterm) { FactoryBot.create(:schoolterm, :undefined) }
+  let(:sep) { Settings.separator + ' ' }
+  let(:i18n_from) { I18n.t('from') }
+  let(:i18n_to) { I18n.t('to') }
+  ADMISSIONS_PERIOD_I18N = I18n.t\
+    'activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod'
+
+  REGISTRATION_SEASON_I18N = I18n.t('activerecord.attributes.schoolterm.registrationseason')
+
+  context 'constants' do
+    it 'ADMISSIONS_PERIOD_I18N' do
+      expect(ADMISSIONS_PERIOD_I18N).to eq(Schoolterm::ADMISSIONS_PERIOD_I18N)
+    end
+
+    it 'REGISTRATION_SEASON_I18N' do
+      expect(REGISTRATION_SEASON_I18N).to eq(Schoolterm::REGISTRATION_SEASON_I18N)
+    end
+  end
+
+  context 'development-schoolyears' do
+    it '-start_finish_dts' do
+      schoolterm_start_finish_dts = I18n.l(schoolterm.start) + ' ' + i18n_to + ' ' \
+       + I18n.l(schoolterm.finish)
+      expect(schoolterm_start_finish_dts).to eq(schoolterm.start_finish_dts)
+    end
+
+    it '-registration_period' do
+      schoolterm_registration_period = REGISTRATION_SEASON_I18N + ' ' \
+      + i18n_from + ' ' + I18n.l(schoolterm.seasondebut) + ' ' + i18n_to \
+      + ' ' + I18n.l(schoolterm.seasonclosure)
+
+      expect(schoolterm_registration_period).to eq(schoolterm.registration_period)
+    end
+
+    it '-registration_period' do
+      schoolterm_registration_period = REGISTRATION_SEASON_I18N + ' ' + i18n_from + \
+                                       ' ' + I18n.l(schoolterm.seasondebut) + ' ' + i18n_to + \
+                                       ' ' + I18n.l(schoolterm.seasonclosure)
+
+      expect(schoolterm_registration_period).to eq(schoolterm.registration_period)
+    end
+
+    it '-admissions_period' do
+      schoolterm_admissions_period = ADMISSIONS_PERIOD_I18N + ' ' + i18n_from + ' ' +  \
+                                     I18n.l(schoolterm.admissionsdebut) + ' ' + i18n_to + ' ' + \
+                                     I18n.l(schoolterm.admissionsclosure)
+
+      expect(schoolterm_admissions_period).to eq(schoolterm.admissions_period)
+    end
+
+    it '-details' do
+      sep = ' ' + Settings.separator + ' '
+
+      schoolterm_details = schoolterm.start_finish_dts + sep + schoolterm.registration_period \
+       + sep + schoolterm.admissions_period
+
+      expect(schoolterm_details).to eq(schoolterm.details)
+    end
+  end
 
   it 'can be created' do
     FactoryBot.create(:schoolterm, :pap)
@@ -226,25 +284,5 @@ RSpec.describe Schoolterm, type: :model do
     registrations_permitted = Logic.within?(season_debut, season_closure, now) # returs a boolean
 
     expect(registrations_permitted).to eq schoolterm.in_season?
-  end
-
-  it '-details' do
-    sep = Settings.separator + ' '
-    i18n_from = I18n.t('from')
-    i18n_to = I18n.t('to')
-
-    term_details = I18n.l(schoolterm.start) + ' ' + i18n_to
-    registration_season_i18n = I18n.t('activerecord.attributes.schoolterm.registrationseason')
-    adm_i18n = I18n.t('activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod')
-
-    term_details += ' ' + I18n.l(schoolterm.finish) + ' ' + sep + \
-                    registration_season_i18n + ' ' + i18n_from + ' ' \
-                    + I18n.l(schoolterm.seasondebut) + ' ' + i18n_to + ' ' + \
-                    I18n.l(schoolterm.seasonclosure) \
-                    + ' ' + sep + adm_i18n + ' ' + i18n_from + ' ' + \
-                    I18n.l(schoolterm.admissionsdebut) + ' ' \
-                    + i18n_to + ' ' + I18n.l(schoolterm.admissionsclosure)
-
-    expect(term_details).to eq(schoolterm.details)
   end
 end
