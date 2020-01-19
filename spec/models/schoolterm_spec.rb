@@ -137,14 +137,14 @@ RSpec.describe Schoolterm, type: :model do
     now = Time.zone.parse(dt)
     allow(Time).to receive(:now) { now }
 
-    @program_admissions_data_entry_period = false
+    program_admissions_data_entry_period = false
 
     if schoolterm.admissionsdebut.present? && schoolterm.admissionsclosure.present?
-      @program_admissions_data_entry_period = Logic.within?(schoolterm.admissionsdebut,
-                                                            schoolterm.admissionsclosure, now)
+      program_admissions_data_entry_period = Logic.within?(schoolterm.admissionsdebut,
+                                                           schoolterm.admissionsclosure, now)
     end
 
-    expect(@program_admissions_data_entry_period).to eq(schoolterm.admissions_data_entry_period?)
+    expect(program_admissions_data_entry_period).to eq(schoolterm.admissions_data_entry_period?)
   end
 
   # To do: figure out how to write this test

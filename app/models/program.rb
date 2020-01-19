@@ -17,7 +17,7 @@ class Program < ActiveRecord::Base
 
   belongs_to :programname
 
-  # belongs_to :schoolterm
+  belongs_to :schoolterm
 
   belongs_to :institution
 

@@ -61,15 +61,15 @@ class Schoolterm < ActiveRecord::Base
   end
 
   def admissions_data_entry_period?
-    @program_admissions_data_entry_period = false
+    program_admissions_data_entry_period = false
 
     if admissionsdebut.present? && admissionsclosure.present?
-      @program_admissions_data_entry_period = Logic
-                                              .within?(admissionsdebut,
-                                                       admissionsclosure, Time.zone.now)
+      program_admissions_data_entry_period = Logic
+                                             .within?(admissionsdebut,
+                                                      admissionsclosure, Time.zone.now)
     end
 
-    @program_admissions_data_entry_period
+    program_admissions_data_entry_period
   end
 
   def in_season?
@@ -105,59 +105,25 @@ class Schoolterm < ActiveRecord::Base
   # Alias
   # Preferred naming.  Active will become deprecated.
   def self.contextual_on(specified_dt)
-    where(id: ids_active_on(specified_dt))
+    where('start <= ? AND finish >= ?', specified_dt, specified_dt)
   end
 
   # More generic version of active_today
   # specified_dt = specified date
   def self.ids_active_on(specified_dt)
-    all_terms = all
-
-    active_ids = []
-
-    dt_range = specified_dt..specified_dt
-
-    all_terms.each do |term|
-      term_range = term.start..term.finish # Schoolterm
-
-      next unless Logic.intersect(dt_range, term_range) == dt_range
-
-      active_ids << term.id
-    end
-
-    active_ids
+    contextual_on(specified_dt).pluck(:id).sort.uniq
   end
 
   # Registration season open a specified date
   def self.ids_within_registration_season(specified_dt)
-    all_terms = all
-
-    active_ids = []
-
-    dt_range = specified_dt..specified_dt
-
-    all_terms.each do |term|
-      next unless term.seasondebut.present? && term.seasonclosure.present?
-
-      term_range = term.seasondebut.to_date..term.seasonclosure.to_date # Schoolterm
-      next unless Logic.intersect(dt_range, term_range) == dt_range
-
-      active_ids << term.id
-    end
-
-    active_ids
+    within_registration_season(specified_dt).pluck(:id).sort.uniq
   end
 
   # specified_dt = arbitrary date
   # It is assumed season debut and closure are consistent
   # i.e. have been properly validated and are within start and finish
   def within_registration_season?(specified_dt)
-    dt_range = specified_dt..specified_dt
-
-    term_range = seasondebut.to_date..seasonclosure.to_date # Schoolterm
-
-    (seasondebut.present? && seasonclosure.present? &&
-       Logic.intersect(dt_range, term_range) == dt_range)
+    where('seasondebut <= ? AND seasonclosure >= ?', specified_dt, specified_dt)
   end
 
   def self.registrations_allowed_and_within_season(specified_dt)
@@ -167,6 +133,15 @@ class Schoolterm < ActiveRecord::Base
   # Within the registration season
   def self.within_registration_season(specified_dt)
     where(id: ids_within_registration_season(specified_dt))
+  end
+
+  def self.ids_within_admissions_data_entry_period
+    within_admissions_data_entry_period.pluck
+  end
+
+  def self.within_admissions_data_entry_period
+    now = Time.zone.now
+    where('admissionsdebut <= ? AND seasonclosure >= ?', now, now)
   end
 
   # Active today (special case)
@@ -274,12 +249,12 @@ class Schoolterm < ActiveRecord::Base
   end
 
   def self.active
-    where(active: true)
+    contextual_today
   end
 
   # --- Model finders
   def self.find_active_schoolterms
-    where(active: true)
+    contextual_today
   end
 
   # Returns active record relation
@@ -407,24 +382,6 @@ class Schoolterm < ActiveRecord::Base
 
   def self.default_scope
     order(start: :desc)
-  end
-
-  # Tests pending
-
-  def self.ids_within_admissions_data_entry_period
-    @ids_within_admissions_data_entry_period = []
-
-    Schoolterm.all.find_each do |schoolterm|
-      next unless schoolterm.admissions_data_entry_period?
-
-      @ids_within_admissions_data_entry_period << schoolterm.id
-    end
-
-    @ids_within_admissions_data_entry_period
-  end
-
-  def self.within_admissions_data_entry_period
-    where(id: ids_within_admissions_data_entry_period)
   end
 
   # Negative
