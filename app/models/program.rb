@@ -20,6 +20,20 @@ class Program < ActiveRecord::Base
   # belongs_to :schoolterm
 
   belongs_to :institution
+
+  #
+  #   # ------------------- Scopes ----------------------------------------------------------------
+
+  #    http://api.rubyonrails.org/classes/ActiveRecord/Scoping/Named/ClassMethods.html
+  scope :pap, -> { where(pap: true) }
+
+  scope :medres, -> { where(medres: true) }
+  scope :medicalresidency, -> { where(medres: true) }
+
+  scope :gradcert, -> { where(gradcert: true) }
+
+  scope :with_institution, -> { joins(:institution).uniq.order(:name) }
+
   #
   #   has_many :courses
   #
@@ -41,32 +55,18 @@ class Program < ActiveRecord::Base
   #   accepts_nested_attributes_for :address, reject_if: :internal_address?,  allow_destroy: true
   #
   #   =end
-  #
-  #   # ------------------- Scopes ----------------------------------------------------------------
-  #
-  #   # http://api.rubyonrails.org/classes/ActiveRecord/Scoping/Named/ClassMethods.html
-  #   scope :pap, -> { where(pap: true) }
-  #
-  #   scope :medres, -> { where(medres: true) }
-  #   scope :medicalresidency, -> { where(medres: true) }
-  #
-  #   scope :gradcert, -> { where(gradcert: true) }
-  #
-  #   #  scope :with_institution, -> { joins(:institution).uniq.order(:name) }
-  #
+
   #   #   scope :original, -> { where(original: true) }.includes(:schoolyears)
   #
   #   # ------------------- Validations ------------------------------------------------------------
   #
-  #   validates :comment, length: { maximum: MAX_COMMENT_LEN }
-  #
-  #   %i[duration programname_id].each do |required_field|
-  #     #  %i[duration institution_id programname_id schoolterm_id].each do |required_field|
-  #     validates required_field, presence: true
-  #   end
-  #
-  #   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1,
-  #     less_than_or_equal_to: MAX_YEARS }
+  validates :comment, length: { maximum: MAX_COMMENT_LEN }
+  %i[duration institution_id programname_id].each do |required_field|
+    #     #  %i[duration institution_id programname_id schoolterm_id].each do |required_field|
+    validates required_field, presence: true
+  end
+  validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1,
+                                       less_than_or_equal_to: MAX_YEARS }
   #
   #     #  validates_uniqueness_of :programname_id, scope: %i[institution_id schoolterm_id pap]
   #
@@ -241,15 +241,14 @@ class Program < ActiveRecord::Base
     name + ' (' + institution.name + ')'
   end
 
-  #  def program_institution_short_name
-  #    prog_inst_short_name = name.truncate(ABBREVIATION_LENGTH) + ' ('
-  #    prog_inst_short_name += institution.name.truncate(INSTITUTION_ABBREVIATION_LENGTH) + ')'
-  #  end
+  def program_institution_short_name
+    shortname + ' (' + institution.shortname + ')'
+  end
 
   # Alias
-  #  def program_name_with_institution
-  #    institution_program_name
-  #  end
+  def program_name_with_institution
+    institution_program_name
+  end
 
   # Abbreviated institution name.  Used in registrations helper for admins and managers (schoolyear)
   #  def name_term_institution_short

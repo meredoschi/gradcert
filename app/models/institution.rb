@@ -2,6 +2,7 @@
 
 # Last revised: December 2019
 class Institution < ActiveRecord::Base
+  ABBREVIATION_LENGTH = Settings.shortname_len.institution
   # --- custom validations
   # --- http://guides.rubyonrails.org/active_record_validations.html
 
@@ -21,25 +22,33 @@ class Institution < ActiveRecord::Base
 
   belongs_to :institutiontype
 
-  has_many  :characteristic, foreign_key: 'institution_id'
-  has_many  :college, foreign_key: 'institution_id'
-  has_many  :healthcareinfo, foreign_key: 'institution_id'
-  has_many  :placesavailable, foreign_key: 'institution_id'
-  has_many  :program, foreign_key: 'institution_id'
-  has_many  :researchcenter, foreign_key: 'institution_id'
-  has_many  :roster, foreign_key: 'institution_id'
-  has_many  :user, foreign_key: 'institution_id', dependent: :restrict_with_exception
+  has_many  :characteristic, foreign_key: 'institution_id',
+                             dependent: :restrict_with_exception, inverse_of: :institution
+  has_many  :college, foreign_key: 'institution_id',
+                      dependent: :restrict_with_exception, inverse_of: :institution
+  has_many  :healthcareinfo, foreign_key: 'institution_id',
+                             dependent: :restrict_with_exception, inverse_of: :institution
+  has_many  :placesavailable, foreign_key: 'institution_id',
+                              dependent: :restrict_with_exception, inverse_of: :institution
+  has_many  :program, foreign_key: 'institution_id',
+                      dependent: :restrict_with_exception, inverse_of: :institution
+  has_many  :researchcenter, foreign_key: 'institution_id',
+                             dependent: :restrict_with_exception, inverse_of: :institution
+  has_many  :roster, foreign_key: 'institution_id',
+                     dependent: :restrict_with_exception, inverse_of: :institution
+  has_many  :user, foreign_key: 'institution_id',
+                   dependent: :restrict_with_exception, inverse_of: :institution
 
-  has_one :accreditation
+  has_one :accreditation, dependent: :restrict_with_exception
   accepts_nested_attributes_for :accreditation
 
-  has_one :address
+  has_one :address, dependent: :restrict_with_exception
   accepts_nested_attributes_for :address
 
-  has_one :phone
+  has_one :phone, dependent: :restrict_with_exception
   accepts_nested_attributes_for :phone
 
-  has_one :webinfo
+  has_one :webinfo, dependent: :restrict_with_exception
   accepts_nested_attributes_for :webinfo
 
   scope :paulista, -> { joins(:stateregion).merge(Stateregion.paulista).order(:name) }
@@ -130,6 +139,10 @@ class Institution < ActiveRecord::Base
 
   def enrollment_reached_maximum_on_schoolterm?(schterm)
     remaining_vacancies_on_schoolterm(schterm).zero?
+  end
+
+  def shortname
+    name.truncate(ABBREVIATION_LENGTH)
   end
 
   # Enrollment control
@@ -278,15 +291,7 @@ class Institution < ActiveRecord::Base
   end
 
   def higherlearning?
-    if undergraduate || with_pap_programs? || with_medres_programs? || with_gradcert_programs?
-
-      true
-
-    else
-
-      false
-
-    end
+    (undergraduate || with_pap_programs? || with_medres_programs? || with_gradcert_programs?)
   end
 
   def with_gradcert_programs?
@@ -297,6 +302,7 @@ class Institution < ActiveRecord::Base
     program.medres.count.positive?
   end
 
+  # For convenience
   def programs
     program
   end

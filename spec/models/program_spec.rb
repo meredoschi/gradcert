@@ -23,7 +23,10 @@ RSpec.describe Program, type: :model do
 
   context 'Associations' do
     it { is_expected.to belong_to(:programname) }
-    # it { is_expected.to belong_to(:schoolterm) }
+    it {
+      pending('development-schoolyears - schoolterm to be reviewed')
+      is_expected.to belong_to(:schoolterm)
+    }
 
     it { is_expected.to belong_to(:institution) }
 
@@ -37,30 +40,41 @@ RSpec.describe Program, type: :model do
   context 'Validations' do
     it { is_expected.to accept_nested_attributes_for(:schoolyears).allow_destroy(true) }
 
-    #
-    #   it { is_expected.to validate_length_of(:comment).is_at_most(MAX_COMMENT_LEN) }
-    #
-    #   it { is_expected.to validate_presence_of(:duration) }
-    #   it { is_expected.to validate_presence_of(:institution_id) }
-    #   it { is_expected.to validate_presence_of(:programname_id) }
-    #   it { is_expected.to validate_presence_of(:schoolterm_id) }
-    #
-    #   it { is_expected.to validate_numericality_of(:duration).only_integer }
-    #   it { is_expected.to validate_numericality_of(:duration).is_greater_than_or_equal_to(1) }
-    #   it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(MAX_YEARS)}
-    #
-    #   it {
-    #     is_expected.to validate_uniqueness_of(:programname_id)
-    #       .scoped_to(%i[institution_id schoolterm_id]).case_insensitive
-    #   }
-    #
-    #   it { is_expected.to accept_nested_attributes_for(:admission) }
-    #   it { is_expected.to accept_nested_attributes_for(:accreditation) }
-    #   it { is_expected.to accept_nested_attribsutes_for(:address).allow_destroy(true) }
-    #
-    #   pending 'validate :duration_consistency'
-    #   pending 'validate schoolyear_range'
-    #
+    it { is_expected.to validate_length_of(:comment).is_at_most(MAX_COMMENT_LEN) }
+
+    it { is_expected.to validate_presence_of(:duration) }
+    it { is_expected.to validate_presence_of(:institution_id) }
+    it { is_expected.to validate_presence_of(:programname_id) }
+    it {
+      pending('development-schoolyears - schoolterm to be reviewed')
+      is_expected.to validate_presence_of(:schoolterm_id)
+    }
+
+    it { is_expected.to validate_numericality_of(:duration).only_integer }
+    it { is_expected.to validate_numericality_of(:duration).is_greater_than_or_equal_to(1) }
+    it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(MAX_YEARS) }
+    it {
+      pending('development-schoolyears - schoolterm to be reviewed')
+      is_expected.to validate_uniqueness_of(:programname_id)
+        .scoped_to(%i[institution_id schoolterm_id]).case_insensitive
+    }
+    it {
+      pending('development-schoolyears - admission to be reviewed')
+      is_expected.to accept_nested_attributes_for(:admission)
+    }
+
+    it {
+      pending('development-schoolyears - accreditation to be reviewed')
+      is_expected.to accept_nested_attributes_for(:accreditation)
+    }
+
+    it {
+      pending('development-schoolyears - address to be reviewed')
+      is_expected.to accept_nested_attributes_for(:address).allow_destroy(true)
+    }
+
+    pending 'validate :duration_consistency'
+    pending 'validate schoolyear_range'
   end
 
   it '-theory' do
@@ -127,6 +141,18 @@ RSpec.describe Program, type: :model do
         institution_name_program_name = program.name + ' (' + program.institution.name + ')'
         expect(program.institution_program_name).to eq(institution_name_program_name)
       end
+
+      it '-program_institution_short_name' do
+        #        prog_inst_short_name = program.name.truncate(ABBREVIATION_LENGTH) + ' (' \
+        prog_inst_short_name = program.shortname + ' (' + program.institution.shortname + ')'
+        expect(program.program_institution_short_name).to eq(prog_inst_short_name)
+      end
+
+      # Deprecated.  Use name instead
+      it '-program_name' do
+        program_name = program.programname.name
+        expect(program_name).to eq(program.program_name)
+      end
     end
 
     context 'Schoolyears' do
@@ -180,6 +206,11 @@ RSpec.describe Program, type: :model do
         expect(program_with_long_name.shortname.size)
           .to eq(Programname::ABBREVIATION_LENGTH.to_i + 4)
         # name[0..ABBREVIATION_LENGTH] + '...' # three dots plus 1 (since index starts at zero) = 4
+      end
+
+      # Alias
+      it '-program_name_with_institution (alias -institution_program_name)' do
+        expect(program.program_name_with_institution).to eq(program.institution_program_name)
       end
     end
   end
@@ -252,21 +283,12 @@ RSpec.describe Program, type: :model do
   #     expect(program.without_registered_students?).to eq(!program.with_registered_students?)
   #   end
   #
-  #   # Deprecated.  Use name instead
-  #   it '-program_name' do
-  #     program_name = program.programname.name
-  #     expect(program_name).to eq(program.program_name)
-  #   end
   #
   #   it '-program_name_schoolterm' do
   #     program.name + ' (' + program.schoolterm.name + ')'
   #   end
   #
   #
-  #   # Alias
-  #   it '-program_name_with_institution (alias -institution_program_name)' do
-  #     expect(program.program_name_with_institution).to eq(program.institution_program_name)
-  #   end
   #
   #   it 'name_term_institution_short' do
   #     program_name_term_institution_short = program.short + ' | ' + program.schoolterm.name
@@ -274,19 +296,15 @@ RSpec.describe Program, type: :model do
   #     expect(program.name_term_institution_short).to eq(program_name_term_institution_short)
   #   end
   #
-  #   it 'program_institution_short_name' do
-  #     prog_inst_short_name = program.name.truncate(ABBREVIATION_LENGTH) + ' ('
-  #     prog_inst_short_name += program.institution.name.truncate(INSTITUTION_ABBREVIATION_LENGTH) + ')'
-  #     expect(program.program_institution_short_name).to eq(prog_inst_short_name)
-  #   end
+
   #
   #   it '-details_mkdown' do
   #     sep = Settings.separator_mkdown
   #     # Program(id: integer, institution_id: integer, programname_id: integer, duration: integer,
   #     # comment: string, created_at: datetime, updated_at: datetime, pap:
   #     # boolean, medres: boolean, address_id: integer, internal: boolean,
-  #     # accreditation_id: integer, admission_id: integer, schoolterm_id: integer, professionalspecialt
-  #     # y_id: integer, previouscode: string, parentid: integer)
+  #     # accreditation_id: integer, admission_id: integer, schoolterm_id: integer,
+  #     # professionalspecialty_id: integer, previouscode: string, parentid: integer)
   #     prog_details = program.id.to_s + sep + program.programname_id.to_s + sep
   #     prog_details += program.name + sep + program.institution.id.to_s + sep
   #     prog_details += program.institution.abbrv + sep + program.schoolterm.id.to_s
