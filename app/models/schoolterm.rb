@@ -1,50 +1,55 @@
+# frozen_string_literal: true
+
 # School calendar from first day of classes to the last
 # As a general rule, events are limited to the same schoolterm
 class Schoolterm < ActiveRecord::Base
   # ------------------- References ------------------------
 
-  has_many :program, foreign_key: 'schoolterm_id'
+  has_many :program, foreign_key: 'schoolterm_id',
+                     dependent: :restrict_with_exception, inverse_of: :schoolterm
 
-  # 	has_many  :registration, :foreign_key => 'schoolterm_id'  - deprecated
+  #   has_many  :registration, :foreign_key => 'schoolterm_id'  - deprecated
 
   # -------------------------------------------------------
 
-  has_many  :placesavailable, foreign_key: 'schoolterm_id'
+  has_many  :placesavailable, foreign_key: 'schoolterm_id',
+                              dependent: :restrict_with_exception, inverse_of: :schoolterm
 
-  has_many  :roster, foreign_key: 'schoolterm_id'
+  has_many  :roster, foreign_key: 'schoolterm_id',
+                     dependent: :restrict_with_exception, inverse_of: :schoolterm
 
   has_paper_trail
 
-  # Preparation for 2018 (refactored)
-  # TDD
-
   def area
-    @term_area = case self
-                 when pap?
-                   I18n.t('activerecord.attributes.program.pap')
-                 when medres?
-                   I18n.t('activerecord.attributes.program.medres')
-                 else
-                   I18n.t('undefined')
-                 end
-    @term_area
+    if pap?
+      I18n.t('activerecord.attributes.program.pap')
+    elsif medres?
+      I18n.t('activerecord.attributes.program.medres')
+    else
+      I18n.t('undefined')
+    end
   end
 
   def details
-    #  Schoolterm(id: integer, start: date, finish: date, pap: boolean, medres: boolean, created_at: datetime, updated_at: datetime, registrationseason: boolean, s
-    #   cholarshipsoffered: integer, seasondebut: datetime, seasonclosure: datetime, admissionsdebut: datetime, admissionsclosure: datetime)
+    #  Schoolterm(id: integer, start: date, finish: date, pap: boolean, medres: boolean,
+    #  registrationseason: boolean, scholarshipsoffered: integer, seasondebut: datetime,
+    #  seasonclosure: datetime, admissionsdebut: datetime, admissionsclosure: datetime)
     sep = Settings.separator + ' '
+
     i18n_from = I18n.t('from')
     i18n_to = I18n.t('to')
-
-    term_details = I18n.l(start) + ' ' + i18n_to
+    admissions_i18n = I18n
+                      .t('activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod')
     registration_season_i18n = I18n.t('activerecord.attributes.schoolterm.registrationseason')
-    adm_i18n = I18n.t('activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod')
 
-    term_details += ' ' + I18n.l(finish) + ' ' + sep + registration_season_i18n + ' ' + i18n_from + ' '
-    term_details += I18n.l(seasondebut) + ' ' + i18n_to + ' ' + I18n.l(seasonclosure)
-    term_details += ' ' + sep + adm_i18n + ' ' + i18n_from + ' ' + I18n.l(admissionsdebut) + ' '
-    term_details += i18n_to + ' ' + I18n.l(admissionsclosure)
+    term_start_finish_dts = I18n.l(start) + ' ' + i18n_to + ' ' + I18n.l(finish)
+    registration_season_debut_closure_dts = registration_season_i18n + ' ' + i18n_from + ' ' \
+     + I18n.l(seasondebut) + ' ' + i18n_to + ' ' + I18n.l(seasonclosure)
+    admissions_debut_closure_dts = admissions_i18n + ' ' + i18n_from + ' ' \
+     + I18n.l(admissionsdebut) + ' ' + i18n_to + ' ' + I18n.l(admissionsclosure)
+
+    term_details = term_start_finish_dts + ' ' + sep + registration_season_debut_closure_dts \
+     + ' ' + sep + admissions_debut_closure_dts
 
     term_details
   end
@@ -54,14 +59,15 @@ class Schoolterm < ActiveRecord::Base
 
     if admissionsdebut.present? && admissionsclosure.present?
       @program_admissions_data_entry_period = Logic
-                                              .within?(admissionsdebut, admissionsclosure, Time.now)
+                                              .within?(admissionsdebut,
+                                                       admissionsclosure, Time.zone.now)
     end
 
     @program_admissions_data_entry_period
   end
 
   def in_season?
-    Logic.within?(seasondebut, seasonclosure, Time.now) # returs a boolean
+    Logic.within?(seasondebut, seasonclosure, Time.zone.now) # returs a boolean
   end
 
   # ---------------------------------------------------------------------------------------------
@@ -71,13 +77,13 @@ class Schoolterm < ActiveRecord::Base
 
   # i.e. Active, in progress
   def self.ids_active_today
-    ids_active_on(Date.today)
+    ids_active_on(Time.zone.today)
   end
 
   # Preferred naming (to avoid confusion with active or inactive registrations)
   # Alias
-  def self.ids_contextual_on(dt)
-    ids_active_on(dt)
+  def self.ids_contextual_on(specified_dt)
+    ids_active_on(specified_dt)
   end
 
   # Alias
@@ -87,25 +93,23 @@ class Schoolterm < ActiveRecord::Base
 
   # Convenience method
   def self.contextual_today
-    dt = Date.today
-
-    contextual_on(dt)
+    contextual_on(Time.zone.today)
   end
 
   # Alias
   # Preferred naming.  Active will become deprecated.
-  def self.contextual_on(dt)
-    where(id: ids_active_on(dt))
+  def self.contextual_on(specified_dt)
+    where(id: ids_active_on(specified_dt))
   end
 
   # More generic version of active_today
-  # dt = specified date
-  def self.ids_active_on(dt)
+  # specified_dt = specified date
+  def self.ids_active_on(specified_dt)
     all_terms = all
 
     active_ids = []
 
-    dt_range = dt..dt
+    dt_range = specified_dt..specified_dt
 
     all_terms.each do |term|
       term_range = term.start..term.finish # Schoolterm
@@ -119,12 +123,12 @@ class Schoolterm < ActiveRecord::Base
   end
 
   # Registration season open a specified date
-  def self.ids_within_registration_season(dt)
+  def self.ids_within_registration_season(specified_dt)
     all_terms = all
 
     active_ids = []
 
-    dt_range = dt..dt
+    dt_range = specified_dt..specified_dt
 
     all_terms.each do |term|
       next unless term.seasondebut.present? && term.seasonclosure.present?
@@ -138,29 +142,25 @@ class Schoolterm < ActiveRecord::Base
     active_ids
   end
 
-  # dt = arbitrary date
+  # specified_dt = arbitrary date
   # It is assumed season debut and closure are consistent
   # i.e. have been properly validated and are within start and finish
-  def within_registration_season?(dt)
-    dt_range = dt..dt
+  def within_registration_season?(specified_dt)
+    dt_range = specified_dt..specified_dt
 
     term_range = seasondebut.to_date..seasonclosure.to_date # Schoolterm
 
-    if seasondebut.present? && seasonclosure.present? &&
-       Logic.intersect(dt_range, term_range) == dt_range
-      return true
-    else
-      return false
-    end
+    (seasondebut.present? && seasonclosure.present? &&
+       Logic.intersect(dt_range, term_range) == dt_range)
   end
 
-  def self.registrations_allowed_and_within_season(dt)
-    within_registration_season(dt).allowed
+  def self.registrations_allowed_and_within_season(specified_dt)
+    within_registration_season(specified_dt).allowed
   end
 
   # Within the registration season
-  def self.within_registration_season(dt)
-    where(id: ids_within_registration_season(dt))
+  def self.within_registration_season(specified_dt)
+    where(id: ids_within_registration_season(specified_dt))
   end
 
   # Active today (special case)
@@ -169,28 +169,29 @@ class Schoolterm < ActiveRecord::Base
   end
 
   # Active on a specified date
-  def self.active_on(dt)
-    where(id: ids_active_on(dt))
+  def self.active_on(specified_dt)
+    where(id: ids_active_on(specified_dt))
   end
 
   def previous
     previous_term = Schoolterm.where(start: start - 1.year)
 
     return unless previous_term.exists?
+
     previous_term
   end
-  # 	return self.where(id: actual_ids)
+  #   return self.where(id: actual_ids)
 
   # To do: implement this more generally, with intersect
   # This assumes schoolterm begins on March 1st !
-  def self.for_payroll(p)
-    reference_year = if p.monthworked.month > 2
+  def self.for_payroll(payroll)
+    reference_year = if payroll.monthworked.month > 2
 
-                       p.monthworked.year
+                       payroll.monthworked.year
 
                      else
 
-                       p.monthworked.year - 1
+                       payroll.monthworked.year - 1
 
                      end
 
@@ -198,7 +199,7 @@ class Schoolterm < ActiveRecord::Base
 
     first_day_of_classes = reference_year.to_s + month_day
 
-    where(start: first_day_of_classes).first # This assumes only one
+    find_by start: first_day_of_classes
   end
 
   # Returns latest finish date (i.e. pertaining to the most recent)
@@ -226,7 +227,7 @@ class Schoolterm < ActiveRecord::Base
 
   # Latest - most recent (returs individual record)
   def self.latest
-    where(finish: latest_finish_date).first if count.positive?
+    find_by finish: latest_finish_date if count.positive?
   end
 
   def name
@@ -385,13 +386,13 @@ class Schoolterm < ActiveRecord::Base
     Schoolterm.ids_contextual_today.include? id
   end
 
-  def active_on?(dt)
-    Schoolterm.ids_contextual_on(dt).include? id
+  def active_on?(specified_dt)
+    Schoolterm.ids_contextual_on(specified_dt).include? id
   end
 
   # Alias, for clarity
-  def active_as_of?(dt)
-    active_on?(dt)
+  def active_as_of?(specified_dt)
+    active_on?(specified_dt)
   end
 
   def active?
@@ -407,7 +408,7 @@ class Schoolterm < ActiveRecord::Base
   def self.ids_within_admissions_data_entry_period
     @ids_within_admissions_data_entry_period = []
 
-    Schoolterm.all.each do |schoolterm|
+    Schoolterm.all.find_each do |schoolterm|
       next unless schoolterm.admissions_data_entry_period?
 
       @ids_within_admissions_data_entry_period << schoolterm.id

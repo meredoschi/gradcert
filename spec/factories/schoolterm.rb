@@ -63,5 +63,11 @@ FactoryBot.define do
       medres true
       pap false
     end
+
+    # Test use only
+    trait :undefined do
+      medres false
+      pap false
+    end
   end
 end
