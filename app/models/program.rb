@@ -17,9 +17,9 @@ class Program < ActiveRecord::Base
 
   belongs_to :programname
 
-  #
-  #   belongs_to :institution
-  #   belongs_to :schoolterm
+  # belongs_to :schoolterm
+
+  belongs_to :institution
   #
   #   has_many :courses
   #
@@ -235,6 +235,12 @@ class Program < ActiveRecord::Base
     theory + practice
   end
 
+  # Related to the institutions association (review in progress)
+
+  def institution_program_name
+    name + ' (' + institution.name + ')'
+  end
+
   #  def program_institution_short_name
   #    prog_inst_short_name = name.truncate(ABBREVIATION_LENGTH) + ' ('
   #    prog_inst_short_name += institution.name.truncate(INSTITUTION_ABBREVIATION_LENGTH) + ')'
@@ -249,10 +255,6 @@ class Program < ActiveRecord::Base
   #  def name_term_institution_short
   #    program_name_term_institution_short = short + ' | ' + schoolterm.name
   #    program_name_term_institution_short += ' | ' + institution.abbrv
-  #  end
-
-  #  def institution_program_name
-  #    name + ' (' + institution.name + ')'
   #  end
 
   #

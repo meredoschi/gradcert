@@ -60,7 +60,7 @@ class Programname < ActiveRecord::Base
   def short
     if name.length > ABBREVIATION_LENGTH
 
-      name[0..len] + '...'
+      name[0..ABBREVIATION_LENGTH] + '...'
 
     else
 

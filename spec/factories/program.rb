@@ -12,7 +12,7 @@ FactoryBot.define do
     programname
     #  schoolterm
     comment 'Test'
-    #  institution
+    institution
     #  accreditation
     #  association :admission, factory: %i[admission zero_amounts]
     pap true
