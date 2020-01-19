@@ -2,20 +2,12 @@
 
 # Important logical verifications
 module Logic
-  def self.within?(a, b, x) # rubocop:disable Naming/UncommunicativeMethodParamName
-    if x >= a && x <= b
-
-      true
-
-    else
-
-      false
-
-    end
+  def self.within?(a, b, x) # rubocop:disable Naming/MethodParameterName
+    ((x >= a) && (x <= b))
   end
 
   # A,B are integer ranges
-  def self.intersection_size(a, b) # rubocop:disable Naming/UncommunicativeMethodParamName
+  def self.intersection_size(a, b) # rubocop:disable Naming/MethodParameterName
     res = nil # result
     intersection = intersect(a, b)
     res = intersection if intersection.present?
