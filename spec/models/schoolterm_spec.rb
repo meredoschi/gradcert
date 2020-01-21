@@ -11,6 +11,7 @@ RSpec.describe Schoolterm, type: :model do
   let(:sep) { Settings.separator + ' ' }
   let(:i18n_from) { I18n.t('from') }
   let(:i18n_to) { I18n.t('to') }
+  let(:specified_dt) { Time.zone.today + 1.year }
   ADMISSIONS_PERIOD_I18N = I18n.t\
     'activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod'
 
@@ -64,6 +65,49 @@ RSpec.describe Schoolterm, type: :model do
        + sep + schoolterm.admissions_period
 
       expect(schoolterm_details).to eq(schoolterm.details)
+    end
+
+    # More generic version of active_today
+    # specified_dt = specified date
+    it '#ids_active_on(specified_dt)' do
+      schoolterm_ids_active_on_dt = Schoolterm.contextual_on(specified_dt).pluck(:id).sort.uniq
+      expect(schoolterm_ids_active_on_dt).to eq(Schoolterm.ids_active_on(specified_dt))
+    end
+
+    # Preferred naming (to avoid confusion with active or inactive registrations)
+    # Alias
+    it '#ids_contextual_on(specified_dt)' do
+      schoolterm_ids_contextual_on_dt = Schoolterm.ids_contextual_on(specified_dt)
+      expect(schoolterm_ids_contextual_on_dt).to eq(Schoolterm.ids_active_on(specified_dt))
+    end
+
+    it '#ids_active_today' do
+      schoolterm_ids_active_on = Schoolterm.ids_active_on(Time.zone.today)
+      expect(schoolterm_ids_active_on).to eq(Schoolterm.ids_active_today)
+    end
+
+    # Preferred naming (to avoid confusion with active or inactive registrations)
+    # Alias
+    it '#ids_contextual_today(specified_dt)' do
+      schoolterm_ids_contextual_today = Schoolterm.ids_active_today
+      expect(schoolterm_ids_contextual_today).to eq(Schoolterm.ids_contextual_today)
+    end
+
+    it '#contextual_today(specified_dt)' do
+      schoolterms_contextual_today = Schoolterm.contextual_on(Time.zone.today)
+      expect(schoolterms_contextual_today).to eq(Schoolterm.contextual_today)
+    end
+
+    # Returns latest finish date (i.e. pertaining to the most recent)
+    it '#latest_finish_date' do
+      schoolterm_latest_finish_dt = Schoolterm.maximum(:finish)
+      expect(schoolterm_latest_finish_dt).to eq(Schoolterm.latest_finish_date)
+    end
+
+    # Returns earliest finish date (i.e. pertaining to the earliest)
+    it '#earliest_finish_date' do
+      schoolterm_earliest_finish_dt = Schoolterm.minimum(:finish)
+      expect(schoolterm_earliest_finish_dt).to eq(Schoolterm.earliest_finish_date)
     end
   end
 

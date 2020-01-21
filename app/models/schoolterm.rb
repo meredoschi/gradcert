@@ -185,12 +185,12 @@ class Schoolterm < ActiveRecord::Base
 
   # Returns latest finish date (i.e. pertaining to the most recent)
   def self.latest_finish_date
-    pluck(:finish).max if count.positive?
+    maximum(:finish)
   end
 
   # Returns earliest finish date (i.e. pertaining to the earliest)
   def self.earliest_finish_date
-    pluck(:finish).min if count.positive?
+    minimum(:finish)
   end
 
   # Latest - most recent
