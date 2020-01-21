@@ -12,6 +12,7 @@ RSpec.describe Schoolterm, type: :model do
   let(:i18n_from) { I18n.t('from') }
   let(:i18n_to) { I18n.t('to') }
   let(:specified_dt) { Time.zone.today + 1.year }
+
   ADMISSIONS_PERIOD_I18N = I18n.t\
     'activerecord.attributes.schoolterm.virtual.admissionsdatareportingperiod'
 
@@ -108,6 +109,68 @@ RSpec.describe Schoolterm, type: :model do
     it '#earliest_finish_date' do
       schoolterm_earliest_finish_dt = Schoolterm.minimum(:finish)
       expect(schoolterm_earliest_finish_dt).to eq(Schoolterm.earliest_finish_date)
+    end
+
+    # Registration season open a specified date
+    it '#ids_within_registration_season(specified_dt)' do
+      schoolterm_ids = Schoolterm.within_registration_season(specified_dt).pluck(:id).sort.uniq
+      expect(schoolterm_ids).to eq(Schoolterm.ids_within_registration_season(specified_dt))
+    end
+
+    # specified_dt = arbitrary date
+    # It is assumed season debut and closure are consistent
+    # i.e. have been properly validated and are within start and finish
+    it '-within_registration_season?(specified_dt)' do
+      is_schoolterm_within_registration_season = ((schoolterm.seasondebut <= specified_dt) \
+      && (schoolterm.seasondebut >= specified_dt))
+      expect(is_schoolterm_within_registration_season)
+        .to eq(schoolterm.within_registration_season?(specified_dt))
+    end
+
+    it '#registrations_allowed_and_within_season(specified_dt)' do
+      schoolterms_in_season_allowed = Schoolterm.within_registration_season(specified_dt).allowed
+      expect(schoolterms_in_season_allowed).to eq(Schoolterm
+        .registrations_allowed_and_within_season(specified_dt))
+    end
+
+    # Within the registration season
+
+    it '#within_registration_season(specified_dt)' do
+      schoolterms_in_season = Schoolterm.within_registration_season(specified_dt)
+      expect(schoolterms_in_season).to eq(Schoolterm
+        .within_registration_season(specified_dt))
+    end
+
+    it '#ids_within_admissions_data_entry_period' do
+      schoolterm_ids_within_admissions_data_entry_period = Schoolterm
+                                                           .within_admissions_data_entry_period
+                                                           .pluck(:id).sort.uniq
+      expect(schoolterm_ids_within_admissions_data_entry_period)
+        .to eq(Schoolterm.ids_within_admissions_data_entry_period)
+    end
+
+    it '#within_admissions_data_entry_period' do
+      now = Time.zone.parse('2020-1-1 00:00:01')
+
+      allow(Time).to receive(:now) { now }
+
+      schoolterms_within_admissions_data_entry_period = Schoolterm
+                                                        .where('admissionsdebut <= ? AND
+                                                          seasonclosure >= ?', now, now)
+      expect(schoolterms_within_admissions_data_entry_period)
+        .to eq(Schoolterm.within_admissions_data_entry_period)
+    end
+
+    # Active today (special case)
+    it '#active_today' do
+      schoolterms_active_today = Schoolterm.where(id: ids_active_today)
+      expect(schoolterms_active_today).to eq(Schoolterm.active_today)
+    end
+
+    # Active on a specified date
+    it '#active_on(specified_dt)' do
+      schoolterms_active_on_dt = Schoolterm.where(id: ids_active_on(specified_dt))
+      expect(schoolterms_active_on_dt).to eq(Schoolterm.active_on(specified_dt))
     end
   end
 

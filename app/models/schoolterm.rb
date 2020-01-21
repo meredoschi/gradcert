@@ -123,7 +123,7 @@ class Schoolterm < ActiveRecord::Base
   # It is assumed season debut and closure are consistent
   # i.e. have been properly validated and are within start and finish
   def within_registration_season?(specified_dt)
-    where('seasondebut <= ? AND seasonclosure >= ?', specified_dt, specified_dt)
+    ((seasondebut < specified_dt) && (seasondebut >= specified_dt))
   end
 
   def self.registrations_allowed_and_within_season(specified_dt)
@@ -132,11 +132,11 @@ class Schoolterm < ActiveRecord::Base
 
   # Within the registration season
   def self.within_registration_season(specified_dt)
-    where(id: ids_within_registration_season(specified_dt))
+    where('seasondebut <= ? AND seasonclosure >= ?', specified_dt, specified_dt)
   end
 
   def self.ids_within_admissions_data_entry_period
-    within_admissions_data_entry_period.pluck
+    within_admissions_data_entry_period.pluck(:id).sort.uniq
   end
 
   def self.within_admissions_data_entry_period
