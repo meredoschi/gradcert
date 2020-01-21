@@ -151,7 +151,6 @@ RSpec.describe Schoolterm, type: :model do
 
     it '#within_admissions_data_entry_period' do
       now = Time.zone.parse('2020-1-1 00:00:01')
-
       allow(Time).to receive(:now) { now }
 
       schoolterms_within_admissions_data_entry_period = Schoolterm
@@ -163,13 +162,13 @@ RSpec.describe Schoolterm, type: :model do
 
     # Active today (special case)
     it '#active_today' do
-      schoolterms_active_today = Schoolterm.where(id: ids_active_today)
+      schoolterms_active_today = Schoolterm.active_on(Time.zone.today)
       expect(schoolterms_active_today).to eq(Schoolterm.active_today)
     end
 
     # Active on a specified date
     it '#active_on(specified_dt)' do
-      schoolterms_active_on_dt = Schoolterm.where(id: ids_active_on(specified_dt))
+      schoolterms_active_on_dt = Schoolterm.contextual_on(specified_dt)
       expect(schoolterms_active_on_dt).to eq(Schoolterm.active_on(specified_dt))
     end
   end
@@ -233,7 +232,7 @@ RSpec.describe Schoolterm, type: :model do
 
   # i.e. inside the admissions data entry period (by local admins)
   it '-admissions_data_entry_period?' do
-    pending('program admissions not reviewed yet')
+    #  pending('program admissions not reviewed yet')
 
     # ***********************************************************************
 

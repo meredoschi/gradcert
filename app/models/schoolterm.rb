@@ -111,7 +111,7 @@ class Schoolterm < ActiveRecord::Base
   # More generic version of active_today
   # specified_dt = specified date
   def self.ids_active_on(specified_dt)
-    contextual_on(specified_dt).pluck(:id).sort.uniq
+    active_on(specified_dt).pluck(:id).sort.uniq
   end
 
   # Registration season open a specified date
@@ -146,12 +146,12 @@ class Schoolterm < ActiveRecord::Base
 
   # Active today (special case)
   def self.active_today
-    where(id: ids_active_today)
+    active_on(Time.zone.today)
   end
 
-  # Active on a specified date
+  # Active on the specified date
   def self.active_on(specified_dt)
-    where(id: ids_active_on(specified_dt))
+    contextual_on(specified_dt)
   end
 
   def previous
