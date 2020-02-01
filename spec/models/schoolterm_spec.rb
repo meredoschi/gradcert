@@ -8,6 +8,7 @@ RSpec.describe Schoolterm, type: :model do
   let(:schoolterm) { FactoryBot.create(:schoolterm, :pap) }
   let(:medical_residency_schoolterm) { FactoryBot.create(:schoolterm, :medres) }
   let(:undefined_schoolterm) { FactoryBot.create(:schoolterm, :undefined) }
+  let(:payroll) { FactoryBot.create(:payroll, :personal_taxation) }
   let(:sep) { Settings.separator + ' ' }
   let(:i18n_from) { I18n.t('from') }
   let(:i18n_to) { I18n.t('to') }
@@ -170,6 +171,17 @@ RSpec.describe Schoolterm, type: :model do
     it '#active_on(specified_dt)' do
       schoolterms_active_on_dt = Schoolterm.contextual_on(specified_dt)
       expect(schoolterms_active_on_dt).to eq(Schoolterm.active_on(specified_dt))
+    end
+
+    it '#for_payroll(payroll)' do
+      condition = '(start <= ?) and (finish>= ?) and (start <= ?) and (finish >= ?)'
+      payroll_start_dt = payroll.monthworked
+      payroll_finish_dt = Dateutils.to_gregorian(payroll.dayfinished)
+      schoolterms_for_payroll = Schoolterm
+                                .where(condition,
+                                       payroll_start_dt, payroll_start_dt,
+                                       payroll_finish_dt, payroll_finish_dt)
+      expect(schoolterms_for_payroll).to eq(Schoolterm.for_payroll(payroll))
     end
   end
 

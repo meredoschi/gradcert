@@ -66,14 +66,14 @@ FactoryBot.define do
       end
     end
 
-    trait :payment_date_in_the_future
-
-    before(:create) do |payroll|
-      offset = 1.year
-      payroll.monthworked += offset
-      payroll.paymentdate += offset
-      payroll.dataentrystart += offset
-      payroll.dataentryfinish += offset
+    trait :payment_date_in_the_future do
+      before(:create) do |payroll|
+        offset = 1.year
+        payroll.monthworked += offset
+        payroll.paymentdate += offset
+        payroll.dataentrystart += offset
+        payroll.dataentryfinish += offset
+      end
     end
   end
 

@@ -163,24 +163,12 @@ class Schoolterm < ActiveRecord::Base
   end
   #   return self.where(id: actual_ids)
 
-  # To do: implement this more generally, with intersect
-  # This assumes schoolterm begins on March 1st !
   def self.for_payroll(payroll)
-    reference_year = if payroll.monthworked.month > 2
-
-                       payroll.monthworked.year
-
-                     else
-
-                       payroll.monthworked.year - 1
-
-                     end
-
-    month_day = '-03-01'
-
-    first_day_of_classes = reference_year.to_s + month_day
-
-    find_by start: first_day_of_classes
+    condition = '(start <= ?) and (finish>= ?) and (start <= ?) and (finish >= ?)'
+    payroll_start_dt = payroll.monthworked
+    payroll_finish_dt = Dateutils.to_gregorian(payroll.dayfinished)
+    where(condition, payroll_start_dt, payroll_start_dt,
+          payroll_finish_dt, payroll_finish_dt)
   end
 
   # Returns latest finish date (i.e. pertaining to the most recent)
