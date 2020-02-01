@@ -5,11 +5,12 @@ require 'rails_helper'
 describe Dateutils, type: :helper do
   let(:days_elapsed) { 4000 }
 
-  let(:dt) { Date.today - 200 }
+  let(:dt) { Time.zone.today - 200 }
 
-  let(:two_days_after_some_dt) { dt + 2 }
-
-  let(:six_days_after_some_dt) { dt + 6 }
+  let(:next_monday) { (Time.zone.today + 7.days).beginning_of_week }
+  let(:next_sunday) { next_monday - 1.day }
+  let(:next_saturday) { next_monday - 2.days }
+  let(:next_friday) { next_monday - 3.days }
 
   # It is assumed days_elapsed will always be non-negative
   it '-elapsed_to_regular_date(num_days_elapsed)' do
@@ -19,12 +20,12 @@ describe Dateutils, type: :helper do
   end
 
   it '-past_month_start' do
-    previous_month_start_dt = Date.today.beginning_of_month - 1.month
+    previous_month_start_dt = Time.zone.today.beginning_of_month - 1.month
     expect(previous_month_start_dt).to eq Dateutils.past_month_start
   end
 
   it '-past_month_finish' do
-    previous_month_finish_dt = (Date.today - 1.month).to_date.end_of_month
+    previous_month_finish_dt = (Time.zone.today - 1.month).to_date.end_of_month
     expect(previous_month_finish_dt).to eq Dateutils.past_month_finish
   end
 
@@ -63,43 +64,27 @@ describe Dateutils, type: :helper do
   it '-previous_weekday(dt)' do
     #     res = case dt.wday
     res = case Dateutils.day_of_the_week_num(dt)
-          when 0
-            dt - 2.day
-          when 6
+          when 1 # Monday
+            dt - 3.days
+          when 0 # Sunday
+            dt - 2.days
+          else # Tuesday (2) thru Saturday (6)
             dt - 1.day
-          else
-            dt
           end
 
     expect(res).to eq(Dateutils.previous_weekday(dt))
   end
 
-  it '-previous_weekday(two_days_after_some_dt)' do
-    #     res = case dt.wday
-    res = case Dateutils.day_of_the_week_num(two_days_after_some_dt)
-          when 0
-            two_days_after_some_dt - 2.day
-          when 6
-            two_days_after_some_dt - 1.day
-          else
-            two_days_after_some_dt
-          end
-
-    expect(res).to eq(Dateutils.previous_weekday(two_days_after_some_dt))
+  it 'previous weekday from monday is friday' do
+    expect(Dateutils.previous_weekday(next_monday)).to eq(next_friday)
   end
 
-  it '-previous_weekday(six_days_after_some_dt)' do
-    #     res = case dt.wday
-    res = case Dateutils.day_of_the_week_num(six_days_after_some_dt)
-          when 0
-            six_days_after_some_dt - 2.day
-          when 6
-            six_days_after_some_dt - 1.day
-          else
-            six_days_after_some_dt
-          end
+  it 'previous weekday from sunday is friday' do
+    expect(Dateutils.previous_weekday(next_sunday)).to eq(next_friday)
+  end
 
-    expect(res).to eq(Dateutils.previous_weekday(six_days_after_some_dt))
+  it 'previous weekday from saturday is friday' do
+    expect(Dateutils.previous_weekday(next_saturday)).to eq(next_friday)
   end
 
   it '-regular_to_elapsed(dt) regular_date_to_days_elapsed(dt)' do
@@ -108,11 +93,9 @@ describe Dateutils, type: :helper do
   end
 
   it '-regular_date_to_days_elapsed(dt)' do
-    first_calendar_day = Settings.dayone
+    days_elapsed = (dt - Settings.dayone).to_i
 
-    @days_elapsed = (dt - first_calendar_day).to_i if dt >= first_calendar_day
-
-    expect(@days_elapsed).to eq Dateutils.regular_date_to_days_elapsed(dt)
+    expect(days_elapsed).to eq Dateutils.regular_date_to_days_elapsed(dt)
   end
 
   it '-days_elapsed_since(dt) aliases regular_date_to_days_elapsed(dt)' do
@@ -126,5 +109,19 @@ describe Dateutils, type: :helper do
     bank_holiday_status = Holidays.on(dt_civil, :br).present?
 
     expect(bank_holiday_status).to eq Dateutils.holiday?(dt)
+  end
+
+  it 'Today transformed to elapsed (integer) and then back to gregorian (date) works correctly' do
+    today = Time.zone.today
+
+    today_in_days_elapsed_format = Dateutils.regular_to_elapsed(today)
+
+    expect(Dateutils.to_gregorian(today_in_days_elapsed_format)).to eq(today)
+  end
+
+  it 'Days elapsed transformed to gregorian and then back to elapsed works correctly' do
+    specified_dt = Dateutils.to_gregorian(days_elapsed)
+
+    expect(Dateutils.regular_to_elapsed(specified_dt)).to eq days_elapsed
   end
 end
