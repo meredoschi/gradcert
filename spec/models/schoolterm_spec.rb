@@ -6,9 +6,12 @@ RSpec.describe Schoolterm, type: :model do
   #  pending "add some examples to (or delete) #{__FILE__}"
 
   let(:schoolterm) { FactoryBot.create(:schoolterm, :pap) }
+  let(:past_schoolterm) { FactoryBot.create(:schoolterm, :pap, :past) }
+
   let(:medical_residency_schoolterm) { FactoryBot.create(:schoolterm, :medres) }
   let(:undefined_schoolterm) { FactoryBot.create(:schoolterm, :undefined) }
   let(:payroll) { FactoryBot.create(:payroll, :personal_taxation) }
+  let(:special_payroll) { FactoryBot.create(:payroll, :personal_taxation, :special) }
   let(:sep) { Settings.separator + ' ' }
   let(:i18n_from) { I18n.t('from') }
   let(:i18n_to) { I18n.t('to') }
@@ -142,23 +145,23 @@ RSpec.describe Schoolterm, type: :model do
         .within_registration_season(specified_dt))
     end
 
-    it '#ids_within_admissions_data_entry_period' do
-      schoolterm_ids_within_admissions_data_entry_period = Schoolterm
-                                                           .within_admissions_data_entry_period
-                                                           .pluck(:id).sort.uniq
-      expect(schoolterm_ids_within_admissions_data_entry_period)
-        .to eq(Schoolterm.ids_within_admissions_data_entry_period)
+    it '#ids_within_admissions_period' do
+      schoolterm_ids_within_admissions_period = Schoolterm
+                                                .within_admissions_period
+                                                .pluck(:id).sort.uniq
+      expect(schoolterm_ids_within_admissions_period)
+        .to eq(Schoolterm.ids_within_admissions_period)
     end
 
-    it '#within_admissions_data_entry_period' do
-      now = Time.zone.parse('2020-1-1 00:00:01')
-      allow(Time).to receive(:now) { now }
+    it 'scratch' do
+      puts schoolterm.details
+    end
 
-      schoolterms_within_admissions_data_entry_period = Schoolterm
-                                                        .where('admissionsdebut <= ? AND
-                                                          seasonclosure >= ?', now, now)
-      expect(schoolterms_within_admissions_data_entry_period)
-        .to eq(Schoolterm.within_admissions_data_entry_period)
+    it '#within_admissions_period' do
+      schoolterms_within_admissions_period = Schoolterm
+                                             .where(id: Schoolterm.ids_within_admissions_period)
+      expect(schoolterms_within_admissions_period)
+        .to eq(Schoolterm.within_admissions_period)
     end
 
     # Active today (special case)
@@ -174,6 +177,7 @@ RSpec.describe Schoolterm, type: :model do
     end
 
     it '#for_payroll(payroll)' do
+      payroll = special_payroll # or do RAILS_ENV=test rake db:reset prior to running this test
       condition = '(start <= ?) and (finish>= ?) and (start <= ?) and (finish >= ?)'
       payroll_start_dt = payroll.monthworked
       payroll_finish_dt = Dateutils.to_gregorian(payroll.dayfinished)
@@ -183,6 +187,13 @@ RSpec.describe Schoolterm, type: :model do
                                        payroll_finish_dt, payroll_finish_dt)
       expect(schoolterms_for_payroll).to eq(Schoolterm.for_payroll(payroll))
     end
+
+    it '-previous' do
+      previous_terms = Schoolterm.where(start: schoolterm.start - 1.year)
+      res = (previous_terms if previous_terms.exists?)
+
+      expect(res).to eq(schoolterm.previous)
+    end
   end
 
   it 'can be created' do
@@ -191,20 +202,20 @@ RSpec.describe Schoolterm, type: :model do
     #    puts schoolterm.name
   end
 
-  it '#in_season? to be true within' do
-    pending('program registrations not reviewed yet')
+  it '-in_season? to be true within the registration season' do
     # ***********************************************************************
     # http://stackoverflow.com/questions/1215245/how-to-fake-time-now
 
-    now = Time.zone.parse('2017-04-28 00:10:00')
+    now = schoolterm.seasonclosure - 1.day
 
+    puts now
     allow(Time).to receive(:now) { now }
 
     # ***********************************************************************
 
-    start = Settings.registration_season.start
+    start = schoolterm.seasondebut
 
-    finish = Settings.registration_season.finish
+    finish = schoolterm.seasonclosure
 
     registrations_permitted = Logic.within?(start, finish, now) # returs a boolean
 
@@ -213,25 +224,24 @@ RSpec.describe Schoolterm, type: :model do
     #    puts I18n.l(finish)
   end
 
-  it '#in_season? (first attempt) to be false outside' do
+  it '-in_season? is expected be false two days after the registration season ended' do
     # ***********************************************************************
     # http://stackoverflow.com/questions/1215245/how-to-fake-time-now
 
-    now = Time.zone.parse('2017-5-1 00:00:01')
+    now = schoolterm.seasonclosure + 2.days
 
+    puts now
     allow(Time).to receive(:now) { now }
 
     # ***********************************************************************
 
-    start = Settings.registration_season.start
+    start = schoolterm.seasondebut
 
-    finish = Settings.registration_season.finish
+    finish = schoolterm.seasonclosure
 
     registrations_permitted = Logic.within?(start, finish, now) # returs a boolean
 
     expect(registrations_permitted).to eq false
-
-    #  puts I18n.l(finish)
   end
 
   it 'registration_season_debut' do
@@ -243,7 +253,7 @@ RSpec.describe Schoolterm, type: :model do
   end
 
   # i.e. inside the admissions data entry period (by local admins)
-  it '-admissions_data_entry_period?' do
+  it '-admissions_period?' do
     #  pending('program admissions not reviewed yet')
 
     # ***********************************************************************
@@ -255,41 +265,18 @@ RSpec.describe Schoolterm, type: :model do
     now = Time.zone.parse(dt)
     allow(Time).to receive(:now) { now }
 
-    program_admissions_data_entry_period = false
+    program_admissions_period = false
 
     if schoolterm.admissionsdebut.present? && schoolterm.admissionsclosure.present?
-      program_admissions_data_entry_period = Logic.within?(schoolterm.admissionsdebut,
-                                                           schoolterm.admissionsclosure, now)
+      program_admissions_period = Logic.within?(schoolterm.admissionsdebut,
+                                                schoolterm.admissionsclosure, now)
     end
 
-    expect(program_admissions_data_entry_period).to eq(schoolterm.admissions_data_entry_period?)
-  end
-
-  # To do: figure out how to write this test
-  it '#admission_ids' do
-    pending('program admissions not reviewed yet')
-
-    schoolterms = FactoryBot.create_list(:schoolterm, 5, :pap)
-
-    @ids_within_admissions_data_entry_period = []
-
-    schoolterms.each do |schoolterm|
-      puts schoolterm.name
-
-      if schoolterm.admissions_data_entry_period?
-
-        @ids_within_admissions_data_entry_period << schoolterm.id
-
-      end
-
-      puts '@ids_with_editable_admissions: ' + @ids_within_admissions_data_entry_period.to_s
-
-      expect(@ids_within_admissions_data_entry_period).to eq(schoolterms.latest)
-    end
+    expect(program_admissions_period).to eq(schoolterm.admissions_period?)
   end
 
   # i.e. inside the admissions data entry period (by local admins)
-  it '-admissions_data_entry_period? returns false for date past deadline' do
+  it '-admissions_period? returns false for date past deadline' do
     # ***********************************************************************
 
     schoolterm = FactoryBot.create(:schoolterm)
@@ -303,7 +290,7 @@ RSpec.describe Schoolterm, type: :model do
 
     #    puts now
 
-    expect(schoolterm.admissions_data_entry_period?).to be_falsey
+    expect(schoolterm.admissions_period?).to be_falsey
   end
 
   it '-area' do
@@ -328,7 +315,7 @@ RSpec.describe Schoolterm, type: :model do
   end
 
   # i.e. inside the admissions data entry period (by local admins)
-  pending '-admissions_data_entry_period? returns true on the eve of the deadline' do
+  it '-admissions_period? returns true on the eve of the deadline' do
     # ***********************************************************************
 
     schoolterm = FactoryBot.create(:schoolterm)
@@ -339,7 +326,7 @@ RSpec.describe Schoolterm, type: :model do
     now = Time.zone.parse(dt)
     allow(Time).to receive(:now) { now }
 
-    expect(schoolterm.admissions_data_entry_period?).to be_truthy
+    expect(schoolterm.admissions_period?).to be_truthy
   end
 
   it 'registration_season_closure' do

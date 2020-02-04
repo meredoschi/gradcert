@@ -21,10 +21,10 @@ FactoryBot.define do
                                                          .open.days_before_term_starts
     num_days_registrations_still_open_after_term_start = Settings.schoolterm.registrations
                                                                  .close.days_after_term_starts
-    num_days_from_admissions_debut_to_term_start = Settings.schoolterm.admissions
-                                                           .open.days_before_term_starts
-    num_days_from_admissions_closure_to_term_start = Settings.schoolterm.admissions
-                                                             .open.days_before_term_starts
+    num_days_admissions_debut_prior_to_term_start = Settings.schoolterm.admissions
+                                                            .open.days_before_term_starts
+    num_days_between_admissions_closure_and_term_start = Settings.schoolterm.admissions
+                                                                 .close.days_before_term_starts
 
     start_y_m_d = [start_y, start_m, start_d].join('-')
     start_dt = Date.parse(start_y_m_d) # in date format
@@ -35,13 +35,14 @@ FactoryBot.define do
     season_debut = start_dt - num_days_from_season_opening_to_term_start
     season_debut_time = season_debut.to_datetime
 
-    season_closure = finish_dt + num_days_registrations_still_open_after_term_start
+    season_closure = season_debut + num_days_from_season_opening_to_term_start +  \
+                     num_days_registrations_still_open_after_term_start
     season_closure_time = season_closure.to_datetime
 
-    admissions_debut = start_dt - num_days_from_admissions_debut_to_term_start
+    admissions_debut = start_dt - num_days_admissions_debut_prior_to_term_start
     admissions_debut_time = admissions_debut.to_datetime
 
-    admissions_closure = start_dt - num_days_from_admissions_closure_to_term_start
+    admissions_closure = start_dt - num_days_between_admissions_closure_and_term_start
     admissions_closure_time = admissions_closure.to_datetime
 
     num_scholarships = Settings.schoolterm.scholarships_offered
@@ -68,6 +69,19 @@ FactoryBot.define do
     trait :undefined do
       medres false
       pap false
+    end
+
+    trait :past do
+      before(:create) do |schoolterm|
+        offset = 1.year
+
+        schoolterm.start -= offset
+        schoolterm.finish -= offset
+        schoolterm.seasondebut -= offset
+        schoolterm.seasonclosure -= offset
+        schoolterm.admissionsdebut -= offset
+        schoolterm.admissionsclosure -= offset
+      end
     end
   end
 end

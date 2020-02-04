@@ -60,16 +60,16 @@ class Schoolterm < ActiveRecord::Base
     start_finish_dts + sep + registration_period + sep + admissions_period
   end
 
-  def admissions_data_entry_period?
-    program_admissions_data_entry_period = false
+  def admissions_period?
+    program_admissions_period = false
 
     if admissionsdebut.present? && admissionsclosure.present?
-      program_admissions_data_entry_period = Logic
-                                             .within?(admissionsdebut,
-                                                      admissionsclosure, Time.zone.now)
+      program_admissions_period = Logic
+                                  .within?(admissionsdebut,
+                                           admissionsclosure, Time.zone.now)
     end
 
-    program_admissions_data_entry_period
+    program_admissions_period
   end
 
   def in_season?
@@ -135,13 +135,13 @@ class Schoolterm < ActiveRecord::Base
     where('seasondebut <= ? AND seasonclosure >= ?', specified_dt, specified_dt)
   end
 
-  def self.ids_within_admissions_data_entry_period
-    within_admissions_data_entry_period.pluck(:id).sort.uniq
+  def self.ids_within_admissions_period
+    now = Time.zone.now
+    where('admissionsdebut <= ? AND admissionsclosure >= ?', now, now).pluck(:id).sort.uniq
   end
 
-  def self.within_admissions_data_entry_period
-    now = Time.zone.now
-    where('admissionsdebut <= ? AND seasonclosure >= ?', now, now)
+  def self.within_admissions_period
+    where(id: Schoolterm.ids_within_admissions_period)
   end
 
   # Active today (special case)
@@ -288,7 +288,7 @@ class Schoolterm < ActiveRecord::Base
   # To do - fix this
   # Registration season open
   def allowed?
-    registrationseason # && within_admissions_data_entry_period
+    registrationseason # && within_admissions_period
   end
 
   # To do - fix this
@@ -374,6 +374,6 @@ class Schoolterm < ActiveRecord::Base
 
   # Negative
   def self.admissions_data_entry_not_in_range
-    where.not(id: within_admissions_data_entry_period)
+    where.not(id: within_admissions_period)
   end
 end
