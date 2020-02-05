@@ -153,8 +153,25 @@ RSpec.describe Schoolterm, type: :model do
         .to eq(Schoolterm.ids_within_admissions_period)
     end
 
-    it 'scratch' do
-      puts schoolterm.details
+    it '#most_recent' do
+      if Schoolterm.all.count.positive?
+        most_recent_terms = Schoolterm.where(finish: Schoolterm.latest_finish_date)
+      end
+      expect(most_recent_terms).to eq(Schoolterm.most_recent)
+    end
+
+    it '#earliest' do
+      if Schoolterm.all.count.positive?
+        earliest_terms = Schoolterm.where(finish: Schoolterm.earliest_finish_date)
+      end
+      expect(earliest_terms).to eq(Schoolterm.earliest)
+    end
+
+    it '#latest' do
+      if Schoolterm.all.count.positive?
+        latest_terms = Schoolterm.find_by finish: Schoolterm.latest_finish_date
+      end
+      expect(latest_terms).to eq(Schoolterm.latest)
     end
 
     it '#within_admissions_period' do
@@ -162,6 +179,23 @@ RSpec.describe Schoolterm, type: :model do
                                              .where(id: Schoolterm.ids_within_admissions_period)
       expect(schoolterms_within_admissions_period)
         .to eq(Schoolterm.within_admissions_period)
+    end
+
+    it '-name' do
+      schoolterm_name = I18n.t('activerecord.attributes.schoolterm.start') + ' ' + \
+                        I18n.l(schoolterm.start, format: :compact)
+      expect(schoolterm_name).to eq(schoolterm.name)
+    end
+
+    it '-startdate' do
+      schoolterm_start_date = I18n.l(schoolterm.start)
+      expect(schoolterm_start_date).to eq(schoolterm.startdate)
+    end
+
+    # One year in the future minus one day
+    it '-contract_last_day' do
+      schoolterm_contract_last_day = schoolterm.start + (1.year - 1.day)
+      expect(schoolterm_contract_last_day).to eq(schoolterm.contract_last_day)
     end
 
     # Active today (special case)

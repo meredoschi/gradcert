@@ -209,7 +209,7 @@ class Schoolterm < ActiveRecord::Base
 
   # Used in legal form, registrations controller
   def contract_last_day
-    start + 1.year - 1 # One year in the future minus one day
+    start + 1.year - 1.day # One year in the future minus one day
   end
 
   def self.firstday_active
