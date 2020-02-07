@@ -172,7 +172,7 @@ class Schoolterm < ActiveRecord::Base
   end
 
   # Returns latest finish date (i.e. pertaining to the most recent)
-  def self.latest_finish_date
+  def self.latest_finish
     maximum(:finish)
   end
 
@@ -184,7 +184,7 @@ class Schoolterm < ActiveRecord::Base
   # Latest - most recent
   # Returns active record relation - Used in placesavailable view
   def self.most_recent
-    where(finish: latest_finish_date) if count.positive?
+    where(finish: latest_finish) if count.positive?
   end
 
   # Earliest, chronologically the oldest
@@ -196,7 +196,7 @@ class Schoolterm < ActiveRecord::Base
 
   # Latest - most recent (returs individual record)
   def self.latest
-    find_by finish: latest_finish_date if count.positive?
+    find_by finish: latest_finish if count.positive?
   end
 
   def name
@@ -212,27 +212,15 @@ class Schoolterm < ActiveRecord::Base
     start + 1.year - 1.day # One year in the future minus one day
   end
 
-  def self.firstday_active
+  def self.earliest_start_contextual_today
     contextual_today.pluck(:start).min
   end
 
-  def self.lastday_active
+  def self.latest_finish_contextual_today
     contextual_today.pluck(:finish).max
   end
 
-  def self.lastday
-    lastday_all
-  end
-
-  def self.firstday
-    firstday_all
-  end
-
-  def self.lastday_all
-    pluck(:finish).max
-  end
-
-  def self.firstday_all
+  def self.earliest_start
     pluck(:start).min
   end
 

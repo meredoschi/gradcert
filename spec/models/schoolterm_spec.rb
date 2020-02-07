@@ -104,9 +104,9 @@ RSpec.describe Schoolterm, type: :model do
     end
 
     # Returns latest finish date (i.e. pertaining to the most recent)
-    it '#latest_finish_date' do
+    it '#latest_finish' do
       schoolterm_latest_finish_dt = Schoolterm.maximum(:finish)
-      expect(schoolterm_latest_finish_dt).to eq(Schoolterm.latest_finish_date)
+      expect(schoolterm_latest_finish_dt).to eq(Schoolterm.latest_finish)
     end
 
     # Returns earliest finish date (i.e. pertaining to the earliest)
@@ -155,7 +155,7 @@ RSpec.describe Schoolterm, type: :model do
 
     it '#most_recent' do
       if Schoolterm.all.count.positive?
-        most_recent_terms = Schoolterm.where(finish: Schoolterm.latest_finish_date)
+        most_recent_terms = Schoolterm.where(finish: Schoolterm.latest_finish)
       end
       expect(most_recent_terms).to eq(Schoolterm.most_recent)
     end
@@ -169,7 +169,7 @@ RSpec.describe Schoolterm, type: :model do
 
     it '#latest' do
       if Schoolterm.all.count.positive?
-        latest_terms = Schoolterm.find_by finish: Schoolterm.latest_finish_date
+        latest_terms = Schoolterm.find_by finish: Schoolterm.latest_finish
       end
       expect(latest_terms).to eq(Schoolterm.latest)
     end
@@ -227,6 +227,30 @@ RSpec.describe Schoolterm, type: :model do
       res = (previous_terms if previous_terms.exists?)
 
       expect(res).to eq(schoolterm.previous)
+    end
+
+    # Earliest start date for active terms (contextual today)
+    it '#earliest_start_contextual_today' do
+      earliest_start_dt_contextual_today = Schoolterm.contextual_today.minimum(:start)
+      expect(earliest_start_dt_contextual_today).to eq Schoolterm.earliest_start_contextual_today
+    end
+
+    # Latest finish date for active terms
+    it '#latest_finish_contextual_today' do
+      latest_finish_dt_contextual_today = Schoolterm.contextual_today.maximum(:finish)
+      expect(latest_finish_dt_contextual_today).to eq Schoolterm.latest_finish_contextual_today
+    end
+
+    # Earliest start date for active terms (contextual today)
+    it '#earliest_start' do
+      earliest_start_dt = Schoolterm.minimum(:start)
+      expect(earliest_start_dt).to eq Schoolterm.earliest_start
+    end
+
+    # contextual_today alias
+    it '#active' do
+      active_schoolterms = Schoolterm.contextual_today
+      expect(active_schoolterms).to eq(Schoolterm.active)
     end
   end
 

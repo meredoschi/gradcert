@@ -152,7 +152,8 @@ class Registration < ActiveRecord::Base
   # For active schoolterms
   def self.activeterms
     joins(:accreditation).where('accreditations.start >=? AND accreditations.start <=?',
-                                Schoolterm.firstday_active, Schoolterm.lastday_active)
+                                Schoolterm.earliest_start_contextual_today,
+                                Schoolterm.latest_finish_contextual_today)
   end
 
   def early_cancellation?
