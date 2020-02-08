@@ -10,9 +10,9 @@
 
 					<% if local_admin?(current_user) %>
 
-					<%# International version - January 2010 %>
-
-					<%# if local_admin?(current_user) && Schoolterm.open_season? %>
+					<%# International version - February 2020 %>
+					
+					<%# if local_admin?(current_user) && Schoolterm.current.open? %>
 
 						<%#= f.collection_select :degreetype_id, Degreetype.pap, :id, :name,  {prompt: true} %>
 

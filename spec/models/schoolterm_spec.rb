@@ -131,11 +131,11 @@ RSpec.describe Schoolterm, type: :model do
         .to eq(schoolterm.within_registration_season?(specified_dt))
     end
 
-    it '#registrations_allowed_and_within_season(specified_dt)' do
-      schoolterms_in_season_allowed = Schoolterm.within_registration_season(specified_dt).allowed
-      expect(schoolterms_in_season_allowed).to eq(Schoolterm
-        .registrations_allowed_and_within_season(specified_dt))
-    end
+    #    pending '#registrations_allowed_and_within_season(specified_dt)' do
+    # schoolterms_in_season_allowed = Schoolterm.within_registration_season(specified_dt).allowed
+    #      expect(schoolterms_in_season_allowed).to eq(Schoolterm
+    #        .registrations_allowed_and_within_season(specified_dt))
+    #    end
 
     # Within the registration season
 
@@ -252,6 +252,66 @@ RSpec.describe Schoolterm, type: :model do
       active_schoolterms = Schoolterm.contextual_today
       expect(active_schoolterms).to eq(Schoolterm.active)
     end
+
+    # --- Model finders
+    it '#find_active_schoolterms' do
+      active_schoolterms = Schoolterm.contextual_today
+      expect(active_schoolterms).to eq Schoolterm.find_active_schoolterms
+    end
+
+    # It is assumed there will be only one
+    it '#current' do
+      active_schoolterms = Schoolterm.order(:finish).active
+      num_active_schoolterms = active_schoolterms.count
+
+      current_schoolterm = active_schoolterms.first if num_active_schoolterms == 1
+
+      expect(current_schoolterm).to eq Schoolterm.current
+    end
+
+    it '#not_current' do
+      not_the_current_term = Schoolterm.where.not(id: Schoolterm.current)
+      expect(not_the_current_term).to eq(Schoolterm.not_current)
+    end
+
+    # Open for registrations (within the registration season)
+    it '#open' do
+      now = Time.zone.now
+
+      allow(Time).to receive(:now) { now }
+      open_schoolterms = Schoolterm.where('seasondebut <= ? and seasonclosure <=?', now, now)
+      expect(open_schoolterms).to eq(Schoolterm.open)
+    end
+
+    # Registration season yet to start or already closed (finished).
+    it '#not_open' do
+      schoolterms_not_open_for_registration = Schoolterm.where.not(id: Schoolterm.open.pluck(:id))
+      expect(schoolterms_not_open_for_registration).to eq(Schoolterm.not_open)
+    end
+
+    it '#current_or_next' do
+      current_schoolterm = Schoolterm.current
+      start_of_current_schoolterm = current_schoolterm.start if current_schoolterm.present?
+
+      if start_of_current_schoolterm.present?
+
+        the_current_or_following_schoolterms = Schoolterm.where('start >= ? ',
+                                                                start_of_current_schoolterm)
+      end
+
+      expect(the_current_or_following_schoolterms).to eq(Schoolterm.current_or_next)
+    end
+
+    it 'open?' do
+      now = Time.zone.now
+
+      allow(Time).to receive(:now) { now }
+
+      is_schoolterm_open = (schoolterm.seasondebut <= now) && (schoolterm.seasonclosure >= now)
+      expect(is_schoolterm_open).to eq(schoolterm.open?)
+    end
+
+    # end
   end
 
   it 'can be created' do
@@ -266,7 +326,7 @@ RSpec.describe Schoolterm, type: :model do
 
     now = schoolterm.seasonclosure - 1.day
 
-    puts now
+    #    puts now
     allow(Time).to receive(:now) { now }
 
     # ***********************************************************************

@@ -126,9 +126,10 @@ class Schoolterm < ActiveRecord::Base
     ((seasondebut < specified_dt) && (seasondebut >= specified_dt))
   end
 
-  def self.registrations_allowed_and_within_season(specified_dt)
-    within_registration_season(specified_dt).allowed
-  end
+  #  Possible future to do: revise this method
+  #  def self.registrations_allowed_and_within_season(specified_dt)
+  #    within_registration_season(specified_dt).allowed # define allowed more precisely
+  #  end
 
   # Within the registration season
   def self.within_registration_season(specified_dt)
@@ -243,8 +244,13 @@ class Schoolterm < ActiveRecord::Base
     where.not(id: current)
   end
 
-  def self.registrations_closed
-    where.not(id: open)
+  def self.open
+    now = Time.zone.now
+    where('seasondebut <= ? and seasonclosure <=?', now, now)
+  end
+
+  def self.not_open
+    where.not(id: Schoolterm.open.pluck(:id))
   end
 
   # To do: review this
@@ -255,17 +261,27 @@ class Schoolterm < ActiveRecord::Base
 
   # Refer to _form_schoolterm partial on programs
   def self.current_or_next
-    where('start >= ? ', current.start)
+    the_current_or_following_schoolterms = nil
+    current_schoolterm = Schoolterm.current
+    start_of_current_schoolterm = current_schoolterm.start if current_schoolterm.present?
+
+    if start_of_current_schoolterm.present?
+
+      the_current_or_following_schoolterms = Schoolterm
+                                             .where('start >= ? ', start_of_current_schoolterm)
+    end
+
+    the_current_or_following_schoolterms
   end
 
-  # To do: fix this - to use dates properly
-  def self.open_season?
-    allowed.exists?
+  def open?
+    now = Time.zone.now
+    (seasondebut <= now) && (seasonclosure >= now)
   end
 
   # Registration season open
   def self.allowed
-    where(registrationseason: 'true')
+    open
   end
 
   # Previous, not active or open (newest)
@@ -276,13 +292,7 @@ class Schoolterm < ActiveRecord::Base
   # To do - fix this
   # Registration season open
   def allowed?
-    registrationseason # && within_admissions_period
-  end
-
-  # To do - fix this
-  # Registration season open
-  def open?
-    allowed?
+    open? # && within_admissions_period
   end
 
   # Returns a single record

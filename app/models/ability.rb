@@ -486,7 +486,7 @@ class Ability
       can [:read], Event, registration: { student: { contact:
         { user: { institution_id: user.institution_id } } } }
 
-      #   if open_season? && places_available?(user)
+      #   if Schoolterm.current.open? && places_available?(user)
 
       can [:read], Registration, student: { contact: { user:
         { institution_id: user.institution_id } } }
@@ -725,10 +725,6 @@ class Ability
   def start_of_medres_payroll_cycle?
     (Date.today.day >= Settings.payroll_cycle_opening_day_for_local_admins.medres) ||
       (Date.today.day < Settings.payroll_cycle_closing_day_for_local_admins.medres)
-  end
-
-  def open_season?
-    Schoolterm.open_season?
   end
 
   # New for May 2017

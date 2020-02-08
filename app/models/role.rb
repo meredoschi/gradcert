@@ -72,7 +72,7 @@ class Role < ActiveRecord::Base
   def self.paplocal
     #   Forbid this thru a custom validation instead.
 
-    #		if Schoolterm.open_season?
+    #		if Schoolterm.current.open?  # used to be written: Schoolterm.open_season?
 
     #        self.student.pap
 
