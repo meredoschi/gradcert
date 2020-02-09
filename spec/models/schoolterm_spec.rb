@@ -350,12 +350,13 @@ RSpec.describe Schoolterm, type: :model do
     end
 
     it '-active_today?' do
-      schoolterms_active_today = (Schoolterm.ids_contextual_today.include? schoolterm.id)
+      schoolterms_active_today = schoolterm.active_on?(Time.zone.today)
       expect(schoolterms_active_today).to eq(schoolterm.active_today?)
     end
 
     it '-active_on?(specified_dt)' do
-      is_schoolterm_active_on_dt = Schoolterm.ids_contextual_on(specified_dt).include? schoolterm.id
+      is_schoolterm_active_on_dt = (schoolterm.start <= specified_dt) && \
+                                   (schoolterm.finish >= specified_dt)
       expect(is_schoolterm_active_on_dt).to eq(schoolterm.active_on?(specified_dt))
     end
 

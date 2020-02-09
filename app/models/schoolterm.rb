@@ -320,12 +320,12 @@ class Schoolterm < ActiveRecord::Base
 
   # New for 2017
 
-  def active_today?
-    Schoolterm.ids_contextual_today.include? id
+  def active_on?(specified_dt)
+    (start <= specified_dt) && (finish >= specified_dt)
   end
 
-  def active_on?(specified_dt)
-    Schoolterm.ids_contextual_on(specified_dt).include? id
+  def active_today?
+    active_on?(Time.zone.today)
   end
 
   # Alias, for clarity
