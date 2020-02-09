@@ -126,11 +126,6 @@ class Schoolterm < ActiveRecord::Base
     ((seasondebut < specified_dt) && (seasondebut >= specified_dt))
   end
 
-  #  Possible future to do: revise this method
-  #  def self.registrations_allowed_and_within_season(specified_dt)
-  #    within_registration_season(specified_dt).allowed # define allowed more precisely
-  #  end
-
   # Within the registration season
   def self.within_registration_season(specified_dt)
     where('seasondebut <= ? AND seasonclosure >= ?', specified_dt, specified_dt)
@@ -279,33 +274,9 @@ class Schoolterm < ActiveRecord::Base
     (seasondebut <= now) && (seasonclosure >= now)
   end
 
-  # Registration season open
-  def self.allowed
-    open
-  end
-
   # Previous, not active or open (newest)
   def self.past
     where.not(id: current)
-  end
-
-  # To do - fix this
-  # Registration season open
-  def allowed?
-    open? # && within_admissions_period
-  end
-
-  # Returns a single record
-  # However, in reality this has limited usefulness since registration season
-  # varies by area and begins before the next term becomes active
-  # One might do: limit area visibility by using ability and use a helper method for the form.
-  def self.currently_active
-    current.first
-  end
-
-  # Computes number of active schoolterms
-  def self.num_active
-    active.count
   end
 
   # Belonging to Pap
@@ -319,11 +290,11 @@ class Schoolterm < ActiveRecord::Base
   end
 
   def self.find_active_pap_schoolterms
-    where(pap: true, active: true)
+    find_active_schoolterms.pap
   end
 
   def self.find_active_medres_schoolterms
-    where(medres: true, active: true)
+    find_active_schoolterms.medres
   end
 
   # With annotations -- used to filter null Ransackable search (which was giving errors)
@@ -339,7 +310,7 @@ class Schoolterm < ActiveRecord::Base
 
   # Processed by SISPAP
   def self.modern
-    where(' schoolterms.start >= ? ', Settings.operational_start)
+    where('start >= ? ', Settings.operational_start)
   end
 
   # Processed by the legacy system (Pick)

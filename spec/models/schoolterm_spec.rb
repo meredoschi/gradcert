@@ -131,14 +131,6 @@ RSpec.describe Schoolterm, type: :model do
         .to eq(schoolterm.within_registration_season?(specified_dt))
     end
 
-    #    pending '#registrations_allowed_and_within_season(specified_dt)' do
-    # schoolterms_in_season_allowed = Schoolterm.within_registration_season(specified_dt).allowed
-    #      expect(schoolterms_in_season_allowed).to eq(Schoolterm
-    #        .registrations_allowed_and_within_season(specified_dt))
-    #    end
-
-    # Within the registration season
-
     it '#within_registration_season(specified_dt)' do
       schoolterms_in_season = Schoolterm.within_registration_season(specified_dt)
       expect(schoolterms_in_season).to eq(Schoolterm
@@ -259,6 +251,16 @@ RSpec.describe Schoolterm, type: :model do
       expect(active_schoolterms).to eq Schoolterm.find_active_schoolterms
     end
 
+    it '#find_active_pap_schoolterms' do
+      pap_schoolterms_active = Schoolterm.find_active_schoolterms.pap
+      expect(pap_schoolterms_active).to eq(Schoolterm.find_active_pap_schoolterms)
+    end
+
+    it '#find_active_medres_schoolterms' do
+      medres_schoolterms_active = Schoolterm.find_active_schoolterms.medres
+      expect(medres_schoolterms_active).to eq(Schoolterm.find_active_medres_schoolterms)
+    end
+
     # It is assumed there will be only one
     it '#current' do
       active_schoolterms = Schoolterm.order(:finish).active
@@ -309,6 +311,71 @@ RSpec.describe Schoolterm, type: :model do
 
       is_schoolterm_open = (schoolterm.seasondebut <= now) && (schoolterm.seasonclosure >= now)
       expect(is_schoolterm_open).to eq(schoolterm.open?)
+    end
+
+    # Previous, not active or open (newest)
+    it '#past' do
+      past_schoolterms = Schoolterm.where.not(id: Schoolterm.current)
+      expect(past_schoolterms).to eq(Schoolterm.past)
+    end
+
+    # Belongs to Pap
+    it '#pap' do
+      pap_schoolterms_active = Schoolterm.where(pap: true)
+      expect(pap_schoolterms_active).to eq(Schoolterm.pap)
+    end
+
+    # Belongs to Medical Residency
+    it '#medres' do
+      medres_schoolterms = Schoolterm.where(medres: true)
+      expect(medres_schoolterms).to eq(Schoolterm.medres)
+    end
+
+    # Graduate Certificate
+    it '#gradcert' do
+      pending('To do: implement as a boolean attribute, refactor the area method accordingly.')
+      gradcert_schoolterms = Schoolterm.where(gradcert: true)
+      expect(gradcert_schoolterms).to eq(Schoolterm.gradcert)
+    end
+
+    # Might be used to differentiate (if applicable) data migrated from a legacy system
+    it '#legacy' do
+      legacy_schoolterms = Schoolterm.where.not(id: Schoolterm.modern)
+      expect(legacy_schoolterms).to eq(Schoolterm.legacy)
+    end
+
+    it '#modern' do
+      modern_schoolterms = Schoolterm.where('start >= ? ', Settings.operational_start)
+      expect(modern_schoolterms).to eq(Schoolterm.modern)
+    end
+
+    it '-active_today?' do
+      schoolterms_active_today = (Schoolterm.ids_contextual_today.include? schoolterm.id)
+      expect(schoolterms_active_today).to eq(schoolterm.active_today?)
+    end
+
+    it '-active_on?(specified_dt)' do
+      is_schoolterm_active_on_dt = Schoolterm.ids_contextual_on(specified_dt).include? schoolterm.id
+      expect(is_schoolterm_active_on_dt).to eq(schoolterm.active_on?(specified_dt))
+    end
+
+    # Alias, for clarity
+    it '-active_as_of?(specified_dt)' do
+      schoolterm_active_as_of_dt = schoolterm.active_on?(specified_dt)
+      expect(schoolterm_active_as_of_dt).to eq(schoolterm.active_as_of?(specified_dt))
+    end
+
+    it '-active?' do
+      is_schoolterm_active = schoolterm.active_today?
+      expect(is_schoolterm_active).to eq(schoolterm.active?)
+    end
+
+    it '#admissions_data_entry_not_in_range' do
+      schoolterms_outside_admissions_data_entry_period = Schoolterm
+                                                         .where.not(id: Schoolterm
+                                                           .within_admissions_period)
+      expect(schoolterms_outside_admissions_data_entry_period)
+        .to eq Schoolterm.admissions_data_entry_not_in_range
     end
 
     # end
