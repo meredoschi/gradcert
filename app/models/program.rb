@@ -49,7 +49,7 @@ class Program < ActiveRecord::Base
   #   has_one :accreditation, dependent: :destroy
   #   accepts_nested_attributes_for :accreditation
   #
-  #   # accepts_nested_attributes_for :accreditation, reject_if: :method___?,  :allow_destroy => true
+  #   accepts_nested_attributes_for :accreditation, reject_if: :method___?,  :allow_destroy => true
   #
   #   has_one :address, dependent: :destroy
   #   accepts_nested_attributes_for :address, reject_if: :internal_address?,  allow_destroy: true
@@ -61,14 +61,12 @@ class Program < ActiveRecord::Base
   #   # ------------------- Validations ------------------------------------------------------------
   #
   validates :comment, length: { maximum: MAX_COMMENT_LEN }
-  %i[duration institution_id programname_id].each do |required_field|
-    #     #  %i[duration institution_id programname_id schoolterm_id].each do |required_field|
+  %i[duration institution_id programname_id schoolterm_id].each do |required_field|
     validates required_field, presence: true
   end
   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1,
                                        less_than_or_equal_to: MAX_YEARS }
-  #
-  #     #  validates_uniqueness_of :programname_id, scope: %i[institution_id schoolterm_id pap]
+  validates :programname_id, uniqueness: { scope: %i[institution_id schoolterm_id] }
   #
   #     # ------------------- PENDING Tests  ---------------------------------------------------
   #
@@ -89,7 +87,7 @@ class Program < ActiveRecord::Base
   #       end
   #     end
   #
-  #     # ---------------------------------------------------------------------------------------------
+  #     # -----------------------------------------------------------------------------------------
   #     # TDD - May & June - 2017
   #     # Essentially the same as program_name
   #

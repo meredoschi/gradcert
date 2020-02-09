@@ -10,7 +10,7 @@ FactoryBot.define do
     # previouscode: string, parentid: integer
 
     programname
-    #  schoolterm
+    schoolterm
     comment 'Test'
     institution
     #  accreditation

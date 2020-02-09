@@ -24,7 +24,6 @@ RSpec.describe Program, type: :model do
   context 'Associations' do
     it { is_expected.to belong_to(:programname) }
     it {
-      pending('development-schoolyears - schoolterm to be reviewed')
       is_expected.to belong_to(:schoolterm)
     }
 
@@ -46,7 +45,6 @@ RSpec.describe Program, type: :model do
     it { is_expected.to validate_presence_of(:institution_id) }
     it { is_expected.to validate_presence_of(:programname_id) }
     it {
-      pending('development-schoolyears - schoolterm to be reviewed')
       is_expected.to validate_presence_of(:schoolterm_id)
     }
 
@@ -54,7 +52,6 @@ RSpec.describe Program, type: :model do
     it { is_expected.to validate_numericality_of(:duration).is_greater_than_or_equal_to(1) }
     it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(MAX_YEARS) }
     it {
-      pending('development-schoolyears - schoolterm to be reviewed')
       is_expected.to validate_uniqueness_of(:programname_id)
         .scoped_to(%i[institution_id schoolterm_id]).case_insensitive
     }
