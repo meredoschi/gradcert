@@ -10,6 +10,7 @@ RSpec.describe Address, type: :model do
   #  internal: boolean, council_id: integer, streetnum: integer, bankbranch_id: integer)
 
   let(:address) { FactoryBot.create(:address) }
+
   context 'internal deparment or subsidiary address' do
     before { allow(subject).to receive(:internal).and_return(true) }
     it { should validate_presence_of(:header) }
@@ -41,32 +42,43 @@ RSpec.describe Address, type: :model do
     expect(address_state_abbrev).to eq(address.state_abbreviation)
   end
 
-  it '-mailing (domestic)' do
-    address = FactoryBot.create(:address)
-
-    street_name = [address.streetname.designation, address.addr].join(' ')
-    street_addr = street_name + ', ' + address.streetnum.to_s + ' - ' + address.complement
-    neighborhood = address.neighborhood
-
-    city_and_state = address.municipality.name + ' (' + address.state_abbreviation + ')'
-
-    postal_code = I18n.t('activerecord.attributes.address.postalcode') + ' ' + address.postalcode
-    mailing_address = [street_addr, neighborhood, city_and_state, postal_code].join(' - ')
-
+  # For Brazilian (or similar) address formats
+  it '-mailing' do
+    street_addr = address.street_name + ', ' + address.streetnum.to_s + ' - ' + address.complement
+    mailing_address = [street_addr, address.neighborhood, address.city_and_state,
+                       address.post_code_i18n].join(' - ')
     expect(mailing_address).to eq(address.mailing)
-
-    puts mailing_address
   end
 
-  it "-correspondence ('international' mailing address with country)" do
-    address = FactoryBot.create(:address)
+  it '-with_complement' do
+    address_w_complement = [address.streetname.designation, address.addr, address.streetnum,
+                            address.complement].join(' ')
+    expect(address_w_complement).to eq(address.with_complement)
+  end
 
-    country = address.municipality.stateregion.state.country.name
-    # http://stackoverflow.com/questions/12237431/the-law-of-demeter
+  it '-with_complement_intl' do
+    address_w_complement_intl = [address.streetnum, address.addr, address.streetname.designation,
+                                 address.complement].join(' ')
+    expect(address_w_complement_intl).to eq(address.with_complement_intl)
+  end
 
-    correspondence_address = [address.mailing, country].join(' - ')
+  it '-without_complement' do
+    address_sans_complement = [address.streetname.designation, address.addr,
+                               address.streetnum].join(' ')
+    expect(address_sans_complement).to eq(address.without_complement)
+  end
 
-    expect(correspondence_address).to eq(address.correspondence)
+  it '-without_complement_intl' do
+    address_sans_complement_intl = [address.streetnum, address.addr,
+                                    address.streetname.designation].join(' ')
+    expect(address_sans_complement_intl).to eq(address.without_complement_intl)
+  end
+  # Possible to do: use denormalized data if and when implemented in the municipalities controller
+  it '-city_and_state' do
+    municipality = address.municipality
+    state = municipality.stateregion.state
+    address_city_state = municipality.name + ' (' + state.abbreviation + ')'
+    expect(address_city_state).to eq(address.city_and_state)
   end
 
   it 'can be created' do
@@ -76,26 +88,29 @@ RSpec.describe Address, type: :model do
   end
 
   it '-postal_code_prefix' do
-    if address.postalcode.include? '-'
+    post_code_prefix = if address.postalcode.include? '-'
 
-      address.postalcode.chomp.split('-').first.to_i
+                         address.postalcode.chomp.split('-').first.to_i
 
-    else
+                       else
 
-      0
+                         0
 
-    end
+                       end
+
+    expect(post_code_prefix).to eq(address.postal_code_prefix)
   end
 
   it '-postal_code_suffix' do
-    if address.postalcode.include? '-'
+    post_code_suffix = if address.postalcode.include? '-'
 
-      address.postalcode.chomp.split('-').last
+                         address.postalcode.chomp.split('-').last
 
-    else
-      ' '
+                       else
+                         ' '
 
-    end
+                       end
+    expect(post_code_suffix).to eq address.postal_code_suffix
   end
 
   it '-street' do
@@ -104,13 +119,15 @@ RSpec.describe Address, type: :model do
     streetnum = address.streetnum
     complement = address.complement
 
-    if complement.present?
-      [streetname.designation, addr, streetnum, complement].join(' ')
-    elsif streetname.id.present?
-      [streetname.designation, addr, streetnum].join(' ')
-    else
-      [addr, streetnum].join(' ')
-    end
+    street_address = if complement.present?
+                       [streetname.designation, addr, streetnum, complement].join(' ')
+                     elsif streetname.id.present?
+                       [streetname.designation, addr, streetnum].join(' ')
+                     else
+                       [addr, streetnum].join(' ')
+                     end
+
+    expect(street_address).to eq(address.street)
   end
 
   # International version
@@ -120,17 +137,41 @@ RSpec.describe Address, type: :model do
     streetnum = address.streetnum
     complement = address.complement
 
-    if complement.present?
-      [streetnum, addr, streetname.designation, complement].join(' ')
-    elsif streetname.id.present?
-      [streetnum, addr, streetname.designation].join(' ')
-    else
-      [streetnum, addr].join(' ')
-    end
+    street_address_intl = if complement.present?
+                            [streetnum, addr, streetname.designation, complement].join(' ')
+                          elsif streetname.id.present?
+                            [streetnum, addr, streetname.designation].join(' ')
+                          else
+                            [streetnum, addr].join(' ')
+                          end
+
+    expect(street_address_intl).to eq(address.street_intl)
   end
 
   it '-street_number (alias to streetnumber)' do
-    address_street_number = address.streetnum
-    expect(address_street_number).to eq(address.streetnum)
+    expect(address.street_number).to eq(address.streetnum)
+  end
+
+  # CNAB - G032 - Brazilian bank payment (text file generation)
+  it '-street_name' do
+    street_name_addr = [address.streetname.designation, address.addr].join(' ')
+    expect(street_name_addr).to eq(address.street_name)
+  end
+
+  it '-municipality_name' do
+    city_name = address.municipality.name
+    expect(city_name).to eq(address.municipality_name)
+  end
+
+  it '-post_code_i18n' do
+    i18n_postal_code = I18n.t('activerecord.attributes.address.postalcode') + ' ' + \
+                       address.postalcode
+    expect(i18n_postal_code).to eq(address.post_code_i18n)
+  end
+
+  it '-postal_addr' do
+    street_name = [address.streetname.designation, address.addr].join(' ')
+    postal_address = street_name + ', ' + address.streetnum.to_s + ' - ' + address.complement
+    expect(postal_address).to eq(address.postal_addr)
   end
 end
