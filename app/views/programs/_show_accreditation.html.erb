@@ -22,7 +22,7 @@
 			</tr>						
 		
 		
-				<% if @program.accreditation.is_original_or_was_renewed? %>
+				<% if @program.accreditation.original_or_was_renewed? %>
 				
 					<%= render 'show_accreditation_start_date.html.erb' %>
 				

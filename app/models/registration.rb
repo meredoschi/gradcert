@@ -432,7 +432,7 @@ class Registration < ActiveRecord::Base
   end
 
   def active?
-    accreditation.is_original_or_was_renewed?
+    accreditation.original_or_was_renewed?
   end
 
   # Useful for special payroll

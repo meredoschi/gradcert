@@ -74,7 +74,7 @@ module ApplicationHelper
   end
 
   def accreditation_status(accr)
-    status = if accr.is_original? then ta('accreditation.original')
+    status = if accr.original? then ta('accreditation.original')
               elsif accr.was_renewed? then ta('accreditation.renewed')
              elsif accr.was_suspended? then ta('accreditation.suspended')
              elsif accr.was_revoked? then ta('accreditation.revoked')

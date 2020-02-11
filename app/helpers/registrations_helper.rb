@@ -54,7 +54,7 @@ module RegistrationsHelper
 
 				status = case
 
-	        when accr.is_original? then return ta('registration.accreditation.original').html_safe
+	        when accr.original? then return ta('registration.accreditation.original').html_safe
 	        when accr.was_renewed? then return ta('registration.accreditation.renewed').html_safe
 	        when accr.was_suspended? then return ta('registration.accreditation.suspended').html_safe
 	       	when accr.was_revoked? then return ta('registration.accreditation.revoked').html_safe

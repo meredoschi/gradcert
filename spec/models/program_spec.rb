@@ -61,12 +61,10 @@ RSpec.describe Program, type: :model do
     }
 
     it {
-      pending('development-schoolyears - accreditation to be reviewed')
       is_expected.to accept_nested_attributes_for(:accreditation)
     }
 
     it {
-      pending('development-schoolyears - address to be reviewed')
       is_expected.to accept_nested_attributes_for(:address).allow_destroy(true)
     }
 
@@ -214,7 +212,7 @@ RSpec.describe Program, type: :model do
 
   #   it '-is_active?' do
   #     program_accreditation = program.accreditation # submodel
-  #     situation = program_accreditation.is_original_or_was_renewed?
+  #     situation = program_accreditation.original_or_was_renewed?
   #     expect(program.is_active?).to eq(situation)
   #   end
   #

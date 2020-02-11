@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Institution, Program or Student (i.e. registration) accreditations
 class Accreditation < ActiveRecord::Base
   has_paper_trail
 
@@ -41,9 +42,9 @@ class Accreditation < ActiveRecord::Base
 
   validates :comment, length: { maximum: 200 }
 
-  validates_inclusion_of [:original], in: [true], unless: :renewal_revocation_or_suspension?
+  #  validates [:original], inclusion: { in: [true], unless: :renewal_revocation_or_suspension? }
 
-  validates :start, presence: true, if: :is_original_or_was_renewed?
+  validates :start, presence: true, if: :original_or_was_renewed?
 
   validates :start, presence: true, unless: :renewal_revocation_or_suspension?
 
@@ -53,17 +54,18 @@ class Accreditation < ActiveRecord::Base
 
   validates :revocation, presence: true, if: :was_revoked?
 
-  validates_inclusion_of %i[renewed suspended revoked], in: [false], if: :is_original?
+  #  validates %i[renewed suspended revoked], inclusion: { in: [false], if: :original? }
 
-  validates_inclusion_of %i[original suspended revoked], in: [false], if: :was_renewed?
+  #  validates %i[original suspended revoked], inclusion: { in: [false], if: :was_renewed? }
 
-  validates_inclusion_of %i[original renewed revoked], in: [false], if: :was_suspended?
+  #  validates %i[original renewed revoked], inclusion: { in: [false], if: :was_suspended? }
 
-  validates_inclusion_of %i[original renewed suspended], in: [false], if: :was_revoked?
+  #  validates %i[original renewed suspended], inclusion: { in: [false], if: :was_revoked? }
 
   # http://stackoverflow.com/questions/12825048/rails-pass-a-parameter-to-conditional-validation
 
-  # validate :start_cannot_be_in_the_future, unless: :open? # Registrations have opened for the next schoolterm
+  #  validate :start_cannot_be_in_the_future,
+  #           unless: :open? # Registrations have opened for the next schoolterm
 
   validate :registration_start_cannot_be_prior_to_first_day_in_schoolyear, if: :registration?
 
@@ -71,9 +73,12 @@ class Accreditation < ActiveRecord::Base
 
   validate :renewal_cannot_be_in_the_future
   validate :suspension_cannot_be_in_the_future
-  #   validate :revocation_cannot_be_in_the_future, unless: :open? # i.e. for next schoolterm - training setting
 
-  validate :revocation_cannot_be_in_the_future, if: :registration?, unless: :registrations_open? # i.e. for next schoolterm - training setting
+  #  validate :revocation_cannot_be_in_the_future,
+  #           unless: :open? # i.e. for next schoolterm - training setting
+
+  # i.e. for next schoolterm - training session setting
+  validate :revocation_cannot_be_in_the_future, if: :registration?, unless: :registrations_open?
 
   validate :renewal_cannot_be_on_the_same_month_as_suspension
   validate :revocation_cannot_be_on_the_same_month_as_renewal
@@ -92,7 +97,7 @@ class Accreditation < ActiveRecord::Base
   validates :revocation, absence: true, if: :was_not_revoked?
 
   %i[renewal suspension revocation].each do |n|
-    validates n, absence: true, if: :is_original?
+    validates n, absence: true, if: :original?
   end
 
   validate :suspension_cannot_be_more_recent_than_renewal, if: :was_renewed?
@@ -146,39 +151,29 @@ class Accreditation < ActiveRecord::Base
   end
 
   def registration_not_possible_after_closing_date
-    if start.present? && start >= registration_closed_from
-
-      errors.add(:start, :not_possible_after_closing_date)
-
-   end
+    (return unless start.present? && start >= registration_closed_from)
+    errors.add(:start, :not_possible_after_closing_date)
   end
 
   def registration_start_cannot_be_prior_to_first_day_in_schoolyear
-    if  start.present? && start < school_term.start # school_term=registration.schoolyear.program.schoolterm
-
-      errors.add(:start, :may_not_be_prior_to_first_day_in_term)
-     #   errors.add(:_, "Data de matrícula não pode ser anterior ao primeiro dia do ano letivo correspondente.")
-   end
+    # school_term=registration.schoolyear.program.schoolterm
+    (return unless start.present? && start < school_term.start)
+    errors.add(:start, :may_not_be_prior_to_first_day_in_term)
   end
 
   # quick block - hotfix
   def registration_start_cannot_be_prior_to_april_first
-    if  start.present? && start < school_term.start + 1.month # school_term=registration.schoolyear.program.schoolterm
-
-      errors.add(:start, :may_not_be_prior_to_april_first)
-    end
+    # school_term=registration.schoolyear.program.schoolterm
+    (return unless start.present? && start < school_term.start + 1.month)
+    errors.add(:start, :may_not_be_prior_to_april_first)
   end
 
   def cancellation_date_must_be_after_latest_event_finish_date
-    if Registration.count.positive? && Event.count.positive? && revocation.present?
+    (return unless Registration.count.positive? && Event.count.positive? && revocation.present?)
+    most_recent_event_date = Event.most_recent_finish_date_for_registration(registration)
 
-      most_recent_event_date = Event.most_recent_finish_date_for_registration(registration)
-
-      if most_recent_event_date.present? && revocation <= most_recent_event_date
-        errors.add(:revocation, :cancellation_must_be_after_latest_event_finish_date)
-       end
-
-    end
+    (return unless most_recent_event_date.present? && revocation <= most_recent_event_date)
+    errors.add(:revocation, :cancellation_must_be_after_latest_event_finish_date)
   end
 
   # Confirmation pending - Entered by local administrators
@@ -199,12 +194,12 @@ class Accreditation < ActiveRecord::Base
   # Registrations whose situation is confirmed (i.e. created or updated by admin or manager)
   def self.registration_situation_confirmed
     joins(:registration).where(confirmed: true)
-   end
+  end
 
   # Not confirmed, pending would be edited or created by local admins
   def self.registration_situation_pending
     joins(:registration).where(confirmed: false)
-    #     where.not(id: self.registration_situation_confirmed)
+                        .where.not(id: registration_situation_confirmed)
   end
 
   # Registration season is open (i.e. future programs, next schoolterm)
@@ -216,121 +211,101 @@ class Accreditation < ActiveRecord::Base
   #  http://stackoverflow.com/questions/17935597/ruby-on-rails-i18n-want-to-translate-custom-messages-in-models
   # i18n Localized
 
-  #    def renewal_must_be_later_than_start
-  # distance in time
-  #     if start.present? && renewal.present? & start == renewal
-  #       errors.add(:renewal, :may_not_be_equal_to_start)
-  #    end
-  #  end
+  def renewal_must_be_later_than_start
+    # distance in time
+    (return unless start.present? && renewal.present? & start == renewal)
+    errors.add(:renewal, :may_not_be_equal_to_start)
+  end
 
   def renewal_revocation_or_suspension?
-    if renewal.present? || revocation.present? || suspension.present?
-
-      true
-
-    else
-
-      false
-
-    end
+    (renewal.present? || revocation.present? || suspension.present?)
   end
 
   def registration_revocation_cannot_overlap_completed_payrolls
-    if revocation.present? && revocation <= Accreditation.latest_completed_payroll_finish_date
-      errors.add(:revocation, :may_not_overlap_completed_payrolls)
-    end
+    (unless revocation.present? && (revocation <= Accreditation
+      .latest_completed_payroll_finish_date)
+       return
+     end)
+    errors.add(:revocation, :may_not_overlap_completed_payrolls)
   end
 
   def revocation_cannot_be_on_the_same_month_as_renewal
-    if renewal.present? && revocation.present? && renewal.beginning_of_month == revocation.beginning_of_month
-      errors.add(:revocation, :may_not_not_be_on_the_same_month_as_renewal)
-    end
+    (unless renewal.present? && revocation.present? && renewal.beginning_of_month == \
+      revocation.beginning_of_month
+       return
+     end)
+    errors.add(:revocation, :may_not_not_be_on_the_same_month_as_renewal)
   end
 
   def renewal_cannot_be_on_the_same_month_as_suspension
-    if suspension.present? && renewal.present? && suspension.beginning_of_month == renewal.beginning_of_month
-      errors.add(:renewal, :may_not_not_be_on_the_same_month_as_suspension)
-    end
+    (unless suspension.present? && renewal.present? && suspension.beginning_of_month == \
+      renewal.beginning_of_month
+       return
+     end)
+    errors.add(:renewal, :may_not_not_be_on_the_same_month_as_suspension)
   end
 
   def start_cannot_be_in_the_future
-    errors.add(:start, :may_not_be_in_the_future) if start.present? && start > Date.today
+    errors.add(:start, :may_not_be_in_the_future) if start.present? && start > Time.zone.today
   end
 
   def renewal_cannot_be_in_the_future
-    errors.add(:renewal, :may_not_be_in_the_future) if renewal.present? && renewal > Date.today
+    errors.add(:renewal, :may_not_be_in_the_future) if renewal.present? && renewal > Time.zone.today
   end
 
   def suspension_cannot_be_in_the_future
-    if suspension.present? && suspension > Date.today
-      errors.add(:suspension, :may_not_be_in_the_future)
-    end
+    (return unless suspension.present? && suspension > Time.zone.today)
+    errors.add(:suspension, :may_not_be_in_the_future)
   end
 
   def suspension_cannot_be_more_recent_than_renewal
-    if renewed? && suspension? && suspension > renewal
-      errors.add(:suspension, :may_not_be_more_recent_than_renewal_if_renewed)
-    end
+    (return unless renewed? && suspension? && suspension > renewal)
+    errors.add(:suspension, :may_not_be_more_recent_than_renewal_if_renewed)
   end
 
   def revocation_cannot_be_in_the_future
-    if revocation.present? && revocation.present? && revocation > Date.today
-      errors.add(:revocation, :may_not_be_in_the_future)
-    end
+    (return unless revocation.present? && revocation.present? && revocation > Time.zone.today)
+    errors.add(:revocation, :may_not_be_in_the_future)
   end
 
   def renewal_cannot_be_prior_to_start
-    if start.present? && renewal.present? && renewal <= start
-      errors.add(:renewal, :may_not_be_prior_to_start)
-    end
+    (return unless start.present? && renewal.present? && renewal <= start)
+    errors.add(:renewal, :may_not_be_prior_to_start)
   end
 
   def suspension_cannot_be_prior_to_start
-    if suspension.present? && start.present? && suspension <= start
-      errors.add(:suspension, :may_not_be_prior_to_start)
-    end
+    (return unless suspension.present? && start.present? && suspension <= start)
+    errors.add(:suspension, :may_not_be_prior_to_start)
   end
 
   def revocation_cannot_be_prior_to_start
-    if revocation.present? && start.present? && revocation <= start
-      errors.add(:revocation, :may_not_be_prior_to_start)
-    end
+    (return unless revocation.present? && start.present? && revocation <= start)
+    errors.add(:revocation, :may_not_be_prior_to_start)
   end
 
   def suspension_cannot_be_prior_to_renewal
-    if suspension.present? && renewal.present? && suspension <= renewal
-      errors.add(:suspension, :may_not_be_prior_to_renewal)
-    end
-   end
+    (return unless suspension.present? && renewal.present? && suspension <= renewal)
+    errors.add(:suspension, :may_not_be_prior_to_renewal)
+  end
 
   def revocation_cannot_be_prior_to_renewal
-    if revocation.present? && renewal.present? && renewal > revocation
-      errors.add(:revocation, :may_not_be_prior_to_renewal)
-    end
+    (return unless revocation.present? && renewal.present? && renewal > revocation)
+    errors.add(:revocation, :may_not_be_prior_to_renewal)
   end
 
   def revocation_cannot_be_prior_to_suspension
-    if revocation.present? && suspension.present? && revocation < suspension
-      errors.add(:revocation, :may_not_be_prior_to_suspension)
-    end
+    (return unless revocation.present? && suspension.present? && revocation < suspension)
+    errors.add(:revocation, :may_not_be_prior_to_suspension)
   end
 
   def details_on_file?
-    if original || renewed || suspended || revoked
-
-      true
-
-    else
-
-      false
-
-    end
-   end
+    (original || renewed || suspended || revoked)
+  end
 
   # To do: fix this to work with Medical Residency as well.
   def self.latest_completed_payroll_finish_date
     Settings.dayone + Bankpayment.done.latest.payroll.dayfinished
-   end
+  end
 
   def was_suspended?
     suspended == true
@@ -348,19 +323,7 @@ class Accreditation < ActiveRecord::Base
     renewed == true
   end
 
-  def institutional?
-    institution_id.present?
-  end
-
-  def program?
-    program_id.present?
-  end
-
-  def registration?
-    registration_id.present?
-  end
-
-  def is_original_or_was_renewed?
+  def original_or_was_renewed?
     original == true || renewed == true
   end
 
@@ -368,14 +331,14 @@ class Accreditation < ActiveRecord::Base
 
   # cancelled = revoked
 
-  def self.cancelled_on_this_payroll(p)
-    where('revocation >= ? and revocation <= ?', p.start, p.finish)
+  def self.cancelled_on_this_payroll(payroll)
+    where('revocation >= ? and revocation <= ?', payroll.start, payroll.finish)
   end
 
-  def cancelled_on_this_payroll?(p)
+  def cancelled_on_this_payroll?(payroll)
     if revocation.present?
 
-      (revocation >= p.start && revocation <= p.finish)
+      (revocation >= payroll.start && revocation <= payroll.finish)
 
     else
 
@@ -384,14 +347,14 @@ class Accreditation < ActiveRecord::Base
     end
   end
 
-  def self.suspended_on_this_payroll(p)
-    where('suspension >= ? and suspension <= ?', p.start, p.finish)
+  def self.suspended_on_this_payroll(payroll)
+    where('suspension >= ? and suspension <= ?', payroll.start, payroll.finish)
   end
 
-  def suspended_on_this_payroll?(p)
+  def suspended_on_this_payroll?(payroll)
     if suspension.present?
 
-      (suspension >= p.start && suspension <= p.finish)
+      (suspension >= payroll.start && suspension <= payroll.finish)
 
     else
 
@@ -408,14 +371,14 @@ class Accreditation < ActiveRecord::Base
     !confirmed
   end
 
-  def self.renewed_on_this_payroll(p)
-    where('renewal >= ? and renewal <= ?', p.start, p.finish)
+  def self.renewed_on_this_payroll(payroll)
+    where('renewal >= ? and renewal <= ?', payroll.start, payroll.finish)
   end
 
-  def renewed_on_this_payroll?(p)
+  def renewed_on_this_payroll?(payroll)
     if renewed.present?
 
-      (renewal >= p.start && renewal <= p.finish)
+      (renewal >= payroll.start && renewal <= payroll.finish)
 
     else
 
@@ -426,7 +389,8 @@ class Accreditation < ActiveRecord::Base
 
   # Already processed (mostly used for registrations)
   def self.cancellation_processed
-    where(revoked: true).where('revocation <= ?', Accreditation.latest_completed_payroll_finish_date)
+    where(revoked: true).where('revocation <= ?',
+                               Accreditation.latest_completed_payroll_finish_date)
   end
 
   # Cancellations to be processed (may be confirmed or not)
@@ -450,9 +414,9 @@ class Accreditation < ActiveRecord::Base
     #    self.school_term.start.next_month.next_month # i.e. May 1st
 
     school_term.start.next_month.next_month + years_completed.years # i.e. May 1st
-    end
+  end
 
-  def is_original?
+  def original?
     original == true
   end
 
@@ -461,5 +425,5 @@ class Accreditation < ActiveRecord::Base
   # hotfix
   def check_start_date
     errors.add(:start, :may_not_be_prior_to_april_first) if start && start < '2017-4-1'.to_date
-     end
+  end
 end

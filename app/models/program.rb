@@ -46,13 +46,13 @@ class Program < ActiveRecord::Base
   #   has_one :admission, dependent: :destroy
   #   accepts_nested_attributes_for :admission
   #
-  #   has_one :accreditation, dependent: :destroy
-  #   accepts_nested_attributes_for :accreditation
+     has_one :accreditation, dependent: :destroy
+     accepts_nested_attributes_for :accreditation
   #
-  #   accepts_nested_attributes_for :accreditation, reject_if: :method___?,  :allow_destroy => true
+     accepts_nested_attributes_for :accreditation, reject_if: :method___?,  :allow_destroy => true
   #
-  #   has_one :address, dependent: :destroy
-  #   accepts_nested_attributes_for :address, reject_if: :internal_address?,  allow_destroy: true
+     has_one :address, dependent: :destroy
+     accepts_nested_attributes_for :address, reject_if: :internal_address?,  allow_destroy: true
   #
   #   =end
 
@@ -196,7 +196,7 @@ class Program < ActiveRecord::Base
   # end
   #
   # def is_active?
-  # accreditation.is_original_or_was_renewed?
+  # accreditation.original_or_was_renewed?
   # end
   #
   # def program_name_schoolterm

@@ -60,4 +60,47 @@ RSpec.describe Accreditation, type: :model do
 
     expect(object_kind).to eq(accreditation.kind)
   end
+
+  context 'development-schoolyears' do
+    context 'class methods' do
+      # Confirmation pending - Entered by local administrators
+      it '#pending' do
+        pending_accreditations = Accreditation.where.not(id: Accreditation.confirmed)
+        expect(pending_accreditations).to eq(Accreditation.pending)
+      end
+
+      # Entered or confirmed by managers (or eventually admin)
+      it '#confirmed' do
+        confirmed_accreditations = Accreditation.where(confirmed: true)
+        expect(confirmed_accreditations).to eq(Accreditation.confirmed)
+      end
+    end
+
+    context 'instance methods' do
+      it '-confirmed?' do
+        is_accreditation_confirmed = accreditation.confirmed
+        expect(is_accreditation_confirmed).to eq(accreditation.confirmed?)
+      end
+
+      it '-pending?' do
+        is_accreditation_pending = !accreditation.confirmed
+        expect(is_accreditation_pending).to eq(accreditation.pending?)
+      end
+
+      it '-institutional?' do
+        is_accreditation_institutional = accreditation.institution_id.present?
+        expect(is_accreditation_institutional).to eq(accreditation.institutional?)
+      end
+
+      it '-program?' do
+        is_accreditation_program = accreditation.program_id.present?
+        expect(is_accreditation_program).to eq(accreditation.program?)
+      end
+
+      it '-registration?' do
+        is_accreditation_registration = accreditation.registration_id.present?
+        expect(is_accreditation_registration).to eq(accreditation.registration?)
+      end
+    end
+  end
 end
