@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Admission, type: :model do
   let(:program) { FactoryBot.create(:program, :biannual) }
+  let(:payroll) { FactoryBot.create(:payroll, :personal_taxation, :special) }
 
   let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
 

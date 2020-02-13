@@ -15,7 +15,7 @@ FactoryBot.define do
 
     trait :zero_amounts do
       # except start and finish, which are required
-      program
+      association :program, factory: %i[program annual]
       start '2016-10-1'
       finish '2016-11-30'
 
