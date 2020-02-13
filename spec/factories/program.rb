@@ -13,16 +13,16 @@ FactoryBot.define do
     schoolterm
     comment 'Test'
     institution
-    accreditation
     address
-    #  association :admission, factory: %i[admission zero_amounts]
+    # Admission model review in progress
+    # association :admission, factory: %i[admission zero_amounts]
     pap true
     medres false
-    gradcert false
+    #  gradcert false
 
     # http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-FactoryBot/
-    #  association :accreditation, :factory => [:accreditation, :program]
-
+    #    association :accreditation, :factory => [:accreditation, :program]
+    accreditation
     # ********************
   end
 

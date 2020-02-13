@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Program, type: :model do
+  let(:programname) { FactoryBot.create(:programname) }
   let(:program) { FactoryBot.create(:program, :biannual) }
   let(:medical_residency_program) { FactoryBot.create(:program, :annual, :medical_residency) }
   let(:graduate_certificate_program) { FactoryBot.create(:program, :annual, :graduate_certificate) }
@@ -53,10 +54,9 @@ RSpec.describe Program, type: :model do
     it { is_expected.to validate_numericality_of(:duration).is_less_than_or_equal_to(MAX_YEARS) }
     it {
       is_expected.to validate_uniqueness_of(:programname_id)
-        .scoped_to(%i[institution_id schoolterm_id]).case_insensitive
+        .scoped_to(%i[institution_id schoolterm_id])
     }
     it {
-      pending('development-schoolyears - admission to be reviewed')
       is_expected.to accept_nested_attributes_for(:admission)
     }
 

@@ -302,9 +302,20 @@ class Accreditation < ActiveRecord::Base
     (original || renewed || suspended || revoked)
   end
 
-  # To do: fix this to work with Medical Residency as well.
   def self.latest_completed_payroll_finish_date
-    Settings.dayone + Bankpayment.done.latest.payroll.dayfinished
+    processed_bankpayments_latest_payroll_finish_dt = nil
+
+    bankpayments_processed = Bankpayment.done # completed, done
+
+    if bankpayments_processed.present?
+      latest_bankpayments_processed = bankpayments_processed.latest
+      if latest_bankpayments_processed.present?
+        processed_bankpayments_latest_payroll_finish_dt = \
+          Dateutils.to_gregorian(latest_bankpayments_processed.payroll.dayfinished)
+      end
+    end
+
+    processed_bankpayments_latest_payroll_finish_dt
   end
 
   def was_suspended?

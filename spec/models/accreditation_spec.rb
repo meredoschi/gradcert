@@ -16,6 +16,11 @@ RSpec.describe Accreditation, type: :model do
 
   let(:institution_accreditation) { FactoryBot.create(:accreditation, :institution) }
 
+  # Set to special for testing purposes to avoid "processing date not available message"
+  let!(:payroll) { FactoryBot.create(:payroll, :personal_taxation, :special) }
+
+  let!(:bankpayment) { FactoryBot.create(:bankpayment) }
+
   it '-institutional?' do
     pertains_to_institution = institution_accreditation.institution_id.present?
 
@@ -74,6 +79,38 @@ RSpec.describe Accreditation, type: :model do
         confirmed_accreditations = Accreditation.where(confirmed: true)
         expect(confirmed_accreditations).to eq(Accreditation.confirmed)
       end
+
+      it '#cancelled_on_this_payroll(payroll)' do
+        accreditations_cancelled_on_this_payroll = Accreditation
+                                                   .where('revocation >= ? and revocation <= ?',
+                                                          payroll.start, payroll.finish)
+        expect(accreditations_cancelled_on_this_payroll)
+          .to eq(Accreditation.cancelled_on_this_payroll(payroll))
+      end
+
+      it '#latest_completed_payroll_finish_date' do
+        bankpayments_processed = Bankpayment.done # completed, done
+
+        if bankpayments_processed.present?
+          latest_bankpayments_processed = bankpayments_processed.latest
+
+          if latest_bankpayments_processed.present?
+            processed_bankpayments_latest_payroll_finish_dt = \
+              Dateutils.to_gregorian(latest_bankpayments_processed.payroll.dayfinished)
+          end
+        end
+
+        expect(processed_bankpayments_latest_payroll_finish_dt)
+          .to eq Accreditation.latest_completed_payroll_finish_date
+      end
+
+      it '#suspended_on_this_payroll(payroll)' do
+        accreditations_suspended_on_this_payroll = Accreditation
+                                                   .where('suspension >= ? and suspension <= ?',
+                                                          payroll.start, payroll.finish)
+        expect(accreditations_suspended_on_this_payroll).to eq(Accreditation
+          .suspended_on_this_payroll(payroll))
+      end
     end
 
     context 'instance methods' do
@@ -100,6 +137,45 @@ RSpec.describe Accreditation, type: :model do
       it '-registration?' do
         is_accreditation_registration = accreditation.registration_id.present?
         expect(is_accreditation_registration).to eq(accreditation.registration?)
+      end
+
+      it '-details_on_file?' do
+        are_details_on_file = (accreditation.original || accreditation.renewed \
+           || accreditation.suspended || accreditation.revoked)
+        expect(are_details_on_file).to eq(accreditation.details_on_file?)
+      end
+
+      it '-cancelled_on_this_payroll?(payroll)' do
+        revocation = accreditation.revocation
+        status = if revocation.present?
+                   (revocation >= payroll.start && revocation <= payroll.finish)
+                 else
+                   false
+                 end
+
+        expect(status).to eq(accreditation.cancelled_on_this_payroll?(payroll))
+      end
+
+      it '-suspended_on_this_payroll?(payroll)' do
+        suspension = accreditation.suspension
+        status = if suspension.present?
+                   (suspension >= payroll.start && suspension <= payroll.finish)
+                 else
+                   false
+                 end
+
+        expect(status).to eq(accreditation.suspended_on_this_payroll?(payroll))
+      end
+
+      it '-renewed_on_this_payroll?(payroll)' do
+        renewed = accreditation.renewed
+        status = if renewed.present?
+                   (renewal >= payroll.start && renewal <= payroll.finish)
+                 else
+                   false
+                 end
+
+        expect(status).to eq(accreditation.suspended_on_this_payroll?(payroll))
       end
     end
   end

@@ -37,26 +37,22 @@ class Program < ActiveRecord::Base
   #
   #   has_many :courses
   #
-  #   has_many :assignments, dependent: :restrict_with_exception
-  #   has_many :supervisors, through: :assignments
-  #   has_many :assesment, foreign_key: 'program_id'
+  has_many :assignments, dependent: :restrict_with_exception
+  has_many :supervisors, through: :assignments
+  has_many :assesment, foreign_key: 'program_id',
+                       dependent: :restrict_with_exception, inverse_of: :program
   #
   #   # ------------------- Nested models ----------------------------------------------------------
   #
-  #   has_one :admission, dependent: :destroy
-  #   accepts_nested_attributes_for :admission
-  #
-     has_one :accreditation, dependent: :destroy
-     accepts_nested_attributes_for :accreditation
-  #
-     accepts_nested_attributes_for :accreditation, reject_if: :method___?,  :allow_destroy => true
-  #
-     has_one :address, dependent: :destroy
-     accepts_nested_attributes_for :address, reject_if: :internal_address?,  allow_destroy: true
-  #
-  #   =end
+  has_one :admission, dependent: :destroy
+  accepts_nested_attributes_for :admission
+  has_one :accreditation, dependent: :destroy
+  accepts_nested_attributes_for :accreditation
+  accepts_nested_attributes_for :accreditation, reject_if: :method___?, allow_destroy: true
+  has_one :address, dependent: :destroy
+  accepts_nested_attributes_for :address, reject_if: :internal_address?, allow_destroy: true
 
-  #   #   scope :original, -> { where(original: true) }.includes(:schoolyears)
+  #    scope :original, -> { where(original: true) }.includes(:schoolyears)
   #
   #   # ------------------- Validations ------------------------------------------------------------
   #
@@ -97,7 +93,7 @@ class Program < ActiveRecord::Base
   #     sep = Settings.separator_mkdown
   #     prog_details = id.to_s + sep + programname_id.to_s + sep
   #     prog_details += name + sep + institution.id.to_s + sep
-  #     prog_details += institution.abbrv + sep + schoolterm.id.to_s + sep + I18n.l(schoolterm.start)
+  #  prog_details += institution.abbrv + sep + schoolterm.id.to_s + sep + I18n.l(schoolterm.start)
   #
   #     prog_details
   #   end

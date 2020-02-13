@@ -11,6 +11,7 @@ FactoryBot.define do
     #    program_id 1
 
     # program # verify why this was giving duplicate name problems
+    association :program, factory: %i[program annual]
 
     trait :zero_amounts do
       # except start and finish, which are required
