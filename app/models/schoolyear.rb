@@ -123,9 +123,9 @@ class Schoolyear < ActiveRecord::Base
         .capitalize + ' [ ' + programyear.to_s + ' ]'
   end
 
-#  def sep
-#    Settings.separator_info
-#  end
+  #  def sep
+  #    Settings.separator_info
+  #  end
 
   def theory_i18n
     I18n.t('activerecord.attributes.schoolyears.theory')\
@@ -146,24 +146,20 @@ class Schoolyear < ActiveRecord::Base
 
   ## January 2020 reviewed methods above
 
-  #  def name_incoming_cohort_i18n
-  #    program_name + ' - ' + I18n.t('incoming_cohort').capitalize + ' ' + yr.to_s
-  #  end
+  def name_incoming_cohort_i18n
+    program_name + ' - ' + I18n.t('incoming_cohort').capitalize + ' ' + yr.to_s
+  end
 
-  #
-  #   def school_term
-  #     program.schoolterm
-  #   end
-  #
-  #   def school_term_name
-  #     school_term.name
-  #   end
-  #
-  #   def cohort_start
-  #     # hotfix
-  #     I18n.t('cohort') + ': ' + I18n.t('start') + ' ' + I18n.l(program.schoolterm.start)
-  #   end
-  #
+  def school_term
+    program.schoolterm
+  end
+
+  delegate :name, to: :school_term, prefix: true
+
+  def cohort_start
+    # hotfix
+    I18n.t('cohort') + ': ' + I18n.t('start') + ' ' + I18n.l(program.schoolterm.start)
+  end
 
   #   # From early development (functionality not implemented)
   #   def full?
@@ -203,9 +199,9 @@ class Schoolyear < ActiveRecord::Base
   #   program_name + ' - ' + I18n.t('start') + ' ' + program.schoolterm.start.year.to_s
   # end
   #
-  # def yr
-  #   program.schoolterm.start.year
-  # end
+  def yr
+    program.schoolterm.start.year
+  end
   #
   # ---
   # def start_year_i18n

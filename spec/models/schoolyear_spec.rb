@@ -150,6 +150,36 @@ RSpec.describe Schoolyear, type: :model do
 
       expect(program_id_i18n_txt).to eq schoolyear.program_id_i18n
     end
+
+    context 'latest to be written' do
+      it '-name_incoming_cohort_i18n' do
+        schoolyear_name_incoming_cohort_i18n = schoolyear.program_name + ' - ' + \
+                                               I18n.t('incoming_cohort').capitalize + ' ' + \
+                                               schoolyear.yr.to_s
+        expect(schoolyear_name_incoming_cohort_i18n).to eq(schoolyear.name_incoming_cohort_i18n)
+      end
+
+      it '-school_term' do
+        schoolterm = schoolyear.program.schoolterm
+        expect(schoolterm).to eq(schoolyear.school_term)
+      end
+
+      it '-school_term_name' do
+        schoolterm_name = schoolyear.school_term.name
+        expect(schoolterm_name).to eq(schoolyear.school_term_name)
+      end
+
+      it '-cohort_start' do
+        schoolyear_cohort_start = I18n.t('cohort') + ': ' + I18n.t('start') + ' ' + \
+                                  I18n.l(schoolyear.program.schoolterm.start)
+        expect(schoolyear_cohort_start).to eq(schoolyear.cohort_start)
+      end
+
+      it '-yr' do
+        schoolyear_yr = schoolyear.program.schoolterm.start.year
+        expect(schoolyear_yr).to eq(schoolyear.yr)
+      end
+    end
   end
   context 'Class methods' do
     # e.g. freshman, sophmore
