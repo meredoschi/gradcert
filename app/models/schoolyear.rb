@@ -181,33 +181,32 @@ class Schoolyear < ActiveRecord::Base
   #
   # Integer
   #
-  # def term_start_year
-  #   school_term.start.year
-  # end
-  #
-  # def year_entered_i18n
-  #   I18n.t('entered_on').capitalize + ' ' + term_start_year.to_s
-  # end
-  #
-  # def incoming_cohort_i18n
-  #   I18n.t('incoming_cohort') + ' ' + term_start_year.to_s
-  # end
-  #
+  def term_start_year
+    school_term.start.year
+  end
+
+  def year_entered_i18n
+    I18n.t('entered_on').capitalize + ' ' + term_start_year.to_s
+  end
+
+  def incoming_cohort_i18n
+    I18n.t('incoming_cohort') + ' ' + term_start_year.to_s
+  end
 
   # 2 Associations oth (Program and schoolterm)
-  # def program_name_schoolterm
-  #   program_name + ' - ' + I18n.t('start') + ' ' + program.schoolterm.start.year.to_s
-  # end
-  #
+  def program_name_schoolterm
+    program_name + ' - ' + I18n.t('start') + ' ' + program.schoolterm.start.year.to_s
+  end
+
   def yr
     program.schoolterm.start.year
   end
+
   #
   # ---
-  # def start_year_i18n
-  #   I18n.t('start') + ' ' + program.schoolterm.start.year.to_s
-  # end
-  #
+  def start_year_i18n
+    I18n.t('start') + ' ' + term_start_year.to_s
+  end
 
   # 3 Associations (program, schoolterm, institution)
   #

@@ -151,33 +151,59 @@ RSpec.describe Schoolyear, type: :model do
       expect(program_id_i18n_txt).to eq schoolyear.program_id_i18n
     end
 
+    it '-name_incoming_cohort_i18n' do
+      schoolyear_name_incoming_cohort_i18n = schoolyear.program_name + ' - ' + \
+                                             I18n.t('incoming_cohort').capitalize + ' ' + \
+                                             schoolyear.yr.to_s
+      expect(schoolyear_name_incoming_cohort_i18n).to eq(schoolyear.name_incoming_cohort_i18n)
+    end
+
+    it '-school_term' do
+      schoolterm = schoolyear.program.schoolterm
+      expect(schoolterm).to eq(schoolyear.school_term)
+    end
+
+    it '-school_term_name' do
+      schoolterm_name = schoolyear.school_term.name
+      expect(schoolterm_name).to eq(schoolyear.school_term_name)
+    end
+
+    it '-cohort_start' do
+      schoolyear_cohort_start = I18n.t('cohort') + ': ' + I18n.t('start') + ' ' + \
+                                I18n.l(schoolyear.program.schoolterm.start)
+      expect(schoolyear_cohort_start).to eq(schoolyear.cohort_start)
+    end
+
+    it '-yr' do
+      schoolyear_yr = schoolyear.program.schoolterm.start.year
+      expect(schoolyear_yr).to eq(schoolyear.yr)
+    end
+
     context 'latest to be written' do
-      it '-name_incoming_cohort_i18n' do
-        schoolyear_name_incoming_cohort_i18n = schoolyear.program_name + ' - ' + \
-                                               I18n.t('incoming_cohort').capitalize + ' ' + \
-                                               schoolyear.yr.to_s
-        expect(schoolyear_name_incoming_cohort_i18n).to eq(schoolyear.name_incoming_cohort_i18n)
+      it '-term_start_year' do
+        year_term_starts = schoolyear.school_term.start.year
+        expect(year_term_starts).to eq(schoolyear.term_start_year)
       end
 
-      it '-school_term' do
-        schoolterm = schoolyear.program.schoolterm
-        expect(schoolterm).to eq(schoolyear.school_term)
+      it '-year_entered_i18n' do
+        year_entered_on = I18n.t('entered_on').capitalize + ' ' + schoolyear.term_start_year.to_s
+        expect(year_entered_on).to eq(schoolyear.year_entered_i18n)
       end
 
-      it '-school_term_name' do
-        schoolterm_name = schoolyear.school_term.name
-        expect(schoolterm_name).to eq(schoolyear.school_term_name)
+      it '-incoming_cohort_i18n' do
+        incoming_cohort_year = I18n.t('incoming_cohort') + ' ' + schoolyear.term_start_year.to_s
+        expect(incoming_cohort_year).to eq(schoolyear.incoming_cohort_i18n)
       end
 
-      it '-cohort_start' do
-        schoolyear_cohort_start = I18n.t('cohort') + ': ' + I18n.t('start') + ' ' + \
-                                  I18n.l(schoolyear.program.schoolterm.start)
-        expect(schoolyear_cohort_start).to eq(schoolyear.cohort_start)
+      it '-program_name_schoolterm' do
+        schoolyear_prog_name_term = schoolyear.program_name + ' - ' + I18n.t('start') + ' ' + \
+                                    schoolyear.program.schoolterm.start.year.to_s
+        expect(schoolyear_prog_name_term).to eq(schoolyear.program_name_schoolterm)
       end
 
-      it '-yr' do
-        schoolyear_yr = schoolyear.program.schoolterm.start.year
-        expect(schoolyear_yr).to eq(schoolyear.yr)
+      it '-start_year_i18n' do
+        schoolyear_start_year_i18n = I18n.t('start') + ' ' + schoolyear.term_start_year.to_s
+        expect(schoolyear_start_year_i18n).to eq(schoolyear.start_year_i18n)
       end
     end
   end
