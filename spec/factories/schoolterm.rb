@@ -83,5 +83,19 @@ FactoryBot.define do
         schoolterm.admissionsclosure -= offset
       end
     end
+
+    # Useful for testing
+    trait :future do
+      before(:create) do |schoolterm|
+        offset = 1.year
+
+        schoolterm.start += offset
+        schoolterm.finish += offset
+        schoolterm.seasondebut += offset
+        schoolterm.seasonclosure += offset
+        schoolterm.admissionsdebut += offset
+        schoolterm.admissionsclosure += offset
+      end
+    end
   end
 end
