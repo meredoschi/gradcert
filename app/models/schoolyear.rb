@@ -211,23 +211,21 @@ class Schoolyear < ActiveRecord::Base
   # 3 Associations (program, schoolterm, institution)
   #
   # Hotfix
-  # def program_name_schoolterm_institution
-  #   program_name + ' - ' + start_year_i18n + ' (' + institution + ')'
-  # end
-  #
+  def program_name_schoolterm_institution
+    program_name + ' - ' + start_year_i18n + ' (' + institution + ')'
+  end
 
-  #
-  # def institution
-  #   program.institution.name
-  # end
-  #
-  # def name_with_institution
-  #   program_name + ' (' + institution + ')'
-  # end
-  #
-  #   # Refer to program.rb
-  #   delegate :name_term_institution_short, to: :program, prefix: true
-  #
+  def institution
+    program.institution.name
+  end
+
+  def name_with_institution
+    program_name + ' (' + institution + ')'
+  end
+
+  #    Refer to program.rb
+  delegate :name_term_institution_short, to: :program, prefix: true
+
   #   # show view
   #   def registrations
   #     registration
@@ -259,23 +257,38 @@ class Schoolyear < ActiveRecord::Base
   #
   # Schoolterms
   #
-  #   # Adapted from registration.rb
-  #   def self.ids_contextual_on(specified_dt)
-  #     @schoolyear_ids_in_context = []
-  #
-  #     relevant_terms = Schoolterm.contextual_on(specified_dt)
-  #
-  #     relevant_terms.each_with_index do |s, i|
-  #       prog_year = (1 + i).to_i
-  #
-  #       schoolyear_ids_in_context_for_the_schoolterm = Schoolyear.for_schoolterm(s)
-  #                                                                .where(programyear: prog_year)
-  #
-  #       @schoolyear_ids_in_context << schoolyear_ids_in_context_for_the_schoolterm
-  #     end
-  #
-  #     @schoolyear_ids_in_context.flatten
-  #   end
+
+  # Sql version, less portable but faster
+  def self.ids_contextual_on(specified_dt)
+    query = "with Intervals_CTE AS (select s.id, ((s.programyear-1)::VARCHAR || ' year')"\
+    '::interval as intervl, s.program_id, s.programyear,t.start, t.finish from schoolyears s, '\
+    'programs p, schoolterms t where s.program_id=p.id and p.schoolterm_id=t.id) '\
+    ', '\
+    'Schoolyear_CTE AS (select i.id, (i.start+i.intervl)::date as start, '\
+    "                  (i.start+i.intervl+interval '1 year'-interval '1 day')::date as finish "\
+    'from Intervals_CTE i) '\
+    'select id from Schoolyear_CTE where start <= ? AND finish >= ? '
+
+    find_by_sql [query, specified_dt, specified_dt]
+  end
+
+  # Deprecated - uses active record only
+  def self.ids_contextual_on_activ_rec(specified_dt)
+    schoolyear_ids_in_context = []
+
+    relevant_terms = Schoolterm.contextual_on(specified_dt)
+
+    relevant_terms.each_with_index do |s, i|
+      prog_year = (1 + i).to_i
+
+      schoolyear_ids_in_context_for_the_schoolterm = Schoolyear.for_schoolterm(s)
+                                                               .where(programyear: prog_year)
+
+      schoolyear_ids_in_context << schoolyear_ids_in_context_for_the_schoolterm
+    end
+
+    schoolyear_ids_in_context.flatten
+  end
   #
   #   def self.contextual_on(specified_dt)
   #     where(id: ids_contextual_on(specified_dt))
@@ -348,9 +361,10 @@ class Schoolyear < ActiveRecord::Base
   #   joins(program: :programname).where('programnames.id = ?', programname.id)
   # end
   #
-  # def self.for_schoolterm(s)
-  #   joins(:program).merge(Program.for_schoolterm(s))
-  # end
+  def self.for_schoolterm(schoolterm)
+    joins(:program).merge(Program.for_schoolterm(schoolterm))
+  end
+
   #
   # def self.ordered_by_programname_and_year
   #   joins(program: :programname).order('programnames.name, schoolyears.programyear')
@@ -374,9 +388,9 @@ class Schoolyear < ActiveRecord::Base
   # end
   #
   # Used in registration.rb
-  # def places_available
-  #   program.institution.placesavailable
-  # end
+  def places_available
+    program.institution.placesavailable
+  end
   #
   # To do: fix argument
   # def self.for_program(programid)
@@ -408,9 +422,9 @@ class Schoolyear < ActiveRecord::Base
   #  end
 
   # Useful for querying
-  #  def self.full
-  #    joins(program: :schoolterm).joins(program: :institution)
-  #  end
+  def self.full
+    joins(program: :schoolterm).joins(program: :institution)
+  end
 
   # with open registrations, registration season=true
   # To do: must fix - Schoolterm.allowed.first (to use actual date)

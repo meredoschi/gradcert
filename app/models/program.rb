@@ -323,9 +323,9 @@ class Program < ActiveRecord::Base
   # end
   #
 
-  # def self.for_schoolterm(schoolterm)
-  #  where(schoolterm_id: schoolterm.id)
-  # end
+  def self.for_schoolterm(schoolterm)
+    where(schoolterm_id: schoolterm.id)
+  end
 
   #
   # def self.active

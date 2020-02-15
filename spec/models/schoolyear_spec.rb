@@ -179,35 +179,62 @@ RSpec.describe Schoolyear, type: :model do
       expect(schoolyear_yr).to eq(schoolyear.yr)
     end
 
-    context 'latest to be written' do
-      it '-term_start_year' do
-        year_term_starts = schoolyear.school_term.start.year
-        expect(year_term_starts).to eq(schoolyear.term_start_year)
-      end
+    it '-term_start_year' do
+      year_term_starts = schoolyear.school_term.start.year
+      expect(year_term_starts).to eq(schoolyear.term_start_year)
+    end
 
-      it '-year_entered_i18n' do
-        year_entered_on = I18n.t('entered_on').capitalize + ' ' + schoolyear.term_start_year.to_s
-        expect(year_entered_on).to eq(schoolyear.year_entered_i18n)
-      end
+    it '-year_entered_i18n' do
+      year_entered_on = I18n.t('entered_on').capitalize + ' ' + schoolyear.term_start_year.to_s
+      expect(year_entered_on).to eq(schoolyear.year_entered_i18n)
+    end
 
-      it '-incoming_cohort_i18n' do
-        incoming_cohort_year = I18n.t('incoming_cohort') + ' ' + schoolyear.term_start_year.to_s
-        expect(incoming_cohort_year).to eq(schoolyear.incoming_cohort_i18n)
-      end
+    it '-incoming_cohort_i18n' do
+      incoming_cohort_year = I18n.t('incoming_cohort') + ' ' + schoolyear.term_start_year.to_s
+      expect(incoming_cohort_year).to eq(schoolyear.incoming_cohort_i18n)
+    end
 
-      it '-program_name_schoolterm' do
-        schoolyear_prog_name_term = schoolyear.program_name + ' - ' + I18n.t('start') + ' ' + \
-                                    schoolyear.program.schoolterm.start.year.to_s
-        expect(schoolyear_prog_name_term).to eq(schoolyear.program_name_schoolterm)
-      end
+    it '-program_name_schoolterm' do
+      schoolyear_prog_name_term = schoolyear.program_name + ' - ' + I18n.t('start') + ' ' + \
+                                  schoolyear.program.schoolterm.start.year.to_s
+      expect(schoolyear_prog_name_term).to eq(schoolyear.program_name_schoolterm)
+    end
 
-      it '-start_year_i18n' do
-        schoolyear_start_year_i18n = I18n.t('start') + ' ' + schoolyear.term_start_year.to_s
-        expect(schoolyear_start_year_i18n).to eq(schoolyear.start_year_i18n)
-      end
+    it '-start_year_i18n' do
+      schoolyear_start_year_i18n = I18n.t('start') + ' ' + schoolyear.term_start_year.to_s
+      expect(schoolyear_start_year_i18n).to eq(schoolyear.start_year_i18n)
+    end
+
+    it '-program_name_schoolterm_institution' do
+      schoolyear_program_name_schoolterm_institution = schoolyear.program_name\
+      + ' - ' + schoolyear.start_year_i18n + ' (' + schoolyear.institution + ')'
+      expect(schoolyear_program_name_schoolterm_institution)\
+        .to eq(schoolyear.program_name_schoolterm_institution)
+    end
+
+    it '-institution' do
+      schoolyear_institution = schoolyear.program.institution.name
+      expect(schoolyear_institution).to eq(schoolyear.institution)
+    end
+
+    it '-name_with_institution' do
+      schoolyear_name_with_institution = schoolyear.program_name + ' (' + schoolyear.institution + ')'
+      expect(schoolyear_name_with_institution).to eq schoolyear.name_with_institution
+    end
+
+    # Used in registration.rb
+    it '-places_available' do
+      schoolyear_places_available = schoolyear.program.institution.placesavailable
+      expect(schoolyear_places_available).to eq(schoolyear.places_available)
     end
   end
   context 'Class methods' do
+    # Useful for querying
+    it '#self.full' do
+      schoolyears_full = Schoolyear.joins(program: :schoolterm).joins(program: :institution)
+      expect(schoolyears_full).to eq(Schoolyear.full)
+    end
+
     # e.g. freshman, sophmore
     it '#level(year)' do
       schoolyear_levels = Schoolyear.level(year)
@@ -237,6 +264,10 @@ RSpec.describe Schoolyear, type: :model do
       end
 
       expect(senior_schoolyears).to eq(Schoolyear.senior)
+    end
+
+    it '#ids_contextual_on(specified_dt)' do
+      schoolyear_ids_in_context = nil
     end
   end
 end
@@ -318,23 +349,7 @@ end
 #     expect(schoolyear_start_year_i18n).to eq(schoolyear_start_year_i18n)
 #   end
 #
-#   # Hotfix
-#   it '-program_name_schoolterm_institution' do
-#     schoolyear_program_name_schoolterm_institution = schoolyear.program_name\
-#     + ' - ' + schoolyear.start_year_i18n + ' (' + schoolyear.institution + ')'
-#     expect(schoolyear_program_name_schoolterm_institution)\
-#       .to eq(schoolyear.program_name_schoolterm_institution)
-#   end
-#
-#   it '-institution' do
-#     schoolyear_institution = schoolyear.program.institution.name
-#     expect(schoolyear_institution).to eq(schoolyear.institution)
-#   end
-#
-#   it '-name_with_institution' do
-#     schoolyear_name_with_institution = schoolyear.program_name + ' (' + schoolyear.institution + ')'
-#     expect(schoolyear_name_with_institution).to eq schoolyear.name_with_institution
-#   end
+
 #
 #   # Refer to program.rb
 #   it '-program_name_term_institution_short' do
