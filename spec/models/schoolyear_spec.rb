@@ -9,8 +9,10 @@ RSpec.describe Schoolyear, type: :model do
   let(:year) { 1 }
   let(:program) { FactoryBot.create(:program, :biannual) }
   let(:schoolyear) { FactoryBot.create(:schoolyear, :freshman, program_id: program.id) } # first
+  let(:schoolterm) { FactoryBot.create(:schoolterm, :pap) }
 
   let!(:second_schoolyear) { FactoryBot.create(:schoolyear, :sophmore, program_id: program.id) }
+  let(:specified_dt) { Time.zone.today + 4.months }
 
   context 'creation' do
     it 'can be created' do
@@ -218,7 +220,8 @@ RSpec.describe Schoolyear, type: :model do
     end
 
     it '-name_with_institution' do
-      schoolyear_name_with_institution = schoolyear.program_name + ' (' + schoolyear.institution + ')'
+      schoolyear_name_with_institution = schoolyear
+                                         .program_name + ' (' + schoolyear.institution + ')'
       expect(schoolyear_name_with_institution).to eq schoolyear.name_with_institution
     end
 
@@ -267,7 +270,37 @@ RSpec.describe Schoolyear, type: :model do
     end
 
     it '#ids_contextual_on(specified_dt)' do
-      schoolyear_ids_in_context = nil
+      query = "with Intervals_CTE AS (select s.id, ((s.programyear-1)::VARCHAR || ' year')"\
+     '::interval as intervl, s.program_id, s.programyear,t.start, t.finish from schoolyears s, '\
+     'programs p, schoolterms t where s.program_id=p.id and p.schoolterm_id=t.id) '\
+     ', '\
+     'Schoolyear_CTE AS (select i.id, (i.start+i.intervl)::date as start, '\
+     "                  (i.start+i.intervl+interval '1 year'-interval '1 day')::date as finish "\
+     'from Intervals_CTE i) '\
+     'select id from Schoolyear_CTE where start <= ? AND finish >= ? '
+      schoolyear_ids_in_context = Schoolyear.find_by_sql [query, specified_dt, specified_dt]
+
+      expect(schoolyear_ids_in_context).to eq(Schoolyear.ids_contextual_on(specified_dt))
+    end
+
+    it '#ids_contextual_on_activ_rec(specified_dt)' do
+      schoolyear_ids_in_context = []
+      relevant_terms = Schoolterm.contextual_on(specified_dt)
+      relevant_terms.each_with_index do |s, i|
+        prog_year = (1 + i).to_i
+        schoolyear_ids_in_context_for_the_schoolterm = Schoolyear.for_schoolterm(s)
+                                                                 .where(programyear: prog_year)
+        schoolyear_ids_in_context << schoolyear_ids_in_context_for_the_schoolterm
+      end
+      expect(schoolyear_ids_in_context.flatten)
+        .to eq(Schoolyear.ids_contextual_on_activ_rec(specified_dt))
+    end
+
+    it '#for_schoolterm(schoolterm)' do
+      schoolyears_associated_to_schoolterm = Schoolyear
+                                             .joins(:program)
+                                             .merge(Program.for_schoolterm(schoolterm))
+      expect(schoolyears_associated_to_schoolterm).to eq(Schoolyear.for_schoolterm(schoolterm))
     end
   end
 end
@@ -353,7 +386,7 @@ end
 #
 #   # Refer to program.rb
 #   it '-program_name_term_institution_short' do
-#     schoolyear_program_name_term_institution_short = schoolyear.program.name_term_institution_short
+#   schoolyear_program_name_term_institution_short = schoolyear.program.name_term_institution_short
 #     expect(schoolyear_program_name_term_institution_short)\
 #       .to eq schoolyear.program_name_term_institution_short
 #   end
