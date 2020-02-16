@@ -281,15 +281,7 @@ RSpec.describe Schoolyear, type: :model do
     end
 
     it '#contextual_on(specified_dt)' do
-      query = "with Intervals_CTE AS (select s.id, ((s.programyear-1)::VARCHAR || ' year')"\
-     '::interval as intervl, s.program_id, s.programyear,t.start, t.finish from schoolyears s, '\
-     'programs p, schoolterms t where s.program_id=p.id and p.schoolterm_id=t.id) '\
-     ', '\
-     'Schoolyear_CTE AS (select i.id, (i.start+i.intervl)::date as start, '\
-     "                  (i.start+i.intervl+interval '1 year'-interval '1 day')::date as finish "\
-     'from Intervals_CTE i) '\
-     'select * from Schoolyear_CTE where start <= ? AND finish >= ? '
-      schoolyears_in_context = Schoolyear.find_by_sql [query, specified_dt, specified_dt]
+      schoolyears_in_context = Schoolyear.where(id: Schoolyear.ids_contextual_on(specified_dt))
 
       expect(schoolyears_in_context).to eq(Schoolyear.contextual_on(specified_dt))
     end
