@@ -272,89 +272,40 @@ class Schoolyear < ActiveRecord::Base
     find_by_sql [query, specified_dt, specified_dt]
   end
 
-  # Deprecated - uses active record only
-  def self.ids_contextual_on_activ_rec(specified_dt)
-    schoolyear_ids_in_context = []
+  # Sql version, less portable but faster
+  def self.contextual_on(specified_dt)
+    query = "with Intervals_CTE AS (select s.id, ((s.programyear-1)::VARCHAR || ' year')"\
+    '::interval as intervl, s.program_id, s.programyear,t.start, t.finish from schoolyears s, '\
+    'programs p, schoolterms t where s.program_id=p.id and p.schoolterm_id=t.id) '\
+    ', '\
+    'Schoolyear_CTE AS (select i.id, (i.start+i.intervl)::date as start, '\
+    "                  (i.start+i.intervl+interval '1 year'-interval '1 day')::date as finish "\
+    'from Intervals_CTE i) '\
+    'select * from Schoolyear_CTE where start <= ? AND finish >= ? '
 
-    relevant_terms = Schoolterm.contextual_on(specified_dt)
-
-    relevant_terms.each_with_index do |s, i|
-      prog_year = (1 + i).to_i
-
-      schoolyear_ids_in_context_for_the_schoolterm = Schoolyear.for_schoolterm(s)
-                                                               .where(programyear: prog_year)
-
-      schoolyear_ids_in_context << schoolyear_ids_in_context_for_the_schoolterm
-    end
-
-    schoolyear_ids_in_context.flatten
+    find_by_sql [query, specified_dt, specified_dt]
   end
-  #
-  #   def self.contextual_on(specified_dt)
-  #     where(id: ids_contextual_on(specified_dt))
-  #   end
-  #
-  #   def self.contextual_today
-  #     todays_date = Time.zone.today
-  #
-  #     contextual_on(todays_date)
-  #   end
-  #
-  #   def self.not_contextual_today
-  #     where.not(id: contextual_today)
-  #   end
-  #
-  #   # Alias
-  #   def self.current
-  #     contextual_today
-  #   end
-  #
-  #   # Alias, for convenience - not to be confused with present?
-  #   # Use current above to avoid ambiguity
-  #   def self.present
-  #     current
-  #   end
-  #
-  #   def self.past
-  #     not_contextual_today
-  #   end
-  #
 
-  # # ----
-  #   # New for 2017
-  #   def self.contextual_on(specified_dt)
-  #
-  #     joins(:program).merge(Program.contextual_on(specified_dt))
-  #
-  #   end
-  #
-  #   def self.contextual_today
-  #
-  #     joins(:program).merge(Program.contextual_today)
-  #
-  #   end
-  #
-  #   def self.current
-  #
-  #     joins(:program).merge(Program.current)
-  #
-  #   end
-  #
-  #   # Alias, for convenience - not to be confused with present?
-  #   # Use current above to avoid ambiguity
-  #   def self.present
-  #
-  #     self.current
-  #
-  #   end
-  #
-  #   # i.e. not contextual today (aliased on Program.rb)
-  #   def self.past
-  #
-  #     joins(:program).merge(Program.past)
-  #
-  #   end
-  #
+  def self.contextual_today
+    todays_date = Time.zone.today
+
+    contextual_on(todays_date)
+  end
+
+  def self.not_contextual_today
+    where.not(id: contextual_today)
+  end
+
+  #    Alias
+  def self.current
+    contextual_today
+  end
+
+  #    Alias, for convenience - not to be confused with present?
+  #    Use current above to avoid ambiguity
+  def self.present
+    current
+  end
 
   # # Used in reports rake task
   # def self.with_programname(programname)

@@ -3,9 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Schoolyear, type: :model do
-  #  let(:biannual_program) { FactoryBot.create(:program, :biannual) }
-  #  let(:schoolyear) { program.schoolyears.last }
-
   let(:year) { 1 }
   let(:program) { FactoryBot.create(:program, :biannual) }
   let(:schoolyear) { FactoryBot.create(:schoolyear, :freshman, program_id: program.id) } # first
@@ -283,17 +280,18 @@ RSpec.describe Schoolyear, type: :model do
       expect(schoolyear_ids_in_context).to eq(Schoolyear.ids_contextual_on(specified_dt))
     end
 
-    it '#ids_contextual_on_activ_rec(specified_dt)' do
-      schoolyear_ids_in_context = []
-      relevant_terms = Schoolterm.contextual_on(specified_dt)
-      relevant_terms.each_with_index do |s, i|
-        prog_year = (1 + i).to_i
-        schoolyear_ids_in_context_for_the_schoolterm = Schoolyear.for_schoolterm(s)
-                                                                 .where(programyear: prog_year)
-        schoolyear_ids_in_context << schoolyear_ids_in_context_for_the_schoolterm
-      end
-      expect(schoolyear_ids_in_context.flatten)
-        .to eq(Schoolyear.ids_contextual_on_activ_rec(specified_dt))
+    it '#contextual_on(specified_dt)' do
+      query = "with Intervals_CTE AS (select s.id, ((s.programyear-1)::VARCHAR || ' year')"\
+     '::interval as intervl, s.program_id, s.programyear,t.start, t.finish from schoolyears s, '\
+     'programs p, schoolterms t where s.program_id=p.id and p.schoolterm_id=t.id) '\
+     ', '\
+     'Schoolyear_CTE AS (select i.id, (i.start+i.intervl)::date as start, '\
+     "                  (i.start+i.intervl+interval '1 year'-interval '1 day')::date as finish "\
+     'from Intervals_CTE i) '\
+     'select * from Schoolyear_CTE where start <= ? AND finish >= ? '
+      schoolyears_in_context = Schoolyear.find_by_sql [query, specified_dt, specified_dt]
+
+      expect(schoolyears_in_context).to eq(Schoolyear.contextual_on(specified_dt))
     end
 
     it '#for_schoolterm(schoolterm)' do
@@ -301,6 +299,26 @@ RSpec.describe Schoolyear, type: :model do
                                              .joins(:program)
                                              .merge(Program.for_schoolterm(schoolterm))
       expect(schoolyears_associated_to_schoolterm).to eq(Schoolyear.for_schoolterm(schoolterm))
+    end
+
+    it '#contextual_today' do
+      todays_date = Time.zone.today
+      schoolyears_contextual_today = Schoolyear.contextual_on(todays_date)
+      expect(schoolyears_contextual_today).to eq(Schoolyear.contextual_today)
+    end
+
+    it '#not_contextual_today' do
+      schoolyears_not_in_todays_context = Schoolyear.where.not(id: Schoolyear.contextual_today)
+      expect(schoolyears_not_in_todays_context).to eq(Schoolyear.not_contextual_today)
+    end
+    #    Alias
+    it '#current' do
+      expect(Schoolyear.current).to eq(Schoolyear.contextual_today)
+    end
+    #    Alias, for convenience - not to be confused with present?
+    #    Use current above to avoid ambiguity
+    it '#present' do
+      expect(Schoolyear.present).to eq(Schoolyear.current)
     end
   end
 end
@@ -313,23 +331,6 @@ end
 ##
 #
 
-#   it '- cohort_start' do
-#     schoolyear_cohort_start = I18n.t('cohort') + ': ' + I18n.t('start')\
-#      + ' ' + I18n.l(schoolyear.program.schoolterm.start)
-#     expect(schoolyear_cohort_start).to eq(schoolyear.cohort_start)
-#   end
-#
-#   it '- school_term' do
-#     schoolyear_program_schoolterm = schoolyear.school_term
-#     expect(schoolyear_program_schoolterm).to eq(schoolyear.school_term)
-#   end
-#
-#   it '- school_term_name' do
-#     schoolyear_program_schoolterm_name = schoolyear.school_term.name
-#     expect(schoolyear_program_schoolterm_name).to eq(schoolyear.school_term_name)
-#   end
-#
-
 #   From early development, not used
 #   it '-full?' do
 #     schoolyear_is_full = (schoolyear.enrollment == schoolyear.program.)
@@ -340,46 +341,12 @@ end
 #
 #   # 2018
 #
-#   it '-term_start_year' do
-#     schoolyear_term_start_year = schoolyear.school_term.start.year
-#     expect(schoolyear_term_start_year).to eq schoolyear.term_start_year
-#   end
-#
-#   it '-year_entered_i18n' do
-#     schoolyear_year_entered_i18n = I18n.t('entered_on').capitalize + ' '\
-#      + schoolyear.term_start_year.to_s
-#     expect(schoolyear_year_entered_i18n).to eq schoolyear.year_entered_i18n
-#   end
+
 #
 #   it '-incoming_cohort_i18n' do
 #     schoolyear_incoming_cohort_i18n = I18n.t('incoming_cohort') + \
 #                                       ' ' + schoolyear.term_start_year.to_s
 #     expect(schoolyear_incoming_cohort_i18n).to eq schoolyear.incoming_cohort_i18n
-#   end
-#
-#   it '-program_name_schoolterm' do
-#     schoolyear_program_name_schoolterm = schoolyear.program_name + ' - ' \
-#     + I18n.t('start') + ' ' + schoolyear.program.schoolterm.start.year.to_s
-#     expect(schoolyear_program_name_schoolterm).to eq schoolyear.program_name_schoolterm
-#   end
-#
-#   it '-yr' do
-#     schoolyear_yr = schoolyear.program.schoolterm.start.year
-#     expect(schoolyear_yr).to eq schoolyear.yr
-#   end
-#
-#   it '-name_incoming_cohort_i18n' do
-#     schoolyear_name_incoming_cohort_i18n = schoolyear.program_name + ' - '\
-#      + I18n.t('incoming_cohort').capitalize + ' ' + schoolyear.yr.to_s
-#     expect(schoolyear_name_incoming_cohort_i18n).to eq schoolyear.name_incoming_cohort_i18n
-#   end
-#
-#   # ---
-#
-#   it '-start_year_i18n' do
-#     schoolyear_start_year_i18n = I18n.t('start')\
-#      + ' ' + schoolyear.program.schoolterm.start.year.to_s
-#     expect(schoolyear_start_year_i18n).to eq(schoolyear_start_year_i18n)
 #   end
 #
 
