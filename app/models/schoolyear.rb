@@ -123,10 +123,6 @@ class Schoolyear < ActiveRecord::Base
         .capitalize + ' [ ' + programyear.to_s + ' ]'
   end
 
-  #  def sep
-  #    Settings.separator_info
-  #  end
-
   def theory_i18n
     I18n.t('activerecord.attributes.schoolyears.theory')\
         .capitalize + ': ' + theory.to_s
@@ -165,22 +161,12 @@ class Schoolyear < ActiveRecord::Base
   #   def full?
   #     enrollment == program.maxenrollment
   #   end
-  #
-  #   # ---
-  #
-  #   def self.from_institution(i)
-  #     joins(program: :institution).where('institutions.id = ? ', i.id)
-  #   end
-  #
-  #   def self.with_institution_id(i)
-  #     joins(program: :institution).where('institutions.id = ? ', i)
-  #   end
-  #
 
-  # Schoolterm
-  #
-  # Integer
-  #
+  # Schoolyears (program course offerings) by the specified institution
+  def self.from_institution(institution)
+    joins(program: :institution).where('institutions.id = ? ', institution.id)
+  end
+
   def term_start_year
     school_term.start.year
   end
@@ -223,6 +209,8 @@ class Schoolyear < ActiveRecord::Base
     program_name + ' (' + institution + ')'
   end
 
+  delegate :name_term_institution_short, to: :program, prefix: true
+
   #    Refer to program.rb
   delegate :name_term_institution_short, to: :program, prefix: true
 
@@ -236,19 +224,15 @@ class Schoolyear < ActiveRecord::Base
   #     registration.count
   #   end
   #
-  #   def program_name_incoming_cohort_program_year
-  #     schoolyear_program_name_incoming_cohort_program_year = name_incoming_cohort_i18n
-  #
-  #     if level > 1
-  #
-  #       schoolyear_program_name_incoming_cohort_program_year += ' - PA' + level.to_s\
-  #        + ' ' + (yr + level - 1).to_s
-  #
-  #     end
-  #
-  #     schoolyear_program_name_incoming_cohort_program_year
-  #   end
+  def program_name_incoming_cohort_program_year
+    area_abbreviation = I18n.t('activerecord.attributes.program.virtual.abbreviation.pap')
 
+    txt = name_incoming_cohort_i18n
+
+    txt += ' - ' + area_abbreviation + level.to_s + ' ' + (yr + level - 1).to_s if level > 1
+
+    txt
+  end
   # [:theory, :practice].each do |h|
   #    validates h, numericality: { only_integer: true, greater_than_or_equal_to: 0,
   #    less_than_or_equal_to: 8784}, presence: true
@@ -298,11 +282,11 @@ class Schoolyear < ActiveRecord::Base
     current
   end
 
-  # # Used in reports rake task
-  # def self.with_programname(programname)
-  #   joins(program: :programname).where('programnames.id = ?', programname.id)
-  # end
-  #
+  #Used in reports rake task
+   def self.with_programname(programname)
+     joins(program: :programname).where('programnames.id = ?', programname.id)
+   end
+
   def self.for_schoolterm(schoolterm)
     joins(:program).merge(Program.for_schoolterm(schoolterm))
   end
@@ -310,11 +294,6 @@ class Schoolyear < ActiveRecord::Base
   #
   # def self.ordered_by_programname_and_year
   #   joins(program: :programname).order('programnames.name, schoolyears.programyear')
-  # end
-  #
-  # Used in reports rake task
-  # def self.with_programname(programname)
-  #   joins(program: :programname).where('programnames.id = ?', programname.id)
   # end
   #
   # def self.for_schoolterm(s)

@@ -423,6 +423,10 @@ en:
         updated_at: Updated at
         virtual:
           area: Program area
+          abbreviation:
+            pap: "P"       # (P)rofessional Advancement
+            medres: "MR"   # (M)edical (R)esident
+            gradcert: "C"  # Graduate (C)ertificate
           parentid: Previous program ID
         workload: Workload
       programname:

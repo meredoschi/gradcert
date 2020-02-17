@@ -422,6 +422,10 @@ pt_BR:
         virtual:
           area: Área programática
           parentid: ID do programa precedente (ano anterior)
+          abbreviation:
+            pap: "PA"     # (P)rograma de (A)primoramento
+            medres: "R"   # (R)esidente Médico
+            gradcert: "E" # (E)specializando
         workload: Carga horária
       programname:
         active: Ativo

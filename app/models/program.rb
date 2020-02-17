@@ -245,10 +245,10 @@ class Program < ActiveRecord::Base
   end
 
   # Abbreviated institution name.  Used in registrations helper for admins and managers (schoolyear)
-  #  def name_term_institution_short
-  #    program_name_term_institution_short = short + ' | ' + schoolterm.name
-  #    program_name_term_institution_short += ' | ' + institution.abbrv
-  #  end
+    def name_term_institution_short
+      program_name_term_institution_short = short + ' | ' + schoolterm.name
+      program_name_term_institution_short += ' | ' + institution.abbrv
+    end
 
   #
   # TDD finish
