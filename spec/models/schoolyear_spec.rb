@@ -372,18 +372,7 @@ end
 #
 #
 #   # 2018
-#
 
-#
-#   it '-incoming_cohort_i18n' do
-#     schoolyear_incoming_cohort_i18n = I18n.t('incoming_cohort') + \
-#                                       ' ' + schoolyear.term_start_year.to_s
-#     expect(schoolyear_incoming_cohort_i18n).to eq schoolyear.incoming_cohort_i18n
-#   end
-#
-
-#
-#
 #   # show view
 #   it '- registrations' do
 #     schoolyear_registrations = schoolyear.registration
@@ -394,21 +383,5 @@ end
 #   it '- enrollment' do
 #     schoolyear_enrollment = schoolyear.registration.count
 #     expect(schoolyear_enrollment).to eq(schoolyear.enrollment)
-#   end
-#
-#
-#   it '-program_name_incoming_cohort_program_year' do
-#     schoolyear_program_name_incoming_cohort_program_year = schoolyear.name_incoming_cohort_i18n
-#
-#     if schoolyear.level > 1
-#
-#       schoolyear_program_name_incoming_cohort_program_year += ' -  '\
-#        + schoolyear.sector_i18n + schoolyear.level.to_s\
-#        + ' ' + (schoolyear.yr + schoolyear.level - 1).to_s
-#
-#     end
-#
-#     expect(schoolyear_program_name_incoming_cohort_program_year)\
-#       .to eq(schoolyear.program_name_incoming_cohort_program_year)
 #   end
 #
