@@ -23,6 +23,22 @@ RSpec.describe Schoolyear, type: :model do
     end
   end
 
+  context 'Validations' do
+
+    it { is_expected.to validate_presence_of(:practice) }
+    it { is_expected.to validate_presence_of(:theory) }
+
+    it { is_expected.to validate_numericality_of(:practice).only_integer }
+    it { is_expected.to validate_numericality_of(:practice).is_greater_than_or_equal_to(0) }
+    it { is_expected.to validate_numericality_of(:practice).is_less_than_or_equal_to(8784) }
+
+    it { is_expected.to validate_numericality_of(:theory).only_integer }
+    it { is_expected.to validate_numericality_of(:theory).is_greater_than_or_equal_to(0) }
+    it { is_expected.to validate_numericality_of(:theory).is_less_than_or_equal_to(8784) }
+
+
+  end
+
   context 'Instance methods' do
     it '-identifier_i18n' do
       identifier_i18n_txt = I18n.t('activerecord.attributes.schoolyears.id')\
@@ -354,8 +370,7 @@ RSpec.describe Schoolyear, type: :model do
     end
 
     it '#open' do
-      schoolyears_open_for_registration = Schoolyear.joins(:program)
-                                              .merge(Program.open).unscoped.order(:id)
+      schoolyears_open_for_registration = Schoolyear.joins(:program).merge(Program.open)
       expect(schoolyears_open_for_registration).to eq(Schoolyear.open)
     end
 

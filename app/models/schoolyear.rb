@@ -233,10 +233,10 @@ class Schoolyear < ActiveRecord::Base
 
     txt
   end
-  # [:theory, :practice].each do |h|
-  #    validates h, numericality: { only_integer: true, greater_than_or_equal_to: 0,
-  #    less_than_or_equal_to: 8784}, presence: true
-  #  end
+    [:theory, :practice].each do |instruction_hours|
+       validates instruction_hours, numericality: { only_integer: true, greater_than_or_equal_to: 0,
+      less_than_or_equal_to: 8784}, presence: true
+    end
 
   #
   # Schoolterms
@@ -345,6 +345,10 @@ class Schoolyear < ActiveRecord::Base
   # Useful for querying
   def self.full
     joins(program: :schoolterm).joins(program: :institution)
+  end
+
+  def self.open
+    joins(:program).merge(Program.open)
   end
 
   # with open registrations, registration season=true
