@@ -352,6 +352,13 @@ RSpec.describe Schoolyear, type: :model do
                                                     .where('programnames.id = ?', programname.id)
       expect(schoolyear_with_some_program_name).to eq(Schoolyear.with_programname(programname))
     end
+
+    it '#open' do
+      schoolyears_open_for_registration = Schoolyear.joins(:program)
+                                              .merge(Program.open).unscoped.order(:id)
+      expect(schoolyears_open_for_registration).to eq(Schoolyear.open)
+    end
+
   end
 end
 

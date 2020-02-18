@@ -151,6 +151,20 @@ RSpec.describe Program, type: :model do
     end
 
     context 'Schoolyears' do
+      # Open for registrations (within the registration season)
+      it '#ids_open' do
+        program_ids_open_for_registration = Program.joins(:schoolterm)
+                                                   .merge(Schoolterm.open).unscoped
+                                                   .order(:id).pluck(:id)
+        expect(program_ids_open_for_registration).to eq(Program.open.pluck(:id))
+      end
+
+      it '#open' do
+        programs_open_for_registration = Program.joins(:schoolterm)
+                                                .merge(Schoolterm.open).unscoped.order(:id)
+        expect(programs_open_for_registration).to eq(Program.open)
+      end
+
       it '-numschoolyears' do
         num_schoolyears = program.schoolyears.count
         expect(program.numschoolyears).to eq(num_schoolyears)

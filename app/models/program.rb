@@ -63,6 +63,12 @@ class Program < ActiveRecord::Base
   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1,
                                        less_than_or_equal_to: MAX_YEARS }
   validates :programname_id, uniqueness: { scope: %i[institution_id schoolterm_id] }
+
+  # Open for registrations (within the registration season)
+  def self.open
+    joins(:schoolterm).merge(Schoolterm.open).unscoped.order(:id)
+  end
+
   #
   #     # ------------------- PENDING Tests  ---------------------------------------------------
   #
@@ -245,10 +251,9 @@ class Program < ActiveRecord::Base
   end
 
   # Abbreviated institution name.  Used in registrations helper for admins and managers (schoolyear)
-    def name_term_institution_short
-      program_name_term_institution_short = short + ' | ' + schoolterm.name
-      program_name_term_institution_short += ' | ' + institution.abbrv
-    end
+  def name_term_institution_short
+    short + ' | ' + schoolterm.name + ' | ' + institution.abbrv
+  end
 
   #
   # TDD finish
