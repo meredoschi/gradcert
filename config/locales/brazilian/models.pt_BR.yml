@@ -420,12 +420,12 @@ pt_BR:
         schoolterm_id: Período letivo
         updated_at: Atualizado em
         virtual:
+          abbreviation:
+            gradcert: E
+            medres: R
+            pap: PA
           area: Área programática
           parentid: ID do programa precedente (ano anterior)
-          abbreviation:
-            pap: "PA"     # (P)rograma de (A)primoramento
-            medres: "R"   # (R)esidente Médico
-            gradcert: "E" # (E)specializando
         workload: Carga horária
       programname:
         active: Ativo
@@ -573,7 +573,7 @@ pt_BR:
           admissionsdatareportingperiod: Prazo para informar detalhes dos processos seletivos
       schooltype:
         name: Nome
-      schoolyears:
+      schoolyear:
         approved: Número de aprovados no certame
         enrollment: Matriculados
         id: Número do ano de programa
@@ -582,6 +582,7 @@ pt_BR:
         programyear: Ano do programa
         theory: Horas teóricas
         workload: Carga horária
+      schoolyears: "${activerecord.attributes.schoolyear}"
       state:
         abbreviation: Abreviação
         code: Código do estado
@@ -930,6 +931,10 @@ pt_BR:
           attributes:
             active:
               more_than_one_not_allowed: opção inválida pois detectei um outro período letivo (ainda) ativo.  Desmarque onde for pertinente e tente novamente.
+        schoolyear:
+          attributes:
+            programyear:
+              exceeds_program_duration: não pode ser maior que a duração total do programa.
         student:
           attributes:
             councilmembership:

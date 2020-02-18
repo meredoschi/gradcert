@@ -60,7 +60,7 @@ defaults: &defaults
   home_state: SÃO PAULO
   home_state_abbreviation: SP
   longest_program_duration:
-    all: 2
+    all: 10
     medres: 2
     pap: 2
   maintenance:

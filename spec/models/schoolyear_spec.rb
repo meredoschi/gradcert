@@ -8,25 +8,34 @@ RSpec.describe Schoolyear, type: :model do
   let(:identifier) { institution.id }
   let(:program) { FactoryBot.create(:program, :biannual) }
   let(:programname) { FactoryBot.create(:programname) }
-  let(:schoolyear) { FactoryBot.create(:schoolyear, :freshman, program_id: program.id) } # first
+  let(:programid) { program.id }
+
+  let(:schoolyear) { FactoryBot.create(:schoolyear, :freshman, program_id: program.id) }
+
   let(:schoolterm) { FactoryBot.create(:schoolterm, :pap) }
 
-  let!(:second_schoolyear) { FactoryBot.create(:schoolyear, :sophmore, program_id: program.id) }
   let(:specified_dt) { Time.zone.today + 4.months }
+
+  let(:MAX_YEARS) { Program::MAX_YEARS }
+
+  # Even Medical Residency training will not have this many years, in general.
+  let(:programyear_too_high) { 7 }
 
   context 'creation' do
     it 'can be created' do
       #  print I18n.t('activerecord.models.schoolyear').capitalize + ': '
       #  schoolyear = FactoryBot.create(:schoolyear, :freshman)
+      puts schoolyear.info
       FactoryBot.create(:schoolyear, :freshman)
+
       #  puts schoolyear.info
     end
   end
 
   context 'Validations' do
-
     it { is_expected.to validate_presence_of(:practice) }
     it { is_expected.to validate_presence_of(:theory) }
+    it { is_expected.to validate_presence_of(:programyear) }
 
     it { is_expected.to validate_numericality_of(:practice).only_integer }
     it { is_expected.to validate_numericality_of(:practice).is_greater_than_or_equal_to(0) }
@@ -36,7 +45,25 @@ RSpec.describe Schoolyear, type: :model do
     it { is_expected.to validate_numericality_of(:theory).is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_numericality_of(:theory).is_less_than_or_equal_to(8784) }
 
+    it { is_expected.to validate_numericality_of(:programyear).only_integer }
+    it { is_expected.to validate_numericality_of(:programyear).is_greater_than_or_equal_to(1) }
+    it {
+      is_expected.to validate_numericality_of(:programyear)
+        .is_less_than_or_equal_to(Program::MAX_YEARS)
+    }
 
+    it '-creation is blocked when programyear is higher than the program duration' do
+      programyear_i18n = I18n.t('activerecord.attributes.schoolyear.programyear')
+
+      msg = I18n.t('validation_failed') + ': ' + programyear_i18n + ' ' + I18n
+            .t('activerecord.errors.models.schoolyear.attributes'\
+              '.programyear.exceeds_program_duration')
+
+      expect do
+        FactoryBot.create(:schoolyear, :freshman, programyear: 7)
+        # https://stackoverflow.com/questions/45128434/comparing-rspec-custom-activerecordrecordinvalid-errors-messages
+      end .to raise_error(ActiveRecord::RecordInvalid, msg)
+    end
   end
 
   context 'Instance methods' do
@@ -270,6 +297,19 @@ RSpec.describe Schoolyear, type: :model do
   end
 
   context 'Class methods' do
+    it '#for_schoolterm(schoolterm)' do
+      schoolyears_pertaining_to_a_schoolterm = Schoolyear
+                                               .joins(:program)
+                                               .merge(Program.for_schoolterm(schoolterm))
+      expect(schoolyears_pertaining_to_a_schoolterm).to eq(Schoolyear.for_schoolterm(schoolterm))
+    end
+
+    it '#for_progyear(programid, year)' do
+      schoolyear_pertaining_to_program_and_year = Schoolyear
+                                                  .where(program_id: programid, programyear: year)
+      expect(schoolyear_pertaining_to_program_and_year).to eq(Schoolyear
+        .for_progyear(programid, year))
+    end
     # Useful for querying
     it '#self.full' do
       schoolyears_full = Schoolyear.joins(program: :schoolterm).joins(program: :institution)
@@ -373,7 +413,6 @@ RSpec.describe Schoolyear, type: :model do
       schoolyears_open_for_registration = Schoolyear.joins(:program).merge(Program.open)
       expect(schoolyears_open_for_registration).to eq(Schoolyear.open)
     end
-
   end
 end
 

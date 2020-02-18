@@ -6,21 +6,26 @@ class Schoolyear < ActiveRecord::Base
 
   has_paper_trail
 
-  #  ******* Review in progres - January 2020 ********
+  #  ******* Review in progres - February 2020 ********
   #  has_many :registration, dependent: :restrict_with_exception
   belongs_to :program
+
+  scope :ordered_by_programname_and_year, -> {
+                                            joins(program: :programname)
+                                              .unscoped
+                                              .order('programnames.name,schoolyears.programyear')
+                                          }
+
   #  *************************************************
 
-  #   validate :valid_program_year, on: :update
+  validate :valid_program_year
 
-  #   validate :valid_program_year
+  #  validate :valid_program_year, on: :update
 
-  #    validates_uniqueness_of :programyear, :scope => [:program_id, :schoolterm_id]
-  #  To do implement custom validation for parent model
-
-  validates :programyear, presence: true, numericality: { only_integer: true,
-                                                          greater_than_or_equal_to: 1,
-                                                          less_than_or_equal_to: 5 }
+  validates :programyear, presence: true,
+                          numericality: { only_integer: true,
+                                          greater_than_or_equal_to: 1,
+                                          less_than_or_equal_to: Program::MAX_YEARS }
 
   #  Reviewed January 2020
 
@@ -233,10 +238,10 @@ class Schoolyear < ActiveRecord::Base
 
     txt
   end
-    [:theory, :practice].each do |instruction_hours|
-       validates instruction_hours, numericality: { only_integer: true, greater_than_or_equal_to: 0,
-      less_than_or_equal_to: 8784}, presence: true
-    end
+  %i[theory practice].each do |instruction_hours|
+    validates instruction_hours, numericality: { only_integer: true, greater_than_or_equal_to: 0,
+                                                 less_than_or_equal_to: 8784 }, presence: true
+  end
 
   #
   # Schoolterms
@@ -282,32 +287,23 @@ class Schoolyear < ActiveRecord::Base
     current
   end
 
-  #Used in reports rake task
-   def self.with_programname(programname)
-     joins(program: :programname).where('programnames.id = ?', programname.id)
-   end
+  # Used in reports rake task
+  def self.with_programname(programname)
+    joins(program: :programname).where('programnames.id = ?', programname.id)
+  end
 
   def self.for_schoolterm(schoolterm)
     joins(:program).merge(Program.for_schoolterm(schoolterm))
   end
 
-  #
-  # def self.ordered_by_programname_and_year
-  #   joins(program: :programname).order('programnames.name, schoolyears.programyear')
-  # end
-  #
-  # def self.for_schoolterm(s)
-  #   joins(:program).merge(Program.for_schoolterm(s))
-  # end
-  #
-  # def self.ordered_by_programname_and_year
-  #   joins(program: :programname).order('programnames.name, schoolyears.programyear')
-  # end
-  #
-  # def self.for_progyear(programid, year)
-  #   where(program_id: programid, programyear: year)
-  # end
-  #
+  def self.ordered_by_programname_and_year
+    joins(program: :programname).order('programnames.name, schoolyears.programyear')
+  end
+
+  def self.for_progyear(programid, year)
+    where(program_id: programid, programyear: year)
+  end
+
   # Used in registration.rb
   def places_available
     program.institution.placesavailable
@@ -319,28 +315,19 @@ class Schoolyear < ActiveRecord::Base
   # end
   #
 
-  # Which belong to the next registration season
+  def self.default_scope
+    # this notation prevents ambiguity
+    order(programyear: :asc)
+    # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
+  end
 
-  # *******************************************************
-  # To do: fix this - to use dates properly
-  #  def self.open
-  #    joins(:program).where('programs.schoolterm_id = ? ', Schoolterm.allowed.first.id)
-  #  end
+  def valid_program_year
+    if programyear.present? && program.present? && program.duration.present? \
+      && programyear > program.duration
 
-  #  def self.default_scope
-  # this notation prevents ambiguity
-  #    order(programyear: :asc)
-  # http://stackoverflow.com/questions/16896937/rails-activerecord-pgerror-error-column-reference-created-at-is-ambiguous
-  #  end
-
-  #   def valid_program_year
-
-  #      if (programyear.present? && num_program_schoolyears > program.duration)
-  #
-  #        errors.add(:programyear, :exceeds_program_duration)
-
-  #      end
-  #  end
+      errors.add(:programyear, :exceeds_program_duration)
+    end
+  end
 
   # Useful for querying
   def self.full
@@ -355,13 +342,6 @@ class Schoolyear < ActiveRecord::Base
   # To do: must fix - Schoolterm.allowed.first (to use actual date)
   #  def self.nextterm
   #    full.where('schoolterms.id = ? ', Schoolterm.allowed.first.id)
-  #  end
-
-  # To do: must fix - Schoolterm.allowed.first (to use actual date)
-  # with open registrations, registration season=true
-  # To do: distinguish between pap and medres
-  #  def self.currentterm
-  #    full.where('schoolterms.id = ? ', Schoolterm.current.first.id)
   #  end
 
   #  def self.pap_programs

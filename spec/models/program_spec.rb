@@ -67,9 +67,6 @@ RSpec.describe Program, type: :model do
     it {
       is_expected.to accept_nested_attributes_for(:address).allow_destroy(true)
     }
-
-    pending 'validate :duration_consistency'
-    pending 'validate schoolyear_range'
   end
 
   it '-theory' do

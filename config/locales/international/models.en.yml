@@ -422,11 +422,11 @@ en:
         schoolterm_id: School term identifier
         updated_at: Updated at
         virtual:
-          area: Program area
           abbreviation:
-            pap: "P"       # (P)rofessional Advancement
-            medres: "MR"   # (M)edical (R)esident
-            gradcert: "C"  # Graduate (C)ertificate
+            gradcert: C
+            medres: MR
+            pap: P
+          area: Program area
           parentid: Previous program ID
         workload: Workload
       programname:
@@ -575,7 +575,7 @@ en:
           admissionsdatareportingperiod: Admissions related information data entry period
       schooltype:
         name: Name
-      schoolyears:
+      schoolyear:
         approved: Number of people approved in the exams
         enrollment: Matriculated (registered)
         id: Program year number
@@ -584,6 +584,7 @@ en:
         programyear: Program year
         theory: Theory hours
         workload: Workload
+      schoolyears: "${activerecord.attributes.schoolyear}"
       state:
         abbreviation: Abbreviation
         code: State code
@@ -933,6 +934,10 @@ en:
           attributes:
             active:
               more_than_one_not_allowed: invalid option for I have detected another schoolterm which is (still) active.  'Uncheck' (deselect) where appropriate and try again.
+        schoolyear:
+          attributes:
+            programyear:
+              exceeds_program_duration: may not be higher than the entire program duration.
         student:
           attributes:
             councilmembership:
