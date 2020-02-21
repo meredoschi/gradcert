@@ -139,14 +139,12 @@ RSpec.describe Schoolyear, type: :model do
   end
 
   it '-info' do
-    sep = Pretty.sep
+    sep = Pretty.sep + ' '
 
-    schoolyear_info2 = schoolyear.identifier_i18n + sep + ' ' + \
-                       schoolyear.program_id_i18n + sep + ' ' + \
-                       schoolyear.programyear_id_i18n + sep + ' ' + \
-                       schoolyear.workload_i18n
+    schoolyear_info = [schoolyear.identifier_i18n, schoolyear.program_id_i18n,
+                       schoolyear.programyear_id_i18n, schoolyear.workload_i18n].join(sep)
 
-    expect(schoolyear_info2).to eq(schoolyear.info)
+    expect(schoolyear_info).to eq(schoolyear.info)
   end
 
   it '-name' do

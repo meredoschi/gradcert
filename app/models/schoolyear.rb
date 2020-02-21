@@ -192,11 +192,9 @@ class Schoolyear < ActiveRecord::Base
   end
 
   def info
-    sep = Pretty.sep
-    identifier_i18n + sep + ' ' + \
-      program_id_i18n + sep + ' ' + \
-      programyear_id_i18n + sep + ' ' + \
-      workload_i18n
+    sep = Pretty.sep + ' '
+
+    [identifier_i18n, program_id_i18n, programyear_id_i18n, workload_i18n].join(sep)
   end
 
   def level
@@ -346,7 +344,6 @@ class Schoolyear < ActiveRecord::Base
   def valid_program_year
     if programyear.present? && program.present? && program.duration.present? \
       && programyear > program.duration
-
       errors.add(:programyear, :exceeds_program_duration)
     end
   end
