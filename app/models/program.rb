@@ -256,7 +256,7 @@ class Program < ActiveRecord::Base
 
   # Abbreviated institution name.  Used in registrations helper for admins and managers (schoolyear)
   def name_term_institution_short
-    short + ' | ' + schoolterm.name + ' | ' + institution.abbrv
+    [short, schoolterm.name, institution.abbrv].join(' | ')
   end
 
   #

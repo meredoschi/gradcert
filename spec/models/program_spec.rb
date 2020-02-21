@@ -13,6 +13,7 @@ RSpec.describe Program, type: :model do
   let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
   let(:user) { FactoryBot.create(:user, :pap) }
   let(:institution) { FactoryBot.create(:institution) }
+  let(:schoolterm) { FactoryBot.create(:schoolterm, :pap) }
 
   MAX_YEARS = Settings.longest_program_duration.all
   MAX_COMMENT_LEN = Settings.maximum_comment_length.program
@@ -128,6 +129,17 @@ RSpec.describe Program, type: :model do
       it '-sector (alias to area)' do
         expect(program.sector).to eq(program.area)
       end
+
+      # Abbreviated institution name.  Used in registrations helper for admins and managers (schoolyear)
+   it '-name_term_institution_short' do
+     sep=' | '
+     program_name_term_institution_abbreviated= [program.short, program.schoolterm.name,
+                        program.institution.abbrv].join(sep)
+
+     expect(program_name_term_institution_abbreviated).to eq(program.name_term_institution_short)
+
+  end
+
     end
 
     context 'Institutions' do
@@ -168,6 +180,12 @@ RSpec.describe Program, type: :model do
           user_institution_programs=Program.where(institution_id: user.institution_id)
           expect(user_institution_programs).to eq(Program.from_users_institution(user))
       end
+
+      it '#for_schoolterm(schoolterm)' do
+        programs_for_schoolterm=Program.where(schoolterm_id: schoolterm.id)
+        expect(programs_for_schoolterm).to eq(Program.for_schoolterm(schoolterm))
+      end
+
 
       it '-numschoolyears' do
         num_schoolyears = program.schoolyears.count
