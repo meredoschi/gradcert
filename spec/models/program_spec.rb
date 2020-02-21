@@ -11,6 +11,8 @@ RSpec.describe Program, type: :model do
   let(:long_name) { FactoryBot.create(:programname, :long_name) }
   let(:program_with_long_name) { FactoryBot.create(:program, :annual, programname: long_name) }
   let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
+  let(:user) { FactoryBot.create(:user, :pap) }
+  let(:institution) { FactoryBot.create(:institution) }
 
   MAX_YEARS = Settings.longest_program_duration.all
   MAX_COMMENT_LEN = Settings.maximum_comment_length.program
@@ -160,6 +162,11 @@ RSpec.describe Program, type: :model do
         programs_open_for_registration = Program.joins(:schoolterm)
                                                 .merge(Schoolterm.open).unscoped.order(:id)
         expect(programs_open_for_registration).to eq(Program.open)
+      end
+
+      it '#from_users_institution(user)' do
+          user_institution_programs=Program.where(institution_id: user.institution_id)
+          expect(user_institution_programs).to eq(Program.from_users_institution(user))
       end
 
       it '-numschoolyears' do

@@ -69,6 +69,10 @@ class Program < ActiveRecord::Base
     joins(:schoolterm).merge(Schoolterm.open).unscoped.order(:id)
   end
 
+  def self.from_users_institution(user)
+    where(institution_id: user.institution_id)
+  end
+
   #
   #     # ------------------- PENDING Tests  ---------------------------------------------------
   #

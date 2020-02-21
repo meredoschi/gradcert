@@ -223,7 +223,6 @@ module RegistrationsHelper
 
 				when admin?(user) then Schoolyear.contextual_today.ordered_by_programname_and_year
 	        when pap_manager?(user) then Schoolyear.contextual_today.ordered_by_programname_and_year
-  	# 			when pap_local_admin?(user) then Schoolyear.nextterm.for_users_institution(user)
 			when pap_local_admin?(user) then Schoolyear.freshman.open.for_users_institution(user).ordered_by_programname_and_year
 #  				when pap_local_admin?(user) then @all_schoolyears.open.for_users_institution(user).freshman
 

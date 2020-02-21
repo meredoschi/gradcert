@@ -582,7 +582,15 @@ pt_BR:
         programyear: Ano do programa
         theory: Horas teóricas
         workload: Carga horária
-      schoolyears: "${activerecord.attributes.schoolyear}"
+      schoolyears:
+        approved: Número de aprovados no certame
+        enrollment: Matriculados
+        id: Número do ano de programa
+        practice: Horas práticas
+        program_id: Programa
+        programyear: Ano do programa
+        theory: Horas teóricas
+        workload: Carga horária
       state:
         abbreviation: Abreviação
         code: Código do estado

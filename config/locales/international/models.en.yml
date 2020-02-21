@@ -584,7 +584,15 @@ en:
         programyear: Program year
         theory: Theory hours
         workload: Workload
-      schoolyears: "${activerecord.attributes.schoolyear}"
+      schoolyears:
+        approved: Number of people approved in the exams
+        enrollment: Matriculated (registered)
+        id: Program year number
+        practice: Practice hours
+        program_id: Program
+        programyear: Program year
+        theory: Theory hours
+        workload: Workload
       state:
         abbreviation: Abbreviation
         code: State code

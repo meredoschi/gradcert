@@ -10,25 +10,28 @@ RSpec.describe Schoolyear, type: :model do
   let(:programname) { FactoryBot.create(:programname) }
   let(:programid) { program.id }
 
-  let(:schoolyear) { FactoryBot.create(:schoolyear, :freshman, program_id: program.id) }
+  let(:schoolyear) { FactoryBot.create(:schoolyear, :sophmore, program_id: program.id) }
 
   let(:schoolterm) { FactoryBot.create(:schoolterm, :pap) }
 
   let(:specified_dt) { Time.zone.today + 4.months }
+
+  let(:user) { FactoryBot.create(:user, :pap) }
 
   let(:MAX_YEARS) { Program::MAX_YEARS }
 
   # Even Medical Residency training will not have this many years, in general.
   let(:programyear_too_high) { 7 }
 
+  context 'associations' do
+    it {
+      is_expected.to have_many(:registration).dependent(:restrict_with_exception)
+    }
+  end
+
   context 'creation' do
     it 'can be created' do
-      #  print I18n.t('activerecord.models.schoolyear').capitalize + ': '
-      #  schoolyear = FactoryBot.create(:schoolyear, :freshman)
-      puts schoolyear.info
       FactoryBot.create(:schoolyear, :freshman)
-
-      #  puts schoolyear.info
     end
   end
 
@@ -218,13 +221,19 @@ RSpec.describe Schoolyear, type: :model do
     expect(schoolyear_cohort_start).to eq(schoolyear.cohort_start)
   end
 
+  it '-start' do
+    seniority = (schoolyear.programyear - 1).year # Offset for multi-year course programs
+    schoolyear_start = schoolyear.school_term.start + seniority
+    expect(schoolyear_start).to eq(schoolyear.start)
+  end
+
   it '-yr' do
     schoolyear_yr = schoolyear.program.schoolterm.start.year
     expect(schoolyear_yr).to eq(schoolyear.yr)
   end
 
   it '-term_start_year' do
-    year_term_starts = schoolyear.school_term.start.year
+    year_term_starts = schoolyear.start.year
     expect(year_term_starts).to eq(schoolyear.term_start_year)
   end
 
@@ -296,6 +305,16 @@ RSpec.describe Schoolyear, type: :model do
     expect(program_info).to eq(schoolyear.program_name_incoming_cohort_program_year)
   end
 
+  it '-registrations' do
+    schoolyear_registrations = schoolyear.registration
+    expect(schoolyear_registrations).to eq(schoolyear.registrations)
+  end
+
+  it '-enrollment' do
+    schoolyear_enrollment = schoolyear.registration.count
+    expect(schoolyear_enrollment).to eq(schoolyear.enrollment)
+  end
+
   context 'Class methods' do
     it '#for_schoolterm(schoolterm)' do
       schoolyears_pertaining_to_a_schoolterm = Schoolyear
@@ -311,7 +330,7 @@ RSpec.describe Schoolyear, type: :model do
         .for_progyear(programid, year))
     end
     # Useful for querying
-    it '#self.full' do
+    it '#full' do
       schoolyears_full = Schoolyear.joins(program: :schoolterm).joins(program: :institution)
       expect(schoolyears_full).to eq(Schoolyear.full)
     end
@@ -361,10 +380,30 @@ RSpec.describe Schoolyear, type: :model do
       expect(schoolyear_ids_in_context).to eq(Schoolyear.ids_contextual_on(specified_dt))
     end
 
+    it '#ids_start_on(specified_dt)' do
+      query = "with Intervals_CTE AS (select s.id, ((s.programyear-1)::VARCHAR || ' year')"\
+     '::interval as intervl, s.program_id, s.programyear,t.start, t.finish from schoolyears s, '\
+     'programs p, schoolterms t where s.program_id=p.id and p.schoolterm_id=t.id) '\
+     ', '\
+     'Schoolyear_CTE AS (select i.id, (i.start+i.intervl)::date as start, '\
+     "                  (i.start+i.intervl+interval '1 year'-interval '1 day')::date as finish "\
+     'from Intervals_CTE i) '\
+     'select id from Schoolyear_CTE where start=?'
+      schoolyear_ids_start_on_specified_dt = Schoolyear.find_by_sql [query, specified_dt]
+
+      expect(schoolyear_ids_start_on_specified_dt).to eq(Schoolyear.ids_start_on(specified_dt))
+    end
+
     it '#contextual_on(specified_dt)' do
       schoolyears_in_context = Schoolyear.where(id: Schoolyear.ids_contextual_on(specified_dt))
 
       expect(schoolyears_in_context).to eq(Schoolyear.contextual_on(specified_dt))
+    end
+
+    it '#start_on(specified_dt)' do
+      schoolyear_start_on_specified_dt = Schoolyear.where(id: Schoolyear.ids_start_on(specified_dt))
+
+      expect(schoolyear_start_on_specified_dt).to eq(Schoolyear.start_on(specified_dt))
     end
 
     it '#for_schoolterm(schoolterm)' do
@@ -402,6 +441,18 @@ RSpec.describe Schoolyear, type: :model do
       expect(schoolyears_from_institution).to eq(Schoolyear.from_institution(institution))
     end
 
+    # Alias, to maintain compatibility with the original method name
+    it '#for_users_institution(user)' do
+      expect(Schoolyear.for_users_institution(user)).to eq(Schoolyear.from_users_institution(user))
+    end
+
+    # New formulation
+    it '#from_users_institution(user)' do
+      user_institution_schoolyears = Schoolyear.joins(:program)
+                                               .merge(Program.from_users_institution(user))
+      expect(user_institution_schoolyears).to eq(Schoolyear.from_users_institution(user))
+    end
+
     # Used in reports rake task
     it '#with_programname(programname)' do
       schoolyear_with_some_program_name = Schoolyear.joins(program: :programname)
@@ -412,6 +463,12 @@ RSpec.describe Schoolyear, type: :model do
     it '#open' do
       schoolyears_open_for_registration = Schoolyear.joins(:program).merge(Program.open)
       expect(schoolyears_open_for_registration).to eq(Schoolyear.open)
+    end
+
+    # Schoolyears related to a program
+    it '#for_program(program)' do
+      program_schoolyears = Schoolyear.where(id: program.id)
+      expect(program_schoolyears).to eq(Schoolyear.for_program(program))
     end
   end
 end
