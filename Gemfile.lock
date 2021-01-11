@@ -241,7 +241,7 @@ GEM
       activesupport (>= 3.0, < 5.2)
       i18n
     raphael-rails (2.1.2)
-    redcarpet (3.5.0)
+    redcarpet (3.5.1)
     ref (2.0.0)
     regexp_parser (1.6.0)
     responders (2.4.1)
