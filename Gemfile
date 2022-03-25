@@ -25,7 +25,6 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
   gem 'simplecov', require: false
   gem 'webrat'
 end
@@ -35,12 +34,13 @@ group :test, :development do
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
   gem 'rubocop', '~> 0.78.0' # December 2019
-#  gem 'rubocop-rails', '~> 2.14', '>= 2.14.2' # March 2022 - Rails 5.0.7
-  # gem 'rubocop-rails', '~> 2.4'
+  # gem 'rubocop-rails', '~> 2.4' # deprecated
   gem 'shoulda-matchers', '~> 3.1' # July 2017
   gem 'json_converter', '~> 0.0.0' # November 2017
   gem 'capybara' # September 2018
   gem 'httparty' # January 2020
+  gem 'rspec-rails', '~> 4.0.0' # March 2022
+  gem 'rubocop-rspec'
 end
 
 # General
