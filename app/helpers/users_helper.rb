@@ -32,7 +32,7 @@ module UsersHelper
   def show_permission_for(user)
     desc = 'definitions.user_permission.description.'
 
-    permission_description = case # rubocop:disable EmptyCaseCondition
+    permission_description = case # rubocop:disable Style/EmptyCaseCondition
 
                              when permission_for(user) == 'admin'
                                I18n.t(desc + 'admin')
@@ -109,7 +109,7 @@ module UsersHelper
 
     # Future to do: Graduate certificate
 
-    profile = case # rubocop:disable EmptyCaseCondition
+    profile = case # rubocop:disable Style/EmptyCaseCondition
 
               when permission_for(user) == 'admin' then all_permissions
               when permission_for(user) == 'adminreadonly' then relevant_to_read_only

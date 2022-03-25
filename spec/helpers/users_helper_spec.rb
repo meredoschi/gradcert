@@ -63,7 +63,7 @@ describe UsersHelper, type: :helper do
 
         # Future to do: Graduate certificate
 
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(admin) == 'admin' then all_permissions
         when permission_for(admin) == 'adminreadonly' then relevant_to_read_only
@@ -78,7 +78,7 @@ describe UsersHelper, type: :helper do
 
       it '-actual_users_permissions_for(adminreadonly)' do
 
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(adminreadonly) == 'admin' then all_permissions
         when permission_for(adminreadonly) == 'adminreadonly' then relevant_to_read_only
@@ -93,7 +93,7 @@ describe UsersHelper, type: :helper do
 
       it '-actual_users_permissions_for(papmgr)' do
 
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(papmgr_user) == 'admin' then all_permissions
         when permission_for(papmgr_user) == 'adminreadonly' then relevant_to_read_only
@@ -108,7 +108,7 @@ describe UsersHelper, type: :helper do
 
       it '-actual_users_permissions_for(paplocaladm)' do
 
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(paplocaladm_user) == 'admin' then all_permissions
         when permission_for(paplocaladm_user) == 'adminreadonly' then relevant_to_read_only
@@ -123,7 +123,7 @@ describe UsersHelper, type: :helper do
 
       it '-actual_users_permissions_for(medresmgr)' do
 
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(medresmgr_user) == 'admin' then all_permissions
         when permission_for(medresmgr_user) == 'adminreadonly' then relevant_to_read_only
@@ -138,7 +138,7 @@ describe UsersHelper, type: :helper do
 
       it '-actual_users_permissions_for(medreslocaladm)' do
 
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(medreslocaladm_user) == 'admin' then all_permissions
         when permission_for(medreslocaladm_user) == 'adminreadonly' then relevant_to_read_only
@@ -546,7 +546,7 @@ describe UsersHelper, type: :helper do
 
     # Includes local admins (i.e. Permissions for users from own institution)
     it '-retrieve_users_permissions_for(user)' do
-      profile = case # rubocop:disable EmptyCaseCondition
+      profile = case # rubocop:disable Style/EmptyCaseCondition
 
       when permission_for(user) == 'admin' then return Permission.all
       when permission_for(user) == 'adminreadonly' then return Permission.readonly
@@ -564,7 +564,7 @@ describe UsersHelper, type: :helper do
     context 'permissions joins(:user)' do
 
       it 'retrieve_active_users_permissions_for(user)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(user) == 'admin' then Permission.all.joins(:user).uniq
         when permission_for(user) == 'adminreadonly' then Permission.readonly
@@ -581,7 +581,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_active_users_permissions_for(admin)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(admin) == 'admin' then Permission.all.joins(:user).uniq
         when permission_for(admin) == 'adminreadonly' then Permission.readonly
@@ -598,7 +598,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_active_users_permissions_for(adminreadonly)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(adminreadonly) == 'admin' then Permission.all.joins(:user).uniq
         when permission_for(adminreadonly) == 'adminreadonly' then Permission.readonly
@@ -615,7 +615,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_active_users_permissions_for(paplocaladm)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(paplocaladm_user) == 'admin' then Permission.all.joins(:user).uniq
         when permission_for(paplocaladm_user) == 'adminreadonly' then Permission.readonly
@@ -632,7 +632,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_active_users_permissions_for(papmgr)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(papmgr_user) == 'admin' then Permission.all.joins(:user).uniq
         when permission_for(papmgr_user) == 'adminreadonly' then Permission.readonly
@@ -649,7 +649,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_active_users_permissions_for(medreslocaladm)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(medreslocaladm_user) == 'admin' then Permission.all.joins(:user).uniq
         when permission_for(medreslocaladm_user) == 'adminreadonly' then Permission.readonly
@@ -666,7 +666,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_active_users_permissions_for(medresmgr)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(medresmgr_user) == 'admin' then Permission.all.joins(:user).uniq
         when permission_for(medresmgr_user) == 'adminreadonly' then  Permission.readonly
@@ -687,7 +687,7 @@ describe UsersHelper, type: :helper do
     context 'retrieve_users_permissions_for(user) (all possible permissions even if no one with that one is yet registered in the database)' do
 
       it 'retrieve_users_permissions_for(user)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(user) == 'admin' then Permission.all
         when permission_for(user) == 'adminreadonly' then Permission.readonly
@@ -704,7 +704,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_users_permissions_for(admin)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(admin) == 'admin' then Permission.all
         when permission_for(admin) == 'adminreadonly' then Permission.readonly
@@ -721,7 +721,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_users_permissions_for(adminreadonly)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(adminreadonly) == 'admin' then Permission.all
         when permission_for(adminreadonly) == 'adminreadonly' then Permission.readonly
@@ -738,7 +738,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_users_permissions_for(paplocaladm)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(paplocaladm_user) == 'admin' then Permission.all
         when permission_for(paplocaladm_user) == 'adminreadonly' then Permission.readonly
@@ -755,7 +755,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_users_permissions_for(papmgr)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(papmgr_user) == 'admin' then Permission.all
         when permission_for(papmgr_user) == 'adminreadonly' then Permission.readonly
@@ -772,7 +772,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_users_permissions_for(medreslocaladm)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(medreslocaladm_user) == 'admin' then Permission.all
         when permission_for(medreslocaladm_user) == 'adminreadonly' then Permission.readonly
@@ -789,7 +789,7 @@ describe UsersHelper, type: :helper do
       end
 
       it 'retrieve_users_permissions_for(medresmgr)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(medresmgr_user) == 'admin' then Permission.all
         when permission_for(medresmgr_user) == 'adminreadonly' then  Permission.readonly
@@ -884,7 +884,7 @@ describe UsersHelper, type: :helper do
     context 'retrieve_institution_with_users_for(user)' do
 
       it '-retrieve_institution_with_users_for(admin)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(admin) == 'admin' then Institution.with_users.to_a.uniq
         when permission_for(admin) == 'adminreadonly' then Institution.with_users_seen_by_readonly.to_a.uniq
@@ -897,7 +897,7 @@ describe UsersHelper, type: :helper do
       end
 
       it '-retrieve_institution_with_users_for(adminreadonly)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(adminreadonly) == 'admin' then Institution.with_users.to_a.uniq
         when permission_for(adminreadonly) == 'adminreadonly' then Institution.with_users_seen_by_readonly.to_a.uniq
@@ -910,7 +910,7 @@ describe UsersHelper, type: :helper do
       end
 
       it '-retrieve_institution_with_users_for(papmgr)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(papmgr_user) == 'admin' then Institution.with_users.to_a.uniq
         when permission_for(papmgr_user) == 'adminreadonly' then Institution.with_users_seen_by_readonly.to_a.uniq
@@ -923,7 +923,7 @@ describe UsersHelper, type: :helper do
       end
 
       it '-retrieve_institution_with_users_for(medresmgr)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(medresmgr_user) == 'admin' then Institution.with_users.to_a.uniq
         when permission_for(medresmgr_user) == 'adminreadonly' then Institution.with_users_seen_by_readonly.to_a.uniq
@@ -940,7 +940,7 @@ describe UsersHelper, type: :helper do
     context 'retrieve_label_institutions_with_users_for(user)' do
 
       it '-retrieve_label_institutions_with_users_for(admin)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(admin) == 'admin' then t('institution_with_users.all')
         when permission_for(admin) == 'adminreadonly' then t('institution_with_users.all')
@@ -957,7 +957,7 @@ describe UsersHelper, type: :helper do
       end
 
       it '-retrieve_label_institutions_with_users_for(adminreadonly)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(adminreadonly) == 'admin' then t('institution_with_users.all')
         when permission_for(adminreadonly) == 'adminreadonly' then t('institution_with_users.all')
@@ -974,7 +974,7 @@ describe UsersHelper, type: :helper do
       end
 
       it '-retrieve_label_institutions_with_users_for(papmgr_user)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(papmgr_user) == 'admin' then t('institution_with_users.all')
         when permission_for(papmgr_user) == 'adminreadonly' then t('institution_with_users.all')
@@ -991,7 +991,7 @@ describe UsersHelper, type: :helper do
       end
 
       it '-retrieve_label_institutions_with_users_for(medresmgr_user)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(medresmgr_user) == 'admin' then t('institution_with_users.all')
         when permission_for(medresmgr_user) == 'adminreadonly' then t('institution_with_users.all')
@@ -1009,7 +1009,7 @@ describe UsersHelper, type: :helper do
 
       # regular user should be false
       it '-retrieve_label_institutions_with_users_for(user)' do
-        profile = case # rubocop:disable EmptyCaseCondition
+        profile = case # rubocop:disable Style/EmptyCaseCondition
 
         when permission_for(user) == 'admin' then t('institution_with_users.all')
         when permission_for(user) == 'adminreadonly' then t('institution_with_users.all')

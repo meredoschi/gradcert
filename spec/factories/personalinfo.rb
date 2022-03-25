@@ -8,7 +8,7 @@ FactoryBot.define do
     #  othername: string, contact_id: integer, mothersname: string)
 
     #    home_state_abbreviation = Settings.home_state_abbreviation
-    dob { Faker::Date.birthday(18, 70) }
+    dob { Faker::Date.birthday(min_age: 18, max_age: 70) }
     idtype { I18n.t('activerecord.constants.personalinfo.idtype.state_registration') }
 
     # association :contact_id, [:contact, :clerical_pap]

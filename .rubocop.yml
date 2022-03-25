@@ -1,4 +1,6 @@
 require: rubocop-rails
+AllCops:
+  TargetRubyVersion: 2.7
 Metrics/LineLength:
   Max: 100
   Exclude:

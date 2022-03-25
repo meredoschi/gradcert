@@ -42,6 +42,7 @@ group :test, :development do
   gem 'httparty' # January 2020
   gem 'rspec-rails', '~> 4.0.0' # March 2022
   gem 'rubocop-rspec'
+  gem 'rubocop-faker' # March 2022
 end
 
 # General
