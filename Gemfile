@@ -13,11 +13,12 @@ end
 group :development do
 #  gem 'bullet'
   gem 'active_record_doctor' # https://github.com/gregnavis/active_record_doctor # October 2019
-  gem 'axlsx', '~> 3.0.0pre' # i18n-tasks xlsx-report
+
+ #  gem 'axlsx', '~> 3.0.0pre' # i18n-tasks xlsx-report # Rails 5.0.7 update conflict
+
   gem 'mime-types', '~> 3.3'
   gem 'byebug' #  Dec 2016
   gem 'railroady' # https://github.com/preston/railroady
-  gem 'rspec-rails'
   gem 'spring'
   gem 'brakeman' # August 2018
   #gem 'rails-erb-lint' # August 2018
@@ -34,7 +35,8 @@ group :test, :development do
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
   gem 'rubocop', '~> 0.78.0' # December 2019
-  gem 'rubocop-rails', '~> 2.4'
+#  gem 'rubocop-rails', '~> 2.14', '>= 2.14.2' # March 2022 - Rails 5.0.7
+  # gem 'rubocop-rails', '~> 2.4'
   gem 'shoulda-matchers', '~> 3.1' # July 2017
   gem 'json_converter', '~> 0.0.0' # November 2017
   gem 'capybara' # September 2018
@@ -45,6 +47,7 @@ end
 
 gem 'active_link_to'
 gem 'activerecord-reset-pk-sequence' # https://github.com/splendeo/activerecord-reset-pk-sequence
+gem 'activerecord', '~> 5.0.7' # Added for Rails 5.0.7 - March 2022
 gem 'addressable', '~> 2.8'
 gem 'bigdecimal', '~> 1.4' # Added for Ruby 2.7 - March 2022
 gem 'cancancan'
@@ -69,17 +72,21 @@ gem 'money'
 gem 'money-rails'
 gem 'morrisjs-rails'
 gem 'nokogiri', ">= 1.13.2"
-gem 'paper_trail', '~> 3.0.6'
+#gem 'paper_trail', '~> 3.0.6'
+gem 'paper_trail', '~> 5.0', '>= 5.0.1' # Rails 5.0.7
 gem 'passenger'
 gem 'pg', '0.20' # Use postgresql as the database for Active Record
 gem 'prawn' # June 2016
 gem 'prawn-table', '~> 0.2.0'
 gem 'priceable'
-gem 'rails', '~> 4.2.10'
+#gem 'rails', '~> 4.2.10'
+gem 'rails', '~> 5.0.7'
 gem 'rails-fix-permissions'
-gem 'ransack', '~> 1.8.0'
+#gem 'ransack', '~> 1.8.0'
+gem 'ransack', '~> 2.1', '>= 2.1.1' # Rails 5.0.7 update
 gem 'raphael-rails'
-gem "rubyzip", ">= 1.3.0"
+#gem "rubyzip", ">= 1.3.0"
+gem 'rubyzip', '~> 2.3' # Rails 5.0.7 update March 2022
 gem 'seed_dump' # Marcelo - February 2016
 gem 'settingslogic'
 gem 'simple_xlsx_writer' # Excel export
