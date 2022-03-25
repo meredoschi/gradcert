@@ -45,6 +45,7 @@ end
 
 gem 'active_link_to'
 gem 'activerecord-reset-pk-sequence' # https://github.com/splendeo/activerecord-reset-pk-sequence
+gem 'addressable', '~> 2.8'
 gem 'bigdecimal', '~> 1.4' # Added for Ruby 2.7 - March 2022
 gem 'cancancan'
 gem 'carrierwave'

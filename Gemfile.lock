@@ -373,6 +373,7 @@ DEPENDENCIES
   active_link_to
   active_record_doctor
   activerecord-reset-pk-sequence
+  addressable (~> 2.8)
   axlsx (~> 3.0.0pre)
   bigdecimal (~> 1.4)
   brakeman
