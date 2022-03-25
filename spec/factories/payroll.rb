@@ -38,24 +38,24 @@ FactoryBot.define do
     #    sequence(:dataentrystart) { |n| (next_months_beginning - 3.days + n.month).to_s }
     #    sequence(:dataentryfinish) { |n| (next_months_beginning + 2.days + n.month).to_s }
 
-    pap true # Default, since medres is reserved for future use
-    medres false
-    annotated false
-    special false
-    comment 'Test'
+    pap { true } # Default, since medres is reserved for future use
+    medres { false }
+    annotated { false }
+    special { false }
+    comment { 'Test' }
 
     # For future use
     trait :medres do
-      medres true
-      pap false
+      medres { true }
+      pap { false }
     end
 
     trait :annotated do
-      annotated true
+      annotated { true }
     end
 
     trait :special do
-      special true
+      special { true }
     end
 
     trait :personal_taxation do
@@ -78,6 +78,6 @@ FactoryBot.define do
   end
 
   trait :late_payment do
-    paymentdate Time.zone.today + 100.years
+    paymentdate { Time.zone.today + 100.years }
   end
 end

@@ -8,15 +8,15 @@ FactoryBot.define do
     # resend: boolean (deprecated) - where payroll is special
     # statements: boolean
 
-    comment 'Test'
+    comment { 'Test' }
     sequence(:sequential, &:to_s)
-    totalamount_cents 300_000_000
+    totalamount_cents { 300_000_000 }
 
     # http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-FactoryBot/
     association :payroll, factory: %i[payroll personal_taxation]
 
     trait :done do
-      done true
+      done { true }
     end
 
     trait :special do

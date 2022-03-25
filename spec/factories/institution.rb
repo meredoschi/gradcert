@@ -13,7 +13,7 @@ FactoryBot.define do
     institutiontype
 
     trait :special_characters_in_the_abbreviation do
-      abbreviation 'XYZˆ'
+      abbreviation { 'XYZˆ' }
     end
   end
 end

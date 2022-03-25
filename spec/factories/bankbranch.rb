@@ -10,7 +10,7 @@ FactoryBot.define do
 
     sequence(:name) { |n| (Faker::Address.street_name + ' ' + (rand(100) + n).to_s).to_s }
     sequence(:code, &:to_s)
-    opened Date.today - 3.years
+    opened { Date.today - 3.years }
     address
 
     trait :incorrect_vd do
@@ -21,11 +21,11 @@ FactoryBot.define do
     end
 
     trait :opens_in_a_month do
-      opened Date.today + 1.month
+      opened { Date.today + 1.month }
     end
 
     trait :opens_in_a_year do
-      opened Date.today + 1.year
+      opened { Date.today + 1.year }
     end
   end
 end

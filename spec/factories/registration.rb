@@ -15,7 +15,7 @@ FactoryBot.define do
     completion
     accreditation
     #   ************ Associated models - factories to be created ***************
-    finalgrade 100
+    finalgrade { 100 }
     #    pap true
     #    medres false
     #   ************************************************************************

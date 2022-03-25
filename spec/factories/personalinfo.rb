@@ -8,8 +8,8 @@ FactoryBot.define do
     #  othername: string, contact_id: integer, mothersname: string)
 
     #    home_state_abbreviation = Settings.home_state_abbreviation
-    dob Faker::Date.birthday(18, 70)
-    idtype I18n.t('activerecord.constants.personalinfo.idtype.state_registration')
+    dob { Faker::Date.birthday(18, 70) }
+    idtype { I18n.t('activerecord.constants.personalinfo.idtype.state_registration') }
 
     # association :contact_id, [:contact, :clerical_pap]
     # association :contact, [:clerical_pap]
@@ -17,7 +17,7 @@ FactoryBot.define do
 
     sequence(:tin) { |n| Brazilianbanking.generate_cpf((n + 100_000_000 + rand(100_000)).to_s) }
     sequence(:idnumber) { |n| (10_000 + n).to_s.to_s }
-    sex 'F'
+    sex { 'F' }
     state
     #   country
 

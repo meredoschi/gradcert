@@ -14,39 +14,39 @@ FactoryBot.define do
     #  **** To do ********
 
     # dayspaidcap
-    name I18n.t('definitions.leavetype.paid.sick').to_s
+    name { I18n.t('definitions.leavetype.paid.sick').to_s }
 
-    maxnumdays 366
+    maxnumdays { 366 }
 
     trait :honeymoon do
-      name I18n.t('definitions.leavetype.paid.honeymoon')
-      paid true
+      name { I18n.t('definitions.leavetype.paid.honeymoon') }
+      paid { true }
     end
 
     trait :days_paid_cap_consistent do
-      dayspaidcap 10
-      maxnumdays 20
+      dayspaidcap { 10 }
+      maxnumdays { 20 }
     end
 
     trait :days_paid_cap_inconsistent do
-      dayspaidcap 400
+      dayspaidcap { 400 }
     end
 
     #  name "Sample"
     # *********************
     trait :pap do
-      pap true
-      medres false
+      pap { true }
+      medres { false }
     end
 
     trait :medres do
-      medres true
-      pap false
+      medres { true }
+      pap { false }
     end
 
     trait :sick do
-      name I18n.t('definitions.leavetype.paid.sick').to_s
-      paid true
+      name { I18n.t('definitions.leavetype.paid.sick').to_s }
+      paid { true }
     end
 
     #

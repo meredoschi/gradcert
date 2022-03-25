@@ -8,11 +8,11 @@ FactoryBot.define do
     # original: boolean, renewed: boolean, program_id: integer, registration_id: integer,
     # confirmed: boolean)
 
-    start '2017-4-1'.to_date
-    original true
-    renewed false
-    suspended false
-    revoked false
+    start { '2017-4-1'.to_date }
+    original { true }
+    renewed { false }
+    suspended { false }
+    revoked { false }
 
     trait :institution do
       # https://stackoverflow.com/questions/41043175/testing-child-model-with-rspec-and-getting-the-error-undefined-method-id

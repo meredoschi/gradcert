@@ -5,8 +5,8 @@ FactoryBot.define do
   factory :placesavailable do
     #  accredited 20
     #  requested 15
-    authorized 50
-    allowregistrations true
+    authorized { 50 }
+    allowregistrations { true }
     institution
     schoolterm
   end

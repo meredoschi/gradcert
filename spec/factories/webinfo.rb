@@ -10,30 +10,30 @@ FactoryBot.define do
     email { Faker::Internet.email }
 
     trait :website_url_starts_with_http do
-      site 'http://example.com'
+      site { 'http://example.com' }
     end
 
     trait :bankbranch do
-      bankbranch_id 1
-      site Faker::Internet.domain_name
+      bankbranch_id { 1 }
+      site { Faker::Internet.domain_name }
     end
 
     trait :contact do
-      contact_id 1
-      twitter '#' + Faker::Internet.domain_word
+      contact_id { 1 }
+      twitter { '#' + Faker::Internet.domain_word }
     end
 
     trait :council do
-      council_id 1
+      council_id { 1 }
     end
 
     trait :institution do
-      site Faker::Internet.domain_name
+      site { Faker::Internet.domain_name }
     end
 
     trait :regionaloffice do
-      regionaloffice_id 1
-      facebook Faker::Internet.slug
+      regionaloffice_id { 1 }
+      facebook { Faker::Internet.slug }
     end
 
     #   ************************************************************************

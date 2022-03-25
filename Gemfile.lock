@@ -288,6 +288,10 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-rails (2.5.2)
+      activesupport
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
     rubocop-rspec (1.41.0)
       rubocop (>= 0.68.1)
     ruby-progressbar (1.11.0)
@@ -427,6 +431,7 @@ DEPENDENCIES
   redcarpet
   rspec-rails (~> 4.0.0)
   rubocop (~> 0.78.0)
+  rubocop-rails
   rubocop-rspec
   rubyzip (~> 2.3)
   sass-rails

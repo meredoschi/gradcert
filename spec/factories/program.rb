@@ -11,13 +11,13 @@ FactoryBot.define do
 
     programname
     schoolterm
-    comment 'Test'
+    comment { 'Test' }
     institution
     accreditation
     association :admission, factory: %i[admission zero_amounts]
-    pap true
-    medres false
-    gradcert false
+    pap { true }
+    medres { false }
+    gradcert { false }
 
     # http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-FactoryBot/
     #  association :accreditation, :factory => [:accreditation, :program]
@@ -26,7 +26,7 @@ FactoryBot.define do
   end
 
   trait :annual do
-    duration 1
+    duration { 1 }
 
     before(:create) do |program|
       freshman_year = FactoryBot.create(:schoolyear, :freshman, program: program)
@@ -35,7 +35,7 @@ FactoryBot.define do
   end
 
   trait :biannual do
-    duration 2
+    duration { 2 }
 
     before(:create) do |program|
       freshman_year = FactoryBot.create(:schoolyear, :freshman, program: program)

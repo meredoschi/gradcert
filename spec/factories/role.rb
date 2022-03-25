@@ -19,13 +19,13 @@ FactoryBot.define do
     end
 
     trait :pap do
-      pap false
-      medres false
+      pap { false }
+      medres { false }
     end
 
     trait :medres do
-      pap false
-      medres false
+      pap { false }
+      medres { false }
     end
 
     # ***********************************
@@ -35,11 +35,11 @@ FactoryBot.define do
          ' ' + (n + rand(100_000)).to_s).to_s
       end
 
-      clerical false
-      itstaff true
-      management false
-      student false
-      teaching false
+      clerical { false }
+      itstaff { true }
+      management { false }
+      student { false }
+      teaching { false }
     end
 
     # "clerical role" (not systems admin)
@@ -49,11 +49,11 @@ FactoryBot.define do
          ' ' + (n + rand(100_000)).to_s).to_s
       end
 
-      clerical true
-      itstaff false
-      management false
-      student false
-      teaching false
+      clerical { true }
+      itstaff { false }
+      management { false }
+      student { false }
+      teaching { false }
     end
 
     trait :pap_student do
@@ -62,21 +62,21 @@ FactoryBot.define do
          ' ' + (n + rand(100_000)).to_s).to_s
       end
 
-      pap true
-      student true
+      pap { true }
+      student { true }
 
-      clerical false
-      itstaff false
-      management false
-      teaching false
+      clerical { false }
+      itstaff { false }
+      management { false }
+      teaching { false }
     end
 
     trait :clerical_and_it do
-      clerical true
-      itstaff true
-      management false
-      student false
-      teaching false
+      clerical { true }
+      itstaff { true }
+      management { false }
+      student { false }
+      teaching { false }
     end
 
     #

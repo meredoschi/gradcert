@@ -7,11 +7,11 @@ FactoryBot.define do
     two_years_ago = Date.today - 2.years
     in_a_year = Date.today + 1.year
 
-    start two_years_ago.to_s
-    finish in_a_year.to_s
-    pap true
-    name 'Brazilian taxes'
-    socialsecurity 11
+    start { two_years_ago.to_s }
+    finish { in_a_year.to_s }
+    pap { true }
+    name { 'Brazilian taxes' }
+    socialsecurity { 11 }
 
     trait :personal do
       before(:create) do |taxation|

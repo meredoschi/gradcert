@@ -55,13 +55,13 @@ FactoryBot.define do
     scholarshipsoffered { num_scholarships }
 
     trait :pap do
-      pap true
-      medres false
+      pap { true }
+      medres { false }
     end
 
     trait :medres do
-      medres true
-      pap false
+      medres { true }
+      pap { false }
     end
   end
 end

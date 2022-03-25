@@ -9,32 +9,32 @@ FactoryBot.define do
   #  streetnum: integer, bankbranch_id: integer)
   factory :address do
     streetname
-    addr Faker::Address.street_name
+    addr { Faker::Address.street_name }
     streetnum { rand(1..1000) }
-    complement Faker::Address.secondary_address
+    complement { Faker::Address.secondary_address }
     municipality
     # postalcode {rand(99999).to_s+"-"+rand(999).to_s}
-    postalcode '12345-678' # Brazilian format
-    neighborhood 'Centro'
+    postalcode { '12345-678' } # Brazilian format
+    neighborhood { 'Centro' }
 
     trait :bankbranchaddr do
       bankbranch
     end
 
     trait :contact do
-      contact_id 1
+      contact_id { 1 }
     end
 
     trait :council do
-      council_id 1
+      council_id { 1 }
     end
 
     trait :institution do
-      institution_id 1
+      institution_id { 1 }
     end
 
     trait :regionaloffice do
-      regionaloffice_id 1
+      regionaloffice_id { 1 }
     end
 
     #   ************************************************************************

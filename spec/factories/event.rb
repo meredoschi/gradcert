@@ -23,15 +23,15 @@ FactoryBot.define do
     #   leavetype_id 1
     sequence(:registration_id) { |n| (reg_ids_active_today[n]).to_s }
 
-    confirmed true
-    processed false
+    confirmed { true }
+    processed { false }
 
     trait :past do
-      processed true
+      processed { true }
     end
 
     trait :current do
-      processed false
+      processed { false }
     end
 
     trait :holiday do
@@ -49,15 +49,15 @@ FactoryBot.define do
     end
 
     trait :pending do
-      confirmed false
+      confirmed { false }
     end
 
     trait :processed do
-      processed true
+      processed { true }
     end
 
     trait :absence do
-      absence true
+      absence { true }
       start { this_months_beginning }
       finish { this_months_beginning + rand(10).days }
     end

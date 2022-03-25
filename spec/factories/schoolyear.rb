@@ -9,12 +9,12 @@ FactoryBot.define do
   end
 
   trait :freshman do
-    programyear 1
+    programyear { 1 }
     association :program, factory: %i[program annual]
   end
 
   trait :sophmore do
-    programyear 2
+    programyear { 2 }
     association :program, factory: %i[program biannual]
   end
 end
