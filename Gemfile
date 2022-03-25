@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-ruby "2.5.5" # August 2019
+#ruby "2.5.5" # August 2019
+ruby "2.7.2" # March 2022
 
 # Specific to certain groups
 group :assets do
@@ -37,13 +38,14 @@ group :test, :development do
   gem 'shoulda-matchers', '~> 3.1' # July 2017
   gem 'json_converter', '~> 0.0.0' # November 2017
   gem 'capybara' # September 2018
-  gem 'httparty' # January 2020 
+  gem 'httparty' # January 2020
 end
 
 # General
 
 gem 'active_link_to'
 gem 'activerecord-reset-pk-sequence' # https://github.com/splendeo/activerecord-reset-pk-sequence
+gem 'bigdecimal', '~> 1.4' # Added for Ruby 2.7 - March 2022
 gem 'cancancan'
 gem 'carrierwave'
 gem 'cocoon'
@@ -65,6 +67,7 @@ gem 'mini_magick', ">= 4.9.4" # http://marsorange.com/files/rmagick_vs_minimagic
 gem 'money'
 gem 'money-rails'
 gem 'morrisjs-rails'
+gem 'nokogiri', ">= 1.13.2"
 gem 'paper_trail', '~> 3.0.6'
 gem 'passenger'
 gem 'pg', '0.20' # Use postgresql as the database for Active Record
