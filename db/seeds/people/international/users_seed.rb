@@ -37,9 +37,10 @@ Personalinfo.create!(sex: 'M', gender: '', dob: '1985-06-30', idtype: 'RG', idnu
 Personalinfo.create!(sex: 'M', gender: '', dob: '1964-02-11', idtype: 'RG', idnumber: '3333333333', state_id: 14, country_id: nil, socialsecuritynumber: '10000000105', tin: '10000000280', othername: '', contact_id: nat_contact.id, mothersname: 'Carla Stevens')
 
 # Phones
-Phone.create!(main: '11 5555-3275', mobile: '', other: '', contact_id: jane_contact.id)
+Phone.create!(main: '11 5555-3275', mobile: '11 9999-0001', other: '', contact_id: jane_contact.id)
 Phone.create!(main: '11 5555-0450', mobile: '11 95555-0462', other: '', contact_id: mark_contact.id)
-Phone.create!(main: '44 5555-8932', mobile: '', other: '44 5555-4378', contact_id: nat_contact.id)
+Phone.create!(main: '44 5555-8932', mobile: '11 9999-0002', other: '44 5555-4378', contact_id: nat_contact.id)
+
 
 # Web infos
 Webinfo.create!(email: '', site: '', facebook: '', twitter: '#janesample', other: '', contact_id: jane_contact.id)
