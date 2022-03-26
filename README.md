@@ -63,23 +63,25 @@ password: **samplepass**
 E-mail: **dean@example.org**
 password: **samplepass**
 
-## RUBY VERSION
+## TECHNICAL INFORMATION   
 
-2.5.5 (rvm)
+Originally developed using both Linux and Mac.  
 
-Developed on both Linux and Mac environments.
+Current environment:
 
-## DATABASE
+#### Ruby: 2.7.5 (rvm)
+#### Rails: 5.0.7.2
+#### Database: Postgres 12.9
 
-Postgres 9.6.7
+---
 
-## LAST UPDATED
+## This page last updated
 
-*14/JAN/2020*
+*26/MAR/2022*
 
-=======
+---
 ## COPYRIGHT
 
-Copyright © 2020 Marcelo Eduardo Redoschi
+Copyright © 2022 Marcelo Eduardo Redoschi
 
 *Licensed under the GNU Affero General Public License v3.0*
