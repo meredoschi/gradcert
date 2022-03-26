@@ -76,7 +76,7 @@ describe 'Ability' do
     it 'can access all' do
       user = FactoryBot.create(:user, :admin)
       ability = Ability.new(user)
-      ability.should be_able_to(:access, :all)
+      expect(ability).to be_able_to(:access, :all)
     end
   end
 

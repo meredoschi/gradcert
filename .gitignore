@@ -16,3 +16,5 @@ coverage
 rubo.txt
 # testing script
 test.sh  
+/drafts/*
+
