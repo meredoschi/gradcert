@@ -22,7 +22,9 @@
   # Disable Rails's static asset server (Apache or nginx will already do this).
  # Marcelo - February 2016
  #  config.serve_static_assets = false # Deprecated notation
-  config.serve_static_files=false
+
+	# config.serve_static_files=false # Depreacted when moved to Rails 5.0.7
+	config.public_file_server.enabled = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier

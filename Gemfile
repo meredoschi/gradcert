@@ -66,7 +66,8 @@ gem 'foundation-rails', '~> 5.5.3' # Version 5
 gem 'holidays'
 gem 'i18n', '>= 0.6.9'
 gem 'i18n-tasks', '~> 0.9.20'
-gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+#gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.9'
 gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'kaminari'
 gem 'mini_magick', ">= 4.9.4" # http://marsorange.com/files/rmagick_vs_minimagick.pdf
