@@ -3,7 +3,7 @@ class PayrollsController < ApplicationController
 
 #  before_action :set_report_variables, only: [:report, :show]
 
-	before_filter :authenticate_user! # By default... Devise
+	before_action :authenticate_user! # By default... Devise
 
   before_action :check_for_annotations, only: [:destroy]
 

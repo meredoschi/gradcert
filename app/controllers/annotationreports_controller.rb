@@ -1,6 +1,6 @@
 class AnnotationreportsController < ApplicationController
 
-  before_filter :authenticate_user! # By default... Devise
+  before_action :authenticate_user! # By default... Devise
 
 
   def show

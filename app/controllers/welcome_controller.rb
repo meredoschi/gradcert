@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   # http://stackoverflow.com/questions/5825135/devise-sign-up-page-as-welcome-landing-page-then-to-user-profile
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   #   load_and_authorize_resource  # CanCan(Can)
 

@@ -6,7 +6,7 @@ class BankpaymentsController < ApplicationController
 
   helper_method :gross_payment
 
-  before_filter :authenticate_user! # By default... Devise
+  before_action :authenticate_user! # By default... Devise
 
   load_and_authorize_resource # CanCan(Can)
 

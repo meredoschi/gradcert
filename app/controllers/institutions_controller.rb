@@ -1,7 +1,7 @@
 class InstitutionsController < ApplicationController
   before_action :set_institution, only: [:show, :edit, :update, :destroy]
 
-	before_filter :authenticate_user!
+	before_action :authenticate_user!
 
   # Marcelo - CanCan
 	load_and_authorize_resource

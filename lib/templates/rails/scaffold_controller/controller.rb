@@ -6,7 +6,7 @@ require_dependency "<%= namespaced_file_path %>/application_controller"
 class <%= controller_class_name %>Controller < ApplicationController
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
 
-	before_filter :authenticate_user! # By default... Devise
+	before_action :authenticate_user! # By default... Devise
  
 	load_and_authorize_resource  # CanCan(Can)  
 

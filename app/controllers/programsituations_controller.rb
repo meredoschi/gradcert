@@ -2,9 +2,9 @@ class ProgramsituationsController < ApplicationController
   before_action :set_programsituation, only: [:show, :edit, :update, :destroy]
   before_action :set_max_duration
 
-	before_filter :set_schoolyears, :only => [:show, :edit, :update]
+	before_action :set_schoolyears, :only => [:show, :edit, :update]
  
-	before_filter :authenticate_user! # By default... Devise
+	before_action :authenticate_user! # By default... Devise
  
 	load_and_authorize_resource  # CanCan(Can)  
 
