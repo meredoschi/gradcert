@@ -11,7 +11,7 @@ RSpec.describe Payroll, type: :model do
   let(:dt) { Time.zone.today - 60 }
   #  let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
 
-  MAX_COMMENT_LEN = Settings.maximum_comment_length.payroll
+  MAX_PAYROLL_COMMENT_LEN = Settings.maximum_comment_length.payroll
 
   context 'associations' do
     it { is_expected.to belong_to(:scholarship) }
@@ -22,7 +22,7 @@ RSpec.describe Payroll, type: :model do
   end
 
   context 'validations' do
-    it { is_expected.to validate_length_of(:comment).is_at_most(MAX_COMMENT_LEN) }
+    it { is_expected.to validate_length_of(:comment).is_at_most(MAX_PAYROLL_COMMENT_LEN) }
     context 'required fields' do
       it { is_expected.to validate_presence_of(:paymentdate) }
       it { is_expected.to validate_presence_of(:taxation_id) }

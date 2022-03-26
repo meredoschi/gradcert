@@ -7,7 +7,7 @@ RSpec.describe Program, type: :model do
   let(:admission) { FactoryBot.create(:admission, :zero_amounts) }
 
   MAX_YEARS = Settings.longest_program_duration.all
-  MAX_COMMENT_LEN = Settings.maximum_comment_length.program
+  MAX_PROG_COMMENT_LEN = Settings.maximum_comment_length.program
   ABBREVIATION_LENGTH = Settings.shortname_len.program
   INSTITUTION_ABBREVIATION_LENGTH = Settings.shortname_len.institution
 
@@ -16,7 +16,7 @@ RSpec.describe Program, type: :model do
   # See config/application_settings.yml
   # N.B. Make sure all>=pap>0, all>=medres>0 (when editing the values) to respect the logic.
 
-  it { is_expected.to validate_length_of(:comment).is_at_most(MAX_COMMENT_LEN) }
+  it { is_expected.to validate_length_of(:comment).is_at_most(MAX_PROG_COMMENT_LEN) }
 
   it { is_expected.to validate_presence_of(:duration) }
   it { is_expected.to validate_presence_of(:institution_id) }

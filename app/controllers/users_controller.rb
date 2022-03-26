@@ -2,7 +2,7 @@
 
 # All users have contact information associated with them, some may also be students
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   # Marcelo - CanCan
   load_and_authorize_resource

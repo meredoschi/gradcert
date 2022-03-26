@@ -9,7 +9,12 @@ class ApplicationController < ActionController::Base
 
   #http://stackoverflow.com/questions/17450185/forbidden-attributes-error-in-rails-4-when-encountering-a-situation-where-one-wo
 
-  before_filter do
+  # Added in March 2022 due to Rails 5.0.7 upgrade (to fix a warning)
+  # "PaperTrail no longer adds the set_paper_trail_whodunnit callback for you"
+  # https://github.com/paper-trail-gem/paper_trail#4a-finding-out-who-was-responsible-for-a-change
+  before_action :set_paper_trail_whodunnit
+
+  before_action do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
