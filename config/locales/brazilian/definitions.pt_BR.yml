@@ -1,0 +1,7 @@
+---
+pt_BR:
+  definitions:
+    taxation:
+      name:
+        personal: Pessoas Físicas
+        business: Pessoas Jurídicas

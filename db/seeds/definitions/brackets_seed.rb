@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Bracket.create!([
-                  { num: 1, start_cents: 190_398, finish_cents: 282_665, unlimited: false, taxation_id: 1, rate: 7.5, deductible_cents: 14_280 },
-                  { num: 2, start_cents: 282_666, finish_cents: 375_105, unlimited: false, taxation_id: 1, rate: 15.0, deductible_cents: 35_480 },
-                  { num: 3, start_cents: 375_106, finish_cents: 466_468, unlimited: false, taxation_id: 1, rate: 22.5, deductible_cents: 63_613 },
-                  { num: 4, start_cents: 466_469, finish_cents: 0, unlimited: true, taxation_id: 1, rate: 27.5, deductible_cents: 86_936 }
+                  { num: 1, start_cents: BigDecimal("190398"), finish_cents: BigDecimal("282665"), unlimited: false, taxation_id: 1, rate: 7.5, deductible_cents: BigDecimal("14280") },
+                  { num: 2, start_cents: BigDecimal("282666"), finish_cents: BigDecimal("375105"), unlimited: false, taxation_id: 1, rate: 15.0, deductible_cents: BigDecimal("35480") },
+                  { num: 3, start_cents: BigDecimal("375106"), finish_cents: BigDecimal("466468"), unlimited: false, taxation_id: 1, rate: 22.5, deductible_cents: BigDecimal("63613") },
+                  { num: 4, start_cents: BigDecimal("466469"), finish_cents: BigDecimal("0"), unlimited: true, taxation_id: 1, rate: 27.5, deductible_cents: BigDecimal("86936") }
                 ])

@@ -1,6 +1,10 @@
 ---
 en:
   definitions:
+    taxation:
+      name:
+        personal: Individual Taxpayers
+        business: Business Taxpayers
     leavetype:
       paid:
         bereavement: Bereavement

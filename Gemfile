@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #ruby "2.5.5" # August 2019
-ruby "2.7.2" # March 2022
+ruby "2.7.5" # March 2022
 
 # Specific to certain groups
 group :assets do

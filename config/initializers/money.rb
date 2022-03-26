@@ -1,12 +1,22 @@
 # frozen_string_literal: true
 
 # config/initializers/money.rb
-MoneyRails.configure do |config|
+MoneyRails.configure do |money_config|
   # set the default currency
-  config.default_currency = :brl
-  config.locale_backend = :i18n
-  # March 2022 
-  # Money.rounding_mode='ROUND_HALF_EVEN' # When explictly set, this was giving seed errors (due to type conversion).
-  # [WARNING] The default rounding mode will change from `ROUND_HALF_EVEN` to `ROUND_HALF_UP` in the next major release. Set it explicitly using `Money.rounding_mode=` to avoid potential problems.
+  money_config.locale_backend = :i18n
 
+  money_config.default_currency = if Rails.application.config.i18n.default_locale == :pt_BR
+                                    :brl
+                                  else
+                                    :eur
+                                  end
+
+  # March 2022
+  # Money.rounding_mode='ROUND_HALF_EVEN' # When explictly set, this was blocking the seed
+  # ** Loading 'brackets'
+  # .rvm/gems/ruby-2.7.5@gradcert/gems/activesupport-5.0.7.2/lib/active_support/core_ext/big_decimal/conversions.rb:9: warning: rb_check_safe_obj will be removed in Ruby 3.0
+  # rake aborted!
+  # TypeError: no implicit conversion of String into Integer
+
+  # [WARNING] The default rounding mode will change from `ROUND_HALF_EVEN` to `ROUND_HALF_UP` in the next major release. Set it explicitly using `Money.rounding_mode=` to avoid potential problems.
 end
