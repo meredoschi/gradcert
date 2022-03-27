@@ -61,6 +61,7 @@ gem 'activerecord-reset-pk-sequence' # https://github.com/splendeo/activerecord-
 gem 'activerecord', '~> 5.2.7' # Added for Rails 5.2.7 - March 2022
 gem 'addressable', '~> 2.8'
 gem 'bigdecimal', '~> 1.4' # Added for Ruby 2.7 - March 2022
+gem 'bootsnap', require: false # Rails 5.2.7 update - March 2022
 gem 'cancancan'
 gem 'carrierwave'
 gem 'cocoon'
