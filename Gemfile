@@ -57,7 +57,8 @@ gem 'active_link_to', '~> 1.0', '>= 1.0.5'
 # ---
 gem 'activerecord-reset-pk-sequence' # https://github.com/splendeo/activerecord-reset-pk-sequence
 #gem 'activerecord', '~> 5.0.7' # Added for Rails 5.0.7 - March 2022
-gem 'activerecord', '~> 5.1.7' # Added for Rails 5.0.7 - March 2022
+#gem 'activerecord', '~> 5.1.7' # Added for Rails 5.1.7 - March 2022
+gem 'activerecord', '~> 5.2.7' # Added for Rails 5.2.7 - March 2022
 gem 'addressable', '~> 2.8'
 gem 'bigdecimal', '~> 1.4' # Added for Ruby 2.7 - March 2022
 gem 'cancancan'
@@ -92,7 +93,8 @@ gem 'prawn-table', '~> 0.2.0'
 gem 'priceable'
 #gem 'rails', '~> 4.2.10'
 #gem 'rails', '~> 5.0.7'
-gem 'rails', '~> 5.1.7'
+#gem 'rails', '~> 5.1.7'
+gem 'rails', '~> 5.2.7'
 gem 'rails-fix-permissions'
 #gem 'ransack', '~> 1.8.0'
 # gem 'ransack', '~> 2.1', '>= 2.1.1' # Rails 5.0.7 update
