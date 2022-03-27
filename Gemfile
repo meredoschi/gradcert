@@ -5,7 +5,9 @@ ruby "2.7.5" # March 2022
 
 # Specific to certain groups
 group :assets do
-  gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .js.coffee assets and views
+#  gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .js.coffee assets and views
+  gem 'coffee-rails', '~> 4.2.2' # Use CoffeeScript for .js.coffee assets and views # Rails 5.1.7
+
   gem 'sass-rails' # http://stackoverflow.com/questions/27126235/sass-or-foundation-error-after-updating-rails-and-other-gems
   gem 'uglifier', '>= 1.3.0' # Compressor for JavaScript assets
 end
@@ -42,14 +44,20 @@ group :test, :development do
   gem 'httparty' # January 2020
   gem 'rspec-rails', '~> 4.0.0' # March 2022
   gem 'rubocop-rspec'
-  gem 'rubocop-faker' # March 2022
+  gem 'rubocop-faker' # March 2022 - Rails 5.0.7
+  gem 'listen'        # March 2022 - Rails 5.1.7
 end
 
 # General
 
-gem 'active_link_to'
+# March 2022 - Rails 5.1.7 upgrade
+gem 'active_link_to', '~> 1.0', '>= 1.0.5'
+#gem 'actionpack', '~> 5.1', '>= 5.1.7'
+#gem 'activemodel', '~> 5.1', '>= 5.1.7'
+# ---
 gem 'activerecord-reset-pk-sequence' # https://github.com/splendeo/activerecord-reset-pk-sequence
-gem 'activerecord', '~> 5.0.7' # Added for Rails 5.0.7 - March 2022
+#gem 'activerecord', '~> 5.0.7' # Added for Rails 5.0.7 - March 2022
+gem 'activerecord', '~> 5.1.7' # Added for Rails 5.0.7 - March 2022
 gem 'addressable', '~> 2.8'
 gem 'bigdecimal', '~> 1.4' # Added for Ruby 2.7 - March 2022
 gem 'cancancan'
@@ -83,10 +91,12 @@ gem 'prawn' # June 2016
 gem 'prawn-table', '~> 0.2.0'
 gem 'priceable'
 #gem 'rails', '~> 4.2.10'
-gem 'rails', '~> 5.0.7'
+#gem 'rails', '~> 5.0.7'
+gem 'rails', '~> 5.1.7'
 gem 'rails-fix-permissions'
 #gem 'ransack', '~> 1.8.0'
-gem 'ransack', '~> 2.1', '>= 2.1.1' # Rails 5.0.7 update
+# gem 'ransack', '~> 2.1', '>= 2.1.1' # Rails 5.0.7 update
+gem 'ransack', '~> 2.3' # Rails 5.1.7 update
 gem 'raphael-rails'
 #gem "rubyzip", ">= 1.3.0"
 gem 'rubyzip', '~> 2.3' # Rails 5.0.7 update March 2022
@@ -99,6 +109,7 @@ gem 'timeliness' #  Date validation
 gem 'traceroute'
 gem 'turbolinks' # Read more: https://github.com/rails/turbolinks
 gem 'tzinfo', '~> 1.2.1'
+# commented out on Rails 5.1.7 install
 gem 'validates_overlap' # April 2016
 gem 'validates_timeliness', '~> 4.0'
 gem 'yard', ">= 0.9.20" # Documentation

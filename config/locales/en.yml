@@ -1,5 +1,6 @@
 ---
 en:
+  hello: "Hello world"
   activemodel:
     format: "%{attribute} %{message}"
     messages:

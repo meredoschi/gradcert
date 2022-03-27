@@ -1,4 +1,7 @@
-Gradcert::Application.routes.draw do
+# frozen_string_literal: true
+
+# Gradcert::Application.routes.draw do # March 2022 - Rails 5.1.7 update
+Rails.application.routes.draw do
   root 'welcome#index'
 
   devise_for :users
@@ -16,7 +19,7 @@ Gradcert::Application.routes.draw do
   post 'reports/displayregistrations'
 
   resources :academiccategories
-  resources :admissions, except: [:new, :create, :destroy]
+  resources :admissions, except: %i[new create destroy]
   resources :annotations
   resources :assessments
   resources :assignments
@@ -76,7 +79,6 @@ Gradcert::Application.routes.draw do
     end
   end
 
-
   resources :payrolls do
     member do
       get 'calculate'
@@ -88,12 +90,11 @@ Gradcert::Application.routes.draw do
     end
   end
 
-   resources :statements
+  resources :statements
 
-#  resources :statements do
-#    member do
-#      get 'report'
-#    end
-#  end
-
+  #  resources :statements do
+  #    member do
+  #      get 'report'
+  #    end
+  #  end
 end

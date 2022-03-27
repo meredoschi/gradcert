@@ -67,17 +67,17 @@ password: **samplepass**
 
 Originally developed using both Linux and Mac.  
 
-Current environment:
+Development branch
 
 #### Ruby: 2.7.5 (rvm)
-#### Rails: 5.0.7.2
+#### Rails: updated to version 5.1.7
 #### Database: Postgres 12.9
 
 ---
 
 ## This page last updated
 
-*26/MAR/2022*
+*27/MAR/2022*
 
 ---
 ## COPYRIGHT
