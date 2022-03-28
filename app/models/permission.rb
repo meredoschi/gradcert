@@ -102,6 +102,6 @@ class Permission < ActiveRecord::Base
   end
 
   def self.own_institution(user)
-    joins(user: :institution).where('institutions.id = ?  ', user.institution_id).uniq
+    joins(user: :institution).where('institutions.id = ?  ', user.institution_id).distinct
   end
 end

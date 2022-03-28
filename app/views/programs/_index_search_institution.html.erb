@@ -4,7 +4,7 @@
 	</div>
 			
 	<div class="large-9 columns">								
-		<%= f.select :institution_id_eq, options_from_collection_for_select(Institution.joins(:program).uniq, :id, :name), 		include_blank: true %>				
+		<%= f.select :institution_id_eq, options_from_collection_for_select(Institution.joins(:program).distinct, :id, :name), 		include_blank: true %>				
 	</div>
 		
   <%# to do: filter for active programs and show unique values %>

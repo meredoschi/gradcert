@@ -64,7 +64,7 @@ class Event < ActiveRecord::Base
      validates :start, :finish, overlap: { scope: 'registration_id' }, if: :dates_exist?
   #
 
- # Hotfix - disabled 
+ # Hotfix - disabled
  #      validate :finish_must_be_prior_to_registration_cancellation_date, if: :actual?
   #
   #    validate :finish_must_be_prior_to_registration_cancellation_date, :if => lambda { self.finished? }

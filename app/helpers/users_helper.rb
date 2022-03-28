@@ -142,12 +142,12 @@ module UsersHelper
   def retrieve_active_users_permissions_for(user)
     profile = case
 
-              when permission_for(user) == 'admin' then return Permission.all.joins(:user).uniq
-              when permission_for(user) == 'adminreadonly' then return Permission.readonly.joins(:user).uniq
-              when permission_for(user) == 'papmgr' then return Permission.pap.joins(:user).uniq
-              when permission_for(user) == 'medresmgr' then return Permission.medres.joins(:user).uniq
-              when permission_for(user) == 'medreslocaladm' then return Permission.own_institution(user).medres.joins(:user).uniq
-              when permission_for(user) == 'paplocaladm' then return Permission.own_institution(user).paplocal.joins(:user).uniq
+              when permission_for(user) == 'admin' then return Permission.all.joins(:user).distinct
+              when permission_for(user) == 'adminreadonly' then return Permission.readonly.joins(:user).distinct
+              when permission_for(user) == 'papmgr' then return Permission.pap.joins(:user).distinct
+              when permission_for(user) == 'medresmgr' then return Permission.medres.joins(:user).distinct
+              when permission_for(user) == 'medreslocaladm' then return Permission.own_institution(user).medres.joins(:user).distinct
+              when permission_for(user) == 'paplocaladm' then return Permission.own_institution(user).paplocal.joins(:user).distinct
     end
   end
 

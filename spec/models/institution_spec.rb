@@ -65,7 +65,7 @@ RSpec.describe Institution, type: :model do
     end
 
     it '#with_contacts' do
-      institutions_with_contacts = Institution.joins(user: :contact).uniq.order(:name)
+      institutions_with_contacts = Institution.joins(user: :contact).distinct.order(:name)
       expect(institutions_with_contacts).to eq(Institution.with_contacts)
     end
 
@@ -102,7 +102,7 @@ RSpec.describe Institution, type: :model do
     end
 
     it '#with_users' do
-      institutions_with_users = Institution.joins(:user).uniq
+      institutions_with_users = Institution.joins(:user).distinct
       expect(institutions_with_users).to eq(Institution.with_users)
     end
 

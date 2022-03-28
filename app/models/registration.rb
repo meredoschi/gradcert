@@ -214,7 +214,7 @@ class Registration < ActiveRecord::Base
     ids_contextual_today = registrations_contextual_today.pluck(:id)
     registrations_contextual_previously = registrations.contextual_on(dt)
     ids_contextual_previously = registrations_contextual_previously.pluck(:id)
-    (ids_contextual_previously + ids_contextual_today).uniq
+    (ids_contextual_previously + ids_contextual_today).distinct
   end
 
   # Returns actual registration ids
@@ -629,11 +629,11 @@ class Registration < ActiveRecord::Base
   # Get unique
 
   def self.ids_with_events
-    joins(:event).uniq.sort
+    joins(:event).distinct.sort
   end
 
   def self.ids_with_annotations
-    joins(:annotation).uniq.sort
+    joins(:annotation).distinct.sort
   end
 
   def self.with_events
@@ -664,7 +664,7 @@ class Registration < ActiveRecord::Base
   end
 
   def self.annotated
-    joins(:annotation).uniq.sort
+    joins(:annotation).distinct.sort
   end
 
   def self.not_annotated

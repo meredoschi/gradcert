@@ -8,9 +8,9 @@ class Personalinfo < ActiveRecord::Base
 
   # Three different contexts here
 
-  belongs_to :municipality # Where person was born
-  belongs_to :state # State which issued id
-  belongs_to :country # Nationality (foreigners)
+  belongs_to :municipality, optional: true # Where person was born
+  belongs_to :state, optional: true # State which issued id
+  belongs_to :country, optional: true # Nationality (foreigners)
 
   belongs_to :contact
 

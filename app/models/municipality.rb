@@ -2,8 +2,10 @@
 
 # Municipality names seldom change
 class Municipality < ActiveRecord::Base
-  belongs_to :stateregion
-  belongs_to :regionaloffice
+  # https://stackoverflow.com/questions/57682556/activerecordrecordinvalid-validation-failed-account-must-exist
+  # "With Rails 5, belongs_to association is required by default. So you should make the account optional."
+  belongs_to :stateregion, optional: true
+  belongs_to :regionaloffice, optional: true
 
   has_many :address, foreign_key: 'municipality_id',
                      dependent: :restrict_with_exception, inverse_of: :municipality
@@ -28,7 +30,7 @@ class Municipality < ActiveRecord::Base
   #    I18n.t('definitions.municipality.default.asciinamewithstate').first }
 
   # To do: order by state as well
-  scope  :with_institution_ordered_by_name, -> { with_institution.uniq.order(:name) }
+  scope  :with_institution_ordered_by_name, -> { with_institution.distinct.order(:name) }
 
   scope  :ordered_by_asciiname_and_state, -> { order(asciinamewithstate: :asc) }
   # joins(stateregion: :state).order(:asciiname, "states.abbreviation")

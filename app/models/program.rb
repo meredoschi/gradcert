@@ -45,7 +45,7 @@ class Program < ActiveRecord::Base
 
   scope :gradcert, -> { where(gradcert: true) }
 
-  scope :with_institution, -> { joins(:institution).uniq.order(:name) }
+  scope :with_institution, -> { joins(:institution).distinct.order(:name) }
 
   # 	scope :original, -> { where(original: true) }.includes(:schoolyears)
 

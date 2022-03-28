@@ -15,7 +15,7 @@ class Programname < ActiveRecord::Base
   #   has_many  :assesment, :through => :program ? assessment index search
 
   # http://stackoverflow.com/questions/18082096/rails-4-scope-to-find-parents-with-no-children
-  scope :with_children, -> { joins(:program).uniq.order(:name) }
+  scope :with_children, -> { joins(:program).distinct.order(:name) }
 
   # http://api.rubyonrails.org/classes/ActiveRecord/Scoping/Named/ClassMethods.html
   scope :pap, -> { where(pap: true).order(:name) }

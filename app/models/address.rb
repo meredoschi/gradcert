@@ -6,15 +6,15 @@ class Address < ActiveRecord::Base
 
   # ------------------- References ------------------------
 
-  belongs_to :bankbranch
+  belongs_to :bankbranch, optional: true
 
-  belongs_to :contact
-  belongs_to :council
-  belongs_to :course
-  belongs_to :institution
-  belongs_to :municipality
-  belongs_to :program
-  belongs_to :regionaloffice
+  belongs_to :contact, optional: true
+  belongs_to :council, optional: true
+  belongs_to :course, optional: true
+  belongs_to :institution, optional: true
+  belongs_to :municipality, optional: true
+  belongs_to :program, optional: true
+  belongs_to :regionaloffice, optional: true
   belongs_to :streetname
 
   has_paper_trail

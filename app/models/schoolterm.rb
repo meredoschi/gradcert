@@ -360,13 +360,13 @@ class Schoolterm < ActiveRecord::Base
 
   # With annotations -- used to filter null Ransackable search (which was giving errors)
   def self.annotated
-    joins(registration: :annotation).merge(Schoolterm.all).uniq
+    joins(registration: :annotation).merge(Schoolterm.all).distinct
   end
 
   # Actually with at least 1 event
   # -- used to filter null Ransackable search (which was giving errors)
   def self.eventful
-    joins(registration: :event).merge(Schoolterm.all).uniq
+    joins(registration: :event).merge(Schoolterm.all).distinct
   end
 
   # Processed by SISPAP

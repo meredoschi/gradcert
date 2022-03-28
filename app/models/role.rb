@@ -18,7 +18,7 @@ class Role < ActiveRecord::Base
   scope :itstaff, -> { where(itstaff: true) }
 
   # returns all roles with contacts, not just own institution's.
-  scope :from_contacts, -> { joins(:contact).uniq.order(:name) }
+  scope :from_contacts, -> { joins(:contact).distinct.order(:name) }
 
   validates_inclusion_of %i[teaching management collaborator student itstaff], in: [false], if: :clerical?
 

@@ -9,10 +9,10 @@ class Phone < ActiveRecord::Base
   belongs_to :contact # individual (person)
 
   # Organizations
-  belongs_to :bankbranch
-  belongs_to :council
-  belongs_to :institution
-  belongs_to :regionaloffice
+  belongs_to :bankbranch, optional: true
+  belongs_to :council, optional: true
+  belongs_to :institution, optional: true
+  belongs_to :regionaloffice, optional: true
 
   validates :main, presence: true, length: { minimum: 6, maximum: 30 }, unless: :individual?
 

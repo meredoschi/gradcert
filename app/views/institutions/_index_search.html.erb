@@ -1,30 +1,30 @@
 <%= search_form_for @search do |f| %>
 
 	<% if staff?(current_user) %>
-	
+
 		<div class="row">
-		
+
 			<div class="field">
-				
+
 				<div class="large-3 columns">
-					
+
 					<%= f.label ta('institution.name') %>
-	
+
 				</div>
-		
-			
+
+
 				<div class="large-9 columns">
-				
-					<%= f.text_field :name_cont %>  
-				
+
+					<%= f.text_field :name_cont %>
+
 				</div>
-			    
+
 			</div>
-		
+
 		</div>
 
 	<div class="row">
-	
+
  		<div class="field">
 
 				<div class="large-3 columns">
@@ -32,19 +32,19 @@
 
 				<%= f.label tm('municipality').capitalize %>
 				</div>
-				
+
 				<div class="large-9 columns">
-					
-					<%= f.select :address_municipality_id_eq, options_from_collection_for_select(Municipality.with_institution_ordered_by_name, :id, :name), 		include_blank: true %>				
-			
-		  	</div>	
+
+					<%= f.select :address_municipality_id_eq, options_from_collection_for_select(Municipality.with_institution_ordered_by_name, :id, :name), 		include_blank: true %>
+
+		  	</div>
 
 		</div>
 
 	</div>
 
 	<div class="row">
-	
+
  		<div class="field">
 
 				<div class="large-3 columns">
@@ -52,22 +52,22 @@
 
 				<%= f.label tm('regionaloffice').capitalize %>
 				</div>
-				
+
 				<div class="large-9 columns">
-					
-					<%= f.select :address_municipality_regionaloffice_id_eq, options_from_collection_for_select(Regionaloffice.with_institution.uniq, :id, :name), 		include_blank: true %>				
-			
-		  	</div>	
+
+					<%= f.select :address_municipality_regionaloffice_id_eq, options_from_collection_for_select(Regionaloffice.with_institution.distinct, :id, :name), 		include_blank: true %>				
+
+		  	</div>
 
 		</div>
 
 	</div>
 
 
-			
+
 	<div class="row">
-		    
-		<div class="large-6 columns">	  
+
+		<div class="large-6 columns">
 		  <%= f.submit  t('actions.search'), class: "buscar" %>
 		</div>
 	</div>

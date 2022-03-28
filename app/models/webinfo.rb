@@ -4,10 +4,10 @@
 class Webinfo < ActiveRecord::Base
   # ------------------- References ------------------------
 
-  belongs_to :contact
-  belongs_to :council
-  belongs_to :institution
-  belongs_to :regionaloffice
+  belongs_to :contact, optional: true
+  belongs_to :council, optional: true
+  belongs_to :institution, optional: true
+  belongs_to :regionaloffice, optional: true
 
   validate :site_url_without_protocol
 

@@ -566,15 +566,15 @@ describe UsersHelper, type: :helper do
       it 'retrieve_active_users_permissions_for(user)' do
         profile = case # rubocop:disable Style/EmptyCaseCondition
 
-        when permission_for(user) == 'admin' then Permission.all.joins(:user).uniq
+        when permission_for(user) == 'admin' then Permission.all.joins(:user).distinct
         when permission_for(user) == 'adminreadonly' then Permission.readonly
-          .joins(:user).uniq
-        when permission_for(user) == 'papmgr' then Permission.pap.joins(:user).uniq
-        when permission_for(user) == 'medresmgr' then Permission.medres.joins(:user).uniq
+          .joins(:user).distinct
+        when permission_for(user) == 'papmgr' then Permission.pap.joins(:user).distinct
+        when permission_for(user) == 'medresmgr' then Permission.medres.joins(:user).distinct
         when permission_for(user) == 'medreslocaladm' then Permission
-          .own_institution(user).medres.joins(:user).uniq
+          .own_institution(user).medres.joins(:user).distinct
         when permission_for(user) == 'paplocaladm' then Permission
-          .own_institution(user).paplocal.joins(:user).uniq
+          .own_institution(user).paplocal.joins(:user).distinct
         end
 
         expect(profile).to eq(helper.retrieve_active_users_permissions_for(user))
@@ -583,15 +583,15 @@ describe UsersHelper, type: :helper do
       it 'retrieve_active_users_permissions_for(admin)' do
         profile = case # rubocop:disable Style/EmptyCaseCondition
 
-        when permission_for(admin) == 'admin' then Permission.all.joins(:user).uniq
+        when permission_for(admin) == 'admin' then Permission.all.joins(:user).distinct
         when permission_for(admin) == 'adminreadonly' then Permission.readonly
-          .joins(:user).uniq
-        when permission_for(admin) == 'papmgr' then Permission.pap.joins(:user).uniq
-        when permission_for(admin) == 'medresmgr' then Permission.medres.joins(:user).uniq
+          .joins(:user).distinct
+        when permission_for(admin) == 'papmgr' then Permission.pap.joins(:user).distinct
+        when permission_for(admin) == 'medresmgr' then Permission.medres.joins(:user).distinct
         when permission_for(admin) == 'medreslocaladm' then Permission
-          .own_institution(admin).medres.joins(:user).uniq
+          .own_institution(admin).medres.joins(:user).distinct
         when permission_for(admin) == 'paplocaladm' then Permission
-          .own_institution(admin).paplocal.joins(:user).uniq
+          .own_institution(admin).paplocal.joins(:user).distinct
         end
 
         expect(profile).to eq(helper.retrieve_active_users_permissions_for(admin))
@@ -600,15 +600,15 @@ describe UsersHelper, type: :helper do
       it 'retrieve_active_users_permissions_for(adminreadonly)' do
         profile = case # rubocop:disable Style/EmptyCaseCondition
 
-        when permission_for(adminreadonly) == 'admin' then Permission.all.joins(:user).uniq
+        when permission_for(adminreadonly) == 'admin' then Permission.all.joins(:user).distinct
         when permission_for(adminreadonly) == 'adminreadonly' then Permission.readonly
-          .joins(:user).uniq
-        when permission_for(adminreadonly) == 'papmgr' then Permission.pap.joins(:user).uniq
-        when permission_for(adminreadonly) == 'medresmgr' then Permission.medres.joins(:user).uniq
+          .joins(:user).distinct
+        when permission_for(adminreadonly) == 'papmgr' then Permission.pap.joins(:user).distinct
+        when permission_for(adminreadonly) == 'medresmgr' then Permission.medres.joins(:user).distinct
         when permission_for(adminreadonly) == 'medreslocaladm' then Permission
-          .own_institution(adminreadonly).medres.joins(:user).uniq
+          .own_institution(adminreadonly).medres.joins(:user).distinct
         when permission_for(adminreadonly) == 'paplocaladm' then Permission
-          .own_institution(adminreadonly).paplocal.joins(:user).uniq
+          .own_institution(adminreadonly).paplocal.joins(:user).distinct
         end
 
         expect(profile).to eq(helper.retrieve_active_users_permissions_for(adminreadonly))
@@ -617,15 +617,15 @@ describe UsersHelper, type: :helper do
       it 'retrieve_active_users_permissions_for(paplocaladm)' do
         profile = case # rubocop:disable Style/EmptyCaseCondition
 
-        when permission_for(paplocaladm_user) == 'admin' then Permission.all.joins(:user).uniq
+        when permission_for(paplocaladm_user) == 'admin' then Permission.all.joins(:user).distinct
         when permission_for(paplocaladm_user) == 'adminreadonly' then Permission.readonly
-          .joins(:user).uniq
-        when permission_for(paplocaladm_user) == 'papmgr' then Permission.pap.joins(:user).uniq
-        when permission_for(paplocaladm_user) == 'medresmgr' then Permission.medres.joins(:user).uniq
+          .joins(:user).distinct
+        when permission_for(paplocaladm_user) == 'papmgr' then Permission.pap.joins(:user).distinct
+        when permission_for(paplocaladm_user) == 'medresmgr' then Permission.medres.joins(:user).distinct
         when permission_for(paplocaladm_user) == 'medreslocaladm' then Permission
-          .own_institution(paplocaladm_user).medres.joins(:user).uniq
+          .own_institution(paplocaladm_user).medres.joins(:user).distinct
         when permission_for(paplocaladm_user) == 'paplocaladm' then Permission
-          .own_institution(paplocaladm_user).paplocal.joins(:user).uniq
+          .own_institution(paplocaladm_user).paplocal.joins(:user).distinct
         end
 
         expect(profile).to eq(helper.retrieve_active_users_permissions_for(paplocaladm_user))
@@ -634,15 +634,15 @@ describe UsersHelper, type: :helper do
       it 'retrieve_active_users_permissions_for(papmgr)' do
         profile = case # rubocop:disable Style/EmptyCaseCondition
 
-        when permission_for(papmgr_user) == 'admin' then Permission.all.joins(:user).uniq
+        when permission_for(papmgr_user) == 'admin' then Permission.all.joins(:user).distinct
         when permission_for(papmgr_user) == 'adminreadonly' then Permission.readonly
-          .joins(:user).uniq
-        when permission_for(papmgr_user) == 'papmgr' then Permission.pap.joins(:user).uniq
-        when permission_for(papmgr_user) == 'medresmgr' then Permission.medres.joins(:user).uniq
+          .joins(:user).distinct
+        when permission_for(papmgr_user) == 'papmgr' then Permission.pap.joins(:user).distinct
+        when permission_for(papmgr_user) == 'medresmgr' then Permission.medres.joins(:user).distinct
         when permission_for(papmgr_user) == 'medreslocaladm' then Permission
-          .own_institution(papmgr_user).medres.joins(:user).uniq
+          .own_institution(papmgr_user).medres.joins(:user).distinct
         when permission_for(papmgr_user) == 'paplocaladm' then Permission
-          .own_institution(papmgr_user).paplocal.joins(:user).uniq
+          .own_institution(papmgr_user).paplocal.joins(:user).distinct
         end
 
         expect(profile).to eq(helper.retrieve_active_users_permissions_for(papmgr_user))
@@ -651,15 +651,15 @@ describe UsersHelper, type: :helper do
       it 'retrieve_active_users_permissions_for(medreslocaladm)' do
         profile = case # rubocop:disable Style/EmptyCaseCondition
 
-        when permission_for(medreslocaladm_user) == 'admin' then Permission.all.joins(:user).uniq
+        when permission_for(medreslocaladm_user) == 'admin' then Permission.all.joins(:user).distinct
         when permission_for(medreslocaladm_user) == 'adminreadonly' then Permission.readonly
-          .joins(:user).uniq
-        when permission_for(medreslocaladm_user) == 'papmgr' then Permission.pap.joins(:user).uniq
-        when permission_for(medreslocaladm_user) == 'medresmgr' then Permission.medres.joins(:user).uniq
+          .joins(:user).distinct
+        when permission_for(medreslocaladm_user) == 'papmgr' then Permission.pap.joins(:user).distinct
+        when permission_for(medreslocaladm_user) == 'medresmgr' then Permission.medres.joins(:user).distinct
         when permission_for(medreslocaladm_user) == 'medreslocaladm' then Permission
-          .own_institution(medreslocaladm_user).medres.joins(:user).uniq
+          .own_institution(medreslocaladm_user).medres.joins(:user).distinct
         when permission_for(medreslocaladm_user) == 'paplocaladm' then Permission
-          .own_institution(medreslocaladm_user).paplocal.joins(:user).uniq
+          .own_institution(medreslocaladm_user).paplocal.joins(:user).distinct
         end
 
         expect(profile).to eq(helper.retrieve_active_users_permissions_for(medreslocaladm_user))
@@ -668,15 +668,15 @@ describe UsersHelper, type: :helper do
       it 'retrieve_active_users_permissions_for(medresmgr)' do
         profile = case # rubocop:disable Style/EmptyCaseCondition
 
-        when permission_for(medresmgr_user) == 'admin' then Permission.all.joins(:user).uniq
+        when permission_for(medresmgr_user) == 'admin' then Permission.all.joins(:user).distinct
         when permission_for(medresmgr_user) == 'adminreadonly' then  Permission.readonly
-          .joins(:user).uniq
-        when permission_for(medresmgr_user) == 'papmgr' then Permission.pap.joins(:user).uniq
-        when permission_for(medresmgr_user) == 'medresmgr' then Permission.medres.joins(:user).uniq
+          .joins(:user).distinct
+        when permission_for(medresmgr_user) == 'papmgr' then Permission.pap.joins(:user).distinct
+        when permission_for(medresmgr_user) == 'medresmgr' then Permission.medres.joins(:user).distinct
         when permission_for(medresmgr_user) == 'medreslocaladm' then Permission
-          .own_institution(medresmgr_user).medres.joins(:user).uniq
+          .own_institution(medresmgr_user).medres.joins(:user).distinct
         when permission_for(medresmgr_user) == 'paplocaladm' then Permission
-          .own_institution(medresmgr_user).paplocal.joins(:user).uniq
+          .own_institution(medresmgr_user).paplocal.joins(:user).distinct
         end
 
         expect(profile).to eq(helper.retrieve_active_users_permissions_for(medresmgr_user))

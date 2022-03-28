@@ -258,12 +258,12 @@ RSpec.describe Payroll, type: :model do
 
     context 'ordering' do
       it '#newest_first' do
-        payrolls_ordered_by_day_finished_desc = Payroll.order(dayfinished: :desc).uniq
+        payrolls_ordered_by_day_finished_desc = Payroll.order(dayfinished: :desc).distinct
         expect(payrolls_ordered_by_day_finished_desc).to eq Payroll.newest_first
       end
 
       it '#ordered_from_oldest_to_newest' do
-        payrolls_ordered_from_oldest_to_newest = Payroll.order(dayfinished: :asc).uniq
+        payrolls_ordered_from_oldest_to_newest = Payroll.order(dayfinished: :asc).distinct
         expect(payrolls_ordered_from_oldest_to_newest).to eq Payroll.ordered_from_oldest_to_newest
       end
 
@@ -303,7 +303,7 @@ RSpec.describe Payroll, type: :model do
 
     context 'situation' do
       it '#with_bankpayment' do
-        payrolls_with_bankpayment = Payroll.joins(:bankpayment).uniq
+        payrolls_with_bankpayment = Payroll.joins(:bankpayment).distinct
         expect(payrolls_with_bankpayment).to eq(Payroll.with_bankpayment)
       end
 
@@ -314,7 +314,7 @@ RSpec.describe Payroll, type: :model do
       end
 
       it '#with_annotations' do
-        payrolls_with_annotations = Payroll.joins(:annotation).uniq
+        payrolls_with_annotations = Payroll.joins(:annotation).distinct
         expect(payrolls_with_annotations).to eq(Payroll.with_annotations)
       end
 

@@ -28,11 +28,11 @@ class Contact < ActiveRecord::Base
 
   belongs_to :role
 
-  belongs_to :student
+  belongs_to :student, optional: true
 
   belongs_to :user, dependent: :delete
 
-  has_many :assessment, foreign_key: 'contact_id',
+  has_many :assessment, foreign_key: 'contact_id', 
                         dependent: :restrict_with_exception, inverse_of: :contact
 
   has_many  :supervisor, foreign_key: 'contact_id',
@@ -63,11 +63,11 @@ class Contact < ActiveRecord::Base
 
   # Scopes
 
-  #   scope :users, lambda { joins(:user).uniq.order(:name) }
+  #   scope :users, lambda { joins(:user).distinct.order(:name) }
 
-  scope :with_users, -> { joins(:user).uniq.order(:name) }
+  scope :with_users, -> { joins(:user).distinct.order(:name) }
 
-  scope :with_role, -> { joins(:role).uniq.order(:name) }
+  scope :with_role, -> { joins(:role).distinct.order(:name) }
 
   scope :confirmed, -> { where(confirmed: true) }
 
@@ -244,7 +244,7 @@ class Contact < ActiveRecord::Base
     where.not(id: nameless)
   end
 
-  def self.not_supervisor
+  def self.not_registered_supervisor
     # http://stackoverflow.com/questions/25086952/rails-how-do-i-exclude-records-with-entries-in-a-join-table
     where.not(id: registered_supervisor)
   end
@@ -340,7 +340,7 @@ class Contact < ActiveRecord::Base
   end
 
   #   def self.roletype
-  #        joins(:roles).where("role_id=roles.id").uniq.order(:name)
+  #        joins(:roles).where("role_id=roles.id").distinct.order(:name)
   #    end
 
   def self.default_scope

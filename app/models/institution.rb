@@ -134,7 +134,7 @@ class Institution < ActiveRecord::Base
 
   # Enrollment control
   def self.with_contacts
-    joins(user: :contact).uniq.order(:name)
+    joins(user: :contact).distinct.order(:name)
   end
 
   def self.default_scope
@@ -151,16 +151,16 @@ class Institution < ActiveRecord::Base
 
   scope :registered, -> { where(provisional: false) }
 
-  scope :with_programs, -> { joins(:program).uniq.order(:name) }
+  scope :with_programs, -> { joins(:program).distinct.order(:name) }
 
   scope :with_pap_programs, -> {
-                              joins(:program).uniq
+                              joins(:program).distinct
                                              .where(programs: { pap: true })
                                              .order(:name)
                             }
 
   scope :with_medres_programs, -> {
-                                 joins(:program).uniq
+                                 joins(:program).distinct
                                                 .where(programs: { medres: true })
                                                 .order(:name)
                                }
@@ -194,11 +194,11 @@ class Institution < ActiveRecord::Base
   end
 
   def self.with_users
-    joins(:user).uniq
+    joins(:user).distinct
   end
 
   def self.with_users_seen_by_readonly
-    with_users.merge(User.visible_to_readonly)
+    with_users.where(id: User.visible_to_readonly.pluck(:institution_id))
   end
 
   def self.with_pap_users

@@ -144,11 +144,11 @@ class Payroll < ActiveRecord::Base
   end
 
   def self.newest_first
-    order(dayfinished: :desc).uniq
+    order(dayfinished: :desc).distinct
   end
 
   def self.ordered_from_oldest_to_newest
-    order(dayfinished: :asc).uniq
+    order(dayfinished: :asc).distinct
   end
 
   # Alias
@@ -169,7 +169,7 @@ class Payroll < ActiveRecord::Base
   end
 
   def self.with_bankpayment
-    joins(:bankpayment).uniq
+    joins(:bankpayment).distinct
   end
 
   # Closed, bank payment performed.
@@ -178,7 +178,7 @@ class Payroll < ActiveRecord::Base
   end
 
   def self.with_annotations
-    joins(:annotation).uniq
+    joins(:annotation).distinct
   end
 
   # Dec 2017

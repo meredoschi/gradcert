@@ -95,7 +95,7 @@ RSpec.describe Permission, type: :model do
 
     it '#own_institution(user)' do
       users_own_institution = Permission.joins(user: :institution)
-                                        .where('institutions.id = ?  ', user.institution_id).uniq
+                                        .where('institutions.id = ?  ', user.institution_id).distinct
       expect(users_own_institution).to eq(Permission.own_institution(user))
     end
   end
