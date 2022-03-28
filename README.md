@@ -70,14 +70,14 @@ Originally developed using both Linux and Mac.
 Development branch
 
 #### Ruby: 2.7.5 (rvm)
-#### Rails: updated to version 5.1.7
+#### Rails: Version 5.2.7
 #### Database: Postgres 12.9
 
 ---
 
 ## This page last updated
 
-*27/MAR/2022*
+*28/MAR/2022*
 
 ---
 ## COPYRIGHT
