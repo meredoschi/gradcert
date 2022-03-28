@@ -11,13 +11,13 @@ class CharacteristicsController < ApplicationController
 
    	if is_admin_or_manager(current_user)    
 
-    @title=t('entity').mb_chars.pluralize.upcase+' | '+tm('characteristic').pluralize.titleize
+    @title=t('entity').to_s.pluralize.upcase+' | '+tm('characteristic').pluralize.titleize
     
     # @title="Debug!"
     
     else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+tm('characteristic').capitalize
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+tm('characteristic').capitalize
     
     end
     	
@@ -35,11 +35,11 @@ class CharacteristicsController < ApplicationController
 
   	 if is_admin_or_manager(current_user)
   	 	
-	  	 @title=t('entity').mb_chars.pluralize.upcase+' | '+tm('characteristic').pluralize.capitalize+' | '+t('actions.show')  
+	  	 @title=t('entity').to_s.pluralize.upcase+' | '+tm('characteristic').pluralize.capitalize+' | '+t('actions.show')  
 
 		 else
 
-			 @title=t('my.f').mb_chars.upcase+" "+t('entity').mb_chars.upcase+' | '+tm('characteristic').capitalize+' | '+t('actions.show')		 
+			 @title=t('my.f').to_s.upcase+" "+t('entity').to_s.upcase+' | '+tm('characteristic').capitalize+' | '+t('actions.show')		 
 		 
 		 end  
 
@@ -54,11 +54,11 @@ class CharacteristicsController < ApplicationController
 
   	 if is_admin_or_manager(current_user)
   	 	
-	   	 @title=t('entity').mb_chars.pluralize.upcase+' | '+tm('characteristic').mb_chars.pluralize.capitalize+' | '+t('actions.new.m')  
+	   	 @title=t('entity').to_s.pluralize.upcase+' | '+tm('characteristic').to_s.pluralize.capitalize+' | '+t('actions.new.m')  
 
 		 else
 
-			 @title=t('my.f').mb_chars.upcase+" "+t('entity').mb_chars.upcase+' | '+tm('characteristic').mb_chars.capitalize+' | '+t('actions.new.m')		 
+			 @title=t('my.f').to_s.upcase+" "+t('entity').to_s.upcase+' | '+tm('characteristic').to_s.capitalize+' | '+t('actions.new.m')		 
 		 
 		 end   
         
@@ -69,11 +69,11 @@ class CharacteristicsController < ApplicationController
 
    	if is_admin_or_manager(current_user)    
 
-	   	 @title=t('entity').mb_chars.pluralize.upcase+' | '+tm('characteristic').pluralize.capitalize+' | '+t('actions.edit')  
+	   	 @title=t('entity').to_s.pluralize.upcase+' | '+tm('characteristic').pluralize.capitalize+' | '+t('actions.edit')  
     
     else
 
-			 @title=t('my.f').upcase+" "+t('entity').mb_chars.upcase+' | '+tm('characteristic').capitalize+' | '+t('actions.edit')		 
+			 @title=t('my.f').upcase+" "+t('entity').to_s.upcase+' | '+tm('characteristic').capitalize+' | '+t('actions.edit')		 
     
     end
 

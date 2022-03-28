@@ -6,7 +6,8 @@ class Permission < ActiveRecord::Base
   has_many :user, foreign_key: 'permission_id', dependent: :restrict_with_exception,
                   inverse_of: :permission
 
-  scope :ordered_by_description, -> { order(desc: :asc) }
+  scope :ordered_by_description, -> { order(:description) }
+  scope :ordered_by_kind, -> { order(:kind) }
 
   def self.readonly
     where(kind: 'adminreadonly')

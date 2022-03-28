@@ -54,7 +54,7 @@ class ProfessionalfamiliesController < ApplicationController
 
     elsif is_local_admin(current_user)
 
-      @title = t('navbar_menu_name').mb_chars.upcase + ' | ' + t('activerecord.models.
+      @title = t('navbar_menu_name').to_s.upcase + ' | ' + t('activerecord.models.
         professionalfamily').capitalize
 
     else

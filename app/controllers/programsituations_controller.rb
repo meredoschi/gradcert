@@ -15,19 +15,19 @@ class ProgramsituationsController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('situation').mb_chars.upcase
+			@title=t('situation').to_s.upcase
       @title+=' | '+t('activerecord.models.programsituation').capitalize.pluralize   
     
     else
 
 			if is_local_admin(current_user)
 						
-				@title=t('situation').mb_chars.upcase
+				@title=t('situation').to_s.upcase
         @title+=' | '+t('activerecord.models.programsituation').capitalize.pluralize   
 
   		else
  
-  			@title=t('my.mp').upcase+' '+tm('programsituation').pluralize.mb_chars.upcase
+  			@title=t('my.mp').upcase+' '+tm('programsituation').pluralize.to_s.upcase
     		
   		end
   		  
@@ -44,7 +44,7 @@ class ProgramsituationsController < ApplicationController
   # GET /programsituations/1
   def show
   
-  	@title=t('activerecord.models.programsituation').capitalize.mb_chars   
+  	@title=t('activerecord.models.programsituation').capitalize.to_s   
 
 #   	@schoolyears=Schoolyear.all
 
@@ -58,17 +58,17 @@ class ProgramsituationsController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('situation').mb_chars.upcase+" | "+t('activerecord.models.programsituation').capitalize
+			@title=t('situation').to_s.upcase+" | "+t('activerecord.models.programsituation').capitalize
 			    			    
     else
 
  	 		if is_local_admin(current_user)    
 
-				@title=t('situation').mb_chars.upcase+' | '+t('activerecord.models.programsituation').capitalize
+				@title=t('situation').to_s.upcase+' | '+t('activerecord.models.programsituation').capitalize
   			
 			else
 					
-				@title=tm('programsituation').pluralize.upcase.mb_chars
+				@title=tm('programsituation').pluralize.upcase.to_s
 
 				if !@programsituation.name.nil? 
 				
@@ -88,7 +88,7 @@ class ProgramsituationsController < ApplicationController
 
     if is_admin_or_manager(current_user)
     
-			@title=t('situation').mb_chars.upcase+" | "+t('actions.new.m')+" "+t('activerecord.models.programsituation')
+			@title=t('situation').to_s.upcase+" | "+t('actions.new.m')+" "+t('activerecord.models.programsituation')
 		
 		else
 
@@ -118,13 +118,13 @@ class ProgramsituationsController < ApplicationController
 
     if is_admin_or_manager(current_user) 
 
-				@title=t('situation').mb_chars.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.programsituation')
+				@title=t('situation').to_s.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.programsituation')
 
     	else
 
 			if is_local_admin(current_user) 
 
-				@title=t('situation').mb_chars.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.programsituation')
+				@title=t('situation').to_s.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.programsituation')
 
 			else
 			 			

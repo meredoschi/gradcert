@@ -6,7 +6,7 @@
 			
 			<% if regular_user?(current_user) %>
 						
-				<h2><%= t('my_assignment_info').mb_chars.upcase  %></h2>	
+				<h2><%= t('my_assignment_info').to_s.upcase  %></h2>	
 
 			<% else %>
 

@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
   # GET /courses
   def index
     
-    @title=t('course').pluralize.mb_chars.upcase+" | "+t('activerecord.models.course').pluralize.capitalize
+    @title=t('course').pluralize.to_s.upcase+" | "+t('activerecord.models.course').pluralize.capitalize
 
     @search = Course.ransack(params[:q])
     @courses=@search.result.page(params[:page]).per(10)
@@ -21,7 +21,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   def show
   
-   	@title=t('course').pluralize.upcase.pluralize.mb_chars.upcase+" | "+t('activerecord.models.course').capitalize+" | "+t('actions.show')
+   	@title=t('course').pluralize.upcase.pluralize.to_s.upcase+" | "+t('activerecord.models.course').capitalize+" | "+t('actions.show')
 
   end
 

@@ -3,7 +3,7 @@
 	<div class="large-8 columns">
 
 
-	    	<h2> <%= t('activerecord.models.leavetype').pluralize.mb_chars.upcase  %> (<%= @leavetypes.total_count  %> /  <%= @numleavetypes %>)</h2>
+	    	<h2> <%= t('activerecord.models.leavetype').pluralize.to_s.upcase  %> (<%= @leavetypes.total_count  %> /  <%= @numleavetypes %>)</h2>
  				
 	</div>
 

@@ -119,7 +119,7 @@ describe Pretty, type: :helper do
 
   # Initial caps - Brazilian Portuguese
   it '#initialcaps(name)' do
-    formatted_name = name.mb_chars.titleize # First, titleize the name
+    formatted_name = name.to_s.titleize # First, titleize the name
 
     original_txt = ["Dell'", "D'", 'Da ', 'Das ', 'Do ', 'Dos ', 'De ', 'Del ', ' E ', ' Em ',
                     ' Entre ', ' A ', ' O ', ' Na ', ' La ', ' P/ ', ' No ', ' Como ', ' Com ',

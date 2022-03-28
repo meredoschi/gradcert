@@ -3,7 +3,7 @@
 	<div class="large-8 columns">
 
 
-	    	<h2> <%= tm('event').pluralize.mb_chars.upcase  %> (<%= @events.total_count  %> /  <%= @num_events %>)</h2>
+	    	<h2> <%= tm('event').pluralize.to_s.upcase  %> (<%= @events.total_count  %> /  <%= @num_events %>)</h2>
 
 
 	</div>

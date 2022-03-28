@@ -8,7 +8,7 @@
 
 <% end %>
 
-  <a href="#"><%= t('course').pluralize.mb_chars.upcase %></a>
+  <a href="#"><%= t('course').pluralize.to_s.upcase %></a>
     <ul class="dropdown">
 
 			<% if can? :read, Assignment %>        

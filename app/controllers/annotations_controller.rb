@@ -12,18 +12,18 @@ class AnnotationsController < ApplicationController
 
 	#	@annotations = Annotation.all
 
-		@title=t('list')+' '+t('navbar.studentregistration').mb_chars.pluralize
+		@title=t('list')+' '+t('navbar.studentregistration').to_s.pluralize
 
   	if is_admin_or_manager(current_user)
 
-			@title=t('navbar.studentregistration').mb_chars.pluralize.upcase
+			@title=t('navbar.studentregistration').to_s.pluralize.upcase
       @title+=' | '+tm('annotation').capitalize.pluralize
 
     else
 
 			if is_local_admin(current_user)
 
-				@title=t('navbar.studentregistration').mb_chars.pluralize.upcase
+				@title=t('navbar.studentregistration').to_s.pluralize.upcase
         @title+=' | '+tm('annotation').capitalize.pluralize
 
   		else
@@ -71,13 +71,13 @@ class AnnotationsController < ApplicationController
 
   	if is_admin_or_manager(current_user)
 
-			@title=t('navbar.studentregistration').mb_chars.pluralize.upcase+" | "+tm('annotation').capitalize+": "+@annotation.name
+			@title=t('navbar.studentregistration').to_s.pluralize.upcase+" | "+tm('annotation').capitalize+": "+@annotation.name
 
     else
 
  	 		if is_local_admin(current_user)
 
-				@title=t('navbar.studentregistration').mb_chars.upcase+' | '+t('annotation').capitalize
+				@title=t('navbar.studentregistration').to_s.upcase+' | '+t('annotation').capitalize
 
 			else
 
@@ -109,7 +109,7 @@ class AnnotationsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-			@title=t('navbar.studentregistration').mb_chars.pluralize.upcase+" | "+t('actions.new.f')+" "+tm('annotation')
+			@title=t('navbar.studentregistration').to_s.pluralize.upcase+" | "+t('actions.new.f')+" "+tm('annotation')
 
 		else
 
@@ -134,13 +134,13 @@ class AnnotationsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-				@title=t('navbar.studentregistration').mb_chars.pluralize.upcase+' | '+t('noun.edit')+' '+tm('annotation')
+				@title=t('navbar.studentregistration').to_s.pluralize.upcase+' | '+t('noun.edit')+' '+tm('annotation')
 
     	else
 
 			if is_local_admin(current_user)
 
-				@title=t('navbar.studentregistration').mb_chars.pluralize.upcase+' | '+t('noun.edit')+' '+tm('annotation')
+				@title=t('navbar.studentregistration').to_s.pluralize.upcase+' | '+t('noun.edit')+' '+tm('annotation')
 
 			else
 

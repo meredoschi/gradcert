@@ -6,7 +6,7 @@
 
 				<h2><%= t('people').upcase %> </h2> 
 		
-	    	<h2 class="subheader"> <%= t('activerecord.models.contact').pluralize.mb_chars.capitalize  %> (<%= @contacts.total_count  %> /  <%= @numcontacts %>)</h2>
+	    	<h2 class="subheader"> <%= t('activerecord.models.contact').pluralize.to_s.capitalize  %> (<%= @contacts.total_count  %> /  <%= @numcontacts %>)</h2>
   
 		<% end %>
 		 

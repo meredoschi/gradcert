@@ -11,11 +11,11 @@ class CollegesController < ApplicationController
     
     if is_admin_or_manager(current_user)    
 
-			@title=t('entity').mb_chars.pluralize.upcase+' | '+tm('college').pluralize.capitalize
+			@title=t('entity').to_s.pluralize.upcase+' | '+tm('college').pluralize.capitalize
     
     else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+tm('college').capitalize
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+tm('college').capitalize
     
     end
     
@@ -30,11 +30,11 @@ class CollegesController < ApplicationController
   
 		if is_admin_or_manager(current_user)
 		
-			@title=t('entity').mb_chars.pluralize.upcase+' | '+tm('college').capitalize+' | '+t('actions.show')
+			@title=t('entity').to_s.pluralize.upcase+' | '+tm('college').capitalize+' | '+t('actions.show')
 		
 		else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+tm('college').capitalize+' | '+t('actions.show')
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+tm('college').capitalize+' | '+t('actions.show')
 
 		end
 
@@ -46,11 +46,11 @@ class CollegesController < ApplicationController
     
     if is_admin_or_manager(current_user)
   	 	
-	   	 @title=t('entity').mb_chars.pluralize.upcase+' | '+tm('college').pluralize.capitalize+' | '+t('actions.new.f')  
+	   	 @title=t('entity').to_s.pluralize.upcase+' | '+tm('college').pluralize.capitalize+' | '+t('actions.new.f')  
 
 		else
 
-			 @title=t('my.f').upcase+" "+t('entity').mb_chars.upcase+' | '+tm('college').capitalize+' | '+t('actions.new.f')		 
+			 @title=t('my.f').upcase+" "+t('entity').to_s.upcase+' | '+tm('college').capitalize+' | '+t('actions.new.f')		 
 		 
 		end   
 
@@ -62,11 +62,11 @@ class CollegesController < ApplicationController
 
 		if is_admin_or_manager(current_user)
 		
-			@title=t('entity').mb_chars.pluralize.upcase+' | '+tm('college').capitalize+' | '+t('actions.edit')
+			@title=t('entity').to_s.pluralize.upcase+' | '+tm('college').capitalize+' | '+t('actions.edit')
 		
 		else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+tm('college').capitalize+' | '+t('actions.edit')
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+tm('college').capitalize+' | '+t('actions.edit')
 
 		end
 

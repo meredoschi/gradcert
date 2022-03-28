@@ -10,13 +10,13 @@ class UsersController < ApplicationController
   def index
     @title = if is_staff(current_user)
 
-               t('people').upcase + ' | ' + tm('user').mb_chars.pluralize.capitalize
+               t('people').upcase + ' | ' + tm('user').to_s.pluralize.capitalize
 
              else
 
                # i.e. regular user or collaborator
 
-               t('personal_info').mb_chars.upcase + ' | ' + t('my.m').capitalize + \
+               t('personal_info').to_s.upcase + ' | ' + t('my.m').capitalize + \
                  ' ' + t('activerecord.models.user')
 
              end
@@ -112,7 +112,7 @@ class UsersController < ApplicationController
 
     @title = if @user.id == current_user.id || is_regular_user(current_user)
 
-               t('personal_info').mb_chars.upcase + ' | ' + tm('user').capitalize + \
+               t('personal_info').to_s.upcase + ' | ' + tm('user').capitalize + \
                  ' | ' + t('actions.show')
 
              else
@@ -132,7 +132,7 @@ class UsersController < ApplicationController
   def edit
     @title = if @user.id == current_user.id || is_regular_user(current_user)
 
-               t('personal_info').mb_chars.upcase + ' | ' + tm('user').capitalize \
+               t('personal_info').to_s.upcase + ' | ' + tm('user').capitalize \
                 + ' | ' + t('actions.edit')
 
              else
@@ -157,7 +157,7 @@ class UsersController < ApplicationController
 
     else
 
-      @title = t('personal_info').mb_chars.upcase + ' | ' + tm('user').capitalize + ' | ' + t('actions.new.m')
+      @title = t('personal_info').to_s.upcase + ' | ' + tm('user').capitalize + ' | ' + t('actions.new.m')
 
     end
   end

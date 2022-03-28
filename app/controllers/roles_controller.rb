@@ -10,7 +10,7 @@ class RolesController < ApplicationController
   # GET /roles.json
   def index
 
-    @title=t('system').mb_chars.upcase+" | "+t('activerecord.models.role').capitalize.pluralize
+    @title=t('system').to_s.upcase+" | "+t('activerecord.models.role').capitalize.pluralize
 
 #     @roles = Role.page(params[:page]).per(10)
 

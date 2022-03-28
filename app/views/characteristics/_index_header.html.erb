@@ -4,7 +4,7 @@
 	
 		<div class="large-8 columns">
 	
-					<h2><%= t('entity').mb_chars.pluralize.upcase %></h2>
+					<h2><%= t('entity').to_s.pluralize.upcase %></h2>
 
 		    	<h2 class="subheader"> <%= tm('characteristic').pluralize.capitalize  %> (<%= @characteristics.total_count  %> /  <%= @numcharacteristics %>)</h2>
 	 				
@@ -27,7 +27,7 @@
 	
 		<div class="large-8 columns">
 	
-					<h2><%= t('my.f').upcase+' '+t('entity').mb_chars.upcase %></h2>
+					<h2><%= t('my.f').upcase+' '+t('entity').to_s.upcase %></h2>
 
 		    	<h2 class="subheader"> <%= t('activerecord.models.characteristic').capitalize  %> </h2>
 	 				

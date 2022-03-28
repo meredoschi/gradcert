@@ -56,7 +56,7 @@ class LeavetypesController < ApplicationController
 
  	 		if is_local_admin(current_user)
 
-				@title=t('navbar_menu_name').mb_chars.upcase+' | '+t('activerecord.models.leavetype').capitalize
+				@title=t('navbar_menu_name').to_s.upcase+' | '+t('activerecord.models.leavetype').capitalize
 
 			else
 

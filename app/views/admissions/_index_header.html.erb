@@ -1,5 +1,5 @@
 <div class="row">
 
-  <h2> <%= t('activerecord.models.admission').pluralize.mb_chars.upcase  %> (<%= @admissions.total_count  %> /  <%= @numadmissions %>)</h2>
+  <h2> <%= t('activerecord.models.admission').pluralize.to_s.upcase  %> (<%= @admissions.total_count  %> /  <%= @numadmissions %>)</h2>
 
 </div>

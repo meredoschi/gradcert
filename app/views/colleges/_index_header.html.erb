@@ -4,9 +4,9 @@
 	
 		<div class="large-8 columns">
 	
-				<h2><%= t('entity').mb_chars.pluralize.upcase %></h2>
+				<h2><%= t('entity').to_s.pluralize.upcase %></h2>
 		
-				<h2 class="subheader"><%= tm('college').pluralize(@colleges.total_count).pluralize.mb_chars.capitalize %> (<%= @colleges.total_count  %> /  <%= @numcolleges %>)  	</h2>
+				<h2 class="subheader"><%= tm('college').pluralize(@colleges.total_count).pluralize.to_s.capitalize %> (<%= @colleges.total_count  %> /  <%= @numcolleges %>)  	</h2>
 
 	 				
 		</div>
@@ -28,7 +28,7 @@
 	
 		<div class="large-8 columns">
 	
-					<h2> <%= t('my.f').upcase+' '+t('entity').mb_chars.upcase %> </h2>
+					<h2> <%= t('my.f').upcase+' '+t('entity').to_s.upcase %> </h2>
 
 	
 		    	<h2 class="subheader"> <%= t('activerecord.models.college').capitalize  %> </h2>

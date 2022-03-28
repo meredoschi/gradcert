@@ -2,7 +2,7 @@
 
 	<div class="large-8 columns">
 
-			<h2><%= t('definition').pluralize.mb_chars.upcase %> </h2>
+			<h2><%= t('definition').pluralize.to_s.upcase %> </h2>
 
 			<h2 class="subheader"><%= tm('programname').pluralize.capitalize %> (<%= @programnames.total_count  %> /  <%= @numprogramnames %>)  	</h2>
 

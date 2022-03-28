@@ -4,7 +4,7 @@
 			
 		<% if regular_user?(current_user) %>
 					
-			<h2><%= t('my_program_info').mb_chars.upcase  %></h2>	
+			<h2><%= t('my_program_info').to_s.upcase  %></h2>	
 
 		<% else %>
 

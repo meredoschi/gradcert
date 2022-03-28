@@ -13,15 +13,15 @@ class ProfessionalareasController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('navbar.programming').mb_chars.pluralize.upcase
-      @title+=' | '+t('activerecord.models.professionalarea').mb_chars.capitalize.pluralize   
+			@title=t('navbar.programming').to_s.pluralize.upcase
+      @title+=' | '+t('activerecord.models.professionalarea').to_s.capitalize.pluralize   
     
     else
 
 			if is_local_admin(current_user)
 						
-				@title=t('navbar.programming').mb_chars.pluralize.upcase
-        @title+=' | '+t('activerecord.models.professionalarea').mb_chars.capitalize.pluralize   
+				@title=t('navbar.programming').to_s.pluralize.upcase
+        @title+=' | '+t('activerecord.models.professionalarea').to_s.capitalize.pluralize   
 
   		else
  
@@ -40,7 +40,7 @@ class ProfessionalareasController < ApplicationController
 
   # GET /professionalareas/1
   def show
-#   	@title=t('activerecord.models.professionalarea').mb_chars.capitalize   
+#   	@title=t('activerecord.models.professionalarea').to_s.capitalize   
   	
 		@professionalspecialties=Professionalspecialty.all
 
@@ -56,13 +56,13 @@ class ProfessionalareasController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('navbar.programming').mb_chars.pluralize.upcase+" | "+t('activerecord.models.professionalarea').mb_chars.capitalize+": "+@professionalarea.name.downcase
+			@title=t('navbar.programming').to_s.pluralize.upcase+" | "+t('activerecord.models.professionalarea').to_s.capitalize+": "+@professionalarea.name.downcase
 			    			    
     else
 
  	 		if is_local_admin(current_user)    
 
-				@title=t('navbar.programming').mb_chars.mb_chars.upcase+' | '+t('activerecord.models.professionalarea').mb_chars.capitalize
+				@title=t('navbar.programming').to_s.to_s.upcase+' | '+t('activerecord.models.professionalarea').to_s.capitalize
   			
 			else
 					
@@ -86,7 +86,7 @@ class ProfessionalareasController < ApplicationController
 
     if is_admin_or_manager(current_user)
     
-			@title=t('navbar.programming').mb_chars.pluralize.upcase+" | "+t('actions.new.f')+" "+t('activerecord.models.professionalarea')
+			@title=t('navbar.programming').to_s.pluralize.upcase+" | "+t('actions.new.f')+" "+t('activerecord.models.professionalarea')
 		
 		else
 
@@ -111,13 +111,13 @@ class ProfessionalareasController < ApplicationController
 
     if is_admin_or_manager(current_user) 
 
-				@title=t('navbar.programming').mb_chars.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.professionalarea')
+				@title=t('navbar.programming').to_s.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.professionalarea')
 
     	else
 
 			if is_local_admin(current_user) 
 
-				@title=t('navbar.programming').mb_chars.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.professionalarea')
+				@title=t('navbar.programming').to_s.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.professionalarea')
 
 			else
 			 			
@@ -134,7 +134,7 @@ class ProfessionalareasController < ApplicationController
     @professionalarea = Professionalarea.new(professionalarea_params)
 
     if @professionalarea.save
-      redirect_to @professionalarea, notice: t('activerecord.models.professionalarea').mb_chars.capitalize+' '+t('created.f')+' '+t('succesfully') 
+      redirect_to @professionalarea, notice: t('activerecord.models.professionalarea').to_s.capitalize+' '+t('created.f')+' '+t('succesfully') 
     else
       render :new
     end
@@ -144,7 +144,7 @@ class ProfessionalareasController < ApplicationController
   def update
     if @professionalarea.update(professionalarea_params)
      # redirect_to @professionalarea, notice: 'Professionalarea was successfully updated.'
-       redirect_to @professionalarea, notice: t('activerecord.models.professionalarea').mb_chars.capitalize+' '+t('updated.f')+' '+t('succesfully')
+       redirect_to @professionalarea, notice: t('activerecord.models.professionalarea').to_s.capitalize+' '+t('updated.f')+' '+t('succesfully')
     else
       render :edit
     end
@@ -153,7 +153,7 @@ class ProfessionalareasController < ApplicationController
   # DELETE /professionalareas/1
   def destroy
     @professionalarea.destroy
-    redirect_to professionalareas_url, notice: t('activerecord.models.professionalarea').mb_chars.capitalize+' '+t('deleted.f')+' '+t('succesfully')
+    redirect_to professionalareas_url, notice: t('activerecord.models.professionalarea').to_s.capitalize+' '+t('deleted.f')+' '+t('succesfully')
     
   end
 

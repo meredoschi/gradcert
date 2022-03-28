@@ -24,7 +24,7 @@ class SupervisorsController < ApplicationController
   		else
 			# i.e. regular user or collaborator
 
-				@title=t('personal_info').mb_chars.upcase+' | '+t('my_teaching').mb_chars.capitalize
+				@title=t('personal_info').to_s.upcase+' | '+t('my_teaching').to_s.capitalize
 			
 			end
 			  		
@@ -46,7 +46,7 @@ class SupervisorsController < ApplicationController
     if @supervisor.contact.user==current_user || is_regular_user(current_user)
 
 
-			@title=t('personal_info').mb_chars.upcase+' | '+t('my_teaching').mb_chars.capitalize+' | '+t('actions.show')
+			@title=t('personal_info').to_s.upcase+' | '+t('my_teaching').to_s.capitalize+' | '+t('actions.show')
 
 		else
 
@@ -70,7 +70,7 @@ class SupervisorsController < ApplicationController
     	   	
     if @supervisor.contact.user==current_user || is_regular_user(current_user)
 
-			@title=t('personal_info').mb_chars.upcase+' | '+t('my_teaching').mb_chars.capitalize+' | '+t('actions.edit')
+			@title=t('personal_info').to_s.upcase+' | '+t('my_teaching').to_s.capitalize+' | '+t('actions.edit')
 		
 		else
 

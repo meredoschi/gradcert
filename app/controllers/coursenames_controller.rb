@@ -56,7 +56,7 @@ class CoursenamesController < ApplicationController
 
  	 		if is_local_admin(current_user)    
 
-				@title=t('navbar_menu_name').mb_chars.upcase+' | '+t('activerecord.models.coursename').capitalize
+				@title=t('navbar_menu_name').to_s.upcase+' | '+t('activerecord.models.coursename').capitalize
   			
 			else
 					
@@ -77,7 +77,7 @@ class CoursenamesController < ApplicationController
   # GET /coursenames/new
   def new
   
-	  @title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.degreetype').capitalize+" | "+t('actions.new.m')
+	  @title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.degreetype').capitalize+" | "+t('actions.new.m')
     @degreetype = Degreetype.new
   
   end

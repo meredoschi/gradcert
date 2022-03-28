@@ -8,7 +8,7 @@ class DegreetypesController < ApplicationController
   # GET /degreetypes
   def index
 
-   	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.degreetype').pluralize.capitalize
+   	@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.degreetype').pluralize.capitalize
 
     @search = Degreetype.ransack(params[:q])
     @degreetypes=@search.result.page(params[:page]).per(10)
@@ -21,14 +21,14 @@ class DegreetypesController < ApplicationController
   def show
 
       @title=t('activerecord.models.degreetype')
-   		@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.degreetype').capitalize+" | "+t('actions.show')
+   		@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.degreetype').capitalize+" | "+t('actions.show')
 
   end
 
   # GET /degreetypes/new
   def new
 
-  	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.degreetype').capitalize+" | "+t('actions.new.m')
+  	@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.degreetype').capitalize+" | "+t('actions.new.m')
     @degreetype = Degreetype.new
 
   end
@@ -37,7 +37,7 @@ class DegreetypesController < ApplicationController
   def edit
 
  		@title=t('actions.edit')+" "+t('activerecord.models.degreetype')
-   	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.degreetype').capitalize+" | "+t('actions.edit')
+   	@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.degreetype').capitalize+" | "+t('actions.edit')
 
 
   end

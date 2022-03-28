@@ -56,7 +56,7 @@ class ScholarshipsController < ApplicationController
 
  	 		if is_local_admin(current_user)
 
-				@title=t('definition').mb_chars.upcase+' | '+t('activerecord.models.scholarship').capitalize
+				@title=t('definition').to_s.upcase+' | '+t('activerecord.models.scholarship').capitalize
 
 			else
 

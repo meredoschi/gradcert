@@ -147,7 +147,7 @@ class PayrollsController < ApplicationController
 
  	 		if is_local_admin(current_user)
 
-				@title=t('navbar.financial').mb_chars.upcase+' | '+t('activerecord.models.payroll').capitalize
+				@title=t('navbar.financial').to_s.upcase+' | '+t('activerecord.models.payroll').capitalize
 
 			else
 

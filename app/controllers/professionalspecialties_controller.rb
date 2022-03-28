@@ -60,7 +60,7 @@ class ProfessionalspecialtiesController < ApplicationController
 
  	 		if is_local_admin(current_user)    
 
-				@title=t('navbar.programming').mb_chars.upcase+' | '+t('activerecord.models.professionalspecialty').capitalize
+				@title=t('navbar.programming').to_s.upcase+' | '+t('activerecord.models.professionalspecialty').capitalize
   			
 			else
 					

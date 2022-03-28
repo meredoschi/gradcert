@@ -3,7 +3,7 @@
 	<div class="large-8 columns">
 
 
-	    	<h2> <%= t('activerecord.models.annotation').pluralize.mb_chars.upcase  %> (<%= @annotations.total_count  %> /  <%= @num_annotations %>)</h2>
+	    	<h2> <%= t('activerecord.models.annotation').pluralize.to_s.upcase  %> (<%= @annotations.total_count  %> /  <%= @num_annotations %>)</h2>
  				
 	</div>
 

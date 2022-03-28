@@ -7,7 +7,7 @@
 		<div class="large-8 columns">
 
 
-		    	<h2> <%= t('activerecord.models.registration').pluralize.mb_chars.upcase  %> (<%= @registrations.total_count  %> /  <%= @numregistrations %>)</h2>
+		    	<h2> <%= t('activerecord.models.registration').pluralize.to_s.upcase  %> (<%= @registrations.total_count  %> /  <%= @numregistrations %>)</h2>
 
 		</div>
 
@@ -21,7 +21,7 @@
 
 	<% else %>
 
-			<h2> <%= t('activerecord.models.registration').pluralize.mb_chars.upcase  %> (<%= @registrations.total_count  %> /  <%= @numregistrations %>) </h2>
+			<h2> <%= t('activerecord.models.registration').pluralize.to_s.upcase  %> (<%= @registrations.total_count  %> /  <%= @numregistrations %>) </h2>
 
 
 

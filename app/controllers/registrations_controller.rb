@@ -52,14 +52,14 @@ class RegistrationsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-      @title = t('navbar.studentregistration').mb_chars.pluralize.upcase
+      @title = t('navbar.studentregistration').to_s.pluralize.upcase
       @title += ' | ' + t('activerecord.models.registration').capitalize.pluralize
 
     else
 
       if is_local_admin(current_user)
 
-        @title = t('navbar.studentregistration').mb_chars.pluralize.upcase
+        @title = t('navbar.studentregistration').to_s.pluralize.upcase
         @title += ' | ' + t('activerecord.models.registration').capitalize.pluralize
 
       else
@@ -134,13 +134,13 @@ class RegistrationsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-      @title = t('navbar.studentregistration').mb_chars.pluralize.upcase + ' | ' + t('activerecord.models.registration').capitalize + ': ' + @registration.student_name
+      @title = t('navbar.studentregistration').to_s.pluralize.upcase + ' | ' + t('activerecord.models.registration').capitalize + ': ' + @registration.student_name
 
     else
 
       if is_local_admin(current_user)
 
-        @title = t('navbar.studentregistration').mb_chars.upcase + ' | ' + t('activerecord.models.registration').capitalize
+        @title = t('navbar.studentregistration').to_s.upcase + ' | ' + t('activerecord.models.registration').capitalize
 
       else
 
@@ -175,7 +175,7 @@ class RegistrationsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-      @title = t('navbar.studentregistration').mb_chars.pluralize.upcase + ' | ' + t('perform').capitalize + ' ' + t('a.f') + ' ' + t('new.f') + ' ' + tm('registration')
+      @title = t('navbar.studentregistration').to_s.pluralize.upcase + ' | ' + t('perform').capitalize + ' ' + t('a.f') + ' ' + t('new.f') + ' ' + tm('registration')
 
     else
 
@@ -229,13 +229,13 @@ class RegistrationsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-      @title = t('navbar.studentregistration').mb_chars.pluralize.upcase + ' | ' + t('noun.edit') + ' ' + t('student_situation')
+      @title = t('navbar.studentregistration').to_s.pluralize.upcase + ' | ' + t('noun.edit') + ' ' + t('student_situation')
 
     else
 
       if is_local_admin(current_user)
 
-        @title = t('navbar.studentregistration').mb_chars.pluralize.upcase + ' | ' + t('noun.edit') + ' ' + t('student_situation')
+        @title = t('navbar.studentregistration').to_s.pluralize.upcase + ' | ' + t('noun.edit') + ' ' + t('student_situation')
 
       else
 

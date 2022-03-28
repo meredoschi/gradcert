@@ -12,11 +12,11 @@ class InstitutionsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-	    @title=t('entity').mb_chars.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize
+	    @title=t('entity').to_s.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize
 
 		else
 
-    	@title=t('my.f').mb_chars.upcase+" "+t('entity').mb_chars.upcase+' | '+t('summary').capitalize
+    	@title=t('my.f').to_s.upcase+" "+t('entity').to_s.upcase+' | '+t('summary').capitalize
 
 		end
 
@@ -62,13 +62,13 @@ class InstitutionsController < ApplicationController
 
   	 if is_admin_or_manager(current_user)
 
-	   	 @title=t('entity').mb_chars.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize+' | '+t('actions.show')
+	   	 @title=t('entity').to_s.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize+' | '+t('actions.show')
 
-	   	 @title=t('entity').mb_chars.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize+' | '+@institution.name
+	   	 @title=t('entity').to_s.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize+' | '+@institution.name
 
 		 else
 
-			 @title=t('my.f').mb_chars.upcase+" "+t('entity').mb_chars.upcase+' | '+t('summary').capitalize+' | '+@institution.name
+			 @title=t('my.f').to_s.upcase+" "+t('entity').to_s.upcase+' | '+t('summary').capitalize+' | '+@institution.name
 
 		 end
 
@@ -103,11 +103,11 @@ class InstitutionsController < ApplicationController
 
   	 if is_admin_or_manager(current_user)
 
-	   	 @title=t('entity').mb_chars.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize+' | '+t('actions.new.f')
+	   	 @title=t('entity').to_s.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize+' | '+t('actions.new.f')
 
 		 else
 
-			 @title=t('my.f').mb_chars.upcase+" "+t('entity')..mb_chars.upcase+' | '+t('summary').capitalize+' | '+t('actions.new.f')
+			 @title=t('my.f').to_s.upcase+" "+t('entity')..to_s.upcase+' | '+t('summary').capitalize+' | '+t('actions.new.f')
 
 		 end
 
@@ -120,11 +120,11 @@ class InstitutionsController < ApplicationController
 
   	 if is_admin_or_manager(current_user)
 
-  	   @title=t('entity').mb_chars.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize+' | '+t('actions.edit')
+  	   @title=t('entity').to_s.pluralize.upcase+' | '+t('institution_summary').pluralize.capitalize+' | '+t('actions.edit')
 
 		 else
 
-			 @title=t('my.f').mb_chars.upcase+" "+t('entity').mb_chars.upcase+' | '+t('summary').capitalize+' | '+t('actions.edit')
+			 @title=t('my.f').to_s.upcase+" "+t('entity').to_s.upcase+' | '+t('summary').capitalize+' | '+t('actions.edit')
 
 		 end
 

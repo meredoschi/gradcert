@@ -8,7 +8,7 @@ class MethodologiesController < ApplicationController
   # GET /methodologies
   def index
   
-    @title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.methodology').pluralize.capitalize
+    @title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.methodology').pluralize.capitalize
 
     @search = Methodology.ransack(params[:q])
     @methodologies=@search.result.page(params[:page]).per(10)
@@ -22,7 +22,7 @@ class MethodologiesController < ApplicationController
   def show
   	
   	@title=t('activerecord.models.methodology')
-   	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.methodology').capitalize+" | "+t('actions.show')
+   	@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.methodology').capitalize+" | "+t('actions.show')
 
 
   end
@@ -55,7 +55,7 @@ class MethodologiesController < ApplicationController
   def edit
 	  
 	  @title=t('actions.edit')+" "+t('activerecord.models.methodology')
-   	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.methodology').capitalize+" | "+t('actions.edit')
+   	@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.methodology').capitalize+" | "+t('actions.edit')
 
   end
 

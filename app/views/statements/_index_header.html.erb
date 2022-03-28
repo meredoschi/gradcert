@@ -3,7 +3,7 @@
 	<div class="large-8 columns">
 
 
-	    	<h2> <%= tm('statement').pluralize.mb_chars.upcase  %> (<%= @statements.total_count  %> /  <%= @numstatements %>)</h2>
+	    	<h2> <%= tm('statement').pluralize.to_s.upcase  %> (<%= @statements.total_count  %> /  <%= @numstatements %>)</h2>
  				
 	</div>
 

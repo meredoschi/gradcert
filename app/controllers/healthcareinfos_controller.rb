@@ -12,11 +12,11 @@ class HealthcareinfosController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('entity').mb_chars.pluralize.upcase+' | '+t('activerecord.models.healthcareinfo').pluralize.capitalize
+			@title=t('entity').to_s.pluralize.upcase+' | '+t('activerecord.models.healthcareinfo').pluralize.capitalize
     
     else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+tm('healthcareinfo').capitalize
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+tm('healthcareinfo').capitalize
     
     end
 
@@ -32,11 +32,11 @@ class HealthcareinfosController < ApplicationController
 
 		if is_admin_or_manager(current_user)
 		
-			@title=t('entity').mb_chars.pluralize.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.show')
+			@title=t('entity').to_s.pluralize.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.show')
 		
 		else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.show')
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.show')
 
 		end
 		   	  	
@@ -48,11 +48,11 @@ class HealthcareinfosController < ApplicationController
     
     if is_admin_or_manager(current_user)
   	 	
-	   	 @title=t('entity').mb_chars.pluralize.upcase+' | '+tm('healthcareinfo').pluralize.capitalize+' | '+t('actions.new.f')  
+	   	 @title=t('entity').to_s.pluralize.upcase+' | '+tm('healthcareinfo').pluralize.capitalize+' | '+t('actions.new.f')  
 
 		else
 
-			 @title=t('my.f').upcase+" "+t('entity').mb_chars.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.new.f')		 
+			 @title=t('my.f').upcase+" "+t('entity').to_s.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.new.f')		 
 		 
 		end   
 
@@ -63,11 +63,11 @@ class HealthcareinfosController < ApplicationController
 
 		if is_admin_or_manager(current_user)
 		
-			@title=t('entity').mb_chars.pluralize.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.edit')
+			@title=t('entity').to_s.pluralize.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.edit')
 		
 		else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.edit')
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+tm('healthcareinfo').capitalize+' | '+t('actions.edit')
 
 		end
 

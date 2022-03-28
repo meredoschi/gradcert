@@ -3,7 +3,7 @@
 	<div class="large-8 columns">
 
 
-	    	<h2> <%= t('activerecord.models.bankpayment').pluralize.mb_chars.upcase  %> (<%= @bankpayments.total_count  %> /  <%= @numbankpayments %>)</h2>
+	    	<h2> <%= t('activerecord.models.bankpayment').pluralize.to_s.upcase  %> (<%= @bankpayments.total_count  %> /  <%= @numbankpayments %>)</h2>
 
 	</div>
 

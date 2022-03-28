@@ -9,7 +9,7 @@ class ProfessionsController < ApplicationController
   def index
     #  @professions = Profession.all
 
-    @title = t('definition').pluralize.mb_chars.upcase + ' | ' + t('activerecord.models.
+    @title = t('definition').pluralize.to_s.upcase + ' | ' + t('activerecord.models.
       profession').pluralize.capitalize
 
     @search = Profession.accessible_by(current_ability).ransack(params[:q])
@@ -21,20 +21,20 @@ class ProfessionsController < ApplicationController
   # GET /professions/1
   # GET /professions/1.json
   def show
-    @title = t('definition').pluralize.mb_chars.upcase + ' | ' + t('activerecord.models.
+    @title = t('definition').pluralize.to_s.upcase + ' | ' + t('activerecord.models.
       profession').capitalize + ' | ' + t('actions.show')
   end
 
   # GET /professions/new
   def new
     @profession = Profession.new
-    @title = t('definition').pluralize.mb_chars.upcase + ' | ' + t('activerecord.models.
+    @title = t('definition').pluralize.to_s.upcase + ' | ' + t('activerecord.models.
       profession').pluralize.capitalize + ' | ' + t('actions.new.f')
   end
 
   # GET /professions/1/edit
   def edit
-    @title = t('definition').pluralize.mb_chars.upcase + ' | ' + t('activerecord.models.
+    @title = t('definition').pluralize.to_s.upcase + ' | ' + t('activerecord.models.
       profession').capitalize + ' | ' + t('actions.edit')
   end
 

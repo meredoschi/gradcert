@@ -20,7 +20,7 @@ module Pretty
 
   # Initial caps - Brazilian Portuguese
   def self.initialcaps(name)
-    name = name.mb_chars.titleize # First, titleize the name
+    name = name.to_s.titleize # First, titleize the name
 
     original_txt = ["Dell'", "D'", 'Da ', 'Das ', 'Do ', 'Dos ', 'De ', 'Del ', ' E ', ' Em ',
                     ' Entre ', ' A ', ' O ', ' Na ', ' La ', ' P/ ', ' No ', ' Como ', ' Com ',

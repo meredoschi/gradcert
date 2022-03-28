@@ -2,9 +2,9 @@
 
 	<div class="large-8 columns">
 
-		<h2><%= t('definition').pluralize.mb_chars.upcase %> </h2>
+		<h2><%= t('definition').pluralize.to_s.upcase %> </h2>
 
-		<h2 class="subheader"><%= tm('profession').pluralize(@professions.total_count).pluralize.mb_chars.capitalize %> (<%= @professions.total_count  %> /  <%= @numprofessions %>)  	</h2>
+		<h2 class="subheader"><%= tm('profession').pluralize(@professions.total_count).pluralize.to_s.capitalize %> (<%= @professions.total_count  %> /  <%= @numprofessions %>)  	</h2>
 
 	</div>
 

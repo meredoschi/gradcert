@@ -3,7 +3,7 @@
 	<div class="large-8 columns">
 
 
-	    	<h2> <%%= tm('<%= singular_table_name %>').pluralize.mb_chars.upcase  %> (<%%= @<%= plural_table_name %>.total_count  %> /  <%%= @num<%= plural_table_name %> %>)</h2>
+	    	<h2> <%%= tm('<%= singular_table_name %>').pluralize.to_s.upcase  %> (<%%= @<%= plural_table_name %>.total_count  %> /  <%%= @num<%= plural_table_name %> %>)</h2>
  				
 	</div>
 

@@ -15,11 +15,11 @@ class ContactsController < ApplicationController
   def index
     @title = if is_staff(current_user)
 
-               t('people').upcase + ' | ' + tm('contact').mb_chars.pluralize.capitalize
+               t('people').upcase + ' | ' + tm('contact').to_s.pluralize.capitalize
 
              else
 
-               t('personal_info').mb_chars.upcase + ' | ' + t('my.m').capitalize \
+               t('personal_info').to_s.upcase + ' | ' + t('my.m').capitalize \
                + ' ' + tm('contact')
 
              end
@@ -51,7 +51,7 @@ class ContactsController < ApplicationController
   def show
     @title = if @contact.user.id == current_user.id || is_regular_user(current_user)
 
-               t('personal_info').mb_chars.upcase + ' | ' + t('my.m').capitalize \
+               t('personal_info').to_s.upcase + ' | ' + t('my.m').capitalize \
                + ' ' + tm('contact') + ' | ' + t('actions.show')
 
              else
@@ -90,7 +90,7 @@ class ContactsController < ApplicationController
 
     @title = if @contact.user == current_user || is_regular_user(current_user)
 
-               t('personal_info').mb_chars.upcase + ' | ' + t('my.m').capitalize \
+               t('personal_info').to_s.upcase + ' | ' + t('my.m').capitalize \
                 + ' ' + tm('contact') + ' | ' + t('actions.edit')
 
              else

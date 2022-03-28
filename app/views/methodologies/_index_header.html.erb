@@ -2,8 +2,8 @@
 
 	<div class="large-8 columns">
 
-			<h2><%= t('definition').pluralize.mb_chars.upcase %> </h2>
-			<h2 class="subheader"><%= tm('methodology').pluralize(@methodologies.total_count).pluralize.mb_chars.capitalize %> (<%= @methodologies.total_count  %> /  <%= @nummethodologies %>)  	</h2>
+			<h2><%= t('definition').pluralize.to_s.upcase %> </h2>
+			<h2 class="subheader"><%= tm('methodology').pluralize(@methodologies.total_count).pluralize.to_s.capitalize %> (<%= @methodologies.total_count  %> /  <%= @nummethodologies %>)  	</h2>
  				
 	</div>
 

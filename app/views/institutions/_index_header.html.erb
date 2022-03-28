@@ -5,13 +5,13 @@
 		<% if admin_or_manager?(current_user) %> 
 
 				
-			<h2><%= t('entity').mb_chars.pluralize.upcase %></h2>
+			<h2><%= t('entity').to_s.pluralize.upcase %></h2>
 		
-			<h2 class="subheader"><%= t('institution_summary').capitalize.pluralize(@institutions.total_count).pluralize.mb_chars.capitalize %> (<%= @institutions.total_count  %> /  <%= @numinstitutions %>)  	</h2>
+			<h2 class="subheader"><%= t('institution_summary').capitalize.pluralize(@institutions.total_count).pluralize.to_s.capitalize %> (<%= @institutions.total_count  %> /  <%= @numinstitutions %>)  	</h2>
 
 		<% else %>
 
-			<h2><%= t('my.f').mb_chars.upcase+' '+tm('institution').mb_chars.upcase %></h2>
+			<h2><%= t('my.f').to_s.upcase+' '+tm('institution').to_s.upcase %></h2>
 		
 			<h2 class="subheader"><%= t('summary').capitalize %></h2>
 						

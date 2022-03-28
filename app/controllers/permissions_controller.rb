@@ -12,10 +12,10 @@ class PermissionsController < ApplicationController
   # GET /permissions
   # GET /permissions.json
   def index
-    @title = t('system').mb_chars.upcase + ' | ' + \
+    @title = t('system').to_s.upcase + ' | ' + \
              t('activerecord.models.permission').capitalize.pluralize
 
-    @search = Permission.accessible_by(current_ability).ordered_by_description.ransack(params[:q])
+    @search = Permission.accessible_by(current_ability).ordered_by_kind.ransack(params[:q])
     @permissions = @search.result.page(params[:page]).per(10)
     @numpermissions = Permission.count
   end
@@ -23,7 +23,7 @@ class PermissionsController < ApplicationController
   # GET /permissions/1
   # GET /permissions/1.json
   def show
-    @title = t('system').mb_chars.upcase + ' | ' + t('activerecord.models.permission').capitalize
+    @title = t('system').to_s.upcase + ' | ' + t('activerecord.models.permission').capitalize
 
     @title = @title + ': ' + @permission.description unless @permission.description.nil?
   end
@@ -32,7 +32,7 @@ class PermissionsController < ApplicationController
   def new
     @permission = Permission.new
 
-    @title = t('system').mb_chars.upcase + ' | ' + \
+    @title = t('system').to_s.upcase + ' | ' + \
              t('activerecord.models.permission').pluralize.capitalize + ' | ' + t('actions.new.f')
   end
 

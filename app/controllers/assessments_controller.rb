@@ -13,19 +13,19 @@ class AssessmentsController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('situation').mb_chars.upcase
+			@title=t('situation').to_s.upcase
       @title+=' | '+t('activerecord.models.assessment').capitalize.pluralize   
     
     else
 
 			if is_local_admin(current_user)
 						
-				@title=t('situation').mb_chars.upcase
+				@title=t('situation').to_s.upcase
         @title+=' | '+t('activerecord.models.assessment').capitalize.pluralize   
 
   		else
  
-  			@title=t('my.mp').upcase+' '+tm('assessment').pluralize.mb_chars.upcase
+  			@title=t('my.mp').upcase+' '+tm('assessment').pluralize.to_s.upcase
     		
   		end
   		  
@@ -54,13 +54,13 @@ class AssessmentsController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('situation').mb_chars.upcase+" | "+t('activerecord.models.assessment').capitalize
+			@title=t('situation').to_s.upcase+" | "+t('activerecord.models.assessment').capitalize
 			    			    
     else
 
  	 		if is_local_admin(current_user)    
 
-				@title=t('situation').mb_chars.upcase+' | '+t('activerecord.models.assessment').capitalize
+				@title=t('situation').to_s.upcase+' | '+t('activerecord.models.assessment').capitalize
   			
 			else
 					
@@ -78,7 +78,7 @@ class AssessmentsController < ApplicationController
 
     if is_admin_or_manager(current_user)
     
-			@title=t('situation').mb_chars.upcase+" | "+t('actions.new.f')+" "+t('activerecord.models.assessment')
+			@title=t('situation').to_s.upcase+" | "+t('actions.new.f')+" "+t('activerecord.models.assessment')
 		
 		else
 
@@ -103,13 +103,13 @@ class AssessmentsController < ApplicationController
 
     if is_admin_or_manager(current_user) 
 
-				@title=t('situation').mb_chars.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.assessment')
+				@title=t('situation').to_s.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.assessment')
 
     	else
 
 			if is_local_admin(current_user) 
 
-				@title=t('situation').mb_chars.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.assessment')
+				@title=t('situation').to_s.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.assessment')
 
 			else
 			 			

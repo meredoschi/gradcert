@@ -13,14 +13,14 @@ class CouncilsController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('definition').mb_chars.pluralize.upcase
+			@title=t('definition').to_s.pluralize.upcase
       @title+=' | '+t('activerecord.models.council').capitalize.pluralize   
     
     else
 
 			if is_local_admin(current_user)
 						
-				@title=t('definition').mb_chars.pluralize.upcase
+				@title=t('definition').to_s.pluralize.upcase
         @title+=' | '+t('activerecord.models.council').capitalize.pluralize   
 
   		else
@@ -50,13 +50,13 @@ class CouncilsController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('definition').mb_chars.pluralize.upcase+" | "+t('activerecord.models.council').capitalize+": "+@council.name
+			@title=t('definition').to_s.pluralize.upcase+" | "+t('activerecord.models.council').capitalize+": "+@council.name
 			    			    
     else
 
  	 		if is_local_admin(current_user)    
 
-				@title=t('definition').mb_chars.upcase+' | '+t('activerecord.models.council').capitalize
+				@title=t('definition').to_s.upcase+' | '+t('activerecord.models.council').capitalize
   			
 			else
 					
@@ -89,7 +89,7 @@ class CouncilsController < ApplicationController
 
     if is_admin_or_manager(current_user)
     
-			@title=t('definition').mb_chars.pluralize.upcase+" | "+t('actions.new.m')+" "+t('activerecord.models.council')
+			@title=t('definition').to_s.pluralize.upcase+" | "+t('actions.new.m')+" "+t('activerecord.models.council')
 		
 		else
 
@@ -115,13 +115,13 @@ class CouncilsController < ApplicationController
 
     if is_admin_or_manager(current_user) 
 
-				@title=t('definition').mb_chars.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.council')
+				@title=t('definition').to_s.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.council')
 
     	else
 
 			if is_local_admin(current_user) 
 
-				@title=t('definition').mb_chars.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.council')
+				@title=t('definition').to_s.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.council')
 
 			else
 			 			

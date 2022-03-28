@@ -21,7 +21,7 @@
 
 			<h2 class="text-center"><%= t('people').upcase %></h2>
 
-    	<h2 class="subheader"> <%= t('activerecord.models.student').pluralize.mb_chars.capitalize  %> (<%= @students.total_count %>/<%= @numstudents %>)</h2>
+    	<h2 class="subheader"> <%= t('activerecord.models.student').pluralize.to_s.capitalize  %> (<%= @students.total_count %>/<%= @numstudents %>)</h2>
 
 	  </div>
 

@@ -13,7 +13,7 @@ class RegionalofficesController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('definition').pluralize.mb_chars.upcase
+			@title=t('definition').pluralize.to_s.upcase
       @title+=' | '+t('activerecord.models.regionaloffice').capitalize.pluralize   
       		  
     end
@@ -30,7 +30,7 @@ class RegionalofficesController < ApplicationController
   
     @regionalofficemunicipalities=@regionaloffice.municipality.page(params[:page]).per(10)
  
-   	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.regionaloffice').capitalize+" | "+t('actions.show')
+   	@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.regionaloffice').capitalize+" | "+t('actions.show')
 
   end
 

@@ -11,11 +11,11 @@ class ResearchcentersController < ApplicationController
 
   	if is_admin_or_manager(current_user)    
 
-			@title=t('entity').mb_chars.pluralize.upcase+' | '+t('activerecord.models.researchcenter').pluralize.capitalize
+			@title=t('entity').to_s.pluralize.upcase+' | '+t('activerecord.models.researchcenter').pluralize.capitalize
     
     else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+t('activerecord.models.researchcenter').capitalize
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+t('activerecord.models.researchcenter').capitalize
     
     end
      
@@ -30,11 +30,11 @@ class ResearchcentersController < ApplicationController
   	
 		if is_admin_or_manager(current_user)
 		
-			@title=t('entity').mb_chars.pluralize.upcase+' | '+t('activerecord.models.researchcenter').capitalize.pluralize+' | '+t('actions.show')
+			@title=t('entity').to_s.pluralize.upcase+' | '+t('activerecord.models.researchcenter').capitalize.pluralize+' | '+t('actions.show')
 		
 		else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+t('activerecord.models.researchcenter').capitalize+' | '+t('actions.show')
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+t('activerecord.models.researchcenter').capitalize+' | '+t('actions.show')
 
 		end
 		 
@@ -46,11 +46,11 @@ class ResearchcentersController < ApplicationController
     
     if is_admin_or_manager(current_user)
   	 	
-	   	 @title=t('entity').mb_chars.pluralize.upcase+' | '+tm('researchcenter').pluralize.capitalize+' | '+t('actions.new.m')  
+	   	 @title=t('entity').to_s.pluralize.upcase+' | '+tm('researchcenter').pluralize.capitalize+' | '+t('actions.new.m')  
 
 		else
 
-			 @title=t('my.f').upcase+" "+t('entity').mb_chars.upcase+' | '+tm('researchcenter').capitalize+' | '+t('actions.new.m')		 
+			 @title=t('my.f').upcase+" "+t('entity').to_s.upcase+' | '+tm('researchcenter').capitalize+' | '+t('actions.new.m')		 
 		 
 		end   
 
@@ -62,11 +62,11 @@ class ResearchcentersController < ApplicationController
 
    	if is_admin_or_manager(current_user)    
 
-     	 @title=t('entity').mb_chars.pluralize.upcase+' | '+t('noun.edit')+" "+t('activerecord.models.researchcenter')
+     	 @title=t('entity').to_s.pluralize.upcase+' | '+t('noun.edit')+" "+t('activerecord.models.researchcenter')
     
     else
 
-			@title=t('my.f').upcase+' '+t('entity').mb_chars.upcase+' | '+t('activerecord.models.researchcenter').capitalize+' | '+t('actions.edit')
+			@title=t('my.f').upcase+' '+t('entity').to_s.upcase+' | '+t('activerecord.models.researchcenter').capitalize+' | '+t('actions.edit')
     
     end
     

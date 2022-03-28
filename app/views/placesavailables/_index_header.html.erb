@@ -3,7 +3,7 @@
 	<div class="large-8 columns">
 
 
-	    	<h2> <%= tm('placesavailable').pluralize.mb_chars.upcase  %> (<%= @placesavailables.total_count  %> /  <%= @numplacesavailables %>)</h2>
+	    	<h2> <%= tm('placesavailable').pluralize.to_s.upcase  %> (<%= @placesavailables.total_count  %> /  <%= @numplacesavailables %>)</h2>
  				
 	</div>
 

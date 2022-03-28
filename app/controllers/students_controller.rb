@@ -34,14 +34,14 @@ class StudentsController < ApplicationController
 
   	if is_admin_or_manager(current_user)
 
-			@title=t('people').mb_chars.pluralize.upcase
+			@title=t('people').to_s.pluralize.upcase
       @title+=' | '+t('activerecord.models.student').capitalize.pluralize
 
     else
 
 			if is_local_admin(current_user)
 
-				@title=t('people').mb_chars.pluralize.upcase
+				@title=t('people').to_s.pluralize.upcase
         @title+=' | '+t('activerecord.models.student').capitalize.pluralize
 
   		else
@@ -75,13 +75,13 @@ class StudentsController < ApplicationController
 
   	if is_admin_or_manager(current_user)
 
-			@title=t('people').mb_chars.pluralize.upcase+" | "+t('activerecord.models.student').capitalize+": "+@student.contact_name
+			@title=t('people').to_s.pluralize.upcase+" | "+t('activerecord.models.student').capitalize+": "+@student.contact_name
 
     else
 
  	 		if is_local_admin(current_user)
 
-				@title=t('people').mb_chars.upcase+' | '+t('activerecord.models.student').capitalize
+				@title=t('people').to_s.upcase+' | '+t('activerecord.models.student').capitalize
 
 			else
 
@@ -105,7 +105,7 @@ class StudentsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-			@title=t('people').mb_chars.pluralize.upcase+" | "+t('actions.new.m')+" "+t('activerecord.models.student')
+			@title=t('people').to_s.pluralize.upcase+" | "+t('actions.new.m')+" "+t('activerecord.models.student')
 
 		else
 
@@ -135,13 +135,13 @@ class StudentsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-				@title=t('people').mb_chars.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.student')
+				@title=t('people').to_s.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.student')
 
     	else
 
 			if is_local_admin(current_user)
 
-				@title=t('people').mb_chars.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.student')
+				@title=t('people').to_s.pluralize.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.student')
 
 			else
 

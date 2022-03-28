@@ -5,7 +5,7 @@
 
 		<div class="large-10 columns">
 
-			<h2 class="text-center"> <%= t('people_management').mb_chars.upcase %>
+			<h2 class="text-center"> <%= t('people_management').to_s.upcase %>
 
 			<h2 class="subheader"> <%= t('my.m').capitalize+' '+tm('contact') %> </h2>
 
@@ -23,7 +23,7 @@
 
 					<h2 class="text-center"><%= t('people').upcase %> </h2>
 
-		    	<h2 class="subheader"> <%= t('activerecord.models.contact').pluralize.mb_chars.capitalize  %> (<%= @contacts.total_count  %> /  <%= @numcontacts %>)</h2>
+		    	<h2 class="subheader"> <%= t('activerecord.models.contact').pluralize.to_s.capitalize  %> (<%= @contacts.total_count  %> /  <%= @numcontacts %>)</h2>
 
 	 		<% end %>
 

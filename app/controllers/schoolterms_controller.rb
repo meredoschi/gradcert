@@ -13,14 +13,14 @@ class SchooltermsController < ApplicationController
 
   	if is_admin_or_manager(current_user)
 
-			@title=t('definition').pluralize.mb_chars.upcase
+			@title=t('definition').pluralize.to_s.upcase
       @title+=' | '+t('activerecord.models.schoolterm').capitalize.pluralize
 
     else
 
 			if is_local_admin(current_user)
 
-				@title=t('definition').pluralize.mb_chars.upcase
+				@title=t('definition').pluralize.to_s.upcase
         @title+=' | '+t('activerecord.models.schoolterm').capitalize.pluralize
 
   		else
@@ -50,13 +50,13 @@ class SchooltermsController < ApplicationController
 
   	if is_admin_or_manager(current_user)
 
-			@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.schoolterm').capitalize+": "+@schoolterm.name
+			@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.schoolterm').capitalize+": "+@schoolterm.name
 
     else
 
  	 		if is_local_admin(current_user)
 
-				@title=t('navbar_menu_name').mb_chars.upcase+' | '+t('activerecord.models.schoolterm').capitalize
+				@title=t('navbar_menu_name').to_s.upcase+' | '+t('activerecord.models.schoolterm').capitalize
 
 			else
 
@@ -80,7 +80,7 @@ class SchooltermsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-			@title=t('definition').pluralize.mb_chars.upcase+" | "+t('actions.new.m')+" "+t('activerecord.models.schoolterm')
+			@title=t('definition').pluralize.to_s.upcase+" | "+t('actions.new.m')+" "+t('activerecord.models.schoolterm')
 
 		else
 
@@ -105,13 +105,13 @@ class SchooltermsController < ApplicationController
 
     if is_admin_or_manager(current_user)
 
-				@title=t('definition').pluralize.mb_chars.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.schoolterm')
+				@title=t('definition').pluralize.to_s.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.schoolterm')
 
     	else
 
 			if is_local_admin(current_user)
 
-				@title=t('definition').pluralize.mb_chars.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.schoolterm')
+				@title=t('definition').pluralize.to_s.upcase+' | '+t('noun.edit')+' '+t('activerecord.models.schoolterm')
 
 			else
 

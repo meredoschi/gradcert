@@ -10,7 +10,7 @@ class ProgramnamesController < ApplicationController
   # GET /programnames.json
   def index
 
-   	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.programname').pluralize.capitalize
+   	@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.programname').pluralize.capitalize
 
     @search = Programname.ransack(params[:q])
     @programnames=@search.result.page(params[:page]).per(10)
@@ -23,7 +23,7 @@ class ProgramnamesController < ApplicationController
   # GET /programnames/1.json
   def show
       @title=t('activerecord.models.programname')
-   		@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.programname').capitalize+" | "+t('actions.show')
+   		@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.programname').capitalize+" | "+t('actions.show')
 
       if @programname.ancestor_id.present?
 
@@ -40,7 +40,7 @@ class ProgramnamesController < ApplicationController
   # GET /programnames/new
   def new
 
-  	@title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.programname').capitalize+" | "+t('actions.new.m')
+  	@title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.programname').capitalize+" | "+t('actions.new.m')
     @programname = Programname.new
 
   end
@@ -48,7 +48,7 @@ class ProgramnamesController < ApplicationController
   # GET /programnames/1/edit
   def edit
      @title=t('actions.edit')+" "+t('activerecord.models.program')
-   	 @title=t('definition').pluralize.mb_chars.upcase+" | "+t('activerecord.models.programname').capitalize+" | "+t('actions.edit')
+   	 @title=t('definition').pluralize.to_s.upcase+" | "+t('activerecord.models.programname').capitalize+" | "+t('actions.edit')
 
   end
 

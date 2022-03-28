@@ -6,7 +6,7 @@
 	
 		<% if admin_or_manager?(current_user) %>
 
-	    	<h2> <%= tm('programsituation').pluralize(@programsituations.total_count).mb_chars.upcase  %> 
+	    	<h2> <%= tm('programsituation').pluralize(@programsituations.total_count).to_s.upcase  %> 
  				
  		<% else %>
  		
