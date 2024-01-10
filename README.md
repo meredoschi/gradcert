@@ -2,24 +2,19 @@
 
 ## HISTORICAL BACKGROUND
 
-Back in 2013, I first started writing what would then become **grad**uate **cert**ificate.  It started as a personal project and steadily grew.  I've coded and installed the production version.
+The original idea for this project started back in 2013.  It is provided as a community resource, for didactical reasons.  Possibly, it could be useful to the participating universities in the then “professional improvement program” institutions from the State of São Paulo, which might still access the now “legacy” application, to review historical data from the students.  
 
-It ran from April 2016 and was successfully used during the 2016, 2017 and 2018 school years.
+That is to say, this repository is a public version of the code for a system I designed and developed while at the São Paulo State Health Secretariat in Brazil. It used Rails as the web framework and Zurb foundation for the interface.  For completeness, may I also mention that this repository uses sample data and therefore does not include all the functionality and scripts present in the (then) production version.   
 
-The feedback from users and the teams involved was generally very positive.  The production version used Portuguese as the default language and the codebase was slightly different.  It included the various *rake tasks* I wrote, in addition to some other features related to Brazilian tax reporting requirements, for instance.
+The feedback from users and the teams involved was generally very positive.  The production version was in Portuguese and had a different project name.  The codebase included various *rake tasks*, in addition to some other features related to Brazilian tax reporting requirements, for instance.  It ran from April 2016 and was successfully used during the 2016, 2017 and 2018 school years.  It was, quite possibly, the first system in the São Paulo State government to use Ruby on Rails technology.     
 
-*Since my departure from public service on April 2018, there have been two new administrations.*
-
-*My expectation, as the architect/developer, in line with original project requirements, was that the system would be in place for many years to come.  Much to my surprise, however, I later learned that this was no longer the case.
-Therefore, I thought it best to update this page accordingly, for the sake of completeness.*
-
-*It was, as far as I know, the first system in the São Paulo State government to use Ruby on Rails technology.*
+Sometime later, after my departure from the Secretariat in 2018, a PHP application was then put into production, after the database had been cloned.  As far as I know, it was developed by an external developer, from outside the very competent team I worked on, without formal training in computer science or engineering.             
 
 ## ABOUT
 
-   I am still in the process of revising and refactoring some of the code for this international version.
+   I have revised and refactored some of the code for this international version.
 
-   This latest update includes additional text in English, such as localized help tooltips ("balloons") in the contact form.
+   The latest update includes additional text in English, such as localized help tooltips ("balloons") in the contact form.
 
    Regarding the sample data (which may be loaded via *rake db:seed*), most of it is in Portuguese, such as states
    municipalities, countries, etc.  Street names are already in English, for the international version.
@@ -77,11 +72,11 @@ Development branch
 
 ## This page last updated
 
-*28/MAR/2022*
+*10/JAN/2024*
 
 ---
 ## COPYRIGHT
 
-Copyright © 2022 Marcelo Eduardo Redoschi
+Copyright © 2024 Marcelo Eduardo Redoschi
 
 *Licensed under the GNU Affero General Public License v3.0*
