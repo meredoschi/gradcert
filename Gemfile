@@ -111,7 +111,7 @@ gem 'thin'
 gem 'timeliness' #  Date validation
 gem 'traceroute'
 gem 'turbolinks' # Read more: https://github.com/rails/turbolinks
-gem 'tzinfo', '~> 1.2.1'
+gem 'tzinfo', '~> 1.2.10'
 # commented out on Rails 5.1.7 install
 gem 'validates_overlap' # April 2016
 gem 'validates_timeliness', '~> 4.0'
