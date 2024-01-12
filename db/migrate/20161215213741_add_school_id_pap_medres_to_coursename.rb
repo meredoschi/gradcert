@@ -1,4 +1,4 @@
-class AddSchoolIdPapMedresToCoursename < ActiveRecord::Migration
+class AddSchoolIdPapMedresToCoursename < ActiveRecord::Migration[4.2]
   def change
     add_column :coursenames, :school_id, :integer
     add_column :coursenames, :pap, :boolean, default: false

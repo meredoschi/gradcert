@@ -1,4 +1,4 @@
-class AddFinalExamAppealsToAdmission < ActiveRecord::Migration
+class AddFinalExamAppealsToAdmission < ActiveRecord::Migration[4.2]
   def change
     change_table :admissions do |t|
       t.rename :appealsgranted, :appealsgrantedfirstexam

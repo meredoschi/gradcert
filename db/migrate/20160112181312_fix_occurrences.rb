@@ -1,4 +1,4 @@
-class FixOccurrences < ActiveRecord::Migration
+class FixOccurrences < ActiveRecord::Migration[4.2]
   def change
     if table_exists?(:occurrences)
 

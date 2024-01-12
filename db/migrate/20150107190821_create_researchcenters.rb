@@ -1,4 +1,4 @@
-class CreateResearchcenters < ActiveRecord::Migration
+class CreateResearchcenters < ActiveRecord::Migration[4.2]
   def change
     create_table :researchcenters do |t|
       t.integer :institution_id

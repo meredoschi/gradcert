@@ -1,4 +1,4 @@
-class CreateFundings < ActiveRecord::Migration
+class CreateFundings < ActiveRecord::Migration[4.2]
   def change
     create_table :fundings do |t|
       t.integer :government

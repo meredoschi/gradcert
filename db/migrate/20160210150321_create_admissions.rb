@@ -1,4 +1,4 @@
-class CreateAdmissions < ActiveRecord::Migration
+class CreateAdmissions < ActiveRecord::Migration[4.2]
   def change
     create_table :admissions do |t|
       t.date :started

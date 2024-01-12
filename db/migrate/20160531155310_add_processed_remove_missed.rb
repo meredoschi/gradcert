@@ -1,4 +1,4 @@
-class AddProcessedRemoveMissed < ActiveRecord::Migration
+class AddProcessedRemoveMissed < ActiveRecord::Migration[4.2]
   def change
     change_table :feedbacks do |t|
       t.remove :missed

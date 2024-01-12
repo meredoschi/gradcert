@@ -1,4 +1,4 @@
-class AddLegacyidToInstitution < ActiveRecord::Migration
+class AddLegacyidToInstitution < ActiveRecord::Migration[4.2]
   def change
     add_column :institutions, :legacycode, :integer
   end

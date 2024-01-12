@@ -1,4 +1,4 @@
-class FixAdmissions < ActiveRecord::Migration
+class FixAdmissions < ActiveRecord::Migration[4.2]
   def change
     change_table :admissions do |t|
       t.rename :started, :start

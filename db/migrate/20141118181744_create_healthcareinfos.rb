@@ -1,4 +1,4 @@
-class CreateHealthcareinfos < ActiveRecord::Migration
+class CreateHealthcareinfos < ActiveRecord::Migration[4.2]
   def change
     create_table :healthcareinfos do |t|
       t.integer :institution_id

@@ -1,4 +1,4 @@
-class RemoveOldProgramCols < ActiveRecord::Migration
+class RemoveOldProgramCols < ActiveRecord::Migration[4.2]
   def change
     change_table :programs do |t|
       t.remove :programnum

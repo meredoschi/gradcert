@@ -1,4 +1,4 @@
-class Fixfeedback < ActiveRecord::Migration
+class Fixfeedback < ActiveRecord::Migration[4.2]
   def change
     change_table :feedbacks do |t|
       t.remove :bankpayment_id

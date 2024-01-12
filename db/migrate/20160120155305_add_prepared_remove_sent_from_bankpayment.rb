@@ -1,4 +1,4 @@
-class AddPreparedRemoveSentFromBankpayment < ActiveRecord::Migration
+class AddPreparedRemoveSentFromBankpayment < ActiveRecord::Migration[4.2]
   def change
     add_column :bankpayments, :prepared, :boolean, default: false
 

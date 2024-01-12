@@ -1,4 +1,4 @@
-class CreateRegionaloffices < ActiveRecord::Migration
+class CreateRegionaloffices < ActiveRecord::Migration[4.2]
   def change
     create_table :regionaloffices do |t|
       t.string :name, limit: 100, null: false, unique: true

@@ -1,4 +1,4 @@
-class CreateAdvisements < ActiveRecord::Migration
+class CreateAdvisements < ActiveRecord::Migration[4.2]
   def change
     create_table :advisements do |t|
       t.integer :supervisor_id

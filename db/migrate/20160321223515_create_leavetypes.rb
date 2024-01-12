@@ -1,4 +1,4 @@
-class CreateLeavetypes < ActiveRecord::Migration
+class CreateLeavetypes < ActiveRecord::Migration[4.2]
   def change
     create_table :leavetypes do |t|
       t.string :name, limit: 100

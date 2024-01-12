@@ -1,4 +1,4 @@
-class CreateBrstates < ActiveRecord::Migration
+class CreateBrstates < ActiveRecord::Migration[4.2]
   def change
     create_table :brstates do |t|
       t.string :name, limit: 50, null: false

@@ -1,4 +1,4 @@
-class CreateProfessionalspecialties < ActiveRecord::Migration
+class CreateProfessionalspecialties < ActiveRecord::Migration[4.2]
   def change
     create_table :professionalspecialties do |t|
       t.string :name, limit: 100

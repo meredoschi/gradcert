@@ -1,4 +1,4 @@
-class CreateAccreditations < ActiveRecord::Migration
+class CreateAccreditations < ActiveRecord::Migration[4.2]
   def change
     create_table :accreditations do |t|
       t.integer :institution_id

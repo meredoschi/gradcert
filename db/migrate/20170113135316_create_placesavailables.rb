@@ -1,4 +1,4 @@
-class CreatePlacesavailables < ActiveRecord::Migration
+class CreatePlacesavailables < ActiveRecord::Migration[4.2]
   def change
     create_table :placesavailables do |t|
       t.integer :institution_id

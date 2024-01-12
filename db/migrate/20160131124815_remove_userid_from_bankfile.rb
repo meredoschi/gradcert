@@ -1,4 +1,4 @@
-class RemoveUseridFromBankfile < ActiveRecord::Migration
+class RemoveUseridFromBankfile < ActiveRecord::Migration[4.2]
   def change
     if table_exists?(:bankfiles)
 

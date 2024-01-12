@@ -1,4 +1,4 @@
-class CreateSchools < ActiveRecord::Migration
+class CreateSchools < ActiveRecord::Migration[4.2]
   def change
     drop_table :schools if table_exists?(:schools)
 

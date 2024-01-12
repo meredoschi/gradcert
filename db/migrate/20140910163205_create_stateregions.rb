@@ -1,4 +1,4 @@
-class CreateStateregions < ActiveRecord::Migration
+class CreateStateregions < ActiveRecord::Migration[4.2]
   def change
     create_table :stateregions do |t|
       t.string :name, limit: 70, null: false

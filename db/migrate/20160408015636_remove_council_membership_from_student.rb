@@ -1,4 +1,4 @@
-class RemoveCouncilMembershipFromStudent < ActiveRecord::Migration
+class RemoveCouncilMembershipFromStudent < ActiveRecord::Migration[4.2]
   def change
     change_table :students do |t|
       t.remove :councilmembership

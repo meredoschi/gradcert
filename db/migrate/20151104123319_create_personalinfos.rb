@@ -1,4 +1,4 @@
-class CreatePersonalinfos < ActiveRecord::Migration
+class CreatePersonalinfos < ActiveRecord::Migration[4.2]
   def change
     create_table :personalinfos do |t|
       t.string :sex

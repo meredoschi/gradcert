@@ -1,4 +1,4 @@
-class CreateStatements < ActiveRecord::Migration
+class CreateStatements < ActiveRecord::Migration[4.2]
   def change
     create_table :statements do |t|
       t.integer :registration_id

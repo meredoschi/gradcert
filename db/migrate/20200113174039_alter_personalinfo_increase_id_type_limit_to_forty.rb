@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Increased due to the international version
-class AlterPersonalinfoIncreaseIdTypeLimitToForty < ActiveRecord::Migration
+class AlterPersonalinfoIncreaseIdTypeLimitToForty < ActiveRecord::Migration[4.2]
   def up
     change_column :personalinfos, :idtype, :string, limit: 40 # for the future
     # I18n.t('activerecord.constants.personalinfo.idtype.registered_foreigner').length = 20

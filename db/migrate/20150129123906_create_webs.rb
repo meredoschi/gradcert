@@ -1,4 +1,4 @@
-class CreateWebs < ActiveRecord::Migration
+class CreateWebs < ActiveRecord::Migration[4.2]
   def change
     create_table :webs do |t|
       t.string :email, limit: 100

@@ -1,4 +1,4 @@
-class CreateBankbranches < ActiveRecord::Migration
+class CreateBankbranches < ActiveRecord::Migration[4.2]
   def change
     create_table :bankbranches do |t|
       t.integer :num

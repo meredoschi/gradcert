@@ -1,4 +1,4 @@
-class CreateCouncils < ActiveRecord::Migration
+class CreateCouncils < ActiveRecord::Migration[4.2]
   def change
     create_table :councils do |t|
       t.string :name, limit: 150, null: false

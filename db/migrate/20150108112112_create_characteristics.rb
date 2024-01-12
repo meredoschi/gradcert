@@ -1,4 +1,4 @@
-class CreateCharacteristics < ActiveRecord::Migration
+class CreateCharacteristics < ActiveRecord::Migration[4.2]
   def change
     create_table :characteristics do |t|
       t.integer :institution_id

@@ -1,4 +1,4 @@
-class RemoveAddressPhoneFromBankbranch < ActiveRecord::Migration
+class RemoveAddressPhoneFromBankbranch < ActiveRecord::Migration[4.2]
   def change
     change_table :bankbranches do |t|
       t.remove :address_id

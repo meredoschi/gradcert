@@ -1,4 +1,4 @@
-class ProgramSupervisors < ActiveRecord::Migration
+class ProgramSupervisors < ActiveRecord::Migration[4.2]
   def change
     create_table :programsupervisors do |t|
       t.integer :supervisor_id

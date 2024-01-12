@@ -1,4 +1,4 @@
-class AlterPersonalDataSetLimits < ActiveRecord::Migration
+class AlterPersonalDataSetLimits < ActiveRecord::Migration[4.2]
   def change
     change_column :personalinfos, :sex, :string, limit: 1
     change_column :personalinfos, :gender, :string, limit: 1

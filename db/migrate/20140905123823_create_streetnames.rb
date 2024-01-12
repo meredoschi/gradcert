@@ -1,4 +1,4 @@
-class CreateStreetnames < ActiveRecord::Migration
+class CreateStreetnames < ActiveRecord::Migration[4.2]
   def change
     create_table :streetnames do |t|
       t.string :nome, limit: 50, null: false

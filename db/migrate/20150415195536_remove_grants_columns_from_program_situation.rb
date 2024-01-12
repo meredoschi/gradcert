@@ -1,4 +1,4 @@
-class RemoveGrantsColumnsFromProgramSituation < ActiveRecord::Migration
+class RemoveGrantsColumnsFromProgramSituation < ActiveRecord::Migration[4.2]
   def change
     change_table :programsituations do |t|
       t.remove :recommended_first_year_grants

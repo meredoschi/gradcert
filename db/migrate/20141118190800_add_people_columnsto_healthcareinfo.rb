@@ -1,4 +1,4 @@
-class AddPeopleColumnstoHealthcareinfo < ActiveRecord::Migration
+class AddPeopleColumnstoHealthcareinfo < ActiveRecord::Migration[4.2]
   def change
     add_column :healthcareinfos, :consultations, :integer
     add_column :healthcareinfos, :admissions, :integer

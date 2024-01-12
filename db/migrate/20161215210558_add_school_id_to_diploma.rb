@@ -1,4 +1,4 @@
-class AddSchoolIdToDiploma < ActiveRecord::Migration
+class AddSchoolIdToDiploma < ActiveRecord::Migration[4.2]
   def change
     add_column :diplomas, :school_id, :integer
   end

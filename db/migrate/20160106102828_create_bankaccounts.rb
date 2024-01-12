@@ -1,4 +1,4 @@
-class CreateBankaccounts < ActiveRecord::Migration
+class CreateBankaccounts < ActiveRecord::Migration[4.2]
   def change
     create_table :bankaccounts do |t|
       t.string :num, limit: 12

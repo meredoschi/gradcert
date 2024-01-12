@@ -1,4 +1,4 @@
-class CreateDiplomas < ActiveRecord::Migration
+class CreateDiplomas < ActiveRecord::Migration[4.2]
   def change
     create_table :diplomas do |t|
       t.string :degree

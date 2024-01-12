@@ -1,4 +1,4 @@
-class FixSelfJoinIdForProgramname < ActiveRecord::Migration
+class FixSelfJoinIdForProgramname < ActiveRecord::Migration[4.2]
   def change
     change_table :programnames do |t|
       t.remove :parentid

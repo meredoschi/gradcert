@@ -1,3 +1,3 @@
-class IndexContactOnState < ActiveRecord::Migration
+class IndexContactOnState < ActiveRecord::Migration[4.2]
   def change; end
 end

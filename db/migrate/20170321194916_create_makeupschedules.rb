@@ -1,4 +1,4 @@
-class CreateMakeupschedules < ActiveRecord::Migration
+class CreateMakeupschedules < ActiveRecord::Migration[4.2]
   def change
     create_table :makeupschedules do |t|
       t.date :start

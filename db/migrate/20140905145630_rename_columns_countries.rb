@@ -1,4 +1,4 @@
-class RenameColumnsCountries < ActiveRecord::Migration
+class RenameColumnsCountries < ActiveRecord::Migration[4.2]
   def change
     change_table :countries do |t|
       t.rename :nome, :brname

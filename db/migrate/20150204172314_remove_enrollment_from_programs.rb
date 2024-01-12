@@ -1,4 +1,4 @@
-class RemoveEnrollmentFromPrograms < ActiveRecord::Migration
+class RemoveEnrollmentFromPrograms < ActiveRecord::Migration[4.2]
   def change
     change_table :programs do |t|
       t.remove :first_year_grants

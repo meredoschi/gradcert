@@ -1,4 +1,4 @@
-class RenameLeavetypeDays < ActiveRecord::Migration
+class RenameLeavetypeDays < ActiveRecord::Migration[4.2]
   def change
     change_table :leavetypes do |t|
       t.rename :days, :setnumdays

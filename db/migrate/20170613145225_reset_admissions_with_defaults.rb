@@ -1,4 +1,4 @@
-class ResetAdmissionsWithDefaults < ActiveRecord::Migration
+class ResetAdmissionsWithDefaults < ActiveRecord::Migration[4.2]
   def change
     change_table :admissions do |t|
       t.remove  :candidates

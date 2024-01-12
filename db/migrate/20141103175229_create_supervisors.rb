@@ -1,4 +1,4 @@
-class CreateSupervisors < ActiveRecord::Migration
+class CreateSupervisors < ActiveRecord::Migration[4.2]
   def change
     create_table :supervisors do |t|
       t.integer :contact_id

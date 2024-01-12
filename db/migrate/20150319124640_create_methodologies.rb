@@ -1,4 +1,4 @@
-class CreateMethodologies < ActiveRecord::Migration
+class CreateMethodologies < ActiveRecord::Migration[4.2]
   def change
     create_table :methodologies do |t|
       t.string :name, limit: 120

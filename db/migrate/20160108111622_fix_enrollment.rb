@@ -1,4 +1,4 @@
-class FixEnrollment < ActiveRecord::Migration
+class FixEnrollment < ActiveRecord::Migration[4.2]
   def change
     if table_exists?(:enrollments)
 

@@ -1,4 +1,4 @@
-class RenameGrantEnrollmentonPrograms < ActiveRecord::Migration
+class RenameGrantEnrollmentonPrograms < ActiveRecord::Migration[4.2]
   def change
     change_table :programs do |t|
       t.rename :first_year_annual_grants, :first_year_grants

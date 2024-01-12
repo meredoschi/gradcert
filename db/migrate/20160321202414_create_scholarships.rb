@@ -1,4 +1,4 @@
-class CreateScholarships < ActiveRecord::Migration
+class CreateScholarships < ActiveRecord::Migration[4.2]
   def change
     create_table :scholarships do |t|
       t.integer :amount, default: 0

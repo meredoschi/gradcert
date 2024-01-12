@@ -1,4 +1,4 @@
-class CreateProfessionalfamilies < ActiveRecord::Migration
+class CreateProfessionalfamilies < ActiveRecord::Migration[4.2]
   def change
     drop_table :professionalfamilies if table_exists?(:professionalfamilies)
 

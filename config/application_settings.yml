@@ -1,6 +1,7 @@
 # config/application_settings.yml
 # https://github.com/settingslogic/settingslogic
 defaults: &defaults
+  international: True  # for example, when "I18n.locale == :en"
   default_line_size: 240
   payroll:
     payday:

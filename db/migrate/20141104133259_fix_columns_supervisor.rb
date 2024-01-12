@@ -1,4 +1,4 @@
-class FixColumnsSupervisor < ActiveRecord::Migration
+class FixColumnsSupervisor < ActiveRecord::Migration[4.2]
   def change
     change_table :supervisors do |t|
       t.remove :lead

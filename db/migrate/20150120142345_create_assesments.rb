@@ -1,4 +1,4 @@
-class CreateAssesments < ActiveRecord::Migration
+class CreateAssesments < ActiveRecord::Migration[4.2]
   def change
     drop_table :assesments if table_exists?(:assesments)
 

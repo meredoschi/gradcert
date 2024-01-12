@@ -1,4 +1,4 @@
-class CreatePayrolls < ActiveRecord::Migration
+class CreatePayrolls < ActiveRecord::Migration[4.2]
   def change
     drop_table :payrolls if table_exists?(:payrolls)
 

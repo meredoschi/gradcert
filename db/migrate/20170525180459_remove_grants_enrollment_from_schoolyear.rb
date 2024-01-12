@@ -1,4 +1,4 @@
-class RemoveGrantsEnrollmentFromSchoolyear < ActiveRecord::Migration
+class RemoveGrantsEnrollmentFromSchoolyear < ActiveRecord::Migration[4.2]
   def change
     admissions_info = %w[grants maxenrollment scholarships grantsrequested]
 

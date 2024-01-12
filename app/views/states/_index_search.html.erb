@@ -4,13 +4,35 @@
 			
 		<div class="large-3 columns">
 		
-			<th><%= f.label ta('state.country')%></th>
-	
+			<th>
+
+			<% if (Settings.international)==true %>
+				
+			<%# To fix %> 
+
+			<% else %> 
+
+			<% f.label ta('state.country')%>
+
+			<% end %> 
+
+			</th>
+
 		</div>
 		
 		<div class="large-9 columns">
-							
-			<%= f.select :country_id_eq, options_from_collection_for_select(Country.registered, :id, :brname), include_blank: true %>
+
+		<% if (Settings.international)==true %>
+				
+		<%# To fix %> 
+
+		<% else %> 
+
+		<%= f.select :country_id_eq, options_from_collection_for_select(Country.registered, :id, :brname), include_blank: true %>
+
+		<% end %> 
+
+
 				
 		</div>
 		

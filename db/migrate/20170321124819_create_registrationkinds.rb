@@ -1,4 +1,4 @@
-class CreateRegistrationkinds < ActiveRecord::Migration
+class CreateRegistrationkinds < ActiveRecord::Migration[4.2]
   def change
     create_table :registrationkinds do |t|
       t.boolean :regular, default: true

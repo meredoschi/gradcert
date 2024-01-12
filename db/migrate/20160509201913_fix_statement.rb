@@ -1,4 +1,4 @@
-class FixStatement < ActiveRecord::Migration
+class FixStatement < ActiveRecord::Migration[4.2]
   def change
     change_table :statements do |t|
       t.remove :payroll_id

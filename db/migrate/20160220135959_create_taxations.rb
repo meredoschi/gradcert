@@ -1,4 +1,4 @@
-class CreateTaxations < ActiveRecord::Migration
+class CreateTaxations < ActiveRecord::Migration[4.2]
   def change
     create_table :taxations do |t|
       t.integer :socialsecurity

@@ -1,4 +1,4 @@
-class CreateSchoolterms < ActiveRecord::Migration
+class CreateSchoolterms < ActiveRecord::Migration[4.2]
   def change
     create_table :schoolterms do |t|
       t.date :start, null: false
