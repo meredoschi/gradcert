@@ -41,7 +41,7 @@ group :test, :development do
   gem 'shoulda-matchers', '~> 3.1' # July 2017
   gem 'json_converter', '~> 0.0.0' # November 2017
   gem 'capybara' # September 2018
-  gem 'httparty' # January 2020
+  gem 'httparty', '~> 0.21.0' # January 2024
   gem 'rspec-rails', '~> 4.0.0' # March 2022
   gem 'rubocop-rspec'
   gem 'rubocop-faker' # March 2022 - Rails 5.0.7
@@ -84,7 +84,7 @@ gem 'mini_magick', ">= 4.9.4" # http://marsorange.com/files/rmagick_vs_minimagic
 gem 'money'
 gem 'money-rails'
 gem 'morrisjs-rails'
-gem 'nokogiri', ">= 1.13.2"
+gem 'nokogiri', '~> 1.13', '>= 1.13.10'
 #gem 'paper_trail', '~> 3.0.6'
 gem 'paper_trail', '~> 5.0', '>= 5.0.1' # Rails 5.0.7
 gem 'passenger'
@@ -96,7 +96,15 @@ gem 'priceable'
 #gem 'rails', '~> 5.0.7'
 #gem 'rails', '~> 5.1.7'
 #gem 'rails', '~> 5.2.7'
+### Rails updates
 gem 'rails', '~> 5.2', '>= 5.2.8.1' 
+### 
+gem 'rack', '~> 2.2', '>= 2.2.8'
+gem 'globalid', '~> 1.0', '>= 1.0.1'
+gem 'loofah', '~> 2.19', '>= 2.19.1'
+gem 'rails-html-sanitizer', '~> 1.4', '>= 1.4.4'
+### 
+
 gem 'rails-fix-permissions'
 #gem 'ransack', '~> 1.8.0'
 # gem 'ransack', '~> 2.1', '>= 2.1.1' # Rails 5.0.7 update

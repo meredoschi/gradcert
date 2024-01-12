@@ -428,8 +428,9 @@ DEPENDENCIES
   ffaker
   file_validators
   foundation-rails (~> 5.5.3)
+  globalid (~> 1.0, >= 1.0.1)
   holidays
-  httparty
+  httparty (~> 0.21.0)
   i18n (>= 0.6.9)
   i18n-tasks (~> 0.9.20)
   jbuilder (~> 2.9)
@@ -437,21 +438,24 @@ DEPENDENCIES
   json_converter (~> 0.0.0)
   kaminari
   listen
+  loofah (~> 2.19, >= 2.19.1)
   mime-types (~> 3.3)
   mini_magick (>= 4.9.4)
   money
   money-rails
   morrisjs-rails
-  nokogiri (>= 1.13.2)
+  nokogiri (~> 1.13, >= 1.13.10)
   paper_trail (~> 5.0, >= 5.0.1)
   passenger
   pg (= 0.20)
   prawn
   prawn-table (~> 0.2.0)
   priceable
+  rack (~> 2.2, >= 2.2.8)
   railroady
   rails (~> 5.2, >= 5.2.8.1)
   rails-fix-permissions
+  rails-html-sanitizer (~> 1.4, >= 1.4.4)
   rails-observers
   ransack (~> 2.3)
   raphael-rails
