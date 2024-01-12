@@ -62,17 +62,17 @@ password: **samplepass**
 
 Originally developed using both Linux and Mac.  
 
-Development branch
+Current versions information:
 
-#### Ruby: 2.7.5 (rvm)
-#### Rails: Version 5.2.7
-#### Database: Postgres 12.9
+#### Ruby: ruby 2.7.5p203
+#### Rails: 5.2.8.1
+#### Database: Postgres 15.5
 
 ---
 
 ## This page last updated
 
-*10/JAN/2024*
+*12/JAN/2024*
 
 ---
 ## COPYRIGHT
