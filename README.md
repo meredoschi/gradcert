@@ -64,15 +64,15 @@ Originally developed using both Linux and Mac.
 
 Current versions information:
 
-#### Ruby: ruby 2.7.5p203
-#### Rails: 5.2.8.1
+#### Ruby: ruby 3.0.6p216 (2023-03-30 revision 23a532679b) [x86_64-linux]
+#### Rails: 6.1.7.6
 #### Database: Postgres 15.5
 
 ---
 
 ## This page last updated
 
-*12/JAN/2024*
+*13/JAN/2024*
 
 ---
 ## COPYRIGHT

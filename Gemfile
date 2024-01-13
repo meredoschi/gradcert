@@ -9,7 +9,11 @@ ruby '3.0.6' # January 2024
 # Specific to certain groups
 group :assets do
   #  gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .js.coffee assets and views
-  gem 'coffee-rails', '~> 4.2.2' # Use CoffeeScript for .js.coffee assets and views # Rails 5.1.7
+
+  # gem 'coffee-rails', '~> 4.2.2' # Use CoffeeScript for .js.coffee assets and views # Rails 5.1.7
+  # Rails 6 update
+  gem 'coffee-rails', '~> 5.0'
+
   gem 'uglifier', '>= 1.3.0' # Compressor for JavaScript assets
 end
 
@@ -34,13 +38,17 @@ end
 
 group :test, :development do
   gem 'capybara'
-  gem 'factory_bot_rails', '4.11.0', require: false
+  #  gem 'factory_bot_rails', '4.11.0', require: false
+  # Rails 6 update
+  # -----
+  gem 'factory_bot_rails', '~> 5.2', require: false
+  gem 'rspec-rails', '~> 6.1'
+  # -----
   gem 'httparty', '~> 0.21.0' # January 2024
   gem 'json_converter', '~> 0.0.0' # November 2017
   gem 'listen' # March 2022 - Rails 5.1.7
   gem 'rails-observers' # https://github.com/rails/rails-observers
   gem 'redcarpet'
-  gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.1' # July 2017
 end
 
@@ -53,7 +61,6 @@ gem 'activerecord-reset-pk-sequence' # https://github.com/splendeo/activerecord-
 # gem 'activerecord', '~> 5.1.7' # Added for Rails 5.1.7 - March 2022
 # gem 'activerecord', '~> 5.2.7' # Added for Rails 5.2.7 - March 2022
 gem 'addressable', '~> 2.8'
-gem 'bigdecimal', '~> 1.4' # Added for Ruby 2.7 - March 2022
 gem 'bootsnap', require: false # Rails 5.2.7 update - March 2022
 gem 'cancancan'
 gem 'cocoon'
@@ -70,10 +77,9 @@ gem 'mini_magick', '>= 4.9.4' # http://marsorange.com/files/rmagick_vs_minimagic
 gem 'nokogiri', '~> 1.13', '>= 1.13.10'
 # gem 'paper_trail', '~> 3.0.6'
 # gem 'paper_trail', '~> 5.0', '>= 5.0.1' # Rails 5.0.7
-gem 'paper_trail', '~> 10.3', '>= 10.3.1'
 # gem 'paper_trail', '~> 11.1' # January 2024 Rails 6.0.22
 gem 'passenger'
-gem 'pg', '0.20' # Use postgresql as the database for Active Record
+# gem 'pg', '0.20' # Use postgresql as the database for Active Record
 gem 'prawn' # June 2016
 gem 'prawn-table', '~> 0.2.0'
 gem 'priceable'
@@ -83,7 +89,6 @@ gem 'priceable'
 # gem 'rails', '~> 5.2.7'
 ### Rails updates
 # gem 'rails', '~> 5.2', '>= 5.2.8.1'
-gem 'rails', '~> 6.0', '>= 6.0.2.2'
 ###
 gem 'globalid', '~> 1.0', '>= 1.0.1'
 gem 'loofah', '~> 2.19', '>= 2.19.1'
@@ -106,7 +111,7 @@ gem 'thin'
 gem 'timeliness' #  Date validation
 gem 'traceroute'
 gem 'turbolinks' # Read more: https://github.com/rails/turbolinks
-gem 'tzinfo', '~> 1.2.10'
+gem 'tzinfo'
 # commented out on Rails 5.1.7 install
 gem 'validates_overlap' # April 2016
 gem 'validates_timeliness', '~> 4.0'
@@ -120,7 +125,7 @@ gem 'yard', '>= 0.9.20' # Documentation
 gem 'actionpack'
 gem 'active_link_to'
 gem 'activemodel'
-gem 'activerecord'
+gem 'activerecord', '>= 6.1.7.1'
 gem 'carrierwave'
 gem 'devise'
 gem 'file_validators'
@@ -131,8 +136,13 @@ gem 'kaminari'
 gem 'money'
 gem 'money-rails'
 gem 'morrisjs-rails'
-gem 'ransack'
+gem 'paper_trail', '~> 15.1'
+gem 'paper_trail-association_tracking', '~> 2.2', '>= 2.2.1'
+gem 'pg'
+gem 'rails', '~> 6.1', '>= 6.1.7.1'
+gem 'ransack', '~> 3.2', '>= 3.2.1'
 gem 'rubocop-faker'
 gem 'rubocop-rails', require: false
 gem 'rubocop-rspec'
 gem 'sass-rails' # http://stackoverflow.com/questions/27126235/sass-or-foundation-error-after-updating-rails-and-other-gems
+gem 'bigdecimal'
