@@ -7,9 +7,12 @@ ruby "3.0.6" # January 2024
 # Specific to certain groups
 group :assets do
 #  gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .js.coffee assets and views
-  gem 'coffee-rails', '~> 4.2.2' # Use CoffeeScript for .js.coffee assets and views # Rails 5.1.7
 
-  gem 'sass-rails' # http://stackoverflow.com/questions/27126235/sass-or-foundation-error-after-updating-rails-and-other-gems
+# ----- PENDING -----
+# gem 'coffee-rails', '~> 4.2.2' # Use CoffeeScript for .js.coffee assets and views # Rails 5.1.7
+# gem 'sass-rails' # http://stackoverflow.com/questions/27126235/sass-or-foundation-error-after-updating-rails-and-other-gems
+# -------------------
+
   gem 'uglifier', '>= 1.3.0' # Compressor for JavaScript assets
 end
 
@@ -33,61 +36,83 @@ group :test do
 end
 
 group :test, :development do
-  gem 'factory_bot_rails', '4.11.0', require: false
-  gem 'rails-observers' # https://github.com/rails/rails-observers
+
+  # ----- PENDING -----
+  # gem 'rails-observers' # https://github.com/rails/rails-observers
+  # gem 'factory_bot_rails', '4.11.0', require: false
+  # -------------------
   gem 'redcarpet'
-  gem 'rubocop', '~> 0.78.0' # December 2019
-  # gem 'rubocop-rails', '~> 2.4' # deprecated
-  gem 'rubocop-rails', require: false
   gem 'shoulda-matchers', '~> 3.1' # July 2017
   gem 'json_converter', '~> 0.0.0' # November 2017
-  gem 'capybara' # September 2018
+# ----- PENDING -----
+#  gem 'capybara' # September 2018
+#  gem 'rspec-rails', '~> 4.0.0' # March 2022 
+# -------------------
+
   gem 'httparty', '~> 0.21.0' # January 2024
-  gem 'rspec-rails', '~> 4.0.0' # March 2022
-  gem 'rubocop-rspec'
-  gem 'rubocop-faker' # March 2022 - Rails 5.0.7
   gem 'listen'        # March 2022 - Rails 5.1.7
 end
 
 # General
 
 # March 2022 - Rails 5.1.7 upgrade
-gem 'active_link_to', '~> 1.0', '>= 1.0.5'
+
+
 #gem 'actionpack', '~> 5.1', '>= 5.1.7'
 #gem 'activemodel', '~> 5.1', '>= 5.1.7'
 # ---
 gem 'activerecord-reset-pk-sequence' # https://github.com/splendeo/activerecord-reset-pk-sequence
 #gem 'activerecord', '~> 5.0.7' # Added for Rails 5.0.7 - March 2022
 #gem 'activerecord', '~> 5.1.7' # Added for Rails 5.1.7 - March 2022
-gem 'activerecord', '~> 5.2.7' # Added for Rails 5.2.7 - March 2022
+# ----- PENDING ------------------------- 
+# gem 'activerecord', '~> 5.2.7' # Added for Rails 5.2.7 - March 2022
+gem 'activerecord', '~> 6.0', '>= 6.0.3'
+# ---------------------------------------
 gem 'addressable', '~> 2.8'
 gem 'bigdecimal', '~> 1.4' # Added for Ruby 2.7 - March 2022
 gem 'bootsnap', require: false # Rails 5.2.7 update - March 2022
 gem 'cancancan'
-gem 'carrierwave'
 gem 'cocoon'
 gem 'daemons'
 gem 'delayed_job_active_record'
-gem 'devise'
 gem 'execjs' # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'faker'
 gem 'ffaker'
-gem 'file_validators'
-gem 'foundation-rails', '~> 5.5.3' # Version 5
 gem 'holidays'
 gem 'i18n', '>= 0.6.9'
-gem 'i18n-tasks', '~> 0.9.20'
 #gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.9'
-gem 'jquery-rails' # Use jquery as the JavaScript library
-gem 'kaminari'
+
+# ----- PENDING -----------
+# gem 'i18n-tasks', '~> 0.9.20'
+# gem 'foundation-rails', '~> 5.5.3' # Version 5
+# gem 'jbuilder', '~> 2.9'
+# gem 'kaminari'
+# gem 'active_link_to', '~> 1.0', '>= 1.0.5'
+# gem 'devise'
+# gem 'rubocop', '~> 0.78.0' # December 2019
+## gem 'rubocop-rails', '~> 2.4' # deprecated
+# gem 'rubocop-rails', require: false
+# gem 'rubocop-rspec'
+# gem 'rubocop-faker' # March 2022 - Rails 5.0.7
+# gem 'carrierwave'
+# gem 'file_validators'
+
+# -------------------------
+
+# ----- PENDING ----- 
+# gem 'jquery-rails' # Use jquery as the JavaScript library
+# -------------------
+
 gem 'mini_magick', ">= 4.9.4" # http://marsorange.com/files/rmagick_vs_minimagick.pdf
-gem 'money'
-gem 'money-rails'
-gem 'morrisjs-rails'
+# ----- PENDING -----
+# gem 'morrisjs-rails'
+# gem 'money'
+# gem 'money-rails'
+# ------------------- 
 gem 'nokogiri', '~> 1.13', '>= 1.13.10'
 #gem 'paper_trail', '~> 3.0.6'
-gem 'paper_trail', '~> 5.0', '>= 5.0.1' # Rails 5.0.7
+# gem 'paper_trail', '~> 5.0', '>= 5.0.1' # Rails 5.0.7
+gem 'paper_trail', '~> 11.1' # January 2024 Rails 6.0.22
 gem 'passenger'
 gem 'pg', '0.20' # Use postgresql as the database for Active Record
 gem 'prawn' # June 2016
@@ -98,7 +123,8 @@ gem 'priceable'
 #gem 'rails', '~> 5.1.7'
 #gem 'rails', '~> 5.2.7'
 ### Rails updates
-gem 'rails', '~> 5.2', '>= 5.2.8.1' 
+# gem 'rails', '~> 5.2', '>= 5.2.8.1' 
+gem 'rails', '~> 6.0', '>= 6.0.2.2'
 ### 
 gem 'rack', '~> 2.2', '>= 2.2.8'
 gem 'globalid', '~> 1.0', '>= 1.0.1'
@@ -109,7 +135,10 @@ gem 'rails-html-sanitizer', '~> 1.4', '>= 1.4.4'
 gem 'rails-fix-permissions'
 #gem 'ransack', '~> 1.8.0'
 # gem 'ransack', '~> 2.1', '>= 2.1.1' # Rails 5.0.7 update
-gem 'ransack', '~> 2.3' # Rails 5.1.7 update
+# ----- PENDING -----
+# gem 'ransack', '~> 2.3' # Rails 5.1.7 update
+# -------------------
+
 gem 'raphael-rails'
 #gem "rubyzip", ">= 1.3.0"
 gem 'rubyzip', '~> 2.3' # Rails 5.0.7 update March 2022
