@@ -484,13 +484,13 @@ DEPENDENCIES
   json_converter (~> 0.0.0)
   kaminari
   listen
-  loofah (~> 2.19, >= 2.19.1)
+  loofah (~> 2.22)
   mime-types (~> 3.3)
   mini_magick (>= 4.9.4)
   money
   money-rails
   morrisjs-rails
-  nokogiri (~> 1.13, >= 1.13.10)
+  nokogiri (~> 1.16)
   paper_trail (~> 15.1)
   paper_trail-association_tracking (~> 2.2, >= 2.2.1)
   passenger
@@ -502,7 +502,7 @@ DEPENDENCIES
   railroady
   rails (~> 6.1, >= 6.1.7.1)
   rails-fix-permissions
-  rails-html-sanitizer (~> 1.4, >= 1.4.4)
+  rails-html-sanitizer (~> 1.6)
   rails-observers
   ransack (~> 3.2, >= 3.2.1)
   raphael-rails

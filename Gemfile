@@ -74,7 +74,7 @@ gem 'i18n', '>= 0.6.9'
 # gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
 gem 'mini_magick', '>= 4.9.4' # http://marsorange.com/files/rmagick_vs_minimagick.pdf
-gem 'nokogiri', '~> 1.13', '>= 1.13.10'
+gem 'nokogiri', '~> 1.16'
 # gem 'paper_trail', '~> 3.0.6'
 # gem 'paper_trail', '~> 5.0', '>= 5.0.1' # Rails 5.0.7
 # gem 'paper_trail', '~> 11.1' # January 2024 Rails 6.0.22
@@ -91,9 +91,7 @@ gem 'priceable'
 # gem 'rails', '~> 5.2', '>= 5.2.8.1'
 ###
 gem 'globalid', '~> 1.0', '>= 1.0.1'
-gem 'loofah', '~> 2.19', '>= 2.19.1'
 gem 'rack', '~> 2.2', '>= 2.2.8'
-gem 'rails-html-sanitizer', '~> 1.4', '>= 1.4.4'
 ###
 
 gem 'rails-fix-permissions'
@@ -146,3 +144,5 @@ gem 'rubocop-rails', require: false
 gem 'rubocop-rspec'
 gem 'sass-rails' # http://stackoverflow.com/questions/27126235/sass-or-foundation-error-after-updating-rails-and-other-gems
 gem 'bigdecimal'
+gem 'loofah', '~> 2.22'
+gem 'rails-html-sanitizer', '~> 1.6'
