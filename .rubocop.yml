@@ -1,4 +1,9 @@
-require: rubocop-rails
+require:
+  - rubocop-rails
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 2.7
 Metrics/LineLength:
