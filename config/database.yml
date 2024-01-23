@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  host: localhost
+  host: <%= ENV['GRADUATE_CERTIFICATE_HOST']%> 
   database: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_PREFIX']%>development
   username: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_USER']%>
   password: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_PASSWORD']%>
@@ -9,7 +9,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  host: localhost
+  host: <%= ENV['GRADUATE_CERTIFICATE_HOST']%>
   database: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_PREFIX']%>test
   username: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_USER'] %>
   password: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_PASSWORD'] %>
@@ -17,7 +17,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  host: localhost
+  host: <%= ENV['GRADUATE_CERTIFICATE_HOST']%>
   database: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_PREFIX']%>production
   username: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_USER'] %>
   password: <%= ENV['GRADUATE_CERTIFICATE_DATABASE_PASSWORD'] %>
