@@ -1,4 +1,4 @@
-/* Marccelo Eduardo Redoschi */
+/* Marcelo Eduardo Redoschi */
 /* Revised January 2024 */
 create user gradcert with encrypted password 'sample-db-password' login createdb;
 create database gradcert_test with owner gradcert;

@@ -119,7 +119,7 @@ Created database 'gradcert_test'
 rails s
 ```
 
-It was possible to log in to the application, referencing the containerized postgres environment, instead of the locally installed Postgres server previosly.
+It was possible to log in to the application, referencing the containerized postgres environment, instead of the locally installed Postgres server previously.
 
 6. Next to do: "dockerize" the application's Ruby environment. 
 
