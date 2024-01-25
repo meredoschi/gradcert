@@ -1,0 +1,62 @@
+# Marcelo Eduardo Redoschi - January - 2024
+# Application (RVM, Ruby) docker environment
+# Debug:
+# sudo docker build . -f containerization/dockerfiles/Dockerfile-ubuntu-rvm-ruby-3_0_6 -t ubuntu-rvm-ruby-3_0_6 --progress=plain
+# sudo docker run -it ubuntu-rvm-ruby-3_0_6 /bin/bash -l
+
+FROM ubuntu:20.04
+ENV TZ="Europe/Rome"
+RUN useradd -ms /bin/bash sample
+RUN usermod sample -p sample-pass
+
+RUN apt-get update && \
+    apt-get install -yq tzdata && \
+    ln -fs /usr/share/zoneinfo/Europe/Rome /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+
+RUN apt-get install -y \
+    curl \
+    gnupg2 \
+    build-essential \
+    sudo \
+    gawk autoconf automake bison libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool libyaml-dev pkg-config sqlite3 zlib1g-dev libgmp-dev libreadline-dev libssl-dev
+
+RUN apt-get install -y \
+    nano net-tools iputils-ping libpq-dev 
+RUN apt-get install -y postgresql-client
+
+RUN apt-get install -y nodejs
+
+RUN usermod -aG sudo sample
+CMD ["/usr/bin/sudo /usr/bin/ufw disable"]
+
+USER sample
+WORKDIR /home/sample
+
+RUN bash
+
+
+RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+RUN curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+RUN echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg2 --import-ownertrust # mpapis@gmail.com
+RUN echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg2 --import-ownertrust # piotr.kuczynski@gmail.com
+
+RUN \curl -sSL https://get.rvm.io | bash -s stable
+RUN $HOME/.rvm/bin/rvm install 3.0.6
+RUN $HOME/.rvm/bin/rvm alias create default ruby-3.0.6
+
+#RUN mkdir -p /home/sample/gradcert
+#COPY --chown=sample:sample . /home/sample/gradcert
+#RUN rm -rf /home/sample/gradcert/coverage
+#RUN rm -rf /home/sample/gradcert/drafts
+#RUN rm -rf /home/sample/gradcert/spec
+#RUN rm -rf /home/sample/gradcert/containerization
+
+#WORKDIR /home/sample/gradcert 
+
+#RUN /bin/bash -l -c "gem install bundler"
+#RUN /bin/bash -l -c "bundle install"
+#RUN cat /home/sample/gradcert/containerization/ruby_container_env >> /home/sample/.bashrc
+#RUN chmod 755 /home/sample/gradcert/start.sh
+#ENTRYPOINT ["/bin/bash", "-l", "-c", "/home/sample/gradcert/start.sh"]
+#EXPOSE 3000

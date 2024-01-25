@@ -1,0 +1,28 @@
+# Marcelo Eduardo Redoschi - January - 2024
+# Application (RVM, Ruby) docker environment
+# Debug:
+# sudo docker build . -f dockerfiles/Dockerfile-graduate-certificate -t graduate-certificate --progress=plain
+# sudo docker run -it graduate-certificate /bin/bash -l
+
+FROM ubuntu-rvm-ruby-3_0_6
+ENV TZ="Europe/Rome"
+
+RUN mkdir -p /home/sample/gradcert
+COPY --chown=sample:sample . /home/sample/gradcert
+RUN cat /home/sample/gradcert/containerization/ruby_container_env >> /home/sample/.bashrc
+RUN chmod 755 /home/sample/gradcert/start.sh
+
+### ------ Clean up  
+# RUN rm -rf /home/sample/gradcert/coverage
+# RUN rm -rf /home/sample/gradcert/spec
+RUN rm -rf /home/sample/gradcert/drafts
+RUN rm -rf /home/sample/gradcert/build* 
+RUN rm -rf /home/sample/gradcert/containerization
+### ------ 
+
+WORKDIR /home/sample/gradcert 
+
+RUN /bin/bash -l -c "gem install bundler"
+RUN /bin/bash -l -c "bundle install"
+ENTRYPOINT ["/bin/bash", "-l", "-c", "/home/sample/gradcert/start.sh"]
+EXPOSE 3000

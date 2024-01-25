@@ -1,11 +1,11 @@
 # Marcelo Eduardo Redoschi - 23 - Jan - 2024
 # ---------------------------------------
 # Debug (in case needed): 
-# sudo docker build . -f dockerfiles/Dockerfile-alpine-postgres-15_5 -t alpine-postgres-15_5 --progress=plain
+# sudo docker build . -f containerization/dockerfiles/Dockerfile-alpine-postgres-15_5 -t alpine-postgres-15_5 --progress=plain
 # sudo docker run --env-file postgres_container_env -it alpine-postgres-15_5
 # ---------------------------------------
 FROM postgres:15.5-alpine3.19
-COPY graduate_certificate_db_setup.sql docker-entrypoint-initdb.d/
+COPY containerization/graduate_certificate_db_setup.sql docker-entrypoint-initdb.d/
 RUN /usr/local/bin/docker-entrypoint.sh
 STOPSIGNAL SIGINT
 EXPOSE 5432

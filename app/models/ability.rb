@@ -505,7 +505,8 @@ class Ability
 
       end
 
-      cannot [:update],  Contact.not_incoming
+#      January 2024 - hotfix
+#      cannot [:update],  Contact.not_incoming
 
       #   cannot [:update],  Contact.paplocalhr
 
