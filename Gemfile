@@ -137,7 +137,7 @@ gem 'morrisjs-rails'
 gem 'paper_trail', '~> 15.1'
 gem 'paper_trail-association_tracking', '~> 2.2', '>= 2.2.1'
 gem 'pg'
-gem 'rails', '~> 6.1', '>= 6.1.7.1'
+gem 'rails', '~> 6.1'
 gem 'ransack', '~> 3.2', '>= 3.2.1'
 gem 'rubocop-faker'
 gem 'rubocop-rails', require: false
