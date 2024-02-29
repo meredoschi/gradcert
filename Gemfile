@@ -91,7 +91,7 @@ gem 'priceable'
 # gem 'rails', '~> 5.2', '>= 5.2.8.1'
 ###
 gem 'globalid', '~> 1.0', '>= 1.0.1'
-gem 'rack', '~> 2.2', '>= 2.2.8'
+gem 'rack', '~> 2.2'
 ###
 
 gem 'rails-fix-permissions'
